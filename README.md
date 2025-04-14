@@ -1,8 +1,8 @@
-# Portfolio Dashboard
+# Lily's Lab
 
 A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Notion as a CMS. This project serves as a personal website showcasing work experience, projects, writing, and more.
 
-![Portfolio Dashboard Screenshot](public/screenshot.png)
+![Lily's Lab Screenshot](public/screenshot.png)
 
 ## 🌟 Features
 
