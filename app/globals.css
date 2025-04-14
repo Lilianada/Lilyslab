@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Prism.js theme for code highlighting */
+@import "prismjs/themes/prism-tomorrow.css";
+/* Fix the import syntax - add semicolon */
+@import "./notion.css";
+/* Remove the import to the deleted styles.css file */
+/* @import "@/components/notion/styles.css"; */
+
+@layer base {
+  :root {
+    --background: 60 6% 95%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 280 75% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 280 75% 60%;
+    --radius: 0.5rem;
+
+    /* Notion-specific colors for light mode */
+    --notion-text: 0 0% 9%;
+    --notion-bg-gray: 0 0% 97%;
+    --notion-bg-brown: 19 80% 97%;
+    --notion-bg-orange: 30 80% 97%;
+    --notion-bg-yellow: 50 80% 97%;
+    --notion-bg-green: 120 80% 97%;
+    --notion-bg-blue: 210 80% 97%;
+    --notion-bg-purple: 270 80% 97%;
+    --notion-bg-pink: 330 80% 97%;
+    --notion-bg-red: 0 80% 97%;
+    --notion-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --notion-max-width: 720px;
+  }
+
+  .dark {
+    --background: 0 0% 6.7%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 6.7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 280 70% 70%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 280 70% 70%;
+
+    /* Notion-specific colors for dark mode */
+    --notion-text: 0 0% 98%;
+    --notion-bg-gray: 0 0% 20%;
+    --notion-bg-brown: 19 30% 20%;
+    --notion-bg-orange: 30 30% 20%;
+    --notion-bg-yellow: 50 30% 20%;
+    --notion-bg-green: 120 30% 20%;
+    --notion-bg-blue: 210 30% 20%;
+    --notion-bg-purple: 270 30% 20%;
+    --notion-bg-pink: 330 30% 20%;
+    --notion-bg-red: 0 30% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  a,
+  button {
+    @apply transition-colors duration-200;
+  }
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+/* Staggered children animation */
+.stagger-children > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-children > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-children > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-children > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-children > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-children > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.stagger-children > *:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.stagger-children > *:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.stagger-children > *:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.stagger-children > *:nth-child(10) {
+  animation-delay: 1s;
+}
+
+/* Notion-specific styles */
+.prose .notion-content {
+  max-width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+    "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* Notion-like spacing */
+.notion-content > * {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.notion-content > * + * {
+  margin-top: 4px;
+}
+
+/* Notion-like paragraph spacing */
+.notion-content p {
+  margin: 2px 0;
+  min-height: 1.5em;
+}
+
+/* Page transition */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.sidebar {
+  background-color: rgba(23, 23, 23, 1);
+}

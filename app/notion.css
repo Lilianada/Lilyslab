@@ -1,0 +1,399 @@
+/* Custom styles for react-notion-x */
+
+/* Base styles for notion content */
+.notion {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  font-family: inherit;
+  caret-color: var(--foreground);
+}
+
+.dark .notion {
+  color: #f0f0f0;
+}
+
+.notion-page {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.notion-page-content {
+  padding: 0;
+  margin: 0;
+}
+
+/* Hide notion collection page properties */
+.notion-collection-page-properties {
+  display: none !important;
+}
+
+/* Typography */
+.notion-h1,
+.notion-h2,
+.notion-h3,
+.notion-h4,
+.notion-h5 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.notion-h1 {
+  font-size: 1.875em;
+}
+
+.notion-h2 {
+  font-size: 1.5em;
+}
+
+.notion-h3 {
+  font-size: 1.25em;
+}
+
+.notion-text {
+  margin: 0.5em 0;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.65;
+  padding: 0.25em 0;
+}
+
+.dark .notion-text {
+  color: #f0f0f0;
+}
+
+/* Fix for dark mode text color */
+.dark .notion-text {
+  color: var(--foreground);
+}
+
+/* Lists */
+.notion-list {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.notion-list-disc {
+  list-style-type: disc;
+}
+
+.notion-list-numbered {
+  list-style-type: decimal;
+}
+
+/* Code blocks */
+.notion .notion-code {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 0.375rem;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+/* Set code text color for light mode */
+.notion .notion-code pre,
+.notion .notion-code code {
+  color: #704b90;
+  font-family: monospace;
+}
+
+.dark .notion .notion-code {
+  background-color: rgba(135, 131, 120, 0.15);
+}
+
+.dark .notion-code pre,
+.dark .notion-code code {
+  color: #b392d8;
+}
+
+/* Callouts */
+.notion .notion-callout {
+  border-radius: 0.375rem;
+  padding: 1em;
+  margin: 1em 0;
+  border: 1px solid #e2e8f0;
+}
+
+/* Images */
+.notion-image {
+  margin: 1.5em 0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.notion-image img {
+  border-radius: 0.375rem;
+}
+
+.notion-image-caption {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.5em;
+}
+
+/* Tables */
+.notion-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.notion .notion-table th,
+.notion .notion-table td {
+  border: 1px solid rgba(111, 103, 64, 0.26);
+  padding: 0.5em;
+}
+
+.notion-table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+}
+
+.notion-table tr:nth-child(even) {
+  background-color: rgba(100, 116, 139, 0.1);
+}
+
+.notion .notion-simple-table td {
+  border: 1px solid rgba(83, 81, 73, 0.1);
+}
+
+/* Links */
+.notion-link {
+  color: #3b82f6;
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+}
+
+.notion-link:hover {
+  opacity: 0.8;
+}
+
+/* Dark mode adjustments */
+.dark .notion-table th {
+  background-color: #1e293b;
+}
+
+.dark .notion-table tr:nth-child(even) {
+  background-color: rgba(100, 116, 139, 0.1);
+}
+
+/* Hide Notion collection view controls */
+.notion-collection-view-tabs {
+  display: none;
+}
+
+/* Hide Notion header */
+.notion-header {
+  display: none;
+}
+
+/* Additional selectors to hide collection page properties */
+.notion-property-select,
+.notion-property-multi_select,
+.notion-property-date,
+.notion-property-person,
+.notion-property-checkbox,
+.notion-property-number,
+.notion-property-text,
+.notion-property-email,
+.notion-property-phone_number,
+.notion-property-formula,
+.notion-property-relation,
+.notion-property-created_time,
+.notion-property-last_edited_time,
+.notion-property-url,
+.notion-property-created_by,
+.notion-property-last_edited_by,
+.notion-property-file,
+.notion-property-title,
+.notion-collection-column-title,
+.notion-property-select-item {
+  display: none !important;
+}
+
+/* Hide the entire collection page properties section */
+.notion .notion-page-properties,
+.notion-collection-row-properties,
+.notion-collection-row-value {
+  display: none;
+}
+
+/* Responsive font sizes for code blocks */
+.notion .notion-code pre {
+  padding: 1.25rem;
+  overflow-x: auto;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #704b90;
+}
+
+@media (min-width: 768px) {
+  .notion .notion-code pre {
+    font-size: 14px; /* Tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .notion .notion-code pre {
+    font-size: 16px; /* Desktop */
+  }
+}
+
+/* Toggle blocks */
+.notion .notion-toggle {
+  margin: 0.75rem 0;
+  border-radius: 0.375rem;
+}
+
+.notion .notion-toggle-summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  padding: 0.5rem 0;
+}
+
+.notion .notion-toggle-triangle {
+  margin-right: 0.5rem;
+  transition: transform 0.2s;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.notion .notion-toggle[open] .notion-toggle-triangle {
+  transform: rotate(90deg);
+}
+
+.notion .notion-toggle-content {
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Divider */
+.notion .notion-hr {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid rgba(111, 103, 64, 0.26);
+}
+
+/* Error states */
+.notion .notion-error {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(185, 28, 28);
+  font-size: 0.875rem;
+}
+
+.dark .notion .notion-error {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: rgb(248, 113, 113);
+}
+
+.notion .notion-error-details {
+  margin-top: 0.5rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Empty state */
+.notion .notion-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #64748b;
+  border: 1px dashed #e2e8f0;
+  border-radius: 0.375rem;
+  margin: 1.5rem 0;
+}
+
+/* Bookmark */
+.notion .notion-bookmark {
+  margin: 1.25rem 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.notion .notion-bookmark:hover {
+  background-color: rgba(241, 245, 249, 0.5);
+}
+
+/* Fix for nested toggle blocks */
+.notion .notion-toggle .notion-toggle {
+  margin-left: 0;
+}
+
+/* Notion-specific content width */
+.notion-content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Notion-specific spacing between blocks */
+.notion-content > * + * {
+  margin-top: 0.5rem;
+}
+
+/* Ensure all text elements have the correct color in dark mode */
+.dark .notion,
+.dark .notion-text,
+.dark .notion-title,
+.dark .notion-h1,
+.dark .notion-h2,
+.dark .notion-h3,
+.dark .notion-quote,
+.dark .notion-list {
+  color: #f0f0f0;
+}
+
+/* Dark mode link color */
+.dark .notion-link {
+  color: #60a5fa;
+}
+
+/* Dark mode code background */
+.dark .notion .notion-inline-code {
+  background-color: rgba(30, 41, 59, 0.5);
+  color: #93c5fd;
+}
+
+/* Inline code */
+.notion-inline-code {
+  font-family: monospace;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #704b90;
+}
+
+.dark .notion-inline-code {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #b392d8;
+}
+
+/* Dark mode bookmark hover */
+.dark .notion .notion-bookmark:hover {
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+/* Dark mode callout */
+.dark .notion .notion-callout {
+  border-color: #334155;
+}
+
+/* Dark mode empty state */
+.dark .notion .notion-empty {
+  border-color: #334155;
+  color: #94a3b8;
+}
