@@ -78,7 +78,7 @@ export default function Home() {
       ) : (
         <>
           <section className="stagger-children">
-            <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
+            <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
               Hi there, I'm Lilian. I'm a{" "}
               <Link href="https://github.com/lilianokeke" className="text-primary hover:underline">
                 MERN-Stack Developer
@@ -95,19 +95,19 @@ export default function Home() {
               working 4 years as a software developer with creative thinking to lead the building and execution of
               products successfully.
             </p>
-            <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
+            <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
               I help turn creative ideas into real solutions, making sure that the product being built aligns with the
               needs of the target users and business goal.{" "}
             </p>
 
-            <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
+            <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
               I am exploring as much <span className="text-primary hover:underline">AI tools</span> as possible, with
               the aim of bringing all my dream apps to life.
             </p>
           </section>
 
           <section>
-            <h2 className="mb-4 text-sm font-medium text-muted-foreground">Work</h2>
+            <h2 className="mb-4 text-base font-medium text-muted-foreground">Work</h2>
             <div className="space-y-4 stagger-children">
               {isLoading ? (
                 <div className="animate-pulse space-y-4">
@@ -132,7 +132,7 @@ export default function Home() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-sm font-medium text-muted-foreground">Projects</h2>
+            <h2 className="mb-4 text-base font-medium text-muted-foreground">Projects</h2>
             <div className="space-y-4 stagger-children">
               {isLoading ? (
                 <div className="animate-pulse space-y-4">
@@ -156,7 +156,7 @@ export default function Home() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-sm font-medium text-muted-foreground">Speaking</h2>
+            <h2 className="mb-4 text-base font-medium text-muted-foreground">Speaking</h2>
             <div className="space-y-4 stagger-children">
               {isLoading ? (
                 <div className="animate-pulse space-y-4">
@@ -180,7 +180,7 @@ export default function Home() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-sm font-medium text-muted-foreground">Online</h2>
+            <h2 className="mb-4 text-base font-medium text-muted-foreground">Online</h2>
             <div className="space-y-2 stagger-children">
               <SocialLink platform="LinkedIn" url="https://linkedin.com/in/lilianada" action="Connect" />
               <SocialLink platform="GitHub" url="https://github.com/lilianokeke" action="Visit" />
