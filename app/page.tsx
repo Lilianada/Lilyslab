@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
+import Logo from "../public/logo.png"
+import Image from "next/image"
 
 // Types for our data
 interface WorkItem {
@@ -69,7 +71,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={`max-w-xl space-y-16 grid mx-auto my-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-xl space-y-16 grid mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       {error ? (
         <div className="text-center py-8 border rounded-lg">
           <p className="text-red-500 mb-2">Error loading data</p>
@@ -78,6 +80,9 @@ export default function Home() {
       ) : (
         <>
           <section className="stagger-children">
+            <div className="w-40 h-40 rounded-full bg-muted border-muted mb-6">
+              <Image src={Logo} alt="Lily's Lab Logo" className="rounded-full " />
+            </div>
             <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
               Hi there, I'm Lilian. I'm a{" "}
               <Link href="https://github.com/lilianokeke" className="text-primary hover:underline">

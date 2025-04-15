@@ -19,10 +19,10 @@ export default async function WritingPage() {
   }
 
   return (
-    <div className="max-w-xl mx-auto animate-fade-in">
+    <div className="max-w-xl mx-auto animate-fade-in px-6 py-12">
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">Writing</h1>
-        <p className="text-xs text-muted-foreground">Thoughts on design, engineering, and building products.</p>
+        <p className="text-sm text-muted-foreground">Thoughts on design, engineering, and building products.</p>
       </header>
 
       {error ? (
@@ -43,13 +43,13 @@ export default async function WritingPage() {
                 className="block transition-transform duration-300 hover:translate-x-1"
               >
                 <div className="space-y-1 border-b border-border pb-4 hover:border-primary transition-colors duration-300">
-                  <time className="text-[10px] text-muted-foreground">
+                  <time className="text-xs text-muted-foreground">
                     {post.date ? formatDate(post.date) : "No date"}
                   </time>
-                  <h2 className="text-sm font-medium group-hover:text-primary group-hover:underline transition-colors duration-200">
+                  <h2 className="text-base font-medium group-hover:text-primary group-hover:underline transition-colors duration-200">
                     {post.title || "Untitled"}
                   </h2>
-                  <p className="text-xs text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
+                  <p className="text-sm text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
                 </div>
               </Link>
             </article>

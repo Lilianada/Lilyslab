@@ -267,10 +267,17 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               onClick={onNavClick}
               delay={1050}
             />
+            <NavItem
+              href="/playground/tools"
+              icon={<Layers size={16} />}
+              label="Tools"
+              onClick={onNavClick}
+              delay={1100}
+            />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Online" delay={1100} />
+            <SectionTitle title="Online" delay={1150} />
             <NavItem
               href="https://linkedin.com/in/lilianada"
               icon={<Linkedin size={16} />}

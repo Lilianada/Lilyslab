@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import PlaceholderImage from "@/components/placeholder-image"
 import { ExternalLink } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface AppDissection {
   id: string
@@ -16,9 +17,13 @@ interface AppDissection {
 
 export default function AppDissectionPage() {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [activeTab, setActiveTab] = useState("all")
+  const [activeTab, setActiveTab] = useState<string | null>(null)
   const [apps, setApps] = useState<AppDissection[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [tabs, setTabs] = useState<string[]>([
+    "Web Apps",
+    "Mobile Apps"
+  ])
 
   useEffect(() => {
     setIsLoaded(true)
@@ -43,25 +48,40 @@ export default function AppDissectionPage() {
   const filteredApps = activeTab === "all" ? apps : apps.filter((app) => app.category === activeTab)
 
   return (
-    <div className={`max-w-xl mx-auto ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-5xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">App Dissection</h1>
-        <p className="text-xs text-muted-foreground">In-depth analyses of applications and their design patterns.</p>
+        <p className="text-sm text-muted-foreground">In-depth analyses of applications and their design patterns.</p>
       </header>
 
-      <Tabs defaultValue="all" className="mb-8" onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="my">My Apps</TabsTrigger>
-          <TabsTrigger value="fancy">Apps I Fancy</TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <div className="mb-6 flex flex-wrap gap-2">
+        <Button
+          variant={activeTab === null ? "default" : "outline"}
+          size="sm"
+          className="text-xs"
+          onClick={() => setActiveTab(null)}
+        >
+          All
+        </Button>
+        {tabs.map((tab) => (
+          <Button
+            key={tab}
+            variant={activeTab === tab ? "default" : "outline"}
+            size="sm"
+            className="text-xs"
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </Button>
+        ))}
+      </div>
 
       {isLoading ? (
-        <div className="space-y-4 animate-pulse">
-          <div className="h-20 bg-muted rounded"></div>
-          <div className="h-20 bg-muted rounded"></div>
-          <div className="h-20 bg-muted rounded"></div>
+        <div className="grid gap-4 sm:grid-cols-2 animate-pulse">
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
         </div>
       ) : filteredApps.length > 0 ? (
         <div className="space-y-4 stagger-children">

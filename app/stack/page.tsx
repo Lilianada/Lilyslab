@@ -98,7 +98,7 @@ export default function StackPage() {
     <div className={`max-w-xl mx-auto ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">My Stack</h1>
-        <p className="text-muted-foreground text-xs">Tools, apps, and services I use daily.</p>
+        <p className="text-muted-foreground text-sm">Tools, apps, and services I use daily.</p>
       </header>
 
       <div className="space-y-12">

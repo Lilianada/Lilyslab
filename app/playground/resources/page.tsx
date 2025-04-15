@@ -3,23 +3,17 @@
 import { Button } from "@/components/ui/button"
 import { Download, ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
-
-interface Resource {
-  id: string
-  title: string
-  description: string
-  type: "download" | "external"
-  url: string
-  category: string
-  files?: string | null
-}
+import { SearchBar } from "@/components/search-bar"
+import { type Resource } from "@/types"
 
 export default function ResourcesPage() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [resources, setResources] = useState<Resource[]>([])
+  const [filteredResources, setFilteredResources] = useState<Resource[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
     setIsLoaded(true)
@@ -30,10 +24,11 @@ export default function ResourcesPage() {
         const response = await fetch("/api/resources")
         const data = await response.json()
         setResources(data.resources || [])
-
+        setFilteredResources(data.resources || [])
+        
         // Extract unique categories
         const uniqueCategories = Array.from(new Set(data.resources.map((r: Resource) => r.category)))
-        setCategories(uniqueCategories)
+        setCategories(uniqueCategories as string[])
       } catch (error) {
         console.error("Error fetching resources:", error)
       } finally {
@@ -44,70 +39,87 @@ export default function ResourcesPage() {
     fetchResources()
   }, [])
 
-  const filteredResources = activeCategory ? resources.filter((r) => r.category === activeCategory) : resources
+  useEffect(() => {
+    const filtered = resources.filter((resource) => {
+      const matchesSearch = 
+        resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      const matchesCategory = !activeCategory || resource.category === activeCategory
+      return matchesSearch && matchesCategory
+    })
+    setFilteredResources(filtered)
+  }, [searchQuery, activeCategory, resources])
 
   return (
-    <div className={`max-w-2xl mx-auto ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-5xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">Resources</h1>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           A collection of tools, templates, and resources I've created or found useful.
         </p>
       </header>
 
-      <div className="mb-6 flex flex-wrap gap-2">
-        <Button
-          variant={activeCategory === null ? "default" : "outline"}
-          size="sm"
-          className="text-xs"
-          onClick={() => setActiveCategory(null)}
-        >
-          All
-        </Button>
-        {categories.map((category) => (
+      <div className="mb-6 space-y-4">
+        <SearchBar
+          placeholder="Search resources by name, description, or tags..."
+          onSearch={setSearchQuery}
+          className="max-w-md"
+        />
+
+        <div className="flex flex-wrap gap-2">
           <Button
-            key={category}
-            variant={activeCategory === category ? "default" : "outline"}
+            variant={activeCategory === null ? "default" : "outline"}
             size="sm"
             className="text-xs"
-            onClick={() => setActiveCategory(category)}
+            onClick={() => setActiveCategory(null)}
           >
-            {category}
+            All
           </Button>
-        ))}
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={activeCategory === category ? "default" : "outline"}
+              size="sm"
+              className="text-xs"
+              onClick={() => setActiveCategory(category)}
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
       </div>
 
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 animate-pulse">
-          <div className="h-40 bg-muted rounded-lg"></div>
-          <div className="h-40 bg-muted rounded-lg"></div>
-          <div className="h-40 bg-muted rounded-lg"></div>
-          <div className="h-40 bg-muted rounded-lg"></div>
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
+          <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
         </div>
       ) : filteredResources.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 stagger-children">
           {filteredResources.map((resource, index) => (
             <div
               key={resource.id}
-              className="rounded-lg border p-4 opacity-0 animate-slide-up"
+              className="rounded-lg border p-4 opacity-0 animate-slide-up bg-card"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="mb-2 flex items-start justify-between">
-                <h2 className="text-sm font-medium">{resource.title}</h2>
+                <h2 className="text-sm font-medium">{resource.name}</h2>
                 <span className="rounded-full bg-muted px-2 py-1 text-[10px]">{resource.category}</span>
               </div>
               <p className="mb-3 text-xs text-muted-foreground">{resource.description}</p>
-              <Button variant="outline" size="sm" className="text-xs w-full" asChild>
-                <a href={resource.url} target="_blank" rel="noopener noreferrer">
-                  {resource.type === "download" ? (
-                    <>
-                      <Download size={14} className="mr-1" /> Download
-                    </>
-                  ) : (
-                    <>
-                      <ExternalLink size={14} className="mr-1" /> Check It
-                    </>
-                  )}
+              <div className="mb-3 flex flex-wrap gap-1">
+                {resource.tags.map((tag) => (
+                  <span key={tag} className="rounded-full bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <Button variant="outline" size="sm" className="text-xs w-full bg-card" asChild>
+                <a href={resource.url || "#"} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink size={14} className="mr-1" /> View Resource
                 </a>
               </Button>
             </div>
@@ -115,7 +127,7 @@ export default function ResourcesPage() {
         </div>
       ) : (
         <div className="text-center py-8 border rounded-lg">
-          <p className="text-sm text-muted-foreground">No resources found for this category.</p>
+          <p className="text-sm text-muted-foreground">No resources found matching your search.</p>
         </div>
       )}
     </div>

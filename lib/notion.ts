@@ -17,6 +17,7 @@ const workDbId = process.env.NOTION_WORK_DATABASE_ID
 const appDissectionDbId = process.env.NOTION_APP_DISSECTION_DATABASE_ID
 const resourcesDbId = process.env.NOTION_RESOURCES_DATABASE_ID
 const amaDbId = process.env.NOTION_AMA_DATABASE_ID
+const toolsDbId = process.env.NOTION_TOOLS_DATABASE_ID
 
 // Helper function to fetch data from a Notion database
 async function getDatabaseItems(databaseId, filter = {}, sorts = []) {
@@ -63,7 +64,8 @@ function extractProperties(page) {
     question: properties.Question?.rich_text?.[0]?.plain_text || null,
     answer: properties.Answer?.rich_text?.[0]?.plain_text || null,
     status: properties.Status?.select?.name || null,
-    logo: properties.Logo?.files?.[0]?.file?.url || properties.Logo?.files?.[0]?.external?.url || null,
+    logo: properties.Logo?.rich_text?.[0]?.plain_text || null,
+    platforms: properties.Platforms?.multi_select?.map((platform) => platform.name) || []
   }
 }
 
@@ -315,4 +317,38 @@ export async function updateArticleLikes(pageId, likes) {
     console.error(`Error updating likes for page ${pageId}:`, error)
     throw error
   }
+}
+
+// Get all tools
+export async function getTools(category?: string) {
+  let filter: any = {
+    property: "Published",
+    checkbox: {
+      equals: true,
+    },
+  }
+
+  if (category && category !== "All") {
+    filter = {
+      and: [
+        filter,
+        {
+          property: "Category",
+          select: {
+            equals: category,
+          },
+        },
+      ],
+    }
+  }
+
+  const sorts = [
+    {
+      property: "Name",
+      direction: "ascending",
+    },
+  ]
+
+  const pages = await getDatabaseItems(toolsDbId, filter, sorts)
+  return pages.map((page) => extractProperties(page))
 }
