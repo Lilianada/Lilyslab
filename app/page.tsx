@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
-import Logo from "../public/logo.png"
+import Logo from "./opengraph-image.png"
 import Image from "next/image"
 
 // Types for our data
