@@ -64,7 +64,7 @@ export default function MobileNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="flex flex-col p-0">
+          <SheetContent side="left" className="sidebar flex flex-col p-0">
             <div className="flex items-center justify-between border-b p-4">
               <div className="flex items-center gap-2">
                 <Image src="/logo.png" alt="Lily's Lab" width={32} height={32} className="rounded-md hidden" />

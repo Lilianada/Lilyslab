@@ -209,6 +209,6 @@
   transition: opacity 300ms, transform 300ms;
 }
 
-.sidebar {
+.dark .sidebar {
   background-color: rgba(23, 23, 23, 1);
 }
