@@ -75,6 +75,10 @@
   padding-left: 1.5em;
 }
 
+.notion .notion-list li {
+  padding: 0;
+}
+
 .notion-list-disc {
   list-style-type: disc;
 }

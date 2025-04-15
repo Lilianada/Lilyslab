@@ -84,7 +84,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
             <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
 
-            <div className="flex items-center gap-3 text-muted-foreground">
+            <div className="flex fkex-wrap items-center gap-3 text-muted-foreground">
               <time className="text-xs">{article.date ? formatDate(article.date) : "No date"}</time>
 
               {article.tags && article.tags.length > 0 && (
