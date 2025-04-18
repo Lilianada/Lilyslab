@@ -47,7 +47,13 @@ const NotionRenderer = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
       defaultPageIcon={"📄"}
       defaultPageCover={""}
       defaultPageCoverPosition={0.5}
-      mapPageUrl={(pageId) => `/writing/${pageId.replace(/-/g, "")}`}
+      mapPageUrl={(pageId, recordMap) => {
+        // Find the block data
+        const block = recordMap.block[pageId];
+        // Get the slug from the block's properties if available
+        const slug = block?.properties?.Slug?.[0]?.[0] || pageId;
+        return `/writing/${slug}`;
+      }}
       mapImageUrl={(url, block) => {
         if (url.startsWith("data:")) return url
         if (url.startsWith("/images")) return url

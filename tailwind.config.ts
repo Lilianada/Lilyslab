@@ -97,6 +97,9 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         progress: "progress 1s ease-in-out infinite",
       },
+      backgroundImage: {
+        'noise': "url('/Noise.png')",
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],

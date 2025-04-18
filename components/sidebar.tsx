@@ -30,6 +30,8 @@ import {
   ArrowUpRight,
   LogOut,
   Crown,
+  Store,
+  History,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -37,17 +39,20 @@ import { UserProfileSection } from "./user-profile-section"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "./ui/button"
 import { useToast } from "@/hooks/use-toast"
+import logo from "@/public/logo.png"
 
 interface NavItemProps {
   href: string
   icon: React.ReactNode
   label: string
   external?: boolean
+  template?: boolean
+  hasNotification?: boolean
   onClick?: () => void
   delay?: number
 }
 
-const NavItem = ({ href, icon, label, external = false, onClick, delay = 0 }: NavItemProps) => {
+const NavItem = ({ href, icon, label, external = false, template = false, hasNotification = false, onClick, delay = 0 }: NavItemProps) => {
   const pathname = usePathname()
   const isActive = pathname === href || pathname.startsWith(`${href}/`)
   const [isVisible, setIsVisible] = useState(false)
@@ -65,9 +70,8 @@ const NavItem = ({ href, icon, label, external = false, onClick, delay = 0 }: Na
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-all duration-300 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-        }`}
+        className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-all duration-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+          }`}
         onClick={onClick}
         style={{ transitionDelay: `${delay}ms` }}
       >
@@ -77,6 +81,27 @@ const NavItem = ({ href, icon, label, external = false, onClick, delay = 0 }: Na
           <ArrowUpRight size={16} />
         </span>
       </a>
+    )
+  }
+
+  if (template) {
+    return (
+      <Link
+        href={href}
+        className={cn(
+          "flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent transition-all duration-300", 
+          isActive ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:text-foreground",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
+        )}
+        onClick={onClick}
+        style={{ transitionDelay: `${delay}ms` }}
+      >
+        {icon}
+        <span>{label}</span>
+        <span className="ml-auto text-sm opacity-60">
+          <Store size={16} />
+        </span>
+      </Link>
     )
   }
 
@@ -91,7 +116,12 @@ const NavItem = ({ href, icon, label, external = false, onClick, delay = 0 }: Na
       onClick={onClick}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {icon}
+      <div className="relative">
+        {icon}
+        {hasNotification && (
+          <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
+        )}
+      </div>
       <span>{label}</span>
     </Link>
   )
@@ -109,9 +139,8 @@ const SectionTitle = ({ title, delay = 0 }: { title: string; delay?: number }) =
 
   return (
     <div
-      className={`px-3 py-2 transition-all duration-300 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-      }`}
+      className={`px-3 py-2 transition-all duration-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <h3 className="text-xs font-medium text-foreground">{title}</h3>
@@ -147,12 +176,12 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
   }
 
   return (
-    <aside className={cn("sidebar border-r", mobile ? "w-full" : "hidden w-64 md:block")}>
+    <aside className={cn("sidebar border-r bg-muted", mobile ? "w-full" : "hidden w-64 md:block")}>
       <div className={cn("p-4", mobile ? "" : "sticky top-0 h-screen flex flex-col")}>
         {!mobile && (
           <div className="mb-8 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
+              <Image src={logo} alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
           </div>
@@ -172,14 +201,82 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Case Studies" delay={400} />
+            <SectionTitle title="Playground" delay={400} />
+            <NavItem
+              href="/playground/digital-garden"
+              icon={<Leaf size={16} />}
+              label="Digital Garden"
+              onClick={onNavClick}
+              delay={450}
+            />
+            <NavItem
+              href="/playground/changelog"
+              icon={<History size={16} />}
+              label="Changelog"
+              onClick={onNavClick}
+              delay={475}
+              hasNotification={true}
+            />
+            <NavItem
+              href="/playground/tools"
+              icon={<Layers size={16} />}
+              label="Tools"
+              onClick={onNavClick}
+              delay={500}
+            />
+            <NavItem
+              href="/playground/resources"
+              icon={<FileText size={16} />}
+              label="Resources"
+              onClick={onNavClick}
+              delay={550}
+            />
+            <NavItem
+              href="/playground/app-dissection"
+              icon={<Scissors size={16} />}
+              label="App Dissection"
+              onClick={onNavClick}
+              delay={600}
+            />
+          </div>
+
+          <div className="space-y-1">
+            <SectionTitle title="Templates" delay={650} />
+            <NavItem
+              href="/templates/dashboard"
+              icon={<Crown size={16} />}
+              label="Canvas"
+              onClick={onNavClick}
+              delay={700}
+              template={true}
+            />
+            <NavItem
+              href="/templates/ecommerce"
+              icon={<ShoppingCart size={16} />}
+              label="Quickview"
+              onClick={onNavClick}
+              delay={750}
+              template={true}
+            />
+            <NavItem
+              href="/templates/saas"
+              icon={<WalletCards size={16} />}
+              label="FitPeeps"
+              onClick={onNavClick}
+              delay={800}
+              template={true}
+            />
+          </div>
+
+          <div className="space-y-1">
+            <SectionTitle title="Case Studies" delay={850} />
             <NavItem
               href="https://codedbabe.notion.site/Leaflet-App-Case-Study-19ef441cd2fd80689b50c8ed3360b150?pvs=74"
               icon={<Leaf size={16} />}
               label="Leaflet"
               external
               onClick={onNavClick}
-              delay={450}
+              delay={900}
             />
             <NavItem
               href="https://codedbabe.notion.site/Plannr-App-Product-Strategy-Requirements-Doc-PSRD-185f441cd2fd80a9b4ede8d73cd5570c"
@@ -187,7 +284,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Plannr"
               external
               onClick={onNavClick}
-              delay={500}
+              delay={950}
             />
             <NavItem
               href="https://codedbabe.notion.site/Upmonie-AI-Powered-Fintech-Startup-192f441cd2fd8049b9f8d575efc08cf6?pvs=74"
@@ -195,19 +292,19 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Upmonie"
               external
               onClick={onNavClick}
-              delay={550}
+              delay={1000}
             />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Live Apps" delay={600} />
+            <SectionTitle title="Live Projects" delay={1000} />
             <NavItem
               href="https://wordix-v1.vercel.app/"
               icon={<Dices size={16} />}
               label="Wordix"
               external={true}
               onClick={onNavClick}
-              delay={650}
+              delay={1050}
             />
             <NavItem
               href="https://lilianada.com/"
@@ -215,7 +312,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="LilianAda"
               external={true}
               onClick={onNavClick}
-              delay={700}
+              delay={1100}
             />
             <NavItem
               href="https://firmco-admin.vercel.app/"
@@ -223,7 +320,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Firmco Admin"
               external={true}
               onClick={onNavClick}
-              delay={750}
+              delay={1150}
             />
             <NavItem
               href="https://firmco-client.app/"
@@ -231,7 +328,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Firmco Client"
               external={true}
               onClick={onNavClick}
-              delay={800}
+              delay={1200}
             />
             <NavItem
               href="https://www.beblended.ca/v2/"
@@ -239,7 +336,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Beblended"
               external={true}
               onClick={onNavClick}
-              delay={850}
+              delay={1250}
             />
             <NavItem
               href="https://the-fitcreatives.vercel.app/"
@@ -247,44 +344,19 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Fitcreatives"
               external={true}
               onClick={onNavClick}
-              delay={900}
+              delay={1300}
             />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Playground" delay={950} />
-            <NavItem
-              href="/playground/app-dissection"
-              icon={<Scissors size={16} />}
-              label="App Dissection"
-              onClick={onNavClick}
-              delay={1000}
-            />
-            <NavItem
-              href="/playground/resources"
-              icon={<FileText size={16} />}
-              label="Resources"
-              onClick={onNavClick}
-              delay={1050}
-            />
-            <NavItem
-              href="/playground/tools"
-              icon={<Layers size={16} />}
-              label="Tools"
-              onClick={onNavClick}
-              delay={1100}
-            />
-          </div>
-
-          <div className="space-y-1">
-            <SectionTitle title="Online" delay={1150} />
+            <SectionTitle title="Online" delay={1350} />
             <NavItem
               href="https://linkedin.com/in/lilianada"
               icon={<Linkedin size={16} />}
               label="LinkedIn"
               external
               onClick={onNavClick}
-              delay={1200}
+              delay={1400}
             />
             <NavItem
               href="https://github.com/lilianada"
@@ -292,7 +364,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="GitHub"
               external
               onClick={onNavClick}
-              delay={1250}
+              delay={1450}
             />
             <NavItem
               href="mailto:lilianokeke.ca@gmail.com"
@@ -300,7 +372,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Email"
               external
               onClick={onNavClick}
-              delay={1300}
+              delay={1500}
             />
             <NavItem
               href="https://twitter.com/lilian_okeke_"
@@ -308,7 +380,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               label="Twitter"
               external
               onClick={onNavClick}
-              delay={1150}
+              delay={1550}
             />
           </div>
 

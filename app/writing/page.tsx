@@ -2,6 +2,7 @@ import Link from "next/link"
 import { formatDate } from "@/lib/utils"
 import { getPublishedArticles } from "@/lib/notion"
 import { Annoyed } from "lucide-react"
+import ReactNotionX from "@/components/ReactNotionX"
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -32,28 +33,34 @@ export default async function WritingPage() {
         </div>
       ) : posts.length > 0 ? (
         <div className="space-y-6 stagger-children">
-          {posts.map((post, index) => (
-            <article
-              key={post.id}
-              className="group opacity-0 animate-slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <Link
-                href={`/writing/${post.slug}`}
-                className="block transition-transform duration-300 hover:translate-x-1"
+          {posts.map((post, index) => {
+            const formattedPageId = post.id.replace(/-/g, "")
+            console.log('Original ID:', post.id);
+            console.log('Formatted ID:', formattedPageId);
+            return (
+              <article
+                key={post.id}
+                className="group opacity-0 animate-slide-up"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="space-y-1 border-b border-border pb-4 hover:border-primary transition-colors duration-300">
-                  <time className="text-xs text-muted-foreground">
-                    {post.date ? formatDate(post.date) : "No date"}
-                  </time>
-                  <h2 className="text-base font-medium group-hover:text-primary group-hover:underline transition-colors duration-200">
-                    {post.title || "Untitled"}
-                  </h2>
-                  <p className="text-sm text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
-                </div>
-              </Link>
-            </article>
-          ))}
+                <Link
+                  href={`/writing/${post.slug}`}
+                  className="block transition-transform duration-300 hover:translate-x-1"
+                  prefetch={true}
+                >
+                  <div className="space-y-1 border-b border-border pb-4 hover:border-primary transition-colors duration-300">
+                    <time className="text-xs text-muted-foreground">
+                      {post.date ? formatDate(post.date) : "No date"}
+                    </time>
+                    <h2 className="text-base font-medium group-hover:text-primary group-hover:underline transition-colors duration-200">
+                      {post.title || "Untitled"}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
+                  </div>
+                </Link>
+              </article>
+            )
+          })}
         </div>
       ) : (
         <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">

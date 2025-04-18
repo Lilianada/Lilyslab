@@ -41,15 +41,21 @@ export default function ResourcesPage() {
 
   useEffect(() => {
     const filtered = resources.filter((resource) => {
-      const matchesSearch = 
-        resource.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-      const matchesCategory = !activeCategory || resource.category === activeCategory
-      return matchesSearch && matchesCategory
-    })
-    setFilteredResources(filtered)
-  }, [searchQuery, activeCategory, resources])
+      const name = resource.name ?? "";
+      const description = resource.description ?? "";
+      const tags = Array.isArray(resource.tags) ? resource.tags : [];
+      const category = resource.category ?? "";
+      const search = searchQuery.toLowerCase();
+
+      const matchesSearch =
+        name.toLowerCase().includes(search) ||
+        description.toLowerCase().includes(search) ||
+        tags.some(tag => (tag ?? "").toLowerCase().includes(search));
+      const matchesCategory = !activeCategory || category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+    setFilteredResources(filtered);
+  }, [searchQuery, activeCategory, resources]);
 
   return (
     <div className={`max-w-5xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
@@ -107,7 +113,6 @@ export default function ResourcesPage() {
             >
               <div className="mb-2 flex items-start justify-between">
                 <h2 className="text-sm font-medium">{resource.name}</h2>
-                <span className="rounded-full bg-muted px-2 py-1 text-[10px]">{resource.category}</span>
               </div>
               <p className="mb-3 text-xs text-muted-foreground">{resource.description}</p>
               <div className="mb-3 flex flex-wrap gap-1">

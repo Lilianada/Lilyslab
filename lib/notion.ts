@@ -1,5 +1,6 @@
 import { Client } from "@notionhq/client"
 import { NotionAPI } from "notion-client"
+import { NotionToMarkdown } from "notion-to-md"
 
 // Initialize the official Notion client
 const notion = new Client({
@@ -8,6 +9,9 @@ const notion = new Client({
 
 // Initialize the unofficial Notion client for better block fetching
 const notionUnofficial = new NotionAPI()
+
+// Initialize the Notion to Markdown converter
+const n2m = new NotionToMarkdown({ notionClient: notion })
 
 // Database IDs
 const writingsDbId = process.env.NOTION_DATABASE_ID
@@ -20,19 +24,17 @@ const amaDbId = process.env.NOTION_AMA_DATABASE_ID
 const toolsDbId = process.env.NOTION_TOOLS_DATABASE_ID
 
 // Helper function to fetch data from a Notion database
-async function getDatabaseItems(databaseId, filter = {}, sorts = []) {
-  if (!notion) {
-    console.error("Notion client is not initialized")
-    return []
-  }
-
+async function getDatabaseItems(databaseId: string, filter = {}, sorts = []) {
+  console.log('notion init')
+  console.log('Database ID:', databaseId)
+  console.log('Filter:', JSON.stringify(filter, null, 2))
   try {
     const response = await notion.databases.query({
       database_id: databaseId,
       filter: filter,
       sorts: sorts,
     })
-
+    console.log('Response:', JSON.stringify(response, null, 2))
     return response.results
   } catch (error) {
     console.error(`Error fetching data from database ${databaseId}:`, error)
@@ -41,7 +43,7 @@ async function getDatabaseItems(databaseId, filter = {}, sorts = []) {
 }
 
 // Function to extract properties from a Notion page
-function extractProperties(page) {
+function extractProperties(page: any) {
   const properties = page.properties
   return {
     id: page.id,
@@ -83,13 +85,15 @@ export async function getPublishedArticles() {
       direction: "descending",
     },
   ]
-
-  const pages = await getDatabaseItems(writingsDbId, filter, sorts)
+  if (!writingsDbId ) {
+    return [];
+  }
+  const pages = await getDatabaseItems(writingsDbId, filter)
   return pages.map((page) => extractProperties(page))
 }
 
 // Submit a new AMA question
-export async function submitAMAQuestion(name, question, email = null, photoURL = null) {
+export async function submitAMAQuestion(name: string, question: string, email = null, photoURL = null) {
   if (!notion || !amaDbId) return null
 
   try {
@@ -280,11 +284,17 @@ export async function getArticleBySlug(slug) {
       equals: slug,
     },
   }
+  console.log("Filter being used:", filter)
+  console.log("writingsDbId:", writingsDbId)
 
-  const pages = await getDatabaseItems(writingsDbId, filter)
-  if (pages.length === 0) return null
-
-  return extractProperties(pages[0])
+  try {
+    const pages = await getDatabaseItems(writingsDbId, filter)
+    if (pages.length === 0) return null
+    return extractProperties(pages[0])
+  } catch (error) {
+    console.error("Error fetching article by slug:", error)
+    throw error // or return null, or handle as appropriate
+  }
 }
 
 // Get all article slugs
@@ -351,4 +361,63 @@ export async function getTools(category?: string) {
 
   const pages = await getDatabaseItems(toolsDbId, filter, sorts)
   return pages.map((page) => extractProperties(page))
+}
+
+export interface ChangelogEntry {
+  id: string
+  title: string
+  date: string
+  type: "feature" | "improvement" | "fix" | "breaking"
+  category: string
+  content: string
+  media?: {
+    type: "image" | "video"
+    url: string
+  }[]
+  notificationExpiry?: string
+}
+
+export async function getChangelogs() {
+  const changelogId = process.env.NOTION_CHANGELOG_ID
+
+  if (!changelogId) {
+    throw new Error("Missing NOTION_CHANGELOG_ID environment variable")
+  }
+
+  const response = await notion.databases.query({
+    database_id: changelogId,
+    sorts: [
+      {
+        property: "Date",
+        direction: "descending",
+      },
+    ],
+  })
+
+  const changelogs: ChangelogEntry[] = await Promise.all(
+    response.results.map(async (page: any) => {
+      // Get page content as markdown
+      const mdBlocks = await n2m.pageToMarkdown(page.id)
+      const markdown = n2m.toMarkdownString(mdBlocks)
+
+      // Extract media files from page content
+      const media = page.properties.Media?.files?.map((file: any) => ({
+        type: file.type === "file" ? "video" : "image",
+        url: file.file?.url || file.external?.url,
+      }))
+
+      return {
+        id: page.id,
+        title: page.properties.Title.title[0].plain_text,
+        date: page.properties.Date.date.start,
+        type: page.properties.Type.select.name.toLowerCase(),
+        category: page.properties.Category.select.name,
+        content: markdown,
+        media: media || [],
+        notificationExpiry: page.properties.NotificationExpiry?.date?.start,
+      }
+    })
+  )
+
+  return changelogs
 }

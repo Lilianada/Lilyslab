@@ -95,7 +95,7 @@ export default function StackPage() {
   }, [])
 
   return (
-    <div className={`max-w-xl mx-auto ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-xl mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">My Stack</h1>
         <p className="text-muted-foreground text-sm">Tools, apps, and services I use daily.</p>

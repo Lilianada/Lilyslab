@@ -61,10 +61,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <div className="flex min-h-screen flex-col bg-[#f4f4f2] dark:bg-[#111] transition-colors duration-300 md:flex-row">
+            <div className="flex min-h-screen flex-col bg-background dark:bg-[#111] transition-colors duration-300 md:flex-row">
               <Sidebar />
               <MobileNav />
-              <main className="flex-1 px-4 py-6 md:px-8 md:py-10">{children}</main>
+              <main className="flex-1 px-4 py-6 md:px-8 md:py-10 main-noise-bg"> <Breadcrumb />{children}</main>
             </div>
             <Toaster />
           </AuthProvider>
@@ -76,3 +76,4 @@ export default function RootLayout({
 
 
 import './globals.css'
+import { Breadcrumb } from "@/components/breadcrumb-nav"

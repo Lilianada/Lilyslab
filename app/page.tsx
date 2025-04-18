@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import logo from "@/public/logo.png"
 
 // Types for our data
 interface WorkItem {
@@ -80,7 +81,7 @@ export default function Home() {
         <>
           <section className="stagger-children">
             <div className="w-40 h-40 rounded-full bg-muted border-muted mb-6">
-              <Image src="/logo.png" alt="Lily's Lab Logo" className="rounded-full " />
+              <Image src={logo} alt="Lily's Lab Logo" className="rounded-full " />
             </div>
             <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
               Hi there, I'm Lilian. I'm a{" "}
