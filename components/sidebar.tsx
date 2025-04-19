@@ -40,7 +40,7 @@ import { UserProfileSection } from "./user-profile-section"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "./ui/button"
 import { useToast } from "@/hooks/use-toast"
-import logo from "@/public/logo.png"
+// import logo from "@/public/logo.png"
 
 interface NavItemProps {
   href: string
@@ -183,7 +183,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         {!mobile && (
           <div className="mb-8 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
-              <Image src={logo} alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
+              <Image src="/logo.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
           </div>
