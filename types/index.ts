@@ -6,6 +6,8 @@ export interface Tool {
   url: string | null
   category: string
   platforms: string[]
+  published?: boolean
+  newSuggestion?: boolean
 }
 
 export interface Resource {
@@ -22,3 +24,4 @@ export interface SearchProps {
   onSearch: (value: string) => void
   className?: string
 } 
+

@@ -28,7 +28,7 @@ export async function generateStaticParams() {
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   // Asynchronously access the slug
   const { slug } = (await params) as { slug: string };
-console.log('render slug', slug)
+  console.log('render slug', slug)
 
   if (!slug) {
     notFound()
@@ -47,9 +47,9 @@ console.log('render slug', slug)
     console.log("Fetching blocks for article ID:", article.id)
 
     const formattedPageId = article.id.replace(/-/g, "")
-console.log('formatted page:', formattedPageId)
+    console.log('formatted page:', formattedPageId)
     const recordMap = await notionApi.getPage(formattedPageId)
-console.log('record map', recordMap)
+    console.log('record map', recordMap)
     const hasContent = recordMap && Object.keys(recordMap.block || {}).length > 0
     console.log('hasContent', hasContent, 'record map', recordMap)
 

@@ -8,6 +8,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import MobileNav from "@/components/mobile-nav"
 import { AuthProvider } from "@/contexts/auth-context"
 import { Toaster } from "@/components/ui/toaster"
+import "react-notion-x/src/styles.css"
+import "prismjs/themes/prism-tomorrow.css"
+import "katex/dist/katex.min.css"
 
 const inter = Inter({ subsets: ["latin"] })
 

@@ -32,6 +32,7 @@ import {
   Crown,
   Store,
   History,
+  Wrench,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -116,13 +117,14 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
       onClick={onClick}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="relative">
+      <div >
         {icon}
-        {hasNotification && (
-          <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
-        )}
       </div>
-      <span>{label}</span>
+      <span className="relative">{label}
+      {hasNotification && (
+          <span className="absolute -top-1 -right-2 w-2 h-2 bg-mellow rounded-full" />
+        )}
+      </span>
     </Link>
   )
 }
@@ -198,45 +200,52 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={250} />
             <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={300} />
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
-          </div>
-
-          <div className="space-y-1">
-            <SectionTitle title="Playground" delay={400} />
             <NavItem
               href="/playground/digital-garden"
               icon={<Leaf size={16} />}
               label="Digital Garden"
               onClick={onNavClick}
-              delay={450}
+              delay={400}
             />
-            <NavItem
-              href="/playground/changelog"
-              icon={<History size={16} />}
-              label="Changelog"
-              onClick={onNavClick}
-              delay={475}
-              hasNotification={true}
-            />
+          </div>
+
+          <div className="space-y-1">
+            <SectionTitle title="Playground" delay={400} />
             <NavItem
               href="/playground/tools"
               icon={<Layers size={16} />}
               label="Tools"
               onClick={onNavClick}
-              delay={500}
+              delay={450}
+            />
+            <NavItem
+              href="/playground/utilities"
+              icon={<Wrench size={16} />}
+              label="Utilities"
+              onClick={onNavClick}
+              delay={475}
             />
             <NavItem
               href="/playground/resources"
               icon={<FileText size={16} />}
               label="Resources"
               onClick={onNavClick}
-              delay={550}
+              delay={500}
             />
             <NavItem
               href="/playground/app-dissection"
               icon={<Scissors size={16} />}
               label="App Dissection"
               onClick={onNavClick}
+              delay={550}
+            />
+            <NavItem
+              href="/playground/changelog"
+              icon={<History size={16} />}
+              label="Changelog"
+              onClick={onNavClick}
               delay={600}
+              hasNotification={true}
             />
           </div>
 
@@ -348,7 +357,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             />
           </div>
 
-          <div className="space-y-1">
+          {/* Social Links  */}
+          {/* <div className="space-y-1">
             <SectionTitle title="Online" delay={1350} />
             <NavItem
               href="https://linkedin.com/in/lilianada"
@@ -382,17 +392,17 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               onClick={onNavClick}
               delay={1550}
             />
-          </div>
+          </div> */}
 
           {user && !mobile && (
             <div className="space-y-1 opacity-0 animate-slide-up" style={{ animationDelay: "1350ms" }}>
-              {isAdmin && (
+              {/* {isAdmin && (
                 <div className="mb-2 flex items-center justify-center">
                   <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-1 flex items-center text-xs">
                     <Crown size={12} className="mr-1" /> Admin
                   </span>
                 </div>
-              )}
+              )} */}
               <Button
                 variant="ghost"
                 size="sm"

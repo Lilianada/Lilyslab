@@ -5,6 +5,8 @@ import { ToolCard } from "@/components/tool-card"
 import { SearchBar } from "@/components/search-bar"
 import { type Tool } from "@/types"
 import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
+import { ToolSubmissionSidebar } from "@/components/tool-submission-sidebar"
 
 const categories = ["All", "Productivity", "Education", "Utilities", "Health & Fitness"]
 
@@ -15,6 +17,7 @@ export default function ToolsPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isSubmitOpen, setIsSubmitOpen] = useState(false)
 
   useEffect(() => {
     setIsLoaded(true)
@@ -49,32 +52,41 @@ export default function ToolsPage() {
     <div className={`max-w-5xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-4">
         <h1 className="mb-1 text-xl font-medium">Tools</h1>
-        <p className="text-sm text-muted-foreground"> A curated collection of {tools.length} tools and resources for digital minimalists.</p>
+        <p className="text-sm text-muted-foreground">
+          A curated collection of {tools.length} tools and resources for digital minimalists.
+        </p>
       </header>
 
-      <div className="mb-6 space-y-4">
-        <SearchBar
-          placeholder="Search tools by name, description, or category..."
-          onSearch={setSearchQuery}
-          className="max-w-md mb-12"
-        />
+      <div className="mt-6 mb-6 space-y-4">
+        <div className="flex items-center gap-4 max-w-lg">
+          <SearchBar
+            placeholder="Search tools by name, description, or category..."
+            onSearch={setSearchQuery}
+            className="flex-1"
+          />
+          <Button
+            onClick={() => setIsSubmitOpen(true)}
+            className="shrink-0"
+            // size="icon"
+          >
+            <Plus className="h-4 w-4" /> Submit Tool
+          </Button>
+        </div>
 
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <Button
-            key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
-            size="sm"
-            className="text-xs"
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </Button>
-            
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              size="sm"
+              className="text-xs"
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </Button>
           ))}
         </div>
-      </div> 
-      
+      </div>
 
       {isLoading ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -96,6 +108,11 @@ export default function ToolsPage() {
           ))}
         </div>
       )}
+
+      <ToolSubmissionSidebar
+        isOpen={isSubmitOpen}
+        onClose={() => setIsSubmitOpen(false)}
+      />
     </div>
   )
 } 

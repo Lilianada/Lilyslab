@@ -54,6 +54,10 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        mellow: {
+          DEFAULT: "hsl(var(--mellow))",
+          foreground: "hsl(var(--mellow-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
