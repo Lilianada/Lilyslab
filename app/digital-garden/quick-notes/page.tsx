@@ -3,7 +3,6 @@ import { formatDate } from "@/lib/utils"
 import { getPublishedArticles } from "@/lib/notion"
 import { Annoyed } from "lucide-react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { BreadcrumbNav } from "@/components/breadcrumb-nav"
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -21,12 +20,15 @@ export default async function QuickNotesPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto animate-fade-in px-6 py-8">
-    
-      <header className="mb-8">
-        <h1 className="mb-2 text-2xl font-bold">Quick Notes</h1>
-        <p className="text-sm text-muted-foreground">A collection of quick thoughts, ideas, and learnings.</p>
-      </header>
+    <div className="max-w-5xl mx-auto animate-fade-in px-6 py-8">
+      <header className="flex items-center justify-between mb-8">
+          <div className="flex flex-col">
+            <h1 className="mb-1 text-xl font-medium">Quick Notes</h1>
+            <p className="text-sm text-muted-foreground">
+            A collection of quick thoughts, ideas, and learnings.
+            </p>
+          </div>
+        </header>
 
       {error ? (
         <div className="text-center py-8 border rounded-lg p-8">
@@ -38,7 +40,7 @@ export default async function QuickNotesPage() {
           {notes.map((note, index) => (
             <Link 
               key={note.id} 
-              href={`/playground/digital-garden/quick-notes/${note.slug}`}
+              href={`/digital-garden/quick-notes/${note.slug}`}
               className="block transition-transform duration-300 hover:-translate-y-1"
             >
               <Card 

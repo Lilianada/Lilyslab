@@ -201,7 +201,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={300} />
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
             <NavItem
-              href="/playground/digital-garden"
+              href="/digital-garden"
               icon={<Leaf size={16} />}
               label="Digital Garden"
               onClick={onNavClick}

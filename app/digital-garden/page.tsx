@@ -50,32 +50,32 @@ export default function LeafletHome() {
     }
 
     const cards = [
-        { title: "Reading List", icon: Book, href: "/playground/digital-garden/reading-list" },
-        { title: "Movie List", icon: Film, href: "/playground/digital-garden/movie-list" },
-        { title: "Pic-Pins", icon: Images, href: "/playground/digital-garden/pic-pins" },
-        { title: "Quick Notes", icon: Zap, href: "/playground/digital-garden/quick-notes" },
+        { title: "Reading List", icon: Book, href: "/digital-garden/reading-list" },
+        { title: "Movie List", icon: Film, href: "/digital-garden/movie-list" },
+        { title: "Pic-Pins", icon: Images, href: "/digital-garden/pic-pins" },
+        { title: "Quick Notes", icon: Zap, href: "/digital-garden/quick-notes" },
     ]
 
     const buttonData = [
         {
             label: 'Recommend a Book',
             icon: Book,
-            href: '/playground/leaflets/reading/new',
+            href: '/leaflets/reading/new',
         },
         {
             label: 'Suggest a Movie',
             icon: Film,
-            href: '/playground/leaflets/movies/new',
+            href: '/leaflets/movies/new',
         },
         {
             label: 'Write Reflection',
             icon: PenTool,
-            href: '/playground/leaflets/reflections/new',
+            href: '/leaflets/reflections/new',
         },
         {
             label: 'Quick Note',
             icon: Zap,
-            href: '/playground/leaflets/notes/new',
+            href: '/leaflets/notes/new',
         },
     ]
 

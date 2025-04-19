@@ -5,7 +5,6 @@ import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { PinCard } from "@/components/pin-card"
 import { useInView } from "react-intersection-observer"
-import { cn } from "@/lib/utils"
 import Masonry from 'react-masonry-css'
 
 // Sample data with Unsplash images
@@ -94,7 +93,6 @@ export default function PicPinsPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [pins, setPins] = useState(samplePins)
   const [loading, setLoading] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
   const { ref: loadMoreRef, inView } = useInView()
 
   // Define breakpoints for the Masonry grid
@@ -132,11 +130,13 @@ export default function PicPinsPage() {
   return (
     <div className="min-h-screen animate-fade-in">
       <div className="container max-w-5xl mx-auto px-4 py-8">
-      <header className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">Pic Pins</h1>
-          <p className="mt-2 text-muted-foreground">
+        <header className="flex items-center justify-between mb-8">
+          <div className="flex flex-col">
+            <h1 className="mb-1 text-xl font-medium">Pic Pins</h1>
+            <p className="text-sm text-muted-foreground">
             A readaptation of the Pinterest layout. Hover on any pin to see more details.
-          </p>
+            </p>
+          </div>
         </header>
         {/* Search Bar */}
         <div className="relative mb-8 max-w-xl">

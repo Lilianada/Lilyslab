@@ -58,13 +58,14 @@ export default function MovieListPage() {
   return (
     <div className="min-h-screen animate-fade-in">
       <div className="container max-w-7xl mx-auto px-4 py-8">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">Movie List</h1>
-          <p className="mt-2 text-muted-foreground">
-            A collection of movies and shows I've watched recently, with some thoughts.
-          </p>
+        <header className="flex items-center justify-between mb-8">
+          <div className="flex flex-col">
+            <h1 className="mb-1 text-xl font-medium">Reading List</h1>
+            <p className="text-sm text-muted-foreground">
+              A collection of books I've read, am reading, or plan to read. Click on any book to see more details.
+            </p>
+          </div>
         </header>
-
         <Masonry
           breakpointCols={breakpointColumns}
           className="flex -ml-4 w-auto"

@@ -43,18 +43,21 @@ const books = [
 export default function ReadingListPage() {
   return (
     <div className="min-h-screen">
-      <div className="container max-w-5xl mx-auto px-4 py-8">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">Reading List</h1>
-          <p className="mt-2 text-muted-foreground">
-            A collection of books I've read, am reading, or plan to read. Click on any book to see more details.
-          </p>
-        </header>
+       <div className="container max-w-7xl mx-auto px-4 py-8">
+        
+                <header className="flex items-center justify-between mb-8">
+                    <div className="flex flex-col">
+                        <h1 className="mb-1 text-xl font-medium"> Movie List</h1>
+                        <p className="text-sm text-muted-foreground">
+                        A collection of movies and shows I've watched recently, with some thoughts.
+                        </p>
+                    </div>
+                </header>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
           {books.map((book, index) => (
             <div key={index} className="h-full">
-              <BookCard
+              {/* <BookCard
                 title={book.title}
                 author={book.author}
                 coverImage={book.coverImage}
@@ -62,7 +65,7 @@ export default function ReadingListPage() {
                 rating={book.rating}
                 summary={book.summary}
                 review={book.review}
-              />
+              /> */}
             </div>
           ))}
         </div>
