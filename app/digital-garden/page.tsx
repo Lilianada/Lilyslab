@@ -1,164 +1,116 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { SearchBar } from "@/components/search-bar"
-import { Card } from "@/components/ui/card"
+import Link from "next/link"
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-    Book,
-    Film,
-    PenTool,
-    Images,
-    Zap,
-    Plus,
-} from "lucide-react"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useAuth } from "@/contexts/auth-context"
+import { SearchBar } from "@/components/search-bar"
+import { ArrowUpRight, Book, Film, Lightbulb, PenTool, Plus, Zap, Images } from "lucide-react"
+import { SuggestionSidebar } from "@/components/suggestion-sidebar"
 
-export default function LeafletHome() {
+export default function DigitalGardenHome() {
     const router = useRouter()
-    const { user } = useAuth()
-    const [date, setDate] = useState<Date | undefined>(new Date())
-    const [isLoaded, setIsLoaded] = useState(true)
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [isSuggestionSidebarOpen, setIsSuggestionSidebarOpen] = useState(false);
 
-    const handleLogout = () => {
-        // TODO: Implement actual logout logic here
-        router.push("/") // Redirect to landing page
-    }
+    useEffect(() => {
+        setIsLoaded(true)
+    }, [])
 
-    // Get current time of day for greeting
-    const getGreeting = () => {
-        const hour = new Date().getHours()
-        if (hour < 12) return "Good morning"
-        if (hour < 18) return "Good afternoon"
-        return "Good evening"
-    }
-
-    const cards = [
-        { title: "Reading List", icon: Book, href: "/digital-garden/reading-list" },
-        { title: "Movie List", icon: Film, href: "/digital-garden/movie-list" },
-        { title: "Pic-Pins", icon: Images, href: "/digital-garden/pic-pins" },
-        { title: "Quick Notes", icon: Zap, href: "/digital-garden/quick-notes" },
-    ]
-
-    const buttonData = [
+    const sections = [
         {
-            label: 'Recommend a Book',
-            icon: Book,
-            href: '/leaflets/reading/new',
+            title: "Bookshelf",
+            description: "Books I've read, am reading, or plan to read.",
+            href: "/digital-garden/bookshelf",
+            icon: Book
         },
         {
-            label: 'Suggest a Movie',
-            icon: Film,
-            href: '/leaflets/movies/new',
+            title: "Movie List",
+            description: "Movies and shows I've watched or want to watch.",
+            href: "/digital-garden/movie-list",
+            icon: Film
         },
         {
-            label: 'Write Reflection',
-            icon: PenTool,
-            href: '/leaflets/reflections/new',
+            title: "Notes",
+            description: "Fleeting thoughts, ideas, and learnings.",
+            href: "/digital-garden/notes",
+            icon: Zap
         },
         {
-            label: 'Quick Note',
-            icon: Zap,
-            href: '/leaflets/notes/new',
+            title: "Catalog",
+            description: "A visual collection of inspiring images.",
+            href: "/digital-garden/catalog",
+            icon: Images
+        },
+        {
+            title: "Bookmarks",
+            description: "A visual collection of inspiring images.",
+            href: "/digital-garden/bookmarks",
+            icon: Images
+        },
+        {
+            title: "Draft",
+            description: "A visual collection of inspiring images.",
+            href: "/digital-garden/drafts",
+            icon: Images
         },
     ]
 
     return (
-        <div className={`max-w-2xl mx-auto px-6 py-12 max-h-screen ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
-            {/* Main Content Area (60% width) */}
-            <main className="">
-                {/* Header */}
+        <>
+            <div className={`max-w-3xl mx-auto sm:px-4 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
                 <header className="flex items-center justify-between mb-8">
-                    <div className="flex flex-col">
-                        <h1 className="mb-1 text-xl font-medium">Digital Garden</h1>
+                    <div>
+                        <h1 className="mb-1 text-lg md:text-2xl font-bold tracking-tight">Digital Garden</h1>
                         <p className="text-sm text-muted-foreground">
-                            A growing collection of thoughts, ideas, and knowledge I’ve gathered from various topics that spark my curiosity.
+                            A growing collection of thoughts, ideas, and knowledge I've gathered.
                         </p>
                     </div>
-                </header>
-
-                {/* Search Bar */}
-                <SearchBar
-                    placeholder="Search across my books, movies, reflections..."
-                    onSearch={() => { }}
-                    className="mb-8"
-                />
-
-
-                <Card className="p-6 mb-4">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-base font-medium">Suggest</h2>
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button variant="outline" size="sm">
-                                    <Plus className="w-4 h-4 mr-1" /> Make a Suggestion
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle>Add New Item</DialogTitle>
-                                    <DialogDescription>
-                                        What would you like to suggest?
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <div className="grid grid-cols-2 gap-2">
-                                    {buttonData.map(({ label, icon: Icon, href }) => (
-                                        <Button
-                                            key={label}
-                                            variant="outline"
-                                            onClick={() => router.push(href)}
-                                            className="flex items-center"
-                                        >
-                                            <Icon className="w-4 h-4 mr-2" />
-                                            {label}
-                                        </Button>
-                                    ))}
-                                </div>
-                            </DialogContent>
-                        </Dialog>
-                    </div>
-                </Card>
-
-                {/* Card Grid */}
-                <div className="grid grid-cols-2 gap-4 ">
-                    {cards.map((card) => (
-                        <Card
-                            key={card.title}
-                            className="p-6 hover:bg-accent/50 transition-colors cursor-pointer rounded-lg"
-                            onClick={() => router.push(card.href)}
-                        >
-                            <div className="flex items-start flex-col gap-2">
-                                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <card.icon className="w-6 h-6 stroke-1 text-gray-400" />
-                                </div>
-                                <h3 className="font-semibold text-base">{card.title}</h3>
-                            </div>
-                        </Card>
+                </header> 
+                <div className="grid grid-cols-1 mb-8 w-1/2">
+               
+                    <Button
+                        variant="outline"
+                        onClick={() => setIsSuggestionSidebarOpen(true)}
+                    >
+                        <Lightbulb size={16} className="mr-2" /> Suggest Something
+                    </Button>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
+                    {sections.map((section, index) => (
+                        <Link key={section.title} href={section.href} className="block group">
+                            <Card
+                                className={`p-4 hover:border-primary/80 transition-colors duration-200 cursor-pointer rounded-lg opacity-0 animate-slide-up h-full flex flex-row items-end justify-between`}
+                                style={{ animationDelay: `${index * 100}ms` }}
+                            >
+                                <CardHeader className="p-0">
+                                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+                                        <section.icon className="w-5 h-5 stroke-1 text-primary" />
+                                    </div>
+                                    <CardTitle className="text-base font-semibold">{section.title}</CardTitle>
+                                </CardHeader>
+                                <CardFooter className="p-0">
+                                    <span className="text-xs text-primary group-hover:underline flex items-center">
+                                        Explore <ArrowUpRight size={12} className="ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                                    </span>
+                                </CardFooter>
+                            </Card>
+                        </Link>
                     ))}
                 </div>
-                {/* <Card className="p-6 mt-4">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-base font-medium">Up Next</h2>
-                    </div>
-                </Card> */}
-            </main>
+            </div>
 
-        </div>
+            <SuggestionSidebar
+                isOpen={isSuggestionSidebarOpen}
+                onClose={() => setIsSuggestionSidebarOpen(false)}
+            />
+        </>
     )
 } 

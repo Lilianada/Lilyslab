@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ExternalLink } from "lucide-react"
 import { SearchBar } from "@/components/search-bar"
+import { Card, CardDescription, CardHeader } from "@/components/ui/card"
 
 type Utility = {
   id: string
@@ -56,21 +57,21 @@ export default function UtilitiesPage() {
   }, [searchQuery, utilities]);
 
   return (
-    <div className={`max-w-5xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
-      <header className="mb-6">
-        <h1 className="mb-1 text-xl font-medium">Utilities</h1>
+    <div className={`max-w-5xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+      <header className="mb-8">
+        <h1 className="mb-1 text-xl font-medium">Fun Projects</h1>
         <p className="text-sm text-muted-foreground">
-          A collection of fast, free, open source, ad-free tools to make developers lives easier.
+          Apps I have built for fun and for work.
         </p>
       </header>
 
-      <div className="mb-6 space-y-4">
+      {/* <div className="mb-6 space-y-4">
         <SearchBar
           placeholder="Search utilities by name, description, or tags..."
           onSearch={setSearchQuery}
           className="max-w-md"
         />
-      </div>
+      </div> */}
 
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 animate-pulse">
@@ -81,15 +82,13 @@ export default function UtilitiesPage() {
       ) : filteredUtilities.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 stagger-children">
           {filteredUtilities.map((utility, index) => (
-            <div
+            <Card
               key={utility.id}
-              className="rounded-lg border p-4 opacity-0 animate-slide-up bg-primary/10"
+              className="rounded-lg border p-4 opacity-0 animate-slide-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="mb-2 flex items-start justify-between">
-                <h2 className="text-sm font-medium">{utility.name}</h2>
-              </div>
-              <p className="mb-3 text-xs text-muted-foreground">{utility.description}</p>
+                <CardHeader className="text-sm font-medium p-0 mb-2">{utility.name}</CardHeader>
+              <CardDescription className="mb-3 text-xs text-muted-foreground">{utility.description}</CardDescription>
               
               <Button variant="outline" size="sm" className="text-xs w-full bg-card" asChild>
                 <a 
@@ -100,7 +99,7 @@ export default function UtilitiesPage() {
                   <ExternalLink size={14} className="mr-1" /> Try it
                 </a>
               </Button>
-            </div>
+            </Card>
           ))}
         </div>
       ) : (

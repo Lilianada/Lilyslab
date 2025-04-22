@@ -43,20 +43,13 @@ export default function MobileNav() {
   }
 
   return (
-    <div className="sticky top-0 z-50 flex items-center justify-between border-b bg-background p-4 md:hidden">
+    <div className="flex items-center justify-between border-b  p-4 md:hidden">
       <Link href="/" className="flex items-center gap-2">
-        <Image src="/logo.png" alt="Lily's Lab Logo" width={32} height={32} className="rounded-md" />
+        {/* <Image src="/Didi.png" alt="Lily's Lab Logo" width={32} height={32} className="rounded-md" /> */}
         <h1 className="text-sm font-medium">Lily's Lab</h1>
       </Link>
       <div className="flex items-center gap-2">
-        <ThemeToggle />
-        {isAdmin ? (
-          <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-0.5 flex items-center text-xs">
-            <Crown size={12} className="mr-1" /> Admin
-          </span>
-        ) : (
-          <UserProfileSection />
-        )}
+
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="h-8 w-8 rounded-md p-0">
@@ -64,7 +57,8 @@ export default function MobileNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="sidebar flex flex-col p-0">
+
+          <SheetContent side="left" className="sidebar flex flex-col p-0 bg-muted">
             <div className="flex items-center justify-between border-b p-4">
               <div className="flex items-center gap-2">
                 <Image src="/logo.png" alt="Lily's Lab" width={32} height={32} className="rounded-md hidden" />
@@ -77,32 +71,15 @@ export default function MobileNav() {
             </div>
             {user && (
               <div className="border-t p-4 flex justify-between">
-                {isAdmin && (
-                  <div className="flex justify-center">
-                    <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-1 flex items-center text-xs">
-                      <Crown size={12} className="mr-1" /> Admin
-                    </span>
-                  </div>
+                
+                <ThemeToggle />
+                {isAdmin ? (
+                  <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-0.5 flex items-center text-xs">
+                    <Crown size={12} className="mr-1" /> Admin
+                  </span>
+                ) : (
+                  <UserProfileSection />
                 )}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="justify-start text-xs text-red-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/20"
-                  onClick={handleSignOut}
-                  disabled={isSigningOut}
-                >
-                  {isSigningOut ? (
-                    <>
-                      <div className="mr-2 h-3 w-3 animate-spin rounded-full border-2 border-red-500 border-t-transparent"></div>
-                      Signing out...
-                    </>
-                  ) : (
-                    <>
-                      <LogOut size={14} className="mr-2" />
-                      Sign out
-                    </>
-                  )}
-                </Button>
               </div>
             )}
           </SheetContent>

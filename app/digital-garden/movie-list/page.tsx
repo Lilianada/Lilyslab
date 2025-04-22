@@ -7,7 +7,7 @@ const books = [
   {
     title: "Atomic Habits",
     author: "James Clear",
-    coverImage: "/Leaflets-logo.png",
+    coverImage: "/digital-garden-logo.png",
     status: "read" as const,
     rating: 4.5,
     summary: "A revolutionary guide to building good habits and breaking bad ones. Clear explains how tiny changes can lead to remarkable results.",
@@ -16,7 +16,7 @@ const books = [
   {
     title: "Deep Work",
     author: "Cal Newport",
-    coverImage: "/Leaflets-logo.png",
+    coverImage: "/digital-garden-logo.png",
     status: "reading" as const,
     rating: 4.2,
     summary: "Rules for focused success in a distracted world. Newport argues that the ability to perform deep work is becoming increasingly rare and valuable.",
@@ -25,14 +25,14 @@ const books = [
   {
     title: "The Pragmatic Programmer",
     author: "Andrew Hunt, David Thomas",
-    coverImage: "/Leaflets-logo.png",
+    coverImage: "/digital-garden-logo.png",
     status: "unread" as const,
     summary: "A guide to software development best practices. The authors share their insights on becoming a more effective programmer.",
   },
   {
     title: "Designing Data-Intensive Applications",
     author: "Martin Kleppmann",
-    coverImage: "/Leaflets-logo.png",
+    coverImage: "/digital-garden-logo.png",
     status: "read" as const,
     rating: 4.8,
     summary: "A comprehensive guide to the principles and practices behind scalable, reliable, and maintainable systems.",

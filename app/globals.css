@@ -11,80 +11,82 @@
 
 @import "../styles/card-animations.css";
 
+ 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 250 100% 83%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 0 0% 93%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    /* Light mode */
+    --background: 0 0% 100%;           /* #ffffff */
+    --foreground: 0 0% 4%;             /* #0a0a0a */
+    --card: 210 1% 98%;               /* #ebedef - light zinc */
+    --card-foreground: 0 0% 6%;        /* #101010 */
+    --popover: 0 0% 100%;              /* #ffffff */
+    --popover-foreground: 0 0% 4%;     /* #0a0a0a */
+    --primary: 250 100% 83%;            /* #e9c6f7 - soft lavender-pink */
+    --primary-foreground: 0 0% 99%;   /* #fcfcfc */
+    --secondary: 210 10% 87%;          /* #dbe1e8 - zinc light */
+    --secondary-foreground: 0 0% 15%;  /* #262626 */
+    --muted: 210 7% 90%;               /* #a9aeb5 - muted zinc */
+    --muted-foreground: 210 7% 40%;   /* #5f6368 */
+    --accent: 210 0% 94%;              /* #d6dbdf - zinc accent */
+    --accent-foreground: 0 0% 15%;    /* #262626 */
+    --destructive: 0 84% 60%;          /* #f03d3d */
+    --destructive-foreground: 0 0% 99%;/* #fcfcfc */
+    --border: 210 10% 88%;             /* #d7dde3 */
+    --input: 210 10% 88%;              /* #d7dde3 */
+    --ring: 0 0% 15%;                  /* #262626 */
     --radius: 0.5rem;
-    --mellow: 50 100% 49%;
+    --mellow: 38 100% 55%;             /* #ffc04d */
 
-    /* Notion-specific colors for light mode */
-    --notion-text: 0 0% 9%;
-    --notion-bg-gray: 0 0% 97%;
-    --notion-bg-brown: 19 80% 97%;
-    --notion-bg-orange: 30 80% 97%;
-    --notion-bg-yellow: 50 80% 97%;
-    --notion-bg-green: 120 80% 97%;
-    --notion-bg-blue: 210 80% 97%;
-    --notion-bg-purple: 270 80% 97%;
-    --notion-bg-pink: 330 80% 97%;
-    --notion-bg-red: 0 80% 97%;
+    --notion-text: 0 0% 9%;            /* #171717 */
+    --notion-bg-gray: 0 0% 97%;        /* #f7f7f7 */
+    --notion-bg-brown: 25 40% 95%;     /* #f2e8e4 */
+    --notion-bg-orange: 30 60% 95%;    /* #f7eee4 */
+    --notion-bg-yellow: 50 60% 95%;    /* #f7f1e4 */
+    --notion-bg-green: 120 40% 95%;    /* #eaf2ea */
+    --notion-bg-blue: 210 40% 95%;     /* #e8f0f7 */
+    --notion-bg-purple: 270 40% 95%;   /* #ede8f7 */
+    --notion-bg-pink: 330 40% 95%;     /* #f7e8f0 */
+    --notion-bg-red: 0 40% 95%;        /* #f7e8e8 */
     --notion-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --notion-max-width: 720px;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --mellow: 45 70% 30%;
+    /* Dark mode with #161616 background */
+    --background: 0 0% 5%;           /* #161616 */
+    --foreground: 0 0% 95%;             /* #f2f2f2 */
+    --card: 0 0% 6%;               /* #2a2e33 - slightly lighter zinc */
+    --card-foreground: 0 0% 95%;        /* #f2f2f2 */
+    --popover: 210 10% 12%;             /* #212529 - dark zinc */
+    --popover-foreground: 0 0% 95%;     /* #f2f2f2 */
+    --primary: 295 60% 85%;             /* #e9c6f7 - same accent */
+    --primary-foreground: 0 0% 15%;     /* #262626 */
+    --secondary: 210 10% 20%;           /* #343a40 - zinc medium-dark */
+    --secondary-foreground: 0 0% 95%;   /* #f2f2f2 */
+    --muted: 210 4% 5%;                /* #40464d - muted zinc */
+    --muted-foreground: 0 0% 60%;       /* #999999 */
+    --accent: 210 5% 18%;               /* #3b424a - zinc accent */
+    --accent-foreground: 0 0% 95%;      /* #f2f2f2 */
+    --destructive: 0 70% 40%;           /* #a94444 */
+    --destructive-foreground: 0 0% 95%; /* #f2f2f2 */
+    --border: 210 5% 10%;              /* #2f343a */
+    --input: 210 10% 12%;               /* #2f343a */
+    --ring: 210 8% 50%;                 /* #7a828b */
+    --mellow: 38 90% 45%;               /* #b3821b */
 
-    /* Notion-specific colors for dark mode */
-    --notion-text: 0 0% 98%;
-    --notion-bg-gray: 0 0% 20%;
-    --notion-bg-brown: 19 30% 20%;
-    --notion-bg-orange: 30 30% 20%;
-    --notion-bg-yellow: 50 30% 20%;
-    --notion-bg-green: 120 30% 20%;
-    --notion-bg-blue: 210 30% 20%;
-    --notion-bg-purple: 270 30% 20%;
-    --notion-bg-pink: 330 30% 20%;
-    --notion-bg-red: 0 30% 20%;
+    --notion-text: 0 0% 95%;            /* #f2f2f2 */
+    --notion-bg-gray: 210 10% 15%;      /* #2a2e33 */
+    --notion-bg-brown: 25 30% 15%;      /* #2a2623 */
+    --notion-bg-orange: 30 30% 15%;     /* #2b2923 */
+    --notion-bg-yellow: 50 30% 15%;     /* #2b2a23 */
+    --notion-bg-green: 120 30% 15%;     /* #232a23 */
+    --notion-bg-blue: 210 30% 15%;      /* #23272a */
+    --notion-bg-purple: 270 30% 15%;    /* #29232a */
+    --notion-bg-pink: 330 30% 15%;      /* #2a2327 */
+    --notion-bg-red: 0 30% 15%;         /* #2a2323 */
   }
 }
+
 
 @layer base {
   * {
@@ -127,7 +129,7 @@
   }
 }
 
-main {
+/* main {
   position: relative;
   z-index: 0;
 }
@@ -139,9 +141,9 @@ main::before {
   z-index: -1;
   background-image: url('/Noise.png');
   background-repeat: repeat;
-  opacity: 0.5; /* Adjust this value for desired opacity */
+  opacity: 0.5; 
   pointer-events: none;
-}
+} */
 
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
@@ -227,8 +229,4 @@ main::before {
   opacity: 0;
   transform: translateY(-8px);
   transition: opacity 300ms, transform 300ms;
-}
-
-.dark .sidebar {
-  background-color: rgba(23, 23, 23, 1);
 }

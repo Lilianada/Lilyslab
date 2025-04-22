@@ -90,7 +90,7 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
       <Link
         href={href}
         className={cn(
-          "flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent transition-all duration-300", 
+          "flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent transition-all duration-300",
           isActive ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:text-foreground",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
         )}
@@ -121,7 +121,7 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
         {icon}
       </div>
       <span className="relative">{label}
-      {hasNotification && (
+        {hasNotification && (
           <span className="absolute -top-1 -right-2 w-2 h-2 bg-mellow rounded-full" />
         )}
       </span>
@@ -178,12 +178,13 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
   }
 
   return (
-    <aside className={cn("sidebar border-r bg-muted", mobile ? "w-full" : "hidden w-64 md:block")}>
+    <aside className={cn("border-r bg-card", mobile ? "w-full" : "hidden w-64 md:block")}>
       <div className={cn("p-4", mobile ? "" : "sticky top-0 h-screen flex flex-col")}>
         {!mobile && (
           <div className="mb-8 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
+              <Image src="/Didi.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
+
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
           </div>
@@ -192,13 +193,14 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         <nav className={cn("space-y-6", mobile ? "" : "flex-1 overflow-y-auto")}>
           <div className="space-y-1">
             <NavItem href="/" icon={<Home size={16} />} label="Home" onClick={onNavClick} delay={100} />
-            <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writing" onClick={onNavClick} delay={150} />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Me" delay={200} />
+            <SectionTitle title="Me" delay={150} />
+            <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writing" onClick={onNavClick} delay={200} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={250} />
             <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={300} />
+            {/* <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={300} /> */}
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
             <NavItem
               href="/digital-garden"
@@ -219,9 +221,9 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               delay={450}
             />
             <NavItem
-              href="/playground/utilities"
+              href="/playground/projects"
               icon={<Wrench size={16} />}
-              label="Utilities"
+              label="Projects"
               onClick={onNavClick}
               delay={475}
             />
@@ -232,15 +234,40 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               onClick={onNavClick}
               delay={500}
             />
-            <NavItem
+            {/* <NavItem
               href="/playground/app-dissection"
               icon={<Scissors size={16} />}
               label="App Dissection"
               onClick={onNavClick}
               delay={550}
+            /> */}
+          </div>
+
+          <div className="space-y-1">
+            <SectionTitle title="Lab" delay={650} />
+            <NavItem
+              href="/lab/shop"
+              icon={<Crown size={16} />}
+              label="Shop"
+              onClick={onNavClick}
+              delay={700}
             />
             <NavItem
-              href="/playground/changelog"
+              href="/lab/Log"
+              icon={<ShoppingCart size={16} />}
+              label="Log"
+              onClick={onNavClick}
+              delay={750}
+            />
+            <NavItem
+              href="/lab/colophon"
+              icon={<WalletCards size={16} />}
+              label="Colophon"
+              onClick={onNavClick}
+              delay={800}
+            />
+            <NavItem
+              href="/lab/changelog"
               icon={<History size={16} />}
               label="Changelog"
               onClick={onNavClick}
@@ -248,117 +275,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               hasNotification={true}
             />
           </div>
-
-          <div className="space-y-1">
-            <SectionTitle title="Templates" delay={650} />
-            <NavItem
-              href="/templates/dashboard"
-              icon={<Crown size={16} />}
-              label="Canvas"
-              onClick={onNavClick}
-              delay={700}
-              template={true}
-            />
-            <NavItem
-              href="/templates/ecommerce"
-              icon={<ShoppingCart size={16} />}
-              label="Quickview"
-              onClick={onNavClick}
-              delay={750}
-              template={true}
-            />
-            <NavItem
-              href="/templates/saas"
-              icon={<WalletCards size={16} />}
-              label="FitPeeps"
-              onClick={onNavClick}
-              delay={800}
-              template={true}
-            />
-          </div>
-
-          <div className="space-y-1">
-            <SectionTitle title="Case Studies" delay={850} />
-            <NavItem
-              href="https://codedbabe.notion.site/Leaflet-App-Case-Study-19ef441cd2fd80689b50c8ed3360b150?pvs=74"
-              icon={<Leaf size={16} />}
-              label="Leaflet"
-              external
-              onClick={onNavClick}
-              delay={900}
-            />
-            <NavItem
-              href="https://codedbabe.notion.site/Plannr-App-Product-Strategy-Requirements-Doc-PSRD-185f441cd2fd80a9b4ede8d73cd5570c"
-              icon={<Calendar size={16} />}
-              label="Plannr"
-              external
-              onClick={onNavClick}
-              delay={950}
-            />
-            <NavItem
-              href="https://codedbabe.notion.site/Upmonie-AI-Powered-Fintech-Startup-192f441cd2fd8049b9f8d575efc08cf6?pvs=74"
-              icon={<TrendingUp size={16} />}
-              label="Upmonie"
-              external
-              onClick={onNavClick}
-              delay={1000}
-            />
-          </div>
-
-          <div className="space-y-1">
-            <SectionTitle title="Live Projects" delay={1000} />
-            <NavItem
-              href="https://wordix-v1.vercel.app/"
-              icon={<Dices size={16} />}
-              label="Wordix"
-              external={true}
-              onClick={onNavClick}
-              delay={1050}
-            />
-            <NavItem
-              href="https://lilianada.com/"
-              icon={<BriefcaseBusiness size={16} />}
-              label="LilianAda"
-              external={true}
-              onClick={onNavClick}
-              delay={1100}
-            />
-            <NavItem
-              href="https://firmco-admin.vercel.app/"
-              icon={<WalletCards size={16} />}
-              label="Firmco Admin"
-              external={true}
-              onClick={onNavClick}
-              delay={1150}
-            />
-            <NavItem
-              href="https://firmco-client.app/"
-              icon={<CreditCard size={16} />}
-              label="Firmco Client"
-              external={true}
-              onClick={onNavClick}
-              delay={1200}
-            />
-            <NavItem
-              href="https://www.beblended.ca/v2/"
-              icon={<ShoppingCart size={16} />}
-              label="Beblended"
-              external={true}
-              onClick={onNavClick}
-              delay={1250}
-            />
-            <NavItem
-              href="https://the-fitcreatives.vercel.app/"
-              icon={<Dumbbell size={16} />}
-              label="Fitcreatives"
-              external={true}
-              onClick={onNavClick}
-              delay={1300}
-            />
-          </div>
-
           {/* Social Links  */}
-          {/* <div className="space-y-1">
+          <div className="space-y-1">
             <SectionTitle title="Online" delay={1350} />
             <NavItem
               href="https://linkedin.com/in/lilianada"
@@ -392,38 +310,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               onClick={onNavClick}
               delay={1550}
             />
-          </div> */}
+          </div>
 
-          {user && !mobile && (
-            <div className="space-y-1 opacity-0 animate-slide-up" style={{ animationDelay: "1350ms" }}>
-              {/* {isAdmin && (
-                <div className="mb-2 flex items-center justify-center">
-                  <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-1 flex items-center text-xs">
-                    <Crown size={12} className="mr-1" /> Admin
-                  </span>
-                </div>
-              )} */}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-full justify-start text-xs text-red-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/20"
-                onClick={handleSignOut}
-                disabled={isSigningOut}
-              >
-                {isSigningOut ? (
-                  <>
-                    <div className="mr-2 h-3 w-3 animate-spin rounded-full border-2 border-red-500 border-t-transparent"></div>
-                    <span>Signing out...</span>
-                  </>
-                ) : (
-                  <>
-                    <LogOut size={16} className="mr-2" />
-                    <span>Sign out</span>
-                  </>
-                )}
-              </Button>
-            </div>
-          )}
         </nav>
 
         {!mobile && (

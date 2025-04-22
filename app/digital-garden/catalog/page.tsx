@@ -132,7 +132,7 @@ export default function PicPinsPage() {
       <div className="container max-w-5xl mx-auto px-4 py-8">
         <header className="flex items-center justify-between mb-8">
           <div className="flex flex-col">
-            <h1 className="mb-1 text-xl font-medium">Pic Pins</h1>
+            <h1 className="mb-1 text-xl font-medium">Catalog</h1>
             <p className="text-sm text-muted-foreground">
             A readaptation of the Pinterest layout. Hover on any pin to see more details.
             </p>

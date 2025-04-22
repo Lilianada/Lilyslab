@@ -11,6 +11,8 @@ import { Toaster } from "@/components/ui/toaster"
 import "react-notion-x/src/styles.css"
 import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
+import { Breadcrumb } from "@/components/breadcrumb-nav"
+import { BuyMeCoffee } from "@/components/buy-me-coffee"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -19,8 +21,8 @@ export const metadata: Metadata = {
     default: "Lily's Lab",
     template: "%s | Lily's Lab",
   },
-  description: "Designer, software engineer, product manager, and digital creator",
-  keywords: ["design", "development", "product management", "portfolio", "Lilian Okeke"],
+  description: "Software engineer, product manager, and digital creator",
+  keywords: ["design", "development", "product management", "portfolio", "Lilian Okeke", "Lilyslab", "Lily's Lab", "artificial intelligence", "machine learning", "software engineer", "product manager", "digital creator"],
   authors: [{ name: "Lilian Okeke" }],
   creator: "Lilian Okeke",
   openGraph: {
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://lilyslab.xyz",
     title: "Lily's Lab",
-    description: "Designer, software engineer, product manager, and digital creator",
+    description: "Software engineer, product manager, and digital creator",
     siteName: "Lily's Lab",
     images: [
       {
@@ -51,7 +53,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/logo.png",
   },
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -61,15 +62,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body className={inter.className}>
+     <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <div className="flex min-h-screen flex-col bg-background dark:bg-[#111] transition-colors duration-300 md:flex-row">
+            <main className="flex min-h-screen flex-col bg-background  transition-colors duration-300 md:flex-row">
               <Sidebar />
               <MobileNav />
-              <main className="flex-1 px-4 py-6 md:px-8 md:py-10 main-noise-bg"> <Breadcrumb />{children}</main>
-            </div>
+              <div className="flex-1 px-4 py-6 md:px-8 md:py-10 "> 
+                <Breadcrumb />
+                {children}
+              </div>
+            </main>
             <Toaster />
+            <BuyMeCoffee />
           </AuthProvider>
         </ThemeProvider>
       </body>
@@ -77,6 +82,3 @@ export default function RootLayout({
   )
 }
 
-
-import './globals.css'
-import { Breadcrumb } from "@/components/breadcrumb-nav"

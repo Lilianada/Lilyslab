@@ -15,10 +15,9 @@ import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { Markdown } from "@/components/markdown"
-import { getChangelogEntries } from "@/app/actions/get-changelogs"
-import { useChangelogNotification } from "@/hooks/use-changelog-notification"
-import { useToast } from "@/hooks/use-toast"
+import { getChangelogs } from "@/lib/notion"
 import type { ChangelogEntry } from "@/lib/notion"
+import { useToast } from "@/hooks/use-toast"
 
 export default function ChangelogPage() {
   const [changelogs, setChangelogs] = useState<ChangelogEntry[]>([])
@@ -31,23 +30,30 @@ export default function ChangelogPage() {
 
   useEffect(() => {
     const fetchChangelogs = async () => {
+      setIsLoading(true)
       try {
-        const result = await getChangelogEntries()
-        if ("error" in result) {
+        const entries = await getChangelogs()
+        console.log(`Fetched ${entries.length} changelog entries with content`)
+        
+        if (Array.isArray(entries)) {
+          setChangelogs(entries)
+        } else {
+          console.error("getChangelogs did not return an array:", entries)
+          setChangelogs([])
           toast({
-            title: "Error",
-            description: result.error,
+            title: "Data Error",
+            description: "Received invalid data format for changelogs.",
             variant: "destructive",
           })
-        } else {
-          setChangelogs(result.changelogs)
         }
-      } catch (error) {
+      } catch (error: any) {
+        console.error("Error fetching changelogs in component:", error)
         toast({
-          title: "Error",
-          description: "Failed to fetch changelogs",
+          title: "Error Fetching Changelogs",
+          description: error.message || "Failed to fetch changelogs.",
           variant: "destructive",
         })
+        setChangelogs([])
       } finally {
         setIsLoading(false)
       }
@@ -58,34 +64,36 @@ export default function ChangelogPage() {
 
   // Filter changelogs based on search and filters
   const filteredChangelogs = changelogs.filter(entry => {
-    const matchesSearch = entry.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      entry.content.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesType = selectedType === "all" || entry.type === selectedType
-    const matchesCategory = selectedCategory === "all" || entry.category === selectedCategory
+    const titleMatch = entry.title?.toLowerCase().includes(searchQuery.toLowerCase()) ?? true
+    const contentMatch = entry.content?.toLowerCase().includes(searchQuery.toLowerCase()) ?? true
+    const typeMatch = selectedType === "all" || entry.type === selectedType
+    const categoryMatch = selectedCategory === "all" || entry.category === selectedCategory
 
-    return matchesSearch && matchesType && matchesCategory
+    return titleMatch && contentMatch && typeMatch && categoryMatch
   })
 
   // Toggle changelog expansion
   const toggleExpansion = (id: string) => {
-    const newExpanded = new Set(expandedEntries)
-    if (newExpanded.has(id)) {
-      newExpanded.delete(id)
-    } else {
-      newExpanded.add(id)
-    }
-    setExpandedEntries(newExpanded)
+    setExpandedEntries((prevExpanded) => {
+      const newExpanded = new Set(prevExpanded)
+      if (newExpanded.has(id)) {
+        newExpanded.delete(id)
+      } else {
+        newExpanded.add(id)
+      }
+      return newExpanded
+    })
   }
 
   // Get badge color based on change type
-  const getBadgeColor = (type: ChangelogEntry["type"]) => {
-    const colors = {
-      feature: "bg-green-500/10 text-green-500",
-      improvement: "bg-blue-500/10 text-blue-500",
-      fix: "bg-yellow-500/10 text-yellow-500",
-      breaking: "bg-red-500/10 text-red-500"
+  const getBadgeColor = (type: ChangelogEntry["type"]): string => {
+    const colors: Record<ChangelogEntry["type"], string> = {
+      feature: "bg-green-500/10 text-green-500 border border-green-500/30",
+      improvement: "bg-blue-500/10 text-blue-500 border border-blue-500/30",
+      fix: "bg-yellow-500/10 text-yellow-500 border border-yellow-500/30",
+      breaking: "bg-red-500/10 text-red-500 border border-red-500/30",
     }
-    return colors[type]
+    return colors[type] ?? colors.improvement
   }
 
   if (isLoading) {
@@ -122,7 +130,7 @@ export default function ChangelogPage() {
             />
           </div>
           <Select value={selectedType} onValueChange={setSelectedType}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-full sm:w-[180px]">
               <SelectValue placeholder="Filter by type" />
             </SelectTrigger>
             <SelectContent>
@@ -134,7 +142,7 @@ export default function ChangelogPage() {
             </SelectContent>
           </Select>
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-full sm:w-[180px]">
               <SelectValue placeholder="Filter by category" />
             </SelectTrigger>
             <SelectContent>
@@ -143,6 +151,7 @@ export default function ChangelogPage() {
               <SelectItem value="Architecture">Architecture</SelectItem>
               <SelectItem value="Performance">Performance</SelectItem>
               <SelectItem value="Security">Security</SelectItem>
+              <SelectItem value="General">General</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -150,61 +159,87 @@ export default function ChangelogPage() {
         {/* Changelog Entries */}
         <div className="space-y-6">
           {filteredChangelogs.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              No changelog entries found.
+            <div className="text-center py-8 text-muted-foreground border rounded-lg p-6">
+              No changelog entries found matching your current filters.
             </div>
           ) : (
             filteredChangelogs.map((entry) => (
               <div
                 key={entry.id}
-                className="border rounded-lg p-4 bg-card transition-all duration-200 hover:shadow-sm"
+                className="border rounded-lg bg-card transition-all duration-200 hover:shadow-md overflow-hidden"
               >
                 <div
-                  className="flex items-start justify-between cursor-pointer"
+                  className="flex items-start justify-between cursor-pointer p-4 hover:bg-muted/30 transition-colors"
                   onClick={() => toggleExpansion(entry.id)}
+                  role="button"
+                  aria-expanded={expandedEntries.has(entry.id)}
+                  aria-controls={`changelog-content-${entry.id}`}
                 >
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Badge className={cn("font-medium", getBadgeColor(entry.type))}>
+                  <div className="flex-1 pr-4">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <Badge
+                        className={cn(
+                          "font-medium whitespace-nowrap px-2.5 py-0.5 text-xs",
+                          getBadgeColor(entry.type)
+                        )}
+                      >
                         {entry.type}
                       </Badge>
-                      <Badge variant="outline">{entry.category}</Badge>
-                      <span className="text-sm text-muted-foreground">
+                      <Badge variant="outline" className="whitespace-nowrap px-2.5 py-0.5 text-xs">
+                        {entry.category}
+                      </Badge>
+                      <span className="text-sm text-muted-foreground whitespace-nowrap">
                         {format(new Date(entry.date), "MMM d, yyyy")}
                       </span>
                     </div>
-                    <h3 className="text-lg font-medium">{entry.title}</h3>
+                    <h3 className="text-lg font-medium">{entry.title ?? "Untitled Entry"}</h3>
                   </div>
-                  <Button variant="ghost" size="icon">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label={
+                      expandedEntries.has(entry.id) ? "Collapse" : "Expand"
+                    }
+                    className="text-muted-foreground hover:text-foreground"
+                  >
                     {expandedEntries.has(entry.id) ? (
-                      <ChevronDown className="h-4 w-4" />
+                      <ChevronDown className="h-5 w-5" />
                     ) : (
-                      <ChevronRight className="h-4 w-4" />
+                      <ChevronRight className="h-5 w-5" />
                     )}
                   </Button>
                 </div>
 
                 {/* Expanded Content */}
                 {expandedEntries.has(entry.id) && (
-                  <div className="mt-4 prose prose-sm dark:prose-invert max-w-none">
-                    <Markdown content={entry.content} />
+                  <div
+                    id={`changelog-content-${entry.id}`}
+                    className="p-4 border-t border-border bg-background prose prose-sm dark:prose-invert max-w-none"
+                  >
+                    {entry.content ? (
+                      <Markdown content={entry.content} />
+                    ) : (
+                      <div className="text-sm text-muted-foreground py-4 text-center">
+                        No detailed content available.
+                      </div>
+                    )}
                     {entry.media && entry.media.length > 0 && (
-                      <div className="mt-4 space-y-4">
+                      <div className="mt-4 space-y-4 not-prose">
                         {entry.media.map((media, index) => (
-                          <div key={index} className="rounded-lg overflow-hidden">
+                          <div key={index} className="rounded-lg overflow-hidden border">
                             {media.type === "image" ? (
                               <img
                                 src={media.url}
                                 alt="Changelog media"
-                                className="w-full h-auto"
+                                className="w-full h-auto object-contain max-h-96"
                               />
-                            ) : (
+                            ) : media.type === 'video' ? (
                               <video
                                 src={media.url}
                                 controls
-                                className="w-full h-auto"
+                                className="w-full h-auto max-h-96"
                               />
-                            )}
+                            ) : null}
                           </div>
                         ))}
                       </div>

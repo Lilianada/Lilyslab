@@ -94,7 +94,7 @@ export function ToolSubmissionSidebar({ isOpen, onClose }: ToolSubmissionSidebar
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-background border-l animate-in slide-in-from-right">
+    <div className="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-background border-l animate-in slide-in-from-right z-50">
       <div className="h-full flex flex-col">
         <header className="flex items-center justify-between p-4 border-b">
           <h2 className="text-lg font-semibold">Submit a Tool</h2>

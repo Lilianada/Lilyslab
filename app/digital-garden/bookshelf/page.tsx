@@ -90,7 +90,7 @@ export default function MovieListPage() {
                 {/* Content */}
                 <div className="p-4">
                   {/* Author */}
-                  <div className="flex items-center gap-2 mb-3">
+                  {/* <div className="flex items-center gap-2 mb-3">
                     <Image
                       src={post.authorImage}
                       alt={post.author}
@@ -99,7 +99,7 @@ export default function MovieListPage() {
                       className="rounded-full"
                     />
                     <span className="text-sm font-medium">{post.author}</span>
-                  </div>
+                  </div> */}
 
                   {/* Title and Description */}
                   <h3 className="font-medium mb-2 hover:text-blue-500 cursor-pointer">
@@ -122,7 +122,7 @@ export default function MovieListPage() {
                   </div>
 
                   {/* Reply Input */}
-                  <Input
+                  {/* <Input
                     type="text"
                     placeholder="Reply..."
                     value={replyText[post.id] || ""}
@@ -133,7 +133,7 @@ export default function MovieListPage() {
                       }))
                     }
                     className="text-sm bg-muted"
-                  />
+                  /> */}
                 </div>
               </div>
             </div>

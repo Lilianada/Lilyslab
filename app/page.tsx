@@ -4,6 +4,8 @@ import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { ProjectItemComponent, SocialLink, ThingItemComponent, WorkItemComponent } from "@/components/homepage-items"
+import { MusicPlayerWidget } from "@/components/music-player-widget"
 
 // Types for our data
 interface WorkItem {
@@ -21,19 +23,47 @@ interface ProjectItem {
   url: string
 }
 
-interface SpeakingItem {
+interface ThingsItem {
   id: string
   title: string
-  date: string
-  description: string
-  url: string
 }
+
+const thingsILike = [
+  {
+    id: '1',
+    name: 'Coding',
+    image: '/coding.png'
+  },
+  {
+    id: '2',
+    name: 'Reading',
+    image: '/reading.png'
+  },
+  {
+    id: '3',
+    name: 'Writing',
+    image: '/writing.png'
+  },
+  {
+    id: '3',
+    name: 'Writing',
+    image: '/writing.png'
+  }
+]
+const thingsIDontLike = [
+  {
+    id: '1',
+    name: 'Coding',
+    description: 'I love coding and building things with code.',
+    image: '/coding.png'
+  }
+]
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [work, setWork] = useState<WorkItem[]>([])
   const [projects, setProjects] = useState<ProjectItem[]>([])
-  const [speaking, setSpeaking] = useState<SpeakingItem[]>([])
+  const [things, setThings] = useState<ThingsItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -57,7 +87,7 @@ export default function Home() {
 
         setWork(data.work || [])
         setProjects(data.projects || [])
-        setSpeaking(data.speaking || [])
+        setThings(data.things || [])
       } catch (error) {
         console.error("Error fetching homepage data:", error)
         setError("Failed to load data")
@@ -70,7 +100,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={`max-w-xl space-y-16 grid mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-xl space-y-12 grid mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       {error ? (
         <div className="text-center py-8 border rounded-lg">
           <p className="text-red-500 mb-2">Error loading data</p>
@@ -79,10 +109,10 @@ export default function Home() {
       ) : (
         <>
           <section className="stagger-children">
-            <div className="w-40 h-40 rounded-full bg-muted border-muted mb-6">
-              <Image src="/logo.png" alt="Lily's Lab Logo" className="rounded-full "width={400} height={400} />
+            <div className="w-20 h-20 mb-6 object-contain">
+              <Image src="/Didi.png" alt="Lily's Lab Logo" width={200} height={200} />
             </div>
-            <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
+            <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
               Hi there, I'm Lilian. I'm a{" "}
               <Link href="https://github.com/lilianokeke" className="text-primary hover:underline">
                 MERN-Stack Developer
@@ -99,19 +129,34 @@ export default function Home() {
               working 4 years as a software developer with creative thinking to lead the building and execution of
               products successfully.
             </p>
-            <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
+            <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
               I help turn creative ideas into real solutions, making sure that the product being built aligns with the
-              needs of the target users and business goal.{" "}
+              needs of the target users and business goals.{" "}
             </p>
 
-            <p className="mb-4 text-base leading-relaxed opacity-0 animate-slide-up">
-              I am exploring as much <span className="text-primary hover:underline">AI tools</span> as possible, with
+            <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
+              Currently, I'm exploring as much <span className="text-primary hover:underline">AI tools</span> as possible, with
               the aim of bringing all my dream apps to life.
             </p>
           </section>
 
           <section>
-            <h2 className="mb-4 text-base font-medium text-muted-foreground">Work</h2>
+            {isLoading ? (
+              <div className="animate-pulse space-y-4">
+                <div className="h-16 bg-muted rounded"></div>
+              </div>)
+              :
+              (<MusicPlayerWidget
+                imageUrl="/cover.png"
+                title="Aura Phonk"
+                artist="Curse Devil"
+                lastPlayed="Last played on Apr 22, 09:13 AM WAT"
+              />)}
+          </section>
+
+          {/* Work */}
+          <section>
+            <h2 className="mb-4 text-sm font-medium text-muted-foreground">Work</h2>
             <div className="space-y-4 stagger-children">
               {isLoading ? (
                 <div className="animate-pulse space-y-4">
@@ -126,7 +171,6 @@ export default function Home() {
                     company={item.company}
                     role={item.role}
                     period={item.period}
-                    description={item.description}
                   />
                 ))
               ) : (
@@ -135,56 +179,52 @@ export default function Home() {
             </div>
           </section>
 
-          <section>
-            <h2 className="mb-4 text-base font-medium text-muted-foreground">Projects</h2>
-            <div className="space-y-4 stagger-children">
-              {isLoading ? (
-                <div className="animate-pulse space-y-4">
-                  <div className="h-20 bg-muted rounded"></div>
-                  <div className="h-20 bg-muted rounded"></div>
-                  <div className="h-20 bg-muted rounded"></div>
-                </div>
-              ) : projects.length > 0 ? (
-                projects.map((project) => (
-                  <ProjectItemComponent
-                    key={project.id}
-                    name={project.name}
-                    description={project.description}
-                    url={project.url}
-                  />
-                ))
-              ) : (
-                <p className="text-xs text-muted-foreground">No projects found.</p>
-              )}
-            </div>
-          </section>
 
-          <section>
-            <h2 className="mb-4 text-base font-medium text-muted-foreground">Speaking</h2>
-            <div className="space-y-4 stagger-children">
-              {isLoading ? (
-                <div className="animate-pulse space-y-4">
-                  <div className="h-16 bg-muted rounded"></div>
-                  <div className="h-16 bg-muted rounded"></div>
-                </div>
-              ) : speaking.length > 0 ? (
-                speaking.map((item) => (
-                  <SpeakingItemComponent
-                    key={item.id}
-                    title={item.title}
-                    event={item.description}
-                    date={item.date}
-                    url={item.url}
-                  />
-                ))
-              ) : (
-                <p className="text-xs text-muted-foreground">No speaking engagements found.</p>
-              )}
-            </div>
-          </section>
 
+          {/* Things I like */}
+          {/* <section className="grid grid-cols-2">
+            <div className="">
+              <h2 className="mb-4 text-sm font-medium text-muted-foreground">Things I like</h2>
+              <div className="space-y-4 stagger-children">
+                {isLoading ? (
+                  <div className="animate-pulse space-y-4">
+                    <div className="h-16 bg-muted rounded"></div>
+                    <div className="h-16 bg-muted rounded"></div>
+                  </div>
+                ) : (
+                  thingsILike.map((item) => (
+                    <ThingItemComponent
+                      key={item.id}
+                      name={item.name}
+                    />
+                  )))}
+              </div>
+            </div>
+            <div>
+              <h2 className="mb-4 text-sm font-medium text-muted-foreground">Things I don't like</h2>
+              <div className="space-y-4 stagger-children">
+                {isLoading ? (
+                  <div className="animate-pulse space-y-4">
+                    <div className="h-16 bg-muted rounded"></div>
+                    <div className="h-16 bg-muted rounded"></div>
+                  </div>
+                ) : (
+                  thingsIDontLike.map((item) => (
+                    <ThingItemComponent
+                      key={item.id}
+                      name={item.name}
+                    />
+                  )))}
+              </div>
+            </div>
+          </section> */}
+
+          {/* Things I don't like */}
+
+
+          {/* Social Links */}
           <section>
-            <h2 className="mb-4 text-base font-medium text-muted-foreground">Online</h2>
+            <h2 className="mb-4 text-sm font-medium text-muted-foreground">Online</h2>
             <div className="space-y-2 stagger-children">
               <SocialLink platform="LinkedIn" url="https://linkedin.com/in/lilianada" action="Connect" />
               <SocialLink platform="GitHub" url="https://github.com/lilianokeke" action="Visit" />
@@ -194,107 +234,6 @@ export default function Home() {
           </section>
         </>
       )}
-    </div>
-  )
-}
-
-function SocialLink({ platform, url, action }: { platform: string; url: string; action: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-border pb-2 opacity-0 animate-slide-up hover:border-primary transition-colors duration-300">
-      <span className="text-xs">{platform}</span>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-1 text-xs text-primary hover:underline group"
-      >
-        {action}
-        <ExternalLink
-          size={12}
-          className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
-        />
-      </a>
-    </div>
-  )
-}
-
-function WorkItemComponent({
-  company,
-  role,
-  period,
-  description,
-}: {
-  company: string
-  role: string
-  period: string
-  description: string
-}) {
-  return (
-    <div className="border-b border-border pb-4 opacity-0 animate-slide-up hover:border-primary transition-colors duration-300">
-      <div className="flex items-start justify-between">
-        <div>
-          <h3 className="text-sm font-medium">{company}</h3>
-          <p className="text-xs text-muted-foreground">{role}</p>
-        </div>
-        <span className="text-xs text-muted-foreground">{period}</span>
-      </div>
-      <p className="mt-1 text-xs">{description}</p>
-    </div>
-  )
-}
-
-function ProjectItemComponent({
-  name,
-  description,
-  url,
-}: {
-  name: string
-  description: string
-  url: string
-}) {
-  return (
-    <div className="space-y-6 opacity-0 animate-slide-up hover:border-primary transition-colors duration-300">
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group block rounded-lg border p-4 transition-colors hover:bg-accent"
-      >
-        <div className="flex items-center justify-between">
-          <h3 className="font-medium group-hover:text-primary text-sm">{name}</h3>
-          <ExternalLink
-            size={16}
-            className="text-muted-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
-          />
-        </div>
-        <p className="mt-1 text-xs text-muted-foreground">{description}</p>
-      </a>
-    </div>
-  )
-}
-
-function SpeakingItemComponent({
-  title,
-  event,
-  date,
-  url,
-}: {
-  title: string
-  event: string
-  date: string
-  url: string
-}) {
-  return (
-    <div className="border-b border-border pb-4 opacity-0 animate-slide-up hover:border-primary transition-colors duration-300">
-      <h3 className="text-sm font-medium">
-        <a href={url} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">
-          {title}
-        </a>
-      </h3>
-      <div className="mt-1 flex items-center justify-between">
-        <p className="text-xs text-muted-foreground">{event}</p>
-        <span className="text-xs text-muted-foreground">{date}</span>
-      </div>
     </div>
   )
 }
