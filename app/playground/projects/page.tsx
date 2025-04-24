@@ -27,13 +27,13 @@ export default function UtilitiesPage() {
 
     async function fetchUtilities() {
       try {
-        const response = await fetch("/api/utilities")
+        const response = await fetch("/api/projects")
         const data = await response.json()
         setUtilities(data.utilities || [])
         setFilteredUtilities(data.utilities || [])
         
       } catch (error) {
-        console.error("Error fetching utilities:", error)
+        console.error("Error fetching projects:", error)
       } finally {
         setIsLoading(false)
       }
@@ -104,7 +104,7 @@ export default function UtilitiesPage() {
         </div>
       ) : (
         <div className="text-center py-8 border rounded-lg">
-          <p className="text-sm text-muted-foreground">No utilities found matching your search.</p>
+          <p className="text-sm text-muted-foreground">No projects found matching your search.</p>
         </div>
       )}
     </div>

@@ -22,8 +22,8 @@ export const MusicPlayerWidget = ({
           <Image
             src={imageUrl}
             alt={`${title} album art`}
-            width={56} // 14 * 4
-            height={56} // 14 * 4
+            width={56} 
+            height={56} 
             className="rounded-md object-cover"
           />
         </div>

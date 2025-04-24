@@ -11,7 +11,7 @@ import {
   BookOpen,
   MessageSquare,
   Layers,
-  Twitter,
+  Bookmark,
   Mail,
   Github,
   Linkedin,
@@ -40,6 +40,7 @@ import { UserProfileSection } from "./user-profile-section"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "./ui/button"
 import { useToast } from "@/hooks/use-toast"
+// import Bookmark from "@/app/digital-garden/bookmarks/page"
 // import logo from "@/public/logo.png"
 
 interface NavItemProps {
@@ -178,105 +179,68 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
   }
 
   return (
-    <aside className={cn("border-r bg-card", mobile ? "w-full" : "hidden w-64 md:block")}>
-      <div className={cn("p-4", mobile ? "" : "sticky top-0 h-screen flex flex-col")}>
+    <aside
+      className={cn(
+        "border-r bg-card shadow-none transition-all duration-300",
+        mobile ? "w-full" : "hidden w-64 md:block"
+      )}
+      style={{ minHeight: '100vh', boxShadow: '0 0 0 0 transparent' }}
+    >
+      <div className={cn("p-4", mobile ? "" : "sticky top-0 h-screen flex flex-col justify-between")}>
         {!mobile && (
           <div className="mb-8 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/Didi.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
+              <Image src="/12.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
 
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
           </div>
         )}
 
-        <nav className={cn("space-y-6", mobile ? "" : "flex-1 overflow-y-auto")}>
+        <nav className={cn("space-y-6 custom-scrollbar", mobile ? "" : "flex-1 overflow-y-auto")}>
           <div className="space-y-1">
-            <NavItem href="/" icon={<Home size={16} />} label="Home" onClick={onNavClick} delay={100} />
-          </div>
+  <NavItem href="/" icon={<Home size={16} />} label="Home" onClick={onNavClick} delay={100} />
+</div>
 
-          <div className="space-y-1">
-            <SectionTitle title="Me" delay={150} />
-            <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writing" onClick={onNavClick} delay={200} />
-            <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={250} />
-            <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={300} />
-            {/* <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={300} /> */}
-            <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
-            <NavItem
-              href="/digital-garden"
-              icon={<Leaf size={16} />}
-              label="Digital Garden"
-              onClick={onNavClick}
-              delay={400}
-            />
-          </div>
+<div className="space-y-1">
+  <SectionTitle title="Me" delay={150} />
+  <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writing" onClick={onNavClick} delay={200} />
+  <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={250} />
+  <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={300} />
+  <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={350} />
+</div>
 
-          <div className="space-y-1">
-            <SectionTitle title="Playground" delay={400} />
-            <NavItem
-              href="/playground/tools"
-              icon={<Layers size={16} />}
-              label="Tools"
-              onClick={onNavClick}
-              delay={450}
-            />
-            <NavItem
-              href="/playground/projects"
-              icon={<Wrench size={16} />}
-              label="Projects"
-              onClick={onNavClick}
-              delay={475}
-            />
-            <NavItem
-              href="/playground/resources"
-              icon={<FileText size={16} />}
-              label="Resources"
-              onClick={onNavClick}
-              delay={500}
-            />
-            {/* <NavItem
-              href="/playground/app-dissection"
-              icon={<Scissors size={16} />}
-              label="App Dissection"
-              onClick={onNavClick}
-              delay={550}
-            /> */}
-          </div>
+<div className="space-y-1">
+  <SectionTitle title="Digital Garden" delay={400} />
+  <NavItem href="/digital-garden/notes" icon={<FileText size={16} />} label="Notes" onClick={onNavClick} delay={420} />
+  <NavItem href="/digital-garden/catalog" icon={<Layers size={16} />} label="Catalog" onClick={onNavClick} delay={440} />
+  <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={460} />
+  <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={480} />
+  <NavItem href="/digital-garden/drafts" icon={<Scissors size={16} />} label="Drafts" onClick={onNavClick} delay={500} />
+  <NavItem href="/digital-garden/movies" icon={<Dices size={16} />} label="Movie list" onClick={onNavClick} delay={520} />
+</div>
 
-          <div className="space-y-1">
-            <SectionTitle title="Lab" delay={650} />
-            <NavItem
-              href="/lab/shop"
-              icon={<Crown size={16} />}
-              label="Shop"
-              onClick={onNavClick}
-              delay={700}
-            />
-            <NavItem
-              href="/lab/Log"
-              icon={<ShoppingCart size={16} />}
-              label="Log"
-              onClick={onNavClick}
-              delay={750}
-            />
-            <NavItem
-              href="/lab/colophon"
-              icon={<WalletCards size={16} />}
-              label="Colophon"
-              onClick={onNavClick}
-              delay={800}
-            />
-            <NavItem
-              href="/lab/changelog"
-              icon={<History size={16} />}
-              label="Changelog"
-              onClick={onNavClick}
-              delay={600}
-              hasNotification={true}
-            />
-          </div>
+<div className="space-y-1">
+  <SectionTitle title="Workshop" delay={550} />
+  <NavItem href="/workshop/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={570} />
+  <NavItem href="/workshop/shop" icon={<ShoppingCart size={16} />} label="Shop" onClick={onNavClick} delay={590} />
+  <NavItem href="/workshop/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={610} />
+  <NavItem href="/workshop/resources" icon={<WalletCards size={16} />} label="Resources" onClick={onNavClick} delay={630} />
+</div>
+
+<div className="space-y-1">
+  <SectionTitle title="Playground" delay={650} />
+  <NavItem href="/playground/log" icon={<Clock size={16} />} label="Log" onClick={onNavClick} delay={670} />
+</div>
+
+<div className="space-y-1">
+  <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={700} />
+  <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={720} hasNotification={true} />
+</div>
+
+
           {/* Social Links  */}
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <SectionTitle title="Online" delay={1350} />
             <NavItem
               href="https://linkedin.com/in/lilianada"
@@ -310,17 +274,41 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
               onClick={onNavClick}
               delay={1550}
             />
-          </div>
+          </div> */}
 
+          {!mobile && (
+            <div className="space-y-1 flex items-center justify-between gap-2">
+              <ThemeToggle />
+              <UserProfileSection />
+            </div>
+          )}
         </nav>
 
-        {!mobile && (
-          <div className="flex items-center justify-between gap-2">
-            <ThemeToggle />
-            <UserProfileSection />
-          </div>
-        )}
       </div>
+    <style jsx global>{`
+      .custom-scrollbar {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+      .custom-scrollbar {
+        overscroll-behavior: contain;
+        background: transparent;
+      }
+      .custom-scrollbar > * {
+        margin-bottom: 0.25rem;
+      }
+      .custom-scrollbar a, .custom-scrollbar .flex.items-center {
+        border-radius: 0.5rem;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        min-height: 2.5rem;
+        align-items: center;
+      }
+    `}</style>
     </aside>
   )
 }

@@ -63,13 +63,13 @@
     --primary-foreground: 0 0% 15%;     /* #262626 */
     --secondary: 210 10% 20%;           /* #343a40 - zinc medium-dark */
     --secondary-foreground: 0 0% 95%;   /* #f2f2f2 */
-    --muted: 210 4% 5%;                /* #40464d - muted zinc */
+    --muted: 210 5% 10%;                /* #40464d - muted zinc */
     --muted-foreground: 0 0% 60%;       /* #999999 */
-    --accent: 210 5% 18%;               /* #3b424a - zinc accent */
+    --accent: 210 5% 15%;               /* #3b424a - zinc accent */
     --accent-foreground: 0 0% 95%;      /* #f2f2f2 */
     --destructive: 0 70% 40%;           /* #a94444 */
     --destructive-foreground: 0 0% 95%; /* #f2f2f2 */
-    --border: 210 5% 10%;              /* #2f343a */
+    --border: 210 6% 18%;              /* #2f343a */
     --input: 210 10% 12%;               /* #2f343a */
     --ring: 210 8% 50%;                 /* #7a828b */
     --mellow: 38 90% 45%;               /* #b3821b */

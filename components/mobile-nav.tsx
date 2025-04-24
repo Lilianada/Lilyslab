@@ -45,7 +45,7 @@ export default function MobileNav() {
   return (
     <div className="flex items-center justify-between border-b  p-4 md:hidden">
       <Link href="/" className="flex items-center gap-2">
-        {/* <Image src="/Didi.png" alt="Lily's Lab Logo" width={32} height={32} className="rounded-md" /> */}
+        {/* <Image src="/12.png" alt="Lily's Lab Logo" width={32} height={32} className="rounded-md" /> */}
         <h1 className="text-sm font-medium">Lily's Lab</h1>
       </Link>
       <div className="flex items-center gap-2">

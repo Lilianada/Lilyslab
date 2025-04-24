@@ -60,7 +60,7 @@ export default function MovieListPage() {
       <div className="container max-w-7xl mx-auto px-4 py-8">
         <header className="flex items-center justify-between mb-8">
           <div className="flex flex-col">
-            <h1 className="mb-1 text-xl font-medium">Reading List</h1>
+            <h1 className="mb-1 text-xl font-medium">Movie List</h1>
             <p className="text-sm text-muted-foreground">
               A collection of books I've read, am reading, or plan to read. Click on any book to see more details.
             </p>
