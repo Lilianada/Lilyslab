@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import PlaceholderImage from "@/components/placeholder-image"
 import { ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"

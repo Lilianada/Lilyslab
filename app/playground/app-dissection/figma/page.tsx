@@ -16,7 +16,7 @@ import {
   NotionDivider,
   NotionQuote,
   NotionToggle,
-} from "@/components/notion-block"
+} from "@/components/digital-garden/notes/NotionBlock"
 
 export default function FigmaDissection() {
   const [isLoaded, setIsLoaded] = useState(false)
