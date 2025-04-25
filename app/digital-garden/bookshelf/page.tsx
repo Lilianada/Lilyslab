@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import NoteCard from "@/components/digital-garden/bookshelf/NoteCard";
+import { BookCardMain as BookCard } from "@/components/digital-garden/bookshelf/BookCard";
 import Link from "next/link";
 
 // Mock data for books
@@ -14,7 +14,8 @@ const books = [
       description: "A practical guide to building good habits and breaking bad ones.",
     },
     body: "Atomic Habits by James Clear provides a proven framework for improving every day.",
-    category: "Productivity"
+    category: "Productivity",
+    status: "read",
   },
   {
     slug: "deep-work.md",
@@ -25,7 +26,8 @@ const books = [
       description: "Rules for focused success in a distracted world.",
     },
     body: "Deep Work by Cal Newport is about the benefits of intense focus and how to achieve it.",
-    category: "Focus"
+    category: "Focus",
+    status: "reading",
   },
   {
     slug: "show-your-work.md",
@@ -36,7 +38,8 @@ const books = [
       description: "10 ways to share your creativity and get discovered.",
     },
     body: "Austin Kleon's book encourages creatives to share their process and connect with others.",
-    category: "Creativity"
+    category: "Creativity",
+    status: "will_read",
   },
   {
     slug: "so-good-they-cant-ignore-you.md",
@@ -47,14 +50,25 @@ const books = [
       description: "Why skills trump passion in the quest for work you love.",
     },
     body: "Cal Newport argues that skills, not passion, are the key to career satisfaction.",
-    category: "Career"
+    category: "Career",
+    status: "read",
   },
 ];
 
 export default function BookshelfPage() {
-  const [selectedBook, setSelectedBook] = useState<null | typeof books[0]>(null);
+  const [selectedTab, setSelectedTab] = useState<'all' | 'read' | 'reading' | 'will_read'>('all');
+
+  const tabLabels = [
+    { key: 'all', label: 'All' },
+    { key: 'read', label: 'Read' },
+    { key: 'reading', label: 'Reading' },
+    { key: 'will_read', label: 'Will Read' },
+  ];
+
+  const filteredBooks = selectedTab === 'all' ? books : books.filter((book) => book.status === selectedTab);
+
   return (
-    <div className="min-h-screen animate-fade-in bg-white/80">
+    <div className="min-h-screen animate-fade-in ">
       <div className="container max-w-5xl mx-auto px-4 py-8">
         <header className="flex items-center justify-between mb-8">
           <div className="flex flex-col">
@@ -64,10 +78,22 @@ export default function BookshelfPage() {
             </p>
           </div>
         </header>
+        {/* Tabs for book status */}
+        <div className="flex gap-2 mb-6">
+          {tabLabels.map((tab) => (
+            <button
+              key={tab.key}
+              className={`px-4 py-2 rounded-full border transition-colors text-sm font-medium ${selectedTab === tab.key ? 'bg-pink-400 text-white border-pink-400' : 'bg-white text-black border-gray-300 hover:bg-pink-100'}`}
+              onClick={() => setSelectedTab(tab.key as 'read' | 'reading' | 'will_read')}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          {books.map((book) => (
+          {filteredBooks.map((book) => (
             <Link key={book.slug} href={`/digital-garden/bookshelf/${book.slug}`} className="cursor-pointer block">
-              <NoteCard
+              <BookCard
                 data={book}
                 path="/digital-garden/bookshelf"
                 category={book.category}
@@ -75,6 +101,9 @@ export default function BookshelfPage() {
               />
             </Link>
           ))}
+          {filteredBooks.length === 0 && (
+            <div className="col-span-full text-center text-gray-500 py-10">No books in this category.</div>
+          )}
         </div>
       </div>
     </div>

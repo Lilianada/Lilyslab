@@ -1,2 +1,2 @@
-export { default } from "../bookshelf/NoteCard";
-export { NoteCard } from "../bookshelf/NoteCard";
+export { default } from "../bookshelf/BookCard";
+export { NoteCard } from "../bookshelf/BookCard";
