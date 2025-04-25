@@ -1,1 +1,1 @@
-export { default } from "../../bookshelf/NoteCard";
+export { default as NoteCard, default, colors } from "../../bookshelf/NoteCard";

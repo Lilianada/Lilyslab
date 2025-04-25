@@ -68,7 +68,7 @@ export function BookCard({
   }
 
   return (
-    <div className="group perspective h-[400px]">
+    <div className="group perspective h-[400px] ">
       <div
         className={cn(
           "relative h-full transition-transform duration-500 transform-style-3d",

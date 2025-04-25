@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { colors, NoteCard } from './NoteCard';
-import { categoriesWhitelist, type GardenCategory } from 'src/api/github';
-import Container from '@components/Container';
+// Import colors and NoteCard as named exports
+import NoteCard, { colors } from './NoteCard'; // NoteCard is now a default import
+// Define categoriesWhitelist locally or import from NoteCard if shared
+export type GardenCategory = string;
+export const categoriesWhitelist = ["Productivity", "Focus", "Creativity", "Career"];
+// Container import removed; use a <div> instead if needed.
 
 interface NotesOverviewProps {
     latestCreatedNotes: any[];
@@ -23,24 +26,26 @@ const NotesOverview: React.FC<NotesOverviewProps> = ({
 
     useEffect(() => {
         if (!categories) return;
+        // Map categoriesWhitelist to counts using categories as strings
         const entryCounts = categoriesWhitelist.map((whitelistCategory) => {
-            const category = categories?.find((cat) => cat.name === whitelistCategory);
-            return category ? category.object.entries.length : 0;
+            const count = categories?.filter((cat) => cat === whitelistCategory).length || 0;
+            return {
+                category: whitelistCategory,
+                count,
+                color: colors[categoriesWhitelist.indexOf(whitelistCategory) % colors.length],
+            };
         });
 
-        const combinedCategories = categoriesWhitelist.map((category, i) => ({
-            category,
-            count: entryCounts[i],
-            color: colors[i]
-        }));
+        const combinedCategories = entryCounts;
 
         combinedCategories.sort((a, b) => b.count - a.count);
 
         setCategoriesWithCounts(combinedCategories);
     }, [categories, colors, categoriesWhitelist]);
 
+    // Replaced <Container> with <div> for compatibility
     return (
-        <Container>
+        <div>
             {categories && (
                 <div className="mb-20 mt-12 lg:hidden">
                     <div className="mb-5 font-bold">Topics</div>
@@ -90,30 +95,34 @@ const NotesOverview: React.FC<NotesOverviewProps> = ({
                     </li>
                 </ul>
             </div>
-            <div className="mt-8 grid grid-cols-1 gap-3 px-2 xs:grid-cols-2 md:grid-cols-3 lg:gap-6">
-                {activeTag === 'created' &&
-                    latestCreatedNotes?.map((note: any, i) => (
-                        <NoteCard
-                            data={note}
-                            path={`${basePath}/${note.path}`}
-                            category={note.path}
-                            distorted
-                            key={i}
-                        />
-                    ))}
-                {activeTag === 'edited' &&
-                    latestEditedNotes?.map((note: any, i) => (
-                        <NoteCard
-                            data={note}
-                            path={`${basePath}/${note.path}`}
-                            category={note.path}
-                            distorted
-                            key={i}
-                        />
-                    ))}
-            </div>
-        </Container>
-    );
+            {/*
+          Replaced <Container> with a regular <div> for layout.
+          If you want a max-width or padding, add Tailwind classes here.
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {activeTag === 'created' &&
+                latestCreatedNotes?.map((note: any, i) => (
+                    <NoteCard
+                        data={note}
+                        path={`${basePath}/${note.path}`}
+                        category={note.path}
+                        distorted
+                        key={i}
+                    />
+                ))}
+            {activeTag === 'edited' &&
+                latestEditedNotes?.map((note: any, i) => (
+                    <NoteCard
+                        data={note}
+                        path={`${basePath}/${note.path}`}
+                        category={note.path}
+                        distorted
+                        key={i}
+                    />
+                ))}
+        </div>
+    </div>
+  );
 };
 
 export default NotesOverview;

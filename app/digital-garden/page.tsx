@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { SearchBar } from "@/components/search-bar"
 import { ArrowUpRight, Book, Film, Lightbulb, PenTool, Plus, Zap, Images } from "lucide-react"
-import { SuggestionSidebar } from "@/components/suggestion-sidebar"
+import { SuggestionSidebar } from "@/components/workshop/suggestions/SuggestionSidebar"
 
 export default function DigitalGardenHome() {
     const router = useRouter()
@@ -70,7 +70,7 @@ export default function DigitalGardenHome() {
                     <div>
                         <h1 className="mb-1 text-lg md:text-2xl font-bold tracking-tight">Digital Garden</h1>
                         <p className="text-sm text-muted-foreground">
-                            A growing collection of thoughts, ideas, and knowledge I've gathered.
+                        My Digital Garden is a growing collection of thoughts, ideas, and knowledge I’ve gathered from various topics that spark my curiosity.
                         </p>
                     </div>
                 </header> 

@@ -1,5 +1,15 @@
-import { categoriesWhitelist, parseMarkdownContent } from 'src/api/github';
-import { formatDate } from 'src/utils/formatDate';
+// Removed invalid imports. Using local helpers instead.
+
+// TODO: For the Note content/details page, import and use a less decorative handwriting font (e.g., Caveat or Indie Flower)
+// Example:
+// import { colors } from './utils/colors';
+// Import Dancing Script (fancy handwriting) font for description
+import { Dancing_Script } from 'next/font/google';
+
+// Setup Dancing Script font instance
+const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
+// const caveat = Caveat({ subsets: ['latin'], weight: ['400', '700'] });
+// Then apply caveat.className to the full article body.
 
 interface NoteCardProps {
     data: any;
@@ -21,7 +31,16 @@ export const colors = [
     '#6C95CF'
 ];
 
-export const NoteCard: React.FC<NoteCardProps> = ({
+// NoteCard is now a default export for easier imports in different places.
+// Props are documented for customizability.
+/**
+ * NoteCard displays a summary card for a note or book.
+ * @param data - The note/book data (required)
+ * @param path - The base path for navigation (required)
+ * @param category - The note category (required)
+ * @param distorted - If true, applies a distortion effect (optional)
+ */
+const NoteCard: React.FC<NoteCardProps> = ({
     data,
     path: currentPath,
     distorted,
@@ -29,7 +48,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({
 }) => {
     const isDraft = !data.body || data.body.trim() === '' || data.body.trim() === 'TBD';
 
-    const charCount = data.frontmatter?.description.length;
+    const charCount = data.frontmatter?.description ? data.frontmatter.description.length : 0;
 
     const getFontSize = (count: number) => {
         const minFontSize = 1.5;
@@ -48,11 +67,20 @@ export const NoteCard: React.FC<NoteCardProps> = ({
 
     const typeFontSize = getFontSize(charCount);
 
+    function formatDate(dateString: string) {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        return `${day} / ${month} / ${year}`;
+    }
+
     const createdDay = formatDate(data.frontmatter?.created);
     const editedDay = formatDate(data.frontmatter?.edited);
 
+    const categoriesWhitelist = ["Productivity", "Focus", "Creativity", "Career"];
     const categoryIndex = categoriesWhitelist.indexOf(category);
-    const backgroundColor = colors[categoryIndex];
+    const backgroundColor = colors[categoryIndex] || colors[0];
 
     const randomMarginBottom = Math.floor(Math.random() * 8);
     const randomMarginRight = Math.floor(Math.random() * 8);
@@ -84,65 +112,67 @@ export const NoteCard: React.FC<NoteCardProps> = ({
     const textAlignmentClass = getTextAlignment(charCount);
 
     const content = (
-        <>
-            <div className="texture"></div>
-            <div className="flex h-full flex-col justify-between border p-3 font-mono">
-                <div>
-                    <ul className="flex gap-2">
-                        <li className="mb-2 inline-block rounded-full border px-2 py-[2px] text-[11px]">
-                            {category}
+        <div
+            className="flex flex-col justify-between h-full w-full px-6 py-4 font-mono text-black border border-black rounded-md bg-white/80 relative paper-texture"
+            style={{
+                backgroundImage: 'url("/Noise.png")',
+                backgroundRepeat: 'repeat',
+                backgroundSize: '350px 350px',
+                backgroundBlendMode: 'multiply',
+            }}
+        >
+            <div>
+                <ul className="flex gap-2 mb-2">
+                    <li className="inline-block rounded-full border px-2 border-black bg-pink-400/70 py-[2px] text-[11px] text-black">
+                        {category}
+                    </li>
+                    {isDraft && (
+                        <li className="inline-block rounded-full border px-2 py-[2px] text-[11px] border-black bg-gray-300/80 text-black">
+                            Draft
                         </li>
-                        {isDraft && (
-                            <li className="mb-2 inline-block rounded-full border px-2 py-[2px] text-[11px]">
-                                Draft
-                            </li>
-                        )}
-                    </ul>
-                    <h3 className="mt-3 text-base font-bold">{data.name.replace(/\.md$/, '')}</h3>
-                </div>
-                {data.frontmatter?.description && (
-                    <div>
-                        <div className="my-1 truncate text-clip font-mono text-base tracking-widest text-black">
-                            ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                        </div>
-                        <p
-                            className={`line-clamp-3 py-1 ${textAlignmentClass} font-script text-md leading-[1.1] opacity-70`}
-                            style={{
-                                filter: 'url(#distort)',
-                                fontSize: typeFontSize,
-                                transform: `translateY(${randomTypeMarginBottom}px) translateX(${randomTypeMarginRight}px) rotate(${randomTypeRotation}deg)`,
-                                fontFeatureSettings: '"liga", "ss01", "ss02", "ss03"'
-                            }}
-                        >
-                            {data.frontmatter.description}
-                        </p>
-                    </div>
-                )}
-                <div className="text-[12px]">
-                    <div className="my-1 truncate text-clip font-mono text-base tracking-widest text-black">
-                        ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    </div>
-                    <p>
-                        <span className="inline-block min-w-[72px]">created:</span> {createdDay}
-                    </p>
-                    {createdDay !== editedDay && (
-                        <p>
-                            <span className="inline-block min-w-[72px]">edited:</span> {editedDay}
-                        </p>
                     )}
-                </div>
+                </ul>
+                <h3 className="text-lg font-bold text-left mb-1 truncate">{data.name.replace(/\.md$/, '')}</h3>
             </div>
-        </>
+            {/* Dashed separator line above description */}
+            <div className="w-full border-t-2 border-dashed border-black my-2" />
+            {data.frontmatter?.description && (
+                <p
+                    className={`line-clamp-3 my-2 text-left font-script text-md font-italics leading-[1.1] opacity-90 ${dancingScript.className}`}
+                    style={{
+                        fontSize: typeFontSize,
+                        fontFeatureSettings: '"liga", "ss01", "ss02", "ss03"',
+                        color: '#111',
+                    }}
+                >
+                    {data.frontmatter.description}
+                </p>
+            )}
+            {/* Dashed separator line below description */}
+            <div className="w-full border-t-2 border-dashed border-black my-2" />
+            <div className="text-xs flex flex-col gap-1 items-start mt-2 text-black">
+                <span className="block">created: {createdDay}</span>
+                {/* {createdDay !== editedDay && (
+                    <span className="block">edited: {editedDay}</span>
+                )} */}
+            </div>
+        </div>
     );
 
     return (
         <div className="group flex h-full min-h-[280px] items-center">
             <div
-                className={`noteCardEffect w-full ${
-                    randomRotation >= 0 ? 'hide-after' : 'hide-before'
-                }`}
+                className={`noteCardEffect ticket w-full ${randomRotation >= 0 ? 'hide-after' : 'hide-before'}`}
                 style={transformStyles}
             >
+                {/* Ticket scallops left */}
+                <div className="scallop left1" />
+                <div className="scallop left2" />
+                <div className="scallop left3" />
+                {/* Ticket scallops right */}
+                <div className="scallop right1" />
+                <div className="scallop right2" />
+                <div className="scallop right3" />
                 {isDraft ? (
                     <div className="relative cursor-not-allowed p-2" style={backgroundColorStyle}>
                         {content}
@@ -160,3 +190,5 @@ export const NoteCard: React.FC<NoteCardProps> = ({
         </div>
     );
 };
+
+export default NoteCard;

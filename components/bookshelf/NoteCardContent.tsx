@@ -1,4 +1,9 @@
 import React from "react";
+// Import Caveat (less decorative handwriting font) for full note content
+import { Caveat } from 'next/font/google';
+
+// Setup Caveat font instance
+const caveat = Caveat({ subsets: ['latin'], weight: ['400', '700'] });
 
 interface NoteCardContentProps {
   data: any;
@@ -62,7 +67,11 @@ const NoteCardContent: React.FC<NoteCardContentProps> = ({
   return (
     <>
       <div className="texture" />
-      <div className="flex h-full flex-col justify-between border p-3 font-mono">
+      {/*
+        The body content uses a less decorative handwriting font (Caveat) for better readability.
+        To change the font, update the font import and className below.
+      */}
+      <div className={`flex h-full flex-col justify-between border p-3 font-mono ${caveat.className}`}>
         <div>
           <ul className="flex gap-2">
             <li className="mb-2 inline-block rounded-full border px-2 py-[2px] text-[11px]">

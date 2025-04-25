@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import NoteCard from "@/components/digital-garden/bookshelf/NoteCard";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import NotesOverview from "@/components/digital-garden/bookshelf/NotesOverview";
+import React from "react";
 
-// Mock data for books
+// For demo, use mock data. In a real app, fetch by slug.
 const books = [
   {
     slug: "atomic-habits.md",
@@ -51,30 +52,34 @@ const books = [
   },
 ];
 
-export default function BookshelfPage() {
-  const [selectedBook, setSelectedBook] = useState<null | typeof books[0]>(null);
+export default function BookshelfDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const book = books.find(b => b.slug === params.slug);
+
+  if (!book) {
+    return <div className="p-8">Book not found.</div>;
+  }
+
+  // For demo, NotesOverview expects certain props; adapt as needed.
   return (
-    <div className="min-h-screen animate-fade-in bg-white/80">
-      <div className="container max-w-5xl mx-auto px-4 py-8">
-        <header className="flex items-center justify-between mb-8">
-          <div className="flex flex-col">
-            <h1 className="mb-1 text-xl font-medium">Bookshelf</h1>
-            <p className="text-sm text-muted-foreground">
-              A collection of books I’ve read, am reading, or plan to read. Click on any book to see more details.
-            </p>
-          </div>
-        </header>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          {books.map((book) => (
-            <Link key={book.slug} href={`/digital-garden/bookshelf/${book.slug}`} className="cursor-pointer block">
-              <NoteCard
-                data={book}
-                path="/digital-garden/bookshelf"
-                category={book.category}
-                distorted={false}
-              />
-            </Link>
-          ))}
+    <div className="min-h-screen bg-white/80">
+      <div className="container max-w-4xl mx-auto px-4 py-8">
+        <button onClick={() => router.back()} className="mb-4 px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">Back</button>
+        <h1 className="mb-4 text-2xl font-bold">{book.name.replace(/\.md$/, "")}</h1>
+        <NotesOverview
+          latestCreatedNotes={[book]}
+          latestEditedNotes={[]}
+          basePath="/digital-garden/bookshelf"
+          categories={[book.category]}
+        />
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-2">Description</h2>
+          <p className="mb-2">{book.frontmatter.description}</p>
+          <h2 className="text-xl font-semibold mb-2">Details</h2>
+          <p><b>Created:</b> {book.frontmatter.created}</p>
+          <p><b>Edited:</b> {book.frontmatter.edited}</p>
+          <p><b>Body:</b> {book.body}</p>
         </div>
       </div>
     </div>

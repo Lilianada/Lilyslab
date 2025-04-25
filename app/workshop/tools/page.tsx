@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ToolCard } from "@/components/tool-card"
+import { ToolCard } from "@/components/workshop/tools/ToolCard"
 import { SearchBar } from "@/components/search-bar"
 import { type Tool } from "@/types"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
-import { ToolSubmissionSidebar } from "@/components/tool-submission-sidebar"
+import { ToolSubmissionSidebar } from "@/components/workshop/tools/ToolSubmissionSidebar"
 
 const categories = ["All", "Productivity", "Education", "Utilities", "Health & Fitness"]
 

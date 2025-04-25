@@ -1,7 +1,7 @@
 "use client"
 
-import { BookmarkItem } from "@/components/BookmarkItem";
-import type { Bookmark } from "@/components/BookmarkItem";
+import { BookmarkItem } from "@/components/digital-garden/BookmarkItem";
+import type { Bookmark } from "@/components/digital-garden/BookmarkItem";
 import React, { useState, useEffect } from "react";
 
 // TagFilter component

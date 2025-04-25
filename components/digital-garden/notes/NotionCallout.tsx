@@ -1,1 +1,1 @@
-export { NotionCallout } from "../../notion-block";
+export { NotionCallout } from "./NotionBlock";
