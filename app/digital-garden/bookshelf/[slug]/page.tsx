@@ -1,12 +1,14 @@
 "use client";
+
+import React from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import NotesOverview from "@/components/digital-garden/bookshelf/BookOverview";
-import React from "react";
-import { BookCardMain } from "@/components/digital-garden/bookshelf/BookCard";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import RenderMarkdownWithNotionBlocks from "./notesRender";
+import { colors } from "@/components/digital-garden/bookshelf/BookCard";
 
-// For demo, use mock data. In a real app, fetch by slug.
+import { mockMarkdownArticle } from "../mockMarkdownArticle";
+
 const books = [
   {
     slug: "atomic-habits.md",
@@ -16,7 +18,7 @@ const books = [
       edited: "2022-01-10",
       description: "A practical guide to building good habits and breaking bad ones.",
     },
-    body: "Atomic Habits by James Clear provides a proven framework for improving every day.",
+    body: mockMarkdownArticle,
     category: "Productivity"
   },
   {
@@ -27,7 +29,7 @@ const books = [
       edited: "2021-11-20",
       description: "Rules for focused success in a distracted world.",
     },
-    body: "Deep Work by Cal Newport is about the benefits of intense focus and how to achieve it.",
+    body: mockMarkdownArticle,
     category: "Focus"
   },
   {
@@ -38,7 +40,7 @@ const books = [
       edited: "2020-06-01",
       description: "10 ways to share your creativity and get discovered.",
     },
-    body: "Austin Kleon's book encourages creatives to share their process and connect with others.",
+    body: mockMarkdownArticle,
     category: "Creativity"
   },
   {
@@ -49,7 +51,7 @@ const books = [
       edited: "2019-09-15",
       description: "Why skills trump passion in the quest for work you love.",
     },
-    body: "Cal Newport argues that skills, not passion, are the key to career satisfaction.",
+    body: mockMarkdownArticle,
     category: "Career"
   },
 ];
@@ -67,11 +69,17 @@ export default function BookshelfDetailPage() {
   return (
     <div className="min-h-screen">
       <div className="container max-w-4xl mx-auto px-2 py-10">
-        <button onClick={() => router.back()} className="mb-6 px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">Back</button>
+        <button onClick={() => router.back()} className="mb-6 px-4 py-2  hover:text-gray-300">
+          <ArrowLeft className="mr-2" />
+        </button>
         <div
-          className="relative w-full mx-auto p-8 rounded-xl shadow-xl transition-transform hover:scale-[1.012]"
+          className="relative w-full mx-auto p-8 rounded-xl shadow-xl "
           style={{
-            backgroundColor: '#FFF9D6',
+            backgroundColor: (() => {
+              const categoriesWhitelist = ["Productivity", "Focus", "Creativity", "Career"];
+              const categoryIndex = categoriesWhitelist.indexOf(book.category);
+              return colors[categoryIndex] || colors[0];
+            })(),
             backgroundImage: 'url("/Noise.png")',
             backgroundRepeat: 'repeat',
             backgroundSize: '350px 350px',
@@ -88,29 +96,53 @@ export default function BookshelfDetailPage() {
           <div className="w-full border-t-2 border-black border-dashed mb-6" />
           {/* Body */}
           <div className="mb-8">
-            <p className="text-lg mb-4 text-black">{book.frontmatter.description}</p>
-            <div className="text-base text-black whitespace-pre-line" style={{lineHeight: '1.7'}}>{book.body}</div>
+            {/* Render markdown article using NotionBlock renderer */}
+            <RenderMarkdownWithNotionBlocks markdown={book.body} />
           </div>
           {/* Footer */}
           <div className="grid grid-cols-3 gap-0 border-t-2 border-black">
             <div className="border-r-2 border-black p-3 flex flex-col">
               <span className="text-xs uppercase text-black mb-1">Created</span>
-              <span className="font-mono text-lg font-bold text-black">{book.frontmatter.created}</span>
+              <span className="font-mono text-sm font-bold text-black">{book.frontmatter.created}</span>
             </div>
             <div className="border-r-2 border-black p-3 flex flex-col">
               <span className="text-xs uppercase text-black mb-1">Edited</span>
-              <span className="font-mono text-lg font-bold text-black">{book.frontmatter.edited}</span>
+              <span className="font-mono text-sm font-bold text-black">{book.frontmatter.edited}</span>
             </div>
             <div className="p-3 flex flex-col">
               <span className="text-xs uppercase text-black mb-1">Topic</span>
-              <span className="font-mono text-lg font-bold italic text-black">{book.category}</span>
+              <span className="font-mono text-sm font-bold italic text-black">{book.category}</span>
             </div>
           </div>
-          {/* Next note button */}
+          {/* Next/Previous note button */}
           <div className="flex justify-end mt-6">
-            <a href="#" className="px-5 py-2 text-black font-semibold  transition flex ">Next note 
-              <ArrowRight className="ml-2" />
-            </a>
+            {(() => {
+              const currentIdx = books.findIndex(b => b.slug === book.slug);
+              const next = books[currentIdx + 1];
+              const prev = books[currentIdx - 1];
+              if (next) {
+                return (
+                  <a
+                    href={`/digital-garden/bookshelf/${next.slug}`}
+                    className="px-5 py-2 text-black font-semibold transition flex items-center"
+                  >
+                    Next note <ArrowRight className="ml-2" />
+                  </a>
+                );
+              } else if (prev) {
+                return (
+                  <a
+                    href={`/digital-garden/bookshelf/${prev.slug}`}
+                    className="px-5 py-2 text-black font-semibold transition flex items-center"
+                  >
+                    <ArrowLeft className="mr-2"/>
+                    Previous note
+                  </a>
+                );
+              } else {
+                return null;
+              }
+            })()}
           </div>
         </div>
       </div>

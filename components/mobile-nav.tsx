@@ -61,7 +61,7 @@ export default function MobileNav() {
           <SheetContent side="left" className="sidebar flex flex-col p-0 bg-muted">
             <div className="flex items-center justify-between border-b p-4">
               <div className="flex items-center gap-2">
-                <Image src="/logo.png" alt="Lily's Lab" width={32} height={32} className="rounded-md hidden" />
+                <Image src="/12.png" alt="Lily's Lab" width={32} height={32} className="rounded-md hidden" />
                 <h2 className="text-sm leading-0 font-medium">Menu</h2>
                 <SheetTitle className="sr-only">Menu</SheetTitle>
               </div>

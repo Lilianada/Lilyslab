@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Lily's Lab",
     images: [
       {
-        url: "/logo.png",
+        url: "/12.png",
         width: 1200,
         height: 1200,
         alt: "Lily's Lab",
@@ -46,12 +46,12 @@ export const metadata: Metadata = {
     title: "Lily's Lab",
     description: "Designer, software engineer, product manager, and digital creator",
     creator: "@lilian_ada_",
-    images: ["/logo.png"],
+    images: ["/12.png"],
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/logo.png",
+    apple: "/12.png",
   },
 }
 

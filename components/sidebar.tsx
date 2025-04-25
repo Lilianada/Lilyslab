@@ -41,7 +41,7 @@ import { useAuth } from "@/contexts/auth-context"
 import { Button } from "./ui/button"
 import { useToast } from "@/hooks/use-toast"
 // import Bookmark from "@/app/digital-garden/bookmarks/page"
-// import logo from "@/public/logo.png"
+// import logo from "@/public/12.png"
 
 interface NavItemProps {
   href: string
