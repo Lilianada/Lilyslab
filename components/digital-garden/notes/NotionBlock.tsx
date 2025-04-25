@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import type React from "react"
-import PlaceholderImage from "./placeholder-image"
+import PlaceholderImage from "@/components/placeholder-image"
 
 interface NotionBlockProps {
   children: React.ReactNode
