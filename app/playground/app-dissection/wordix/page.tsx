@@ -17,7 +17,7 @@ import {
   NotionQuote,
   NotionTable,
   NotionNumberedList,
-} from "@/components/notion-block"
+} from "@/components/digital-garden/notes/NotionBlock"
 
 export default function WordixDissection() {
   const [isLoaded, setIsLoaded] = useState(false)
