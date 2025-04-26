@@ -49,7 +49,7 @@ export default function ToolsPage() {
   }, [searchQuery, selectedCategory, tools])
 
   return (
-    <div className={`max-w-5xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-3xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-4">
         <h1 className="mb-1 text-xl font-medium">Tools</h1>
         <p className="text-sm text-muted-foreground">

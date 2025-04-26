@@ -47,7 +47,7 @@ export default function AppDissectionPage() {
   const filteredApps = activeTab === "all" ? apps : apps.filter((app) => app.category === activeTab)
 
   return (
-    <div className={`max-w-5xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-3xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">App Dissection</h1>
         <p className="text-sm text-muted-foreground">In-depth analyses of applications and their design patterns.</p>

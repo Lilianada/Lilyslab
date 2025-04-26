@@ -57,7 +57,7 @@ export default function UtilitiesPage() {
   }, [searchQuery, utilities]);
 
   return (
-    <div className={`max-w-5xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-3xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">Fun Projects</h1>
         <p className="text-sm text-muted-foreground">

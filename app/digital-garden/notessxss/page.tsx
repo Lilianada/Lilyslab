@@ -91,7 +91,7 @@ export default function QuickNotesPage() {
   // For advanced packing, implement a custom row logic (future improvement)
 
   return (
-    <div className="max-w-5xl mx-auto animate-fade-in px-6 py-8">
+    <div className="max-w-3xl mx-auto animate-fade-in px-6 py-8">
       <header className="flex items-center justify-between mb-8">
         <div className="flex flex-col">
           <h1 className="mb-1 text-xl font-medium">Quick Notes</h1>

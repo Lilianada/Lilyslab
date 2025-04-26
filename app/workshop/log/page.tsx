@@ -138,7 +138,7 @@ const projects = [
 
 export default function WorkshopLogPage() {
   return (
-    <main className="max-w-5xl mx-auto px-4 py-16">
+    <main className="max-w-3xl mx-auto px-4 py-16">
       <header className="mb-8">
         <h1 className="mb-2 text-xl font-medium">Project Log</h1>
         <p className="text-xs text-muted-foreground">Too many ideas, not enough <span className="line-through">time </span>focus.</p>

@@ -69,7 +69,7 @@ export default function BookshelfPage() {
 
   return (
     <div className="min-h-screen animate-fade-in ">
-      <div className="container max-w-5xl mx-auto px-4 py-8">
+      <div className="container max-w-3xl mx-auto px-4 py-8">
 
         <header className="flex items-center justify-between mb-8">
           <div className="flex flex-col">
@@ -84,14 +84,17 @@ export default function BookshelfPage() {
           {tabLabels.map((tab) => (
             <button
               key={tab.key}
-              className={`px-4 py-2 rounded-full border transition-colors text-sm font-medium ${selectedTab === tab.key ? 'bg-pink-400 text-white border-pink-400' : 'bg-white text-black border-gray-300 hover:bg-pink-100'}`}
+              className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTab === tab.key
+                ? "bg-primary text-primary-foreground border-primary"
+                : "bg-muted border-border text-muted-foreground hover:bg-accent"
+              }`}
               onClick={() => setSelectedTab(tab.key as 'read' | 'reading' | 'will_read')}
             >
               {tab.label}
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {filteredBooks.map((book) => (
             <Link key={book.slug} href={`/digital-garden/bookshelf/${book.slug}`} className="cursor-pointer block">
               <BookCard

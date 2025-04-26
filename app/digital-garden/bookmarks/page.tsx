@@ -10,7 +10,7 @@ export default async function Bookmark() {
   const bookmarks = await getBookmarks();
 
   return (
-    <div className="max-w-5xl mx-auto py-12 px-6">
+    <div className="max-w-3xl mx-auto py-12 px-6">
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">Bookmarks</h1>
       </header>

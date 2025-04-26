@@ -58,7 +58,7 @@ export default function ResourcesPage() {
   }, [searchQuery, activeCategory, resources]);
 
   return (
-    <div className={`max-w-5xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-3xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">Resources</h1>
         <p className="text-sm text-muted-foreground">
