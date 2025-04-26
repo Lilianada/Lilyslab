@@ -33,7 +33,6 @@ yarn-error.log*
 next-env.d.ts
 
 # content db
-/Content
 .obsidian
 .trash
 .windsurf
