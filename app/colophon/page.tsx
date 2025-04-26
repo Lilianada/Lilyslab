@@ -8,13 +8,10 @@ import { Globe, Code2, Paintbrush, BookOpen, ChevronLeft, TriangleAlert, Github 
 export default function Colophon() {
   return (
     <div className="max-w-3xl mx-auto py-12 px-6 animate-fade-in">
-      <div className="mb-8">
-        <a href="/" className="text-sm text-muted-foreground hover:underline flex items-center gap-1 mb-2">
-          <ChevronLeft size={16} /> back home
-        </a>
-        <h1 className="mb-1 text-2xl font-bold tracking-tight">Colophon</h1>
+      <header className="mb-8">
+        <h1 className="mb-1 text-xl font-medium tracking-tight">Colophon</h1>
         <p className="text-sm text-muted-foreground mb-6">The tools, technologies, and inspirations behind this website.</p>
-      </div>
+      </header>
       <section className="mb-10">
         <div className="flex items-center gap-2 mb-2">
           <Code2 size={16} className="text-muted-foreground" />
@@ -62,18 +59,17 @@ export default function Colophon() {
         </div>
         <div className="text-sm mb-2 text-muted-foreground">Stole code and designs from these amazing creators:</div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 border rounded bg-background p-4">
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Shu Ding</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Andres</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Joshua Guo</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Guillermo Rauch</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Paco Coursey</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Lee Robinson</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Florian Kiem</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Benji Taylor</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Julien Thibeaut</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Sara Du</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Shayan</a>
-          <a className="underline underline-offset-2 text-xs" href="#" target="_blank" rel="noopener">Farza</a>
+          <a className="underline underline-offset-2 text-xs" href="https://brianlovin.com" target="_blank" rel="noopener noreferrer">Brian Lovin</a>
+          <a className="underline underline-offset-2 text-xs" href="https://beingfemi.com" target="_blank" rel="noopener noreferrer">Being Femi</a>
+          <a className="underline underline-offset-2 text-xs" href="https://junaidanjum.com" target="_blank" rel="noopener noreferrer">junaidanjum.com</a>
+          <a className="underline underline-offset-2 text-xs" href="https://iamrob.in" target="_blank" rel="noopener noreferrer">iamrob.in</a>
+          <a className="underline underline-offset-2 text-xs" href="https://digitalminimalist.com" target="_blank" rel="noopener noreferrer">Digital Minimalist</a>
+          <a className="underline underline-offset-2 text-xs" href="https://ibuildmyideas.com" target="_blank" rel="noopener noreferrer">ibuildmyideas.com</a>
+          <a className="underline underline-offset-2 text-xs" href="https://armond.me" target="_blank" rel="noopener noreferrer">Armond</a>
+          <a className="underline underline-offset-2 text-xs" href="https://linusrogge.com" target="_blank" rel="noopener noreferrer">Linus Rogge</a>
+          <a className="underline underline-offset-2 text-xs" href="https://pranathiperi.com" target="_blank" rel="noopener noreferrer">pranathiperi.com</a>
+          <a className="underline underline-offset-2 text-xs" href="https://zaidmukaddam.com/" target="_blank" rel="noopener noreferrer">Zaid Mukaddam</a>
+          <a className="underline underline-offset-2 text-xs" href="https://mw.works/" target="_blank" rel="noopener noreferrer">Mason Watson</a>
         </div>
       </section>
       <section className="mb-10">
@@ -93,11 +89,30 @@ export default function Colophon() {
           <BookOpen size={16} className="text-muted-foreground" />
           <h2 className="font-mono text-base font-semibold">Color Palette</h2>
         </div>
-        <div className="flex gap-3 items-end mb-2">
-          {[100,200,300,400,500,700,800,900].map((shade) => (
-            <div key={shade} className="flex flex-col items-center">
-              <div className={`w-8 h-8 rounded-full border`} style={{ background: `hsl(0,0%,${100-(shade/10)}%)` }} />
-              <span className="text-[10px] mt-1 text-muted-foreground font-mono">{shade}</span>
+        <div className="flex flex-wrap gap-4 items-end mb-2">
+          {/* Site palette */}
+          {[
+            { name: 'background', var: 'var(--background)' },
+            { name: 'popover', var: 'var(--popover)' },
+            { name: 'card', var: 'var(--card)' },
+            { name: 'accent', var: 'var(--accent)' },
+            { name: 'muted', var: 'var(--muted)' },
+            { name: 'border', var: 'var(--border)' },
+            { name: 'primary', var: 'var(--primary)' },
+            { name: 'foreground', var: 'var(--foreground)' },
+          ].map((color) => (
+            <div key={color.name} className="flex flex-col items-center">
+              <div className="w-10 h-10 rounded-full border" style={{ background: `hsl(${color.var})` }} />
+              <span className="text-[10px] mt-1 text-muted-foreground font-mono">{color.name}</span>
+            </div>
+          ))}
+        </div>
+        {/* Bookshelf palette */}
+        <div className="flex flex-wrap gap-4 items-end mb-2 mt-3">
+          {[1,2,3,4,5,6,7,8,9,10].map((i) => (
+            <div key={`bookshelf-${i}`} className="flex flex-col items-center">
+              <div className={`w-10 h-10 rounded-full border bg-bookshelf-${i}`} />
+              <span className="text-[10px] mt-1 text-muted-foreground font-mono">bookshelf-{i}</span>
             </div>
           ))}
         </div>
@@ -109,13 +124,11 @@ export default function Colophon() {
         </div>
         <div className="border rounded bg-background p-4">
           <div className="font-semibold">Heading</div>
-          <div className="font-mono text-lg mb-2">Geist Mono</div>
+          <div className="font-sans text-2xl mb-2">Inter</div>
           <div className="font-semibold">Body</div>
           <div className="mb-2">The quick brown fox jumps over the lazy dog.</div>
           <div className="font-semibold">Inline Link</div>
           <div className="mb-2 underline">The quick brown fox</div>
-          <div className="font-semibold">Code</div>
-          <div className="text-xs border-t pt-1 font-mono">const example = "Hello World";</div>
         </div>
       </section>
       <section className="mb-10">
@@ -228,6 +241,7 @@ export default function Colophon() {
 //             { name: "linusrogge.com", url: "https://linusrogge.com" },
 //             { name: "pranathiperi.com", url: "https://pranathiperi.com" },
 //             { name: "zaidmukaddam.com", url: "https://zaidmukaddam.com/" },
+//             { name: "Mason Watson", url: "https://mw.works/" },
 //           ].map((site) => (
 //             <li key={site.url} className="">
 //               <a href={site.url} target="_blank" rel="noopener noreferrer" className="underline text-foreground/90 text-sm">

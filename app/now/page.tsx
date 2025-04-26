@@ -12,7 +12,7 @@ export default function NowPage() {
   }, [])
 
   return (
-    <div className={`max-w-xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-3xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <h1 className="mb-2 text-xl font-medium">Now</h1>
         <p className="text-xs text-muted-foreground">

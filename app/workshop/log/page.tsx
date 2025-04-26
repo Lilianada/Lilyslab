@@ -139,23 +139,28 @@ const projects = [
 export default function WorkshopLogPage() {
   return (
     <main className="max-w-5xl mx-auto px-4 py-16">
-      <h1 className="text-2xl font-bold mb-10 tracking-tight">Workshop Log</h1>
-      <div className="divide-y divide-border rounded-xl overflow-hidden bg-background/70">
+      <header className="mb-8">
+        <h1 className="mb-2 text-xl font-medium">Project Log</h1>
+        <p className="text-xs text-muted-foreground">Too many ideas, not enough <span className="line-through">time </span>focus.</p>
+      </header>
+      <div className="divide-y divide-border overflow-hidden bg-background/70">
         {projects.map((item, i) => {
           const isConfidential = !item.accessible;
           return (
             <div
               key={item.number + item.title}
-              className={`grid grid-cols-12 items-center gap-4 py-5 px-4 sm:px-8 transition-colors duration-150 ${
-                isConfidential ? "opacity-60 text-muted-foreground" : "hover:bg-muted/40"
+              className={`group grid grid-cols-12 items-center gap-4 py-5 px-4 sm:px-8 transition-colors duration-150 ${
+                isConfidential
+                  ? "opacity-60 text-muted-foreground cursor-not-allowed"
+                  : "hover:bg-muted/40 cursor-pointer"
               }`}
             >
               {/* Number & Title */}
               <div className="col-span-12 sm:col-span-4 flex items-center gap-2">
-                <span className="w-6 text-xs tabular-nums text-muted-foreground">{item.number}</span>
+                <span className="w-6 text-xs tabular-nums text-muted-foreground mr-2">{item.number}</span>
                 <span className={`font-medium ${isConfidential ? "text-muted-foreground" : "text-foreground"}`}>{item.title}</span>
                 {item.new && (
-                  <span className="ml-2 px-2 py-0.5 bg-orange-500/10 text-orange-500 text-[10px] rounded font-bold tracking-wider">NEW</span>
+                  <span className="px-2 py-0.5 bg-orange-500/10 text-orange-500 text-[10px] rounded font-bold tracking-wider">NEW</span>
                 )}
               </div>
               {/* Description */}
@@ -170,13 +175,15 @@ export default function WorkshopLogPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Open ${item.title} externally`}
-                      className="text-primary hover:text-primary/80 transition-colors"
+                      className="transition-colors"
                     >
-                      <ArrowUpRight size={16} strokeWidth={2} />
+                      <ArrowUpRight size={16} strokeWidth={2} className="text-foreground group-hover:text-primary transition-colors" />
                     </Link>
                   ) : null
                 ) : (
-                  <Lock size={16} className="text-muted-foreground" aria-label="Locked" />
+                  <span title="Confidential" aria-label="Confidential">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="lucide lucide-ban w-4 h-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="10" /><path d="m4.9 4.9 14.2 14.2" /></svg>
+                  </span>
                 )}
               </div>
             </div>
