@@ -75,7 +75,7 @@ const bookmarks: Bookmark[] = [
     title: "Reeder – RSS Reader",
     cover: "https://reederapp.com/images/og-image.png",
     tags: ["rss", "reader"],
-    type: "link",
+    type: "website",
     created: "2024-04-01T08:00:00Z",
   },
   {
@@ -83,7 +83,7 @@ const bookmarks: Bookmark[] = [
     title: "Raindrop.io – Bookmark Manager",
     cover: "https://raindrop.io/static/og-image.png",
     tags: ["bookmarks", "manager"],
-    type: "link",
+    type: "website",
     created: "2024-04-02T10:00:00Z",
   },
   {

@@ -5,7 +5,7 @@ export type Bookmark = {
   title: string;
   cover: string;
   tags: string[];
-  type: "article" | "video" | "link" | "misc";
+  type: "article" | "video" | "website" | "misc";
   created: string;
 };
 
@@ -27,7 +27,7 @@ export function BookmarkItem({ bookmark }: Props) {
   // Color dots
   const colorMap = {
     article: "bg-[#FBF3B9]",
-    link: "bg-[#FFDCCC]",
+    website: "bg-[#FFDCCC]",
     video: "bg-[#FDB7EA]",
     misc: "bg-[#B7B1F2]",
   } as const;
