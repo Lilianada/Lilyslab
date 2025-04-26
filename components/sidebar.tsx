@@ -216,8 +216,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
   <NavItem href="/digital-garden/catalog" icon={<Layers size={16} />} label="Catalog" onClick={onNavClick} delay={440} />
   <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={460} />
   <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={480} />
-  <NavItem href="/digital-garden/drafts" icon={<Scissors size={16} />} label="Drafts" onClick={onNavClick} delay={500} />
-  <NavItem href="/digital-garden/movies" icon={<Dices size={16} />} label="Movie list" onClick={onNavClick} delay={520} />
+  {/* <NavItem href="/digital-garden/drafts" icon={<Scissors size={16} />} label="Drafts" onClick={onNavClick} delay={500} />
+  <NavItem href="/digital-garden/movies-list" icon={<Dices size={16} />} label="Movie list" onClick={onNavClick} delay={520} /> */}
 </div>
 
 <div className="space-y-1">

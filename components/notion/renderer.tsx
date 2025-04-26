@@ -71,16 +71,13 @@ export const NotionRenderer: React.FC<NotionRendererProps> = ({
                 <Block
                   key={blockId}
                   block={blockMap[blockId]?.value}
-                  blockMap={blockMap}
-                  mapPageUrl={mapPageUrl}
-                  mapImageUrl={mapImageUrl}
-                  darkMode={isDarkMode}
+                  level={0}
                 />
               )
             })
           ) : (
             <div className="notion-empty">
-              <p>This page has no content.</p>
+              <p>This section is still under construction.</p>
             </div>
           )}
         </div>
@@ -90,8 +87,8 @@ export const NotionRenderer: React.FC<NotionRendererProps> = ({
     console.error("Error rendering Notion content:", error)
     return (
       <div className="notion-error">
-        <p>There was an error rendering this content.</p>
-        <p className="notion-error-details">{error.message}</p>
+        <p>This section is still under construction.</p>
+        {/* <p className="notion-error-details">{error.message}</p> */}
       </div>
     )
   }

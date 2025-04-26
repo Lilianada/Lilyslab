@@ -125,7 +125,7 @@ export default function Bookmark() {
   }, []);
 
   return (
-    <div className={`max-w-4xl mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-5xl mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">Bookmarks</h1>
       </header>

@@ -121,7 +121,7 @@ export default function Home() {
       <div className={`max-w-xl space-y-12 grid mx-auto sm:x-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
         {error ? (
           <div className="text-center py-8 border rounded-lg">
-            <p className="text-red-500 mb-2">Error loading data</p>
+            <p className="text-red-500 mb-2">This section is still under construction.</p>
             <p className="text-sm text-muted-foreground">{error}</p>
           </div>
         ) : (

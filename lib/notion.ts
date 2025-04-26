@@ -16,9 +16,17 @@ const notion = new Client({
 // Initialize the unofficial Notion client for better block fetching
 const notionUnofficial = new NotionAPI()
 
-
 // Initialize the Notion to Markdown converter
 const n2m = new NotionToMarkdown({ notionClient: notion })
+
+// Add this helper function to normalize Notion IDs
+export function normalizeNotionId(id: string): string {
+  // Handle both UUID format with hyphens and the raw format
+  if (id.includes('-')) {
+    return id.replace(/-/g, '')
+  }
+  return id
+}
 
 // Database IDs
 const writingsDbId = process.env.NOTION_DATABASE_ID
@@ -62,8 +70,9 @@ function extractProperties(page: any) {
   }
   const properties = page.properties
 
+  // If Title is a relation/page property, use its id; otherwise fallback to the row's id
   return {
-    id: page.id,
+    id: properties.Title?.relation?.[0]?.id ?? page.id,
     title: properties.Title?.title?.[0]?.plain_text ?? null,
     date: properties.Date?.date?.start ?? null,
     excerpt: properties.Excerpt?.rich_text?.[0]?.plain_text ?? null,
@@ -88,6 +97,43 @@ function extractProperties(page: any) {
   }
 }
 
+ // Add this new function to fetch full page content
+// Utility function to add a timeout to any promise
+async function withTimeout<T>(promise: Promise<T>, ms = 10000): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error('Timeout')), ms))
+  ]);
+}
+
+export async function getNotionPageContent(pageId: string): Promise<ExtendedRecordMap> {
+  console.log('gaet notion page content starting');
+  try {
+    const normalizedId = normalizeNotionId(pageId);
+    console.log('[getNotionPageContent] Fetching recordMap for page ID:', normalizedId);
+
+    // Use timeout wrapper for the Notion API call
+    const recordMap = await withTimeout(
+      notionUnofficial.getPage(normalizedId),
+      10000
+    );
+
+    console.log('[getNotionPageContent] Normalized page ID:', normalizedId);
+    console.log('[getNotionPageContent] recordMap keys:', Object.keys(recordMap?.block || {}));
+
+    if (!recordMap?.block) {
+      throw new Error('Invalid recordMap structure received from Notion');
+    }
+
+    return recordMap;
+  } catch (error) {
+    console.error('Error fetching Notion page content:', error);
+    throw new Error(`Failed to fetch Notion content: ${error.message}`);
+  }
+}
+
+
+
 // Get published articles
 export async function getPublishedArticles() {
   if (!writingsDbId) {
@@ -108,6 +154,85 @@ export async function getPublishedArticles() {
   ]
   const pages = await getDatabaseItems(writingsDbId, filter, sorts)
   return pages.map((page) => extractProperties(page))
+}
+
+// Get a specific article by slug
+export async function getArticleBySlug(slug: string) {
+  if (!slug) return null
+
+  if (!writingsDbId) {
+    console.error("Missing NOTION_DATABASE_ID for writings.")
+    return null
+  }
+
+  const filter: QueryDatabaseParameters["filter"] = {
+    and: [
+      {
+        property: "Slug",
+        rich_text: {
+          equals: slug,
+        },
+      },
+      {
+        property: "Published",
+        checkbox: {
+          equals: true,
+        },
+      },
+    ],
+  }
+  console.log("Filter being used:", filter)
+  console.log("writingsDbId:", writingsDbId)
+
+  try {
+    const pages = await getDatabaseItems(writingsDbId, filter)
+    if (pages.length === 0) return null
+    return extractProperties(pages[0])
+  } catch (error) {
+    console.error("Error fetching article by slug:", error)
+    throw error // or return null, or handle as appropriate
+  }
+}
+
+// Get all article slugs
+export async function getAllArticleSlugs(): Promise<string[]> {
+  if (!writingsDbId) {
+    console.error("Missing NOTION_DATABASE_ID for writings.")
+    return []
+  }
+  const filter: QueryDatabaseParameters["filter"] = {
+    property: "Published",
+    checkbox: {
+      equals: true,
+    },
+  }
+
+  const pages = await getDatabaseItems(writingsDbId, filter)
+  return pages.map((page) => extractProperties(page).slug).filter(Boolean) as string[]
+}
+
+// Update likes for an article
+export async function updateArticleLikes(pageId: string, likes: number) {
+  if (!notion) {
+    console.error("Notion client not initialized for updateArticleLikes.")
+    return null
+  }
+  try {
+    const properties: UpdatePageParameters["properties"] = {
+      Likes: {
+        number: likes,
+      },
+    }
+    const response = await notion.pages.update({
+      page_id: pageId,
+      properties: properties,
+    })
+
+    return response
+  } catch (error) {
+    console.error(`Error updating likes for page ${pageId}:`, error)
+    throw error
+  }
 }
 
 // Submit a new AMA question
@@ -307,75 +432,6 @@ export async function getPublishedResources() {
 
   const pages = await getDatabaseItems(resourcesDbId, filter)
   return pages.map((page) => extractProperties(page))
-}
-
-// Get a specific article by slug
-export async function getArticleBySlug(slug: string) {
-  if (!slug) return null
-
-  if (!writingsDbId) {
-    console.error("Missing NOTION_DATABASE_ID for writings.")
-    return null
-  }
-
-  const filter: QueryDatabaseParameters["filter"] = {
-    property: "Slug",
-    rich_text: {
-      equals: slug,
-    },
-  }
-  console.log("Filter being used:", filter)
-  console.log("writingsDbId:", writingsDbId)
-
-  try {
-    const pages = await getDatabaseItems(writingsDbId, filter)
-    if (pages.length === 0) return null
-    return extractProperties(pages[0])
-  } catch (error) {
-    console.error("Error fetching article by slug:", error)
-    throw error // or return null, or handle as appropriate
-  }
-}
-
-// Get all article slugs
-export async function getAllArticleSlugs(): Promise<string[]> {
-  if (!writingsDbId) {
-    console.error("Missing NOTION_DATABASE_ID for writings.")
-    return []
-  }
-  const filter: QueryDatabaseParameters["filter"] = {
-    property: "Published",
-    checkbox: {
-      equals: true,
-    },
-  }
-
-  const pages = await getDatabaseItems(writingsDbId, filter)
-  return pages.map((page) => extractProperties(page).slug).filter(Boolean) as string[]
-}
-
-// Update likes for an article
-export async function updateArticleLikes(pageId: string, likes: number) {
-  if (!notion) {
-    console.error("Notion client not initialized for updateArticleLikes.")
-    return null
-  }
-  try {
-    const properties: UpdatePageParameters["properties"] = {
-      Likes: {
-        number: likes,
-      },
-    }
-    const response = await notion.pages.update({
-      page_id: pageId,
-      properties: properties,
-    })
-
-    return response
-  } catch (error) {
-    console.error(`Error updating likes for page ${pageId}:`, error)
-    throw error
-  }
 }
 
 // Get all tools
@@ -799,9 +855,6 @@ async function processTable(rows: any[], tableBlock: any): Promise<string> {
   
   return tableContent + "\n"
 }
-
-
-
 
 
 

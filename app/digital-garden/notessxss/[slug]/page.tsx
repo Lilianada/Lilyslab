@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 import { getArticleBySlug, getAllArticleSlugs } from "@/lib/notion"
 import ArticleInteractions from "@/components/article-interactions"
 import { NotionAPI } from "notion-client"
-import ClientNotionRenderer from "./client-notion-renderer"
+import ClientNotionRenderer from "../../notes/client-notion-renderer"
 
 // Import the client-side renderer
 // We'll create this file next
@@ -127,6 +127,7 @@ export default async function QuickNotePage({ params }: { params: { slug: string
     )
   } catch (error: any) {
     console.error(`Error rendering note ${slug}:`, error)
+    
     return (
       <div className="max-w-xl mx-auto text-center py-10">
         <h1 className="text-xl font-medium mb-4">Error Loading Note</h1>

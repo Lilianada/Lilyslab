@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { Construction } from "lucide-react"
 
 export default function NotFound() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -13,11 +14,9 @@ export default function NotFound() {
 
     const router = useRouter();
   return (
-    <div className={`max-w-xl mx-auto text-center ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
-      <h2 className="mb-4 text-2xl font-medium">Page Not Found</h2>
-      <p className="mb-8 text-sm text-muted-foreground">
-        Sorry, the page you're looking for doesn't exist or has been moved.
-      </p>
+    <div className={`max-w-xl mx-auto my-20 text-center ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+      <h2 className="mb-4 text-2xl font-medium flex">Sorry, the page you're looking for doesn't exist or still under construction
+        </h2>
       <div className="flex justify-center gap-4">
         <button
           onClick={() => router.back()}

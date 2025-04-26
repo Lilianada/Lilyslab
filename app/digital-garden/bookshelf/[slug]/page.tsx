@@ -68,7 +68,7 @@ export default function BookshelfDetailPage() {
   // For demo, NotesOverview expects certain props; adapt as needed.
   return (
     <div className="min-h-screen">
-      <div className="container max-w-4xl mx-auto px-2 py-10">
+      <div className="container max-w-5xl mx-auto px-2 py-10">
         <button onClick={() => router.back()} className="mb-6 px-4 py-2  hover:text-gray-300">
           <ArrowLeft className="mr-2" />
         </button>
