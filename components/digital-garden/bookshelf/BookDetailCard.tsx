@@ -8,6 +8,7 @@ import {
   NotionNumberedList,
   NotionQuote,
 } from "@/components/digital-garden/notes/NotionBlock";
+import { CrossIcon } from "lucide-react";
 
 // --- Simple Markdown to NotionBlock structure parser for demonstration ---
 function renderMarkdownWithNotionBlocks(markdown: string) {
@@ -92,7 +93,7 @@ const NoteDetailCard: React.FC<NoteDetailCardProps> = ({
           onClick={onClose}
           aria-label="Close"
         >
-          ×
+          <CrossIcon/>
         </button>
         <div className="texture" />
         <div className="border px-4 pb-24 pt-4 md:px-10 md:pt-6">

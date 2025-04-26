@@ -1,9 +1,4 @@
-// Removed invalid imports. Using local helpers instead.
 
-// TODO: For the Note content/details page, import and use a less decorative handwriting font (e.g., Caveat or Indie Flower)
-// Example:
-// import { colors } from './utils/colors';
-// Import Dancing Script (fancy handwriting) font for description
 import { Dancing_Script } from 'next/font/google';
 
 // Setup Dancing Script font instance
@@ -31,8 +26,6 @@ export const colors = [
     '#6C95CF'
 ];
 
-// NoteCard is now a default export for easier imports in different places.
-// Props are documented for customizability.
 /**
  * NoteCard displays a summary card for a note or book.
  * @param data - The note/book data (required)
@@ -76,7 +69,6 @@ const NoteCard: React.FC<NoteCardProps> = ({
     }
 
     const createdDay = formatDate(data.frontmatter?.created);
-    const editedDay = formatDate(data.frontmatter?.edited);
 
     const categoriesWhitelist = ["Productivity", "Focus", "Creativity", "Career"];
     const categoryIndex = categoriesWhitelist.indexOf(category);
@@ -100,16 +92,6 @@ const NoteCard: React.FC<NoteCardProps> = ({
     const backgroundColorStyle = {
         backgroundColor: backgroundColor
     };
-
-    const getTextAlignment = (charCount: number) => {
-        if (charCount < 50) {
-            return 'text-center';
-        } else {
-            return 'text-left';
-        }
-    };
-
-    const textAlignmentClass = getTextAlignment(charCount);
 
     const content = (
         <div
@@ -150,11 +132,8 @@ const NoteCard: React.FC<NoteCardProps> = ({
             )}
             {/* Dashed separator line below description */}
             <div className="w-full border-t-2 border-dashed border-black my-2" />
-            <div className="text-xs flex flex-col gap-1 items-start mt-2 text-black">
+            <div className="text-[12px] flex flex-col gap-1 items-start mt-2 text-black">
                 <span className="block">created: {createdDay}</span>
-                {/* {createdDay !== editedDay && (
-                    <span className="block">edited: {editedDay}</span>
-                )} */}
             </div>
         </div>
     );

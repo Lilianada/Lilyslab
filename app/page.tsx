@@ -128,9 +128,9 @@ export default function Home() {
           <>
             <section className="stagger-children">
               <div className="w-20 h-20 mb-6 object-contain">
-  <AnimatedLogo />
-</div>
-              <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
+                <AnimatedLogo />
+              </div>
+              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
                 Hi there, I'm Lilian. I'm a{" "}
                 <Link href="https://github.com/lilianokeke" className="text-primary hover:underline">
                   MERN-Stack Developer
@@ -143,14 +143,24 @@ export default function Home() {
                 <Link href="/writing" className="text-primary hover:underline">
                   Digital Creator
                 </Link>
-                . This personal website is my cozy corner of the internet — part digital living room, part creative workshop. It’s where I share my work, interests, and curiosities freely, without the noise of algorithms or the pressure to perform.  
+                . This personal website is my cozy corner of the internet — part digital living room, part creative workshop. It’s where I share my work, interests, and curiosities freely, without the noise of algorithms or the pressure to perform.
               </p>
-              <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
-              By day, I manage and build digital products — blending a background in software engineering with product thinking to turn creative ideas into real, user-focused solutions. By night (and most weekends), this space becomes my lab for experimenting with new tools, exploring AI, and bringing dream projects to life one pixel at a time.   {" "}
+              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                By day, I manage and build digital products — blending a background in software engineering with product thinking to turn creative ideas into real, user-focused solutions.
+
               </p>
 
-              <p className="mb-4 text-sm leading-relaxed opacity-0 animate-slide-up">
-              I hope you enjoy exploring it as much as I’ve enjoyed crafting and tinkering with it.
+              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+
+                By night (and most weekends), this space becomes my lab for experimenting with new tools, exploring AI, and bringing dream projects to life one pixel at a time. I hope you enjoy exploring it as much as I’ve enjoyed crafting and tinkering with it.  {" "}
+              </p>
+
+              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                <span className="font-bold">Status: </span> Actively looking 
+                <br />
+                Having taken some time off to recharge and explore, I am looking to get back into it.
+
+                If you are looking for someone to help on frontend or design, I am always open to chat and make connections, so please do not hesitate to reach out!
               </p>
             </section>
 
@@ -213,7 +223,7 @@ export default function Home() {
                         return <div key={indx} className={`h-20 w-full sm:h-36 sm:w-36 ${code} rounded`}></div>
                       })
                     }
-                   
+
                   </div>
                 )}
               </div>
