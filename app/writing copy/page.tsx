@@ -1,0 +1,92 @@
+import Link from "next/link"
+import { formatDate } from "@/lib/utils"
+import { getPublishedArticles } from "@/lib/notion"
+import { Annoyed } from "lucide-react"
+import ReactNotionX from "@/components/ReactNotionX"
+
+export const revalidate = 3600 // Revalidate every hour
+
+type Post = {
+  id: string;
+  slug?: string;
+  title?: string;
+  date?: string;
+  excerpt?: string;
+};
+
+export default async function WritingPage() {
+  let posts: Post[] = [];
+  let error: string | null = null;
+
+  try {
+    console.log("Fetching published articles");
+    posts = await getPublishedArticles();
+    console.log(`Fetched ${posts.length} posts`);
+  } catch (err) {
+    console.error("Error in WritingPage:", err);
+    if (typeof err === "object" && err && "message" in err) {
+      error = (err as { message?: string }).message || "An error occurred while fetching articles";
+    } else {
+      error = "An error occurred while fetching articles";
+    }
+  }
+
+  // Defensive logging
+  console.debug('WritingPage posts:', posts);
+  console.debug('WritingPage error:', error);
+
+  return (
+    <div className="max-w-xl mx-auto animate-fade-in px-6 py-12">
+      <header className="mb-6">
+        <h1 className="mb-1 text-xl font-medium">Writing</h1>
+        <p className="text-sm text-muted-foreground">Thoughts on design, engineering, and building products.</p>
+      </header>
+
+      {error ? (
+        <div className="text-center py-8 border rounded-lg p-8">
+          <h2 className="text-base font-medium mb-2">This section is still under construction.</h2>
+          <p className="text-muted-foreground mb-4 text-sm">{error}</p>
+        </div>
+      ) : posts.length > 0 ? (
+        <div className="space-y-6 stagger-children">
+          {posts.map((post, index) => {
+            const formattedPageId = post.id.replace(/-/g, "")
+            console.log('Original ID:', post.id);
+            console.log('Formatted ID:', formattedPageId);
+            return (
+              <article
+                key={post.slug || post.id}
+                className="group opacity-0 animate-slide-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <Link
+                  href={`/writing/${post.slug || post.id}`}
+                  className="block transition-transform duration-300 hover:translate-x-1"
+                  prefetch={true}
+                >
+                  <div className="space-y-1 border-b border-border pb-4 hover:border-primary transition-colors duration-300">
+                    <time className="text-xs text-muted-foreground">
+                      {post.date ? formatDate(post.date) : "No date"}
+                    </time>
+                    <h2 className="text-base font-medium group-hover:text-primary group-hover:underline transition-colors duration-200">
+                      {post.title || "Untitled"}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
+                  </div>
+                </Link>
+              </article>
+            )
+          })}
+        </div>
+      ) : (
+        <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">
+          <Annoyed size={16} />
+          <h2 className="mt-2 text-base font-medium mb-2">No Articles Found</h2>
+          <p className="text-muted-foreground mb-4 text-sm">
+            There are no published articles in your Notion database yet.
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
