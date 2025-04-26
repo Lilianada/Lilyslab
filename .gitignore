@@ -34,3 +34,7 @@ next-env.d.ts
 
 # content db
 /Content
+.obsidian
+.trash
+.windsurf
+conflict-files-obsidian-git.md

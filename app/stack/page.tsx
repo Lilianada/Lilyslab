@@ -36,12 +36,22 @@ const categories = [
       {
         name: "v0",
         description: "Innovative AI-powered tool",
-        url: "https://www.cursor.com/",
+        url: "https://www.v0.com/",
       },
       {
         name: "Cursor",
         description: "AI Code Editor",
         url: "https://www.cursor.com/",
+      },
+      {
+        name: "Windsurf",
+        description: "AI Code Editor",
+        url: "https://www.windsurf.io/",
+      },
+      {
+        name: "Lovable",
+        description: "AI Code Editor",
+        url: "https://www.lovable.ai/",
       },
       {
         name: "GitHub Copilot",
@@ -63,20 +73,25 @@ const categories = [
         description: "Online design and visual communication platform",
         url: "https://canva.com",
       },
-      {
-        name: "Framer",
-        description: "Interactive prototyping",
-        url: "https://framer.com",
-      },
     ],
   },
   {
     name: "Productivity",
     items: [
       {
+        name: "Apple Notes",
+        description: "Notes, docs, and project management",
+        url: "https://notes.apple.com",
+      },
+      {
         name: "Notion",
         description: "Notes, docs, and project management",
         url: "https://notion.so",
+      },
+      {
+        name: "Obsidian",
+        description: "Notes, docs, and content management",
+        url: "https://obsidian.md",
       },
       {
         name: "Chrome Browser",
@@ -84,7 +99,22 @@ const categories = [
         url: "https://google.com",
       },
     ],
-  },
+   },
+  // {
+  //   name: "Inspiration",
+  //   items: [
+  //     {
+  //       name: "Pi",
+  //       description: "UI design and prototyping",
+  //       url: "https://figma.com",
+  //     },
+  //     {
+  //       name: "Canva",
+  //       description: "Online design and visual communication platform",
+  //       url: "https://canva.com",
+  //     },
+  //   ],
+  // }
 ]
 
 export default function StackPage() {

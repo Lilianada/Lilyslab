@@ -31,13 +31,15 @@ export default function Colophon() {
             <div className="text-xs text-muted-foreground">Utility-first CSS framework for rapid UI development</div>
           </div>
           <div className="border rounded bg-background p-4">
-            <div className="font-semibold">Custom Components</div>
-            <div className="text-xs text-muted-foreground">Hand-crafted UI components built specifically for this site</div>
+            <div className="font-semibold">Shadcn/ui</div>
+            <div className="text-xs text-muted-foreground">
+              lOREM IPSGUHMHMHM
+            </div>
           </div>
-          {/* <div className="border rounded bg-background p-4">
-            <div className="font-semibold">Basehub</div>
-            <div className="text-xs text-muted-foreground">Modern headless CMS for structured content management</div>
-          </div> */}
+          <div className="border rounded bg-background p-4">
+            <div className="font-semibold">Firebase</div>
+            <div className="text-xs text-muted-foreground">User management and authentication</div>
+          </div>
           <div className="border rounded bg-background p-4">
             <div className="font-semibold">Notion</div>
             <div className="text-xs text-muted-foreground">Flexible workspace and CMS for notes, content, and data</div>
