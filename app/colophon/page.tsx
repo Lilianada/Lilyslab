@@ -34,17 +34,17 @@ export default function Colophon() {
             <div className="font-semibold">Custom Components</div>
             <div className="text-xs text-muted-foreground">Hand-crafted UI components built specifically for this site</div>
           </div>
-          <div className="border rounded bg-background p-4">
+          {/* <div className="border rounded bg-background p-4">
             <div className="font-semibold">Basehub</div>
             <div className="text-xs text-muted-foreground">Modern headless CMS for structured content management</div>
+          </div> */}
+          <div className="border rounded bg-background p-4">
+            <div className="font-semibold">Notion</div>
+            <div className="text-xs text-muted-foreground">Flexible workspace and CMS for notes, content, and data</div>
           </div>
           <div className="border rounded bg-background p-4">
-            <div className="font-semibold">PostgreSQL</div>
-            <div className="text-xs text-muted-foreground">Robust relational database for data persistence</div>
-          </div>
-          <div className="border rounded bg-background p-4">
-            <div className="font-semibold">Drizzle ORM</div>
-            <div className="text-xs text-muted-foreground">TypeScript ORM with a focus on type safety and developer experience</div>
+            <div className="font-semibold">Obsidian</div>
+            <div className="text-xs text-muted-foreground">Markdown-based knowledge base and CMS for personal content</div>
           </div>
           <div className="border rounded bg-background p-4">
             <div className="font-semibold">Vercel AI SDK</div>
@@ -55,7 +55,7 @@ export default function Colophon() {
       <section className="mb-10">
         <div className="flex items-center gap-2 mb-2">
           <Globe size={16} className="text-muted-foreground" />
-          <h2 className="font-mono text-base font-semibold">Attribution</h2>
+          <h2 className="font-mono text-base font-semibold">Inspiration</h2>
         </div>
         <div className="text-sm mb-2 text-muted-foreground">Stole code and designs from these amazing creators:</div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 border rounded bg-background p-4">
@@ -98,7 +98,6 @@ export default function Colophon() {
             { name: 'accent', var: 'var(--accent)' },
             { name: 'muted', var: 'var(--muted)' },
             { name: 'border', var: 'var(--border)' },
-            { name: 'primary', var: 'var(--primary)' },
             { name: 'foreground', var: 'var(--foreground)' },
           ].map((color) => (
             <div key={color.name} className="flex flex-col items-center">
@@ -109,10 +108,25 @@ export default function Colophon() {
         </div>
         {/* Bookshelf palette */}
         <div className="flex flex-wrap gap-4 items-end mb-2 mt-3">
-          {[1,2,3,4,5,6,7,8,9,10].map((i) => (
-            <div key={`bookshelf-${i}`} className="flex flex-col items-center">
-              <div className={`w-10 h-10 rounded-full border bg-bookshelf-${i}`} />
-              <span className="text-[10px] mt-1 text-muted-foreground font-mono">bookshelf-{i}</span>
+          {[
+            { name: 'Cream', var: 'var(--extra-accentCream)' },
+            { name: 'PaleYellow', var: 'var(--extra-accentPaleYellow)' },
+            { name: 'Yellow', var: 'var(--extra-accentYellow)' },
+            { name: 'Blue', var: 'var(--extra-accentBlue)' },
+            { name: 'SteelBlue', var: 'var(--extra-accentSteelBlue)' },
+            { name: 'Lavender', var: 'var(--extra-accentLavender)' },
+            { name: 'Primary', var: 'var(--primary)' },
+            { name: 'Lilac', var: 'var(--extra-accentLilac)' },
+            { name: 'Pink', var: 'var(--extra-accentPink)' },
+            { name: 'Peach', var: 'var(--extra-accentPeach)' },
+            { name: 'Green', var: 'var(--extra-accentGreen)' },
+          ].map((color) => (
+            <div key={`extra-${color.name}`} className="flex flex-col items-center">
+              <div
+                className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 shadow"
+                style={{ background: `hsl(${color.var})` }}
+              />
+              <span className="text-[10px] mt-1 font-mono">{color.name}</span>
             </div>
           ))}
         </div>
@@ -122,13 +136,25 @@ export default function Colophon() {
           <BookOpen size={16} className="text-muted-foreground" />
           <h2 className="font-mono text-base font-semibold">Typography</h2>
         </div>
-        <div className="border rounded bg-background p-4">
-          <div className="font-semibold">Heading</div>
-          <div className="font-sans text-2xl mb-2">Inter</div>
-          <div className="font-semibold">Body</div>
-          <div className="mb-2">The quick brown fox jumps over the lazy dog.</div>
-          <div className="font-semibold">Inline Link</div>
-          <div className="mb-2 underline">The quick brown fox</div>
+        <div className="grid gap-3 border rounded bg-background p-4">
+          <div className="">
+            <div className="font-semibold">Geist Sans (Head)</div>
+            <div className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-geist-sans, sans-serif)' }}>
+              The quick brown fox jumps over the lazy dog.
+            </div>
+          </div>
+          <div className="">
+            <div className="font-semibold">Geist Sans (Body)</div>
+            <div className="text-base" style={{ fontFamily: 'var(--font-geist-sans, sans-serif)' }}>
+              The quick brown fox jumps over the lazy dog.
+            </div>
+          </div>
+          <div className="">
+            <div className="font-semibold">Geist Mono (Code)</div>
+            <div className="text-base" style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}>
+              const example = "Hello World";
+            </div>
+          </div>
         </div>
       </section>
       <section className="mb-10">
@@ -137,11 +163,7 @@ export default function Colophon() {
           <h2 className="font-mono text-base font-semibold">Personal Space</h2>
         </div>
         <div className="border rounded bg-background p-4 mb-2 text-sm">
-          This website is a personal digital garden—a space for me to experiment with design, technology, and share my thoughts. It's not open source, as it represents my personal journey and identity online.
-          <div className="border rounded bg-muted/30 p-4 mt-4 text-center text-xs font-mono italic">
-            <div className="mb-1">A haiku:</div>
-            <div>Digital canvas<br/>Code weaves personal space<br/>My thoughts, digitized</div>
-          </div>
+          This site is my creative lab—a place to build, tinker, and share ideas in progress. Everything here is shaped by personal curiosity and experimentation. The codebase is private, reflecting the evolving and individual nature of this space.
         </div>
       </section>
       <section className="mb-10">
@@ -151,27 +173,23 @@ export default function Colophon() {
           <span className="ml-2 px-2 py-0.5 rounded bg-muted text-xs">Vercel</span>
         </div>
         <div className="text-sm text-muted-foreground mb-4">
-          This site is deployed on <a href="https://vercel.com/" className="underline">Vercel</a>, taking advantage of their global edge network for optimal performance. Each commit triggers automatic deployments with preview environments for testing changes before they go live.
+          Deployments are powered by <a href="https://vercel.com/" className="underline">Vercel</a>, making updates seamless and fast. Every push creates a fresh version, so improvements and fixes reach visitors quickly.
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="border rounded bg-background p-4">
             <div className="font-semibold">Performance</div>
-            <div className="text-xs text-muted-foreground">Optimized for Core Web Vitals with 100+ Lighthouse score. Static generation combined with ISR for the best of both worlds.</div>
+            <div className="text-xs text-muted-foreground">Built for speed and reliability, with static and dynamic content served globally for a smooth user experience.</div>
           </div>
           <div className="border rounded bg-background p-4">
             <div className="font-semibold">Analytics</div>
-            <div className="text-xs text-muted-foreground">Privacy-focused analytics with Vercel Web Analytics to track performance metrics and user engagement without cookies.</div>
+            <div className="text-xs text-muted-foreground">Lightweight, privacy-friendly analytics provide insight into site usage—no cookies, no tracking of personal data.</div>
           </div>
         </div>
       </section>
       <section className="mb-10">
         <blockquote className="border-l-4 border-muted pl-4 italic text-sm text-muted-foreground">
-          "I'm convinced that about half of what separates the successful entrepreneurs from the non-successful ones is pure perseverance."<br/>
-          <span className="not-italic font-mono text-xs">from the non-successful ones is pure perseverance."</span><br/>
-          <br/>
-          "Do something when you are young, when you have nothing to lose, and keep that in mind."<br/>
-          <br/>
-          "Don't let the noise of others' opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition."
+          <span className="block mb-2">“Growth happens at the edge of comfort. This site is a record of my experiments, mistakes, and learning in public.”</span>
+          <span className="not-italic font-mono text-xs">— Lily</span>
         </blockquote>
       </section>
     </div>

@@ -13,8 +13,11 @@ import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { Breadcrumb } from "@/components/breadcrumb-nav"
 import { BuyMeCoffee } from "@/components/buy-me-coffee"
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 
-const inter = Inter({ subsets: ["latin"] })
+
+
 
 export const metadata: Metadata = {
   title: {
@@ -22,9 +25,9 @@ export const metadata: Metadata = {
     template: "%s | Lily's Lab",
   },
   description: "Software engineer, product manager, and digital creator",
-  keywords: ["design", "development", "product management", "portfolio", "Lilian Okeke", "Lilyslab", "Lily's Lab", "artificial intelligence", "machine learning", "software engineer", "product manager", "digital creator"],
-  authors: [{ name: "Lilian Okeke" }],
-  creator: "Lilian Okeke",
+  keywords: ["design", "development", "product management", "portfolio", "Lilian Ada", "Lilyslab", "Lily's Lab", "artificial intelligence", "machine learning", "software engineer", "product manager", "digital creator"],
+  authors: [{ name: "Lilian Ada" }],
+  creator: "Lilian Ada",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -62,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-     <body className={inter.className}>
+     <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
             <main className="flex min-h-screen flex-col bg-background  transition-colors duration-300 md:flex-row">

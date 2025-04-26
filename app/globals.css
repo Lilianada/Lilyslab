@@ -37,6 +37,18 @@
     --radius: 0.5rem;
     --mellow: 38 100% 55%;             /* #ffc04d */
 
+    /* Extra palette for bg-extra-... */
+    --extra-accentLavender: 234 91% 80%;   /* #9EAAFA */
+    --extra-accentYellow: 48 95% 76%;      /* #FAE680 */
+    --extra-accentGreen: 148 28% 72%;      /* #A2CBAF */
+    --extra-accentPink: 350 54% 80%;       /* #E8ADB1 */
+    --extra-accentBlue: 213 61% 80%;       /* #A6C2EB */
+    --extra-accentCream: 43 68% 89%;       /* #F4E8C8 */
+    --extra-accentLilac: 270 64% 80%;      /* #CCA7ED */
+    --extra-accentPeach: 18 86% 71%;       /* #F29874 */
+    --extra-accentPaleYellow: 45 82% 80%;  /* #F4DAA0 */
+    --extra-accentSteelBlue: 218 47% 61%;  /* #6C95CF */
+
     --notion-text: 0 0% 9%;            /* #171717 */
     --notion-bg-gray: 0 0% 97%;        /* #f7f7f7 */
     --notion-bg-brown: 25 40% 95%;     /* #f2e8e4 */
@@ -73,6 +85,18 @@
     --input: 210 10% 12%;               /* #2f343a */
     --ring: 210 8% 50%;                 /* #7a828b */
     --mellow: 38 90% 45%;               /* #b3821b */
+
+    /* Extra palette for bg-extra-... (dark mode) */
+    --extra-accentLavender: 234 91% 35%;   /* #4c529b */
+    --extra-accentYellow: 48 95% 30%;      /* #7a6e2b */
+    --extra-accentGreen: 148 28% 32%;      /* #4e695b */
+    --extra-accentPink: 350 54% 38%;       /* #8d5b60 */
+    --extra-accentBlue: 213 61% 38%;       /* #546d8c */
+    --extra-accentCream: 43 68% 24%;       /* #6b6246 */
+    --extra-accentLilac: 270 64% 37%;      /* #7a5b8f */
+    --extra-accentPeach: 18 86% 36%;       /* #a15c3d */
+    --extra-accentPaleYellow: 45 82% 32%;  /* #85743a */
+    --extra-accentSteelBlue: 218 47% 32%;  /* #354c6b */
 
     --notion-text: 0 0% 95%;            /* #f2f2f2 */
     --notion-bg-gray: 210 10% 15%;      /* #2a2e33 */

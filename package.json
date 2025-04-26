@@ -49,6 +49,7 @@
     "embla-carousel-react": "8.5.1",
     "firebase": "latest",
     "framer-motion": "^12.8.0",
+    "geist": "^1.3.1",
     "gray-matter": "^4.0.3",
     "input-otp": "1.4.1",
     "katex": "latest",
