@@ -9,8 +9,6 @@ date: 2025-04-26
 exerpt: Easy peasy content management system
 ---
 
----
-
 ### **How I Set Up Obsidian as My Content Management System After Encountering Bugs in Notion's Renderer**
 
 As a creative professional, managing content effectively is crucial. For years, I relied on Notion to keep my notes, ideas, and articles organized. However, after a recent experience with bugs in Notion’s renderer, I decided to explore alternative content management solutions. That's when I discovered Obsidian, a powerful note-taking and knowledge management app that supports markdown files, and it quickly became my new CMS.
@@ -89,9 +87,3 @@ Since switching to Obsidian, I’ve experienced several benefits that make it a 
 While Notion served me well for a time, the bugs in its renderer pushed me to find a more stable solution for managing my content. Obsidian’s local-first approach, markdown support, and flexibility made it an ideal choice for my content management system. Whether you’re a writer, developer, or creative professional, Obsidian offers an efficient and customizable way to manage your content and integrate it with other tools.
 
 If you’re looking for a reliable, flexible, and customizable CMS, I highly recommend giving Obsidian a try. It’s been a game-changer for me, and I’m excited to continue using it to organize and display my work.
-
----
-
-[^1]
-
-[^1]: **Obsidian’s Open Ecosystem**: Obsidian’s flexibility isn’t just limited to its native features—it also supports a wide range of community plugins that further enhance its capabilities, from task management to knowledge graph visualization. This open ecosystem is one of the reasons I was able to tailor Obsidian to meet my specific CMS needs.
