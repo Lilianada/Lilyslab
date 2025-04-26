@@ -43,9 +43,8 @@ export default function MobileNav() {
   }
 
   return (
-    <div className="flex items-center justify-between border-b  p-4 md:hidden">
+    <div className="flex items-center justify-between border-b  p-4 lg:hidden">
       <Link href="/" className="flex items-center gap-2">
-        {/* <Image src="/12.png" alt="Lily's Lab Logo" width={32} height={32} className="rounded-md" /> */}
         <h1 className="text-sm font-medium">Lily's Lab</h1>
       </Link>
       <div className="flex items-center gap-2">
@@ -58,10 +57,9 @@ export default function MobileNav() {
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="left" className="sidebar flex flex-col p-0 bg-muted">
+          <SheetContent side="left" className="sidebar flex flex-col p-0 bg-muted gap-0">
             <div className="flex items-center justify-between border-b p-4">
-              <div className="flex items-center gap-2">
-                <Image src="/12.png" alt="Lily's Lab" width={32} height={32} className="rounded-md hidden" />
+              <div className="flex items-center">
                 <h2 className="text-sm leading-0 font-medium">Menu</h2>
                 <SheetTitle className="sr-only">Menu</SheetTitle>
               </div>
