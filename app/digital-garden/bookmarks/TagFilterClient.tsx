@@ -52,7 +52,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                   key={tag}
                   className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTag === tag
                       ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-muted border-border text-muted-foreground hover:bg-accent"
+                      : "bg-muted border-border text-muted-foreground "
                     }`}
                   onClick={() => setSelectedTag(tag)}
                 >

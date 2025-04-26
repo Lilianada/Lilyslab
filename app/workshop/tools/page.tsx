@@ -1,118 +1,36 @@
-"use client"
+import { ToolCard } from "@/components/workshop/tools/ToolCard";
+import { parseToolsMarkdown } from "@/lib/toolsParser";
+// import { Button } from "@/components/ui/button";
+// import { Plus } from "lucide-react";
+// import { ToolSubmissionSidebar } from "@/components/workshop/tools/ToolSubmissionSidebar";
+// If you want submission or interactivity, move those to a client component
 
-import { useEffect, useState } from "react"
-import { ToolCard } from "@/components/workshop/tools/ToolCard"
-import { SearchBar } from "@/components/search-bar"
-import { type Tool } from "@/types"
-import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
-import { ToolSubmissionSidebar } from "@/components/workshop/tools/ToolSubmissionSidebar"
-
-const categories = ["All", "Productivity", "Education", "Utilities", "Health & Fitness"]
+const categories = ["All", "Productivity", "Education", "Utilities", "Health & Fitness"];
+// If you want category filtering, move this logic into a client component
 
 export default function ToolsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const [tools, setTools] = useState<Tool[]>([])
-  const [filteredTools, setFilteredTools] = useState<Tool[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isSubmitOpen, setIsSubmitOpen] = useState(false)
-
-  useEffect(() => {
-    setIsLoaded(true)
-    async function fetchTools() {
-      try {
-        const response = await fetch(`/api/tools?category=${selectedCategory}`)
-        const data = await response.json()
-        setTools(data)
-        setFilteredTools(data)
-      } catch (error) {
-        console.error("Error fetching tools:", error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchTools()
-  }, [selectedCategory])
-
-  useEffect(() => {
-    const filtered = tools.filter((tool) => {
-      const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.category.toLowerCase().includes(searchQuery.toLowerCase())
-      const matchesCategory = selectedCategory === "All" || tool.category === selectedCategory
-      return matchesSearch && matchesCategory
-    })
-    setFilteredTools(filtered)
-  }, [searchQuery, selectedCategory, tools])
-
+  const allTools = parseToolsMarkdown();
+  // If you want search/filter, move that to a client component and pass allTools as a prop
   return (
-    <div className={`max-w-3xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className="max-w-3xl mx-auto sm:px-6 py-12">
       <header className="mb-4">
         <h1 className="mb-1 text-xl font-medium">Tools</h1>
         <p className="text-sm text-muted-foreground">
-          A curated collection of {tools.length} tools and resources for digital minimalists.
+          A curated collection of {allTools.length} tools and resources for digital minimalists.
         </p>
       </header>
-
-      <div className="mt-6 mb-6 space-y-4">
-        <div className="flex items-center gap-4 max-w-lg">
-          <SearchBar
-            placeholder="Search tools by name, description, or category..."
-            onSearch={setSearchQuery}
-            className="flex-1"
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {allTools.map((tool: any, i: number) => (
+          <ToolCard
+            key={tool.name + i}
+            name={tool.name}
+            description={tool.description}
+            logo={tool.logo}
+            platforms={tool.platforms}
+            url={tool.url}
           />
-          <Button
-            onClick={() => setIsSubmitOpen(true)}
-            className="shrink-0"
-            // size="icon"
-          >
-            <Plus className="h-4 w-4" /> Submit Tool
-          </Button>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              size="sm"
-              className="text-xs"
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
+        ))}
       </div>
-
-      {isLoading ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-48 animate-pulse rounded-lg border bg-muted" />
-          ))}
-        </div>
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredTools.map((tool) => (
-            <ToolCard
-              key={tool.id}
-              name={tool.name}
-              description={tool.description}
-              logo={tool.logo}
-              platforms={tool.platforms}
-              url={tool.url}
-            />
-          ))}
-        </div>
-      )}
-
-      <ToolSubmissionSidebar
-        isOpen={isSubmitOpen}
-        onClose={() => setIsSubmitOpen(false)}
-      />
     </div>
-  )
-} 
+  );
+}
