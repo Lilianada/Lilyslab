@@ -64,10 +64,10 @@ export default function WorkshopLogPage() {
             <React.Fragment key={item.number + item.title}>
               {/* Desktop/Tablet (md and up) */}
               <div
-                className={`group grid grid-cols-12 items-center min-h-[44px] text-sm border-0 border-b border-border last:border-0 px-2 py-2 transition-colors duration-150 hidden lg:grid ${
+                className={`group grid-cols-12 items-center min-h-[44px] text-sm border-0 border-b border-border last:border-0 px-2 py-2 transition-colors duration-150 hidden lg:grid hover:bg-muted ${
                   isConfidential
-                    ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed hover:bg-zinc-800/80"
-                    : "hover:bg-muted cursor-pointer bg-transparent"
+                    ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed"
+                    : "cursor-pointer bg-transparent"
                 }`}
               >
                 {/* Number + Title */}
@@ -78,7 +78,7 @@ export default function WorkshopLogPage() {
                   <span className="font-medium flex items-center text-foreground" style={{minWidth: '120px'}}>
                    {item.title}
                     {item.new && (
-                      <span className="ml-2 px-2 leading-normal bg-orange-500/10 text-extra-peach border border-orange-900 text-[8px] rounded font-semibold tracking-wider">NEW</span>
+                      <span className="ml-2 px-2 leading-normal bg-orange-500/10 text-extra-peach border border-orange-800 text-[8px] rounded font-semibold tracking-wider">NEW</span>
                     )}
                   </span>
                 </div>
@@ -104,7 +104,7 @@ export default function WorkshopLogPage() {
                       <Lock
                         size={16}
                         strokeWidth={2}
-                        className="text-muted-foreground group-hover:text-red-400 transition-colors"
+                        className="text-muted-foreground group-hover:text-primary transition-colors"
                       />
                     </span>
                   ) : (

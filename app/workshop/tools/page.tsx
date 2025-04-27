@@ -1,35 +1,132 @@
-import { ToolCard } from "@/components/workshop/tools/ToolCard";
-import { parseToolsMarkdown } from "@/lib/toolsParser";
-// import { Button } from "@/components/ui/button";
-// import { Plus } from "lucide-react";
-// import { ToolSubmissionSidebar } from "@/components/workshop/tools/ToolSubmissionSidebar";
-// If you want submission or interactivity, move those to a client component
+"use client"; // Make this a Client Component
 
-const categories = ["All", "Productivity", "Education", "Utilities", "Health & Fitness"];
-// If you want category filtering, move this logic into a client component
+import { useState, useEffect, useMemo } from "react";
+import { ToolCard } from "@/components/workshop/tools/ToolCard";
+import { Input } from "@/components/ui/input"; // Assuming shadcn/ui Input
+import { Button } from "@/components/ui/button"; // Assuming shadcn/ui Button
+import { type Tool } from "@/types"; // Import Tool type
+import { ToolCardSkeleton } from "@/components/workshop/tools/ToolCardSkeleton"; // Import the skeleton
 
 export default function ToolsPage() {
-  const allTools = parseToolsMarkdown();
-  // If you want search/filter, move that to a client component and pass allTools as a prop
+  const [allTools, setAllTools] = useState<Tool[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Fetch data on component mount from the API route
+  useEffect(() => {
+    async function loadTools() {
+      setIsLoading(true);
+      setError(null);
+      try {
+        // Fetch from the new API route
+        const response = await fetch("/api/tools");
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Failed to fetch tools data' }));
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        }
+        const toolsData: Tool[] = await response.json();
+        setAllTools(toolsData);
+      } catch (err) {
+        console.error("Failed to load tools:", err);
+        // Set specific error message based on error type if possible
+        const message = err instanceof Error ? err.message : "Failed to load tools data.";
+        setError(message);
+      } finally {
+        // Simulate loading for slightly longer to see skeleton
+        // Remove this setTimeout in production
+        setTimeout(() => setIsLoading(false), 500);
+      }
+    }
+    loadTools();
+  }, []);
+
+  // Derive categories from the fetched tools
+  const categories = useMemo(() => {
+    const uniqueCategories = new Set(allTools.map(tool => tool.category));
+    return ["All", ...Array.from(uniqueCategories).sort()];
+  }, [allTools]);
+
+  // Filter tools based on search query and selected category
+  const filteredTools = useMemo(() => {
+    return allTools.filter(tool => {
+      const matchesCategory = selectedCategory === "All" || tool.category === selectedCategory;
+      const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [allTools, searchQuery, selectedCategory]);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   return (
-    <div className="max-w-3xl mx-auto sm:px-6 py-12">
-      <header className="mb-4">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+      <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">Tools</h1>
         <p className="text-sm text-muted-foreground">
-          A curated collection of {allTools.length} tools and resources for digital minimalists.
+          A curated collection of tools and resources for digital minimalists.
+          {!isLoading && ` Showing ${filteredTools.length} of ${allTools.length}.`}
         </p>
       </header>
+
+      {/* Search and Filter UI */}
+      <div className="mb-8 space-y-4">
+        <Input
+          type="text"
+          placeholder="Search tools..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="max-w-sm" // Limit search bar width
+        />
+        <div className="flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              size="sm"
+              onClick={() => handleCategoryClick(category)}
+              className="text-xs py-0 leading-normal px-4"
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      {/* Tools Grid or Loading Skeleton */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {allTools.map((tool: any, i: number) => (
-          <ToolCard
-            key={tool.name + i}
-            name={tool.name}
-            description={tool.description}
-            logo={tool.logo}
-            platforms={tool.platforms}
-            url={tool.url}
-          />
-        ))}
+        {isLoading ? (
+          // Render Skeleton Cards
+          Array.from({ length: 6 }).map((_, index) => (
+            <ToolCardSkeleton key={index} />
+          ))
+        ) : error ? (
+          // Display error message spanning grid columns
+          <div className="sm:col-span-2 lg:col-span-3 text-center py-10 text-red-500">{error}</div>
+        ) : filteredTools.length === 0 ? (
+          // Display no results message spanning grid columns
+          <div className="sm:col-span-2 lg:col-span-3 text-center py-10 text-muted-foreground">No tools found matching your criteria.</div>
+        ) : (
+          // Render Actual Tool Cards
+          filteredTools.map((tool, i) => (
+            <ToolCard
+              key={tool.name + i}
+              name={tool.name}
+              description={tool.description}
+              logo={tool.logo}
+              platforms={tool.platforms}
+              url={tool.url}
+            />
+          ))
+        )}
       </div>
     </div>
   );
