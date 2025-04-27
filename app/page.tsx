@@ -1,16 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
-import Image from "next/image";
 import AnimatedLogo from "@/components/AnimatedLogo";
-import { ProjectItemComponent, ProjectStack, SocialLink, ThingItemComponent, WorkItemComponent } from "@/components/homepage-items"
+import { SocialLink, WorkItemComponent } from "@/components/homepage-items"
 import { MusicPlayerWidget } from "@/components/music-player-widget"
-
-// Types for our data
-
-// Footer component for date/time/location
 import { useEffect as useFooterEffect, useState as useFooterState } from "react";
 
 function FooterWithDateTimeAndLocation() {
