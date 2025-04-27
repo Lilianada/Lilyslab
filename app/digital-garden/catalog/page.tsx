@@ -129,7 +129,7 @@ export default function PicPinsPage() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-3xl mx-auto px-4 py-8">
+      <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
         <header className="flex items-center justify-between mb-8">
           <div className="flex flex-col">
             <h1 className="mb-1 text-xl font-medium">Catalog</h1>

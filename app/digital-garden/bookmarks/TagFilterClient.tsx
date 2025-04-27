@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import type { Bookmark } from "@/lib/bookmarks";
-import { BookmarkItem } from "@/components/digital-garden/BookmarkItem";
+import { BookmarkItem } from "@/components/digital-garden/bookmark/BookmarkItem";
 
 interface Props {
   bookmarks: Bookmark[];

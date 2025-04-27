@@ -1,4 +1,4 @@
-import { BookmarkItem } from "@/components/digital-garden/BookmarkItem";
+import { BookmarkItem } from "@/components/digital-garden/bookmark/BookmarkItem";
 import type { Bookmark } from "@/lib/bookmarks";
 import { getBookmarks } from "@/lib/bookmarks";
 
