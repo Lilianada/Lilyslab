@@ -1,86 +1,81 @@
 "use client";
-import React, { useState } from "react";
-import { BookCardMain as BookCard } from "@/components/digital-garden/bookshelf/BookCard";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import BookCard from "@/components/digital-garden/bookshelf/BookCardMain";
+import { BookCardSkeleton } from "@/components/digital-garden/bookshelf/BookCardSkeleton";
 
-// Mock data for books
-const books = [
-  {
-    slug: "atomic-habits.md",
-    name: "Atomic Habits.md",
-    frontmatter: {
-      created: "2022-01-01",
-      edited: "2022-01-10",
-      description: "A practical guide to building good habits and breaking bad ones.",
-    },
-    body: "Atomic Habits by James Clear provides a proven framework for improving every day.",
-    category: "Productivity",
-    status: "read",
-  },
-  {
-    slug: "deep-work.md",
-    name: "Deep Work.md",
-    frontmatter: {
-      created: "2021-11-15",
-      edited: "2021-11-20",
-      description: "Rules for focused success in a distracted world.",
-    },
-    body: "Deep Work by Cal Newport is about the benefits of intense focus and how to achieve it.",
-    category: "Focus",
-    status: "reading",
-  },
-  {
-    slug: "show-your-work.md",
-    name: "Show Your Work.md",
-    frontmatter: {
-      created: "2020-05-10",
-      edited: "2020-06-01",
-      description: "10 ways to share your creativity and get discovered.",
-    },
-    body: "Austin Kleon's book encourages creatives to share their process and connect with others.",
-    category: "Creativity",
-    status: "will_read",
-  },
-  {
-    slug: "so-good-they-cant-ignore-you.md",
-    name: "So Good They Can't Ignore You.md",
-    frontmatter: {
-      created: "2019-09-01",
-      edited: "2019-09-15",
-      description: "Why skills trump passion in the quest for work you love.",
-    },
-    body: "Cal Newport argues that skills, not passion, are the key to career satisfaction.",
-    category: "Career",
-    status: "read",
-  },
-];
+// Define the Book type matching the API response (should match API and BookCardMain)
+interface Book {
+  id: string;
+  slug: string;
+  title: string;
+  status: 'current-reads' | 'read' | 'will-read';
+  rating?: number;
+  summary?: string;
+  date?: number;
+}
 
 export default function BookshelfPage() {
-  const [selectedTab, setSelectedTab] = useState<'all' | 'read' | 'reading' | 'will_read'>('all');
+  const [allBooks, setAllBooks] = useState<Book[]>([]); // Uses the updated Book type
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const [selectedTab, setSelectedTab] = useState<'all' | 'current-reads' | 'read' | 'will-read'>('all');
 
   const tabLabels = [
     { key: 'all', label: 'All' },
+    { key: 'current-reads', label: 'Reading' },
     { key: 'read', label: 'Read' },
-    { key: 'reading', label: 'Reading' },
-    { key: 'will_read', label: 'Will Read' },
+    { key: 'will-read', label: 'Will Read' },
   ];
 
-  const filteredBooks = selectedTab === 'all' ? books : books.filter((book) => book.status === selectedTab);
+  useEffect(() => {
+    async function loadBooks() {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("/api/books");
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Failed to load book data' }));
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        }
+        const data: Book[] = await response.json(); // Use updated Book type
+        setAllBooks(data);
+      } catch (err) {
+        console.error("Failed to load books:", err);
+        const message = err instanceof Error ? err.message : "Failed to load book data.";
+        setError(message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadBooks();
+  }, []);
+
+  const filteredBooks = selectedTab === 'all'
+    ? allBooks
+    : allBooks.filter((book) => book.status === selectedTab);
+
+  const renderSkeletons = () => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <BookCardSkeleton key={`skeleton-${index}`} />
+      ))}
+    </div>
+  );
 
   return (
-    <div className="min-h-screen animate-fade-in ">
-      <div className="container max-w-3xl mx-auto px-4 py-8">
-
+    <div className="min-h-screen animate-fade-in">
+      <div className="container max-w-3xl mx-auto p-0 sm:px-4 py-8">
         <header className="flex items-center justify-between mb-8">
           <div className="flex flex-col">
             <h1 className="mb-1 text-xl font-medium">Bookshelf</h1>
             <p className="text-sm text-muted-foreground">
-              A collection of books I’ve read, am reading, or plan to read. Click on any book to see more details.
+              A collection of books I've read, am reading, or plan to read.
             </p>
           </div>
         </header>
-        {/* Tabs for book status */}
-        <div className="flex gap-2 mb-6">
+
+        <div className="flex flex-wrap gap-2 mb-6">
           {tabLabels.map((tab) => (
             <button
               key={tab.key}
@@ -88,29 +83,32 @@ export default function BookshelfPage() {
                 ? "bg-primary text-primary-foreground border-primary"
                 : "bg-muted border-border text-muted-foreground hover:bg-accent"
               }`}
-              onClick={() => setSelectedTab(tab.key as 'read' | 'reading' | 'will_read')}
+              onClick={() => setSelectedTab(tab.key as 'all' | 'current-reads' | 'read' | 'will-read')}
             >
               {tab.label}
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {filteredBooks.map((book) => (
-            <Link key={book.slug} href={`/digital-garden/bookshelf/${book.slug}`} className="cursor-pointer block">
+
+        {isLoading ? (
+          renderSkeletons()
+        ) : error ? (
+          <div className="text-center py-10 text-red-500 border border-destructive/50 bg-destructive/10 rounded-lg p-4">{error}</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {filteredBooks.map((book) => (
               <BookCard
-                data={book}
-                path="/digital-garden/bookshelf"
-                category={book.category}
+                key={book.id}
+                book={book}
                 distorted={false}
               />
-            </Link>
-          ))}
-          {filteredBooks.length === 0 && (
-            <div className="col-span-full text-center text-gray-500 py-10">No books in this category.</div>
-          )}
-        </div>
+            ))}
+            {filteredBooks.length === 0 && (
+              <div className="col-span-full text-center text-muted-foreground py-10">No books found in this category.</div>
+            )}
+          </div>
+        )}
       </div>
-      
     </div>
   );
 }

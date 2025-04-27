@@ -1,58 +1,16 @@
 import React from "react";
-import {
-  NotionHeading1,
-  NotionHeading2,
-  NotionHeading3,
-  NotionParagraph,
-  NotionList,
-  NotionNumberedList,
-  NotionQuote,
-} from "@/components/digital-garden/notes/NotionBlock";
-import { CrossIcon } from "lucide-react";
-
-// --- Simple Markdown to NotionBlock structure parser for demonstration ---
-function renderMarkdownWithNotionBlocks(markdown: string) {
-  const lines = markdown.split('\n');
-  const blocks: React.ReactNode[] = [];
-  let listItems: string[] = [];
-  let orderedListItems: string[] = [];
-  lines.forEach((line, idx) => {
-    if (line.startsWith('# ')) {
-      blocks.push(<NotionHeading1 key={idx}>{line.replace('# ', '')}</NotionHeading1>);
-    } else if (line.startsWith('## ')) {
-      blocks.push(<NotionHeading2 key={idx}>{line.replace('## ', '')}</NotionHeading2>);
-    } else if (line.startsWith('### ')) {
-      blocks.push(<NotionHeading3 key={idx}>{line.replace('### ', '')}</NotionHeading3>);
-    } else if (line.startsWith('- ')) {
-      listItems.push(line.replace('- ', ''));
-      // If next line is not a list, flush
-      if (!lines[idx + 1] || !lines[idx + 1].startsWith('- ')) {
-        blocks.push(<NotionList key={idx} items={[...listItems]} />);
-        listItems = [];
-      }
-    } else if (/^\d+\. /.test(line)) {
-      orderedListItems.push(line.replace(/^\d+\. /, ''));
-      if (!lines[idx + 1] || !/^\d+\. /.test(lines[idx + 1])) {
-        blocks.push(<NotionNumberedList key={idx} items={[...orderedListItems]} />);
-        orderedListItems = [];
-      }
-    } else if (line.startsWith('> ')) {
-      blocks.push(<NotionQuote key={idx}>{line.replace('> ', '')}</NotionQuote>);
-    } else if (line.trim() !== '') {
-      blocks.push(<NotionParagraph key={idx}>{line}</NotionParagraph>);
-    }
-  });
-  return blocks;
-}
+import { X } from "lucide-react";
 
 interface NoteDetailCardProps {
   slug: string;
   path: string;
   body: string;
   frontmatter: {
+    title?: string;
     created: string;
     edited: string;
     description: string;
+    category?: string;
   };
   previousTitle?: string;
   nextTitle?: string;
@@ -61,64 +19,77 @@ interface NoteDetailCardProps {
 }
 
 function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  return `${day} / ${month} / ${year}`;
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      console.warn(`Invalid date string received: ${dateString}`);
+      return 'Invalid Date';
+    }
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day} / ${month} / ${year}`;
+  } catch (e) {
+    console.error(`Error formatting date: ${dateString}`, e);
+    return 'Error Date';
+  }
 }
 
-const NoteDetailCard: React.FC<NoteDetailCardProps> = ({
+const BookDetailCard: React.FC<NoteDetailCardProps> = ({
   slug,
   path,
   body,
   frontmatter,
   previousTitle,
   nextTitle,
-  category,
+  category: propCategory,
   onClose,
 }) => {
-  const title = slug.endsWith(".md") ? slug.replace(/\.md$/, "") : slug;
+  const title = frontmatter.title || (slug.endsWith(".md") ? slug.replace(/\.md$/, "").replace(/-/g, ' ') : slug.replace(/-/g, ' '));
   const createdDate = formatDate(frontmatter.created);
   const editedDate = formatDate(frontmatter.edited);
+  const displayCategory = frontmatter.category || propCategory || 'N/A';
 
-  // For markdown rendering, you can use a library like react-markdown or similar
-  // Here we'll render as plain text for the mock/demo
+  const renderBody = () => {
+    if (!body) {
+        return <p className="italic text-muted-foreground">(No description available)</p>;
+    }
+    return body.split('\n').map((paragraph, index) => (
+        paragraph.trim() ? <p key={index}>{paragraph}</p> : null
+    ));
+  };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-      <div className="relative mt-8 w-full max-w-3xl p-2 md:p-4 bg-white rounded-lg shadow-xl" style={{ background: '#F4E8C8' }}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+      <div className="relative w-full max-w-3xl max-h-[90vh] m-4 bg-card border border-border rounded-lg shadow-xl flex flex-col">
         <button
-          className="absolute top-4 right-4 text-lg font-bold text-gray-600 hover:text-black"
+          className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors z-10"
           onClick={onClose}
           aria-label="Close"
         >
-          <CrossIcon/>
+          <X size={20} />
         </button>
-        <div className="texture" />
-        <div className="border px-4 pb-24 pt-4 md:px-10 md:pt-6">
-          <div className="mx-auto mt-4 max-w-[65ch] text-[1.2rem]">
-            <h1 className="font-sans text-[2.5rem] font-black leading-[1.15] md:text-[3.5rem]">{title}</h1>
-            <div className="my-4 border-b border-black" />
+        <div className="flex-1 overflow-y-auto p-6 md:p-8">
+          <div className="mb-6 border-b border-border pb-4">
+            <h1 className="font-sans text-2xl md:text-3xl font-bold leading-tight text-foreground">{title}</h1>
           </div>
-          <div className="prose prose-sm md:prose-base mb-6">
-            {/* Render markdown using NotionBlock components */}
-            {renderMarkdownWithNotionBlocks(body)}
+          <div className="prose prose-neutral dark:prose-invert max-w-none space-y-4 mb-8">
+            {renderBody()}
           </div>
         </div>
-        <div className="mx-auto border-b border-l border-r bg-white rounded-b-lg">
-          <div className="flex">
-            <span className="flex w-1/3 flex-col items-center gap-2 border-r p-3 md:flex-row">
-              <span>Created:</span>
-              <span className="font-script text-[20px] sm:text-[24px]">{createdDate}</span>
-            </span>
-            <span className="flex w-1/3 flex-col items-center gap-2 border-r p-3 md:flex-row">
-              <span>Edited:</span>
-              <span className="font-script text-[20px] sm:text-[24px]">{editedDate}</span>
-            </span>
-            <div className="flex w-1/3 flex-col items-center gap-2 p-3 md:flex-row">
-              <span>Topic:</span>
-              <span className="font-script text-[20px] sm:text-[24px]">{category}</span>
+        <div className="border-t border-border bg-muted/50 rounded-b-lg p-4 text-xs text-muted-foreground">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
+            <div>
+              <span className="block font-medium text-foreground">Created</span>
+              <span>{createdDate}</span>
+            </div>
+            <div>
+              <span className="block font-medium text-foreground">Edited</span>
+              <span>{editedDate}</span>
+            </div>
+            <div className="col-span-2 sm:col-span-1">
+              <span className="block font-medium text-foreground">Category</span>
+              <span>{displayCategory}</span>
             </div>
           </div>
         </div>
@@ -127,4 +98,4 @@ const NoteDetailCard: React.FC<NoteDetailCardProps> = ({
   );
 };
 
-export default NoteDetailCard;
+export default BookDetailCard;

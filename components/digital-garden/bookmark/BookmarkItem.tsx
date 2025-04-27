@@ -26,17 +26,17 @@ export function BookmarkItem({ bookmark }: Props) {
 
   // Color dots
   const colorMap = {
-    article: "bg-[#FBF3B9]",
-    website: "bg-[#FFDCCC]",
-    video: "bg-[#FDB7EA]",
-    misc: "bg-[#B7B1F2]",
+    article: "bg-extra-lavender",
+    website: "bg-extra-peach",
+    video: "bg-extra-steelBlue",
+    misc: "bg-extra-yellow",
   } as const;
 
   return (
     <>
       {/* Desktop Version */}
       <li className="list-item-image-hover-effect group relative hidden md:block transition-all duration-300">
-        <a href={bookmark.link} className="flex items-center justify-between gap-4 py-2 transition-all duration-300 hover:scale-[1.025] hover:shadow-lg" target="_blank" rel="noopener noreferrer">
+        <a href={bookmark.link} className="flex items-center justify-between gap-4 py-2 transition-all duration-300 hover:scale-[1.025] " target="_blank" rel="noopener noreferrer">
           {/* <img
             className="cover-image max-w-64 pointer-events-none absolute z-10 hidden max-h-40 shadow-lg md:group-hover:block"
             src={bookmark.cover}

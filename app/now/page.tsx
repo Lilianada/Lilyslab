@@ -2,97 +2,115 @@
 
 import { useEffect, useState } from "react"
 import { formatDate } from "@/lib/utils"
+import ReactMarkdown from "react-markdown"
+import { Loader2 } from "lucide-react"
+
+interface NowData {
+  frontmatter: {
+    lastUpdated?: string
+    [key: string]: any
+  }
+  content: string
+}
 
 export default function NowPage() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const lastUpdated = "2025-04-10"
+  const [nowData, setNowData] = useState<NowData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [isClientLoaded, setIsClientLoaded] = useState(false)
 
   useEffect(() => {
-    setIsLoaded(true)
+    setIsClientLoaded(true)
+
+    async function loadNowContent() {
+      setIsLoading(true)
+      setError(null)
+      try {
+        const response = await fetch("/api/now")
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Failed to load Now page data' }))
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
+        }
+        const data: NowData = await response.json()
+        setNowData(data)
+      } catch (err) {
+        console.error("Failed to load Now content:", err)
+        const message = err instanceof Error ? err.message : "Failed to load Now page data."
+        setError(message)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    loadNowContent()
   }, [])
 
+  const renderLoading = () => (
+    <div className="space-y-8 animate-pulse">
+        {/* Skeleton for a section */}
+        <div className="space-y-3">
+            <div className="h-4 bg-muted rounded w-1/3"></div> {/* Heading skeleton */}
+            <div className="space-y-2">
+                <div className="h-3 bg-muted rounded w-full"></div> {/* Paragraph line skeleton */}
+                <div className="h-3 bg-muted rounded w-5/6"></div> {/* Paragraph line skeleton */}
+            </div>
+        </div>
+        {/* Skeleton for another section */}
+         <div className="space-y-3">
+            <div className="h-4 bg-muted rounded w-1/4"></div> {/* Heading skeleton */}
+            <div className="space-y-2">
+                <div className="h-3 bg-muted rounded w-full"></div> {/* Paragraph line skeleton */}
+            </div>
+        </div>
+         {/* Skeleton for a list section */}
+         <div className="space-y-3">
+            <div className="h-4 bg-muted rounded w-1/5"></div> {/* Heading skeleton */}
+            <div className="space-y-2 pl-4">
+                 <div className="h-3 bg-muted rounded w-full"></div> {/* List item skeleton */}
+                 <div className="h-3 bg-muted rounded w-11/12"></div> {/* List item skeleton */}
+                 <div className="h-3 bg-muted rounded w-full"></div> {/* List item skeleton */}
+            </div>
+        </div>
+    </div>
+  )
+
+  const renderError = () => (
+    <div className="text-center py-10 text-red-500 border border-destructive/50 bg-destructive/10 rounded-lg p-4">
+      {error}
+    </div>
+  )
+
   return (
-    <div className={`max-w-3xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-3xl mx-auto px-6 py-12 ${isClientLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <h1 className="mb-2 text-xl font-medium">Now</h1>
-        <p className="text-xs text-muted-foreground">
-          Last updated: {formatDate(lastUpdated)} • Inspired by{" "}
-          <a
-            href="https://nownownow.com/about"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:underline"
-          >
-            nownownow.com
-          </a>
-        </p>
+        {nowData?.frontmatter?.lastUpdated && (
+          <p className="text-xs text-muted-foreground">
+            Last updated: {formatDate(nowData.frontmatter.lastUpdated)} • Inspired by{" "}
+            <a
+              href="https://nownownow.com/about"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              nownownow.com
+            </a>
+          </p>
+        )}
       </header>
 
-      <div className="space-y-8 stagger-children">
-        <section className="opacity-0 animate-slide-up">
-          <h2 className="text-base font-medium mb-3">What I'm working on</h2>
-          <div className="space-y-3">
-            <p className="text-sm text-muted-foreground">
-              I'm currently focused on building a new AI-powered financial tool designed to help users simplify
-              budgeting, automate savings, optimize debt repayment, and make smarter investment decisions using
-              AI-driven financial tools.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              I'm also doing some exploring into using AI powered tools to build and ship web apps fast.
-            </p>
-          </div>
-        </section>
-
-        <section className="opacity-0 animate-slide-up">
-          <h2 className="text-base font-medium mb-3">What I'm learning</h2>
-          <div className="space-y-3">
-            <p className="text-sm text-muted-foreground">
-              I've been diving deeper into AI and data analysis, particularly focusing on how these technologies can
-              enhance user experiences and boost business success.
-            </p>
-          </div>
-        </section>
-
-        <section className="opacity-0 animate-slide-up">
-          <h2 className="text-base font-medium mb-3">What I'm reading</h2>
-          <div className="space-y-3">
-            <p className="text-sm text-muted-foreground">
-              <strong className="text-primary">Atomic Habits</strong> by James Clear — An easy and proven way to build good habits that lasts.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              <strong className="text-primary">Ikigai</strong> by Francesc Miralles and Hector Garcia — The Japanese secret to a long and happy
-              life.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              <strong className="text-primary">Feel-Good Productivity Book</strong> by Ali Abdaal — The three fundamental energizers that make us
-              feel good and lead to true productivity.
-            </p>
-          </div>
-        </section>
-
-        <section className="opacity-0 animate-slide-up">
-          <h2 className="text-base font-medium mb-3">Where I'm at</h2>
-          <div className="space-y-3">
-            <p className="text-sm text-muted-foreground">
-              I'm currently based in Abuja, Nigeria. I plan to travel to Ghana and Tokyo sometime this year.
-            </p>
-          </div>
-        </section>
-
-        <section className="opacity-0 animate-slide-up">
-          <h2 className="text-base font-medium mb-3">What I'm excited about</h2>
-          <div className="space-y-3">
-            <p className="text-sm text-muted-foreground">
-              The intersection of AI and creativity is particularly exciting to me right now. I'm fascinated by how
-              these tools can augment human creativity rather than replace it.
-            </p>
-            <p className="text-xs text-muted-foreground">
-              I'm also excited about the growing focus on digital wellbeing and how we can design technology that
-              enhances our lives without dominating them.
-            </p>
-          </div>
-        </section>
-      </div>
+      {isLoading ? (
+        renderLoading()
+      ) : error ? (
+        renderError()
+      ) : nowData ? (
+        <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h2]:text-[16px] [&_h2]:font-medium [&_h2]:tracking-tight [&_h2]:mb-4 [&_h2]:text-foreground">
+          <ReactMarkdown>
+            {nowData.content}
+          </ReactMarkdown>
+        </div>
+      ) : (
+        <div className="text-center py-10 text-muted-foreground">No content available.</div>
+      )}
     </div>
   )
 }

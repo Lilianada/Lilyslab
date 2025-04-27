@@ -1,52 +1,55 @@
-
 import { Dancing_Script } from 'next/font/google';
+import Link from 'next/link';
 
 // Setup Dancing Script font instance
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
-// const caveat = Caveat({ subsets: ['latin'], weight: ['400', '700'] });
-// Then apply caveat.className to the full article body.
 
-interface NoteCardProps {
-    data: any;
-    path: string;
-    category: string;
+// Define the Book type locally (or move to a central types file later)
+interface Book {
+  id: string;
+  slug: string;
+  title: string;
+  status: 'current-reads' | 'read' | 'will-read';
+  rating?: number;
+  summary?: string;
+  date?: number;
+}
+
+// Update Props interface
+interface BookCardProps {
+    book: Book;
     distorted?: boolean;
 }
 
-export const colors = [
-    '#9EAAFA',
-    '#FAE680',
-    '#A2CBAF',
-    '#E8ADB1',
-    '#A6C2EB',
-    '#F4E8C8',
-    '#CCA7ED',
-    '#F29874',
-    '#F4DAA0',
-    '#6C95CF'
-];
+// Map book statuses to colors (adjust colors as needed)
+const statusColors: Record<Book['status'], string> = {
+    'read': '#A2CBAF', 
+    'current-reads': '#A6C2EB', 
+    'will-read': '#FAE680' 
+};
 
 /**
- * NoteCard displays a summary card for a note or book.
- * @param data - The note/book data (required)
- * @param path - The base path for navigation (required)
- * @param category - The note category (required)
+ * BookCard displays a summary card for a book.
+ * @param book - The book data (required)
  * @param distorted - If true, applies a distortion effect (optional)
  */
-const NoteCard: React.FC<NoteCardProps> = ({
-    data,
-    path: currentPath,
+const BookCard: React.FC<BookCardProps> = ({
+    book,
     distorted,
-    category
 }) => {
-    const isDraft = !data.body || data.body.trim() === '' || data.body.trim() === 'TBD';
+    // Removed isDraft logic, rely on status or other properties if needed
 
-    const charCount = data.frontmatter?.description ? data.frontmatter.description.length : 0;
+    // Use summary length for potential styling adjustments
+    const summaryCharCount = book.summary ? book.summary.length : 0;
 
+    // Keep font size logic for summary if desired
     const getFontSize = (count: number) => {
-        const minFontSize = 1.5;
-        const maxFontSize = 2.5;
-        const maxCharCount = 50;
+        const minFontSize = 1.5; // Adjust as needed
+        const maxFontSize = 2.5; // Adjust as needed
+        const maxCharCount = 150; // Adjust based on typical summary length
+
+        // Prevent division by zero or negative counts
+        if (count <= 0) return `${minFontSize}rem`;
 
         const fontSize = Math.min(
             maxFontSize,
@@ -58,85 +61,106 @@ const NoteCard: React.FC<NoteCardProps> = ({
         return `${fontSize.toFixed(2)}rem`;
     };
 
-    const typeFontSize = getFontSize(charCount);
+    const summaryFontSize = getFontSize(summaryCharCount);
 
-    function formatDate(dateString: string) {
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const year = date.getFullYear();
-        return `${day} / ${month} / ${year}`;
+    // Format the date (if available)
+    function formatTimestamp(timestamp?: number): string | null {
+        if (!timestamp) return null;
+        try {
+            // Assuming timestamp is Unix epoch *seconds* - adjust if it's milliseconds
+            const date = new Date(timestamp * 1000);
+             // Basic validation
+             if (isNaN(date.getTime())) {
+                console.warn("Invalid date timestamp:", timestamp);
+                return null;
+            }
+            const day = String(date.getDate()).padStart(2, "0");
+            const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-indexed
+            const year = date.getFullYear();
+            return `${day} / ${month} / ${year}`;
+        } catch (error) {
+            console.error("Error formatting date:", error);
+            return null;
+        }
     }
 
-    const createdDay = formatDate(data.frontmatter?.created);
+    const formattedDate = formatTimestamp(book.date);
 
-    const categoriesWhitelist = ["Productivity", "Focus", "Creativity", "Career"];
-    const categoryIndex = categoriesWhitelist.indexOf(category);
-    const backgroundColor = colors[categoryIndex] || colors[0];
+    // Get background color based on status
+    const backgroundColor = statusColors[book.status] || '#E0E0E0'; // Default gray
 
+    // Keep distortion logic
     const randomMarginBottom = Math.floor(Math.random() * 8);
     const randomMarginRight = Math.floor(Math.random() * 8);
     const randomRotation = Math.floor(Math.random() * 4 - 2);
-    const randomTypeMarginBottom = Math.floor(Math.random() * 12 - 6);
-    const randomTypeRotation = Math.floor(Math.random() * 4 - 2);
-    const randomTypeMarginRight = Math.floor(Math.random() * 12 - 6);
+    // Removed type-specific random margins
 
     const transformStyles = distorted
         ? {
               transform: `translateY(${randomMarginBottom}px) translateX(${randomMarginRight}px) rotate(${randomRotation}deg)`
           }
         : {
-              transform: `rotate(${randomRotation}deg)`
+              transform: `rotate(${randomRotation}deg)` // Keep rotation even if not distorted
           };
 
     const backgroundColorStyle = {
         backgroundColor: backgroundColor
     };
 
+    // Update content structure to use book properties
     const content = (
         <div
             className="flex flex-col justify-between h-full w-full px-6 py-4 font-mono text-black border border-black rounded-md bg-white/80 relative paper-texture"
             style={{
-                backgroundImage: 'url("/Noise.png")',
+                backgroundImage: 'url("/noise.svg")',
                 backgroundRepeat: 'repeat',
                 backgroundSize: '350px 350px',
                 backgroundBlendMode: 'multiply',
             }}
         >
             <div>
+                {/* Display status instead of category */}
                 <ul className="flex gap-2 mb-2">
-                    <li className="inline-block rounded-full border px-2 border-black bg-pink-400/70 py-[2px] text-[11px] text-black">
-                        {category}
+                    <li className="inline-block rounded-full border px-2 border-black py-[2px] text-[11px] text-black" style={{ backgroundColor: backgroundColor }}>
+                        {book.status.replace('-', ' ')} {/* Make status readable */}
                     </li>
-                    {isDraft && (
-                        <li className="inline-block rounded-full border px-2 py-[2px] text-[11px] border-black bg-gray-300/80 text-black">
-                            Draft
-                        </li>
+                    {/* Add rating if available */}
+                    {book.rating !== undefined && book.rating !== null && (
+                         <li className="inline-block rounded-full border px-2 border-black bg-yellow-300/70 py-[2px] text-[11px] text-black">
+                            Rating: {book.rating}/5
+                         </li>
                     )}
                 </ul>
-                <h3 className="text-lg font-bold text-left mb-1 truncate">{data.name.replace(/\.md$/, '')}</h3>
+                {/* Use book.title */}
+                <h3 className="text-lg font-bold text-left mb-1 truncate">{book.title}</h3>
             </div>
-            {/* Dashed separator line above description */}
+            {/* Dashed separator line */}
             <div className="w-full border-t-2 border-dashed border-black my-2" />
-            {data.frontmatter?.description && (
+            {/* Use book.summary */}
+            {book.summary && (
                 <p
                     className={`line-clamp-3 my-2 text-left font-script text-md font-italics leading-[1.1] opacity-90 ${dancingScript.className}`}
                     style={{
-                        fontSize: typeFontSize,
+                        fontSize: summaryFontSize, // Use dynamic font size for summary
                         fontFeatureSettings: '"liga", "ss01", "ss02", "ss03"',
                         color: '#111',
                     }}
                 >
-                    {data.frontmatter.description}
+                    {book.summary}
                 </p>
             )}
-            {/* Dashed separator line below description */}
+            {/* Dashed separator line */}
             <div className="w-full border-t-2 border-dashed border-black my-2" />
+            {/* Display formatted date if available */}
             <div className="text-[12px] flex flex-col gap-1 items-start mt-2 text-black">
-                <span className="block">created: {createdDay}</span>
+                 {formattedDate && <span className="block">Date: {formattedDate}</span>}
+                {/* Add other relevant info if needed */}
             </div>
         </div>
     );
+
+    // Construct the correct href using book.slug
+    const bookHref = `/digital-garden/bookshelf/${book.slug}`;
 
     return (
         <div className="group flex h-full min-h-[280px] items-center">
@@ -152,22 +176,18 @@ const NoteCard: React.FC<NoteCardProps> = ({
                 <div className="scallop right1" />
                 <div className="scallop right2" />
                 <div className="scallop right3" />
-                {isDraft ? (
-                    <div className="relative cursor-not-allowed p-2" style={backgroundColorStyle}>
-                        {content}
-                    </div>
-                ) : (
-                    <a
-                        className="relative block p-2 transition-all hover:scale-105 hover:shadow-md"
-                        href={`${currentPath}/${data.name}`}
-                        style={backgroundColorStyle}
-                    >
-                        {content}
-                    </a>
-                )}
+                {/* Use Link component with correct href */}
+                <Link
+                    href={bookHref}
+                    className="relative block p-2 transition-all hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" // Added focus styles
+                    style={backgroundColorStyle}
+                    aria-label={`View details for ${book.title}`} // Accessibility
+                >
+                    {content}
+                </Link>
             </div>
         </div>
     );
 };
 
-export default NoteCard;
+export default BookCard; // Export as BookCard

@@ -33,6 +33,7 @@ import {
   Store,
   History,
   Wrench,
+  BadgeCheck,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -212,31 +213,31 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1">
             <SectionTitle title="Digital Garden" delay={400} />
-            <NavItem href="/digital-garden/notes" icon={<FileText size={16} />} label="Notes" onClick={onNavClick} delay={420} />
-            <NavItem href="/digital-garden/catalog" icon={<Layers size={16} />} label="Catalog" onClick={onNavClick} delay={440} />
-            <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={460} />
-            <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={480} />
-            {/* <NavItem href="/digital-garden/drafts" icon={<Scissors size={16} />} label="Drafts" onClick={onNavClick} delay={500} />
-  <NavItem href="/digital-garden/movies-list" icon={<Dices size={16} />} label="Movie list" onClick={onNavClick} delay={520} /> */}
+            <NavItem href="/digital-garden/bucket-list" icon={<BadgeCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={450} />
+            <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={500} />
+            <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={550} />
+            <NavItem href="/digital-garden/catalog" icon={<Layers size={16} />} label="Catalog" onClick={onNavClick} delay={600} />
+            <NavItem href="/digital-garden/notes" icon={<FileText size={16} />} label="Notes" onClick={onNavClick} delay={650} />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Workshop" delay={550} />
-            <NavItem href="/workshop/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={570} />
-            <NavItem href="/workshop/shop" icon={<ShoppingCart size={16} />} label="Shop" onClick={onNavClick} delay={590} />
-            <NavItem href="/workshop/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={610} />
-            <NavItem href="/workshop/resources" icon={<WalletCards size={16} />} label="Resources" onClick={onNavClick} delay={630} />
-            <NavItem href="/workshop/log" icon={<Clock size={16} />} label="Log" onClick={onNavClick} delay={670} />
+            <SectionTitle title="Workshop" delay={700} />
+            <NavItem href="/workshop/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={750} />
+            <NavItem href="/workshop/shop" icon={<ShoppingCart size={16} />} label="Shop" onClick={onNavClick} delay={800} />
+            <NavItem href="/workshop/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={850} />
+            <NavItem href="/workshop/resources" icon={<WalletCards size={16} />} label="Resources" onClick={onNavClick} delay={900} />
+            <NavItem href="/workshop/log" icon={<Clock size={16} />} label="Log" onClick={onNavClick} delay={950} />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Playground" delay={650} />
+            <SectionTitle title="Playground" delay={1000} />
+            <NavItem href="/digital-garden/movies-list" icon={<Dices size={16} />} label="Movie list" onClick={onNavClick} delay={1050} />
 
           </div>
 
           <div className="space-y-1">
-            <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={700} />
-            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={720} hasNotification={true} />
+            <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1100} />
+            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1150} hasNotification={true} />
           </div>
 
 

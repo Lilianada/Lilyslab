@@ -120,17 +120,17 @@ export default function Colophon() {
         {/* Bookshelf palette */}
         <div className="flex flex-wrap gap-4 items-end mb-2 mt-3">
           {[
-            { name: 'Cream', var: 'var(--extra-accentCream)' },
-            { name: 'PaleYellow', var: 'var(--extra-accentPaleYellow)' },
-            { name: 'Yellow', var: 'var(--extra-accentYellow)' },
-            { name: 'Blue', var: 'var(--extra-accentBlue)' },
-            { name: 'SteelBlue', var: 'var(--extra-accentSteelBlue)' },
-            { name: 'Lavender', var: 'var(--extra-accentLavender)' },
+            { name: 'Cream', var: 'var(--extra-cream)' },
+            { name: 'PaleYellow', var: 'var(--extra-paleYellow)' },
+            { name: 'Yellow', var: 'var(--extra-yellow)' },
+            { name: 'Blue', var: 'var(--extra-Blue)' },
+            { name: 'SteelBlue', var: 'var(--extra-steelBlue)' },
+            { name: 'Lavender', var: 'var(--extra-lavender)' },
             { name: 'Primary', var: 'var(--primary)' },
-            { name: 'Lilac', var: 'var(--extra-accentLilac)' },
-            { name: 'Pink', var: 'var(--extra-accentPink)' },
-            { name: 'Peach', var: 'var(--extra-accentPeach)' },
-            { name: 'Green', var: 'var(--extra-accentGreen)' },
+            { name: 'Lilac', var: 'var(--extra-lilac)' },
+            { name: 'Pink', var: 'var(--extra-pink)' },
+            { name: 'Peach', var: 'var(--extra-peach)' },
+            { name: 'Green', var: 'var(--extra-green)' },
           ].map((color) => (
             <div key={`extra-${color.name}`} className="flex flex-col items-center">
               <div

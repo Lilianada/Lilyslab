@@ -28,16 +28,15 @@ const config = {
         foreground: "hsl(var(--foreground))",
         // Bookshelf pastel palette for book/note cards
         extra: {
-          accentLavender: '#9EAAFA', // lavender blue
-          accentYellow: '#FAE680', // pastel yellow
-          accentGreen: '#A2CBAF', // soft green
-          accentPink: '#E8ADB1', // soft pink
-          accentBlue: '#A6C2EB', // light blue
-          accentCream: '#F4E8C8', // cream
-          accentLilac: '#CCA7ED', // lilac
-          accentPeach: '#F29874', // peach
-          accentPaleYellow: '#F4DAA0', // pale yellow
-          accentSteelBlue: '#6C95CF', // blue
+          lavender: '#9EAAFA', // lavender blue
+          yellow: '#FAE680', // pastel yellow
+          green: '#A2CBAF', // soft green
+          pink: '#E8ADB1', // soft pink
+          cream: '#F4E8C8', // cream
+          lilac: '#CCA7ED', // lilac
+          peach: '#F29874', // peach
+          paleYellow: '#F4DAA0', // pale yellow
+          steelBlue: '#6C95CF', // blue
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
