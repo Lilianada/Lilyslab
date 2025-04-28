@@ -1,5 +1,5 @@
 ---
-Published: false
+published: false
 Slug: v0-vs-lovable
 tags:
   - Artificial-Intelligence

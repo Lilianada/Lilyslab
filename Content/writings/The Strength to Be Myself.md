@@ -1,16 +1,18 @@
 ---
-Author: Lilian
-Cover:
+author: Lilian
+cover:
   - "[[Building_Bloques_Creative_Studio_(21).png]]"
-Date: 2025-04-20
-Excerpt: Why I decided to grow stronger instead of smaller when the comments started coming.
-Published: false
-Slug: the-strength-to-be-myself
+date: 2025-04-20
+excerpt: Why I decided to grow stronger instead of smaller when the comments started coming.
+published: true
+slug: the-strength-to-be-myself
 tags:
   - Fitness
   - Personal-Growth
+title: The Strength to Be Myself
 ---
-have you ever looked yourself in the mirror and thought…  
+
+~~have you ever looked yourself in the mirror and thought…  
 — “i look too muscular, maybe i should stop training my upper body.”  
 
 well, this was me in the 4th quarter of 2024.
@@ -21,7 +23,6 @@ i gained strength.
 i developed muscle definition i didn’t even know i could build.  
 in turn, this earned me:  
 
-  
 
 compliments from people who admired my progress.  
 snide comments from those who felt intimidated.  
@@ -29,7 +30,6 @@ new clients who saw my results and wanted them too.
 i was making visible progress, but suddenly, the noise got louder.  
 
   
-
 people started saying things like:
 
 “don’t get too muscular, it’s not feminine.”  
@@ -97,4 +97,4 @@ this is what you should also do.
 — never conform to standards that aren’t yours.  
 — be confident in yourself and your work.  
 
-own your progress. don’t shrink. don’t quit. keep going.
+own your progress. don’t shrink. don’t quit. keep going.~~

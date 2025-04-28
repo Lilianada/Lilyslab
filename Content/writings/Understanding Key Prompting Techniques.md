@@ -1,14 +1,16 @@
 ---
-Author: Lilian
-Cover:
+author: Lilian
+cover:
   - "[[www.theclevernod.com_(Surface_Pro_7)_(5).png]]"
-Date: 2025-04-22
-Excerpt: Crafting the most effective prompt can becomplicated, but here’s a breakdown into the key prompting techniques.
-Published: false
-Slug: understanding-key-prompting-techniques
+date: 2025-04-22
+excerpt: Crafting the most effective prompt can becomplicated, but here’s a breakdown into the key prompting techniques.
+published: true
+slug: understanding-key-prompting-techniques
 tags:
   - Artificial-Intelligence
+title: Understanding Key Prompting Techniques
 ---
+
 Welcome to prompt engineering! It's all about crafting the right text inputs, or **prompts**, to get the best responses from language models (LLMs). Think of it as guiding a super-smart AI to understand what you need. Here are some key techniques to get you started:
 
   

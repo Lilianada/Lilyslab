@@ -1,13 +1,14 @@
 ---
-Author: Lilian
-Cover:
+author: Lilian
+cover:
   - "[[thecreativeindependent.com_(Surface_Pro_7).png]]"
-Date: 2025-04-18
-Excerpt: Becoming a pro at prompt engineering takes practice, but following these best practices from the sources will get you on the right track.
-Published: false
+date: 2025-04-18
+excerpt: Becoming a pro at prompt engineering takes practice, but following these best practices from the sources will get you on the right track.
+published: true
 Slug: best-practices-for-prompt-engineering
 tags:
   - Artificial-Intelligence
+title: Best Practices for Pro Prompt Engineering
 ---
 ### Best Practices for Pro Prompt Engineering
 

@@ -11,6 +11,7 @@ export type Writing = {
   tags?: string[];
   coverImage?: string;
   content: string;
+  published: boolean;
 };
 
 const writingsDir = path.join(process.cwd(), 'Content/Writings');
@@ -28,9 +29,11 @@ export function getAllWritings(): Writing[] {
   return files
     .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
     .map(file => {
-      const filePath = path.join(writingsDir, file);
+      const filePath = path.join(writingsPath, file);
       const raw = fs.readFileSync(filePath, 'utf-8');
       const { data, content } = matter(raw);
+
+      const published = data.published === true;
 
       return {
         slug: file.replace(/\.mdx?$/, ''),
@@ -39,9 +42,11 @@ export function getAllWritings(): Writing[] {
         excerpt: data.excerpt || '',
         tags: data.tags || [],
         coverImage: data.coverImage || null,
+        published: published,
         content,
       };
     })
+    .filter(writing => writing.published === true)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
@@ -60,5 +65,6 @@ export function getWritingBySlug(slug: string): Writing | null {
     tags: data.tags || [],
     coverImage: data.coverImage || null,
     content,
+    published: data.published === true,
   };
 }

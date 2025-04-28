@@ -222,22 +222,22 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1">
             <SectionTitle title="Workshop" delay={700} />
-            <NavItem href="/workshop/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={750} />
-            <NavItem href="/workshop/shop" icon={<ShoppingCart size={16} />} label="Shop" onClick={onNavClick} delay={800} />
-            <NavItem href="/workshop/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={850} />
+            <NavItem href="/workshop/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={750} />
+            <NavItem href="/workshop/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={800} />
             <NavItem href="/workshop/resources" icon={<WalletCards size={16} />} label="Resources" onClick={onNavClick} delay={900} />
-            <NavItem href="/workshop/log" icon={<Clock size={16} />} label="Log" onClick={onNavClick} delay={950} />
+            {/* <NavItem href="/workshop/shop" icon={<ShoppingCart size={16} />} label="Shop" onClick={onNavClick} delay={850} />
+            <NavItem href="/workshop/log" icon={<Clock size={16} />} label="Log" onClick={onNavClick} delay={950} /> */}
           </div>
 
           <div className="space-y-1">
             <SectionTitle title="Playground" delay={1000} />
-            <NavItem href="/digital-garden/movies-list" icon={<Dices size={16} />} label="Movie list" onClick={onNavClick} delay={1050} />
-
+            <NavItem href="/playground/calculator" icon={<Dices size={16} />} label="Calculator App" onClick={onNavClick} delay={1050} />
+            <NavItem href="/playground/note-widgets" icon={<Dices size={16} />} label="Note Widgets" onClick={onNavClick} delay={1100} />
           </div>
 
           <div className="space-y-1">
-            <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1100} />
-            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1150} hasNotification={true} />
+            <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1150} />
+            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1200} hasNotification={true} />
           </div>
 
 

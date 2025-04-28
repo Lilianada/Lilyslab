@@ -1,5 +1,6 @@
 import { Dancing_Script } from 'next/font/google';
 import Link from 'next/link';
+import { formatTimestampToYYMMDD } from "@/lib/utils"; // Import the utility function
 
 // Setup Dancing Script font instance
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
@@ -11,7 +12,7 @@ interface Book {
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
-  summary?: string;
+  genre?: string;
   date?: number;
 }
 
@@ -29,7 +30,7 @@ const statusColors: Record<Book['status'], string> = {
 };
 
 /**
- * BookCard displays a summary card for a book.
+ * BookCard displays a genre card for a book.
  * @param book - The book data (required)
  * @param distorted - If true, applies a distortion effect (optional)
  */
@@ -39,14 +40,14 @@ const BookCard: React.FC<BookCardProps> = ({
 }) => {
     // Removed isDraft logic, rely on status or other properties if needed
 
-    // Use summary length for potential styling adjustments
-    const summaryCharCount = book.summary ? book.summary.length : 0;
+    // Use genre length for potential styling adjustments
+    const genreCharCount = book.genre ? book.genre.length : 0;
 
-    // Keep font size logic for summary if desired
+    // Keep font size logic for genre if desired
     const getFontSize = (count: number) => {
         const minFontSize = 1.5; // Adjust as needed
         const maxFontSize = 2.5; // Adjust as needed
-        const maxCharCount = 150; // Adjust based on typical summary length
+        const maxCharCount = 150; // Adjust based on typical genre length
 
         // Prevent division by zero or negative counts
         if (count <= 0) return `${minFontSize}rem`;
@@ -61,30 +62,10 @@ const BookCard: React.FC<BookCardProps> = ({
         return `${fontSize.toFixed(2)}rem`;
     };
 
-    const summaryFontSize = getFontSize(summaryCharCount);
+    const genreFontSize = getFontSize(genreCharCount);
 
-    // Format the date (if available)
-    function formatTimestamp(timestamp?: number): string | null {
-        if (!timestamp) return null;
-        try {
-            // Assuming timestamp is Unix epoch *seconds* - adjust if it's milliseconds
-            const date = new Date(timestamp * 1000);
-             // Basic validation
-             if (isNaN(date.getTime())) {
-                console.warn("Invalid date timestamp:", timestamp);
-                return null;
-            }
-            const day = String(date.getDate()).padStart(2, "0");
-            const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-indexed
-            const year = date.getFullYear();
-            return `${day} / ${month} / ${year}`;
-        } catch (error) {
-            console.error("Error formatting date:", error);
-            return null;
-        }
-    }
-
-    const formattedDate = formatTimestamp(book.date);
+    // Use the imported utility function
+    const formattedDate = formatTimestampToYYMMDD(book.date);
 
     // Get background color based on status
     const backgroundColor = statusColors[book.status] || '#E0E0E0'; // Default gray
@@ -131,22 +112,22 @@ const BookCard: React.FC<BookCardProps> = ({
                          </li>
                     )}
                 </ul>
-                {/* Use book.title */}
-                <h3 className="text-lg font-bold text-left mb-1 truncate">{book.title}</h3>
+                {/* Use book.genre */}
+                <h3 className="text-base font-medium text-left mb-1 truncate">{book.genre}</h3>
             </div>
             {/* Dashed separator line */}
             <div className="w-full border-t-2 border-dashed border-black my-2" />
-            {/* Use book.summary */}
-            {book.summary && (
+            {/* Use book.title */}
+            {book.title && (
                 <p
                     className={`line-clamp-3 my-2 text-left font-script text-md font-italics leading-[1.1] opacity-90 ${dancingScript.className}`}
                     style={{
-                        fontSize: summaryFontSize, // Use dynamic font size for summary
+                        fontSize: genreFontSize, // Use dynamic font size for title
                         fontFeatureSettings: '"liga", "ss01", "ss02", "ss03"',
                         color: '#111',
                     }}
                 >
-                    {book.summary}
+                    {book.title}
                 </p>
             )}
             {/* Dashed separator line */}
@@ -163,7 +144,7 @@ const BookCard: React.FC<BookCardProps> = ({
     const bookHref = `/digital-garden/bookshelf/${book.slug}`;
 
     return (
-        <div className="group flex h-full min-h-[280px] items-center">
+        <div className="group flex h-80 items-center">
             <div
                 className={`noteCardEffect ticket w-full ${randomRotation >= 0 ? 'hide-after' : 'hide-before'}`}
                 style={transformStyles}

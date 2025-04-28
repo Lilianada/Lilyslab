@@ -3,15 +3,16 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 
-// Define type for a note (adjust fields as needed)
+// Update Note interface to include content
 interface Note {
-  id: string; // Use filename as ID for simplicity
+  id: string;
   title: string;
-  tags?: string[]; // Changed from author
+  tags?: string[];
   date: string;
-  entry: string; // Changed from quote
-  image?: string | null; // Added optional image
+  entry: string;
+  image?: string | null;
   publish?: boolean;
+  content: string; // Add field for full markdown content
 }
 
 export async function GET() {
@@ -25,19 +26,20 @@ export async function GET() {
     for (const file of mdFiles) {
       const filePath = path.join(notesDir, file);
       const fileContent = await fs.readFile(filePath, 'utf-8');
-      const { data } = matter(fileContent);
+      // Destructure content along with data
+      const { data, content } = matter(fileContent);
 
       // Validate required fields and publish status
-      if (data.publish === true && data.title && data.date && data.entry && data.tags) { // Check for tags
+      if (data.publish === true && data.title && data.date && data.entry && data.tags) {
         notes.push({
           id: file.replace(/\.md$/, ''),
           title: data.title,
-          // Use tags, ensuring it's an array
-          tags: Array.isArray(data.tags) ? data.tags : [data.tags], 
+          tags: Array.isArray(data.tags) ? data.tags : [data.tags],
           date: data.date,
-          entry: data.entry, // Use entry
-          image: data.image || null, // Add image, default to null
+          entry: data.entry,
+          image: data.image || null,
           publish: data.publish,
+          content: content, // Add the full markdown content
         });
       }
     }

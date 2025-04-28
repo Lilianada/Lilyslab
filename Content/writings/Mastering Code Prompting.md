@@ -1,14 +1,17 @@
 ---
-Author: Lilian
+author: Lilian
 Cover:
   - "[[Trainer_info.jpeg]]"
-Date: 2025-04-24
-Excerpt: LLMs aren't just for text; they can be powerful tools for working with code too and you’ll learn how to use prompts for various coding tasks here.
-Published: false
-Slug: mastering-code-prompting
+date: 2025-04-24
+excerpt: LLMs aren't just for text; they can be powerful tools for working with code too and you’ll learn how to use prompts for various coding tasks here.
+published: true
+slug: mastering-code-prompting
 tags:
   - Artificial-Intelligence
+title: Mastering Code Prompting
 ---
+
+
 LLMs aren't just for text; they can be powerful tools for working with **code** too. Here's how you can use prompts for various coding tasks:
 
 - **Prompts for Writing Code:** You can ask the LLM to generate code in a specific programming language to automate tasks or create new functionalities. Be specific about what you need.
@@ -22,4 +25,4 @@ LLMs aren't just for text; they can be powerful tools for working with **code** 
 
   
 
-![[LilysLab-Logo.png]]
+![[logo.png]]

@@ -1,112 +1,171 @@
-"use client"
+import React from "react";
+import { ArrowUpRight, Lock, Badge } from "lucide-react";
+import Link from "next/link";
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { ExternalLink } from "lucide-react"
-import { SearchBar } from "@/components/search-bar"
-import { Card, CardDescription, CardHeader } from "@/components/ui/card"
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
-type Utility = {
-  id: string
-  name: string
-  description: string
-  url: string
-  tags: string[]
-  category: string
+interface Project {
+  number: string;
+  title: string;
+  desc: string;
+  category: string;
+  url?: string;
+  new?: boolean;
+  isConfidential?: boolean;
+  isArchived?: boolean;
 }
 
-export default function UtilitiesPage() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [utilities, setUtilities] = useState<Utility[]>([])
-  const [filteredUtilities, setFilteredUtilities] = useState<Utility[]>([])
-  const [searchQuery, setSearchQuery] = useState("")
-
-  useEffect(() => {
-    setIsLoaded(true)
-
-    async function fetchUtilities() {
-      try {
-        const response = await fetch("/api/projects")
-        const data = await response.json()
-        setUtilities(data.utilities || [])
-        setFilteredUtilities(data.utilities || [])
-        
-      } catch (error) {
-        console.error("Error fetching projects:", error)
-      } finally {
-        setIsLoading(false)
-      }
+function getPublishedProjects(): Project[] {
+  const dir = path.join(process.cwd(), "Content/projects");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
+  // Sort files numerically (001.md, 002.md, ...)
+  files.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  let idx = 1;
+  const projects: Project[] = [];
+  for (const file of files) {
+    const content = fs.readFileSync(path.join(dir, file), "utf8");
+    const { data } = matter(content);
+    // Accept both 'publish' and 'published' (bool or string)
+    const published = data.publish === true || data.published === true ||
+      (typeof data.publish === 'string' && data.publish.toLowerCase() === 'true') ||
+      (typeof data.published === 'string' && data.published.toLowerCase() === 'true');
+    if (published) {
+      projects.push({
+        number: idx.toString().padStart(3, "0"),
+        title: data.title || "Untitled",
+        desc: data.excerpt || data.description || "No description",
+        category: Array.isArray(data.tags) && data.tags.length > 0 ? data.tags[0] : (data.category || "Project"),
+        url: data.slug ? `/projects/${data.slug}` : (data.url || undefined),
+        new: !!data.new,
+        isConfidential: data.isConfidential === true || (typeof data.isConfidential === 'string' && data.isConfidential.toLowerCase() === 'true'),
+        isArchived: data.isArchived === true || (typeof data.isArchived === 'string' && data.isArchived.toLowerCase() === 'true'),
+      });
+      idx++;
     }
+  }
+  return projects;
+}
 
-    fetchUtilities()
-  }, [])
+const projects = typeof window === "undefined" ? getPublishedProjects() : [];
 
-  useEffect(() => {
-    const filtered = utilities.filter((utility) => {
-      const name = utility.name ?? "";
-      const description = utility.description ?? "";
-      const search = searchQuery.toLowerCase();
-
-      const matchesSearch =
-        name.toLowerCase().includes(search) ||
-        description.toLowerCase().includes(search) 
-      return matchesSearch;
-    });
-    setFilteredUtilities(filtered);
-  }, [searchQuery, utilities]);
-
+export default function WorkshopLogPage() {
   return (
-    <div className={`max-w-3xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <main className="max-w-4xl mx-auto px-4 py-16">
       <header className="mb-8">
-        <h1 className="mb-1 text-xl font-medium">Fun Projects</h1>
-        <p className="text-sm text-muted-foreground">
-          Apps I have built for fun and for work.
-        </p>
+        <h1 className="mb-2 text-xl font-medium">Project Log</h1>
+        <p className="text-sm text-zinc-500">Too many ideas, not enough <span className="line-through">time </span>focus.</p>
       </header>
+      <div>
+        {projects.map((item, i) => {
+          const isConfidential = item.isConfidential === true || item.isArchived === true;
+          return (
+            <React.Fragment key={item.number + item.title}>
+              {/* Desktop/Tablet (md and up) */}
+              <div
+                className={`group grid-cols-12 items-center min-h-[44px] text-sm border-0 border-b border-border last:border-0 px-2 py-2 transition-colors duration-150 hidden lg:grid hover:bg-muted ${
+                  isConfidential
+                    ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed"
+                    : "cursor-pointer bg-transparent"
+                }`}
+              >
+                {/* Number + Title */}
+                <div className="col-span-4 flex items-center gap-2">
+                  <span className="w-10 text-xs font-mono text-muted-foreground flex-shrink-0 text-left select-none">
+                    {item.number}
+                  </span>
+                  <span className="font-medium flex items-center text-foreground" style={{minWidth: '120px'}}>
+                   {item.title}
+                    {item.new && (
+                      <span className="ml-2 px-2 leading-normal bg-orange-500/10 text-extra-peach border border-orange-800 text-[8px] rounded font-semibold tracking-wider">NEW</span>
+                    )}
+                  </span>
+                </div>
 
-      {/* <div className="mb-6 space-y-4">
-        <SearchBar
-          placeholder="Search utilities by name, description, or tags..."
-          onSearch={setSearchQuery}
-          className="max-w-md"
-        />
-      </div> */}
+                {/* Description */}
+                <div className="col-span-6 flex items-center justify-start">
+                  <span className="truncate font-light text-muted-foreground text-left" style={{maxWidth: '340px', minWidth: '220px'}}>
+                    {item.desc}
+                  </span>
+                </div>
 
-      {isLoading ? (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 animate-pulse">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-40 bg-muted rounded-lg"></div>
-          ))}
-        </div>
-      ) : filteredUtilities.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 stagger-children">
-          {filteredUtilities.map((utility, index) => (
-            <Card
-              key={utility.id}
-              className="rounded-lg border p-4 opacity-0 animate-slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-                <CardHeader className="text-sm font-medium p-0 mb-2">{utility.name}</CardHeader>
-              <CardDescription className="mb-3 text-xs text-muted-foreground">{utility.description}</CardDescription>
-              
-              <Button variant="outline" size="sm" className="text-xs w-full bg-card" asChild>
-                <a 
-                  href={utility.url.startsWith('http') ? utility.url : `https://${utility.url}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink size={14} className="mr-1" /> Try it
-                </a>
-              </Button>
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-8 border rounded-lg">
-          <p className="text-sm text-muted-foreground">No projects found matching your search.</p>
-        </div>
-      )}
-    </div>
-  )
+                {/* Category + Icon */}
+                <div className="col-span-2 flex items-center justify-end gap-4">
+                  <span className="text-xs font-mono tracking-tight text-muted-foreground min-w-[80px] text-right">
+                    {item.category}
+                  </span>
+                  {isConfidential ? (
+                    <span
+                      title="Confidential"
+                      aria-label="Confidential"
+                      className="transition-colors cursor-not-allowed"
+                    >
+                      <Lock
+                        size={16}
+                        strokeWidth={2}
+                        className="text-muted-foreground group-hover:text-primary transition-colors"
+                      />
+                    </span>
+                  ) : (
+                    item.url ? (
+                      <Link
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open ${item.title} externally`}
+                        className="transition-colors cursor-pointer"
+                      >
+                        <ArrowUpRight size={16} strokeWidth={2} className="text-zinc-500 group-hover:text-primary transition-colors" />
+                      </Link>
+                    ) : null
+                  )}
+                </div>
+              </div>
+
+              {/* Mobile (below md) */}
+              <div
+                className={`group flex flex-col items-start gap-y-1 border-0 border-b border-border last:border-0 px-2 py-3 transition-colors duration-150 lg:hidden ${
+                  isConfidential
+                    ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed hover:bg-zinc-800/80"
+                    : "hover:bg-muted cursor-pointer bg-transparent"
+                }`}
+              >
+                <div className="w-full flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono text-muted-foreground select-none">{item.number}</span>
+                    <span className="font-medium text-foreground text-sm">{item.title}</span>
+                    {item.new && (
+                      <span className="ml-2 px-2 py-0.5 bg-orange-500/10 text-extra-peach text-[10px] rounded font-bold tracking-wider">NEW</span>
+                    )}
+                  </div>
+                  <div className="flex items-center">
+                    {isConfidential ? (
+                      <span title="Confidential" aria-label="Confidential" className="transition-colors cursor-not-allowed">
+                        <Lock size={20} strokeWidth={2} className="text-muted-foreground group-hover:text-red-400 transition-colors" />
+                      </span>
+                    ) : (
+                      item.url ? (
+                        <Link
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open ${item.title} externally`}
+                          className="transition-colors cursor-pointer"
+                        >
+                          <ArrowUpRight size={20} strokeWidth={2} className="text-zinc-500 group-hover:text-primary transition-colors" />
+                        </Link>
+                      ) : null
+                    )}
+                  </div>
+                </div>
+                <span className="truncate text-muted-foreground text-left text-base w-full">{item.desc}</span>
+              </div>
+            </React.Fragment>
+
+          );
+        })}
+      </div>
+    </main>
+  );
 }

@@ -97,7 +97,6 @@ function extractProperties(page: any) {
   }
 }
 
- // Add this new function to fetch full page content
 // Utility function to add a timeout to any promise
 async function withTimeout<T>(promise: Promise<T>, ms = 10000): Promise<T> {
   return Promise.race([
@@ -115,7 +114,7 @@ export async function getNotionPageContent(pageId: string): Promise<ExtendedReco
     // Use timeout wrapper for the Notion API call
     const recordMap = await withTimeout(
       notionUnofficial.getPage(normalizedId),
-      10000
+      30000
     );
 
     console.log('[getNotionPageContent] Normalized page ID:', normalizedId);
@@ -131,8 +130,6 @@ export async function getNotionPageContent(pageId: string): Promise<ExtendedReco
     throw new Error(`Failed to fetch Notion content: ${error.message}`);
   }
 }
-
-
 
 // Get published articles
 export async function getPublishedArticles() {
@@ -472,8 +469,6 @@ export async function getTools(category?: string) {
   return pages.map((page) => extractProperties(page))
 }
 
-
-
 export interface ChangelogEntry {
   id: string
   title: string
@@ -488,53 +483,7 @@ export interface ChangelogEntry {
   notificationExpiry?: string
 }
 
-// export async function getChangelogs() {
-//   const changelogId = process.env.NOTION_CHANGELOG_ID
-
-//   if (!changelogId) {
-//     throw new Error("Missing NOTION_CHANGELOG_ID environment variable")
-//   }
-
-//   const response = await notion.databases.query({
-//     database_id: changelogId,
-//     sorts: [
-//       {
-//         property: "Date",
-//         direction: "descending",
-//       },
-//     ],
-//   })
-
-//   const changelogs: ChangelogEntry[] = await Promise.all(
-//     response.results.map(async (page: any) => {
-//       // Get page content as markdown
-//       const mdBlocks = await n2m.pageToMarkdown(page.id)
-//       const markdown = n2m.toMarkdownString(mdBlocks)
-
-//       // Extract media files from page content
-//       const media = page.properties.Media?.files?.map((file: any) => ({
-//         type: file.type === "file" ? "video" : "image",
-//         url: file.file?.url || file.external?.url,
-//       }))
-
-//       return {
-//         id: page.id,
-//         title: page.properties.Title.title[0].plain_text,
-//         date: page.properties.Date.date.start,
-//         type: page.properties.Type.select.name.toLowerCase(),
-//         category: page.properties.Category.select.name,
-//         content: markdown,
-//         media: media || [],
-//         notificationExpiry: page.properties.NotificationExpiry?.date?.start,
-//       }
-//     })
-//   )
-
-//   return changelogs
-// }
-
 // Get published utilities
-
 export async function getChangelogs(): Promise<ChangelogEntry[]> {
   const changelogId = process.env.NOTION_CHANGELOG_ID
 
@@ -855,8 +804,6 @@ async function processTable(rows: any[], tableBlock: any): Promise<string> {
   
   return tableContent + "\n"
 }
-
-
 
 export async function getPublishedUtilities() {
   if (!utilitiesDbId) {

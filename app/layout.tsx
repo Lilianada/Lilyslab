@@ -68,7 +68,7 @@ export default function RootLayout({
      <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <main className="flex min-h-screen flex-col bg-background  transition-colors duration-300 lg:flex-row">
+            <main className="flex min-h-screen flex-col bg-background  transition-colors duration-300 lg:flex-row relative">
               <Sidebar />
               <MobileNav />
               <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 "> 

@@ -10,7 +10,7 @@ interface Book {
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
-  summary?: string;
+  genre?: string;
   date?: number;
 }
 

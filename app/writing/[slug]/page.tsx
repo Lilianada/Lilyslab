@@ -1,4 +1,3 @@
-
 import { notFound } from "next/navigation"
 import { getWritingBySlug } from "@/lib/writings/writings"
 import { formatDate } from "@/lib/utils"
@@ -43,13 +42,18 @@ export default async function WritingSlugPage({ params }: PageProps) {
 
   // Check if the file exists
   if (!fs.existsSync(filePath)) {
-    notFound();  // Returns a 404 if the file is not found
+    notFound();
   }
 
   // Read the markdown file
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
 
+  // Check if the post is published
+  if (data.published !== true) {
+      console.log(`Writing with slug '${slug}' found but not published.`); // Optional logging
+      notFound(); // Return 404 if not explicitly published
+  }
 
   return (
     <div className="max-w-3xl mx-auto animate-fade-in px-4 md:px-0">

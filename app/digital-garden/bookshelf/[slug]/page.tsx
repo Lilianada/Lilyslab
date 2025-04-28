@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { BookCardSkeleton } from "@/components/digital-garden/bookshelf/BookCardSkeleton";
+import ReactMarkdown from "react-markdown";
+import { Loader2 } from "lucide-react";
+import { formatTimestampToYYMMDD } from "@/lib/utils";
 
 interface Book {
   id: string;
@@ -11,33 +13,16 @@ interface Book {
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
-  summary?: string;
+  genre?: string;
   date?: number;
+  content: string;
 }
 
 const statusColors: Record<Book['status'], string> = {
-    'read': '#A2CBAF',
-    'current-reads': '#A6C2EB',
-    'will-read': '#FAE680'
+  'read': '#A2CBAF',
+  'current-reads': '#A6C2EB',
+  'will-read': '#FAE680'
 };
-
-function formatTimestamp(timestamp?: number): string | null {
-    if (!timestamp) return null;
-    try {
-        const date = new Date(timestamp * 1000);
-        if (isNaN(date.getTime())) {
-            console.warn("Invalid date timestamp:", timestamp);
-            return null;
-        }
-        const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const year = date.getFullYear();
-        return `${day} / ${month} / ${year}`;
-    } catch (error) {
-        console.error("Error formatting date:", error);
-        return null;
-    }
-}
 
 export default function BookshelfDetailPage() {
   const params = useParams();
@@ -82,38 +67,48 @@ export default function BookshelfDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10">
-        <div className="text-center py-10">Loading book details...</div>
+      <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10 animate-pulse">
+        <div className="h-8 w-1/4 bg-muted rounded mb-6"></div>
+        <div className="p-8 rounded-xl shadow-xl bg-muted space-y-6">
+          <div className="h-8 w-3/4 bg-muted-foreground/20 rounded"></div>
+          <div className="h-4 w-1/2 bg-muted-foreground/20 rounded"></div>
+          <div className="w-full h-1 border-t-2 border-dashed border-muted-foreground/10 my-6"></div>
+          <div className="space-y-3">
+            <div className="h-4 w-full bg-muted-foreground/20 rounded"></div>
+            <div className="h-4 w-full bg-muted-foreground/20 rounded"></div>
+            <div className="h-4 w-5/6 bg-muted-foreground/20 rounded"></div>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (error) {
-     return (
-        <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10">
-             <button onClick={() => router.back()} className="mb-6 px-4 py-2 hover:text-gray-300 flex items-center">
-                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to Bookshelf
-            </button>
-            <div className="text-center py-10 text-red-500 border border-destructive/50 bg-destructive/10 rounded-lg p-4">
-                {error}
-            </div>
+    return (
+      <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10">
+        <button onClick={() => router.back()} className="mb-6 px-4 py-2 hover:text-gray-300 flex items-center">
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Bookshelf
+        </button>
+        <div className="text-center py-10 text-red-500 border border-destructive/50 bg-destructive/10 rounded-lg p-4">
+          {error}
         </div>
-        );
+      </div>
+    );
   }
 
   if (!book) {
-     return (
-        <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10">
-             <button onClick={() => router.back()} className="mb-6 px-4 py-2 hover:text-gray-300 flex items-center">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Bookshelf
-            </button>
-             <div className="text-center py-10 text-muted-foreground">Book not found.</div>
-        </div>
-        );
+    return (
+      <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10">
+        <button onClick={() => router.back()} className="mb-6 px-4 py-2 hover:text-gray-300 flex items-center">
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Bookshelf
+        </button>
+        <div className="text-center py-10 text-muted-foreground">Book not found.</div>
+      </div>
+    );
   }
 
   const backgroundColor = statusColors[book.status] || '#E0E0E0';
-  const formattedDate = formatTimestamp(book.date);
+  const formattedDate = formatTimestampToYYMMDD(book.date);
 
   return (
     <div className="min-h-screen">
@@ -134,22 +129,20 @@ export default function BookshelfDetailPage() {
           }}
         >
           <div className="pb-4">
-            <h1 className="text-2xl font-semibold tracking-tight mb-1 text-black" style={{letterSpacing: '-1px'}}>{book.title}</h1>
+            <h1 className="text-2xl font-semibold tracking-tight mb-1 text-black" style={{ letterSpacing: '-1px' }}>{book.title}</h1>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm mt-2 font-mono text-black/80">
-                 <span>Status: {book.status.replace('-', ' ')}</span>
-                 {book.rating !== undefined && <span>Rating: {book.rating}/5</span>}
-                 {formattedDate && <span>Date: {formattedDate}</span>}
+              <span>Status: {book.status.replace('-', ' ')}</span>
+              {book.rating !== undefined && <span>Rating: {book.rating}/5</span>}
             </div>
           </div>
           <div className="w-full border-t-2 border-black border-dashed mb-6" />
-          <div className="mb-8 prose prose-neutral dark:prose-invert max-w-none">
-             <h2 className="text-lg font-medium text-black mb-2">Summary</h2>
-             {book.summary ? (
-                <p className="text-black/90 whitespace-pre-wrap">{book.summary}</p>
-            ) : (
-                <p className="text-black/70 italic">No summary available.</p>
-            )}
+          <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-black/90">
+            <ReactMarkdown>
+              {book.content}
+            </ReactMarkdown>
           </div>
+          <div className="w-full mt-8 border-t-2 border-black border-dashed mb-6" />
+          <span className="text-sm text-black/80 flex justify-end font-mono font-medium w-full">Date added: {formattedDate}</span>
         </div>
       </div>
     </div>

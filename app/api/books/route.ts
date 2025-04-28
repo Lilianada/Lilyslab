@@ -10,8 +10,9 @@ interface Book {
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
-  summary?: string;
+  genre?: string;
   date?: number; // Added date field
+  content: string; // Add field for full markdown content
 }
 
 // Set the directory path to bookshelf
@@ -34,7 +35,7 @@ async function getBooksFromStatusDirectory(status: 'current-reads' | 'read' | 'w
   for (const fileName of fileNames) {
     const filePath = join(statusDirectory, fileName);
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContents);
+    const { data, content } = matter(fileContents);
 
     // Basic validation for required fields
     if (!data.title) {
@@ -53,8 +54,9 @@ async function getBooksFromStatusDirectory(status: 'current-reads' | 'read' | 'w
       title: data.title,
       status: status,
       rating: data.rating ? Number(data.rating) : undefined,
-      summary: data.summary || undefined, // Use summary from frontmatter, or undefined if not present
+      genre: data.genre || undefined, // Use genre from frontmatter, or undefined if not present
       date: data.date ? Number(data.date) : undefined, // Add date, ensure it's a number
+      content: content, // Add the full markdown content
     };
     books.push(bookData);
   }

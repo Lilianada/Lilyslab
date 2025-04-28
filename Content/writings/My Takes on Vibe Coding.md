@@ -1,15 +1,17 @@
 ---
-Author: Lilian
-Cover:
+author: Lilian
+cover:
   - "[[__(17).jpeg]]"
-Date: 2025-04-18
-Excerpt: Riding the wave of AI development.
-Published: false
-Slug: my-takes-on-vibe-coding
+date: 2025-04-18
+excerpt: Riding the wave of AI development.
+published: true
+slug: my-takes-on-vibe-coding
 tags:
   - Artificial-Intelligence
   - Frontend
+title: My Takes on Vibe Coding
 ---
+
 Remember when coding meant hours of debugging and Stack Overflow searches? Those days aren't gone, but they're definitely changing. As someone who's spent countless nights wrestling with code, I've watched the landscape transform dramatically with AI tools flooding the market.
 
 Today, I call what we're doing "vibe coding" – a more intuitive, flow-based approach to building digital products. It's less about memorizing syntax and more about communicating your vision.
