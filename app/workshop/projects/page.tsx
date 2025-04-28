@@ -64,19 +64,18 @@ export default function WorkshopLogPage() {
             <React.Fragment key={item.number + item.title}>
               {/* Desktop/Tablet (md and up) */}
               <div
-                className={`group grid-cols-12 items-center min-h-[44px] text-sm border-0 border-b border-border last:border-0 px-2 py-2 transition-colors duration-150 hidden lg:grid hover:bg-muted ${
-                  isConfidential
+                className={`group grid-cols-12 items-center min-h-[44px] text-sm border-0 border-b border-border last:border-0 px-2 py-2 transition-colors duration-150 hidden lg:grid hover:bg-muted ${isConfidential
                     ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed"
                     : "cursor-pointer bg-transparent"
-                }`}
+                  }`}
               >
                 {/* Number + Title */}
                 <div className="col-span-4 flex items-center gap-2">
                   <span className="w-10 text-xs font-mono text-muted-foreground flex-shrink-0 text-left select-none">
                     {item.number}
                   </span>
-                  <span className="font-medium flex items-center text-foreground" style={{minWidth: '120px'}}>
-                   {item.title}
+                  <span className="font-medium flex items-center text-foreground" style={{ minWidth: '120px' }}>
+                    {item.title}
                     {item.new && (
                       <span className="ml-2 px-2 leading-normal bg-orange-500/10 text-extra-peach border border-orange-800 text-[8px] rounded font-semibold tracking-wider">NEW</span>
                     )}
@@ -85,7 +84,7 @@ export default function WorkshopLogPage() {
 
                 {/* Description */}
                 <div className="col-span-6 flex items-center justify-start">
-                  <span className="truncate font-light text-muted-foreground text-left" style={{maxWidth: '340px', minWidth: '220px'}}>
+                  <span className="truncate font-light text-muted-foreground text-left" style={{ maxWidth: '340px', minWidth: '220px' }}>
                     {item.desc}
                   </span>
                 </div>
@@ -124,43 +123,44 @@ export default function WorkshopLogPage() {
               </div>
 
               {/* Mobile (below md) */}
-              <div
-                className={`group flex flex-col items-start gap-y-1 border-0 border-b border-border last:border-0 px-2 py-3 transition-colors duration-150 lg:hidden ${
-                  isConfidential
-                    ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed hover:bg-zinc-800/80"
-                    : "hover:bg-muted cursor-pointer bg-transparent"
-                }`}
-              >
-                <div className="w-full flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono text-muted-foreground select-none">{item.number}</span>
-                    <span className="font-medium text-foreground text-sm">{item.title}</span>
-                    {item.new && (
-                      <span className="ml-2 px-2 py-0.5 bg-orange-500/10 text-extra-peach text-[10px] rounded font-bold tracking-wider">NEW</span>
-                    )}
+              {item.url && (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${item.title} externally`}
+                  className={`group flex flex-col items-start gap-y-1 border-0 border-b border-border last:border-0 px-2 py-3 transition-colors duration-150 lg:hidden ${isConfidential
+                      ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed hover:bg-zinc-800/80"
+                      : "hover:bg-muted cursor-pointer bg-transparent"
+                    }`}
+                >
+                  <div className="w-full flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono text-muted-foreground select-none">{item.number}</span>
+                      <span className="font-medium text-foreground text-sm">{item.title}</span>
+                      {item.new && (
+                        <span className="ml-2 px-2 py-0.5 bg-orange-500/10 text-extra-peach text-[10px] rounded font-bold tracking-wider">NEW</span>
+                      )}
+                    </div>
+                    <div className="flex items-center">
+                      {isConfidential ? (
+                        <span title="Confidential" aria-label="Confidential" className="transition-colors cursor-not-allowed">
+                          <Lock size={20} strokeWidth={2} className="text-muted-foreground group-hover:text-red-400 transition-colors" />
+                        </span>
+                      ) : (
+                        item.url ? (
+                          <div
+                            className="transition-colors cursor-pointer"
+                          >
+                            <ArrowUpRight size={20} strokeWidth={2} className="text-zinc-500 group-hover:text-primary transition-colors" />
+                          </div>
+                        ) : null
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    {isConfidential ? (
-                      <span title="Confidential" aria-label="Confidential" className="transition-colors cursor-not-allowed">
-                        <Lock size={20} strokeWidth={2} className="text-muted-foreground group-hover:text-red-400 transition-colors" />
-                      </span>
-                    ) : (
-                      item.url ? (
-                        <Link
-                          href={item.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Open ${item.title} externally`}
-                          className="transition-colors cursor-pointer"
-                        >
-                          <ArrowUpRight size={20} strokeWidth={2} className="text-zinc-500 group-hover:text-primary transition-colors" />
-                        </Link>
-                      ) : null
-                    )}
-                  </div>
-                </div>
-                <span className="truncate text-muted-foreground text-left text-base w-full">{item.desc}</span>
-              </div>
+                  <span className="truncate text-muted-foreground text-left text-base w-full">{item.desc}</span>
+                </a>
+              )}
             </React.Fragment>
 
           );

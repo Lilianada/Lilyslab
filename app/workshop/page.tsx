@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Scissors, FileText } from "lucide-react"
+import { Scissors, FileText, Logs } from "lucide-react"
 
 export default function WorkshopPage() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -21,14 +21,14 @@ export default function WorkshopPage() {
       <div className="space-y-6 stagger-children">
         <div className="opacity-0 animate-slide-up">
           <Link
-            href="/workshop/log"
+            href="/workshop/projects"
             className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
           >
             <Scissors size={20} className="text-primary" />
             <div>
-              <h2 className="text-sm font-medium">Logs</h2>
+              <h2 className="text-sm font-medium">Projects</h2>
               <p className="text-xs text-muted-foreground">
-                A collection of fun experiments, analyses, and resources.
+                A collection of fun experiments, apps, and tools built by me.
               </p>
             </div>
           </Link>
@@ -44,6 +44,21 @@ export default function WorkshopPage() {
               <h2 className="text-sm font-medium">Resources</h2>
               <p className="text-xs text-muted-foreground">
                 A collection of tools, templates, and resources I've created or found useful.
+              </p>
+            </div>
+          </Link>
+        </div>
+
+        <div className="opacity-0 animate-slide-up" style={{ animationDelay: "100ms" }}>
+          <Link
+            href="/workshop/logs"
+            className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
+          >
+            <Logs size={20} className="text-primary" />
+            <div>
+              <h2 className="text-sm font-medium">Logs</h2>
+              <p className="text-xs text-muted-foreground">
+                A 
               </p>
             </div>
           </Link>
