@@ -43,7 +43,7 @@ To set up Obsidian as my content management system, I followed a simple process 
         
 2. **Integrating Obsidian with My Website**
     
-    - I built a **Next.js** website that reads markdown files directly from my **Content/Writings** folder.
+    - I built a **Next.js** website that reads markdown files directly from my **Content/writings** folder.
         
     - Using Node’s **fs** (file system) module, I read the markdown files from the folder and parsed the frontmatter using the **gray-matter** package.
         

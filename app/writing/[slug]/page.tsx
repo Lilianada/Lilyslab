@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function WritingSlugPage({ params }: PageProps) {
   const { slug } = params;
 
-  const writingsDir = path.join(process.cwd(), 'Content/Writings');
+  const writingsDir = path.join(process.cwd(), 'Content/writings');
   const filePath = path.join(writingsDir, `${slug}.md`);
 
   // Check if the file exists
