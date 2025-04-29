@@ -108,7 +108,7 @@ const renderListItem = (item: any, index: number) => {
         )}
 
         {/* Text Content */}
-        <span className="flex-1 break-words text-foreground">
+        <span className="flex-1 break-words text-foreground text-sm">
           {item.link && linkText ? (
             <>
               {textBeforeLink}
@@ -133,8 +133,8 @@ const renderListItem = (item: any, index: number) => {
       {item.subItems && item.subItems.length > 0 && (
         <ul className="ml-6 mt-1 list-none"> {/* Indentation for sub-items */}
           {item.subItems.map((subItem: string, subIndex: number) => (
-            <li key={subIndex} className="mb-1 flex items-start">
-              <span className="mr-2 mt-[6px] text-xs text-muted-foreground flex-shrink-0" aria-hidden="true">■</span> {/* Square bullet */}
+            <li key={subIndex} className="mb-1 flex items-start text-xs">
+              <span className="mr-2 mt-[6px] text-xs text-muted-foreground flex-shrink-0" aria-hidden="true"> <Square fill='#0f0e0e' className="w-2 h-2" /> </span> {/* Square bullet */}
               <span className="break-words text-foreground">{subItem}</span>
             </li>
           ))}
