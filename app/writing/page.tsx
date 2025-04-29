@@ -23,7 +23,7 @@ export default async function WritingPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto animate-fade-in px-6 py-12">
+    <div className="max-w-3xl mx-auto animate-fade-in px-6 py-12">
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">Writing</h1>
         <p className="text-sm text-muted-foreground">Thoughts on design, engineering, and building products.</p>

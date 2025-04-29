@@ -1,7 +1,9 @@
 Fixes
 - suggestion sidebar display for mobile is being interrupted by mobile sticky menu
-- Change log and Writings both have render block that refuses to display
-- Change dark theme background and card to be contrasts that are not too far from each other e.g #242424 #181818
+- fix bookshelf card display
+- remove all mentions of notion including code lines(make sure this doesn't break my UI or code), import statements, files abnd folders, packages in package.json.
+
+
 
 Refs
 
