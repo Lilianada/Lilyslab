@@ -54,7 +54,7 @@ export default function WorkshopLogPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-16">
       <header className="mb-8">
-        <h1 className="mb-2 text-xl font-medium">Project Log</h1>
+        <h1 className="mb-2 text-xl font-medium">Projects</h1>
         <p className="text-sm text-zinc-500">Too many ideas, not enough <span className="line-through">time </span>focus.</p>
       </header>
       <div>

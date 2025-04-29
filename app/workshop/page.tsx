@@ -51,14 +51,14 @@ export default function WorkshopPage() {
 
         <div className="opacity-0 animate-slide-up" style={{ animationDelay: "100ms" }}>
           <Link
-            href="/workshop/logs"
+            href="/workshop/logss"
             className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
           >
             <Logs size={20} className="text-primary" />
             <div>
-              <h2 className="text-sm font-medium">Logs</h2>
+              <h2 className="text-sm font-medium">Project Logs</h2>
               <p className="text-xs text-muted-foreground">
-                A 
+                A digital file used to track the progress, issues, decisions, and other key information related to my projects throughout their lifecycle.
               </p>
             </div>
           </Link>

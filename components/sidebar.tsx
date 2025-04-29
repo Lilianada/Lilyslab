@@ -226,7 +226,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/workshop/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={800} />
             <NavItem href="/workshop/resources" icon={<WalletCards size={16} />} label="Resources" onClick={onNavClick} delay={900} />
             {/* <NavItem href="/workshop/shop" icon={<ShoppingCart size={16} />} label="Shop" onClick={onNavClick} delay={850} />
-            <NavItem href="/workshop/log" icon={<Clock size={16} />} label="Log" onClick={onNavClick} delay={950} /> */}
+           */}
+            <NavItem href="/workshop/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={950} /> 
           </div>
 
           <div className="space-y-1">
