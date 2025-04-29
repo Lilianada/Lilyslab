@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { CheckSquare, Square, Circle } from 'lucide-react'; // Using icons for checkboxes
-
+import { Skeleton } from '@/components/ui/skeleton';
 import { useEffect, useState } from 'react';
 
 export default function DailyLogPage() {
@@ -91,17 +91,39 @@ export default function DailyLogPage() {
         </header>
 
         {/* Sections */}
-        {dailyLogData.sections.map((section, sectionIndex) => (
-          <div key={sectionIndex} className="mb-6">
-            <h3 className="text-base font-semibold text-primary mb-3 flex items-center">
-              <span className="mr-2 h-3 w-3 rounded-full bg-extra-yellow"></span> {/* Bullet for section title */}
-              {section.title}
-            </h3>
-            <ul className="ml-2  border-l border-border pl-4"> {/* Indentation for section items */}
-              {section.items.map(renderListItem)}
-            </ul>
+        {dailyLogData.sections.length === 0 ? (
+          // Loading skeletons
+          <div>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="mb-6">
+                <div className="flex items-center mb-3">
+                  <Skeleton className="mr-2 h-3 w-3 rounded-full bg-extra-yellow" />
+                  <Skeleton className="h-5 w-32" />
+                </div>
+                <ul className="ml-2 border-l border-border pl-4">
+                  {[...Array(3)].map((_, j) => (
+                    <li key={j} className="mb-2 flex items-center">
+                      <Skeleton className="mr-2 h-4 w-4 rounded" />
+                      <Skeleton className="h-4 w-48" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-        ))}
+        ) : (
+          dailyLogData.sections.map((section, sectionIndex) => (
+            <div key={sectionIndex} className="mb-6">
+              <h3 className="text-base font-semibold text-primary mb-3 flex items-center">
+                <span className="mr-2 h-3 w-3 rounded-full bg-extra-yellow"></span> {/* Bullet for section title */}
+                {section.title}
+              </h3>
+              <ul className="ml-2  border-l border-border pl-4"> {/* Indentation for section items */}
+                {section.items.map(renderListItem)}
+              </ul>
+            </div>
+          ))
+        )}
 
         {/* Footer */}
         <div className="mt-8 pt-4 border-t border-border text-sm text-gray-400">
