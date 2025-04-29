@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { PinCard } from "@/components/pin-card"
+import { PinCardSkeleton } from "@/components/pin-card-skeleton"
 import { useInView } from "react-intersection-observer"
 import Masonry from 'react-masonry-css'
 
@@ -156,16 +157,22 @@ export default function PicPinsPage() {
           className="flex w-auto -ml-4"
           columnClassName="pl-4 bg-clip-padding"
         >
-          {filteredPins.map((pin) => (
-            <div key={pin.id} className="mb-4">
-              <PinCard
-                title={pin.title}
-                description={pin.description}
-                image={pin.image}
-                tags={pin.tags}
-              />
-            </div>
-          ))}
+          {loading
+  ? Array.from({ length: 6 }).map((_, idx) => (
+      <div key={"skeleton-" + idx} className="mb-4">
+        <PinCardSkeleton />
+      </div>
+    ))
+  : filteredPins.map((pin) => (
+      <div key={pin.id} className="mb-4">
+        <PinCard
+          title={pin.title}
+          description={pin.description}
+          image={pin.image}
+          tags={pin.tags}
+        />
+      </div>
+    ))}
         </Masonry>
 
         {/* Loading Indicator */}

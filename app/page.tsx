@@ -79,6 +79,15 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  // Color cards interactive animation state
+  const colorCards = [
+    "bg-[#FBF3B9]",
+    "bg-[#FFDCCC]",
+    "bg-[#FDB7EA]",
+    "bg-[#B7B1F2]",
+  ];
+  const [hovered, setHovered] = useState<number | null>(null);
+
   useEffect(() => {
     setIsLoaded(true)
 
@@ -203,24 +212,32 @@ export default function Home() {
               <h2 className="mb-4 text-sm font-medium text-muted-foreground">Color Project</h2>
 
               <div className="flex justify-start">
-                {isLoading ? (
-                  <div className="animate-pulse flex gap-2 sm:gap-4">
-                    <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
-                    <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
-                    <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
-                    <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
-                  </div>
-                ) : (
-                  <div className="animate-pulse grid grid-cols-4 justfy-between gap-2 w-full sm:gap-4">
-                    {
-                      ["bg-[#FBF3B9]", "bg-[#FFDCCC]", "bg-[#FDB7EA]", "bg-[#B7B1F2]"].map((code, indx) => {
-                        return <div key={indx} className={`h-20 w-full sm:h-36 sm:w-36 ${code} rounded`}></div>
-                      })
-                    }
-
-                  </div>
-                )}
-              </div>
+  {isLoading ? (
+    <div className="animate-pulse flex gap-2 sm:gap-4">
+      <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
+      <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
+      <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
+      <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
+    </div>
+  ) : (
+    <div className="grid grid-cols-4 justify-between gap-2 w-full sm:gap-4">
+      {colorCards.map((code, indx) => (
+        <div
+          key={indx}
+          className={`h-20 w-full sm:h-36 sm:w-36 ${code} rounded transition-all duration-300 cursor-pointer ${
+            hovered === null
+              ? "opacity-100"
+              : hovered === indx
+              ? "opacity-100 z-20 shadow-xl scale-105"
+              : "opacity-30"
+          }`}
+          onMouseEnter={() => setHovered(indx)}
+          onMouseLeave={() => setHovered(null)}
+        ></div>
+      ))}
+    </div>
+  )}
+</div>
 
             </section>
 

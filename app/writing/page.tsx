@@ -23,7 +23,7 @@ export default async function WritingPage() {
   }
 
   return (
-    <div className="max-w-xl mx-auto animate-fade-in px-6 py-12">
+    <div className="max-w-4xl mx-auto animate-fade-in px-6 py-12">
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">Writing</h1>
         <p className="text-sm text-muted-foreground">Thoughts on design, engineering, and building products.</p>
@@ -47,17 +47,36 @@ export default async function WritingPage() {
                 className="block transition-transform duration-300 hover:translate-x-1"
                 prefetch
               >
-                <article key={post.slug} className="border rounded-lg p-4 bg-card hover:shadow-md transition-shadow duration-200">
+                <article key={post.slug} className="hover:bg-card hover:p-2 rounded-md transition-all duration-200">
                   <Link href={`/writing/${post.slug}`} className="block group">
-                    <div className="mb-2 flex items-center gap-2">
-                      <h2 className="text-lg font-semibold group-hover:text-primary transition-colors duration-200">
-                        {post.title || "Untitled"}
+                    {/* First line: Title, line, date */}
+                    <div className="flex items-center gap-2 mb-1">
+                      <h2 className="text-base font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
+                        {post.title}
                       </h2>
+                      <div className="w-full border-t-2 border-dashed border-muted-foreground opacity-50 mx-2 group-hover:border-primary" />
+                      <span className="text-xs text-muted-foreground whitespace-nowrap">
+                        {post.date ? formatDate(post.date) : "No date"}
+                      </span>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-1">
-                      {post.date ? formatDate(post.date) : "No date available"}
+                    {/* Second line: Reading time */}
+                    <div className="flex gap-2 items-center mb-1">
+                      <span className="text-xs text-muted-foreground italic">
+                        {post.wordCount ? `${post.wordCount} words` : "— words"}
+                      </span>
+                      -
+                      <span className="text-xs text-muted-foreground italic">
+                        {post.readingTime ? `${post.readingTime} min read` : "— min read"}
+                      </span>
+                    </div>
+                    {/* Third line: Excerpt */}
+                    <p className="text-sm text-muted-foreground">
+                      {post.excerpt
+                        ? post.excerpt.split(" ").length > 10
+                          ? post.excerpt.split(" ").slice(0, 10).join(" ") + "…"
+                          : post.excerpt
+                        : "No excerpt available"}
                     </p>
-                    <p className="text-sm text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
                   </Link>
                 </article>
               </Link>

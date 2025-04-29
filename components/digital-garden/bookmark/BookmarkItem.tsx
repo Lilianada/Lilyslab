@@ -14,6 +14,7 @@ interface Props {
 }
 
 export function BookmarkItem({ bookmark }: Props) {
+
   const date = new Date(bookmark.created);
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
