@@ -47,15 +47,19 @@ export default async function WritingPage() {
                 className="block transition-transform duration-300 hover:translate-x-1"
                 prefetch
               >
-                <div className="space-y-1 border-b border-border pb-4 hover:border-primary transition-colors duration-300">
-                  <time className="text-xs text-muted-foreground">
-                    {post.date ? formatDate(post.date) : "No date"}
-                  </time>
-                  <h2 className="text-base font-medium group-hover:text-primary group-hover:underline transition-colors duration-200">
-                    {post.title || "Untitled"}
-                  </h2>
-                  <p className="text-sm text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
-                </div>
+                <article key={post.slug} className="border rounded-lg p-4 bg-card hover:shadow-md transition-shadow duration-200">
+                  <Link href={`/writing/${post.slug}`} className="block group">
+                    <div className="mb-2 flex items-center gap-2">
+                      <h2 className="text-lg font-semibold group-hover:text-primary transition-colors duration-200">
+                        {post.title || "Untitled"}
+                      </h2>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-1">
+                      {post.date ? formatDate(post.date) : "No date available"}
+                    </p>
+                    <p className="text-sm text-muted-foreground">{post.excerpt || "No excerpt available"}</p>
+                  </Link>
+                </article>
               </Link>
             </article>
           ))}

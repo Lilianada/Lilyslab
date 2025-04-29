@@ -20,6 +20,7 @@ interface Question {
   photoURL?: string
   question: string
   dateSubmitted: string
+  date?: string
   status: string
   answer?: string
 }
@@ -152,7 +153,7 @@ export default function AMAPage() {
       fetchQuestions()
     } catch (error) {
       console.error("Error submitting admin reply:", error)
-      setSubmitMessage({ type: "error", text: `Failed to submit reply: ${error.message}` })
+      setSubmitMessage({ type: "error", text: `Failed to submit reply.}` })
     }
   }
 
@@ -234,17 +235,12 @@ export default function AMAPage() {
           <div className="space-y-4 animate-pulse">
             <div className="h-24 bg-muted rounded-lg"></div>
             <div className="h-24 bg-muted rounded-lg"></div>
-            <div className="h-24 bg-muted rounded-lg"></div>
           </div>
         ) : questions.length > 0 ? (
-          <div className="space-y-4 stagger-children">
-            {questions.map((q, index) => (
-              <div
-                key={q.id}
-                className="space-y-1 rounded-lg border p-4 opacity-0 animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="flex items-center justify-between">
+          <div className="space-y-4">
+            {questions.map((q) => (
+              <div key={q.id} className="p-4 border rounded-lg space-y-2">
+                <div className="flex justify-between items-start">
                   <div className="flex items-center space-x-2">
                     {q.photoURL ? (
                       <Image
@@ -260,7 +256,7 @@ export default function AMAPage() {
                     <h3 className="text-xs font-medium">{q.name}</h3>
                   </div>
                   <span className="text-[10px] text-muted-foreground">
-                    {q.dateSubmitted ? formatDate(q.dateSubmitted) : "Unknown date"}
+                    {q.date || q.dateSubmitted ? formatDate(q.date || q.dateSubmitted) : "Unknown date"}
                   </span>
                 </div>
                 <p className="text-xs">{q.question}</p>
@@ -315,7 +311,6 @@ export default function AMAPage() {
     </div>
   )
 }
-
 // Add the AdminReplyForm component inside the file
 interface AdminReplyFormProps {
   questionId: string
