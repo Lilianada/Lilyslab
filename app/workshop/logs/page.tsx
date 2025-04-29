@@ -1,195 +1,186 @@
-"use client";
+import fs from 'fs';
+import path from 'path';
+import Link from 'next/link';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Circle } from 'lucide-react'; // Keep icon for visual consistency if needed
 
-import React from 'react';
-import { CheckSquare, Square, Circle } from 'lucide-react'; // Using icons for checkboxes
-
-// Mock Data (assuming this structure is correct)
-const dailyLogData = {
-  sections: [
-    {
-      title: "Mini App",
-      items: [
-        { text: "2025-02-28 MVP", link: "https://mini.lilyslab.xyz/", tag: "#web-app" },
-        {
-          text: "What's one thing top of mind today?",
-          subItems: ["it's going to rain, get some sun early in the day"],
-        },
-        {
-          text: "What would make today great?",
-          subItems: ["Hulk theme bought by Bill Gates for 1 Billion dollars"],
-        },
-        {
-          text: "What's the One Thing I need to get done today?",
-          linkText: "One Thing",
-          link: "#",
-          subItems: ["snip-a-note screenshot"],
-        },
-      ],
-    },
-    {
-      title: "Calculator",
-      items: [
-        { text: "2 hours focused time on Top Secret Project 90210" },
-        { text: "Read 30 minutes", linkText: "Read", link: "#" },
-      ],
-    },
-    {
-      title: "Note Widget",
-      items: [
-        { text: "30 minutes outside", checked: true },
-        { text: "10 minutes meditation", checked: false },
-        { text: "Workout or run", checked: false },
-        { text: "Read for pleasure, watch something, go for a walk", checked: true, linkText: "Read", link: "#" },
-      ],
-    },
-    {
-      title: "GetRoastedOnline",
-      items: [
-        { text: "The best thing that happened today", linkText: "The best thing that happened today", link: "#" },
-        { text: "How could I have made today even better?", tag: "#habit" },
-        { text: "List three things I'm grateful for", tag: "#gratitude" },
-        { text: "What made me happy today?" },
-        { text: "What made me sad?" },
-        { text: "How has Resistance shown up today? The War of Art", linkText: "The War of Art", link: "#" },
-        { text: "Where there any signs of my day going to shit that I could recognize?" },
-        { text: "What did I read / watch ?", linkText: "read / watch", link: "#" },
-        { text: "What am I looking forward to?" },
-        { text: "Things to remember" },
-      ],
-    },
-    {
-      title: "VentRoom",
-      items: [
-        { text: "How did I help someone today?" },
-        { text: "What did I learn?" },
-        { text: "What did I do to help my future?" },
-        { text: "How can I make tomorrow better?" },
-        { text: "How is my girlfriend amazing?" },
-        { text: "What am I grateful for?" },
-      ],
-    },
-  ],
-  footer: {
-    tags: ["#daily", "#agenda"],
-    lastUpdated: [
-      { text: "2020-08-18 Monthly Log",  },
-    ],
-  },
+// Define the structure for a log entry
+type LogEntry = {
+  slug: string;
+  title: string;
+  date: string;
+  published: boolean;
+  tags: string[];
 };
 
-// Helper to render list items remains largely the same but uses theme colors
-const renderListItem = (item: any, index: number) => {
-  const bulletColor = "text-blue-500 dark:text-blue-400"; // Adjusted for theme
-
-  // Split text around the link if linkText is provided
-  let textBeforeLink = item.text;
-  let linkText = '';
-  let textAfterLink = '';
-
-  if (item.linkText && item.text.includes(item.linkText)) {
-    const parts = item.text.split(item.linkText);
-    textBeforeLink = parts[0];
-    linkText = item.linkText;
-    textAfterLink = parts[1] || '';
+// Helper function to parse frontmatter manually
+// Improved robustness for line endings and empty lines
+const parseFrontmatter = (content: string): Partial<LogEntry> => {
+  const frontmatterMatch = content.match(/^---([\s\S]*?)---/); // Ensure --- is at the start
+  if (!frontmatterMatch || !frontmatterMatch[1]) {
+      console.warn("No frontmatter found or empty frontmatter.");
+      return {};
   }
 
-  return (
-    <li key={index} className="mb-1 flex flex-col">
-      <div className="flex items-start">
-        {/* Checkbox or Bullet */}
-        {item.hasOwnProperty('checked') ? (
-          item.checked ? (
-            <CheckSquare size={16} className="mr-2 mt-[3px] text-green-600 dark:text-green-400 flex-shrink-0" aria-label="Checked" />
-          ) : (
-            <Square size={16} className="mr-2 mt-[3px] text-muted-foreground flex-shrink-0" aria-label="Unchecked" />
-          )
-        ) : (
-          <span className={`mr-2 mt-[6px] text-xs  flex-shrink-0`} aria-hidden="true"> <Circle className="w-2 h-2" /> </span>
-        )}
+  const frontmatter = frontmatterMatch[1];
+  // Split by newline, handle \r\n and \n, filter empty lines after trim
+  const lines = frontmatter.split(/\r?\n/).filter(line => line.trim() !== '');
 
-        {/* Text Content */}
-        <span className="flex-1 break-words text-foreground">
-          {item.link && linkText ? (
-            <>
-              {textBeforeLink}
-              <a href={item.link} className="text-green-600 dark:text-green-400 underline" aria-label={linkText}>
-                {linkText}
-              </a>
-              {textAfterLink}
-            </>
-          ) : item.link ? ( // Handle cases where the whole text might be a link (fallback)
-            <a href={item.link} className="text-green-600 dark:text-green-400 underline" aria-label={item.text}>
-              {item.text}
-            </a>
-          ) : (
-            item.text // Just plain text
-          )}
-          {/* Tag */}
-          {item.tag && <span className="ml-2 text-blue-500 dark:text-blue-400">{item.tag}</span>}
-        </span>
-      </div>
+  const data: Partial<LogEntry> = { tags: [] };
 
-      {/* Sub Items */}
-      {item.subItems && item.subItems.length > 0 && (
-        <ul className="ml-6 mt-1 list-none"> {/* Indentation for sub-items */}
-          {item.subItems.map((subItem: string, subIndex: number) => (
-            <li key={subIndex} className="mb-1 flex items-start">
-              <span className="mr-2 mt-[6px] text-xs text-muted-foreground flex-shrink-0" aria-hidden="true">■</span> {/* Square bullet */}
-              <span className="break-words text-foreground">{subItem}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </li>
-  );
+  lines.forEach(line => {
+    const separatorIndex = line.indexOf(':');
+    if (separatorIndex !== -1) {
+      const key = line.slice(0, separatorIndex).trim();
+      let value = line.slice(separatorIndex + 1).trim();
+
+      // Remove surrounding quotes
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+
+      if (key === 'title') {
+        data.title = value;
+      } else if (key === 'date') {
+         // Ensure date is a string, even if it looks numeric
+         data.date = String(value);
+      } else if (key === 'published') {
+        data.published = value.toLowerCase() === 'true';
+      } else if (key === 'tags') {
+        // Handle tags: Expecting format like ["#tag1", "#tag2"] or [#tag1, #tag2]
+        if (value.startsWith('[') && value.endsWith(']')) {
+           const tagsString = value.substring(1, value.length - 1);
+           // Split by comma, trim whitespace, remove surrounding quotes from each tag
+           data.tags = tagsString.split(',').map(tag => tag.trim().replace(/^['"]|['"]$/g, '')).filter(tag => tag !== '');
+        } else {
+            console.warn(`Tags format not recognized or invalid: ${value}. Expected array format like ["#tag1"].`);
+            data.tags = [];
+        }
+      }
+    } else {
+         console.warn(`Skipping invalid frontmatter line: ${line}`);
+    }
+  });
+
+  return data;
 };
 
 
+// Server Component to fetch and display logs
 export default function DailyLogPage() {
+  const logsDirectory = path.join(process.cwd(), 'Content', 'logs');
+  let allLogs: LogEntry[] = [];
+
+  console.log(`Reading logs from: ${logsDirectory}`); // Debug log
+
+  try {
+    const filenames = fs.readdirSync(logsDirectory);
+    console.log(`Found files: ${filenames.join(', ')}`); // Debug log
+
+    allLogs = filenames
+      .filter(filename => filename.endsWith('.mdx'))
+      .map(filename => {
+        const filePath = path.join(logsDirectory, filename);
+        console.log(`Processing file: ${filePath}`); // Debug log
+        let fileContent = '';
+        try {
+            fileContent = fs.readFileSync(filePath, 'utf8');
+        } catch (readError) {
+            console.error(`Error reading file ${filePath}:`, readError);
+            return null; // Skip this file if reading fails
+        }
+
+        const frontmatter = parseFrontmatter(fileContent);
+        const slug = filename.replace(/\.mdx$/, ''); // Create slug from filename
+
+        // Basic validation and default values
+        const logEntry: LogEntry = {
+          slug,
+          title: frontmatter.title || 'Untitled Log',
+          date: frontmatter.date || '1970-01-01', // Default valid date
+          published: frontmatter.published === true, // Ensure it's explicitly true
+          tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [], // Ensure tags is an array
+        };
+        console.log(`Parsed ${filename}:`, logEntry); // Debug log
+        return logEntry;
+      })
+      .filter((log): log is LogEntry => log !== null && log.published) // Filter out nulls and unpublished logs
+      .sort((a, b) => {
+          try {
+              // Attempt to parse dates for robust sorting
+              const dateA = new Date(a.date).getTime();
+              const dateB = new Date(b.date).getTime();
+              if (isNaN(dateA) || isNaN(dateB)) {
+                  console.warn(`Invalid date detected during sort: ${a.date} or ${b.date}`);
+                  return 0; // Keep original order if dates are invalid
+              }
+              return dateB - dateA; // Sort by date descending
+          } catch (sortError) {
+              console.error("Error sorting logs by date:", sortError);
+              return 0;
+          }
+      });
+
+      console.log(`Filtered and sorted logs (${allLogs.length}):`, allLogs.map(l => l.title)); // Debug log
+
+  } catch (error) {
+    console.error("Error reading logs directory or processing files:", error);
+    allLogs = []; // Ensure logs is empty on error
+  }
+
+
   return (
-
-    <div className="min-h-screen text-foreground sm:p-8 ">
-      <div className="max-w-2xl mx-auto sm:p-6">
-        {/* Main Heading - Using theme colors */}
+    <div className="min-h-screen text-foreground sm:p-8">
+      <div className="max-w-3xl mx-auto sm:p-6">
+        {/* Header */}
         <header className="mb-8">
-        <h1 className="mb-2 text-xl font-medium">Project Logs</h1>
-        <p className="text-sm text-zinc-500">A build log of all my new projects.</p>
-      </header>
+          <h1 className="mb-1 text-xl font-medium">Project Logs</h1>
+          <p className="text-sm text-muted-foreground">A build log of all my published projects.</p>
+        </header>
 
-        {/* Sections */}
-        {dailyLogData.sections.map((section, sectionIndex) => (
-          <div key={sectionIndex} className="mb-6">
-            <h3 className="text-base font-semibold text-primary mb-3 flex items-center">
-              <span className="mr-2 h-3 w-3 rounded-full bg-extra-yellow"></span> {/* Bullet for section title */}
-              {section.title}
-            </h3>
-            <ul className="ml-2  border-l border-border pl-4"> {/* Indentation for section items */}
-              {section.items.map(renderListItem)}
-            </ul>
-          </div>
-        ))}
-
-        {/* Footer */}
-        <div className="mt-8 pt-4 border-t border-border text-sm text-gray-400">
-          <div className="mb-2">
-            <span className="font-semibold mr-2">tags:</span>
-            {dailyLogData.footer.tags.map((tag, i) => (
-              <a key={i} href="#" className="text-blue-400 hover:underline mr-2">
-                {tag}
-              </a>
+        {/* Log Entries Grid */}
+        {allLogs.length > 0 ? (
+          <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
+            {allLogs.map((log) => (
+               <Link key={log.slug} href={`/workshop/logs/${log.slug}`} passHref legacyBehavior>
+                 <a className="block hover:no-underline group"> {/* Wrap Card with Link */}
+                    <Card className="h-full flex flex-col transition-shadow duration-200 group-hover:shadow-md dark:border-neutral-800">
+                      <CardHeader>
+                        <CardTitle className="text-base group-hover:text-primary transition-colors">
+                          {log.title}
+                        </CardTitle>
+                        <CardDescription className="text-xs">
+                          {/* Format date safely */}
+                          {(() => {
+                              try {
+                                  return new Date(log.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                              } catch {
+                                  return log.date; // Fallback to raw date string
+                              }
+                          })()}
+                        </CardDescription>
+                      </CardHeader>
+                      {/* Optional: Add excerpt/description */}
+                      {/* <CardContent className="flex-grow"></CardContent> */}
+                      <CardFooter className="mt-auto pt-2">
+                        <div className="flex flex-wrap gap-1">
+                          {log.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
+                          ))}
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </a>
+               </Link>
             ))}
           </div>
-          <div className="flex items-center">
-            <span className="font-semibold mr-2">last updated:</span>
-            {dailyLogData.footer.lastUpdated.map((text, i) => (
-              <React.Fragment key={i}>
-                <p className="text-neutral-300 hover:underline">
-                  {text.text}
-                </p>
-              </React.Fragment>
-            ))}
+        ) : (
+          <div className="text-center py-8 border rounded-lg dark:border-neutral-800">
+             <p className="text-muted-foreground">No published logs found or there was an error reading them.</p>
           </div>
-        </div>
+        )}
+
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ const projects = typeof window === "undefined" ? getPublishedProjects() : [];
 
 export default function WorkshopLogPage() {
   return (
-    <main className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-4xl mx-auto px-4 py-16">
       <header className="mb-8">
         <h1 className="mb-2 text-xl font-medium">Projects</h1>
         <p className="text-sm text-zinc-500">Too many ideas, not enough <span className="line-through">time </span>focus.</p>
@@ -166,6 +166,6 @@ export default function WorkshopLogPage() {
           );
         })}
       </div>
-    </main>
+    </div>
   );
 }
