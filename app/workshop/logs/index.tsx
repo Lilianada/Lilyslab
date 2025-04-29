@@ -2,109 +2,89 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, Tag } from "lucide-react"
 import { SearchBar } from "@/components/search-bar"
-import { Card, CardDescription, CardHeader } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { LogData } from "@/lib/logs"
+import Link from 'next/link'
+import { Badge } from "@/components/ui/badge"
 
-type Utility = {
-  id: string
-  name: string
-  description: string
-  url: string
-  tags: string[]
-  category: string
+interface LogsClientComponentProps {
+  logsData: LogData[];
 }
 
-export default function UtilitiesPage() {
+export default function LogsClientComponent({ logsData }: LogsClientComponentProps) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [utilities, setUtilities] = useState<Utility[]>([])
-  const [filteredUtilities, setFilteredUtilities] = useState<Utility[]>([])
+  const [filteredLogs, setFilteredLogs] = useState<LogData[]>(logsData)
   const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
     setIsLoaded(true)
-
-    async function fetchUtilities() {
-      try {
-        const response = await fetch("/api/projects")
-        const data = await response.json()
-        setUtilities(data.utilities || [])
-        setFilteredUtilities(data.utilities || [])
-        
-      } catch (error) {
-        console.error("Error fetching projects:", error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchUtilities()
-  }, [])
+    setFilteredLogs(logsData)
+  }, [logsData])
 
   useEffect(() => {
-    const filtered = utilities.filter((utility) => {
-      const name = utility.name ?? "";
-      const description = utility.description ?? "";
-      const search = searchQuery.toLowerCase();
+    const filtered = logsData.filter((log) => {
+      const title = log.frontmatter.title ?? ""
+      const tags = log.frontmatter.tags?.join(" ") ?? ""
+      const search = searchQuery.toLowerCase()
 
       const matchesSearch =
-        name.toLowerCase().includes(search) ||
-        description.toLowerCase().includes(search) 
-      return matchesSearch;
-    });
-    setFilteredUtilities(filtered);
-  }, [searchQuery, utilities]);
+        title.toLowerCase().includes(search) ||
+        tags.toLowerCase().includes(search)
+      return matchesSearch
+    })
+    setFilteredLogs(filtered)
+  }, [searchQuery, logsData])
+
+  const isLoading = !isLoaded
 
   return (
-    <div className={`max-w-3xl mx-auto sm:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
-      <header className="mb-8">
-        <h1 className="mb-1 text-xl font-medium">Fun Projects</h1>
-        <p className="text-sm text-muted-foreground">
-          Apps I have built for fun and for work.
-        </p>
-      </header>
-
-      {/* <div className="mb-6 space-y-4">
+    <div className={`w-full ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+      <div className="mb-6">
         <SearchBar
-          placeholder="Search utilities by name, description, or tags..."
+          placeholder="Search logs by title or tag..."
           onSearch={setSearchQuery}
           className="max-w-md"
         />
-      </div> */}
+      </div>
 
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 animate-pulse">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(logsData.length || 6)].map((_, i) => (
             <div key={i} className="h-40 bg-muted rounded-lg"></div>
           ))}
         </div>
-      ) : filteredUtilities.length > 0 ? (
+      ) : filteredLogs.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 stagger-children">
-          {filteredUtilities.map((utility, index) => (
-            <Card
-              key={utility.id}
-              className="rounded-lg border p-4 opacity-0 animate-slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-                <CardHeader className="text-sm font-medium p-0 mb-2">{utility.name}</CardHeader>
-              <CardDescription className="mb-3 text-xs text-muted-foreground">{utility.description}</CardDescription>
-              
-              <Button variant="outline" size="sm" className="text-xs w-full bg-card" asChild>
-                <a 
-                  href={utility.url.startsWith('http') ? utility.url : `https://${utility.url}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink size={14} className="mr-1" /> Try it
-                </a>
-              </Button>
-            </Card>
+          {filteredLogs.map((log, index) => (
+            <Link key={log.slug} href={`/workshop/logs/${log.slug}`} passHref legacyBehavior>
+              <a className="block opacity-0 animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+                <Card className="rounded-lg border h-full flex flex-col hover:shadow-md transition-shadow duration-200">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-base font-medium">{log.frontmatter.title}</CardTitle>
+                    <CardDescription className="text-xs text-muted-foreground">{log.frontmatter.date}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    {/* Optionally display a snippet or other info here */}
+                  </CardContent>
+                  <CardFooter className="pt-2">
+                     <div className="flex flex-wrap gap-1">
+                        {log.frontmatter.tags?.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs">
+                                {tag}
+                            </Badge>
+                        ))}
+                      </div>
+                  </CardFooter>
+                </Card>
+              </a>
+            </Link>
           ))}
         </div>
       ) : (
         <div className="text-center py-8 border rounded-lg">
-          <p className="text-sm text-muted-foreground">No projects found matching your search.</p>
+          <p className="text-sm text-muted-foreground">No logs found matching your search.</p>
         </div>
       )}
     </div>
