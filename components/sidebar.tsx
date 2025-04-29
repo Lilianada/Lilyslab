@@ -41,6 +41,7 @@ import { UserProfileSection } from "./user-profile-section"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "./ui/button"
 import { useToast } from "@/hooks/use-toast"
+import { Separator } from "./ui/separator"
 // import Bookmark from "@/app/digital-garden/bookmarks/page"
 // import logo from "@/public/12.png"
 
@@ -189,7 +190,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
     >
       <div className={cn("p-4", mobile ? "" : "sticky top-0 h-screen flex flex-col justify-between")}>
         {!mobile && (
-          <div className="mb-8 animate-fade-in">
+          <div className="mb-4 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/12.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
 
@@ -236,6 +237,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/playground/note-widgets" icon={<Dices size={16} />} label="Note Widgets" onClick={onNavClick} delay={1100} />
           </div>
 
+          <Separator />
+
           <div className="space-y-1">
             <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1150} />
             <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1200} hasNotification={true} />
@@ -244,7 +247,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
 
           {!mobile && (
-            <div className="space-y-1 flex items-center justify-between gap-2">
+            <div className="bg-card sticky bottom-0 space-y-1 pt-2 flex items-center justify-between gap-2">
               <ThemeToggle />
               <UserProfileSection />
             </div>

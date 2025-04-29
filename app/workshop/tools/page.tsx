@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input"; // Assuming shadcn/ui Input
 import { Button } from "@/components/ui/button"; // Assuming shadcn/ui Button
 import { type Tool } from "@/types"; // Import Tool type
 import { ToolCardSkeleton } from "@/components/workshop/tools/ToolCardSkeleton"; // Import the skeleton
+import { ToolSubmissionSidebar } from "@/components/workshop/tools/ToolSubmissionSidebar";
 
 export default function ToolsPage() {
   const [allTools, setAllTools] = useState<Tool[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -67,6 +68,10 @@ export default function ToolsPage() {
     setSelectedCategory(category);
   };
 
+  const handleSubmit = () => {
+    setIsSidebarOpen(true);
+  }
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
       <header className="mb-8">
@@ -79,6 +84,7 @@ export default function ToolsPage() {
 
       {/* Search and Filter UI */}
       <div className="mb-8 space-y-4">
+      <div className="flex flex-wrap gap-2">
         <Input
           type="text"
           placeholder="Search tools..."
@@ -86,6 +92,16 @@ export default function ToolsPage() {
           onChange={handleSearchChange}
           className="max-w-sm" // Limit search bar width
         />
+         <Button
+            
+              variant="default" 
+              size="sm"
+              onClick={() => handleSubmit()}
+              className="text-xs py-0 leading-normal px-4"
+            >
+             Submit tool
+            </Button>
+        </div>
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <Button
@@ -128,6 +144,18 @@ export default function ToolsPage() {
           ))
         )}
       </div>
+      {/* Overlay for desktop screens when sidebar is open */}
+      {isSidebarOpen && (
+        <div
+          className="hidden sm:block fixed inset-0 bg-black/50 z-40 transition-opacity animate-fade-in animate-fade-out"
+          aria-label="Sidebar overlay"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+      <ToolSubmissionSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
     </div>
   );
 }

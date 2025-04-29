@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -22,8 +22,9 @@ interface ToolSubmissionSidebarProps {
   onClose: () => void
 }
 
+
 export function ToolSubmissionSidebar({ isOpen, onClose }: ToolSubmissionSidebarProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -31,8 +32,30 @@ export function ToolSubmissionSidebar({ isOpen, onClose }: ToolSubmissionSidebar
     url: "",
     category: "",
     platforms: [] as string[],
-  })
-  const { toast } = useToast()
+  });
+  const { toast } = useToast();
+  const [isClosing, setIsClosing] = useState(false);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Handle fade-out and unmount
+  useEffect(() => {
+    // If sidebar is opened, reset closing state
+    if (isOpen) {
+      setIsClosing(false);
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+    }
+  }, [isOpen]);
+
+  const handleSidebarClose = () => {
+    setIsClosing(true);
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsClosing(false);
+      onClose();
+    }, 700); // match animation duration
+  };
 
   const handlePlatformToggle = (platform: string) => {
     setFormData(prev => {
@@ -48,6 +71,8 @@ export function ToolSubmissionSidebar({ isOpen, onClose }: ToolSubmissionSidebar
     setIsSubmitting(true)
 
     try {
+      // DEBUG: Log the form data before submission
+      console.debug("[ToolSubmissionSidebar] Submitting tool:", formData);
       const response = await fetch("/api/tools/submit", {
         method: "POST",
         headers: {
@@ -91,16 +116,24 @@ export function ToolSubmissionSidebar({ isOpen, onClose }: ToolSubmissionSidebar
     }
   }
 
-  if (!isOpen) return null
+  // Only render if open or closing (for fade-out)
+  if (!isOpen && !isClosing) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-background border-l animate-in slide-in-from-right z-50">
+    <div
+      className={`fixed inset-y-0 right-0 w-full sm:w-[400px] bg-background border-l z-50
+        transition-transform transition-opacity duration-[700ms] ease-in-out
+        ${isOpen && !isClosing ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
+      `}
+      style={{ willChange: 'transform, opacity' }}
+    >
       <div className="h-full flex flex-col">
         <header className="flex items-center justify-between p-4 border-b">
           <h2 className="text-lg font-semibold">Submit a Tool</h2>
           <button
-            onClick={onClose}
+            onClick={handleSidebarClose}
             className="p-1 hover:bg-muted rounded-md transition-colors"
+            type="button"
           >
             <X className="h-5 w-5" />
           </button>
