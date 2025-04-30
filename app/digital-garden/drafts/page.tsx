@@ -60,21 +60,21 @@ export default function DraftPage() {
         const filePath = path.join(draftsDir, filename);
         const raw = fs.readFileSync(filePath, 'utf8');
         const data = getSafeData(raw);
-        
-        const result = read(filePath, DraftMetaSchema);
-const validated = {
-  title: result.data.title || filename.replace(/\.md$/, ''),
-  date: result.data.date.toISOString().split('T')[0],
-  slug: filename.replace(/\.md$/, '')
-};
-        
-        return [{
-          title: validated.title || filename.replace(/\.md$/, ''),
-          date: validated.date,
-          slug: filename.replace(/\.md$/, ''),
-        }];
+        // Try to parse and validate frontmatter, skip if ZodError or invalid date
+        try {
+          const result = read(filePath, DraftMetaSchema);
+          const validated = {
+            title: result.data.title || filename.replace(/\.md$/, ''),
+            date: result.data.date.toISOString().split('T')[0],
+            slug: filename.replace(/\.md$/, ''),
+          };
+          return [validated];
+        } catch (zodErr) {
+          console.error(`Skipping invalid file (bad date or metadata): ${filename}`, zodErr);
+          return [];
+        }
       } catch (error) {
-        console.error(`Skipping invalid file: ${filename}`, error);
+        console.error(`Skipping unreadable file: ${filename}`, error);
         return [];
       }
     });
@@ -110,18 +110,27 @@ const validated = {
       </header>
         {Object.entries(grouped).map(([year, items]) => (
           <div key={year} className="mb-10">
-            <div className="font-bold text-xl mb-3 font-mono">{year}</div>
+            <div className="font-bold text-base mb-3 font-mono">{year}</div>
             <div className="divide-y divide-border">
               {items.map((draft) => (
-                <div key={draft.slug} className="flex items-baseline py-2">
-                  <span className="w-28 text-neutral-400 font-mono text-sm">
+                <div
+                  key={draft.slug}
+                  className="group flex items-baseline py-2 transition-transform duration-150 hover:scale-[1.02]"
+                >
+                  <span className="w-28 text-neutral-400 font-mono text-xs">
                     {draft.date}
                   </span>
                   <a
                     href={`/digital-garden/drafts/${draft.slug}`}
-                    className="ml-2 text-base text-extra-steelBlue hover:underline"
+                    className="ml-2 text-xs text-extra-steelBlue hover:underline flex-1 flex items-center justify-between"
                   >
-                    {draft.title}
+                    <span>{draft.title}</span>
+                    <span className="flex items-center opacity-0 group-hover:opacity-100 ml-4 transition-opacity duration-200">
+                      {/* Arrow icon (right arrow) */}
+                      <svg className="inline h-4 w-4 text-extra-steelBlue" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
                   </a>
                 </div>
               ))}

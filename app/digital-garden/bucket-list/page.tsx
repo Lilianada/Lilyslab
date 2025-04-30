@@ -22,10 +22,6 @@ const specifications: Spec[] = [
     category: "Roles",
     details: "Associate Product Manager / Engineering Manager / Project Manager",
   },
-  // {
-  //   category: "Salary",
-  //   details: "$82,000 - $90,000",
-  // },
   {
     category: "Countries",
     details: "USA / UK / Mexico / Canada / France / Germany",
