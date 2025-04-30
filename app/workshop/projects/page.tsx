@@ -129,9 +129,9 @@ export default function WorkshopLogPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Open ${item.title} externally`}
-                  className={`group flex flex-col items-start gap-y-1 border-0 border-b border-border last:border-0 px-2 py-3 transition-colors duration-150 lg:hidden ${isConfidential
-                      ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed hover:bg-zinc-800/80"
-                      : "hover:bg-muted cursor-pointer bg-transparent"
+                  className={`group flex flex-col items-start gap-y-1 border-0 border-b border-border last:border-0 px-2 py-3 transition-colors duration-150 lg:hidden hover:bg-muted ${isConfidential
+                      ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed"
+                      : "cursor-pointer bg-transparent"
                     }`}
                 >
                   <div className="w-full flex items-center justify-between">
