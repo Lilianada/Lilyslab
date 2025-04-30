@@ -104,7 +104,7 @@ const validated = {
         <div className="flex flex-col">
           <h1 className="mb-1 text-xl font-medium">Drafts</h1>
           <p className="text-sm text-muted-foreground">
-            Unfinished notes.
+            Unfinished notes, thoughts and all.
           </p>
         </div>
       </header>
