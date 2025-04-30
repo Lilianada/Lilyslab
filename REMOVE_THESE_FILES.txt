@@ -1,0 +1,15 @@
+The following Notion-related files/folders will be deleted:
+- app/notion.css
+- components/notion/
+- components/notion-renderer.tsx
+- lib/notion-comments.ts
+- lib/notion-database-check.ts
+- lib/notion-enhanced.ts
+- lib/notion-test.js
+- lib/notion.ts
+- components/ReactNotionX.tsx
+- app/api/debug-notion/
+- app/changelog/client-notion-renderer.tsx
+- app/writing copy/[slug]/client-notion-renderer.tsx
+
+After code cleanup, these files/folders should be removed from the project directory to fully eliminate Notion from the codebase.

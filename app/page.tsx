@@ -91,7 +91,6 @@ export default function Home() {
   useEffect(() => {
     setIsLoaded(true)
 
-    // Fetch data from Notion
     async function fetchData() {
       try {
         const response = await fetch("/api/homepage-data")

@@ -27,7 +27,6 @@ export default function AppDissectionPage() {
   useEffect(() => {
     setIsLoaded(true)
 
-    // Fetch app dissections from Notion
     async function fetchAppDissections() {
       try {
         const response = await fetch("/api/app-dissections")

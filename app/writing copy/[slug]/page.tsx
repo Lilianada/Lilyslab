@@ -3,13 +3,12 @@ import Image from "next/image"
 import { formatDate } from "@/lib/utils"
 import { ArrowLeft } from "lucide-react"
 import { notFound } from "next/navigation"
-import { getArticleBySlug, getAllArticleSlugs, normalizeNotionId, getNotionPageContent } from "@/lib/notion"
-import ArticleInteractions from "@/components/article-interactions"
-import { NotionAPI } from "notion-client"
-import ClientNotionRenderer from "./client-notion-renderer"
 
-// Initialize the unofficial Notion client
-const notionApi = new NotionAPI()
+import ArticleInteractions from "@/components/article-interactions"
+
+
+
+
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -48,8 +47,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     }
 
     // DEBUG: Log Notion page ID
-    console.log("[BlogPost] Using Notion page ID:", article.id);
-    // Fetch Notion page content
+    // Notion logic removed
+    // Notion logic removed
     recordMap = await getNotionPageContent(article.id);
     // DEBUG: Log recordMap block keys
     console.log("[BlogPost] recordMap keys:", Object.keys(recordMap?.block || {}));

@@ -1,0 +1,12 @@
+{
+  "id": "001",
+  "name": "Sample App Dissection",
+  "description": "A detailed analysis of an application's architecture and features.",
+  "platforms": ["web"],
+  "url": "https://example.com",
+  "analysis": {
+    "architecture": "Modern React/Next.js architecture",
+    "features": ["SSR", "ISR", "API routes"],
+    "techStack": ["Next.js", "React", "TypeScript"]
+  }
+}

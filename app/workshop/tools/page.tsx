@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"; // Assuming shadcn/ui Button
 import { type Tool } from "@/types"; // Import Tool type
 import { ToolCardSkeleton } from "@/components/workshop/tools/ToolCardSkeleton"; // Import the skeleton
 import { ToolSubmissionSidebar } from "@/components/workshop/tools/ToolSubmissionSidebar";
+import ToolSubmissionDialog from "@/components/workshop/tools/ToolSubmissionDialog";
 
 export default function ToolsPage() {
   const [allTools, setAllTools] = useState<Tool[]>([]);
@@ -152,9 +153,29 @@ export default function ToolsPage() {
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
-      <ToolSubmissionSidebar
-        isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
+      <ToolSubmissionDialog
+        open={isSidebarOpen}
+        onOpenChange={() => setIsSidebarOpen(false)}
+        onSubmit={async (data) => {
+          // Get the submissions directory
+          const submissionsDir = "/Users/lilian/Desktop/Projects/Lilyslab/Content/tools/submissions";
+          // Read existing files to determine next number
+          const files = await window.fetch("/api/list-files?dir=" + encodeURIComponent(submissionsDir)).then(res => res.json());
+          const numbers = files
+            .map((file: string) => parseInt(file.replace(/\.json$/, "")))
+            .filter((n: number) => !isNaN(n));
+          const nextNum = (numbers.length > 0 ? Math.max(...numbers) : 0) + 1;
+          const paddedNum = String(nextNum).padStart(3, "0");
+          // Save the submission
+          await window.fetch("/api/save-file", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              path: `${submissionsDir}/${paddedNum}.json`,
+              content: JSON.stringify(data, null, 2)
+            })
+          });
+        }}
       />
     </div>
   );

@@ -224,7 +224,7 @@ const NotesWidget: React.FC<NotesWidgetProps> = ({
             <>
               {/* Render Todo List */}
               {type === 'todo' && (
-                <ul className="relative z-10 space-y-0 text-blue-600 text-base font-medium font-serif italic -ml-1" style={{ fontFamily: '"Comic Sans MS", "cursive", sans-serif' }}>
+                <ul className="relative z-10 space-y-0 text-blue-600 text-base font-medium font-serif italic" style={{ fontFamily: '"Comic Sans MS", "cursive", sans-serif' }}>
                   {todoItems.map((item) => (
                     <li
                       key={item.id}

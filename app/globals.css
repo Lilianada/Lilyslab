@@ -5,9 +5,8 @@
 /* Import Prism.js theme for code highlighting */
 @import "prismjs/themes/prism-tomorrow.css";
 /* Fix the import syntax - add semicolon */
-@import "./notion.css";
-/* Remove the import to the deleted styles.css file */
-/* @import "@/components/notion/styles.css"; */
+
+
 
 @import "../styles/card-animations.css";
 

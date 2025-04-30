@@ -1,4 +1,4 @@
-import { getPublishedWork, getPublishedProjects, getPublishedSpeaking } from "@/lib/notion"
+// Error: Notion integration removed
 import { NextResponse } from "next/server"
 
 export async function GET() {
@@ -7,9 +7,9 @@ export async function GET() {
     
     // Use Promise.allSettled to handle partial failures
     const [workResult, projectsResult, speakingResult] = await Promise.allSettled([
-      getPublishedWork(),
-      getPublishedProjects(),
-      getPublishedSpeaking(),
+      throw new Error("Notion integration removed. Please implement a new data source."),
+      throw new Error("Notion integration removed. Please implement a new data source."),
+      throw new Error("Notion integration removed. Please implement a new data source."),
     ])
 
     // Process results and handle errors

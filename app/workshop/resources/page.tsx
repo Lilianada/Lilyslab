@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Download, ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
 import { SearchBar } from "@/components/search-bar"
-import { type Resource } from "@/types"
+import type { Resource } from "@/types"
 
 export default function ResourcesPage() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -18,7 +18,6 @@ export default function ResourcesPage() {
   useEffect(() => {
     setIsLoaded(true)
 
-    // Fetch resources from Notion
     async function fetchResources() {
       try {
         const response = await fetch("/api/resources")
@@ -41,16 +40,16 @@ export default function ResourcesPage() {
 
   useEffect(() => {
     const filtered = resources.filter((resource) => {
-      const name = resource.name ?? "";
-      const description = resource.description ?? "";
-      const tags = Array.isArray(resource.tags) ? resource.tags : [];
-      const category = resource.category ?? "";
+      const name = typeof resource.name === 'string' ? resource.name : String(resource.name ?? "");
+      const description = typeof resource.description === 'string' ? resource.description : String(resource.description ?? "");
+      const tags = Array.isArray(resource.tags) ? resource.tags.map(tag => String(tag ?? "")) : [];
+      const category = typeof resource.category === 'string' ? resource.category : String(resource.category ?? "");
       const search = searchQuery.toLowerCase();
 
       const matchesSearch =
         name.toLowerCase().includes(search) ||
         description.toLowerCase().includes(search) ||
-        tags.some(tag => (tag ?? "").toLowerCase().includes(search));
+        tags.some(tag => tag.toLowerCase().includes(search));
       const matchesCategory = !activeCategory || category === activeCategory;
       return matchesSearch && matchesCategory;
     });
@@ -107,7 +106,7 @@ export default function ResourcesPage() {
         <div className="grid gap-4 sm:grid-cols-2 stagger-children">
           {filteredResources.map((resource, index) => (
             <div
-              key={resource.id}
+              key={index}
               className="rounded-lg border p-4 opacity-0 animate-slide-up bg-card"
               style={{ animationDelay: `${index * 100}ms` }}
             >

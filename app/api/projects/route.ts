@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server"
-import { getPublishedUtilities } from "@/lib/notion"
 
 export async function GET() {
   try {
-    const utilities = await getPublishedUtilities()
+    throw new Error("Notion integration removed. Please implement a new data source.")
     return NextResponse.json({ utilities })
   } catch (error) {
     console.error("Error fetching utilities:", error)

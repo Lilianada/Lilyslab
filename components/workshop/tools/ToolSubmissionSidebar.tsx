@@ -123,7 +123,7 @@ export function ToolSubmissionSidebar({ isOpen, onClose }: ToolSubmissionSidebar
     <div
       className={`fixed inset-y-0 right-0 w-full sm:w-[400px] bg-background border-l z-50
         transition-transform transition-opacity duration-[700ms] ease-in-out
-        ${isOpen && !isClosing ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
+       
       `}
       style={{ willChange: 'transform, opacity' }}
     >

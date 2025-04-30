@@ -1,9 +1,9 @@
-import { getCommentsBySlug, submitComment } from "@/lib/notion-comments"
+// Error: Notion integration removed
 import { NextResponse } from "next/server"
 
 export async function GET(request: Request, { params }: { params: { slug: string } }) {
   try {
-    const comments = await getCommentsBySlug(params.slug)
+    throw new Error("Notion integration removed. Please implement a new data source.")
     return NextResponse.json({ comments })
   } catch (error) {
     console.error("Error fetching comments:", error)
@@ -24,21 +24,11 @@ export async function POST(request: Request, { params }: { params: { slug: strin
       return NextResponse.json({ error: "Comment is required" }, { status: 400 })
     }
 
-    // Validate the Notion database ID is available
-    if (!process.env.NOTION_COMMENTS_DATABASE_ID) {
-      console.error("API: NOTION_COMMENTS_DATABASE_ID is not defined")
-      return NextResponse.json({ error: "Comments database is not configured" }, { status: 500 })
-    }
+    console.error("API: NOTION_COMMENTS_DATABASE_ID is not defined")
+    return NextResponse.json({ error: "Comments database is not configured" }, { status: 500 })
 
     try {
-      const response = await submitComment({
-        name: name || "Anonymous",
-        email,
-        comment,
-        slug: params.slug,
-        parentCommentId,
-        photoURL,
-      })
+      const response = null // Notion integration removed
 
       if (!response) {
         console.log("API: Failed to submit comment - no response from Notion")
