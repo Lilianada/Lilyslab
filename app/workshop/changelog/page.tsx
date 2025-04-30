@@ -15,8 +15,6 @@ import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { Markdown } from "@/components/markdown"
-import { getChangelogs } from "@/lib/notion"
-import type { ChangelogEntry } from "@/lib/notion"
 import { useToast } from "@/hooks/use-toast"
 
 export default function ChangelogPage() {

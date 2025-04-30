@@ -67,6 +67,8 @@ export default function Colophon() {
             { name: "Pranathi Peri", url: "https://pranathiperi.com" },
             { name: "Zaid Mukaddam", url: "https://zaidmukaddam.com/" },
             { name: "Mason Watson", url: "https://mw.works/" },
+            { name: "Nicole van der Hoeven", url: "https://nicolevanderhoeven.com/about" },
+            
           ].map((site) => (
             <a
               key={site.url}

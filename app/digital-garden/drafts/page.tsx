@@ -1,88 +1,134 @@
-import { DraftAccordionItem } from "@/components/draft-accordion-item"; // Adjust path if needed
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { z } from 'zod'; 
+import { read } from 'zod-matter';
 
-// Define data structure (or import if defined elsewhere)
-interface DraftItemData {
-  id: string;
-  initial: string;
-  name: string;
-  company: string;
-  quote: string;
+// Define schema for front matter validation
+const DraftMetaSchema = z.object({
+  title: z.string().optional(),
+  date: z.coerce.date().refine(
+    (val) => !isNaN(val.getTime()), 
+    { message: "Invalid date format" }
+  ),
+});
+
+interface DraftMeta {
   title: string;
-  statusColor: 'green' | 'red' | 'blue' | 'gray';
+  date: string;
+  slug: string;
 }
 
-// Sample data (replace with your actual data source/fetch logic)
-const draftItems: DraftItemData[] = [
-  {
-    id: '1',
-    initial: 'C',
-    name: 'Chester Chipperfield',
-    company: 'Running Tide',
-    quote: 'James is one of the rare talents that harmonizes design and technology. Very few designers are technical enough to generate viable product ideas, but James does.',
-    title: 'Head of Product at Running Tide',
-    statusColor: 'green',
-  },
-  {
-    id: '2',
-    initial: 'K',
-    name: 'Kevin Robinson',
-    company: 'LVLY',
-    quote: 'James has a rare combination of skills. He knows tech backwards and forwards but speaks like a human. He’s clear, communicative, professional, and highly talented. His UI/UX aesthetic is bar none. And working with him all amounts to the most important thing of all. Trust.',
-    title: 'Founder / Creative Director at Juniper Jones',
-    statusColor: 'gray', // No visible dot in the "open" example
-  },
-  {
-    id: '3',
-    initial: 'D',
-    name: 'Danny Crichton',
-    company: 'Lux Capital',
-    quote: 'James is exceptional at creative yet functional designs for the web. His user interfaces are incredibly intuitive and beautiful. Highly recommended.',
-    title: 'Editor-in-Chief at TechCrunch',
-    statusColor: 'red',
-  },
-  {
-    id: '4',
-    initial: 'F',
-    name: 'Frank Shi',
-    company: 'Paper Triangles',
-    quote: 'Working with James was one of the best experiences I’ve had. He has an amazing eye for detail and ensures the user experience is prioritized. A true professional.',
-    title: 'Founder at Paper Triangles',
-    statusColor: 'blue',
-  },
-  {
-    id: '5',
-    initial: 'H',
-    name: 'Heather Beserra',
-    company: 'Running Tide',
-    quote: 'James helped us build a complex, interactive site that aligned with a new brand launch, and we couldn’t be happier with the results. His technical skill and design sense are top-notch.',
-    title: 'Marketing Lead at Running Tide',
-    statusColor: 'green',
-  },
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
+function getSafeData(raw: string): { title?: string; date?: string } {
+  try {
+    const { data } = matter(raw);
+    return data;
+  } catch (error) {
+    console.error('Error parsing front matter');
+    return {};
+  }
+}
+
+function validateDraft(data: unknown): DraftMeta | null {
+  try {
+    const parsed = DraftMetaSchema.parse(data);
+    return {
+      title: parsed.title || '',
+      date: z.coerce.string().parse(parsed.date.toISOString().split('T')[0]),
+      slug: ''
+    };
+  } catch (error) {
+    console.error('Invalid draft metadata:', error);
+    return null;
+  }
+}
+
+
 export default function DraftPage() {
+  const draftsDir = path.join(process.cwd(), 'Content/drafts');
+  const files = fs.readdirSync(draftsDir);
+
+  const drafts: DraftMeta[] = files
+    .filter(f => f.endsWith('.md'))
+    .flatMap(filename => {
+      try {
+        const filePath = path.join(draftsDir, filename);
+        const raw = fs.readFileSync(filePath, 'utf8');
+        const data = getSafeData(raw);
+        
+        const result = read(filePath, DraftMetaSchema);
+const validated = {
+  title: result.data.title || filename.replace(/\.md$/, ''),
+  date: result.data.date.toISOString().split('T')[0],
+  slug: filename.replace(/\.md$/, '')
+};
+        
+        return [{
+          title: validated.title || filename.replace(/\.md$/, ''),
+          date: validated.date,
+          slug: filename.replace(/\.md$/, ''),
+        }];
+      } catch (error) {
+        console.error(`Skipping invalid file: ${filename}`, error);
+        return [];
+      }
+    });
+
+  // Sort and group drafts
+  const grouped = drafts
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .reduce((acc, draft) => {
+      const [year, month, day] = draft.date.split('-');
+      if (!year || !month || !day) return acc; // Skip invalid dates
+      
+      const monthIndex = parseInt(month, 10) - 1;
+      if (monthIndex < 0 || monthIndex >= MONTHS.length) return acc;
+
+      const formattedDate = `${year}-${MONTHS[monthIndex].slice(0,3)}-${day}`;
+      
+      return {
+        ...acc,
+        [year]: [...(acc[year] || []), { ...draft, date: formattedDate }]
+      };
+    }, {} as Record<string, DraftMeta[]>);
+
   return (
-    // Main container for the draft page - apply dark theme background
-    <div className="min-h-screen text-neutral-300 py-12">
-       <div className="max-w-2xl mx-auto">
-         <h1 className="text-2xl font-semibold text-neutral-100 px-4 mb-6">Drafts</h1>
-         {/* Accordion Container */}
-         <div className="border border-neutral-800 rounded-lg overflow-hidden">
-           {draftItems.map((item, index) => (
-             <DraftAccordionItem
-               key={item.id}
-               initial={item.initial}
-               name={item.name}
-               company={item.company}
-               quote={item.quote}
-               title={item.title}
-               statusColor={item.statusColor}
-               // Example: Start the second item open, like in the screenshot
-               startOpen={item.id === '2'}
-             />
-           ))}
-         </div>
-       </div>
-     </div>
+    <div className="min-h-screen animate-fade-in">
+    <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
+      <header className="flex items-center justify-between mb-8">
+        <div className="flex flex-col">
+          <h1 className="mb-1 text-xl font-medium">Drafts</h1>
+          <p className="text-sm text-muted-foreground">
+            Unfinished notes.
+          </p>
+        </div>
+      </header>
+        {Object.entries(grouped).map(([year, items]) => (
+          <div key={year} className="mb-10">
+            <div className="font-bold text-xl mb-3 font-mono">{year}</div>
+            <div className="divide-y divide-border">
+              {items.map((draft) => (
+                <div key={draft.slug} className="flex items-baseline py-2">
+                  <span className="w-28 text-neutral-400 font-mono text-sm">
+                    {draft.date}
+                  </span>
+                  <a
+                    href={`/digital-garden/drafts/${draft.slug}`}
+                    className="ml-2 text-base text-extra-steelBlue hover:underline"
+                  >
+                    {draft.title}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

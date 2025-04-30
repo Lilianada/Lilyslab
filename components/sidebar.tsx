@@ -35,6 +35,7 @@ import {
   Wrench,
   BadgeCheck,
   ImageIcon,
+  BookHeartIcon,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -220,6 +221,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={550} />
             <NavItem href="/digital-garden/catalog" icon={<ImageIcon size={16} />} label="Catalog" onClick={onNavClick} delay={600} />
             <NavItem href="/digital-garden/notes" icon={<FileText size={16} />} label="Notes" onClick={onNavClick} delay={650} />
+            <NavItem href="/digital-garden/drafts" icon={<BookHeartIcon size={16} />} label="Drafts" onClick={onNavClick} delay={700} />
           </div>
 
           <div className="space-y-1">
