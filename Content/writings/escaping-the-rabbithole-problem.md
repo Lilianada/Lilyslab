@@ -2,7 +2,7 @@
 author: Lilian
 cover:
   - "[[rabbit-hole.jpg]]"
-date: 2025-05-01
+date: 2025-04-10
 excerpt: Managing the endless paths of curiosity without losing yourself in the process.
 published: true
 slug: escaping-the-rabbithole-problem

@@ -2,7 +2,7 @@
 author: Lilian
 cover:
   - "[[garden-illustration.jpg]]"
-date: 2025-05-01
+date: 2025-04-23
 excerpt: Exploring the art of tending a digital garden as a personal knowledge space.
 published: true
 slug: cultivating-my-digital-garden

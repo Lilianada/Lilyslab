@@ -2,7 +2,7 @@
 author: Lilian
 cover:
   - "[[workshop.jpg]]"
-date: 2025-05-01
+date: 2025-04-02
 excerpt: How I turned my website into a living studio for projects in all stages of completion.
 published: true
 slug: building-a-digital-workshop

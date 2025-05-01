@@ -1,83 +1,62 @@
 ---
+author: Lilian
+cover:
+  - "[[progress.jpg]]"
+date: 2025-04-16
+excerpt: A personal summary of my professional and personal growth in Q1 2025.
 published: true
-Slug: q1-life-update
+slug: q1-life-update
 tags:
   - self-development
   - progress
-title: A much needed 𝗤𝟭 𝗟𝗶𝗳𝗲 𝗨𝗽𝗱𝗮𝘁𝗲
-exerpt: Progress tracking
-author: Lilian
-date: 2025-04-29
-"":
+title: Q1 Life Update - Building Momentum
+readingTime: 4
+wordCount: 560
 ---
 
-If you’ve been following my journey since January, you know I’m all about learning, building, and sharing. The past few months have been a whirlwind of progress, and I’m excited to finally share what’s been happening behind the scenes
+If you've been following my journey since January, you know I'm all about learning, building, and sharing. The past few months have been a whirlwind of progress, and I'm excited to finally share what's been happening behind the scenes.
 
-▶ **𝗣𝗿𝗼𝗳𝗲𝘀𝘀𝗶𝗼𝗻𝗮𝗹 𝗚𝗿𝗼𝘄𝘁𝗵**
+### Professional Growth
 
- → Completed Scrum Fundamentals Certified (SFC) from SCRUMstudy
+I've been intentionally building my product and technical management credentials:
 
- → Completed AI for Product Management from Pendo - Mind the Product
+- Completed Scrum Fundamentals Certified (SFC) from SCRUMstudy
+- Completed AI for Product Management from Pendo - Mind the Product
+- Completed Product Management course from Great Learning Academy
+- Earned my Google Data Analytics Professional Certificate
 
- → Completed Product Management course from Great Learning Academy
-
- → Earned my Google Data Analytics Professional Certificate
-
-
-
-▶ **𝗔𝗰𝗮𝗱𝗲𝗺𝗶𝗰 𝗠𝗶𝗹𝗲𝘀𝘁𝗼𝗻𝗲**
+### Academic Milestone
 
 Finally collected my degree certificate for Diploma in Software Engineering from Alt School Africa as a pioneering student (class of 2022). A journey that started with courage and curiosity, and ended with an even bigger appetite for building and leading.
 
-  
+### Product Progress
 
-▶ **𝗣𝗿𝗼𝗱𝘂𝗰𝘁 𝗣𝗿𝗼𝗴𝗿𝗲𝘀𝘀**
+- **TryPlannr.app**: Wrapped up the product design phase for this financial management tool that brings together AI-driven insights, account linking, budgeting, goals, subscriptions tracking and more. We're now moving into development! If you're curious, join the early waiting list at [tryplannr.lilyslab.xyz](https://tryplannr.lilyslab.xyz).
 
- → Wrapped up the product design phase for 𝚃̲𝚛̲𝚢̲𝙿̲𝚕̲𝚊̲𝚗̲𝚗̲𝚛̲.̲𝚊̲𝚙̲𝚙̲ ( _𝘗𝘭𝘢𝘯𝘯𝘳 𝘣𝘳𝘪𝘯𝘨𝘴 𝘵𝘰𝘨𝘦𝘵𝘩𝘦𝘳 𝘱𝘰𝘸𝘦𝘳𝘧𝘶𝘭 𝘵𝘰𝘰𝘭𝘴 — 𝘧𝘳𝘰𝘮 𝘈𝘐-𝘥𝘳𝘪𝘷𝘦𝘯 𝘪𝘯𝘴𝘪𝘨𝘩𝘵𝘴 𝘵𝘰 𝘢𝘤𝘤𝘰𝘶𝘯𝘵 𝘭𝘪𝘯𝘬𝘪𝘯𝘨, 𝘣𝘶𝘥𝘨𝘦𝘵𝘪𝘯𝘨, 𝘨𝘰𝘢𝘭𝘴, 𝘴𝘶𝘣𝘴𝘤𝘳𝘪𝘱𝘵𝘪𝘰𝘯𝘴, 𝘢𝘯𝘥 𝘮𝘰𝘳𝘦 — 𝘴𝘰 𝘺𝘰𝘶 𝘤𝘢𝘯 𝘮𝘢𝘯𝘢𝘨𝘦 𝘺𝘰𝘶𝘳 𝘧𝘪𝘯𝘢𝘯𝘤𝘦𝘴 𝘸𝘪𝘵𝘩 𝘵𝘰𝘵𝘢𝘭 𝘤𝘰𝘯𝘧𝘪𝘥𝘦𝘯𝘤𝘦_). We are now moving into the development phase🥳. ( You can join the early waiting list if you’re curious! Go to **tryplannr.lilyslab.xyz**)
+- **Mini Projects**: Built 5 web projects with 5 more in progress. I'll be sharing more details about these in May.
 
- → Built 5 mini web projects — with 5 more on the way. (More details coming in May.)
+### Personal Wins
 
-  
+Completed the 75 Soft Challenge. While I didn't see dramatic weight loss on the scale, I lost body fat, built muscle, and found a deeper respect for discipline and consistency in my daily habits.
 
+### What's Next?
 
-▶ **𝗣𝗲𝗿𝘀𝗼𝗻𝗮𝗹 𝗪𝗶𝗻𝘀**
+Starting May 1st, I'm committing to building and sharing **20 products in 20 days** to strengthen my portfolio. I've already begun laying groundwork for several projects to ensure success. I have so many interesting ideas to build and I can't wait to share them with you all.
 
-Completed the 75 Soft Challenge. No weight loss on the scale, but lost body fat, built muscle, and found a deeper respect for discipline and balance.  
+### My Career Focus
 
-  
+My professional direction has sharpened considerably. I'm actively seeking opportunities as:
 
-▶ **𝗪𝗵𝗮𝘁’𝘀 𝗡𝗲𝘅𝘁?**
+- **Technical Product Manager** specializing in AI tools or developer/creative solutions
+- **Engineering Manager** leading teams through innovative product development
+- **Creative Project Manager** bridging technical requirements with creative execution
 
- Starting May 1st, I'm committing to building and sharing 20 products in 20 days to strengthen my portfolio. I've already begun laying groundwork for several projects to ensure success.
-
-I have so many interesting projects to build and I can't wait to share them with you all.
-
-  
-
-
-▶ **𝗠𝘆 𝗨𝗹𝘁𝗶𝗺𝗮𝘁𝗲 𝗚𝗼𝗮𝗹:**
-
-My professional focus has sharpened. I'm actively seeking opportunities as:
-
- → A Technical Product Manager specializing in AI tools or developer/creative solutions
-
- → An Engineering Manager leading teams through innovative product development
-
- → A Creative Project Manager bridging technical requirements with creative execution
-
-  
-
-  
-▶ **𝗛𝗼𝘄 𝗬𝗼𝘂 𝗖𝗮𝗻 𝗛𝗲𝗹𝗽**
+### How You Can Help
 
 If your organization (or one in your network) could benefit from someone with my skillset, I'd welcome an introduction. Whether it's a formal referral or just connecting me with the right person, your support would make a meaningful difference.
 
-  
-
 Feel free to message me directly—I'd love to share more about my projects and how I might contribute to your team.
 
-Stay tuned for daily updates throughout May as the 20/20 challenge unfolds.
+---
 
-Thanks for following the journey so far — the best is just getting started.
-
-Stay tuned.
+Stay tuned for daily updates throughout May as the 20/20 challenge unfolds. Thanks for following the journey so far — the best is just getting started.

@@ -2,7 +2,7 @@
 author: Lilian
 cover:
   - "[[prioritization.jpg]]"
-date: 2025-05-01
+date: 2025-03-25
 excerpt: Strategies for managing multiple creative projects without getting overwhelmed.
 published: true
 slug: the-prioritization-problem

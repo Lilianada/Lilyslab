@@ -2,7 +2,7 @@
 author: Lilian
 cover:
   - "[[tabs.jpg]]"
-date: 2025-05-01
+date: 2025-04-05
 excerpt: How browser tab overload reflects our digital thinking habits and strategies to tame the chaos.
 published: true
 slug: taming-tab-chaos
@@ -56,10 +56,9 @@ I aim to keep no more than nine tabs open per window. Why nine? It's the maximum
 **3. Tab Grouping by Project**
 
 I use browser tab groups organized by:
-- Current primary project (blue)
-- Reference materials (purple)
-- Communication (green)
-- Quick tasks (yellow)
+- Ace course (blue)
+- Site inspiration (purple)
+- Job finder (sky-blue)
 
 **4. The Single-Purpose Window**
 
