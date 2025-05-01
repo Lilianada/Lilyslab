@@ -5,8 +5,7 @@ import { ToolCard } from "@/components/workshop/tools/ToolCard";
 import { Input } from "@/components/ui/input"; // Assuming shadcn/ui Input
 import { Button } from "@/components/ui/button"; // Assuming shadcn/ui Button
 import { type Tool } from "@/types"; // Import Tool type
-import { ToolCardSkeleton } from "@/components/workshop/tools/ToolCardSkeleton"; // Import the skeleton
-import { ToolSubmissionSidebar } from "@/components/workshop/tools/ToolSubmissionSidebar";
+import { ToolCardSkeleton } from "@/components/workshop/tools/ToolCardSkeleton"; 
 import ToolSubmissionDialog from "@/components/workshop/tools/ToolSubmissionDialog";
 
 export default function ToolsPage() {

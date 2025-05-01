@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Loader2, CheckSquare, Square, Mail, Linkedin, Sprout, ArrowUpNarrowWide, Blocks, HeartHandshake, Sparkles, CreditCard } from "lucide-react";
+import Image from "next/image";
 
 // Interface for the bucket list item data (should match API)
 interface BucketListItem {
@@ -143,7 +144,14 @@ export default function BucketListPage() {
         </div>
         </header>
 
-        <div className="w-full h-40 bg-extra-yellow/50 rounded-lg border border-extra-peach/50 mb-8"></div>
+        <div className="w-full h-40 bg-extra-yellow/50 rounded-lg border border-extra-peach/50 mb-8">
+          <Image 
+          src='/walpaper.jpeg'
+          alt='walpaper'
+          width={100}
+          height={100}
+          />
+        </div>
 
         <section className="mb-16">
           <h2 className="text-base font-medium tracking-tight mb-6 border-b pb-3 text-foreground">What I&apos;m Looking For</h2>

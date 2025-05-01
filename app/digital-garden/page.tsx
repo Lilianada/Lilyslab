@@ -74,7 +74,7 @@ export default function DigitalGardenHome() {
                         </p>
                     </div>
                 </header> 
-                <div className="grid grid-cols-1 mb-8 w-1/2">
+                <div className="hidden sm:grid grid-cols-1 mb-8 w-1/2">
                
                     <Button
                         variant="outline"
@@ -98,7 +98,7 @@ export default function DigitalGardenHome() {
                                 </CardHeader>
                                 <CardFooter className="p-0">
                                     <span className="text-xs text-primary group-hover:underline flex items-center">
-                                        Explore <ArrowUpRight size={12} className="ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                                        Explore <ArrowUpRight size={12} className="ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                                     </span>
                                 </CardFooter>
                             </Card>

@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 
 export type Bookmark = {
@@ -34,9 +35,9 @@ export function BookmarkItem({ bookmark }: Props) {
   } as const;
 
   return (
-    <>
+    <React.Fragment>
       {/* Desktop Version */}
-      <li className="list-item-image-hover-effect group relative hidden md:block transition-all duration-300">
+      <div className="list-item-image-hover-effect group relative hidden md:block transition-all duration-300">
         <a href={bookmark.link} className="flex items-center justify-between gap-4 py-2 transition-all duration-300 hover:scale-[1.025] " target="_blank" rel="noopener noreferrer">
           {/* <img
             className="cover-image max-w-64 pointer-events-none absolute z-10 hidden max-h-40 shadow-lg md:group-hover:block"
@@ -65,10 +66,17 @@ export function BookmarkItem({ bookmark }: Props) {
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="transition-transform duration-200 group-hover:rotate-12"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </div>
         </a>
-      </li>
+        {/* Preview iframe on hover */}
+          <iframe
+            src={bookmark.link}
+            className="cover-image max-w-64 pointer-events-none absolute z-10 hidden max-h-40 shadow-lg md:group-hover:block"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+          />
+      </div>
 
       {/* Mobile Version */}
-      <li className="md:hidden">
+      <div className="md:hidden group">
         <a href={bookmark.link} className="mt-5 flex flex-col gap-2 border-b border-neutral-200 pb-5" target="_blank" rel="noopener noreferrer">
           <div className="flex items-center justify-between gap-1">
             <div className="flex shrink items-center gap-2 overflow-x-auto">
@@ -93,11 +101,11 @@ export function BookmarkItem({ bookmark }: Props) {
             </div>
             <div className="flex shrink-0 items-center gap-2 text-neutral-400">
               <p className="text-[10px]">{domain}</p>
-              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="transition-transform duration-200 group-hover:rotate-24 group-hover:text-extra-steelBlue group-hover:scale-150"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
           </div>
         </a>
-      </li>
-    </>
+      </div>
+    </React.Fragment>
   );
 }

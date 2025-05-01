@@ -35,7 +35,7 @@ export default async function WritingPage() {
           <p className="text-muted-foreground mb-4 text-sm">{error}</p>
         </div>
       ) : posts.length > 0 ? (
-        <div className="space-y-6 stagger-children">
+        <div className="space-y-8 stagger-children mt-12">
           {posts.map((post, index) => (
             <article
               key={post.slug}
@@ -47,11 +47,10 @@ export default async function WritingPage() {
                 className="block transition-transform duration-300 hover:translate-x-1"
                 prefetch
               >
-                <article key={post.slug} className="hover:bg-card hover:p-2 rounded-md transition-all duration-200">
-                  <Link href={`/writing/${post.slug}`} className="block group">
+                <article key={post.slug} className="hover:bg-card hover:p-2 rounded-md transition-all duration-200 group">
                     {/* First line: Title, line, date */}
                     <div className="flex items-center gap-2 mb-1">
-                      <h2 className="text-base font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
+                      <h2 className="text-sm font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
                         {post.title}
                       </h2>
                       <div className="w-full border-t-2 border-dashed border-muted-foreground opacity-50 mx-2 group-hover:border-primary" />
@@ -77,7 +76,6 @@ export default async function WritingPage() {
                           : post.excerpt
                         : "No excerpt available"}
                     </p>
-                  </Link>
                 </article>
               </Link>
             </article>

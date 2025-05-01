@@ -59,12 +59,14 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
       <ol className="relative border-l border-gray-200 dark:border-gray-700">
         {filtered.map((entry, idx) => {
           const isOpen = expanded === entry.version;
+          // Fallback color if type not in mapping
+          const colorString = typeColors[entry.type] ?? '';
           return (
             <li key={entry.version} className="mb-12 ml-4">
               {/* Dot */}
-              <span className={`absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full ring-8 ring-background ${typeColors[entry.type].split(" ")[0]}`}></span>
-              <div className="flex items-center gap-2 mb-1">
-                <span className={`px-2 py-0.5 rounded font-mono text-xs border ${typeColors[entry.type]}`}>{entry.type}</span>
+              <span className={`absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full ring-8 ring-background ${colorString.split(" ")[0]}`}></span>
+              <div className="relative flex items-center gap-2 mb-1">
+                <span className={`px-2 py-0.5 rounded font-mono text-xs border ${colorString}`}>{entry.type}</span>
                 <span className="font-mono text-xs text-muted-foreground">{format(new Date(entry.date), "MMM d, yyyy")}</span>
                 <span className="font-mono text-xs text-muted-foreground">v{entry.version}</span>
               </div>
@@ -77,8 +79,8 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
                 <div
                   className={`prose prose-sm dark:prose-invert max-w-none transition-all duration-300 overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-16 opacity-80"}`}
                   style={{
-                    WebkitMaskImage: !isOpen ? "linear-gradient(180deg, #000 60%, transparent 100%)" : undefined,
-                    maskImage: !isOpen ? "linear-gradient(180deg, #000 60%, transparent 100%)" : undefined,
+                    WebkitMaskImage: !isOpen ? "linear-gradient(180deg, #000 70%, transparent 100%)" : undefined,
+                    maskImage: !isOpen ? "linear-gradient(180deg, #000 70%, transparent 100%)" : undefined,
                   }}
                 >
                   {isOpen ? entry.body : getExcerpt(entry.body)}
