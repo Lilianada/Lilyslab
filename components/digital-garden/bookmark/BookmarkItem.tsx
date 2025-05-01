@@ -39,11 +39,6 @@ export function BookmarkItem({ bookmark }: Props) {
       {/* Desktop Version */}
       <div className="list-item-image-hover-effect group relative hidden md:block transition-all duration-300">
         <a href={bookmark.link} className="flex items-center justify-between gap-4 py-2 transition-all duration-300 hover:scale-[1.025] " target="_blank" rel="noopener noreferrer">
-          {/* <img
-            className="cover-image max-w-64 pointer-events-none absolute z-10 hidden max-h-40 shadow-lg md:group-hover:block"
-            src={bookmark.cover}
-            alt={bookmark.title}
-          /> */}
           <div className="flex max-w-[80%] shrink-0 items-center gap-2">
             <div className={`h-2 w-2 rounded-full ${colorMap[bookmark.type]}`} />
             <p className="mr-2 truncate font-mono text-sm">{bookmark.title}</p>
@@ -66,13 +61,13 @@ export function BookmarkItem({ bookmark }: Props) {
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="transition-transform duration-200 group-hover:rotate-12"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </div>
         </a>
-        {/* Preview iframe on hover */}
-          <iframe
-            src={bookmark.link}
-            className="cover-image max-w-64 pointer-events-none absolute z-10 hidden max-h-40 shadow-lg md:group-hover:block"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-popups"
+        {/* Simple colored accent box on hover */}
+        <div className="pointer-events-none absolute left-[-20px] top-[50%] transform translate-y-[-50%] z-10 hidden md:group-hover:block">
+          <div 
+            className={`h-full w-2 rounded-full ${colorMap[bookmark.type]} animate-pulse shadow-md`} 
+            style={{ height: '24px' }}
           />
+        </div>
       </div>
 
       {/* Mobile Version */}

@@ -14,7 +14,6 @@ import {
   Bookmark,
   Clock,
   FileText,
-  Dices,
   BriefcaseBusiness,
   WalletCards,
   ArrowUpRight,
@@ -24,12 +23,12 @@ import {
   BadgeCheck,
   ImageIcon,
   BookHeartIcon,
+  Calculator,
+  NotepadText,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
 import { UserProfileSection } from "./user-profile-section"
-import { useAuth } from "@/contexts/auth-context"
-import { useToast } from "@/hooks/use-toast"
 import { Separator } from "./ui/separator"
 
 interface NavItemProps {
@@ -198,8 +197,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1">
             <SectionTitle title="Playground" delay={1100} />
-            <NavItem href="/playground/calculator" icon={<Dices size={16} />} label="Calculator App" onClick={onNavClick} delay={1150} />
-            <NavItem href="/playground/note-widgets" icon={<Dices size={16} />} label="Note Widgets" onClick={onNavClick} delay={1200} />
+            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator App" onClick={onNavClick} delay={1150} />
+            <NavItem href="/playground/note-widgets" icon={<NotepadText size={16} />} label="Note Widgets" onClick={onNavClick} delay={1200} />
           </div>
 
           <Separator />

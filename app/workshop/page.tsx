@@ -51,7 +51,7 @@ export default function WorkshopPage() {
 
         <div className="opacity-0 animate-slide-up" style={{ animationDelay: "100ms" }}>
           <Link
-            href="/workshop/logss"
+            href="/workshop/logs"
             className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
           >
             <Logs size={20} className="text-primary" />

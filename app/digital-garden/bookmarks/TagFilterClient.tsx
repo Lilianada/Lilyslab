@@ -24,9 +24,14 @@ export default function TagFilterClient({ bookmarks }: Props) {
     return () => clearTimeout(timeout);
   }, []);
 
+  // Sort bookmarks by newest first, then apply tag filtering
+  const sortedBookmarks = [...bookmarks].sort((a, b) => {
+    return new Date(b.created).getTime() - new Date(a.created).getTime();
+  });
+  
   const filteredBookmarks = selectedTag
-    ? bookmarks.filter((b) => b.tags.includes(selectedTag))
-    : bookmarks;
+    ? sortedBookmarks.filter((b) => b.tags.includes(selectedTag))
+    : sortedBookmarks;
 
   return (
     <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
