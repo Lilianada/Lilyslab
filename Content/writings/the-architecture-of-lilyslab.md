@@ -7,4 +7,5 @@ tags:
   - Documentation
   - Strategy
   - Tips-&-Tricks
+title: The Architecture of Lily's Lab
 ---
