@@ -144,14 +144,20 @@ export default function BucketListPage() {
         </div>
         </header>
 
-        <div className="w-full h-40 bg-extra-yellow/50 rounded-lg border border-extra-peach/50 mb-8">
-          <Image 
-          src='/walpaper.jpeg'
-          alt='walpaper'
-          width={100}
-          height={100}
-          className="object-cover"
-          />
+        <div className="w-full h-40 mb-8 rounded-lg border border-extra-peach/50 relative overflow-hidden bg-gradient-to-r from-extra-yellow/30 to-extra-peach/30">
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 opacity-20" style={{ 
+              backgroundImage: 'radial-gradient(circle at 1px 1px, black 1px, transparent 0)', 
+              backgroundSize: '20px 20px' 
+            }}></div>
+            <div className="absolute inset-0 opacity-10" style={{
+              backgroundImage: 'linear-gradient(90deg, black 1px, transparent 0), linear-gradient(0deg, black 1px, transparent 0)',
+              backgroundSize: '30px 30px'
+            }}></div>
+          </div>
+          <div className="absolute bottom-4 right-4 text-xs text-extra-peach/70 font-medium">
+            Career Aspirations
+          </div>
         </div>
 
         <section className="mb-16">
