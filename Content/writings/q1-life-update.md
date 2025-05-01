@@ -2,7 +2,7 @@
 author: Lilian
 cover:
   - "[[progress.jpg]]"
-date: 2025-04-16
+date: 2025-04-30
 excerpt: A personal summary of my professional and personal growth in Q1 2025.
 published: true
 slug: q1-life-update

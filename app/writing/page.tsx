@@ -5,6 +5,36 @@ import { getAllWritings, Writing } from "@/lib/writings/writings"
 
 export const revalidate = 3600 // Revalidate every hour
 
+// Helper to group writings by month and year
+function groupWritingsByMonth(writings: Writing[]) {
+  const grouped: Record<string, Writing[]> = {}
+
+  writings.forEach(writing => {
+    if (!writing.date) return
+    
+    const date = new Date(writing.date)
+    const monthYear = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
+    
+    if (!grouped[monthYear]) {
+      grouped[monthYear] = []
+    }
+    
+    grouped[monthYear].push(writing)
+  })
+
+  // Sort the keys (month-year) in reverse chronological order
+  return Object.keys(grouped)
+    .sort((a, b) => {
+      const dateA = new Date(grouped[a][0].date)
+      const dateB = new Date(grouped[b][0].date)
+      return dateB.getTime() - dateA.getTime()
+    })
+    .map(monthYear => ({
+      monthYear,
+      writings: grouped[monthYear]
+    }))
+}
+
 export default async function WritingPage() {
   let posts: Writing [] = []
   let error: string | null = null
@@ -23,7 +53,7 @@ export default async function WritingPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto animate-fade-in px-6 py-12">
+    <div className="max-w-3xl mx-auto animate-fade-in sm:px-6 py-12">
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">Writing</h1>
         <p className="text-sm text-muted-foreground">Thoughts on design, engineering, and building products.</p>
@@ -35,52 +65,89 @@ export default async function WritingPage() {
           <p className="text-muted-foreground mb-4 text-sm">{error}</p>
         </div>
       ) : posts.length > 0 ? (
-        <div className="space-y-8 stagger-children mt-12">
-          {posts.map((post, index) => (
-            <article
-              key={post.slug}
-              className="group opacity-0 animate-slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <Link
-                href={`/writing/${post.slug}`}
-                className="block transition-transform duration-300 hover:translate-x-1"
-                prefetch
+        <>
+          {/* Mobile view: Group by month */}
+          <div className="sm:hidden space-y-8 mt-8">
+            {groupWritingsByMonth(posts).map(group => (
+              <div key={group.monthYear} className="opacity-0 animate-fade-in">
+                <h3 className="text-sm font-medium text-muted-foreground border-b pb-2 mb-4">
+                  {group.monthYear}
+                </h3>
+                <div className="space-y-5">
+                  {group.writings.map(post => (
+                    <article key={post.slug} className="pb-4">
+                      <Link href={`/writing/${post.slug}`} prefetch>
+                        <h2 className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 mb-1">
+                          {post.title}
+                        </h2>
+                        <div className="flex gap-2 items-center text-[10px] text-muted-foreground mb-1">
+                          <span>{formatDate(post.date)}</span>
+                          <span>•</span>
+                          <span>{post.readingTime} min read</span>
+                        </div>
+                        {post.excerpt && (
+                          <p className="text-xs text-muted-foreground">
+                            {post.excerpt.split(" ").length > 15
+                              ? post.excerpt.split(" ").slice(0, 15).join(" ") + "…"
+                              : post.excerpt}
+                          </p>
+                        )}
+                      </Link>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Desktop view: Original layout */}
+          <div className="hidden sm:block space-y-8 stagger-children mt-12">
+            {posts.map((post, index) => (
+              <article
+                key={post.slug}
+                className="group opacity-0 animate-slide-up"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <article key={post.slug} className="hover:bg-card hover:p-2 rounded-md transition-all duration-200 group">
-                    {/* First line: Title, line, date */}
-                    <div className="flex items-center gap-2 mb-1">
-                      <h2 className="text-sm font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
-                        {post.title}
-                      </h2>
-                      <div className="w-full border-t-2 border-dashed border-muted-foreground opacity-50 mx-2 group-hover:border-primary" />
-                      <span className="text-xs text-muted-foreground whitespace-nowrap">
-                        {post.date ? formatDate(post.date) : "No date"}
-                      </span>
-                    </div>
-                    {/* Second line: Reading time */}
-                    <div className="flex gap-2 items-center mb-1">
-                      <span className="text-xs text-muted-foreground italic">
-                        {post.wordCount ? `${post.wordCount} words` : "— words"}
-                      </span>
-                      -
-                      <span className="text-xs text-muted-foreground italic">
-                        {post.readingTime ? `${post.readingTime} min read` : "— min read"}
-                      </span>
-                    </div>
-                    {/* Third line: Excerpt */}
-                    <p className="text-sm text-muted-foreground">
-                      {post.excerpt
-                        ? post.excerpt.split(" ").length > 10
-                          ? post.excerpt.split(" ").slice(0, 10).join(" ") + "…"
-                          : post.excerpt
-                        : "No excerpt available"}
-                    </p>
-                </article>
-              </Link>
-            </article>
-          ))}
-        </div>
+                <Link
+                  href={`/writing/${post.slug}`}
+                  className="block transition-transform duration-300 hover:translate-x-1"
+                  prefetch
+                >
+                  <article className="hover:bg-card hover:p-2 rounded-md transition-all duration-200 group">
+                      {/* First line: Title, line, date */}
+                      <div className="flex items-center gap-2 mb-1">
+                        <h2 className="text-sm font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
+                          {post.title}
+                        </h2>
+                        <div className="w-full border-t-2 border-dashed border-muted-foreground opacity-50 mx-2 group-hover:border-primary" />
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">
+                          {post.date ? formatDate(post.date) : "No date"}
+                        </span>
+                      </div>
+                      {/* Second line: Reading time */}
+                      <div className="flex gap-2 items-center mb-1">
+                        <span className="text-xs text-muted-foreground italic">
+                          {post.wordCount ? `${post.wordCount} words` : "— words"}
+                        </span>
+                        -
+                        <span className="text-xs text-muted-foreground italic">
+                          {post.readingTime ? `${post.readingTime} min read` : "— min read"}
+                        </span>
+                      </div>
+                      {/* Third line: Excerpt */}
+                      <p className="text-sm text-muted-foreground">
+                        {post.excerpt
+                          ? post.excerpt.split(" ").length > 10
+                            ? post.excerpt.split(" ").slice(0, 10).join(" ") + "…"
+                            : post.excerpt
+                          : "No excerpt available"}
+                      </p>
+                  </article>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </>
       ) : (
         <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">
           <Annoyed size={16} />
