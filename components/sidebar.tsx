@@ -12,24 +12,12 @@ import {
   MessageSquare,
   Layers,
   Bookmark,
-  Mail,
-  Github,
-  Linkedin,
-  Scissors,
-  Leaf,
-  Calendar,
-  TrendingUp,
   Clock,
   FileText,
   Dices,
   BriefcaseBusiness,
-  Dumbbell,
-  ShoppingCart,
   WalletCards,
-  CreditCard,
   ArrowUpRight,
-  LogOut,
-  Crown,
   Store,
   History,
   Wrench,
@@ -41,11 +29,8 @@ import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
 import { UserProfileSection } from "./user-profile-section"
 import { useAuth } from "@/contexts/auth-context"
-import { Button } from "./ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { Separator } from "./ui/separator"
-// import Bookmark from "@/app/digital-garden/bookmarks/page"
-// import logo from "@/public/12.png"
 
 interface NavItemProps {
   href: string
@@ -156,31 +141,7 @@ const SectionTitle = ({ title, delay = 0 }: { title: string; delay?: number }) =
 }
 
 export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boolean; onNavClick?: () => void }) {
-  const { user, signOut, isAdmin } = useAuth()
-  const [isSigningOut, setIsSigningOut] = useState(false)
-  const { toast } = useToast()
 
-  const handleSignOut = async () => {
-    setIsSigningOut(true)
-    try {
-      await signOut()
-      toast({
-        title: "Signed out successfully",
-        description: "You have been signed out of your account.",
-        duration: 3000,
-      })
-    } catch (error) {
-      console.error("Error signing out:", error)
-      toast({
-        title: "Sign out failed",
-        description: "There was a problem signing you out. Please try again.",
-        variant: "destructive",
-        duration: 3000,
-      })
-    } finally {
-      setIsSigningOut(false)
-    }
-  }
 
   return (
     <aside
@@ -221,8 +182,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={550} />
             <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={600} />
             <NavItem href="/digital-garden/catalog" icon={<ImageIcon size={16} />} label="Catalog" onClick={onNavClick} delay={650} />
-            <NavItem href="/digital-garden/notes" icon={<FileText size={16} />} label="Notes" onClick={onNavClick} delay={700} />
-            <NavItem href="/digital-garden/drafts" icon={<BookHeartIcon size={16} />} label="Drafts" onClick={onNavClick} delay={750} />
+            <NavItem href="/digital-garden/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={700} />
+            {/* <NavItem href="/digital-garden/drafts" icon={<BookHeartIcon size={16} />} label="Drafts" onClick={onNavClick} delay={750} /> */}
           </div>
 
           <div className="space-y-1">

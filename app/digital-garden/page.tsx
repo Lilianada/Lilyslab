@@ -5,18 +5,15 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {
     Card,
-    CardContent,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { SearchBar } from "@/components/search-bar"
-import { ArrowUpRight, Book, Film, Lightbulb, PenTool, Plus, Zap, Images } from "lucide-react"
+import { ArrowUpRight, Book, ListCheckIcon, Lightbulb, Sprout, NotepadText, Images, BookmarkIcon } from "lucide-react"
 import { SuggestionSidebar } from "@/components/workshop/suggestions/SuggestionSidebar"
 
 export default function DigitalGardenHome() {
-    const router = useRouter()
     const [isLoaded, setIsLoaded] = useState(false)
     const [isSuggestionSidebarOpen, setIsSuggestionSidebarOpen] = useState(false);
 
@@ -26,22 +23,22 @@ export default function DigitalGardenHome() {
 
     const sections = [
         {
+            title: "Bucket List",
+            description: "",
+            href: "/digital-garden/bucket-list",
+            icon: ListCheckIcon
+        },
+        {
             title: "Bookshelf",
             description: "Books I've read, am reading, or plan to read.",
             href: "/digital-garden/bookshelf",
             icon: Book
         },
         {
-            title: "Movie List",
-            description: "Movies and shows I've watched or want to watch.",
-            href: "/digital-garden/movie-list",
-            icon: Film
-        },
-        {
             title: "Notes",
             description: "Fleeting thoughts, ideas, and learnings.",
             href: "/digital-garden/notes",
-            icon: Zap
+            icon: NotepadText
         },
         {
             title: "Catalog",
@@ -53,13 +50,13 @@ export default function DigitalGardenHome() {
             title: "Bookmarks",
             description: "A visual collection of inspiring images.",
             href: "/digital-garden/bookmarks",
-            icon: Images
+            icon: BookmarkIcon
         },
         {
-            title: "Draft",
-            description: "A visual collection of inspiring images.",
-            href: "/digital-garden/drafts",
-            icon: Images
+            title: "Coming Soon",
+            description: "An Empty Space",
+            href: "/digital-garden/coming-soon",
+            icon: Sprout
         },
     ]
 
@@ -71,6 +68,8 @@ export default function DigitalGardenHome() {
                         <h1 className="mb-1 text-lg md:text-2xl font-bold tracking-tight">Digital Garden</h1>
                         <p className="text-sm text-muted-foreground">
                         My Digital Garden is a growing collection of thoughts, ideas, and knowledge I’ve gathered from various topics that spark my curiosity.
+                        {" "}
+                        <a href="/digital-garden/writings/digital-garden" className="text-extra-steelBlue underline hover:text-extra-peach">What is a digital garden?</a>
                         </p>
                     </div>
                 </header> 

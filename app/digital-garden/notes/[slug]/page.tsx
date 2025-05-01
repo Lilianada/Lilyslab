@@ -19,8 +19,8 @@ import { DraftRouteParams, SlugParams } from "@/lib/types/route-params"
  */
 async function getDraftContent(slug: string) {
   try {
-    const draftsDir = path.join(process.cwd(), 'Content/drafts')
-    const filePath = path.join(draftsDir, `${slug}.md`)
+    const notesDir = path.join(process.cwd(), 'Content/notes')
+    const filePath = path.join(notesDir, `${slug}.md`)
     
     if (!fs.existsSync(filePath)) {
       return null
@@ -61,13 +61,13 @@ export async function generateMetadata({ params }: DraftRouteParams) {
 }
 
 /**
- * Generate static paths for all markdown files in the drafts directory
+ * Generate static paths for all markdown files in the notes directory
  * This follows Next.js's convention for static site generation with dynamic routes
  */
 export function generateStaticParams(): SlugParams[] {
   try {
-    const draftsDir = path.join(process.cwd(), 'Content/drafts')
-    const files = fs.readdirSync(draftsDir)
+    const notesDir = path.join(process.cwd(), 'Content/notes')
+    const files = fs.readdirSync(notesDir)
     
     return files
       .filter(file => file.endsWith('.md'))
@@ -75,7 +75,7 @@ export function generateStaticParams(): SlugParams[] {
         slug: file.replace(/\.md$/, '')
       }))
   } catch (error) {
-    console.error('Error generating static params for drafts:', error)
+    console.error('Error generating static params for notes:', error)
     return []
   }
 }
@@ -94,11 +94,11 @@ export default async function DraftPage({ params }: DraftRouteParams) {
     <div className="max-w-3xl mx-auto px-6 py-12 animate-fade-in">
       <div className="mb-8">
         <Link 
-          href="/digital-garden/drafts" 
+          href="/digital-garden/notes" 
           className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mb-6"
         >
           <ArrowLeft className="w-3 h-3 mr-2" />
-          Back to Drafts
+          Back to Notes
         </Link>
         <header className="mb-8">
           <h1 className="mb-2 text-2xl font-bold text-foreground">{draft.title}</h1>
@@ -121,7 +121,7 @@ export default async function DraftPage({ params }: DraftRouteParams) {
         </header>
 
         <Separator />
-        <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4">
+        <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-8 ">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeHighlight]}
