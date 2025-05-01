@@ -1,0 +1,26 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Example Blog Post",
+  "description": "This is an example blog post description.",
+  "image": "https://lilyslab.xyz/example-image.jpg",
+  "datePublished": "2025-01-01T12:00:00Z",
+  "dateModified": "2025-01-01T12:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Lilian Ada",
+    "url": "https://lilyslab.xyz"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lily's Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lilyslab.xyz/12.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://lilyslab.xyz/writing/example-post"
+  }
+}

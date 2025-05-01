@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Loader2, CheckSquare, Square, Mail, Linkedin, Sprout, ArrowUpNarrowWide, Blocks, HeartHandshake, Sparkles, CreditCard } from "lucide-react";
 import Image from "next/image";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Interface for the bucket list item data (should match API)
 interface BucketListItem {
@@ -132,17 +133,24 @@ export default function BucketListPage() {
   };
 
   return (
-    <div className="min-h-screen animate-fade-in">
-    <div className="container max-w-3xl mx-auto p-0 sm:px-4 py-8">
-      <header className="flex items-center justify-between mb-8">
-        <div className="flex flex-col">
-          <h1 className="mb-1 text-xl font-medium">Career Bucket List
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            My aspirations and target companies for the next step.
-          </p>
-        </div>
-        </header>
+    <>
+      <ScrollProgress 
+        color="bg-extra-lavender" 
+        height={3} 
+        glow={true}
+        glowColor="rgba(var(--extra-lavender), 0.6)"
+        glowIntensity="12px"
+      />
+      <div className="min-h-screen animate-fade-in">
+        <div className="container max-w-3xl mx-auto p-0 sm:px-4 py-8">
+          <header className="flex items-center justify-between mb-8">
+            <div className="flex flex-col">
+              <h1 className="mb-1 text-xl font-medium">Career Bucket List</h1>
+              <p className="text-sm text-muted-foreground">
+                My aspirations and target companies for the next step.
+              </p>
+            </div>
+          </header>
 
         <div className="w-full h-40 mb-8 rounded-lg border border-extra-peach/50 relative overflow-hidden bg-gradient-to-r from-extra-yellow/30 to-extra-peach/30">
           <div className="absolute inset-0">
@@ -234,8 +242,8 @@ export default function BucketListPage() {
             </Link>
           </div>
         </section>
-
+        </div>
       </div>
-    </div>
+    </>
   );
 } 

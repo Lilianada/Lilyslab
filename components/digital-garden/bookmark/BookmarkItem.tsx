@@ -38,14 +38,14 @@ export function BookmarkItem({ bookmark }: Props) {
     <React.Fragment>
       {/* Desktop Version */}
       <div className="list-item-image-hover-effect group relative hidden md:block transition-all duration-300">
-        <a href={bookmark.link} className="flex items-center justify-between gap-4 py-2 transition-all duration-300 hover:scale-[1.025] " target="_blank" rel="noopener noreferrer">
+        <a href={bookmark.link} className="flex items-center justify-between gap-4 py-2 transition-all duration-300 hover:scale-[1.025] " target="_blank" rel="noopener noreferrer" aria-label={`Visit ${bookmark.title}`}>
           <div className="flex max-w-[80%] shrink-0 items-center gap-2">
             <div className={`h-2 w-2 rounded-full ${colorMap[bookmark.type]}`} />
             <p className="mr-2 truncate font-mono text-sm">{bookmark.title}</p>
             {bookmark.tags.length > 0 && (
               <div className="flex gap-1 ">
                 {bookmark.tags.map((tag) => (
-                  <span key={tag} className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+                  <span key={tag} className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
                     #{tag}
                   </span>
                 ))}
@@ -72,7 +72,7 @@ export function BookmarkItem({ bookmark }: Props) {
 
       {/* Mobile Version */}
       <div className="md:hidden group">
-        <a href={bookmark.link} className="mt-5 flex flex-col gap-2 border-b border-neutral-200 pb-5" target="_blank" rel="noopener noreferrer">
+        <a href={bookmark.link} className="mt-5 flex flex-col gap-2 border-b border-neutral-200 pb-5" target="_blank" rel="noopener noreferrer" aria-label={`Visit ${bookmark.title}`}>
           <div className="flex items-center justify-between gap-1">
             <div className="flex shrink items-center gap-2 overflow-x-auto">
               <div className={`h-2 w-2 shrink-0 rounded-full ${colorMap[bookmark.type]}`} />
@@ -87,7 +87,7 @@ export function BookmarkItem({ bookmark }: Props) {
               {bookmark.tags.length > 0 && (
                 <div className="flex gap-1 ">
                   {bookmark.tags.map((tag) => (
-                    <span key={tag} className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+                    <span key={tag} className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
                       #{tag}
                     </span>
                   ))}
@@ -95,7 +95,7 @@ export function BookmarkItem({ bookmark }: Props) {
               )}
             </div>
             <div className="flex shrink-0 items-center gap-2 text-neutral-400">
-              <p className="text-[10px]">{domain}</p>
+              <p className="text-xs">{domain}</p>
               <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="transition-transform duration-200 group-hover:rotate-24 group-hover:text-extra-steelBlue group-hover:scale-150"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
           </div>

@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://lilyslab.xyz"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Digital Garden",
+      "item": "https://lilyslab.xyz/digital-garden"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Notes",
+      "item": "https://lilyslab.xyz/digital-garden/notes"
+    }
+  ]
+}

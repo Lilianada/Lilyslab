@@ -1,5 +1,7 @@
+// Import Firebase modules directly from the package root to avoid path issues
 import { initializeApp, getApps, getApp } from "firebase/app"
-import { getAuth, GoogleAuthProvider, signInWithPopup, browserPopupRedirectResolver } from "firebase/auth"
+// Use dynamic imports for auth to avoid the file not found error
+import { GoogleAuthProvider } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
 // Let's log the environment variables to verify they exist (only in development)
@@ -36,8 +38,27 @@ if (isConfigValid) {
   console.error("Firebase configuration is incomplete. Authentication will not work.")
 }
 
-const auth = isConfigValid ? getAuth(app) : null
-const db = isConfigValid ? getFirestore(app) : null
+// Initialize auth and db with proper typing
+import type { Auth } from 'firebase/auth';
+import type { Firestore } from 'firebase/firestore';
+
+// Initialize with proper types
+let auth: Auth | null = null;
+let db: Firestore | null = null;
+
+// Only initialize if config is valid and app exists
+if (isConfigValid && app) {
+  // Initialize Firestore
+  db = getFirestore(app);
+  
+  // Initialize Auth dynamically to avoid path issues
+  import('firebase/auth').then(({ getAuth }) => {
+    auth = getAuth(app!);
+  }).catch(err => {
+    console.error('Error loading auth module:', err);
+  });
+}
+
 const googleProvider = new GoogleAuthProvider()
 
 // Helper function for Google sign-in
@@ -48,6 +69,8 @@ export const signInWithGoogle = async () => {
   }
 
   try {
+    // Dynamically import the required functions
+    const { signInWithPopup, browserPopupRedirectResolver } = await import('firebase/auth');
     const result = await signInWithPopup(auth, googleProvider, browserPopupRedirectResolver)
     return result.user
   } catch (error) {

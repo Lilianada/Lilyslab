@@ -1,0 +1,11 @@
+<!-- person structured data -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Lilian Ada","alternateName":"Lily","description":"Software engineer, product manager, and digital creator","image":"https://lilyslab.xyz/12.png","url":"https://lilyslab.xyz","sameAs":["https://twitter.com/lilian_ada_","https://github.com/lilianada","https://linkedin.com/in/lilianada"],"jobTitle":"Software Engineer","worksFor":{"@type":"Organization","name":"Lily's Lab"},"knowsAbout":["Web Development","User Interface Design","Product Management","Digital Content Creation"]}</script>
+
+<!-- website structured data -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Lily's Lab","alternateName":"Lilyslab","url":"https://lilyslab.xyz","description":"Software engineer, product manager, and digital creator","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lilyslab.xyz/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+
+<!-- breadcrumb structured data -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://lilyslab.xyz"},{"@type":"ListItem","position":2,"name":"Digital Garden","item":"https://lilyslab.xyz/digital-garden"},{"@type":"ListItem","position":3,"name":"Notes","item":"https://lilyslab.xyz/digital-garden/notes"}]}</script>
+
+<!-- article structured data -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Example Blog Post","description":"This is an example blog post description.","image":"https://lilyslab.xyz/example-image.jpg","datePublished":"2025-01-01T12:00:00Z","dateModified":"2025-01-01T12:00:00Z","author":{"@type":"Person","name":"Lilian Ada","url":"https://lilyslab.xyz"},"publisher":{"@type":"Organization","name":"Lily's Lab","logo":{"@type":"ImageObject","url":"https://lilyslab.xyz/12.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://lilyslab.xyz/writing/example-post"}}</script>

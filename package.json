@@ -6,7 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create:log": "node scripts/create-content.js log",
+    "create:note": "node scripts/create-content.js note",
+    "create:writing": "node scripts/create-content.js writing",
+    "create:bookmark": "node scripts/create-content.js bookmark",
+    "update:metadata": "node scripts/update-metadata.js",
+    "generate:backlinks": "node scripts/generate-backlinks.js",
+    "optimize:images": "node scripts/optimize-images.js",
+    "check:links": "node scripts/check-links.js",
+    "generate:og": "node scripts/generate-og-images.js"
   },
   "dependencies": {
     "@headlessui/react": "latest",
@@ -88,7 +97,13 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "critters": "^0.0.25",
+    "cssnano": "^7.0.6",
+    "glob": "^11.0.2",
+    "husky": "^9.1.7",
     "postcss": "^8",
+    "postcss-import": "^16.1.0",
+    "puppeteer": "^24.7.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

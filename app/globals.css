@@ -1,14 +1,11 @@
+/* Import external CSS first */
+@import "prismjs/themes/prism-tomorrow.css";
+@import "../styles/card-animations.css";
+
+/* Then include Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Prism.js theme for code highlighting */
-@import "prismjs/themes/prism-tomorrow.css";
-/* Fix the import syntax - add semicolon */
-
-
-
-@import "../styles/card-animations.css";
 
  
 @layer base {

@@ -17,7 +17,7 @@ wordCount: 689
 
 We've all been there: you open your browser to research something specific – maybe a JavaScript framework or a design pattern. Three hours later, you find yourself with 37 open tabs spanning everything from the original topic to cutting-edge design trends to fascinating creators you've never heard of before. Somewhere along the way, you fell down a rabbithole.
 
-As I've been [[cultivating-my-digital-garden|building my digital garden]], I've come to celebrate these rabbitholes as one of my primary sources of inspiration and discovery. The idea for this digital garden itself, many of the designs I've implemented, and the most interesting people I follow all came from unexpected journeys down various rabbitholes. They represent our natural tendency to explore connections between ideas – the very essence of creative thinking.
+As I've been [cultivating my digital garden](/cultivating-my-digital-garden), I've come to celebrate these rabbitholes as one of my primary sources of inspiration and discovery. The idea for this digital garden itself, many of the designs I've implemented, and the most interesting people I follow all came from unexpected journeys down various rabbitholes. They represent our natural tendency to explore connections between ideas – the very essence of creative thinking.
 
 ### The Anatomy of a Rabbithole
 
@@ -39,7 +39,7 @@ The browser tab collection becomes a physical manifestation of my curiosity in a
 
 ### From Rabbitholes to Gardens
 
-This is precisely where [[cultivating-my-digital-garden|digital gardening]] becomes transformative. Instead of letting these interesting discoveries disappear into the graveyard of closed tabs or trying to fight against this natural exploratory tendency, I've started to:
+This is precisely where [cultivating my digital garden](/cultivating-my-digital-garden) becomes transformative. Instead of letting these interesting discoveries disappear into the graveyard of closed tabs or trying to fight against this natural exploratory tendency, I've started to:
 
 1. **Capture Quick Seedlings**: When I find something interesting but tangential, I create a basic note (a seedling 🌱) with minimal context and the source link
    

@@ -6,6 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+// Import only the icons we need, but in a TypeScript-compatible way
 import {
   Home,
   BookOpen,
@@ -21,8 +22,8 @@ import {
   History,
   Wrench,
   BadgeCheck,
-  ImageIcon,
-  BookHeartIcon,
+  Image as ImageIcon,
+  BookHeart as BookHeartIcon,
   Calculator,
   NotepadText,
 } from "lucide-react"
@@ -43,7 +44,7 @@ interface NavItemProps {
 }
 
 const NavItem = ({ href, icon, label, external = false, template = false, hasNotification = false, onClick, delay = 0 }: NavItemProps) => {
-  const pathname = usePathname()
+  const pathname = usePathname() || ''
   const isActive = pathname === href || pathname.startsWith(`${href}/`)
   const [isVisible, setIsVisible] = useState(false)
 

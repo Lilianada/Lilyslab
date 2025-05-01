@@ -20,7 +20,7 @@ export function ToolCard({ name, description, logo, platforms, url }: ToolCardPr
           <div className="flex items-center gap-2 min-w-0">
             {logo && (
               <div className="h-6 w-6 overflow-hidden rounded-md flex-shrink-0">
-                <img src={logo} alt={name} className="h-full w-full object-cover" />
+                <img src={logo} alt={name} width={24} height={24} loading="lazy" className="h-full w-full object-cover" />
               </div>
             )}
             <h3 className="text-sm font-medium truncate">{name}</h3>

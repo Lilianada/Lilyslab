@@ -174,7 +174,7 @@ As Lilyslab grows, I'm planning several architectural improvements:
 
 ## Conclusion
 
-Architecture isn't just about technical decisions—it's about creating systems that support your goals and workflow. For my [[cultivating-my-digital-garden|digital garden]] and [[building-a-digital-workshop|digital workshop]], this architecture provides the right balance of flexibility, performance, and maintainability.
+Architecture isn't just about technical decisions—it's about creating systems that support your goals and workflow. For my [digital garden](/cultivating-my-digital-garden) and [digital workshop](/building-a-digital-workshop), this architecture provides the right balance of flexibility, performance, and maintainability.
 
 Every project has unique requirements, so your choices may differ. The important thing is to make deliberate decisions based on your specific needs rather than blindly following trends.
 

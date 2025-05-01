@@ -2,12 +2,20 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Globe, Code2, Paintbrush, BookOpen, ChevronLeft, TriangleAlert, Github } from "lucide-react";
 
 export default function Colophon() {
   return (
-    <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
+    <>
+      <ScrollProgress 
+        color="bg-extra-peach" 
+        height={3} 
+        glow={true}
+        glowColor="rgba(var(--extra-peach), 0.6)"
+        glowIntensity="12px"
+      />
+      <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium tracking-tight">Colophon</h1>
         <p className="text-sm text-muted-foreground mb-6">The tools, technologies, and inspirations behind this website.</p>
@@ -186,7 +194,7 @@ export default function Colophon() {
           <span className="ml-2 px-2 py-0.5 rounded bg-muted text-xs">Vercel</span>
         </div>
         <div className="text-sm text-muted-foreground mb-4">
-          Deployments are powered by <a href="https://vercel.com/" className="underline">Vercel</a>, making updates seamless and fast. Every push creates a fresh version, so improvements and fixes reach visitors quickly.
+          Deployments are powered by <a href="https://vercel.com/" className="underline" target="_blank" rel="noopener noreferrer">Vercel</a>, making updates seamless and fast. Every push creates a fresh version, so improvements and fixes reach visitors quickly.
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="border rounded bg-background p-4">
@@ -206,5 +214,6 @@ export default function Colophon() {
         </blockquote>
       </section>
     </div>
+    </>
   );
 }

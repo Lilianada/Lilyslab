@@ -17,7 +17,7 @@ wordCount: 476
 
 I'll admit it: I'm a chronic tab hoarder. At this very moment, I have 34 browser tabs open across three windows. Each represents a different thread of thought, a different possibility, a different someday/maybe project. My browser has essentially become the externalized version of my brain—chaotic, overflowing with ideas, and desperately in need of some structure.
 
-This tab situation connects directly to both my [[cultivating-my-digital-garden|digital garden]] approach and my [[building-a-digital-workshop|digital workshop]] philosophy—they're all attempts to manage the overflow of ideas and information.
+This tab situation connects directly to both my [digital workshop](/building-a-digital-workshop) approach and my [digital garden](/cultivating-my-digital-garden) philosophy—they're all attempts to manage the overflow of ideas and information.
 
 ### Why We Accumulate Tabs
 

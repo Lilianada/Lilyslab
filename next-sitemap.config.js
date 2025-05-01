@@ -1,8 +1,25 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://your-domain.com', // TODO: Set your production URL
+  siteUrl: process.env.SITE_URL || 'https://lilyslab.xyz',
   generateRobotsTxt: true,
-  // Add more options as needed
-  // Exclude admin or draft routes if necessary
-  // See: https://github.com/iamvishnusankar/next-sitemap#configuration-options
+  changefreq: 'weekly',
+  priority: 0.7,
+  sitemapSize: 5000,
+  exclude: [
+    '/api/*',
+    '/server-sitemap.xml',
+    '/admin/*',
+    '/playground/coming-soon',
+    '/digital-garden/coming-soon',
+    '/workshop/shop'
+  ],
+  robotsTxtOptions: {
+    additionalSitemaps: [
+      'https://lilyslab.xyz/server-sitemap.xml',
+    ],
+    policies: [
+      { userAgent: '*', allow: '/' },
+      { userAgent: '*', disallow: ['/api', '/admin'] },
+    ],
+  },
 };

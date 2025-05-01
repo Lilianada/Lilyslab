@@ -11,6 +11,12 @@ const config = {
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
+  experimental: {
+    optimizeUniversalDefaults: true,
+  },
   theme: {
     container: {
       center: true,
@@ -118,7 +124,30 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"), 
+    require("@tailwindcss/typography"),
+    // Add plugin to purge unused CSS
+    function({ addBase, addComponents, addUtilities }) {
+      addBase({
+        'html': {
+          scrollBehavior: 'smooth',
+        },
+        '::selection': {
+          backgroundColor: 'hsl(var(--primary) / 0.2)',
+        },
+        'img': {
+          display: 'block',
+          maxWidth: '100%',
+        },
+      });
+    },
+  ],
+  corePlugins: {
+    // Disable plugins that might not be needed
+    touchAction: false,
+    container: true,
+  },
 } satisfies Config
 
 export default config

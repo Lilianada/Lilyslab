@@ -10,6 +10,8 @@ import remarkGfm from "remark-gfm"
 import rehypeHighlight from "rehype-highlight"
 import { ArrowLeft } from "lucide-react"
 import { DraftRouteParams, SlugParams } from "@/lib/types/route-params"
+import { NotesClientWrapper } from "./notes-client-wrapper"
+import { ScrollProgress } from "@/components/ui/scroll-progress"
 
 /**
  * Get draft content by slug
@@ -46,7 +48,9 @@ async function getDraftContent(slug: string) {
  * Generate metadata for the draft page
  */
 export async function generateMetadata({ params }: DraftRouteParams) {
-  const draft = await getDraftContent(params.slug)
+  // Ensure params is awaited before accessing properties
+  const slug = await Promise.resolve(params.slug);
+  const draft = await getDraftContent(slug);
   
   if (!draft) {
     return {
@@ -84,52 +88,63 @@ export function generateStaticParams(): SlugParams[] {
  * Draft page component
  */
 export default async function DraftPage({ params }: DraftRouteParams) {
-  const draft = await getDraftContent(params.slug)
+  // Ensure params is awaited before accessing properties
+  const slug = await Promise.resolve(params.slug);
+  const draft = await getDraftContent(slug);
   
   if (!draft) {
     notFound()
   }
   
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12 animate-fade-in">
-      <div className="mb-8">
-        <Link 
-          href="/digital-garden/notes" 
-          className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mb-6"
-        >
-          <ArrowLeft className="w-3 h-3 mr-2" />
-          Back to Notes
-        </Link>
-        <header className="mb-8">
-          <h1 className="mb-2 text-2xl font-bold text-foreground">{draft.title}</h1>
-          <div className="flex flex-col gap-2">
-            {draft.date && <p className="text-xs text-muted-foreground">Last updated: {draft.date}</p>}
-            
-            {draft.tags && draft.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1">
-                {draft.tags.map((tag: string) => (
-                  <span 
-                    key={tag} 
-                    className="rounded-full bg-muted px-2 py-0.5 text-[10px] text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        </header>
-
-        <Separator />
-        <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-8 ">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight]}
+    <NotesClientWrapper>
+      <ScrollProgress 
+        color="bg-extra-green" 
+        height={3} 
+        glow={true} 
+        glowColor="rgba(var(--extra-green), 0.6)" 
+        glowIntensity="12px" 
+      />
+      <div className="max-w-3xl mx-auto px-6 py-12 animate-fade-in">
+        <div className="mb-8">
+          <Link 
+            href="/digital-garden/notes" 
+            className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mb-6"
           >
-            {draft.content}
-          </ReactMarkdown>
-        </article>
+            <ArrowLeft className="w-3 h-3 mr-2" />
+            Back to Notes
+          </Link>
+          <header className="mb-8">
+            <h1 className="mb-2 text-2xl font-bold text-foreground">{draft.title}</h1>
+            <div className="flex flex-col gap-2">
+              {draft.date && <p className="text-xs text-muted-foreground">Last updated: {draft.date}</p>}
+              
+              {draft.tags && draft.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {draft.tags.map((tag: string) => (
+                    <span 
+                      key={tag} 
+                      className="rounded-full bg-muted px-2 py-0.5 text-[10px] text-muted-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </header>
+
+          <Separator />
+          <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-8 ">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeHighlight]}
+            >
+              {draft.content}
+            </ReactMarkdown>
+          </article>
+        </div>
       </div>
-    </div>
+    </NotesClientWrapper>
   )
 }
