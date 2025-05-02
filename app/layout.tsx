@@ -107,7 +107,7 @@ export default function RootLayout({
         {/* Security Headers */}
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        {/* <meta httpEquiv="X-Frame-Options" content="DENY" /> */}
         <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
         
         {/* Structured Data for SEO */}

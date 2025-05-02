@@ -16,7 +16,7 @@ export default function DailyLogPage() {
           sections: data.sections,
           footer: {
             tags: ['#daily', '#agenda'],
-            lastUpdated: data.sections.length > 0 ? [{ text: data.sections[0].date + ' Log' }] : []
+            lastUpdated: data.sections.length > 0 ? [{ text: data.sections[0].date  }] : []
           }
         });
       });
@@ -128,7 +128,7 @@ export default function DailyLogPage() {
         {/* Footer */}
         <div className="mt-8 pt-4 border-t border-border text-sm text-gray-400">
           <div className="mb-2">
-            <span className="font-semibold mr-2">tags:</span>
+            <span className="font-medium mr-2">tags:</span>
             {dailyLogData.footer.tags.map((tag: string, i: number) => (
               <a key={i} href="#" className="text-blue-400 hover:underline mr-2">
                 {tag}
@@ -136,7 +136,7 @@ export default function DailyLogPage() {
             ))}
           </div>
           <div className="flex items-center">
-            <span className="font-semibold mr-2">last updated:</span>
+            <span className="font-medium mr-2">last updated:</span>
             {dailyLogData.footer.lastUpdated.map((text: { text: string }, i: number) => (
               <React.Fragment key={i}>
                 <p className="text-neutral-300 hover:underline">

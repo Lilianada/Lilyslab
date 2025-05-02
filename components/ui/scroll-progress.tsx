@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useIsomorphicLayoutEffect from '@/hooks/use-isomorphic-layout-effect';
 
 interface ScrollProgressProps {
   color?: string;
@@ -21,7 +22,7 @@ export function ScrollProgress({
 }: ScrollProgressProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const handleScroll = () => {
       // Calculate how far the user has scrolled
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
