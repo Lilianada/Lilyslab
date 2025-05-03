@@ -1,6 +1,6 @@
 "use client"
 
-import { Separator } from "@/components/ui/separator";
+import { PageCredit } from "@/components/page-credit"
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Removed dynamic MDX import for static About content
@@ -84,10 +84,10 @@ export default function AboutPage() {
           <p className="text-sm leading-normal mb-6">This site is built as a digital garden—always evolving, never truly finished.</p>
         </div>
 
-        <Separator />
-
-        <p className="text-sm text-muted-foreground/60 mt-8">Credit to <a href="https://nicolevanderhoeven.com/about" className="text-extra-green hover:underline" target="_blank" rel="noopener noreferrer">Nicole</a> for the design and inspiration behind this page. Find me elsewhere on <a href="https://twitter.com/lilian_okeke" className="text-extra-green hover:underline" target="_blank" rel="noopener noreferrer">Twitter</a>, <a href="https://github.com/lilianokeke" className="text-extra-green hover:underline" target="_blank" rel="noopener noreferrer">GitHub</a>, and <a href="https://linkedin.com/in/lilianada" className="text-extra-green hover:underline" target="_blank" rel="noopener noreferrer">LinkedIn</a>. Email me at <a href="mailto:lilianokeke.ca@gmail.com" className="text-extra-green hover:underline">lilianokeke.ca@gmail.com</a>, especially about this site, vibe coding, lifestyle, design, productivity, and finding hidden talent. This site was designed in 2025. View my portfolio site <a href="https://lilianada.com" className="text-extra-green hover:underline" target="_blank" rel="noopener noreferrer">here</a>.</p>
-
+        <PageCredit 
+          inspirationName="Nicole"
+          inspirationUrl="https://nicolevanderhoeven.com/about"
+        />
       </div>
       </div>
     </>

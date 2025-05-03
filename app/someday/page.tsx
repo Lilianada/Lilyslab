@@ -1,3 +1,4 @@
+import { PageCredit } from "@/components/page-credit";
 import React from "react";
 
 export default function SomedayPage() {
@@ -10,6 +11,11 @@ export default function SomedayPage() {
       <div className="prose prose-sm dark:prose-invert">
         <p>This page is under construction. Check back later for content about future plans and aspirations.</p>
       </div>
+      <PageCredit
+        inspirationName="Alexander Sandberg"
+        inspirationUrl="https://alexandersandberg.com/someday/"
+        pageName="my someday page" 
+      />
     </div>
   );
 }
