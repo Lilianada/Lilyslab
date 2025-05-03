@@ -87,6 +87,7 @@ export default function AboutPage() {
         <PageCredit 
           inspirationName="Nicole"
           inspirationUrl="https://nicolevanderhoeven.com/about"
+          color="text-extra-green"
         />
       </div>
       </div>
