@@ -25,6 +25,7 @@ export const MusicPlayerWidget = ({
             width={56} 
             height={56} 
             className="rounded-md object-cover"
+            style={{ height: "auto" }} // Maintain aspect ratio
           />
         </div>
         {/* Text Info */}

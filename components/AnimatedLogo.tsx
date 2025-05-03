@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+// Define image paths and constants
 const IMAGES = ["/12.png", "/13.png"];
 const IMAGE_SIZE = 80; // 5rem in px (tailwind w-20/h-20)
 const PAUSE_DURATION = 2000; // ms each image is fully visible
@@ -32,35 +33,46 @@ export default function AnimatedLogo() {
     };
   }, [isTransitioning, current]);
 
-  // For accessibility: alt text can be improved
   return (
     <div
       className="w-20 h-20 mb-6 object-contain relative overflow-hidden"
       style={{ width: IMAGE_SIZE, height: IMAGE_SIZE }}
     >
       {/* Next image underneath */}
-      {/* Next image underneath */}
       <Image
         src={IMAGES[next]}
-        alt="Animated Logo Next"
-        fill
+        alt="Next Animated Logo Frame"
+        width={IMAGE_SIZE}
+        height={IMAGE_SIZE}
         style={{
           objectFit: "contain",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
           zIndex: 1,
           pointerEvents: "none",
-          transition: 'none',
+          transition: "none",
         }}
         className="select-none pointer-events-none"
         draggable={false}
         priority
       />
+
       {/* Current image on top, animating out with blur+fade */}
       <Image
         src={IMAGES[current]}
-        alt="Animated Logo Current"
-        fill
+        alt="Current Animated Logo Frame"
+        width={IMAGE_SIZE}
+        height={IMAGE_SIZE}
         style={{
           objectFit: "contain",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
           zIndex: 2,
           pointerEvents: "none",
           transition: `filter ${TRANSITION_DURATION}ms linear, opacity ${TRANSITION_DURATION}ms linear`,

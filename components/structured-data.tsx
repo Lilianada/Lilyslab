@@ -1,5 +1,5 @@
-
-import React from 'react';
+// Use Next.js Script component for structured data
+import Script from 'next/script';
 
 export const PersonStructuredData = () => {
   const data = {
@@ -29,10 +29,13 @@ export const PersonStructuredData = () => {
 };
   
   return (
-    <script
+    <Script 
+      id="person-schema"
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+      strategy="afterInteractive"
+    >
+      {JSON.stringify(data)}
+    </Script>
   );
 };
 
@@ -55,14 +58,25 @@ export const WebsiteStructuredData = () => {
 };
   
   return (
-    <script
+    <Script 
+      id="website-schema"
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+      strategy="afterInteractive"
+    >
+      {JSON.stringify(data)}
+    </Script>
   );
 };
 
-export const ArticleStructuredData = ({ title, description, slug, date, image }) => {
+interface ArticleStructuredDataProps {
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  image?: string;
+}
+
+export const ArticleStructuredData = ({ title, description, slug, date, image }: ArticleStructuredDataProps) => {
   const data = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -91,14 +105,26 @@ export const ArticleStructuredData = ({ title, description, slug, date, image })
   };
   
   return (
-    <script
+    <Script 
+      id={`article-schema-${slug}`}
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+      strategy="afterInteractive"
+    >
+      {JSON.stringify(data)}
+    </Script>
   );
 };
 
-export const BreadcrumbStructuredData = ({ items }) => {
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface BreadcrumbStructuredDataProps {
+  items: BreadcrumbItem[];
+}
+
+export const BreadcrumbStructuredData = ({ items }: BreadcrumbStructuredDataProps) => {
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -111,9 +137,12 @@ export const BreadcrumbStructuredData = ({ items }) => {
   };
   
   return (
-    <script
+    <Script 
+      id="breadcrumb-schema"
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+      strategy="afterInteractive"
+    >
+      {JSON.stringify(data)}
+    </Script>
   );
 };

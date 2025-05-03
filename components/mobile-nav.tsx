@@ -57,7 +57,7 @@ export default function MobileNav() {
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="left" className="sidebar flex flex-col p-0 bg-muted gap-0">
+          <SheetContent side="left" className="sidebar flex flex-col p-0 bg-muted gap-0" aria-describedby="mobile-navigation-description">
             <div className="flex items-center justify-between border-b p-4">
               <div className="flex items-center">
                 <h2 className="text-sm leading-0 font-medium">Menu</h2>

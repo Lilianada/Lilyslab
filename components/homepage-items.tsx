@@ -9,7 +9,6 @@ export interface WorkItem {
   description: string
 }
 
-
 export const WorkItemComponent = ({
   company,
   role,
@@ -26,6 +25,7 @@ export const WorkItemComponent = ({
     </div>
   )
 }
+
 
 export const SocialLink = ({ platform, url, action }: { platform: string; url: string; action: string }) => {
   return (
