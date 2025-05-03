@@ -100,7 +100,7 @@ export default function DailyLogPage() {
                   <Skeleton className="mr-2 h-3 w-3 rounded-full bg-extra-yellow" />
                   <Skeleton className="h-5 w-32" />
                 </div>
-                <ul className="ml-2 border-l border-border pl-8">
+                <ul className="ml-2 border-l border-border pl-6">
                   {[...Array(3)].map((_, j) => (
                     <li key={j} className="mb-2 flex items-center">
                       <Skeleton className="mr-2 h-4 w-4 rounded" />

@@ -1,30 +1,64 @@
 ---
-title: "Togglr"
-date: "2024-03-22"
-published: false
-tags: ["#utility", "#feature-flags", "#dashboard", "#react"]
+
+title: "AI Prompt Glossary Project"
+date: "2025-05-02"
+published: true
+tags: ["#nextjs", "#react", "#typescript", "#debugging"]
+
 ---
+
+  
 
 ## Project Goals
 
--   [x] Concept: Simple UI for managing feature flags.
--   [ ] Design dashboard interface.
--   [ ] Implement backend logic (Node.js/Express TBD) to store flag states.
--   [ ] Develop React frontend to display and toggle flags.
--   [ ] Basic user authentication for access control.
 
-## Log - 2024-03-22
+- [x] Create a web application to catalog and share AI prompts
+- [x] Implement a search and filtering system for prompts by category
+- [ ] Allow users to submit new prompts for review
+- [ ] Build a responsive, modern UI with Next.js
 
--   **Top of mind:** Deciding on the database schema for flags (name, description, active state, environments?).
--   **Made today great:** Sketched the dashboard layout - list view of flags with toggle switches.
--   **One Thing:** Set up the basic React project using Create React App (will migrate to Next.js later if needed).
+  
+
+## Log - 2025-05-02
+
+- **Top of mind:** How to properly handle server-side code in Next.js client components
+    - Need to separate client and server concerns in Next.js applications
+
+    - File system operations must be moved to API routes or server components
+
+- **Made today great:** Fixed two critical errors in the application
+    - Resolved the "Module not found: Can't resolve 'fs/promises'" error by creating API routes
+    - Fixed the ReactMarkdown className prop error by following the latest API guidelines
+
+- **One Thing:** Understanding Next.js data fetching patterns
+    - Learned how to properly handle server-side operations in a Next.js application
+    - Implemented the pattern of using API routes for client components to fetch data
+
+  
 
 ## Challenges
 
--   Real-time updates on the dashboard if flags change elsewhere. #websockets
--   Designing a simple yet effective API for flag management. #api-design
+- **Challenges:** 
+    - Client-side components trying to use Node.js modules (fs/promises) #nextjs #clientComponents
+    - ReactMarkdown API changes breaking the UI with className prop errors #dependencies #apiChanges
+
+    - Need to maintain proper separation between client and server code #architecture
+
+  
+
+## Resources
+- [Next.js Data Fetching](https://nextjs.org/docs/app/building-your-application/data-fetching) - Helped understand the proper patterns for data fetching in Next.js applications.
+
+- [React Markdown Changelog](https://github.com/remarkjs/react-markdown/blob/main/changelog.md) - Provided guidance on the API changes and how to properly use the component.
+
+- Remember that Next.js 'use client' components cannot use Node.js specific modules like fs, path, etc.
+
+  
 
 ## Next Steps
+- **Next Steps:** 
+- Complete the implementation of the prompt submission feature.
+- Add proper error handling for API routes and form submissions.
+- Improve the UI with better loading states and animations.
 
--   Build the main FlagList component in React.
--   Start setting up the basic Express server for the backend. 
+  
