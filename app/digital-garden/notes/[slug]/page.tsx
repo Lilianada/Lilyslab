@@ -109,13 +109,6 @@ export default async function DraftPage({ params }: DraftRouteParams) {
       />
       <div className="max-w-3xl mx-auto px-6 py-12 animate-fade-in">
         <div className="mb-8">
-          <Link 
-            href="/digital-garden/notes" 
-            className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mb-6"
-          >
-            <ArrowLeft className="w-3 h-3 mr-2" />
-            Back to Notes
-          </Link>
           <header className="mb-8">
             <h1 className="mb-2 text-2xl font-bold text-foreground">{draft.title}</h1>
             <div className="flex flex-col gap-2">
@@ -145,6 +138,14 @@ export default async function DraftPage({ params }: DraftRouteParams) {
               {draft.content}
             </ReactMarkdown>
           </article>
+
+          <Link 
+            href="/digital-garden/notes" 
+            className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mt-6"
+          >
+            <ArrowLeft className="w-3 h-3 mr-2" />
+            Back to Notes
+          </Link>
         </div>
       </div>
     </NotesClientWrapper>
