@@ -107,7 +107,7 @@ export default async function DraftPage({ params }: DraftRouteParams) {
         glowColor="rgba(var(--extra-green), 0.6)" 
         glowIntensity="12px" 
       />
-      <div className="max-w-3xl mx-auto px-6 py-12 animate-fade-in">
+      <div className="max-w-3xl mx-auto sm:px-6 py-12 animate-fade-in">
         <div className="mb-8">
           <header className="mb-8">
             <h1 className="mb-2 text-2xl font-bold text-foreground">{draft.title}</h1>
