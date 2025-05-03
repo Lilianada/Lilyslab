@@ -21,11 +21,11 @@ export default function AboutPage() {
         <p className="text-xs text-extra-green">Last updated: April 30, 2025</p>
       </header>
       <div className="space-y-4 max-w-none text-justify">
-        <p className="text-sm leading-normal mb-6">Hi! I’m Lily, a digital creator, lifestyle connoisseur, design enthusiast, passionate technologist, digital gardener, and lifelong learner. I love exploring knowledge management, creative coding, frontend design, and sharing what I learn with others. This site is my digital home for projects, notes, experiments, and inspiration. <br />Welcome!</p>
         <figure className="space-y-2 mb-6">
           <img src="/about2.jpeg" alt="A beautiful arrangement of lilies" className="rounded-lg shadow-md h-[500px] object-cover" />
           <figcaption className="text-center text-sm text-muted-foreground mt-2">lilies</figcaption>
         </figure>
+        <p className="text-sm leading-normal mb-6">Hi! I’m Lily, a digital creator, lifestyle connoisseur, design enthusiast, passionate technologist, digital gardener, and lifelong learner. I love exploring knowledge management, creative coding, frontend design, and sharing what I learn with others. This site is my digital home for projects, notes, experiments, and inspiration. <br />Welcome!</p>
         <h2 className="text-lg mb-2 font-medium tracking-tight text-foreground">This site</h2>
         <p className="text-base leading-normal mb-6">Here’s what you can find here, and how it all fits together:</p>
 
