@@ -15,6 +15,7 @@ export default function SomedayPage() {
         inspirationName="Alexander Sandberg"
         inspirationUrl="https://alexandersandberg.com/someday/"
         pageName="my someday page" 
+        color="text-extra-peach"
       />
     </div>
   );
