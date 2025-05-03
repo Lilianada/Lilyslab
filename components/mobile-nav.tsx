@@ -67,7 +67,7 @@ export default function MobileNav() {
             <div className="flex-1 overflow-y-auto">
               <Sidebar mobile onNavClick={() => setOpen(false)} />
             </div>
-            {user && (
+            
               <div className="border-t p-4 flex justify-between">
                 
                 <ThemeToggle />
@@ -79,7 +79,7 @@ export default function MobileNav() {
                   <UserProfileSection />
                 )}
               </div>
-            )}
+            
           </SheetContent>
         </Sheet>
       </div>

@@ -18,6 +18,7 @@ async function loadChangelogs(): Promise<ChangelogEntry[]> {
       date: data.date,
       type: data.type,
       body: data.body,
+      category: data.category,
     } as ChangelogEntry;
   });
   return entries.sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -28,7 +29,9 @@ export default async function ChangelogPage() {
     <div className="max-w-xl mx-auto py-12 px-6">
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">Changelog</h1>
-        <p className="text-muted-foreground text-sm"></p>
+        <p className="text-muted-foreground text-sm">
+          Log of all notable changes and updates made to this website.
+        </p>
       </header>
 
       <ChangelogTimeline entries={await loadChangelogs()} />

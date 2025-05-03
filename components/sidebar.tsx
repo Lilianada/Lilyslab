@@ -27,6 +27,7 @@ import {
   Calculator,
   NotepadText,
   CalendarDaysIcon,
+  PersonStandingIcon,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -156,7 +157,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         {!mobile && (
           <div className="mb-4 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/12.png" alt="Lily's Lab Logo" width={40} height={40} className="rounded-md" />
+              <Image src="/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
 
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
@@ -170,10 +171,10 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1">
             <SectionTitle title="Me" delay={150} />
-            <NavItem href="/about" icon={<FileText size={16} />} label="About" onClick={onNavClick} delay={200} />
+            <NavItem href="/about" icon={<PersonStandingIcon size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writing" onClick={onNavClick} delay={250} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={300} />
-            <NavItem href="/someday" icon={<CalendarDaysIcon size={16} />} label="Someday" onClick={onNavClick} delay={400} />
+            <NavItem href="/someday" icon={<FileText size={16} />} label="Someday" onClick={onNavClick} delay={400} />
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
             <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={450} />
           </div>

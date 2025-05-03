@@ -8,10 +8,16 @@ import { MusicPlayerWidget } from "@/components/music-player-widget"
 import { useEffect as useFooterEffect, useState as useFooterState } from "react";
 
 function FooterWithDateTimeAndLocation() {
+  // Use empty initial values to prevent hydration mismatch
   const [dateTime, setDateTime] = useFooterState("");
-  const [location, setLocation] = useFooterState("Locating...");
+  const [location, setLocation] = useFooterState("");
+  // Add a mounted state to prevent rendering content during SSR
+  const [isMounted, setIsMounted] = useFooterState(false);
 
   useFooterEffect(() => {
+    // Set mounted to true once component is mounted on client
+    setIsMounted(true);
+    
     // Function to update date/time
     const updateTime = () => {
       const now = new Date();
@@ -29,6 +35,11 @@ function FooterWithDateTimeAndLocation() {
     // Cleanup function to clear interval
     return () => clearInterval(intervalId);
   }, []);
+  
+  // Only render the content on the client side
+  if (!isMounted) {
+    return <footer className="mt-8 py-4 text-xs text-left text-secondary"></footer>;
+  }
   
   return (
     <footer className="mt-8 py-4 text-xs text-left text-secondary">
@@ -134,7 +145,7 @@ export default function Home() {
               </p>
 
               <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                <span className="font-semibold">Status: </span> Actively looking 
+                <span className="font-semibold text-extra-yellow">Status: </span> Actively looking 
                 <br />
                 Having taken some time off to recharge and explore, I am looking to get back into it.
 

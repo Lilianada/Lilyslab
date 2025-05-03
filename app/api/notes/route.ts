@@ -3,13 +3,12 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 
-// Update Note interface to include content
+// Update Note interface to include content and make entry optional
 interface Note {
   id: string;
   title: string;
   tags?: string[];
   date: string;
-  entry: string;
   image?: string | null;
   publish?: boolean;
   content: string; // Add field for full markdown content
@@ -30,13 +29,12 @@ export async function GET() {
       const { data, content } = matter(fileContent);
 
       // Validate required fields and publish status
-      if (data.publish === true && data.title && data.date && data.entry && data.tags) {
+      if (data.publish === true && data.title && data.date && data.tags) {
         notes.push({
           id: file.replace(/\.md$/, ''),
           title: data.title,
           tags: Array.isArray(data.tags) ? data.tags : [data.tags],
           date: data.date,
-          entry: data.entry,
           image: data.image || null,
           publish: data.publish,
           content: content, // Add the full markdown content

@@ -10,6 +10,7 @@ export type ChangelogEntry = {
   date: string;
   type: "feature" | "improvement" | "fix" | "breaking";
   body: string;
+  category: string;
 };
 
 const typeColors: Record<ChangelogEntry["type"], string> = {
@@ -64,7 +65,7 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
           return (
             <li key={entry.version} className="mb-12 ml-4">
               {/* Dot */}
-              <span className={`absolute -left-2.5 flex items-center justify-center w-5 h-5 rounded-full ring-8 ring-background ${colorString.split(" ")[0]}`}></span>
+              <span className={`absolute -left-1.5 mt-2 flex items-center justify-center w-3 h-3 rounded-full ring-8 ring-background ${colorString.split(" ")[0]}`}></span>
               <div className="relative flex items-center gap-2 mb-1">
                 <span className={`px-2 py-0.5 rounded font-mono text-xs border ${colorString}`}>{entry.type}</span>
                 <span className="font-mono text-xs text-muted-foreground">{format(new Date(entry.date), "MMM d, yyyy")}</span>
@@ -75,7 +76,7 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
                 onClick={() => setExpanded(isOpen ? null : entry.version)}
                 aria-expanded={isOpen}
               >
-                <h3 className="text-lg font-semibold mb-1">{entry.title}</h3>
+                <h3 className="text-base font-semibold mb-1 mt-3">{entry.title}</h3>
                 <div
                   className={`prose prose-sm dark:prose-invert max-w-none transition-all duration-300 overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-16 opacity-80"}`}
                   style={{
@@ -83,7 +84,8 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
                     maskImage: !isOpen ? "linear-gradient(180deg, #000 70%, transparent 100%)" : undefined,
                   }}
                 >
-                  {isOpen ? entry.body : getExcerpt(entry.body)}
+                  {isOpen ? entry.body : getExcerpt(entry.body)} {" "}  
+                 #{entry.category}
                 </div>
                 <span className="font-mono text-xs text-primary mt-2 inline-block transition-opacity duration-300 opacity-80 hover:opacity-100">
                   {isOpen ? "Show less" : "Read more →"}
