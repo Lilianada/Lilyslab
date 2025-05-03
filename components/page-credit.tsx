@@ -17,7 +17,6 @@ export function PageCredit({
   color,
   pageName = "this page"
 }: PageCreditProps) {
-  // The year will be rendered client-side only to avoid hydration errors
   
   return (
     <>
