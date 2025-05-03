@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme";
+import type { PluginAPI } from 'tailwindcss/types/config';
 
 const config = {
   darkMode: "class",
@@ -128,7 +129,7 @@ const config = {
     require("tailwindcss-animate"), 
     require("@tailwindcss/typography"),
     // Add plugin to purge unused CSS
-    function({ addBase, addComponents, addUtilities }) {
+    function({ addBase, addComponents, addUtilities }: PluginAPI) {
       addBase({
         'html': {
           scrollBehavior: 'smooth',

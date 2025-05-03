@@ -27,6 +27,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Make sure auth is not null before using it
+    if (!auth) {
+      setLoading(false);
+      return () => {};
+    }
+    
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user)
 
@@ -75,7 +81,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await setUserIsLoggedIn(user.email, false)
       }
 
-      await firebaseSignOut(auth)
+      // Make sure auth is not null before signing out
+      if (auth) {
+        await firebaseSignOut(auth)
+      }
       setIsAdmin(false)
     } catch (error) {
       console.error("Error signing out:", error)

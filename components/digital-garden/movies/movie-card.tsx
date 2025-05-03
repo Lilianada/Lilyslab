@@ -47,7 +47,7 @@ export default function MovieCard({ post }: { post: any }) {
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.map((tag) => (
+                    {post.tags.map((tag: string) => (
                       <span
                         key={tag}
                         className="text-xs text-muted-foreground hover:text-foreground cursor-pointer"
