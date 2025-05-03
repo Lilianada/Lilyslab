@@ -51,21 +51,42 @@ if (isConfigValid && app) {
   // Initialize Firestore
   db = getFirestore(app);
   
-  // Initialize Auth dynamically to avoid path issues
-  import('firebase/auth').then(({ getAuth }) => {
-    auth = getAuth(app!);
-  }).catch(err => {
-    console.error('Error loading auth module:', err);
-  });
+  // Initialize Auth with a safer approach
+  try {
+    // Use a synchronous import for better reliability
+    require('firebase/auth');
+    const { getAuth } = require('firebase/auth');
+    auth = getAuth(app);
+  } catch (err) {
+    console.error('Error initializing Firebase auth:', err);
+    // Fallback to dynamic import if synchronous import fails
+    import('firebase/auth')
+      .then(({ getAuth }) => {
+        auth = getAuth(app!);
+      })
+      .catch(err => {
+        console.error('Error loading auth module (fallback):', err);
+      });
+  }
 }
 
 const googleProvider = new GoogleAuthProvider()
 
-// Helper function for Google sign-in
+// Helper function for Google sign-in with better error handling
 export const signInWithGoogle = async () => {
+  // Add a small delay to ensure auth has time to initialize
   if (!auth) {
-    console.error("Firebase auth is not initialized due to missing configuration")
-    throw new Error("Firebase authentication is not properly configured")
+    // Wait for auth to initialize (max 2 seconds)
+    let attempts = 0;
+    while (!auth && attempts < 20) {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      attempts++;
+    }
+    
+    if (!auth) {
+      console.error("Firebase auth is not initialized due to missing configuration")
+      throw new Error("Firebase authentication is not properly configured")
+    }
   }
 
   try {

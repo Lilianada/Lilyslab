@@ -53,6 +53,21 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event - serve from cache, fall back to network
 self.addEventListener('fetch', (event) => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  // Skip API requests
+  if (event.request.url.includes('/api/')) {
+    return;
+  }
+
+  // Skip external resources
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
@@ -74,18 +89,26 @@ self.addEventListener('fetch', (event) => {
             // Clone the response because it's a one-time use stream
             const responseToCache = response.clone();
 
+            // Cache the response
             caches.open(CACHE_NAME)
               .then((cache) => {
-                // Don't cache API requests or external resources
-                if (!event.request.url.includes('/api/') && 
-                    event.request.url.startsWith(self.location.origin)) {
+                try {
                   cache.put(event.request, responseToCache);
+                } catch (error) {
+                  console.warn('Failed to cache response:', error);
                 }
               });
 
             return response;
           }
-        );
+        ).catch(error => {
+          console.error('Fetch failed:', error);
+          // You could return a custom offline page here
+          return new Response('Network error occurred', {
+            status: 503,
+            statusText: 'Service Unavailable'
+          });
+        });
       })
   );
 });

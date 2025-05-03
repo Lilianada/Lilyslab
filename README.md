@@ -8,7 +8,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Not
 
 - **Modern Design**: Clean, minimalist design with dark/light mode support
 - **Responsive Layout**: Optimized for all device sizes
-- **Notion-Powered CMS**: Content managed through Notion databases
+- **Obsidian-Powered CMS**: Content managed through Notion databases
 - **Firebase Authentication**: User authentication for interactive features
 - **Interactive Components**:
   - Ask Me Anything (AMA) section
@@ -23,7 +23,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Not
 
 - **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS
 - **Authentication**: Firebase Authentication
-- **Database**: Notion API (as headless CMS)
+- **Database**: Obsidian (as headless CMS)
 - **Styling**: Tailwind CSS, shadcn/ui components
 - **Deployment**: Vercel
 
@@ -39,18 +39,15 @@ portfolio-dashboard/
 │   ├── now/                # Now page
 │   ├── stack/              # Tech stack page
 │   ├── globals.css         # Global styles
-│   ├── notion.css          # Notion-specific styles
 │   └── layout.tsx          # Root layout
 ├── components/             # Reusable components
 │   ├── ui/                 # UI components (shadcn/ui)
-│   ├── notion/             # Notion-specific components
 │   ├── sidebar.tsx         # Sidebar navigation
 │   └── ...                 # Other components
 ├── contexts/               # React contexts
 │   └── auth-context.tsx    # Authentication context
 ├── hooks/                  # Custom React hooks
 ├── lib/                    # Utility functions and libraries
-│   ├── notion.ts           # Notion API integration
 │   ├── firebase.ts         # Firebase configuration
 │   └── utils.ts            # Utility functions
 ├── public/                 # Static assets
@@ -59,9 +56,9 @@ portfolio-dashboard/
 
 ## 🧩 Key Components
 
-### Notion Integration
+### Obsidian Integration
 
-The website uses Notion as a headless CMS, with several databases:
+The website uses Obsidian as a headless CMS, with several databases:
 
 - **Articles/Writing**: Blog posts with rich text content
 - **Projects**: Portfolio projects
@@ -72,9 +69,7 @@ The website uses Notion as a headless CMS, with several databases:
 - **AMA**: Ask Me Anything questions and answers
 - **Comments**: Article comments
 
-The integration is handled through the Notion API, with both official and unofficial clients:
-- Official client (`@notionhq/client`) for database queries
-- Unofficial client (`notion-client`) for rich text content rendering
+
 
 ### Authentication System
 
@@ -113,7 +108,6 @@ The UI is built with a combination of custom components and shadcn/ui:
 - **Navigation**: Sidebar for desktop, sheet for mobile
 - **Theme Toggle**: Light/dark mode support
 - **User Profile**: User information and authentication status
-- **Notion Renderer**: Custom renderer for Notion content
 - **Comments Section**: Threaded comments with replies
 - **Toast Notifications**: Feedback for user actions
 
@@ -121,7 +115,7 @@ The UI is built with a combination of custom components and shadcn/ui:
 
 1. **Clone the repository**:
    \`\`\`bash
-   git clone https://github.com/yourusername/portfolio-dashboard.git
+   git clone https://github.com/lilianada/lilyslab.git
    cd portfolio-dashboard
    \`\`\`
 
@@ -133,17 +127,7 @@ The UI is built with a combination of custom components and shadcn/ui:
 3. **Set up environment variables**:
    Create a `.env.local` file with the following variables:
    \`\`\`
-   # Notion
-   NOTION_API_KEY=your_notion_api_key
-   NOTION_DATABASE_ID=your_notion_database_id
-   NOTION_SPEAKING_DATABASE_ID=your_notion_speaking_database_id
-   NOTION_PROJECTS_DATABASE_ID=your_notion_projects_database_id
-   NOTION_WORK_DATABASE_ID=your_notion_work_database_id
-   NOTION_APP_DISSECTION_DATABASE_ID=your_notion_app_dissection_database_id
-   NOTION_RESOURCES_DATABASE_ID=your_notion_resources_database_id
-   NOTION_AMA_DATABASE_ID=your_notion_ama_database_id
-   NOTION_COMMENTS_DATABASE_ID=your_notion_comments_database_id
-
+  
    # Firebase
    NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
@@ -162,19 +146,6 @@ The UI is built with a combination of custom components and shadcn/ui:
    Navigate to `http://localhost:3000`
 
 ## 🔑 Environment Variables
-
-### Notion Configuration
-
-- `NOTION_API_KEY`: Your Notion API key
-- `NOTION_DATABASE_ID`: Main articles database ID
-- `NOTION_SPEAKING_DATABASE_ID`: Speaking engagements database ID
-- `NOTION_PROJECTS_DATABASE_ID`: Projects database ID
-- `NOTION_WORK_DATABASE_ID`: Work experience database ID
-- `NOTION_APP_DISSECTION_DATABASE_ID`: App dissection database ID
-- `NOTION_RESOURCES_DATABASE_ID`: Resources database ID
-- `NOTION_AMA_DATABASE_ID`: AMA questions database ID
-- `NOTION_COMMENTS_DATABASE_ID`: Comments database ID
-
 ### Firebase Configuration
 
 - `NEXT_PUBLIC_FIREBASE_API_KEY`: Firebase API key
@@ -273,7 +244,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [shadcn/ui](https://ui.shadcn.com/)
-- [Notion API](https://developers.notion.com/)
 - [Firebase](https://firebase.google.com/)
 - [Vercel](https://vercel.com/)
 - [Lucide Icons](https://lucide.dev/)

@@ -12,14 +12,12 @@ export type Writing = {
   coverImage?: string;
   content: string;
   published: boolean;
-  readingTime: number;
-  wordCount: number;
 };
 
-const writingsDir = path.join(process.cwd(), 'Content/writings');
+const writingsDir = path.join(process.cwd(), 'Content/Writings');
 
 export function getAllWritings(): Writing[] {
-  const writingsPath = path.join(process.cwd(), "Content/writings")
+  const writingsPath = path.join(process.cwd(), "Content/Writings")
 
   if (!fs.existsSync(writingsPath)) {
     console.warn("Writings folder not found:", writingsPath)
@@ -37,9 +35,6 @@ export function getAllWritings(): Writing[] {
 
       const published = data.published === true;
 
-      // Calculate word count and reading time
-      const wordCount = content.split(/\s+/).filter(Boolean).length;
-      const readingTime = Math.max(1, Math.round(wordCount / 200));
       return {
         slug: file.replace(/\.mdx?$/, ''),
         title: data.title || 'Untitled',
@@ -49,17 +44,10 @@ export function getAllWritings(): Writing[] {
         coverImage: data.coverImage || null,
         published: published,
         content,
-        wordCount,
-        readingTime,
       };
     })
     .filter(writing => writing.published === true)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-}
-
-// Helper to count words in a string
-function countWords(text: string): number {
-  return text.split(/\s+/).filter(Boolean).length;
 }
 
 export function getWritingBySlug(slug: string): Writing | null {
@@ -69,9 +57,6 @@ export function getWritingBySlug(slug: string): Writing | null {
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
 
-  // Calculate word count and reading time
-  const wordCount = content.split(/\s+/).filter(Boolean).length;
-  const readingTime = Math.max(1, Math.round(wordCount / 200));
   return {
     slug,
     title: data.title || 'Untitled',
@@ -81,7 +66,5 @@ export function getWritingBySlug(slug: string): Writing | null {
     coverImage: data.coverImage || null,
     content,
     published: data.published === true,
-    wordCount,
-    readingTime,
   };
 }
