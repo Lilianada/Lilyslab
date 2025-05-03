@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    throw new Error("Notion integration removed. Please implement a new data source.")
+    throw new Error("Please implement a new data source.")
     return NextResponse.json({ utilities })
   } catch (error) {
     console.error("Error fetching utilities:", error)

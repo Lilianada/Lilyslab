@@ -17,6 +17,7 @@ interface Project {
   isArchived?: boolean;
 }
 
+
 function getPublishedProjects(): Project[] {
   const dir = path.join(process.cwd(), "Content/projects");
   const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
@@ -37,7 +38,7 @@ function getPublishedProjects(): Project[] {
         title: data.title || "Untitled",
         desc: data.excerpt || data.description || "No description",
         category: Array.isArray(data.tags) && data.tags.length > 0 ? data.tags[0] : (data.category || "Project"),
-        url: data.slug ? `/projects/${data.slug}` : (data.url || undefined),
+        url: data.url || "No URL",
         new: !!data.new,
         isConfidential: data.isConfidential === true || (typeof data.isConfidential === 'string' && data.isConfidential.toLowerCase() === 'true'),
         isArchived: data.isArchived === true || (typeof data.isArchived === 'string' && data.isArchived.toLowerCase() === 'true'),
@@ -51,6 +52,7 @@ function getPublishedProjects(): Project[] {
 const projects = typeof window === "undefined" ? getPublishedProjects() : [];
 
 export default function WorkshopLogPage() {
+  console.log(projects);
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
       <header className="mb-8">
@@ -110,9 +112,9 @@ export default function WorkshopLogPage() {
                     item.url ? (
                       <Link
                         href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Open ${item.title} externally`}
+                        target={item.url.startsWith('http') ? "_blank" : "_self"}
+                        rel={item.url.startsWith('http') ? "noopener noreferrer" : undefined}
+                        aria-label={`Open ${item.title} ${item.url.startsWith('http') ? 'externally' : ''}`}
                         className="transition-colors cursor-pointer"
                       >
                         <ArrowUpRight size={16} strokeWidth={2} className="text-zinc-500 group-hover:text-primary transition-colors" />
@@ -124,11 +126,11 @@ export default function WorkshopLogPage() {
 
               {/* Mobile (below md) */}
               {item.url && (
-                <a
+                <Link
                   href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open ${item.title} externally`}
+                  target={item.url.startsWith('http') ? "_blank" : "_self"}
+                  rel={item.url.startsWith('http') ? "noopener noreferrer" : undefined}
+                  aria-label={`Open ${item.title} ${item.url.startsWith('http') ? 'externally' : ''}`}
                   className={`group flex flex-col items-start gap-y-1 border-0 border-b border-border last:border-0 px-2 py-3 transition-colors duration-150 lg:hidden hover:bg-muted ${isConfidential
                       ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed"
                       : "cursor-pointer bg-transparent"
@@ -159,7 +161,7 @@ export default function WorkshopLogPage() {
                     </div>
                   </div>
                   <span className="truncate text-muted-foreground text-left text-base w-full">{item.desc}</span>
-                </a>
+                </Link>
               )}
             </React.Fragment>
 

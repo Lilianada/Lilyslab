@@ -82,7 +82,7 @@ export default function BookshelfPage() {
               className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTab === tab.key
                 ? "bg-primary text-primary-foreground border-primary"
                 : "bg-muted border-border text-muted-foreground hover:bg-accent"
-                }`}
+              }`}
               onClick={() => setSelectedTab(tab.key as 'all' | 'current-reads' | 'read' | 'will-read')}
             >
               {tab.label}
@@ -108,10 +108,7 @@ export default function BookshelfPage() {
             )}
           </div>
         )}
-      <p className="text-sm text-muted-foreground/60 mt-8">Credit to <a href="https://iamrob.in" className="text-extra-green/80 hover:underline" target="_blank" rel="noopener noreferrer">Robin Spielmann</a> for the design and inspiration behind this page.</p>
       </div>
-
-
     </div>
   );
 }

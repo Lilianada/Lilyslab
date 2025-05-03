@@ -32,7 +32,6 @@ export default function Colophon() {
             { name: "Tailwind CSS", url: "https://tailwindcss.com/", desc: "Utility-first CSS framework for rapid UI development" },
             { name: "shadcn/ui", url: "https://ui.shadcn.com/", desc: "Beautifully designed components built with Radix UI and Tailwind CSS" },
             { name: "Firebase", url: "https://firebase.google.com/", desc: "User management and authentication" },
-            { name: "Notion", url: "https://www.notion.so/", desc: "Flexible workspace and CMS for notes, content, and data" },
             { name: "Obsidian", url: "https://obsidian.md/", desc: "Markdown-based knowledge base and CMS for personal content" },
             { name: "Vercel AI SDK", url: "https://sdk.vercel.ai/", desc: "The AI Toolkit for building AI-powered features and applications" }
           ].map((tech) => (

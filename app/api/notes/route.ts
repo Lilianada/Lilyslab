@@ -30,19 +30,13 @@ export async function GET() {
       const { data, content } = matter(fileContent);
 
       // Validate required fields and publish status
-      if (data.publish === true && data.title && data.date && data.tags) {
-        // Use entry from frontmatter, or fallback to first paragraph of content
-        let entry = data.entry;
-        if (!entry) {
-          // Find the first non-empty paragraph in content
-          entry = content.split(/\n\s*\n/).find(paragraph => paragraph.trim().length > 0)?.trim() || '';
-        }
+      if (data.publish === true && data.title && data.date && data.entry && data.tags) {
         notes.push({
           id: file.replace(/\.md$/, ''),
           title: data.title,
           tags: Array.isArray(data.tags) ? data.tags : [data.tags],
           date: data.date,
-          entry: entry,
+          entry: data.entry,
           image: data.image || null,
           publish: data.publish,
           content: content, // Add the full markdown content

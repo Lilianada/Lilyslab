@@ -33,12 +33,12 @@ export default function AboutPage() {
 
           <h3 className="text-base mb-2 font-medium tracking-tight text-foreground">Main</h3>
           <ul className="list-disc pl-5 space-y-1 text-sm">
-            <li>Home: The landing page with an overview of the site.</li>
-            <li>About: Learn more about me and the purpose of this site.</li>
-            <li>Writing: Blog posts and articles on technology, design, and life.</li>
-            <li>Now: What I’m currently working on and planning.</li>
-            <li>Stack: Tools, frameworks, and technologies I use.</li>
-            <li>AMA: Ask Me Anything — submit questions for public answers.</li>
+            <li className="text-sm">Home: The landing page with an overview of the site.</li>
+            <li className="text-sm">About: Learn more about me and the purpose of this site.</li>
+            <li className="text-sm">Writing: Blog posts and articles on technology, design, and life.</li>
+            <li className="text-sm">Now: What I’m currently working on and planning.</li>
+            <li className="text-sm">Stack: Tools, frameworks, and technologies I use.</li>
+            <li className="text-sm">AMA: Ask Me Anything — submit questions for public answers.</li>
           </ul>
         </div>
 
@@ -46,12 +46,12 @@ export default function AboutPage() {
 
           <h3 className="text-base mb-2 font-medium tracking-tight text-foreground">Digital Garden</h3>
           <ul className="list-disc pl-5 space-y-1 text-sm">
-            <li>Bucket List: Goals, aspirations, and target companies.</li>
-            <li>Bookshelf: Books I’m reading, have read, or plan to read.</li>
-            <li>Bookmarks: Curated links and resources.</li>
-            <li>Catalog: Visual catalog of projects and media.</li>
-            <li>Notes: Collection of my notes and research.</li>
-            <li>Drafts: Work-in-progress ideas and explorations.</li>
+            <li className="text-sm">Bucket List: Goals, aspirations, and target companies.</li>
+            <li className="text-sm">Bookshelf: Books I’m reading, have read, or plan to read.</li>
+            <li className="text-sm">Bookmarks: Curated links and resources.</li>
+            <li className="text-sm">Catalog: Visual catalog of projects and media.</li>
+            <li className="text-sm">Notes: Collection of my notes and research.</li>
+            <li className="text-sm">Drafts: Work-in-progress ideas and explorations.</li>
           </ul>
         </div>
 
@@ -59,18 +59,18 @@ export default function AboutPage() {
 
           <h3 className="text-base mb-2 font-medium tracking-tight text-foreground">Workshop</h3>
           <ul className="list-disc pl-5 space-y-1 text-sm">
-            <li>Projects: Professional and personal projects showcase.</li>
-            <li>Logs: Process logs for experiments and engineering.</li>
-            <li>Tools: Custom utilities and tool demos.</li>
-            <li>Resources: Guides, templates, and references.</li>
+            <li className="text-sm">Projects: Professional and personal projects showcase.</li>
+            <li className="text-sm">Logs: Process logs for experiments and engineering.</li>
+            <li className="text-sm">Tools: Custom utilities and tool demos.</li>
+            <li className="text-sm">Resources: Guides, templates, and references.</li>
           </ul>
         </div>
 
         <div>
           <h3 className="text-base mb-2 font-medium tracking-tight text-foreground">Playground</h3>
           <ul className="list-disc pl-5 space-y-1 text-sm">
-            <li>Calculator App: Interactive calculator demo.</li>
-            <li>Note Widgets: Small interactive note-taking widgets.</li>
+            <li className="text-sm">Calculator App: Interactive calculator demo.</li>
+            <li className="text-sm">Note Widgets: Small interactive note-taking widgets.</li>
           </ul>
         </div>
 
@@ -78,8 +78,8 @@ export default function AboutPage() {
 
           <h3 className="text-base mb-2 font-medium tracking-tight text-foreground">Utility</h3>
           <ul className="list-disc pl-5 space-y-1 text-sm">
-            <li>Colophon: Site credits and technologies used.</li>
-            <li>Changelog: Recent updates and changes.</li>
+            <li className="text-sm">Colophon: Site credits and technologies used.</li>
+            <li className="text-sm">Changelog: Recent updates and changes.</li>
           </ul>
           <p className="text-sm leading-normal mb-6">This site is built as a digital garden—always evolving, never truly finished.</p>
         </div>

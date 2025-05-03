@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Search } from "lucide-react"
+import { Search, Instagram } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { PinCard } from "@/components/pin-card"
 import { PinCardSkeleton } from "@/components/pin-card-skeleton"
 import { useInView } from "react-intersection-observer"
 import Masonry from 'react-masonry-css'
+import Link from "next/link"
 
 // Sample data with Unsplash images
 const samplePins = [
@@ -138,6 +139,13 @@ export default function PicPinsPage() {
             A readaptation of the Pinterest layout. Hover on any pin to see more details.
             </p>
           </div>
+          <Link 
+            href="/digital-garden/catalog/instagram" 
+            className="flex items-center gap-2 px-3 py-2 rounded-md bg-muted hover:bg-muted/80 transition-colors text-sm"
+          >
+            <Instagram className="h-4 w-4" />
+            <span>Instagram Feed</span>
+          </Link>
         </header>
         {/* Search Bar */}
         <div className="relative mb-8 max-w-xl">

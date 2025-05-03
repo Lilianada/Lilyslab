@@ -44,19 +44,6 @@
     --extra-peach: 18 86% 71%;       /* #F29874 */
     --extra-paleYellow: 45 82% 80%;  /* #F4DAA0 */
     --extra-steelBlue: 218 47% 61%;  /* #6C95CF */
-
-    --notion-text: 0 0% 9%;            /* #171717 */
-    --notion-bg-gray: 0 0% 97%;        /* #f7f7f7 */
-    --notion-bg-brown: 25 40% 95%;     /* #f2e8e4 */
-    --notion-bg-orange: 30 60% 95%;    /* #f7eee4 */
-    --notion-bg-yellow: 50 60% 95%;    /* #f7f1e4 */
-    --notion-bg-green: 120 40% 95%;    /* #eaf2ea */
-    --notion-bg-blue: 210 40% 95%;     /* #e8f0f7 */
-    --notion-bg-purple: 270 40% 95%;   /* #ede8f7 */
-    --notion-bg-pink: 330 40% 95%;     /* #f7e8f0 */
-    --notion-bg-red: 0 40% 95%;        /* #f7e8e8 */
-    --notion-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --notion-max-width: 720px;
   }
 
   .dark {
@@ -93,17 +80,6 @@
     --extra-peach: 18 86% 36%;       /* #a15c3d */
     --extra-paleYellow: 45 82% 32%;  /* #85743a */
     --extra-steelBlue: 218 47% 32%;  /* #354c6b */
-
-    --notion-text: 0 0% 95%;            /* #f2f2f2 */
-    --notion-bg-gray: 210 10% 15%;      /* #2a2e33 */
-    --notion-bg-brown: 25 30% 15%;      /* #2a2623 */
-    --notion-bg-orange: 30 30% 15%;     /* #2b2923 */
-    --notion-bg-yellow: 50 30% 15%;     /* #2b2a23 */
-    --notion-bg-green: 120 30% 15%;     /* #232a23 */
-    --notion-bg-blue: 210 30% 15%;      /* #23272a */
-    --notion-bg-purple: 270 30% 15%;    /* #29232a */
-    --notion-bg-pink: 330 30% 15%;      /* #2a2327 */
-    --notion-bg-red: 0 30% 15%;         /* #2a2323 */
   }
 }
 
@@ -205,28 +181,6 @@ main::before {
   animation-delay: 1s;
 }
 
-/* Notion-specific styles */
-.prose .notion-content {
-  max-width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
-    "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-/* Notion-like spacing */
-.notion-content > * {
-  margin-top: 1px;
-  margin-bottom: 1px;
-}
-
-.notion-content > * + * {
-  margin-top: 4px;
-}
-
-/* Notion-like paragraph spacing */
-.notion-content p {
-  margin: 2px 0;
-  min-height: 1.5em;
-}
 
 /* Page transition */
 .page-transition-enter {

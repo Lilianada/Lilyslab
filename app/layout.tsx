@@ -10,6 +10,7 @@ import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { Breadcrumb } from "@/components/breadcrumb-nav"
 import { BuyMeCoffee } from "@/components/buy-me-coffee"
+// ViewCounter temporarily removed to fix build errors
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
@@ -133,6 +134,7 @@ export default function RootLayout({
             </main>
             <Toaster />
             <BuyMeCoffee />
+            {/* ViewCounter temporarily removed to fix build errors */}
           </AuthProvider>
         </ThemeProvider>
       </body>

@@ -5,49 +5,31 @@ import { useEffect, useState } from "react"
 import AnimatedLogo from "@/components/AnimatedLogo";
 import { SocialLink, WorkItemComponent } from "@/components/homepage-items"
 import { MusicPlayerWidget } from "@/components/music-player-widget"
+import { useEffect as useFooterEffect, useState as useFooterState } from "react";
 
 function FooterWithDateTimeAndLocation() {
-  const [dateTime, setDateTime] = useState("");
-  const [location, setLocation] = useState("Locating...");
+  const [dateTime, setDateTime] = useFooterState("");
+  const [location, setLocation] = useFooterState("Locating...");
 
-  useEffect(() => {
-    // Update date/time every minute
+  useFooterEffect(() => {
+    // Function to update date/time
     const updateTime = () => {
       const now = new Date();
       setDateTime(now.toLocaleString());
     };
+  
+    // Initialize and set interval for updating time
     updateTime();
-    const interval = setInterval(updateTime, 60000); // Update every minute
-
-    // Get location if supported
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (pos) => {
-          const { latitude, longitude } = pos.coords;
-          try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
-            if (!response.ok) throw new Error('Failed to fetch location');
-            const data = await response.json();
-            let place = data.address?.city || data.address?.town || data.address?.village || data.address?.hamlet || '';
-            let region = data.address?.state || data.address?.region || '';
-            let country = data.address?.country || '';
-            let display = [place, region, country].filter(Boolean).join(', ');
-            setLocation(display || 'Location unavailable');
-          } catch (err) {
-            setLocation('Location unavailable');
-          }
-        },
-        (err) => {
-          setLocation("Location unavailable");
-        }
-      );
-    } else {
-      setLocation("Geolocation not supported");
-    }
-
-    return () => clearInterval(interval);
+    const intervalId = setInterval(updateTime, 1000);
+    
+    // Set a static location instead of using geolocation
+    // This completely avoids the permissions policy violation
+    setLocation("Remote, Digital World");
+  
+    // Cleanup function to clear interval
+    return () => clearInterval(intervalId);
   }, []);
-
+  
   return (
     <footer className="mt-8 py-4 text-xs text-left text-secondary">
       <span className="block">Current time: {dateTime}</span>
@@ -64,43 +46,49 @@ interface WorkItem {
   description: string
 }
 
+interface ProjectItem {
+  id: string
+  img: string
+}
+
+
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [work, setWork] = useState<WorkItem[]>([])
+  const [projects, setProjects] = useState<ProjectItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
-  const colorCards = [
-    "bg-[#FBF3B9]",
-    "bg-[#FFDCCC]",
-    "bg-[#FDB7EA]",
-    "bg-[#B7B1F2]",
-  ];
-  const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
     setIsLoaded(true)
 
-    async function loadWorkData() {
-      setIsLoading(true)
+    // Fetch data from Obsidian
+    async function fetchData() {
       try {
-        const response = await fetch('/api/work');
-        if (!response.ok) throw new Error('Failed to fetch work data');
-        const workData = await response.json();
-        setWork(workData);
-        
+        const response = await fetch("/api/homepage-data")
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`)
+        }
+
+        const data = await response.json()
+
+        if (data.error) {
+          throw new Error(data.error)
+        }
+
+        setWork(data.work || [])
+        setProjects(data.projects || [])
       } catch (error) {
-        console.error('Error loading work data:', error);
+        console.error("Error fetching homepage data:", error)
+        setError("Failed to load data")
       } finally {
-        setIsLoading(false);
-        setIsLoaded(true);
+        setIsLoading(false)
       }
     }
 
-    loadWorkData();
-  }, []);
-
-  
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -142,14 +130,19 @@ export default function Home() {
               </p>
 
               <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                <span className="font-bold">Status: </span> Actively looking 
+                My goal with this site to show how much you can achieve with AI at the intersection of creativity and innovation. We should all strive to work smarter not harder. You don’t have to learn a new skill each time you want to accomplish something. Steal an idea, refine it, tweak it until it becomes new, until it becomes yours. {" "}
+              </p>
+
+              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                <span className="font-semibold">Status: </span> Actively looking 
                 <br />
                 Having taken some time off to recharge and explore, I am looking to get back into it.
 
-                If you are looking for someone to help on frontend or design, I am always open to chat and make connections, so please do not hesitate to reach out!
+                If you are looking for someone whose mission is to demonstrate the vast potential of AI when it’s used as a partner in the creative process, I am always open to chat and make connections, so please do not hesitate to reach out!
               </p>
             </section>
 
+            {/* Music Widget */}
             <section>
               {isLoading ? (
                 <div className="animate-pulse space-y-4">
@@ -164,6 +157,7 @@ export default function Home() {
                 />)}
             </section>
 
+            {/* Work */}
             <section>
               <h2 className="mb-4 text-sm font-medium text-muted-foreground">Work</h2>
               <div className="space-y-4 stagger-children">
@@ -188,6 +182,7 @@ export default function Home() {
               </div>
             </section>
 
+            {/* Projects */}
             <section>
               <h2 className="mb-4 text-sm font-medium text-muted-foreground">Color Project</h2>
 
@@ -200,26 +195,20 @@ export default function Home() {
                     <div className="h-20 w-20 sm:h-36 sm:w-36 bg-muted rounded"></div>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-4 justify-between gap-2 w-full sm:gap-4">
-                    {colorCards.map((code, indx) => (
-                      <div
-                        key={indx}
-                        className={`h-20 w-full sm:h-36 sm:w-36 ${code} rounded transition-all duration-300 cursor-pointer ${
-                          hovered === null
-                            ? "opacity-100"
-                            : hovered === indx
-                            ? "opacity-100 z-20 shadow-xl scale-105"
-                            : "opacity-30"
-                        }`}
-                        onMouseEnter={() => setHovered(indx)}
-                        onMouseLeave={() => setHovered(null)}
-                      ></div>
-                    ))}
+                  <div className="animate-pulse grid grid-cols-4 justfy-between gap-2 w-full sm:gap-4">
+                    {
+                      ["bg-[#FBF3B9]", "bg-[#FFDCCC]", "bg-[#FDB7EA]", "bg-[#B7B1F2]"].map((code, indx) => {
+                        return <div key={indx} className={`h-20 w-full sm:h-36 sm:w-36 ${code} rounded`}></div>
+                      })
+                    }
+
                   </div>
                 )}
               </div>
+
             </section>
 
+            {/* Social Links */}
             <section>
               <h2 className="mb-4 text-sm font-medium text-muted-foreground">Online</h2>
               <div className="space-y-2 stagger-children">
@@ -230,6 +219,7 @@ export default function Home() {
               </div>
             </section>
 
+
             <FooterWithDateTimeAndLocation />
           </>
         )}
@@ -237,3 +227,5 @@ export default function Home() {
     </>
   )
 }
+
+

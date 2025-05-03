@@ -37,7 +37,7 @@ export default function NotFound() {
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
-            onClick={() => router.back()}
+            onClick={() => window.history.length > 1 ? window.history.back() : router.push('/')}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             <MoveLeft className="h-4 w-4" />

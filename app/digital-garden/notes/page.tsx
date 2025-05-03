@@ -1,129 +1,131 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { z } from 'zod'; 
-import { read } from 'zod-matter';
+"use client";
 
-// Define schema for front matter validation
-const DraftMetaSchema = z.object({
-  title: z.string().optional(),
-  date: z.coerce.date().refine(
-    (val) => !isNaN(val.getTime()), 
-    { message: "Invalid date format" }
-  ),
-});
+import { useState, useEffect } from "react";
+import { NoteCardSkeleton } from "@/components/digital-garden/notes/NoteCardSkeleton";
+import NotesMasonry from "@/components/digital-garden/notes/NotesMasonry";
+import Image from "next/image";
 
-interface DraftMeta {
+// Define the Note type matching the API response
+interface Note {
+  id: string;
   title: string;
+  tags?: string[]; // Changed from author
   date: string;
-  slug: string;
+  entry: string;
+  image?: string | null;
 }
 
-const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
+// Simple inline Note Card component
+function NoteCard({ note }: { note: Note }) {
+  const formattedDate = new Date(note.date).toLocaleDateString("en-US", {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
-function getSafeData(raw: string): { title?: string; date?: string } {
-  try {
-    const { data } = matter(raw);
-    return data;
-  } catch (error) {
-    console.error('Error parsing front matter');
-    return {};
-  }
+  return (
+    <article className="bg-card border border-border rounded-lg overflow-hidden mb-6 shadow-sm">
+      {note.image && (
+        <div className="relative w-full h-48 sm:h-64">
+          <Image
+            src={note.image}
+            alt={`Image for note titled ${note.title}`}
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 640px) 100vw, 640px"
+          />
+        </div>
+      )}
+      <div className="p-5">
+        <header className="mb-3 pb-2 border-b border-border/50">
+          <h2 className="text-lg font-semibold text-foreground">{note.title}</h2>
+          {/* Display Date only in header now */}
+          <div className="flex justify-end items-center text-xs text-muted-foreground mt-1">
+            <time dateTime={note.date}>{formattedDate}</time>
+          </div>
+        </header>
+        <p className="text-sm text-foreground/90 leading-relaxed whitespace-pre-line mb-4">
+          {note.entry}
+        </p>
+        {/* Display Tags */}
+        {note.tags && note.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-border/20">
+            {note.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-block bg-muted text-muted-foreground text-xs font-medium px-2.5 py-0.5 rounded-full"
+              >
+                #{tag} 
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  );
 }
 
+export default function NotesPage() {
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export default function DraftPage() {
-  const draftsDir = path.join(process.cwd(), 'Content/notes');
-  const files = fs.readdirSync(draftsDir);
-
-  const notes: DraftMeta[] = files
-    .filter(f => f.endsWith('.md'))
-    .flatMap(filename => {
+  useEffect(() => {
+    async function loadNotes() {
+      setIsLoading(true);
+      setError(null);
       try {
-        const filePath = path.join(draftsDir, filename);
-        const raw = fs.readFileSync(filePath, 'utf8');
-        const data = getSafeData(raw);
-        // Try to parse and validate frontmatter, skip if ZodError or invalid date
-        try {
-          const result = read(filePath, DraftMetaSchema);
-          const validated = {
-            title: result.data.title || filename.replace(/\.md$/, ''),
-            date: result.data.date.toISOString().split('T')[0],
-            slug: filename.replace(/\.md$/, ''),
-          };
-          return [validated];
-        } catch (zodErr) {
-          console.error(`Skipping invalid file (bad date or metadata): ${filename}`, zodErr);
-          return [];
+        const response = await fetch("/api/notes");
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Failed to load notes' }));
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
-      } catch (error) {
-        console.error(`Skipping unreadable file: ${filename}`, error);
-        return [];
+        const data: Note[] = await response.json();
+        setNotes(data);
+      } catch (err) {
+        console.error("Failed to load notes:", err);
+        const message = err instanceof Error ? err.message : "Failed to load notes data.";
+        setError(message);
+      } finally {
+        setIsLoading(false);
       }
-    });
+    }
+    loadNotes();
+  }, []);
 
-  // Sort and group notes
-  const grouped = notes
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .reduce((acc, note) => {
-      const [year, month, day] = note.date.split('-');
-      if (!year || !month || !day) return acc; // Skip invalid dates
-      
-      const monthIndex = parseInt(month, 10) - 1;
-      if (monthIndex < 0 || monthIndex >= MONTHS.length) return acc;
-
-      const formattedDate = `${year}-${MONTHS[monthIndex].slice(0,3)}-${day}`;
-      
-      return {
-        ...acc,
-        [year]: [...(acc[year] || []), { ...note, date: formattedDate }]
-      };
-    }, {} as Record<string, DraftMeta[]>);
+  // Loading Skeleton Rendering
+  const renderLoadingSkeletons = () => (
+    <div>
+      {Array.from({ length: 3 }).map((_, index) => (
+        <NoteCardSkeleton key={index} />
+      ))}
+    </div>
+  );
 
   return (
     <div className="min-h-screen animate-fade-in">
-    <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
-      <header className="flex items-center justify-between mb-8">
-        <div className="flex flex-col">
-          <h1 className="mb-1 text-xl font-medium">Notes</h1>
-          <p className="text-sm text-muted-foreground">
+      <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
+        <header className="flex items-center justify-between mb-8">
+          <div className="flex flex-col">
+            <h1 className="mb-1 text-xl font-medium">Notes</h1>
+        <p className="text-sm text-muted-foreground">
           A collection of thoughts, quotes, and reflections.
-          </p>
+        </p>
         </div>
       </header>
-        {Object.entries(grouped).map(([year, items]) => (
-          <div key={year} className="mb-10">
-            <div className="font-bold text-base mb-3 font-mono">{year}</div>
-            <div className="divide-y divide-border">
-              {items.map((note) => (
-                <div
-                  key={note.slug}
-                  className="group flex items-baseline py-2 transition-transform duration-150 hover:scale-[1.02]"
-                >
-                  <span className="w-28 text-neutral-400 font-mono text-xs">
-                    {note.date}
-                  </span>
-                  <a
-                    href={`/digital-garden/notes/${note.slug}`}
-                    className="ml-2 text-xs text-extra-steelBlue hover:underline flex-1 flex items-center justify-between"
-                  >
-                    <span>{note.title}</span>
-                    <span className="flex items-center opacity-0 group-hover:opacity-100 ml-4 transition-opacity duration-200">
-                      {/* Arrow icon (right arrow) */}
-                      <svg className="inline h-4 w-4 text-extra-steelBlue" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+
+      <div>
+        {isLoading ? (
+          renderLoadingSkeletons()
+        ) : error ? (
+          <div className="text-center py-10 text-red-500 border border-destructive/50 bg-destructive/10 rounded-lg p-4 max-w-2xl mx-auto">{error}</div>
+        ) : notes.length === 0 ? (
+          <div className="text-center py-10 text-muted-foreground border rounded-lg p-4 max-w-2xl mx-auto">No notes published yet.</div>
+        ) : (
+          <NotesMasonry notes={notes} />
+        )}
       </div>
+    </div>
     </div>
   );
 }
