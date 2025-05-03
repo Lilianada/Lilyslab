@@ -29,6 +29,7 @@ export async function GET() {
       // Basic validation and type assertion (adjust as needed)
       if (data.publish === true && data.name && data.description && data.url && data.category && data.platforms) {
         tools.push({
+          id: file.replace(/\.md$/, ''), // Generate ID from filename
           name: data.name,
           description: data.description,
           url: data.url,
@@ -36,7 +37,7 @@ export async function GET() {
           // Ensure platforms is always an array
           platforms: Array.isArray(data.platforms) ? data.platforms : [data.platforms],
           logo: data.logo || null, // Handle optional logo
-          // published: data.published === true, // Example if you add published
+          published: data.publish === true, // Include published flag
         });
       }
     }

@@ -6,7 +6,6 @@ This is a modern Next.js application with a rich set of features and a well-orga
    - Styled with Tailwind CSS
    - Implements modern UI components using Radix UI and Headless UI
    - Uses Firebase for backend services
-   - Integrates with Notion API
 
 2. **Project Structure**:
    - `/app`: The main application directory using Next.js 13+ App Router
@@ -23,7 +22,7 @@ This is a modern Next.js application with a rich set of features and a well-orga
    - `/types`: TypeScript type definitions
 
 3. **Key Features** (based on dependencies and structure):
-   - Rich text editing and display (using Notion-like components)
+   - Rich text editing and display 
    - Authentication (likely through Firebase)
    - Interactive UI components (accordions, dialogs, menus, etc.)
    - Form handling with react-hook-form

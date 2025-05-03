@@ -14,9 +14,11 @@ export interface SlugParams {
 
 /**
  * Params type for page components with slug-based routes
+ * In Next.js App Router, both params and searchParams must be Promises to satisfy PageProps
  */
 export interface RouteParams {
-  params: SlugParams;
+  params: Promise<SlugParams>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 /**

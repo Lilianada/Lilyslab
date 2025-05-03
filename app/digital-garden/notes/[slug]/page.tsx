@@ -48,8 +48,9 @@ async function getDraftContent(slug: string) {
  * Generate metadata for the draft page
  */
 export async function generateMetadata({ params }: DraftRouteParams) {
-  // Ensure params is awaited before accessing properties
-  const slug = await Promise.resolve(params.slug);
+  // Params is already a Promise in the updated type definition
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
   const draft = await getDraftContent(slug);
   
   if (!draft) {
@@ -88,8 +89,9 @@ export function generateStaticParams(): SlugParams[] {
  * Draft page component
  */
 export default async function DraftPage({ params }: DraftRouteParams) {
-  // Ensure params is awaited before accessing properties
-  const slug = await Promise.resolve(params.slug);
+  // Params is already a Promise in the updated type definition
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
   const draft = await getDraftContent(slug);
   
   if (!draft) {

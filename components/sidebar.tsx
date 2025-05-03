@@ -26,6 +26,7 @@ import {
   BookHeart as BookHeartIcon,
   Calculator,
   NotepadText,
+  CalendarDaysIcon,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -165,25 +166,25 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         <nav className={cn("space-y-6 custom-scrollbar", mobile ? "" : "flex-1 overflow-y-auto")}>
           <div className="space-y-1">
             <NavItem href="/" icon={<Home size={16} />} label="Home" onClick={onNavClick} delay={100} />
-            <NavItem href="/about" icon={<FileText size={16} />} label="About" onClick={onNavClick} delay={150} />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Me" delay={200} />
+            <SectionTitle title="Me" delay={150} />
+            <NavItem href="/about" icon={<FileText size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writing" onClick={onNavClick} delay={250} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={300} />
+            <NavItem href="/someday" icon={<CalendarDaysIcon size={16} />} label="Someday" onClick={onNavClick} delay={400} />
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
-            <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={400} />
+            <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={450} />
           </div>
 
           <div className="space-y-1">
-            <SectionTitle title="Digital Garden" delay={450} />
-            <NavItem href="/digital-garden/bucket-list" icon={<BadgeCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={500} />
-            <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={550} />
-            <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={600} />
-            <NavItem href="/digital-garden/catalog" icon={<ImageIcon size={16} />} label="Catalog" onClick={onNavClick} delay={650} />
-            <NavItem href="/digital-garden/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={700} />
-            {/* <NavItem href="/digital-garden/drafts" icon={<BookHeartIcon size={16} />} label="Drafts" onClick={onNavClick} delay={750} /> */}
+            <SectionTitle title="Digital Garden" delay={500} />
+            <NavItem href="/digital-garden/bucket-list" icon={<BadgeCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={550} />
+            <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={600} />
+            <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={650} />
+            <NavItem href="/digital-garden/catalog" icon={<ImageIcon size={16} />} label="Catalog" onClick={onNavClick} delay={700} />
+            <NavItem href="/digital-garden/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={750} />
           </div>
 
           <div className="space-y-1">

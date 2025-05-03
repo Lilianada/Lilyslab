@@ -27,7 +27,7 @@ const statusColors: Record<Book['status'], string> = {
 export default function BookshelfDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const currentSlug = params.slug as string;
+  const currentSlug = params?.slug as string || '';
 
   const [book, setBook] = useState<Book | null>(null);
   const [isLoading, setIsLoading] = useState(true);

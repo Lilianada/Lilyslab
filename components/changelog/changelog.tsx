@@ -2,7 +2,22 @@
 
 
 import React, { useState } from 'react';
-import type { ChangelogEntry } from "@/lib/notion";
+
+// Define types locally to avoid import issues
+interface MediaItem {
+  type: 'image' | 'video';
+  url: string;
+}
+
+interface ChangelogEntry {
+  id: string;
+  title: string;
+  date: string;
+  type: string; // 'new', 'improvement', 'fix', etc.
+  category: string;
+  content: string;
+  media?: MediaItem[];
+}
 
 interface ChangelogListProps {
   changelogs: ChangelogEntry[];
@@ -63,7 +78,7 @@ const ChangelogItem = ({ entry }: { entry: ChangelogEntry }) => {
           
           {entry.media && entry.media.length > 0 && (
             <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {entry.media.map((item, index) => (
+              {entry.media.map((item: { type: string; url: string }, index: number) => (
                 <div key={index} className="rounded-lg overflow-hidden border border-gray-200">
                   {item.type === 'image' ? (
                     <img 

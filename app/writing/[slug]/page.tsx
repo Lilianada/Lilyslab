@@ -14,13 +14,15 @@ import rehypeHighlight from "rehype-highlight";
 import { ArrowLeft } from "lucide-react"
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const writing = await getWritingBySlug(params.slug)
+  const resolvedParams = await params;
+  const writing = await getWritingBySlug(resolvedParams.slug)
 
   if (!writing) {
     return {
@@ -35,7 +37,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function WritingSlugPage({ params }: PageProps) {
-  const { slug } = params;
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
   const writingsDir = path.join(process.cwd(), 'Content/Writings');
   const filePath = path.join(writingsDir, `${slug}.md`);

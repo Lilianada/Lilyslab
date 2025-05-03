@@ -3,6 +3,18 @@ import { formatDate } from "@/lib/utils"
 import { Annoyed } from "lucide-react"
 import { getAllWritings, Writing } from "@/lib/writings/writings"
 
+// Helper function to count words in a string
+function countWords(text: string): number {
+  return text.split(/\s+/).filter(Boolean).length;
+}
+
+// Helper function to calculate reading time based on words
+function calculateReadingTime(text: string): number {
+  const wordsPerMinute = 200; // Average reading speed
+  const words = countWords(text);
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
+}
+
 export const revalidate = 3600 // Revalidate every hour
 
 // Helper to group writings by month and year
@@ -83,7 +95,7 @@ export default async function WritingPage() {
                         <div className="flex gap-2 items-center text-[10px] text-muted-foreground mb-1">
                           <span>{formatDate(post.date)}</span>
                           <span>•</span>
-                          <span>{post.readingTime} min read</span>
+                          <span>{calculateReadingTime(post.content)} min read</span>
                         </div>
                         {post.excerpt && (
                           <p className="text-xs text-muted-foreground">
@@ -127,11 +139,11 @@ export default async function WritingPage() {
                       {/* Second line: Reading time */}
                       <div className="flex gap-2 items-center mb-1">
                         <span className="text-xs text-muted-foreground italic">
-                          {post.wordCount ? `${post.wordCount} words` : "— words"}
+                          {`${countWords(post.content)} words`}
                         </span>
                         -
                         <span className="text-xs text-muted-foreground italic">
-                          {post.readingTime ? `${post.readingTime} min read` : "— min read"}
+                          {`${calculateReadingTime(post.content)} min read`}
                         </span>
                       </div>
                       {/* Third line: Excerpt */}

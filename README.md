@@ -8,7 +8,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Not
 
 - **Modern Design**: Clean, minimalist design with dark/light mode support
 - **Responsive Layout**: Optimized for all device sizes
-- **Obsidian-Powered CMS**: Content managed through Notion databases
+- **Obsidian-Powered CMS**: Content managed through Obsidian databases
 - **Firebase Authentication**: User authentication for interactive features
 - **Interactive Components**:
   - Ask Me Anything (AMA) section
@@ -155,7 +155,7 @@ The UI is built with a combination of custom components and shadcn/ui:
 - `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`: Firebase messaging sender ID
 - `NEXT_PUBLIC_FIREBASE_APP_ID`: Firebase app ID
 
-## 📊 Notion Database Structure
+## 📊 Obsidian Database Structure
 
 ### Articles Database
 
@@ -168,22 +168,8 @@ The UI is built with a combination of custom components and shadcn/ui:
 | Excerpt    | Rich Text  | Short description of the article  |
 | Cover      | Files      | Cover image for the article       |
 | Tags       | Multi-select| Article tags                     |
-| Likes      | Number     | Number of likes                   |
+|                 |
 
-### Comments Database
-
-| Property       | Type       | Description                       |
-|----------------|------------|-----------------------------------|
-| Name           | Title      | Commenter's name                  |
-| Comment        | Rich Text  | Comment content                   |
-| Slug           | Rich Text  | Article slug the comment belongs to |
-| Date           | Date       | Comment date                      |
-| Published      | Checkbox   | Whether the comment is published  |
-| Status         | Select     | Comment status (Pending/Approved/Answered) |
-| Email          | Email      | Commenter's email (optional)      |
-| PhotoURL       | URL        | Commenter's photo URL (optional)  |
-| Parent Comment | Relation   | Parent comment for replies        |
-| Reply          | Rich Text  | Admin reply to the comment        |
 
 Similar structures exist for other databases (Projects, Work, Speaking, etc.)
 
