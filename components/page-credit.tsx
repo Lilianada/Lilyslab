@@ -27,7 +27,7 @@ export function PageCredit({
         Credit to <a href={inspirationUrl} className={color + " hover:underline"} target="_blank" rel="noopener noreferrer">{inspirationName}</a> for the inspiration behind {pageName}. 
         Find me elsewhere on <a href="https://twitter.com/lilian_okeke" className={ color + " hover:underline"} target="_blank" rel="noopener noreferrer">Twitter</a>, <a href="https://github.com/lilianokeke" className={ color + " hover:underline"} target="_blank" rel="noopener noreferrer">GitHub</a>, and <a href="https://linkedin.com/in/lilianada" className={ color + " hover:underline"} target="_blank" rel="noopener noreferrer">LinkedIn</a>. 
         Email me at <a href="mailto:lilianokeke.ca@gmail.com" className={ color + " hover:underline"}>lilianokeke.ca@gmail.com</a>, especially about this site, vibe coding, lifestyle, design, productivity, and finding hidden talent. 
-        This site was designed in <ClientOnly>{new Date().getFullYear()}</ClientOnly>. View my portfolio site <a href="https://lilianada.com" className={ color + " hover:underline"} target="_blank" rel="noopener noreferrer">here</a>.
+        View my portfolio site <a href="https://lilianada.com" className={ color + " hover:underline"} target="_blank" rel="noopener noreferrer">here</a> ❤️.
       </p>
     </>
   )
