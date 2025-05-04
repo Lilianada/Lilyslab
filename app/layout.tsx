@@ -74,9 +74,14 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   alternates: {
-    canonical: "/",
+    canonical: '/',
     languages: {
       'en-US': '/en-US',
+    },
+    types: {
+      'application/rss+xml': '/feed',
+      'application/atom+xml': '/feed?format=atom',
+      'application/json': '/feed?format=json',
     },
   },
   verification: {
