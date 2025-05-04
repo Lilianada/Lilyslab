@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Example changelog data type
 export type ChangelogEntry = {
@@ -79,27 +80,54 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
                 aria-expanded={isOpen}
               >
                 <h3 className="text-base font-semibold mb-1 mt-3">{entry.title}</h3>
-                <div
-                  className={`prose prose-sm dark:prose-invert max-w-none transition-all duration-300 overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-16 opacity-80"}`}
-                  style={{
-                    WebkitMaskImage: !isOpen ? "linear-gradient(180deg, #000 70%, transparent 100%)" : undefined,
-                    maskImage: !isOpen ? "linear-gradient(180deg, #000 70%, transparent 100%)" : undefined,
-                  }}
-                >
-                  {isOpen ? (
-                    <div className="task-list-container">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {entry.body}
-                      </ReactMarkdown>
-                    </div>
-                  ) : (
-                    getExcerpt(entry.body)
+                
+                {/* Content preview (when closed) */}
+                {!isOpen && (
+                  <div 
+                    className="prose prose-sm dark:prose-invert max-w-none overflow-hidden max-h-16 opacity-80"
+                    style={{
+                      WebkitMaskImage: "linear-gradient(180deg, #000 70%, transparent 100%)",
+                      maskImage: "linear-gradient(180deg, #000 70%, transparent 100%)"
+                    }}
+                  >
+                    {getExcerpt(entry.body)}
+                  </div>
+                )}
+                
+                {/* Full content with animation (when open) */}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div 
+                      className="prose prose-sm dark:prose-invert max-w-none overflow-hidden"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 30, 
+                        damping: 20,
+                        mass: 1.5,
+                        duration: 0.5
+                      }}
+                    >
+                      <div className="task-list-container py-2">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {entry.body}
+                        </ReactMarkdown>
+                      </div>
+                      <span className="text-xs text-muted-foreground">#{entry.category}</span>
+                    </motion.div>
                   )}
-                  <span className="text-xs text-muted-foreground">#{entry.category}</span>
-                </div>
-                <span className="font-mono text-xs text-primary mt-2 inline-block transition-opacity duration-300 opacity-80 hover:opacity-100">
-                  {isOpen ? "Show less" : "Read more →"}
-                </span>
+                </AnimatePresence>
+                
+                {/* Show more/less button with animation */}
+                <motion.span 
+                  className="font-mono text-xs text-primary mt-2 inline-block opacity-80 hover:opacity-100"
+                  whileHover={{ x: 5, transition: { duration: 0.3 } }}
+                  animate={{ y: isOpen ? 0 : 0 }}
+                >
+                  {isOpen ? "Show less ↑" : "Read more ↓"}
+                </motion.span>
               </button>
             </li>
           );
