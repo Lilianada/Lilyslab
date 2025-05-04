@@ -5,49 +5,8 @@ import { useEffect, useState } from "react"
 import AnimatedLogo from "@/components/AnimatedLogo";
 import { SocialLink, WorkItemComponent } from "@/components/homepage-items"
 import { MusicPlayerWidget } from "@/components/music-player-widget"
-import { useEffect as useFooterEffect, useState as useFooterState } from "react";
+import { Footer } from "@/components/footer";
 
-function FooterWithDateTimeAndLocation() {
-  // Use empty initial values to prevent hydration mismatch
-  const [dateTime, setDateTime] = useFooterState("");
-  const [location, setLocation] = useFooterState("");
-  // Add a mounted state to prevent rendering content during SSR
-  const [isMounted, setIsMounted] = useFooterState(false);
-
-  useFooterEffect(() => {
-    // Set mounted to true once component is mounted on client
-    setIsMounted(true);
-    
-    // Function to update date/time
-    const updateTime = () => {
-      const now = new Date();
-      setDateTime(now.toLocaleString());
-    };
-  
-    // Initialize and set interval for updating time
-    updateTime();
-    const intervalId = setInterval(updateTime, 1000);
-    
-    // Set a static location instead of using geolocation
-    // This completely avoids the permissions policy violation
-    setLocation("Remote, Digital World");
-  
-    // Cleanup function to clear interval
-    return () => clearInterval(intervalId);
-  }, []);
-  
-  // Only render the content on the client side
-  if (!isMounted) {
-    return <footer className="mt-8 py-4 text-xs text-left text-secondary"></footer>;
-  }
-  
-  return (
-    <footer className="mt-8 py-4 text-xs text-left text-secondary">
-      <span className="block">Current time: {dateTime}</span>
-      <span className="block">Location: {location}</span>
-    </footer>
-  );
-}
 
 interface WorkItem {
   id: string
@@ -231,7 +190,7 @@ export default function Home() {
             </section>
 
 
-            <FooterWithDateTimeAndLocation />
+            <Footer/>
           </>
         )}
       </div>

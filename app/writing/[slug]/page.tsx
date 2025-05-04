@@ -12,6 +12,7 @@ import Link from "next/link"
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { ArrowLeft } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 type PageProps = {
   params: Promise<{
@@ -54,67 +55,69 @@ export default async function WritingSlugPage({ params }: PageProps) {
 
   // Check if the post is published
   if (data.published !== true) {
-      console.log(`Writing with slug '${slug}' found but not published.`); // Optional logging
-      notFound(); // Return 404 if not explicitly published
+    console.log(`Writing with slug '${slug}' found but not published.`); // Optional logging
+    notFound(); // Return 404 if not explicitly published
   }
 
   return (
     <div className="max-w-3xl mx-auto animate-fade-in px-4 md:px-0">
-         <div className="my-6 flex items-center sm:my-12">
-           <Link
-             href="/writing"
-             className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
-           >
-             <ArrowLeft size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
-             <span>Back to all posts</span>
-           </Link>
-         </div>
-    
-         <div>
-           <header className="mb-8">
-             {data.coverImage && (
-               <div className="mb-6 rounded-lg overflow-hidden w-full">
-                 <Image
-                   src={data.coverImage || "/placeholder.svg"}
-                   alt={data.title || "Article cover"}
-                   width={1200}
-                   height={630}
-                   className="w-full h-auto object-contain"
-                   priority
-                 />
-               </div>
-             )}
-    
-             <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
-    
-             <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
-               <time className="text-xs">{data.date ? formatDate(data.date) : "No date"}</time>
+      <div className="my-6 flex items-center sm:my-12">
+        <Link
+          href="/writing"
+          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
+        >
+          <ArrowLeft size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
+          <span>Back to all posts</span>
+        </Link>
+      </div>
 
-    
-               {data.tags && data.tags.length > 0 && (
-                 <div className="flex flex-wrap gap-2">
-                   {data.tags.map((tag: string) => (
-                     <span key={tag} className="px-2 py-1 text-[10px] bg-muted/50 border border-border rounded-full">
-                       {tag}
-                     </span>
-                   ))}
-                 </div>
-               )}
-             </div>
-           </header>
-    
-               <Separator />
-           <article className="prose dark:prose-invert mt-6">
-    
-             <ReactMarkdown
-               remarkPlugins={[remarkGfm]}
-               rehypePlugins={[rehypeHighlight]}
-             >
-               {content}
-             </ReactMarkdown>
-    
-           </article>
-       </div>
-       </div>
+      <div>
+        <header className="mb-8">
+          {data.coverImage && (
+            <div className="mb-6 rounded-lg overflow-hidden w-full">
+              <Image
+                src={data.coverImage || "/placeholder.svg"}
+                alt={data.title || "Article cover"}
+                width={1200}
+                height={630}
+                className="w-full h-auto object-contain"
+                priority
+              />
+            </div>
+          )}
+
+          <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+
+          <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
+            <time className="text-xs">{data.date ? formatDate(data.date) : "No date"}</time>
+
+
+            {data.tags && data.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {data.tags.map((tag: string) => (
+                  <span key={tag} className="px-2 py-1 text-[10px] bg-muted/50 border border-border rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </header>
+
+        <Separator />
+        <article className="prose dark:prose-invert mt-6">
+
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeHighlight]}
+          >
+            {content}
+          </ReactMarkdown>
+
+        </article>
+      </div>
+
+      <Footer />
+    </div>
   )
 }

@@ -1,17 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Disable React strict mode to avoid double-rendering in development
-  reactStrictMode: false,
-  
-  experimental: {
-    // Disable CSS optimization to prevent caching issues
-    optimizeCss: false,
-  },
+  // Enable React strict mode to catch bugs and improve development experience
+  reactStrictMode: true,
   
   // Configure image optimization
   images: {
-    // Disable image caching
-    minimumCacheTTL: 0,
+    // Set a reasonable cache TTL for images (in seconds)
+    minimumCacheTTL: 60,
     // Define responsive image sizes
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -20,8 +15,8 @@ const nextConfig = {
   // Customize webpack configuration
   webpack: (config, { dev, isServer }) => {
     if (dev) {
-      // Disable webpack caching in development
-      config.cache = false;
+      // Allow webpack caching in development for faster rebuilds
+      // and better Fast Refresh support
       
       // Optimize resource loading to prevent preload warnings
       if (!isServer) {

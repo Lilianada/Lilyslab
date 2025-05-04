@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { format } from "date-fns";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 // Example changelog data type
 export type ChangelogEntry = {
@@ -84,8 +86,16 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
                     maskImage: !isOpen ? "linear-gradient(180deg, #000 70%, transparent 100%)" : undefined,
                   }}
                 >
-                  {isOpen ? entry.body : getExcerpt(entry.body)} {" "}  
-                 #{entry.category}
+                  {isOpen ? (
+                    <div className="task-list-container">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {entry.body}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    getExcerpt(entry.body)
+                  )}
+                  <span className="text-xs text-muted-foreground">#{entry.category}</span>
                 </div>
                 <span className="font-mono text-xs text-primary mt-2 inline-block transition-opacity duration-300 opacity-80 hover:opacity-100">
                   {isOpen ? "Show less" : "Read more →"}

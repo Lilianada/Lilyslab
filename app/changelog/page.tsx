@@ -11,13 +11,14 @@ async function loadChangelogs(): Promise<ChangelogEntry[]> {
   const dir = path.join(process.cwd(), 'Content', 'changelog');
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
   const entries = files.map(file => {
-    const { data } = matter(fs.readFileSync(path.join(dir, file), 'utf8'));
+    const fileContent = fs.readFileSync(path.join(dir, file), 'utf8');
+    const { data, content } = matter(fileContent);
     return {
       version: data.version,
       title: data.title,
       date: data.date,
       type: data.type,
-      body: data.body,
+      body: content.trim(), // Use the markdown content instead of data.body
       category: data.category,
     } as ChangelogEntry;
   });
