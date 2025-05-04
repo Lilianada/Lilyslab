@@ -47,7 +47,8 @@ const DigitalClock: React.FC = () => {
     { text: "text-extra-peach", accent: "bg-extra-peach", border: "border-extra-peach" },
     { text: "text-extra-lavendar", accent: "bg-extra-lavendar", border: "border-extra-lavendar" },
     { text: "text-extra-yellow", accent: "bg-extra-yellow", border: "border-extra-yellow" },
-    { text: "text-foreground", accent: "bg-foreground", border: "border-foreground" }
+    { text: "text-extra-pink", accent: "bg-extra-pink", border: "border-extra-pink" },
+    // { text: "text-foreground", accent: "bg-foreground", border: "border-foreground" }
   ];
   
   // Current theme
@@ -188,13 +189,13 @@ const DigitalClock: React.FC = () => {
   return (
     <div 
       id="digital-clock-container"
-      className="flex flex-col items-center justify-center w-full mx-auto transition-colors relative"
+      className="flex flex-col items-center justify-center w-full mx-auto transition-colors relative mb-2"
     >
       {/* Digital Clock Display - Fixed position */}
       <div className="w-full text-center mb-12 relative">
         <h1 
           className={cn(
-            "font-mono font-bold text-9xl md:text-[17rem] lg:text-[17rem] xl:text-[20rem] tracking-tight transition-colors",
+            "font-mono font-bold text-9xl md:text-[17rem] lg:text-[15rem] tracking-tight transition-colors",
             getThemeText()
           )}
         >
@@ -202,7 +203,7 @@ const DigitalClock: React.FC = () => {
         </h1>
         
         {/* Mode toggle buttons positioned above the clock */}
-        <div className="absolute top-0 left-0 right-0 flex justify-center space-x-4 mb-2">
+        <div className="absolute top-0 left-0 right-0 flex justify-center space-x-4 mb-4">
           <Button
             variant={isTimerMode ? "outline" : "default"}
             size="icon"
