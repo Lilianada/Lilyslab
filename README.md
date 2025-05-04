@@ -4,7 +4,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Not
 
 ![Lily's Lab Screenshot](public/screenshot.png)
 
-## 🌟 Features
+## Features
 
 - **Modern Design**: Clean, minimalist design with dark/light mode support
 - **Responsive Layout**: Optimized for all device sizes
@@ -19,7 +19,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Not
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **Performance Optimized**: Fast loading times and optimized assets
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS
 - **Authentication**: Firebase Authentication
@@ -27,7 +27,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Not
 - **Styling**: Tailwind CSS, shadcn/ui components
 - **Deployment**: Vercel
 
-## 📁 Project Structure
+## Project Structure
 
 \`\`\`
 portfolio-dashboard/
@@ -54,7 +54,7 @@ portfolio-dashboard/
 └── ...                     # Configuration files
 \`\`\`
 
-## 🧩 Key Components
+## Key Components
 
 ### Obsidian Integration
 
