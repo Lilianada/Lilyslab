@@ -3,7 +3,7 @@ author: Lilian
 cover:
   - ""
 date: 2021-05-05
-excerpt: "Why you should invest into designing your personal space?” & How you can go about it, while relating to my personal experience.
+excerpt: "Why you should invest into designing your personal space? & How you can go about it, while relating to my personal experience."
 published: true
 slug: designing-your-personal-space
 tags:

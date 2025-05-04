@@ -5,6 +5,7 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { Footer } from "@/components/footer";
 
 interface Project {
   number: string;
@@ -160,7 +161,7 @@ export default function WorkshopLogPage() {
                       )}
                     </div>
                   </div>
-                  <span className="truncate text-muted-foreground text-left text-base w-full">{item.desc}</span>
+                  <span className="truncate text-muted-foreground text-left text-sm w-full">{item.desc}</span>
                 </Link>
               )}
             </React.Fragment>
@@ -168,6 +169,7 @@ export default function WorkshopLogPage() {
           );
         })}
       </div>
+      <Footer />
     </div>
   );
 }

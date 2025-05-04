@@ -38,7 +38,7 @@ export function Footer() {
    }
    
   return (
-    <footer>
+    <footer className="mt-32">
       <Separator className="my-6" />
       
       <p className="text-sm text-muted-foreground/60">

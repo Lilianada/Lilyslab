@@ -125,29 +125,29 @@ export default async function WritingPage() {
                   className="block transition-transform duration-300 hover:translate-x-1"
                   prefetch
                 >
-                  <article className="hover:bg-card hover:p-2 rounded-md transition-all duration-200 group">
+                  <article className=" rounded-md transition-all duration-200 group">
                       {/* First line: Title, line, date */}
                       <div className="flex items-center gap-2 mb-1">
                         <h2 className="text-sm font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
                           {post.title}
                         </h2>
                         <div className="w-full border-t-2 border-dashed border-muted-foreground opacity-50 mx-2 group-hover:border-primary" />
-                        <span className="text-xs text-muted-foreground whitespace-nowrap">
+                        <span className="text-xs text-muted-foreground whitespace-nowrap group-hover:text-primary ">
                           {post.date ? formatDate(post.date) : "No date"}
                         </span>
                       </div>
                       {/* Second line: Reading time */}
                       <div className="flex gap-2 items-center mb-1">
-                        <span className="text-xs text-muted-foreground italic">
+                        <span className="text-xs text-muted-foreground italic group-hover:text-primary">
                           {`${countWords(post.content)} words`}
                         </span>
                         -
-                        <span className="text-xs text-muted-foreground italic">
+                        <span className="text-xs text-muted-foreground italic group-hover:text-primary">
                           {`${calculateReadingTime(post.content)} min read`}
                         </span>
                       </div>
                       {/* Third line: Excerpt */}
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-muted-foreground group-hover:text-primary">
                         {post.excerpt
                           ? post.excerpt.split(" ").length > 10
                             ? post.excerpt.split(" ").slice(0, 10).join(" ") + "…"

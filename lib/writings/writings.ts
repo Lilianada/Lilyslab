@@ -14,10 +14,10 @@ export type Writing = {
   published: boolean;
 };
 
-const writingsDir = path.join(process.cwd(), 'Content/Writings');
+const writingsDir = path.join(process.cwd(), 'Content/writings');
 
 export function getAllWritings(): Writing[] {
-  const writingsPath = path.join(process.cwd(), "Content/Writings")
+  const writingsPath = path.join(process.cwd(), "Content/writings")
 
   if (!fs.existsSync(writingsPath)) {
     console.warn("Writings folder not found:", writingsPath)

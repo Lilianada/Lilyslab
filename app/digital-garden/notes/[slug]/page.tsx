@@ -12,6 +12,7 @@ import { ArrowLeft } from "lucide-react"
 import { DraftRouteParams, SlugParams } from "@/lib/types/route-params"
 import { NotesClientWrapper } from "./notes-client-wrapper"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
+import { Footer } from "@/components/footer"
 
 /**
  * Get draft content by slug
@@ -147,6 +148,7 @@ export default async function DraftPage({ params }: DraftRouteParams) {
             Back to Notes
           </Link>
         </div>
+        <Footer />
       </div>
     </NotesClientWrapper>
   )

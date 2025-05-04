@@ -28,6 +28,7 @@ import {
   NotepadText,
   CalendarDaysIcon,
   PersonStandingIcon,
+  Timer,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -202,6 +203,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <SectionTitle title="Playground" delay={1100} />
             <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator App" onClick={onNavClick} delay={1150} />
             <NavItem href="/playground/note-widgets" icon={<NotepadText size={16} />} label="Note Widgets" onClick={onNavClick} delay={1200} />
+            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1250} />
           </div>
 
           <Separator />

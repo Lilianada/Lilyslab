@@ -83,7 +83,7 @@ export default function DailyLogPage() {
 
   return (
     <div className="min-h-screen text-foreground sm:p-8 ">
-      <div className="max-w-3xl mx-auto sm:p-6">
+      <div className="max-w-3xl mx-auto sm:p-6 h-full">
         {/* Main Heading - Using theme colors */}
         <header className="mb-8">
           <h1 className="mb-2 text-xl font-medium">Project Logs</h1>
