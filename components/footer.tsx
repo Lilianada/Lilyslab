@@ -2,11 +2,13 @@
 
 import { Separator } from "@/components/ui/separator"
 import { useEffect as useFooterEffect, useState as useFooterState } from "react";
+import { format } from "date-fns";
 
 export function Footer() {
    // Use empty initial values to prevent hydration mismatch
    const [dateTime, setDateTime] = useFooterState("");
    const [location, setLocation] = useFooterState("");
+   const [lastEdited, setLastEdited] = useFooterState("");
    // Add a mounted state to prevent rendering content during SSR
    const [isMounted, setIsMounted] = useFooterState(false);
  
@@ -27,6 +29,24 @@ export function Footer() {
      // Set a static location instead of using geolocation
      // This completely avoids the permissions policy violation
      setLocation("Lily's Lab - Digital Garden & Workshop");
+     
+     // Fetch the last edited date
+     const fetchLastEdited = async () => {
+       try {
+         const response = await fetch('/api/last-updated');
+         if (response.ok) {
+           const data = await response.json();
+           const lastUpdatedDate = new Date(data.lastUpdated);
+           setLastEdited(format(lastUpdatedDate, 'MMMM d, yyyy'));
+         } else {
+           console.error('Failed to fetch last edited date');
+         }
+       } catch (error) {
+         console.error('Error fetching last edited date:', error);
+       }
+     };
+     
+     fetchLastEdited();
    
      // Cleanup function to clear interval
      return () => clearInterval(intervalId);
@@ -41,12 +61,15 @@ export function Footer() {
     <footer className="mt-32">
       <Separator className="my-6" />
       
-      <p className="text-sm text-muted-foreground/60">
+      <p className="text-xs text-muted-foreground/60">
         Subscribe to my <a href='/feed' className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">RSS Feed</a> for the latest updates. You can also <a href="https://www.buymeacoffee.com/lilian.ada" className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">buy me a coffee</a> if you find my content helpful. 
       </p>
       <div className="mt-4">
-      <span className="block text-xs text-muted-foreground/60">Current time: {dateTime}</span>
-      <span className="block text-xs text-muted-foreground/60">Location: {location}</span>
+        <span className="block text-xs text-muted-foreground/60">Your local time: {dateTime}</span>
+        {lastEdited && (
+          <span className="block text-xs text-muted-foreground/60">Last edited: {lastEdited}</span>
+        )}
+        {/* <span className="block text-xs text-muted-foreground/60">Location: {location}</span> */}
       </div>
     </footer>
   )

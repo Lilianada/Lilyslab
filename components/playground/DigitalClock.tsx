@@ -42,13 +42,16 @@ const DigitalClock: React.FC = () => {
   
   // Available color themes with matching button colors
   const colorThemes = [
+    { text: "text-foreground", accent: "bg-foreground", border: "border-foreground" },
     { text: "text-primary", accent: "bg-primary", border: "border-primary" },
     { text: "text-extra-steelBlue", accent: "bg-extra-steelBlue", border: "border-extra-steelBlue" },
     { text: "text-extra-peach", accent: "bg-extra-peach", border: "border-extra-peach" },
-    { text: "text-extra-lavendar", accent: "bg-extra-lavendar", border: "border-extra-lavendar" },
+    { text: "text-extra-lavender", accent: "bg-extra-lavender", border: "border-extra-lavender" },
     { text: "text-extra-yellow", accent: "bg-extra-yellow", border: "border-extra-yellow" },
     { text: "text-extra-pink", accent: "bg-extra-pink", border: "border-extra-pink" },
-    // { text: "text-foreground", accent: "bg-foreground", border: "border-foreground" }
+    { text: "text-extra-cream", accent: "bg-extra-cream", border: "border-extra-cream" },
+    { text: "text-extra-lilac", accent: "bg-extra-lilac", border: "border-extra-lilac" },
+    { text: "text-extra-paleYellow", accent: "bg-extra-paleYellow", border: "border-extra-paleYellow" },
   ];
   
   // Current theme
@@ -189,10 +192,10 @@ const DigitalClock: React.FC = () => {
   return (
     <div 
       id="digital-clock-container"
-      className="flex flex-col items-center justify-center w-full mx-auto transition-colors relative mb-2"
+      className="flex flex-col items-center justify-center w-full mx-auto transition-colors relative "
     >
       {/* Digital Clock Display - Fixed position */}
-      <div className="w-full text-center mb-12 relative">
+      <div className="w-full text-center pb-8 pt-8 mb-8 relative">
         <h1 
           className={cn(
             "font-mono font-bold text-9xl md:text-[17rem] lg:text-[15rem] tracking-tight transition-colors",
@@ -251,7 +254,7 @@ const DigitalClock: React.FC = () => {
 
       {/* Controls - Absolute position to prevent moving the clock */}
       {showControls && (
-        <div className="w-full max-w-2xl grid grid-cols-2 md:grid-cols-7 gap-3 text-base transition-opacity duration-300">
+        <div className="w-full max-w-2xl grid grid-cols-4 md:grid-cols-7 gap-3 text-base transition-opacity duration-300">
 
         {isTimerMode && (
           <>

@@ -60,7 +60,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto animate-fade-in px-4 md:px-0">
+    <div className="max-w-3xl mx-auto animate-fade-in">
       <div className="my-6 flex items-center sm:my-12">
         <Link
           href="/writing"

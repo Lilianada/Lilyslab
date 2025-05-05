@@ -60,7 +60,7 @@ export default function Colophon() {
           <Globe size={16} className="text-muted-foreground" />
           <h2 className="font-mono text-base font-semibold">Inspiration</h2>
         </div>
-        <div className="text-sm mb-2 text-muted-foreground">Stole code and designs from these amazing creators:</div>
+        <div className="text-sm mb-2 text-muted-foreground">Got design inspiration from these amazing creators:</div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 border rounded bg-background p-4">
           {[
             { name: "Brian Lovin", url: "https://brianlovin.com" },
