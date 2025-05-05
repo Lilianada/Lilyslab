@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { z } from 'zod';
 import { read } from 'zod-matter';
-import { PageCredit } from '@/components/page-credit';
+import { Footer } from '@/components/footer';
 
 // Define schema for front matter validation
 const NoteMetaSchema = z.object({
@@ -157,7 +157,7 @@ export default function NotesPage() {
           </div>
         ))}
       </div>
-      <PageCredit 
+      <Footer 
           inspirationName="Linus Rogge"
           inspirationUrl="https://linusrogge.com/log/concerts"
           color='text-extra-steelBlue'

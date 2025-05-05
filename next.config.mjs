@@ -18,6 +18,7 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
+    devIndicators: false,
   },
   images: {
     unoptimized: true,
@@ -26,6 +27,7 @@ const nextConfig = {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
+    devIndicators: false,
   },
 }
 

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getWritingBySlug } from "@/lib/writings/writings"
+import { getWritingBySlug, getAllWritings } from "@/lib/writings/writings"
 import { formatDate } from "@/lib/utils"
 import { Metadata } from "next"
 import { Separator } from "@/components/ui/separator"
@@ -58,6 +58,16 @@ export default async function WritingSlugPage({ params }: PageProps) {
     console.log(`Writing with slug '${slug}' found but not published.`); // Optional logging
     notFound(); // Return 404 if not explicitly published
   }
+  
+  // Get all writings for prev/next navigation
+  const allWritings = getAllWritings();
+  
+  // Find the current post index
+  const currentIndex = allWritings.findIndex(writing => writing.slug === slug);
+  
+  // Get previous and next posts
+  const prevPost = currentIndex < allWritings.length - 1 ? allWritings[currentIndex + 1] : null;
+  const nextPost = currentIndex > 0 ? allWritings[currentIndex - 1] : null;
 
   return (
     <div className="max-w-3xl mx-auto animate-fade-in">
@@ -117,7 +127,11 @@ export default async function WritingSlugPage({ params }: PageProps) {
         </article>
       </div>
 
-      <Footer />
+      <Footer 
+        prevPost={prevPost ? { title: prevPost.title, slug: prevPost.slug } : undefined}
+        nextPost={nextPost ? { title: nextPost.title, slug: nextPost.slug } : undefined}
+        contentType="writing"
+      />
     </div>
   )
 }

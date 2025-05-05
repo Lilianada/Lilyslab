@@ -13,6 +13,7 @@ import { DraftRouteParams, SlugParams } from "@/lib/types/route-params"
 import { NotesClientWrapper } from "./notes-client-wrapper"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 import { Footer } from "@/components/footer"
+import { getAllNotesData } from "@/lib/notes"
 
 /**
  * Get draft content by slug
@@ -99,6 +100,25 @@ export default async function DraftPage({ params }: DraftRouteParams) {
     notFound()
   }
   
+  // Get all notes for navigation
+  const allNotes = getAllNotesData();
+  
+  // Find current note index
+  const currentIndex = allNotes.findIndex(note => note.slug === slug);
+  
+  // Get previous and next notes for navigation
+  const previousPost = currentIndex > 0 ? {
+    title: allNotes[currentIndex - 1].frontmatter.title,
+    slug: allNotes[currentIndex - 1].slug,
+    path: "/digital-garden/notes"
+  } : undefined;
+  
+  const nextPost = currentIndex < allNotes.length - 1 ? {
+    title: allNotes[currentIndex + 1].frontmatter.title,
+    slug: allNotes[currentIndex + 1].slug,
+    path: "/digital-garden/notes"
+  } : undefined;
+  
   return (
     <NotesClientWrapper>
       <ScrollProgress 
@@ -109,6 +129,14 @@ export default async function DraftPage({ params }: DraftRouteParams) {
         glowIntensity="12px" 
       />
       <div className="max-w-3xl mx-auto sm:px-6 py-12 animate-fade-in">
+      <Link 
+            href="/digital-garden/notes" 
+            className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mb-8"
+          >
+            <ArrowLeft className="w-3 h-3 mr-2" />
+            Back 
+          </Link>
+       
         <div className="mb-8">
           <header className="mb-8">
             <h1 className="mb-2 text-2xl font-bold text-foreground">{draft.title}</h1>
@@ -140,15 +168,12 @@ export default async function DraftPage({ params }: DraftRouteParams) {
             </ReactMarkdown>
           </article>
 
-          <Link 
-            href="/digital-garden/notes" 
-            className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mt-6"
-          >
-            <ArrowLeft className="w-3 h-3 mr-2" />
-            Back to Notes
-          </Link>
         </div>
-        <Footer />
+        <Footer
+          prevPost={previousPost ? { title: previousPost.title, slug: previousPost.slug } : undefined}
+          nextPost={nextPost ? { title: nextPost.title, slug: nextPost.slug } : undefined}
+          contentType="digital-garden/notes"
+        />
       </div>
     </NotesClientWrapper>
   )

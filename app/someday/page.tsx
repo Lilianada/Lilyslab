@@ -1,4 +1,4 @@
-import { PageCredit } from "@/components/page-credit";
+import { Footer } from "@/components/footer";
 import Link from "next/link";
 import React from "react";
 
@@ -34,7 +34,7 @@ export default function SomedayPage() {
 
       </div>
 
-      <PageCredit
+      <Footer
         inspirationName="Alexander Sandberg"
         inspirationUrl="https://alexandersandberg.com/someday/"
         pageName="my someday page" 

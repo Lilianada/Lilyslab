@@ -1,6 +1,6 @@
 "use client"
 
-import { PageCredit } from "@/components/page-credit"
+import { Footer } from "@/components/footer"
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Removed dynamic MDX import for static About content
@@ -84,7 +84,7 @@ export default function AboutPage() {
           <p className="text-sm leading-normal mb-6">This site is built as a digital garden—always evolving, never truly finished.</p>
         </div>
 
-        <PageCredit 
+        <Footer 
           inspirationName="Nicole"
           inspirationUrl="https://nicolevanderhoeven.com/about"
           color="text-extra-green"
