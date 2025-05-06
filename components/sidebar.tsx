@@ -29,11 +29,13 @@ import {
   CalendarDaysIcon,
   PersonStandingIcon,
   Timer,
+  Shield,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
 import { UserProfileSection } from "./user-profile-section"
 import { Separator } from "./ui/separator"
+import { useAuth } from "@/contexts/auth-context"
 
 interface NavItemProps {
   href: string
@@ -144,7 +146,17 @@ const SectionTitle = ({ title, delay = 0 }: { title: string; delay?: number }) =
 }
 
 export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boolean; onNavClick?: () => void }) {
+  const { user, userRoles } = useAuth()
+  const [isAdmin, setIsAdmin] = useState(false)
 
+  useEffect(() => {
+    // Check if user is admin
+    if (user && userRoles) {
+      setIsAdmin(userRoles.includes('admin'))
+    } else {
+      setIsAdmin(false)
+    }
+  }, [user, userRoles])
 
   return (
     <aside
@@ -204,6 +216,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator App" onClick={onNavClick} delay={1150} />
             <NavItem href="/playground/note-widgets" icon={<NotepadText size={16} />} label="Note Widgets" onClick={onNavClick} delay={1200} />
             <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1250} />
+            <NavItem href="/playground/music-player" icon={<BookHeartIcon size={16} />} label="Music Player" onClick={onNavClick} delay={1300} />
           </div>
 
           <Separator />
@@ -211,6 +224,9 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
           <div className="space-y-1">
             <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1250} />
             <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1300} hasNotification={true} />
+            {isAdmin && (
+              <NavItem href="/ctrl-room" icon={<Shield size={16} />} label="CTRL Room" onClick={onNavClick} delay={1350} />
+            )}
           </div>
 
 

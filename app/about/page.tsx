@@ -21,7 +21,7 @@ export default function AboutPage() {
         <p className="text-xs text-extra-green">Last updated: April 30, 2025</p>
       </header>
       <div className="space-y-4 max-w-none text-justify">
-        <figure className="space-y-2 mb-6">
+        <figure className="space-y-2 mb-6 w-fit">
           <img src="/about2.jpeg" alt="A beautiful arrangement of lilies" className="rounded-lg shadow-md h-[500px] object-cover" />
           <figcaption className="text-center text-sm text-muted-foreground mt-2">lilies</figcaption>
         </figure>

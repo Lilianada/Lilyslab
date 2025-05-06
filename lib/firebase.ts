@@ -70,7 +70,12 @@ if (isConfigValid && app) {
   }
 }
 
+// Create Google provider and configure it to always prompt for account selection
 const googleProvider = new GoogleAuthProvider()
+// Add custom parameters to always force account selection
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+})
 
 // Helper function for Google sign-in with better error handling
 export const signInWithGoogle = async () => {
@@ -92,6 +97,12 @@ export const signInWithGoogle = async () => {
   try {
     // Dynamically import the required functions
     const { signInWithPopup, browserPopupRedirectResolver } = await import('firebase/auth');
+    
+    // Force account selection by setting custom parameters again right before sign-in
+    googleProvider.setCustomParameters({
+      prompt: 'select_account'
+    })
+    
     const result = await signInWithPopup(auth, googleProvider, browserPopupRedirectResolver)
     return result.user
   } catch (error) {

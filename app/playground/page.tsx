@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Pencil, Sparkles, Flame, Timer } from "lucide-react";
+import { Calculator, Pencil, Sparkles, Flame, Timer, Music } from "lucide-react";
 
 export const metadata = {
   title: "Playground | Lilyslab",
@@ -66,9 +66,25 @@ export default function PlaygroundPage() {
               </div>
             </Link>
           </div>
+          
+          {/* Music Player */}
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
+            <Link
+              href="/playground/music-player"
+              className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
+            >
+              <Music size={20} className="text-primary" />
+              <div>
+                <h2 className="font-medium text-sm">Music Player</h2>
+                <p className="text-xs text-muted-foreground">
+                  A customizable audio player for your recordings and music
+                </p>
+              </div>
+            </Link>
+          </div>
 
           {/* Coming Soon: Animation Playground */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "400ms" }}>
             <div className="flex items-center gap-3 rounded-md border p-4 bg-muted/50">
               <Sparkles size={20} className="text-muted-foreground" />
               <div>
@@ -84,7 +100,7 @@ export default function PlaygroundPage() {
           </div>
 
           {/* Coming Soon: Color Theory */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "400ms" }}>
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "500ms" }}>
             <div className="flex items-center gap-3 rounded-md border p-4 bg-muted/50">
               <Flame size={20} className="text-muted-foreground" />
               <div>
