@@ -25,13 +25,10 @@ import {
   FileAudio
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
-import { db, storage } from "@/lib/firebase/firebase-config"
-import { collection, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy } from "firebase/firestore"
-import { ref, deleteObject } from "firebase/storage"
 import { AudioTrack } from "@/lib/audio/howler-service"
 import { ColorCover } from "@/components/playground/ColorCover"
 import howlerService from "@/lib/audio/howler-service"
-import { getAllAudioItems, AudioCollectionType, deleteAudioItem, updateAudioItem } from "@/lib/firebase/tracks"
+import { getAllAudioItems, AudioCollectionType, deleteAudioItem, updateAudioItem } from "@/lib/audio/local-tracks"
 import { cn } from "@/lib/utils"
 
 export function ManageLibrary() {
@@ -139,29 +136,18 @@ export function ManageLibrary() {
     try {
       setIsDeleting(true)
       
-      // Delete from Firestore
-      await deleteDoc(doc(db, 'tracks', trackToDelete.id))
+      // Determine collection type based on isVoiceMemo flag
+      const collectionType: AudioCollectionType = trackToDelete.isVoiceMemo ? "voice_memo" : "tracks"
       
-      // Delete from Storage if URL exists
-      if (trackToDelete.url) {
-        try {
-          const fileRef = ref(storage, trackToDelete.url)
-          await deleteObject(fileRef)
-        } catch (error) {
-          console.error("Error deleting audio file:", error)
-          // Continue even if file deletion fails
-        }
-      }
+      // Delete from local tracks (in a real app, this would delete from a database)
+      await deleteAudioItem(trackToDelete.id, collectionType)
       
-      // Delete cover image if exists
+      // Log deletion (in a real app, we would also delete the actual files)
+      console.log(`Deleted track: ${trackToDelete.title} (${trackToDelete.id})`)
+      console.log(`Note: In a real app, we would also delete the file from: ${trackToDelete.url}`)
+      
       if (trackToDelete.coverImage) {
-        try {
-          const coverRef = ref(storage, trackToDelete.coverImage)
-          await deleteObject(coverRef)
-        } catch (error) {
-          console.error("Error deleting cover image:", error)
-          // Continue even if image deletion fails
-        }
+        console.log(`Note: In a real app, we would also delete the cover image from: ${trackToDelete.coverImage}`)
       }
       
       // Update state
@@ -195,12 +181,18 @@ export function ManageLibrary() {
 
   const handleSaveTrack = async (updatedTrack: AudioTrack) => {
     try {
-      // Update in Firestore
-      await updateDoc(doc(db, 'tracks', updatedTrack.id), {
-        title: updatedTrack.title,
-        artist: updatedTrack.artist,
-        category: updatedTrack.category,
-        isPremium: updatedTrack.isPremium
+      // Determine collection type based on isVoiceMemo flag
+      const collectionType: AudioCollectionType = updatedTrack.isVoiceMemo ? "voice_memo" : "tracks"
+      
+      // Update in local tracks (in a real app, this would update a database)
+      await updateAudioItem(updatedTrack.id, updatedTrack, collectionType)
+      
+      // Log update (in a real app, we would actually save this to a database)
+      console.log(`Updated track: ${updatedTrack.title} (${updatedTrack.id})`)
+      
+      toast({
+        title: "Track updated",
+        description: `"${updatedTrack.title}" has been updated.`
       })
       
       // Update local state

@@ -9,7 +9,7 @@ export const metadata = {
 export default function PlaygroundPage() {
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-3xl mx-auto sm:px-4 py-12">
+      <div className="sm:container max-w-3xl mx-auto sm:px-4 py-12">
         <header className="mb-12">
           <h1 className="mb-2 text-xl font-medium">Playground</h1>
           <p className="text-sm text-muted-foreground">
@@ -114,6 +114,8 @@ export default function PlaygroundPage() {
               </div>
             </div>
           </div>
+          
+
         </div>
 
         <div className="mt-16 p-6 border border-dashed rounded-lg text-center">

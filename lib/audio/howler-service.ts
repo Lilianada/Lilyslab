@@ -47,18 +47,36 @@ class HowlerService {
       
       this.currentTrack = track;
       
+      // Ensure URL is absolute for local files
+      let audioUrl = track.url;
+      if (audioUrl.startsWith('/')) {
+        audioUrl = window.location.origin + audioUrl;
+      }
+      
+      console.log('Loading audio track:', { ...track, url: audioUrl });
+      
       const options: HowlOptions = {
-        src: [track.url],
+        src: [audioUrl],
         html5: true, // Enable streaming
         preload: true,
         volume: 0.8,
         rate: 1.0,
         onload: () => {
+          // Update the track duration from the actual audio file
+          if (this.howl) {
+            const actualDuration = this.howl.duration();
+            if (actualDuration > 0 && (!track.duration || Math.abs(track.duration - actualDuration) > 1)) {
+              console.log(`Updating duration for ${track.title} from ${track.duration} to ${actualDuration}`);
+              track.duration = actualDuration;
+            }
+          }
           this.emit('loaded', track);
+          this.emit('durationchange', track.duration);
           resolve();
         },
         onloaderror: (id, error) => {
-          this.emit('error', { id, error });
+          console.error('Error loading audio:', error);
+          this.emit('error', { id, error, track });
           reject(error);
         },
         onplay: () => {

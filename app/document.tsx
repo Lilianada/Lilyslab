@@ -19,12 +19,12 @@ export default function Document() {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        
+
         {/* Favicon and PWA icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
-        
+
         {/* PWA meta tags */}
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -38,9 +38,10 @@ export default function Document() {
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+
         {/* Font display optimization */}
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           @font-face {
             font-family: 'Geist Sans';
             font-style: normal;

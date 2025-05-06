@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils"
 import { List, Music, RefreshCw } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useToast } from "@/hooks/use-toast"
+import { Button } from "@/components/ui/button"
 import howlerService, { AudioTrack } from "@/lib/audio/howler-service"
-import { getAllAudio, getAllTracks, getAllVoiceMemos } from "@/lib/firebase/tracks"
+import { getAllAudioItems } from "@/lib/audio/local-tracks"
 
 // Import sub-components
 import { PlayerControls } from "./PlayerControls"
@@ -14,19 +15,9 @@ import { ProgressBar } from "./ProgressBar"
 import { VolumeControl } from "./VolumeControl"
 import { PlaybackOptions } from "./PlaybackOptions"
 import { TrackInfo } from "./TrackInfo"
-import { BookmarkButton } from "./BookmarkButton"
-import { BookmarksList } from "./BookmarksList"
 import { PlaylistView } from "./PlaylistView"
 import { BuyMeCoffeeDialog } from "./BuyMeCoffeeDialog"
 
-// Define types for our component state
-interface Bookmark {
-  id: string;
-  trackId: string;
-  position: number;
-  label: string;
-  timestamp: number;
-}
 
 interface PlaybackState {
   isPlaying: boolean;
@@ -58,43 +49,42 @@ export function MusicPlayer() {
     speed: 1,
     loop: false
   })
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([])
   
   // UI state
   const [showPlaylist, setShowPlaylist] = useState(true)
-  const [showBookmarkDialog, setShowBookmarkDialog] = useState(false)
-  const [bookmarkLabel, setBookmarkLabel] = useState("")
   const [showBuyMeCoffeeDialog, setShowBuyMeCoffeeDialog] = useState(false)
   
   // Auth and toast
   const { user } = useAuth()
   const { toast } = useToast()
   
-  // Load tracks from Firebase
+  // Load local audio tracks
   useEffect(() => {
     async function fetchTracks() {
       try {
         setIsLoading(true)
         setError(null)
         
-        // Fetch all audio tracks and voice memos from Firebase
-        const fetchedTracks = await getAllAudio()
+        // Fetch all audio tracks from local files
+        const allAudioItems = await getAllAudioItems()
         
-        if (fetchedTracks.length === 0) {
-          setError("No audio tracks found. Add some tracks in the CTRL Room.")
+        if (allAudioItems.length === 0) {
+          setError("No audio tracks found. Please add sample audio files to the public/audio folder.")
           setTracks([])
           setFilteredTracks([])
           return
         }
         
         // Sort tracks by title
-        const sortedTracks = fetchedTracks.sort((a, b) => a.title.localeCompare(b.title))
+        const sortedTracks = allAudioItems.sort((a: AudioTrack, b: AudioTrack) => 
+          a.title.localeCompare(b.title)
+        )
         setTracks(sortedTracks)
         
         // Extract unique categories
         const uniqueCategories = Array.from(
-          new Set(sortedTracks.map(track => track.category))
-        ).sort()
+          new Set(sortedTracks.map((track: AudioTrack) => track.category || 'Uncategorized'))
+        ).sort() as string[]
         setCategories(uniqueCategories)
         
         // Initially show all tracks
@@ -130,36 +120,64 @@ export function MusicPlayer() {
   // Set up Howler event listeners
   const setupHowlerListeners = () => {
     // Update playback state when time changes
-    howlerService.on('timeupdate', (time: number) => {
-      setPlaybackState(prev => ({ ...prev, currentTime: time }))
+    howlerService.on('timeupdate', (currentTime: number) => {
+      setPlaybackState(prev => ({
+        ...prev,
+        currentTime
+      }))
     })
     
-    // Update state when play/pause/stop events occur
+    // Update duration when it changes
+    howlerService.on('durationchange', (duration: number) => {
+      console.log('Duration changed:', duration)
+      setPlaybackState(prev => ({
+        ...prev,
+        duration
+      }))
+    })
+    
+    // Update play state
     howlerService.on('play', () => {
-      setPlaybackState(prev => ({ ...prev, isPlaying: true }))
+      console.log('Play event received')
+      setPlaybackState(prev => ({
+        ...prev,
+        isPlaying: true
+      }))
     })
     
     howlerService.on('pause', () => {
-      setPlaybackState(prev => ({ ...prev, isPlaying: false }))
+      console.log('Pause event received')
+      setPlaybackState(prev => ({
+        ...prev,
+        isPlaying: false
+      }))
     })
     
     howlerService.on('stop', () => {
-      setPlaybackState(prev => ({ ...prev, isPlaying: false, currentTime: 0 }))
+      console.log('Stop event received')
+      setPlaybackState(prev => ({
+        ...prev,
+        isPlaying: false,
+        currentTime: 0
+      }))
     })
     
-    // Handle track end
     howlerService.on('end', () => {
-      if (!playbackState.loop) {
-        playNextTrack()
-      }
+      console.log('End event received')
+      setPlaybackState(prev => ({
+        ...prev,
+        isPlaying: false,
+        currentTime: prev.duration // Set to full duration when ended
+      }))
+      playNextTrack()
     })
     
-    // Handle errors
+    // Log errors
     howlerService.on('error', (error: any) => {
       console.error('Howler error:', error)
       toast({
         title: "Playback Error",
-        description: "There was an error playing this track. Please try again.",
+        description: "There was an error playing this track. Please try another.",
         variant: "destructive"
       })
     })
@@ -197,34 +215,64 @@ export function MusicPlayer() {
   
   // Track selection
   const playTrack = async (track: AudioTrack) => {
-    if (track.isPremium && !user) {
-      setShowBuyMeCoffeeDialog(true)
-      return
-    }
-    
     try {
+      // If it's the same track, just toggle play/pause
+      if (currentTrack && currentTrack.id === track.id) {
+        togglePlayPause()
+        return
+      }
+      
+      // Load and play the new track
       setCurrentTrack(track)
       
-      // Load and play the track
-      await howlerService.loadTrack(track)
-      
-      // Update duration in playback state
+      // Reset playback state
       setPlaybackState(prev => ({
         ...prev,
-        duration: howlerService.getDuration(),
-        volume: howlerService.getVolume(),
-        muted: howlerService.isMuted(),
-        speed: howlerService.getPlaybackRate(),
-        loop: howlerService.isLooping()
+        currentTime: 0,
+        duration: track.duration || 0, // Use 0 as fallback if duration is not set
+        isPlaying: false
       }))
       
-      // Start playback
+      console.log(`Loading track: ${track.title} (${track.url})`)
+      
+      // Show loading toast
+      toast({
+        title: "Loading track",
+        description: `Loading ${track.title}...`
+      })
+      
+      // Load the track
+      await howlerService.loadTrack(track)
+      
+      // Get the actual duration from the loaded track
+      const actualDuration = howlerService.getDuration()
+      if (actualDuration > 0) {
+        // Update the track duration if it's different
+        if (Math.abs(track.duration - actualDuration) > 1) {
+          console.log(`Updated duration for ${track.title}: ${track.duration} → ${actualDuration}`)
+          track.duration = actualDuration
+          
+          // Update playback state with the correct duration
+          setPlaybackState(prev => ({
+            ...prev,
+            duration: actualDuration
+          }))
+        }
+      }
+      
+      // Start playing
       howlerService.play()
+      
+      // Update playback state
+      setPlaybackState(prev => ({
+        ...prev,
+        isPlaying: true
+      }))
     } catch (error) {
       console.error("Error playing track:", error)
       toast({
         title: "Playback Error",
-        description: "Failed to load the audio track. Please try again.",
+        description: "Failed to play this track. Please try another.",
         variant: "destructive"
       })
     }
@@ -298,57 +346,47 @@ export function MusicPlayer() {
     setPlaybackState(prev => ({ ...prev, loop: newLoopState }))
   }
   
-  // Bookmark functions
-  const addBookmark = () => {
-    if (!currentTrack || !user) return
-    
-    const newBookmark: Bookmark = {
-      id: `bookmark-${Date.now()}`,
-      trackId: currentTrack.id,
-      position: playbackState.currentTime,
-      label: bookmarkLabel || `Bookmark at ${formatTime(playbackState.currentTime)}`,
-      timestamp: Date.now()
-    }
-    
-    setBookmarks([...bookmarks, newBookmark])
-    setShowBookmarkDialog(false)
-    setBookmarkLabel("")
-    
-    // In production, save to Firestore
-    toast({
-      title: "Bookmark added",
-      description: `Bookmark added at ${formatTime(playbackState.currentTime)}`,
-    })
-  }
-  
-  const jumpToBookmark = (bookmark: Bookmark) => {
-    if (currentTrack?.id === bookmark.trackId) {
-      seekTo(bookmark.position)
-    } else {
-      const track = tracks.find(t => t.id === bookmark.trackId)
-      if (track) {
-        playTrack(track).then(() => {
-          // Set timeout to allow track to load
-          setTimeout(() => seekTo(bookmark.position), 300)
-        })
-      }
-    }
-  }
-  
   // Download track
   const downloadTrack = (track: AudioTrack, e: React.MouseEvent) => {
-    e.stopPropagation() // Prevent track selection when clicking download
+    e.preventDefault()
+    e.stopPropagation()
     
-    if (track.isPremium && !user) {
-      setShowBuyMeCoffeeDialog(true)
+    if (!track.url) {
+      toast({
+        title: "Download failed",
+        description: "This track does not have a downloadable URL.",
+        variant: "destructive"
+      })
       return
     }
     
-    // In production, this would get the download URL from Firebase
-    // and trigger a download
+    // Show confirmation toast
     toast({
-      title: "Download started",
-      description: `Downloading ${track.title}`,
+      title: "Confirm download",
+      description: `Do you want to download "${track.title}" by ${track.artist}?`,
+      action: (
+        <Button 
+          variant="default" 
+          size="sm" 
+          onClick={() => {
+            // Create a temporary anchor element
+            const a = document.createElement('a')
+            a.href = track.url
+            a.download = `${track.title} - ${track.artist}.mp3`
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+            
+            // Show success toast
+            toast({
+              title: "Download started",
+              description: `"${track.title}" is being downloaded.`
+            })
+          }}
+        >
+          Download
+        </Button>
+      ),
     })
   }
   
@@ -408,19 +446,6 @@ export function MusicPlayer() {
                     onToggleLoop={toggleLoop}
                   />
                   
-                  {/* Bookmark Button */}
-                  <BookmarkButton 
-                    isDisabled={!currentTrack || !user}
-                    showDialog={showBookmarkDialog}
-                    setShowDialog={setShowBookmarkDialog}
-                    currentTime={playbackState.currentTime}
-                    bookmarkLabel={bookmarkLabel}
-                    setBookmarkLabel={setBookmarkLabel}
-                    addBookmark={addBookmark}
-                    formatTime={formatTime}
-                    currentTrackId={currentTrack?.id}
-                  />
-                  
                   {/* Toggle Playlist Button (mobile only) */}
                   <button
                     className="md:hidden"
@@ -443,15 +468,6 @@ export function MusicPlayer() {
           )}
         </div>
         
-        {/* Bookmarks List */}
-        {user && (
-          <BookmarksList 
-            bookmarks={bookmarks}
-            tracks={tracks}
-            onJumpToBookmark={jumpToBookmark}
-            formatTime={formatTime}
-          />
-        )}
       </div>
       
       {/* Playlist View */}
