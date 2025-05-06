@@ -32,7 +32,7 @@ Fall in love with the process, not just the outcome.
 When you enjoy the journey, success is no longer the condition for happiness—it becomes a byproduct of it.
 
 
-This is my entry for 𝗗𝗮𝘆 𝟰/𝟯𝟬
+This is my entry for 𝗗𝗮𝘆 𝟰/2𝟬
 
 My digital garden & workshop has a playground section. It is a space for experimental web interactions, mini-projects, and interactive demos.
 
