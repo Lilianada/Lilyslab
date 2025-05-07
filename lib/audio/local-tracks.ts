@@ -1,33 +1,41 @@
-import { AudioTrack } from './howler-service';
+// Tracks service that uses Cloudinary for audio files
+import { AudioTrack } from "./howler-service";
+import { 
+  getAudioFromCloudinary, 
+  getAudioByIdFromCloudinary,
+  uploadAudioToCloudinary,
+  deleteAudioFromCloudinary
+} from "../cloudinary/audio-service";
 
-// Mock data for audio tracks using local files
-const localTracks: AudioTrack[] = [
+// Collection types
+export type AudioCollectionType = "tracks" | "voice_memo"
+
+// Fallback local tracks in case Cloudinary fetch fails
+const fallbackTracks: AudioTrack[] = [
   {
-    id: '1',
-    title: 'Sample Track 1',
-    artist: 'Local Artist',
-    url: '/audio/sample-track.mp3',
+    id: "track-1",
+    title: "Sample Track",
+    artist: "Lily's Lab",
+    duration: 30,
+    url: "/audio/sample-track.mp3",
     coverImage: null,
-    duration: 180, // 3 minutes in seconds
-    category: 'Music',
+    category: "Music",
     isPremium: false,
     isVoiceMemo: false
   },
   {
-    id: '2',
-    title: 'Voice Memo Sample',
-    artist: 'Recorded by You',
-    url: '/audio/sample-voice-memo.mp3',
+    id: "voice-memo-1",
+    title: "Sample Voice Memo",
+    artist: "Lily's Lab",
+    duration: 15,
+    url: "/audio/sample-voice-memo.mp3",
     coverImage: null,
-    duration: 60, // 1 minute in seconds
-    category: 'Voice Memo',
+    category: "Voice Memo",
     isPremium: false,
     isVoiceMemo: true
   }
 ];
 
-// Type for audio collection
-export type AudioCollectionType = 'tracks' | 'voice_memo';
 
 /**
  * Get all audio items of a specific type
@@ -35,9 +43,9 @@ export type AudioCollectionType = 'tracks' | 'voice_memo';
 export const getAllAudioItems = async (type: AudioCollectionType = 'tracks'): Promise<AudioTrack[]> => {
   // Filter by type
   if (type === 'tracks') {
-    return localTracks.filter(track => !track.isVoiceMemo);
+    return fallbackTracks.filter(track => !track.isVoiceMemo);
   } else {
-    return localTracks.filter(track => track.isVoiceMemo);
+    return fallbackTracks.filter(track => track.isVoiceMemo);
   }
 };
 
@@ -45,14 +53,14 @@ export const getAllAudioItems = async (type: AudioCollectionType = 'tracks'): Pr
  * Get all music tracks
  */
 export const getAllTracks = async (): Promise<AudioTrack[]> => {
-  return localTracks.filter(track => !track.isVoiceMemo);
+  return fallbackTracks.filter(track => !track.isVoiceMemo);
 };
 
 /**
  * Get all voice memos
  */
 export const getAllVoiceMemos = async (): Promise<AudioTrack[]> => {
-  return localTracks.filter(track => track.isVoiceMemo);
+  return fallbackTracks.filter(track => track.isVoiceMemo);
 };
 
 /**
@@ -60,8 +68,8 @@ export const getAllVoiceMemos = async (): Promise<AudioTrack[]> => {
  */
 export const getAudioByCategory = async (category: string, type: AudioCollectionType = 'tracks'): Promise<AudioTrack[]> => {
   const items = type === 'tracks' 
-    ? localTracks.filter(track => !track.isVoiceMemo) 
-    : localTracks.filter(track => track.isVoiceMemo);
+    ? fallbackTracks.filter(track => !track.isVoiceMemo) 
+    : fallbackTracks.filter(track => track.isVoiceMemo);
   
   return items.filter(item => item.category === category);
 };
@@ -70,7 +78,7 @@ export const getAudioByCategory = async (category: string, type: AudioCollection
  * Get audio item by ID
  */
 export const getAudioItemById = async (id: string): Promise<AudioTrack | null> => {
-  const track = localTracks.find(track => track.id === id);
+  const track = fallbackTracks.find(track => track.id === id);
   return track || null;
 };
 

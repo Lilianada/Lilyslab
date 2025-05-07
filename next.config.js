@@ -14,8 +14,8 @@ const nextConfig = {
               style-src 'self' 'unsafe-inline';
               img-src 'self' data: https: blob:;
               font-src 'self' data:;
-              connect-src 'self' https:;
-              media-src 'self' https://firebasestorage.googleapis.com data: blob:;
+              connect-src 'self' https: blob:;
+              media-src 'self' https://firebasestorage.googleapis.com https://res.cloudinary.com https://*.cloudinary.com data: blob:;
               frame-src 'self' https://*.firebaseapp.com https://*.firebaseio.com https://*.google.com https://accounts.google.com;
             `.replace(/\s{2,}/g, ' ').trim(),
           },
@@ -30,6 +30,7 @@ const nextConfig = {
     domains: [
       'lh3.googleusercontent.com',  // Google profile images
       'firebasestorage.googleapis.com',  // Firebase Storage images
+      'res.cloudinary.com',  // Cloudinary images
     ],
   },
 };

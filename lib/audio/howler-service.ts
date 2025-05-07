@@ -53,7 +53,31 @@ class HowlerService {
         audioUrl = window.location.origin + audioUrl;
       }
       
-      console.log('Loading audio track:', { ...track, url: audioUrl });
+      // Use our proxy API for Cloudinary URLs to avoid CSP issues
+      if (audioUrl.includes('res.cloudinary.com')) {
+        try {
+          // Extract the public ID from the track's ID
+          const publicId = track.id;
+          
+          // Use our API endpoint to proxy the request
+          audioUrl = `/api/cloudinary/play-audio?publicId=${encodeURIComponent(publicId)}`;
+          
+          // Add cache-busting parameter
+          const cacheBuster = Date.now();
+          audioUrl = `${audioUrl}&_cb=${cacheBuster}`;
+          
+          console.log('Using proxied audio URL:', audioUrl);
+        } catch (error) {
+          console.error('Error creating proxy URL:', error);
+          // If URL creation fails, log the error but continue with original URL
+        }
+      }
+      
+      console.log('Loading audio track:', track.title);
+      console.log('Audio URL:', audioUrl);
+      
+      // Determine if we're using the proxy endpoint
+      const isProxyEndpoint = audioUrl.includes('/api/cloudinary/play-audio');
       
       const options: HowlOptions = {
         src: [audioUrl],
@@ -61,6 +85,8 @@ class HowlerService {
         preload: true,
         volume: 0.8,
         rate: 1.0,
+        // Explicitly specify the format for proxy endpoint URLs to avoid codec detection issues
+        format: isProxyEndpoint ? 'mp3' : undefined,
         onload: () => {
           // Update the track duration from the actual audio file
           if (this.howl) {
@@ -76,7 +102,9 @@ class HowlerService {
         },
         onloaderror: (id, error) => {
           console.error('Error loading audio:', error);
-          this.emit('error', { id, error, track });
+          // Convert the error object to a string message to avoid React rendering issues
+          const errorMessage = typeof error === 'object' ? 'Failed to load audio file' : String(error);
+          this.emit('error', errorMessage);
           reject(error);
         },
         onplay: () => {
