@@ -26,10 +26,11 @@ export default function CtrlRoomPage() {
 
   // Redirect non-admin users
   useEffect(() => {
-    if (!isLoading && !isAdmin) {
+    // Only redirect if we've confirmed the user is logged in but not an admin
+    if (!isLoading && user && !isAdmin) {
       router.push('/')
     }
-  }, [isAdmin, isLoading, router])
+  }, [isAdmin, isLoading, router, user])
 
   if (isLoading) {
     return (
@@ -46,19 +47,23 @@ export default function CtrlRoomPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
-      <header className="mb-8">
-        <h1 className="mb-1 text-xl font-medium tracking-tight">CTRL Room</h1>
+    <div className="sm:container max-w-6xl mx-auto py-8 animate-fade-in">
+      <header className="mb-8 flex items-center gap-3">
+        {/* <Shield className="h-8 w-8 text-primary" /> */}
+        <div>
+          <h1 className="text-2xl font-bold mb-1">CTRL Room</h1>
           <p className="text-sm text-muted-foreground">
             Admin control panel for managing site content and settings
           </p>
+        </div>
       </header>
 
       <Tabs defaultValue="audio" className="mb-8">
         <TabsList className="mb-4">
           <TabsTrigger value="audio" className="flex items-center gap-2">
             <Music className="h-4 w-4" />
-            <span>Audio Library</span>
+            <span className="hidden md:flex">Audio Library</span>
+            <span className="md:hidden">Audio</span>
           </TabsTrigger>
           <TabsTrigger value="content" className="flex items-center gap-2">
             <FileText className="h-4 w-4" />

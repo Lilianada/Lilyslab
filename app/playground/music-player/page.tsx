@@ -13,12 +13,7 @@ export default function MusicPlayerPage() {
       </header>
       
       <MusicPlayer />
-      
-      <div className="mt-12">
-        <p className="text-xs text-muted-foreground mt-2">
-          Powered by Howler.js - a powerful audio library with excellent cross-browser compatibility.
-        </p>
-      </div>
+    
     </div>
   )
 }
