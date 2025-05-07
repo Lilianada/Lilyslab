@@ -1,13 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { List, Music, RefreshCw, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { List, Music, RefreshCw } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { useAuth } from "@/contexts/auth-context"
 import { useToast } from "@/hooks/use-toast"
-import { Button } from "@/components/ui/button"
-import howlerService, { AudioTrack } from "@/lib/audio/howler-service"
-import { getAllAudioItems } from "@/lib/audio/local-tracks"
+import { ColorCover } from "../ColorCover"
+import howlerService, { AudioTrack, PlaybackState } from "@/lib/audio/howler-service"
+import { getAudioFromCloudinary } from "@/lib/cloudinary/audio-service"
 
 // Import sub-components
 import { PlayerControls } from "./PlayerControls"
@@ -18,23 +20,13 @@ import { TrackInfo } from "./TrackInfo"
 import { PlaylistView } from "./PlaylistView"
 import { BuyMeCoffeeDialog } from "./BuyMeCoffeeDialog"
 
-
-interface PlaybackState {
-  isPlaying: boolean;
-  currentTime: number;
-  duration: number;
-  volume: number;
-  muted: boolean;
-  speed: number;
-  loop: boolean;
-}
-
 export function MusicPlayer() {
   // State for tracks and playlists
   const [tracks, setTracks] = useState<AudioTrack[]>([])
   const [filteredTracks, setFilteredTracks] = useState<AudioTrack[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
+  const [searchQuery, setSearchQuery] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   
@@ -58,53 +50,8 @@ export function MusicPlayer() {
   const { user } = useAuth()
   const { toast } = useToast()
   
-  // Load local audio tracks
+  // Load tracks from Cloudinary
   useEffect(() => {
-    async function fetchTracks() {
-      try {
-        setIsLoading(true)
-        setError(null)
-        
-        // Fetch all audio tracks from local files
-        const allAudioItems = await getAllAudioItems()
-        
-        if (allAudioItems.length === 0) {
-          setError("No audio tracks found. Please add sample audio files to the public/audio folder.")
-          setTracks([])
-          setFilteredTracks([])
-          return
-        }
-        
-        // Sort tracks by title
-        const sortedTracks = allAudioItems.sort((a: AudioTrack, b: AudioTrack) => 
-          a.title.localeCompare(b.title)
-        )
-        setTracks(sortedTracks)
-        
-        // Extract unique categories
-        const uniqueCategories = Array.from(
-          new Set(sortedTracks.map((track: AudioTrack) => track.category || 'Uncategorized'))
-        ).sort() as string[]
-        setCategories(uniqueCategories)
-        
-        // Initially show all tracks
-        setFilteredTracks(sortedTracks)
-        
-        // Set a default track
-        if (sortedTracks.length > 0 && !currentTrack) {
-          setCurrentTrack(sortedTracks[0])
-          await howlerService.loadTrack(sortedTracks[0])
-        }
-      } catch (error) {
-        console.error("Error loading tracks:", error)
-        setError("Failed to load tracks. Please try again.")
-        setTracks([])
-        setFilteredTracks([])
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    
     fetchTracks()
     
     // Set up event listeners for howler service
@@ -115,69 +62,142 @@ export function MusicPlayer() {
       cleanupHowlerListeners()
       howlerService.destroy()
     }
-  }, [user])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
+  // Filter tracks when search or category changes
+  useEffect(() => {
+    filterTracks()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, selectedCategory, tracks])
+  
+  const fetchTracks = async () => {
+    try {
+      setIsLoading(true)
+      setError(null)
+      
+      // Fetch tracks from Cloudinary
+      const fetchedTracks = await getAudioFromCloudinary(false) // Regular tracks
+      const fetchedVoiceMemos = await getAudioFromCloudinary(true) // Voice memos
+      
+      // Combine all audio items
+      const allAudio = [...fetchedTracks, ...fetchedVoiceMemos]
+      
+      if (allAudio.length === 0) {
+        setError("No audio tracks found in your Cloudinary library.")
+        setTracks([])
+        setFilteredTracks([])
+        return
+      }
+      
+      // Sort tracks by title
+      const sortedTracks = allAudio.sort((a, b) => 
+        a.title.localeCompare(b.title)
+      )
+      setTracks(sortedTracks)
+      
+      // Extract unique categories
+      const uniqueCategories = Array.from(
+        new Set(sortedTracks.map((track) => track.category || 'Uncategorized'))
+      ).sort() as string[]
+      uniqueCategories.unshift('all')
+      setCategories(uniqueCategories)
+      
+      // Set a default track
+      if (sortedTracks.length > 0 && !currentTrack) {
+        setCurrentTrack(sortedTracks[0])
+        await howlerService.loadTrack(sortedTracks[0])
+      }
+      
+      setFilteredTracks(sortedTracks)
+    } catch (error) {
+      console.error("Error loading tracks:", error)
+      
+      // Handle different error types with user-friendly messages
+      if (error instanceof Error) {
+        // Network errors
+        if (error.message.includes('ENOTFOUND') || error.message.includes('ETIMEDOUT') || error.message.includes('network')) {
+          setError("Unable to connect to the audio service. Please check your internet connection and try again.")
+        }
+        // Authentication errors
+        else if (error.message.includes('authentication') || error.message.includes('credentials') || error.message.includes('401')) {
+          setError("Authentication failed with the audio service. Please contact an administrator.")
+        }
+        // API errors
+        else if (typeof error.message === 'string' && error.message.includes('Failed to fetch')) {
+          setError("No music available yet. Check back later or upload some tracks in the control room.")
+        }
+        // Generic error
+        else {
+          setError("Failed to load tracks. Please try again later.")
+        }
+      } else {
+        // If it's not an Error object
+        setError("No music available yet. Check back later or upload some tracks in the control room.")
+      }
+      
+      setTracks([])
+      setFilteredTracks([])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+  
+  // Filter tracks based on search query and category
+  const filterTracks = () => {
+    if (!tracks.length) return
+    
+    let result = [...tracks]
+    
+    // Filter by search query
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase()
+      result = result.filter(track => 
+        track.title.toLowerCase().includes(query) || 
+        track.artist.toLowerCase().includes(query)
+      )
+    }
+    
+    // Filter by category
+    if (selectedCategory !== "all") {
+      result = result.filter(track => track.category === selectedCategory)
+    }
+    
+    setFilteredTracks(result)
+  }
   
   // Set up Howler event listeners
   const setupHowlerListeners = () => {
-    // Update playback state when time changes
-    howlerService.on('timeupdate', (currentTime: number) => {
-      setPlaybackState(prev => ({
-        ...prev,
-        currentTime
-      }))
-    })
-    
-    // Update duration when it changes
-    howlerService.on('durationchange', (duration: number) => {
-      console.log('Duration changed:', duration)
-      setPlaybackState(prev => ({
-        ...prev,
-        duration
-      }))
-    })
-    
-    // Update play state
     howlerService.on('play', () => {
-      console.log('Play event received')
-      setPlaybackState(prev => ({
-        ...prev,
-        isPlaying: true
-      }))
+      setPlaybackState(prev => ({ ...prev, isPlaying: true }))
     })
     
     howlerService.on('pause', () => {
-      console.log('Pause event received')
-      setPlaybackState(prev => ({
-        ...prev,
-        isPlaying: false
-      }))
+      setPlaybackState(prev => ({ ...prev, isPlaying: false }))
     })
     
     howlerService.on('stop', () => {
-      console.log('Stop event received')
-      setPlaybackState(prev => ({
-        ...prev,
-        isPlaying: false,
-        currentTime: 0
-      }))
+      setPlaybackState(prev => ({ ...prev, isPlaying: false, currentTime: 0 }))
     })
     
     howlerService.on('end', () => {
-      console.log('End event received')
-      setPlaybackState(prev => ({
-        ...prev,
-        isPlaying: false,
-        currentTime: prev.duration // Set to full duration when ended
-      }))
+      setPlaybackState(prev => ({ ...prev, isPlaying: false }))
+      // Auto play next track
       playNextTrack()
     })
     
-    // Log errors
-    howlerService.on('error', (error: any) => {
-      console.error('Howler error:', error)
+    howlerService.on('timeupdate', (position: number) => {
+      setPlaybackState(prev => ({ ...prev, currentTime: position }))
+    })
+    
+    howlerService.on('load', (duration: number) => {
+      setPlaybackState(prev => ({ ...prev, duration }))
+    })
+    
+    howlerService.on('error', (message: string) => {
       toast({
         title: "Playback Error",
-        description: "There was an error playing this track. Please try another.",
+        description: message,
         variant: "destructive"
       })
     })
@@ -185,22 +205,16 @@ export function MusicPlayer() {
   
   // Clean up Howler event listeners
   const cleanupHowlerListeners = () => {
-    howlerService.off('timeupdate', () => {})
-    howlerService.off('play', () => {})
-    howlerService.off('pause', () => {})
-    howlerService.off('stop', () => {})
-    howlerService.off('end', () => {})
-    howlerService.off('error', () => {})
+    // Using empty function as callback since we're removing all listeners
+    const noop = () => {}
+    howlerService.off('play', noop)
+    howlerService.off('pause', noop)
+    howlerService.off('stop', noop)
+    howlerService.off('end', noop)
+    howlerService.off('timeupdate', noop)
+    howlerService.off('load', noop)
+    howlerService.off('error', noop)
   }
-  
-  // Filter tracks when category changes
-  useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredTracks(tracks)
-    } else {
-      setFilteredTracks(tracks.filter(track => track.category === selectedCategory))
-    }
-  }, [selectedCategory, tracks])
   
   // Play/pause functions
   const togglePlayPause = () => {
@@ -215,64 +229,35 @@ export function MusicPlayer() {
   
   // Track selection
   const playTrack = async (track: AudioTrack) => {
+    if (currentTrack && currentTrack.id === track.id) {
+      togglePlayPause()
+      return
+    }
+    
     try {
-      // If it's the same track, just toggle play/pause
-      if (currentTrack && currentTrack.id === track.id) {
-        togglePlayPause()
-        return
-      }
-      
-      // Load and play the new track
       setCurrentTrack(track)
-      
-      // Reset playback state
-      setPlaybackState(prev => ({
-        ...prev,
-        currentTime: 0,
-        duration: track.duration || 0, // Use 0 as fallback if duration is not set
-        isPlaying: false
-      }))
-      
-      console.log(`Loading track: ${track.title} (${track.url})`)
-      
-      // Show loading toast
-      toast({
-        title: "Loading track",
-        description: `Loading ${track.title}...`
-      })
-      
-      // Load the track
-      await howlerService.loadTrack(track)
-      
-      // Get the actual duration from the loaded track
-      const actualDuration = howlerService.getDuration()
-      if (actualDuration > 0) {
-        // Update the track duration if it's different
-        if (Math.abs(track.duration - actualDuration) > 1) {
-          console.log(`Updated duration for ${track.title}: ${track.duration} → ${actualDuration}`)
-          track.duration = actualDuration
-          
-          // Update playback state with the correct duration
-          setPlaybackState(prev => ({
-            ...prev,
-            duration: actualDuration
-          }))
-        }
-      }
-      
-      // Start playing
-      howlerService.play()
       
       // Update playback state
       setPlaybackState(prev => ({
         ...prev,
-        isPlaying: true
+        isPlaying: false,
+        currentTime: 0,
+        duration: 0
       }))
+      
+      // Load and play the track
+      await howlerService.loadTrack(track)
+      howlerService.play()
+      
+      // If premium track and user not logged in, show buy me coffee dialog
+      if (track.isPremium && !user) {
+        setShowBuyMeCoffeeDialog(true)
+        howlerService.pause()
+      }
     } catch (error) {
-      console.error("Error playing track:", error)
       toast({
-        title: "Playback Error",
-        description: "Failed to play this track. Please try another.",
+        title: "Error",
+        description: "Failed to play track. Please try again.",
         variant: "destructive"
       })
     }
@@ -283,16 +268,22 @@ export function MusicPlayer() {
     if (!currentTrack || filteredTracks.length === 0) return
     
     const currentIndex = filteredTracks.findIndex(t => t.id === currentTrack.id)
-    const nextIndex = (currentIndex + 1) % filteredTracks.length
-    playTrack(filteredTracks[nextIndex])
+    if (currentIndex < filteredTracks.length - 1) {
+      playTrack(filteredTracks[currentIndex + 1])
+    } else {
+      playTrack(filteredTracks[0]) // Loop back to the first track
+    }
   }
   
   const playPreviousTrack = () => {
     if (!currentTrack || filteredTracks.length === 0) return
     
     const currentIndex = filteredTracks.findIndex(t => t.id === currentTrack.id)
-    const prevIndex = (currentIndex - 1 + filteredTracks.length) % filteredTracks.length
-    playTrack(filteredTracks[prevIndex])
+    if (currentIndex > 0) {
+      playTrack(filteredTracks[currentIndex - 1])
+    } else {
+      playTrack(filteredTracks[filteredTracks.length - 1]) // Loop to the last track
+    }
   }
   
   // Seek functions
@@ -312,125 +303,146 @@ export function MusicPlayer() {
   
   // Volume functions
   const toggleMute = () => {
-    const newMutedState = !playbackState.muted
-    howlerService.setMuted(newMutedState)
-    setPlaybackState(prev => ({ ...prev, muted: newMutedState }))
+    if (playbackState.muted) {
+      setPlaybackState(prev => ({ ...prev, muted: false }))
+      howlerService.setMuted(false)
+    } else {
+      setPlaybackState(prev => ({ ...prev, muted: true }))
+      howlerService.setMuted(true)
+    }
   }
   
   const changeVolume = (value: number[]) => {
-    const newVolume = value[0]
-    howlerService.setVolume(newVolume)
-    
-    setPlaybackState(prev => ({ 
-      ...prev, 
-      volume: newVolume,
-      muted: newVolume === 0 ? true : prev.muted
-    }))
-    
-    if (newVolume > 0 && playbackState.muted) {
+    const volume = value[0]
+    if (playbackState.muted) {
+      setPlaybackState(prev => ({ 
+        ...prev, 
+        volume, 
+        muted: false 
+      }))
       howlerService.setMuted(false)
-      setPlaybackState(prev => ({ ...prev, muted: false }))
+    } else {
+      setPlaybackState(prev => ({ ...prev, volume }))
     }
+    howlerService.setVolume(volume)
   }
   
   // Playback speed
   const changeSpeed = (speed: number) => {
-    howlerService.setPlaybackRate(speed)
     setPlaybackState(prev => ({ ...prev, speed }))
+    // Use the correct method for setting playback rate
+    howlerService.setPlaybackRate(speed)
   }
   
   // Loop toggle
   const toggleLoop = () => {
     const newLoopState = !playbackState.loop
-    howlerService.setLoop(newLoopState)
     setPlaybackState(prev => ({ ...prev, loop: newLoopState }))
+    howlerService.setLoop(newLoopState)
   }
   
   // Download track
   const downloadTrack = (track: AudioTrack, e: React.MouseEvent) => {
-    e.preventDefault()
     e.stopPropagation()
     
-    if (!track.url) {
-      toast({
-        title: "Download failed",
-        description: "This track does not have a downloadable URL.",
-        variant: "destructive"
-      })
+    // Check if premium content
+    if (track.isPremium && !user) {
+      setShowBuyMeCoffeeDialog(true)
       return
     }
     
-    // Show confirmation toast
-    toast({
-      title: "Confirm download",
-      description: `Do you want to download "${track.title}" by ${track.artist}?`,
-      action: (
-        <Button 
-          variant="default" 
-          size="sm" 
-          onClick={() => {
-            // Create a temporary anchor element
-            const a = document.createElement('a')
-            a.href = track.url
-            a.download = `${track.title} - ${track.artist}.mp3`
-            document.body.appendChild(a)
-            a.click()
-            document.body.removeChild(a)
-            
-            // Show success toast
-            toast({
-              title: "Download started",
-              description: `"${track.title}" is being downloaded.`
-            })
-          }}
-        >
-          Download
-        </Button>
-      ),
-    })
+    try {
+      // Create a temporary anchor element
+      const anchor = document.createElement('a')
+      anchor.href = track.url
+      anchor.download = `${track.artist} - ${track.title}.mp3`
+      anchor.target = '_blank'
+      document.body.appendChild(anchor)
+      anchor.click()
+      document.body.removeChild(anchor)
+      
+      toast({
+        title: "Download Started",
+        description: `Downloading ${track.title}`,
+      })
+    } catch (error) {
+      toast({
+        title: "Download Failed",
+        description: "Could not download the track. Please try again.",
+        variant: "destructive"
+      })
+    }
   }
   
   // Format time (seconds to MM:SS)
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60)
     const secs = Math.floor(seconds % 60)
-    return `${mins}:${secs.toString().padStart(2, '0')}`
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`
   }
   
   return (
-    <div className="flex flex-col md:flex-row gap-6">
-      {/* Main player section */}
+    <div className="flex flex-col md:flex-row gap-6 max-w-7xl mx-auto">
+      {/* Player Section */}
       <div className={cn(
-        "flex-1 bg-card border rounded-lg p-6 overflow-hidden",
+        "flex-1 bg-card/90 backdrop-blur-sm border rounded-lg overflow-hidden shadow-md",
         showPlaylist ? "w-full md:w-2/3" : "w-full"
       )}>
-        {/* Now playing section */}
-        <div className="flex flex-col items-center mb-6">
+        <div className="flex flex-col h-full p-6">
           {currentTrack ? (
             <>
               {/* Track Info */}
-              <TrackInfo track={currentTrack} />
+              <div className="flex items-center justify-center mt-6">
+                <TrackInfo
+                  track={currentTrack}
+                />
+              </div>
               
               {/* Progress Bar */}
-              <ProgressBar 
-                currentTime={playbackState.currentTime}
-                duration={playbackState.duration}
-                onSeek={seekTo}
-                formatTime={formatTime}
-              />
+              <div className="mb-4">
+                <ProgressBar
+                  currentTime={playbackState.currentTime}
+                  duration={playbackState.duration}
+                  formatTime={formatTime}
+                  onSeek={seekTo}
+                />
+              </div>
               
               {/* Player Controls */}
-              <PlayerControls 
-                isPlaying={playbackState.isPlaying}
-                onPlayPause={togglePlayPause}
-                onSkipForward={skipForward}
-                onSkipBackward={skipBackward}
-              />
+              <div className="mb-6">
+                <PlayerControls
+                  isPlaying={playbackState.isPlaying}
+                  onPlayPause={togglePlayPause}
+                  onSkipForward={skipForward}
+                  onSkipBackward={skipBackward}
+                />
+              </div>
               
-              {/* Additional controls */}
-              <div className="flex items-center justify-between w-full mt-6">
+              {/* Additional Controls */}
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card/50 p-4 rounded-lg">
+                <div className="flex items-center gap-2 w-full md:w-auto">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={playPreviousTrack}
+                    title="Previous track"
+                    className="rounded-full px-4"
+                  >
+                    Previous
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={playNextTrack}
+                    title="Next track"
+                    className="rounded-full px-4"
+                  >
+                    Next
+                  </Button>
+                </div>
+                
                 {/* Volume Control */}
-                <VolumeControl 
+                <VolumeControl
                   volume={playbackState.volume}
                   isMuted={playbackState.muted}
                   onVolumeChange={changeVolume}
@@ -447,44 +459,79 @@ export function MusicPlayer() {
                   />
                   
                   {/* Toggle Playlist Button (mobile only) */}
-                  <button
-                    className="md:hidden"
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden rounded-full"
                     onClick={() => setShowPlaylist(!showPlaylist)}
                     title={showPlaylist ? "Hide playlist" : "Show playlist"}
                   >
-                    <List size={20} />
-                  </button>
+                    <List size={18} />
+                  </Button>
                 </div>
               </div>
             </>
           ) : (
-            <div className="flex flex-col items-center justify-center h-64">
-              <Music size={64} className="text-muted-foreground mb-4" />
-              <h3 className="text-xl font-medium">No track selected</h3>
-              <p className="text-sm text-muted-foreground mt-2">
+            <div className="flex flex-col items-center justify-center h-[400px] text-center">
+              <div className="bg-primary/10 p-6 rounded-full mb-6">
+                <Music size={64} className="text-primary" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-2">No track selected</h3>
+              <p className="text-muted-foreground max-w-md">
                 Select a track from the playlist to start listening
               </p>
             </div>
           )}
         </div>
         
+        <div className="px-6 py-4 border-t text-xs text-muted-foreground text-center">
+          Powered by Howler.js - a powerful audio library with excellent cross-browser compatibility
+        </div>
       </div>
       
       {/* Playlist View */}
       {showPlaylist && (
-        <PlaylistView 
-          isLoading={isLoading}
-          error={error}
-          selectedCategory={selectedCategory}
-          categories={categories}
-          filteredTracks={filteredTracks}
-          currentTrack={currentTrack}
-          onCategoryChange={setSelectedCategory}
-          onTrackSelect={playTrack}
-          onDownload={downloadTrack}
-          onHidePlaylist={() => setShowPlaylist(false)}
-          formatTime={formatTime}
-        />
+        <div className="w-full md:w-1/3 h-full">
+          <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm p-4 border rounded-lg mb-4 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Search</h3>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={fetchTracks}
+                disabled={isLoading}
+                title="Refresh tracks"
+                className="h-8 w-8 rounded-full"
+              >
+                <RefreshCw className={cn("h-4 w-4", isLoading && "animate-spin")} />
+              </Button>
+            </div>
+            
+            <div className="relative">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                className="pl-9 bg-background/70 rounded-full"
+                placeholder="Search tracks..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+          
+          <PlaylistView 
+            isLoading={isLoading}
+            error={error}
+            selectedCategory={selectedCategory}
+            categories={categories}
+            filteredTracks={filteredTracks}
+            currentTrack={currentTrack}
+            onCategoryChange={setSelectedCategory}
+            onTrackSelect={playTrack}
+            onDownload={downloadTrack}
+            onHidePlaylist={() => setShowPlaylist(false)}
+            formatTime={formatTime}
+          />
+        </div>
       )}
       
       {/* Buy Me Coffee Dialog */}

@@ -8,9 +8,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2, Upload, X, Music, Check, AlertCircle } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
-import { storage, db } from "@/lib/firebase/firebase-config"
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
-import { collection, addDoc } from "firebase/firestore"
 import * as musicMetadata from 'music-metadata-browser'
 
 interface AudioFile {
@@ -28,6 +25,7 @@ interface AudioFile {
     category: string
     isPremium: boolean
     coverImage?: string | null
+    coverImageBlob?: Blob | null
   }
 }
 
@@ -112,14 +110,15 @@ export function AudioUploader() {
         duration: Math.round(duration),
         category: guessCategory(parsedMetadata.common.genre?.[0] || ""),
         isPremium: false,
-        coverImage: null as string | null
+        coverImage: null as string | null,
+        coverImageBlob: null as Blob | null
       }
       
       // Extract cover image if available
       if (parsedMetadata.common.picture && parsedMetadata.common.picture.length > 0) {
         const picture = parsedMetadata.common.picture[0]
         const blob = new Blob([picture.data], { type: picture.format })
-        metadata.coverImage = URL.createObjectURL(blob)
+        metadata.coverImageBlob = blob;
       }
       
       return metadata
@@ -204,127 +203,109 @@ export function AudioUploader() {
     
     // Process each file
     for (const file of files) {
+      // Create a variable for the progress interval that's accessible in the try/catch blocks
+      let progressInterval: NodeJS.Timeout | null = null;
+      
       try {
         // Update status to uploading
         setFiles(prev => 
           prev.map(f => 
             f.id === file.id 
-              ? { ...f, status: 'uploading' } 
+              ? { ...f, status: 'uploading', progress: 0 } 
               : f
           )
         )
         
-        // 1. Upload the audio file to Firebase Storage
-        const audioStoragePath = `audio/tracks/${Date.now()}_${file.file.name}`
-        const audioStorageRef = ref(storage, audioStoragePath)
+        // Set up progress tracking
+        const updateProgress = (progress: number) => {
+          setFiles(prev => 
+            prev.map(f => 
+              f.id === file.id 
+                ? { ...f, progress } 
+                : f
+            )
+          );
+        };
         
-        // Create upload task
-        const uploadTask = uploadBytesResumable(audioStorageRef, file.file)
-        
-        // Wait for upload to complete
-        await new Promise<void>((resolve, reject) => {
-          uploadTask.on(
-            'state_changed',
-            (snapshot) => {
-              // Update progress
-              const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-              setFiles(prev => 
-                prev.map(f => 
-                  f.id === file.id 
-                    ? { ...f, progress } 
-                    : f
-                )
-              )
-            },
-            (error) => {
-              console.error("Upload error:", error)
-              setFiles(prev => 
-                prev.map(f => 
-                  f.id === file.id 
-                    ? { ...f, status: 'error' } 
-                    : f
-                )
-              )
-              reject(error)
-            },
-            async () => {
-              // Upload completed successfully
-              resolve()
+        // Simulate upload progress since we can't get real-time progress from the server
+        progressInterval = setInterval(() => {
+          setFiles(prev => {
+            const currentFile = prev.find(f => f.id === file.id);
+            if (currentFile && currentFile.status === 'uploading' && currentFile.progress < 90) {
+              return prev.map(f => 
+                f.id === file.id 
+                  ? { ...f, progress: f.progress + 5 } 
+                  : f
+              );
             }
-          )
-        })
+            return prev;
+          });
+        }, 500);
         
-        // Get the download URL
-        const audioDownloadURL = await getDownloadURL(audioStorageRef)
+        // 1. Upload the audio file to Cloudinary using our server-side API
+        const audioFormData = new FormData();
+        audioFormData.append('file', file.file);
+        audioFormData.append('folder', 'tracks');
+        audioFormData.append('resourceType', 'video');
+        audioFormData.append('tags', 'music_track');
+        
+        // Use our server-side API route for the upload
+        const audioRes = await fetch('/api/cloudinary/upload', {
+          method: 'POST',
+          body: audioFormData,
+        });
+        const audioData = await audioRes.json();
+        if (!audioData.secure_url) throw new Error(audioData.error?.message || 'Audio upload failed');
+        const audioDownloadURL = audioData.secure_url;
         
         // 2. Upload cover image if available
-        let coverImageURL = null
-        if (file.metadata.coverImage && file.metadata.coverImage.startsWith('blob:')) {
-          // Convert blob URL to File
-          const response = await fetch(file.metadata.coverImage)
-          const blob = await response.blob()
+        let coverImageURL = null;
+        if (file.metadata.coverImageBlob) {
+          const coverFormData = new FormData();
+          coverFormData.append('file', file.metadata.coverImageBlob, `${file.metadata.title.replace(/\s+/g, '_')}.jpg`);
+          coverFormData.append('folder', 'covers');
+          coverFormData.append('resourceType', 'image');
+          coverFormData.append('tags', 'cover_image');
           
-          const coverStoragePath = `images/covers/${Date.now()}_${file.metadata.title.replace(/\s+/g, '_')}.jpg`
-          const coverStorageRef = ref(storage, coverStoragePath)
-          
-          // Upload cover image
-          await uploadBytesResumable(coverStorageRef, blob)
-          
-          // Get cover image URL
-          coverImageURL = await getDownloadURL(coverStorageRef)
+          // Use our server-side API route for the cover image upload
+          const coverRes = await fetch('/api/cloudinary/upload', {
+            method: 'POST',
+            body: coverFormData,
+          });
+          const coverData = await coverRes.json();
+          if (!coverData.secure_url) throw new Error(coverData.error?.message || 'Cover upload failed');
+          coverImageURL = coverData.secure_url;
+        }
+
+        // 3. Save metadata to your DB if needed
+        // Clear the progress interval
+        if (progressInterval) {
+          clearInterval(progressInterval);
+          progressInterval = null;
         }
         
-        // 3. Save metadata to Firestore
-        await addDoc(collection(db, 'tracks'), {
-          title: file.metadata.title,
-          artist: file.metadata.artist,
-          album: file.metadata.album || null,
-          year: file.metadata.year || null,
-          duration: file.metadata.duration,
-          url: audioDownloadURL,
-          coverImage: coverImageURL,
-          category: file.metadata.category,
-          isPremium: file.metadata.isPremium,
-          createdAt: new Date()
-        })
-        
-        // Update status to success
-        setFiles(prev => 
-          prev.map(f => 
-            f.id === file.id 
-              ? { ...f, status: 'success' } 
-              : f
-          )
-        )
-        
-        successCount++
+        // Set progress to 100% and status to success
+        setFiles(prev => prev.map(f => f.id === file.id ? { ...f, status: 'success', progress: 100 } : f));
+        successCount++;
       } catch (error) {
-        console.error("Error uploading file:", error)
-        
-        // Update status to error
-        setFiles(prev => 
-          prev.map(f => 
-            f.id === file.id 
-              ? { ...f, status: 'error' } 
-              : f
-          )
-        )
+        console.error("Error uploading file:", error);
+        // Clear the progress interval
+        if (progressInterval) {
+          clearInterval(progressInterval);
+          progressInterval = null;
+        }
+        setFiles(prev => prev.map(f => f.id === file.id ? { ...f, status: 'error' } : f));
       }
     }
-    
-    setIsUploading(false)
-    
-    // Show toast with results
+    setIsUploading(false);
     toast({
       title: "Upload complete",
       description: `Successfully uploaded ${successCount} of ${files.length} files.`,
       variant: successCount === files.length ? "default" : "destructive"
-    })
-    
-    // Clear successful uploads after a delay
+    });
     setTimeout(() => {
-      setFiles(prev => prev.filter(file => file.status !== 'success'))
-    }, 3000)
+      setFiles(prev => prev.filter(file => file.status !== 'success'));
+    }, 3000);
   }
 
   return (

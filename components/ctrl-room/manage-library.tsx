@@ -1,62 +1,53 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogClose, DialogTrigger } from "@/components/ui/dialog"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { 
   Music, 
   Search, 
-  Edit, 
   Trash, 
-  Download, 
-  Play, 
-  Pause,
-  Filter,
   RefreshCw,
   AlertTriangle,
-  AlertCircle,
-  Mic,
-  FileAudio
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { AudioTrack } from "@/lib/audio/howler-service"
-import { ColorCover } from "@/components/playground/ColorCover"
 import howlerService from "@/lib/audio/howler-service"
-import { getAllAudioItems, AudioCollectionType, deleteAudioItem, updateAudioItem } from "@/lib/audio/local-tracks"
+import { getAudioFromCloudinary, deleteAudioFromCloudinary, updateAudioMetadata } from "@/lib/cloudinary/audio-service"
 import { cn } from "@/lib/utils"
+import { AudioTable } from "./audio-table"
+import { EditTrackDialog } from "./edit-track-dialog"
+import { DeleteDialog } from "./delete-dialog"
 
 export function ManageLibrary() {
   const [audioItems, setAudioItems] = useState<AudioTrack[]>([])
   const [filteredAudioItems, setFilteredAudioItems] = useState<AudioTrack[]>([])
   const [categories, setCategories] = useState<string[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
-  const [editingTrack, setEditingTrack] = useState<AudioTrack | null>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentPlayingId, setCurrentPlayingId] = useState<string | null>(null)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [searchTerm, setSearchTerm] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const [currentPreviewTrack, setCurrentPreviewTrack] = useState<AudioTrack | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false)
   const [trackToDelete, setTrackToDelete] = useState<AudioTrack | null>(null)
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
-  
+  const [isDeleting, setIsDeleting] = useState<boolean>(false)
+  const [editingTrack, setEditingTrack] = useState<AudioTrack | null>(null)
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false)
+  const [selectedTracks, setSelectedTracks] = useState<Set<string>>(new Set())
+  const [isBatchDeleteDialogOpen, setIsBatchDeleteDialogOpen] = useState<boolean>(false)
   const { toast } = useToast()
 
-  // Fetch audio items from Firestore
+  // Fetch audio items on component mount
   useEffect(() => {
     fetchAudioItems()
   }, [])
 
-  // Filter tracks when search query or category changes
+  // Filter tracks when search term or category changes
   useEffect(() => {
     filterAudioItems()
-  }, [searchQuery, selectedCategory, audioItems])
+  }, [searchTerm, selectedCategory, audioItems])
 
   // Clean up audio when component unmounts
   useEffect(() => {
@@ -71,25 +62,21 @@ export function ManageLibrary() {
       setIsLoading(true)
       setError(null)
       
-      // Get tracks from Firestore
-      const fetchedTracks = await getAllAudioItems("tracks")
-      
-      // Get voice memos from Firestore
-      const fetchedVoiceMemos = await getAllAudioItems("voice_memo")
-      
-      // Combine all audio items
+      // Fetch tracks from Cloudinary
+      const fetchedTracks = await getAudioFromCloudinary(false)
+      const fetchedVoiceMemos = await getAudioFromCloudinary(true)
       const allAudio = [...fetchedTracks, ...fetchedVoiceMemos]
       setAudioItems(allAudio)
       
-      // Extract unique categories from all audio items
+      // Extract unique categories
       const uniqueCategories = Array.from(
         new Set(allAudio.map(item => item.category || "Uncategorized"))
       ).sort()
       
       setCategories(uniqueCategories)
       
-      // Initialize filtered list
-      filterAudioItems()
+      // Clear selected tracks when refreshing
+      setSelectedTracks(new Set())
       
     } catch (error) {
       console.error("Error fetching audio items:", error)
@@ -103,26 +90,26 @@ export function ManageLibrary() {
     let filtered = [...audioItems]
     
     // Filter by category
-    if (selectedCategory !== "all") {
+    if (selectedCategory && selectedCategory !== "all") {
       filtered = filtered.filter(item => item.category === selectedCategory)
     }
     
-    // Filter by search query
-    if (searchQuery.trim() !== "") {
-      const query = searchQuery.toLowerCase()
-      filtered = filtered.filter(
-        item => 
-          (item.title || "").toLowerCase().includes(query) ||
-          (item.artist || "").toLowerCase().includes(query)
+    // Filter by search term
+    if (searchTerm && searchTerm.trim() !== "") {
+      const query = searchTerm.toLowerCase()
+      filtered = filtered.filter(item => 
+        item.title.toLowerCase().includes(query) ||
+        item.artist.toLowerCase().includes(query) ||
+        (item.category && item.category.toLowerCase().includes(query))
       )
     }
     
-    // Update filtered state
     setFilteredAudioItems(filtered)
   }
 
   const handleEdit = (track: AudioTrack) => {
     setEditingTrack(track)
+    setIsEditDialogOpen(true)
   }
 
   const handleDeleteClick = (track: AudioTrack) => {
@@ -136,27 +123,17 @@ export function ManageLibrary() {
     try {
       setIsDeleting(true)
       
-      // Determine collection type based on isVoiceMemo flag
-      const collectionType: AudioCollectionType = trackToDelete.isVoiceMemo ? "voice_memo" : "tracks"
-      
-      // Delete from local tracks (in a real app, this would delete from a database)
-      await deleteAudioItem(trackToDelete.id, collectionType)
-      
-      // Log deletion (in a real app, we would also delete the actual files)
-      console.log(`Deleted track: ${trackToDelete.title} (${trackToDelete.id})`)
-      console.log(`Note: In a real app, we would also delete the file from: ${trackToDelete.url}`)
-      
-      if (trackToDelete.coverImage) {
-        console.log(`Note: In a real app, we would also delete the cover image from: ${trackToDelete.coverImage}`)
-      }
+      // Delete from Cloudinary
+      await deleteAudioFromCloudinary(trackToDelete.id)
       
       // Update state
-      setAudioItems(prev => prev.filter(t => t.id !== trackToDelete.id))
-      setFilteredAudioItems(prev => prev.filter(t => t.id !== trackToDelete.id))
+      setAudioItems(prev => prev.filter(item => item.id !== trackToDelete.id))
       
-      // Stop playback if this was the playing track
-      if (currentPlayingId === trackToDelete.id) {
-        setCurrentPlayingId(null)
+      // Remove from selected tracks if it was selected
+      if (selectedTracks.has(trackToDelete.id)) {
+        const newSelected = new Set(selectedTracks)
+        newSelected.delete(trackToDelete.id)
+        setSelectedTracks(newSelected)
       }
       
       toast({
@@ -181,28 +158,17 @@ export function ManageLibrary() {
 
   const handleSaveTrack = async (updatedTrack: AudioTrack) => {
     try {
-      // Determine collection type based on isVoiceMemo flag
-      const collectionType: AudioCollectionType = updatedTrack.isVoiceMemo ? "voice_memo" : "tracks"
+      setIsLoading(true)
       
-      // Update in local tracks (in a real app, this would update a database)
-      await updateAudioItem(updatedTrack.id, updatedTrack, collectionType)
+      // Update track in Cloudinary
+      await updateAudioMetadata(updatedTrack)
       
-      // Log update (in a real app, we would actually save this to a database)
-      console.log(`Updated track: ${updatedTrack.title} (${updatedTrack.id})`)
-      
-      toast({
-        title: "Track updated",
-        description: `"${updatedTrack.title}" has been updated.`
-      })
-      
-      // Update local state
+      // Update state
       setAudioItems(prev => 
         prev.map(t => t.id === updatedTrack.id ? updatedTrack : t)
       )
-      setFilteredAudioItems(prev => 
-        prev.map(t => t.id === updatedTrack.id ? updatedTrack : t)
-      )
       
+      setIsEditDialogOpen(false)
       setEditingTrack(null)
       
       toast({
@@ -216,67 +182,118 @@ export function ManageLibrary() {
         description: "Failed to update track. Please try again.",
         variant: "destructive"
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const handlePlayPreview = (track: AudioTrack) => {
-    if (isPlaying && currentPlayingId === track.id) {
-      // Already playing this track, pause it
-      setIsPlaying(false)
-      setCurrentPlayingId(null)
-      
-      // Stop audio
-      const audio = document.getElementById('preview-audio') as HTMLAudioElement
-      if (audio) {
-        audio.pause()
-      }
-    } else {
-      // Play this track
-      setIsPlaying(true)
-      setCurrentPlayingId(track.id)
-      
-      // Play audio
-      const audio = document.getElementById('preview-audio') as HTMLAudioElement
-      if (audio) {
-        try {
-          // Create a new audio element instead of reusing the existing one
-          // This can help bypass some CSP caching issues
-          const tempAudio = new Audio()
-          tempAudio.src = track.url
-          tempAudio.oncanplay = () => {
-            // If the temp audio can play, update the main audio element
-            audio.src = track.url
-            audio.play().catch(error => {
-              handlePlaybackError(error, track)
-            })
-          }
-          
-          tempAudio.onerror = (error) => {
-            handlePlaybackError(error, track)
-          }
-        } catch (error) {
-          handlePlaybackError(error, track)
+  const handlePlayPreview = async (track: AudioTrack) => {
+    try {
+      if (isPlaying) {
+        // Stop playback if we're already playing
+        if (currentPreviewTrack?.id === track.id) {
+          // If this is the current track, stop it
+          handleStopPlayback()
+          return
+        } else {
+          // If a different track is playing, stop it first
+          handleStopPlayback()
+          // Then continue to play the new track
         }
       }
+      
+      // Set the new track as current
+      setCurrentPreviewTrack(track)
+      
+      // Play the track using Howler service
+      await howlerService.loadTrack(track)
+      howlerService.play()
+      setIsPlaying(true)
+      
+      toast({
+        title: "Now Playing",
+        description: `${track.title} by ${track.artist}`,
+      })
+    } catch (error) {
+      handlePlaybackError(error, track)
     }
   }
-  
+
   const handlePlaybackError = (error: any, track: AudioTrack) => {
     console.error("Error playing track:", track.id, error)
     setIsPlaying(false)
-    setCurrentPlayingId(null)
+    setCurrentPreviewTrack(null)
     
     toast({
       title: "Playback Error",
-      description: "Unable to play this audio. This may be due to Content Security Policy restrictions in development.",
+      description: `Could not play "${track.title}". The file may be missing or corrupted.`,
       variant: "destructive"
     })
   }
 
   const handleStopPlayback = () => {
-    howlerService.stop()
     setIsPlaying(false)
-    setCurrentPlayingId(null)
+    setCurrentPreviewTrack(null)
+    howlerService.stop()
+  }
+
+  const handleBatchDelete = async () => {
+    try {
+      setIsDeleting(true)
+      
+      // Delete all selected tracks
+      const deletePromises = Array.from(selectedTracks).map(id => {
+        const track = audioItems.find(item => item.id === id)
+        if (track) {
+          return deleteAudioFromCloudinary(id)
+        }
+        return Promise.resolve()
+      })
+      
+      await Promise.all(deletePromises)
+      
+      // Update state
+      setAudioItems(prev => prev.filter(item => !selectedTracks.has(item.id)))
+      
+      toast({
+        title: "Tracks Deleted",
+        description: `${selectedTracks.size} tracks have been removed from your library.`,
+      })
+      
+      // Clear selection and close dialog
+      setSelectedTracks(new Set())
+      setIsBatchDeleteDialogOpen(false)
+    } catch (error) {
+      console.error("Error deleting tracks:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete tracks. Please try again.",
+        variant: "destructive"
+      })
+    } finally {
+      setIsDeleting(false)
+    }
+  }
+
+  const handleSelectTrack = (id: string, checked: boolean) => {
+    const newSelected = new Set(selectedTracks)
+    if (checked) {
+      newSelected.add(id)
+    } else {
+      newSelected.delete(id)
+    }
+    setSelectedTracks(newSelected)
+  }
+
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      // Select all filtered tracks
+      const allIds = new Set(filteredAudioItems.map(track => track.id))
+      setSelectedTracks(allIds)
+    } else {
+      // Deselect all tracks
+      setSelectedTracks(new Set())
+    }
   }
 
   // Format time (seconds to MM:SS)
@@ -288,313 +305,127 @@ export function ManageLibrary() {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold">Manage Audio Library</h2>
+        
+        {selectedTracks.size > 0 && (
+          <Button 
+            variant="destructive" 
+            size="sm" 
+            onClick={() => setIsBatchDeleteDialogOpen(true)}
+          >
+            <Trash className="h-4 w-4 mr-2" />
+            Delete Selected ({selectedTracks.size})
+          </Button>
+        )}
+      </div>
+      
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={fetchAudioItems}
+            disabled={isLoading}
+          >
+            <RefreshCw className={cn("h-4 w-4 mr-2", isLoading && "animate-spin")} />
+            Refresh
+          </Button>
+          
+          <Select
+            value={selectedCategory}
+            onValueChange={setSelectedCategory}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Filter by category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              {categories.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div className="relative w-[300px]">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            className="pl-8"
+            placeholder="Search by title, artist, or category"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+      
       {error && (
-        <div className="bg-destructive/15 text-destructive p-4 rounded-md flex items-center gap-2">
-          <AlertCircle className="h-5 w-5" />
+        <div className="bg-destructive/10 p-4 rounded-md flex items-center gap-2 text-destructive">
+          <AlertTriangle className="h-5 w-5" />
           <p>{error}</p>
         </div>
       )}
       
-      <div>
-        <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <h2 className="text-2xl font-semibold">Audio Library</h2>
-          </div>
-          
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* Category filter */}
-            <Select
-              value={selectedCategory}
-              onValueChange={setSelectedCategory}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                {categories.map(category => (
-                  <SelectItem key={category} value={category}>
-                    {category}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            
-            {/* Search input */}
-            <div className="relative">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search audio..." 
-                className="pl-8"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            
-            {/* Refresh button */}
-            <Button 
-              variant="outline" 
-              size="icon"
-              onClick={fetchAudioItems}
-              disabled={isLoading}
-              title="Refresh audio library"
-            >
-              <RefreshCw className={cn("h-4 w-4", isLoading && "animate-spin")} />
-            </Button>
-          </div>
+      {isLoading ? (
+        <div className="flex items-center justify-center h-64">
+          <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" />
         </div>
-        
-        {isLoading ? (
-          <div className="flex items-center justify-center h-64">
-            <RefreshCw className="h-8 w-8 animate-spin text-primary/70" />
-          </div>
-        ) : filteredAudioItems.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-64 border rounded-md bg-muted/20">
-            <Music className="h-16 w-16 text-muted-foreground mb-4" />
-            <h3 className="text-xl font-medium">No audio items found</h3>
-            <p className="text-sm text-muted-foreground mt-2">
-              {searchQuery || selectedCategory !== "all" 
-                ? "Try adjusting your filters"
-                : "Upload some audio to get started"}
-            </p>
-          </div>
-        ) : (
-          <div className="border rounded-lg overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead style={{ width: "40%" }}>Title</TableHead>
-                  <TableHead style={{ width: "20%" }}>Artist</TableHead>
-                  <TableHead style={{ width: "15%" }}>Category</TableHead>
-                  <TableHead style={{ width: "10%" }}>Duration</TableHead>
-                  <TableHead style={{ width: "15%" }}>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredAudioItems.map((item) => (
-                  <TableRow key={item.id}>
-                    <TableCell className="font-medium">
-                      <div className="flex items-center gap-3">
-                        {item.coverImage ? (
-                          <img 
-                            src={item.coverImage} 
-                            alt={item.title}
-                            className="h-10 w-10 rounded-md object-cover"
-                          />
-                        ) : (
-                          <ColorCover 
-                            title={item.title}
-                            artist={item.artist}
-                            size="sm"
-                            isPremium={item.isPremium}
-                          />
-                        )}
-                        <div>
-                          <div className="flex items-center gap-2">
-                            {item.isVoiceMemo ? (
-                              <Mic className="h-4 w-4 text-blue-500" />
-                            ) : (
-                              <Music className="h-4 w-4 text-purple-500" />
-                            )}
-                            <span>{item.title}</span>
-                          </div>
-                          <div className="flex gap-2 mt-1">
-                            {item.isPremium && (
-                              <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
-                                Premium
-                              </span>
-                            )}
-                            {item.isVoiceMemo && (
-                              <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">
-                                Voice Memo
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      {item.isVoiceMemo ? "Recorded by " : ""}{item.artist}
-                    </TableCell>
-                    <TableCell>{item.category}</TableCell>
-                    <TableCell>{formatTime(item.duration)}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handlePlayPreview(item)}
-                          disabled={isPlaying && currentPlayingId !== item.id}
-                          title={isPlaying && currentPlayingId === item.id ? "Pause" : "Play"}
-                        >
-                          {isPlaying && currentPlayingId === item.id ? (
-                            <Pause className="h-4 w-4 text-primary" />
-                          ) : (
-                            <Play className="h-4 w-4 text-primary" />
-                          )}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleEdit(item)}
-                          title="Edit"
-                        >
-                          <Edit className="h-4 w-4 text-muted-foreground" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDeleteClick(item)}
-                          className="text-destructive hover:text-destructive/80"
-                        >
-                          <Trash className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-      </div>
+      ) : filteredAudioItems.length === 0 ? (
+        <div className="flex flex-col items-center justify-center h-64 text-center">
+          <Music className="h-16 w-16 text-muted-foreground mb-4" />
+          <h3 className="text-xl font-medium">No audio items found</h3>
+          <p className="text-sm text-muted-foreground mt-2">
+            {searchTerm || selectedCategory !== "all" 
+              ? "Try adjusting your filters"
+              : "Upload some audio to get started"}
+          </p>
+        </div>
+      ) : (
+        <AudioTable 
+          audioItems={filteredAudioItems}
+          currentPreviewTrack={currentPreviewTrack}
+          isPlaying={isPlaying}
+          selectedTracks={selectedTracks}
+          onSelectTrack={handleSelectTrack}
+          onSelectAll={handleSelectAll}
+          onPlayPreview={handlePlayPreview}
+          onEdit={handleEdit}
+          onDelete={handleDeleteClick}
+          formatTime={formatTime}
+        />
+      )}
       
-      {/* Edit track dialog */}
-      <Dialog open={!!editingTrack} onOpenChange={(open) => !open && setEditingTrack(null)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit {editingTrack?.isVoiceMemo ? "Voice Memo" : "Track"}</DialogTitle>
-            <DialogDescription>
-              Update information
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="grid gap-4 py-4">
-            <div className="grid gap-2">
-              <Label htmlFor="title">Title</Label>
-              <Input
-                id="title"
-                value={editingTrack?.title || ""}
-                onChange={(e) => {
-                  if (editingTrack) {
-                    setEditingTrack({ ...editingTrack, title: e.target.value })
-                  }
-                }}
-              />
-            </div>
-            
-            <div className="grid gap-2">
-              <Label htmlFor="artist">
-                {editingTrack?.isVoiceMemo ? "Recorded By" : "Artist"}
-              </Label>
-              <Input
-                id="artist"
-                value={editingTrack?.artist || ""}
-                onChange={(e) => {
-                  if (editingTrack) {
-                    setEditingTrack({ ...editingTrack, artist: e.target.value })
-                  }
-                }}
-              />
-            </div>
-            
-            <div className="grid gap-2">
-              <Label htmlFor="category">Category</Label>
-              <Select
-                value={editingTrack?.category || ""}
-                onValueChange={(value) => {
-                  if (editingTrack) {
-                    setEditingTrack({ ...editingTrack, category: value })
-                  }
-                }}
-              >
-                <SelectTrigger id="category">
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="isPremium"
-                checked={editingTrack?.isPremium || false}
-                onCheckedChange={(checked) => {
-                  if (editingTrack) {
-                    setEditingTrack({ ...editingTrack, isPremium: checked === true })
-                  }
-                }}
-              />
-              <Label htmlFor="isPremium">Premium Content</Label>
-            </div>
-          </div>
-          
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setEditingTrack(null)}>
-              Cancel
-            </Button>
-            <Button 
-              onClick={() => {
-                if (editingTrack) {
-                  handleSaveTrack(editingTrack)
-                }
-              }} 
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                  Saving...
-                </>
-              ) : (
-                "Save Changes"
-              )}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Edit Track Dialog */}
+      <EditTrackDialog 
+        track={editingTrack}
+        categories={categories}
+        isLoading={isLoading}
+        open={isEditDialogOpen}
+        onOpenChange={setIsEditDialogOpen}
+        onSave={handleSaveTrack}
+      />
+      
       {/* Delete Confirmation Dialog */}
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-destructive" />
-              Confirm Deletion
-            </DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete "{trackToDelete?.title}"? This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button 
-              variant="destructive" 
-              onClick={handleDeleteTrack}
-              disabled={isDeleting}
-            >
-              {isDeleting ? (
-                <>
-                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                  Deleting...
-                </>
-              ) : (
-                <>
-                  <Trash className="h-4 w-4 mr-2" />
-                  Delete Track
-                </>
-              )}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <DeleteDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        trackToDelete={trackToDelete}
+        isDeleting={isDeleting}
+        onDelete={handleDeleteTrack}
+      />
+      
+      {/* Batch Delete Confirmation Dialog */}
+      <DeleteDialog
+        open={isBatchDeleteDialogOpen}
+        onOpenChange={setIsBatchDeleteDialogOpen}
+        trackToDelete={null}
+        isDeleting={isDeleting}
+        onDelete={handleBatchDelete}
+        isBatch={true}
+        selectedCount={selectedTracks.size}
+      />
     </div>
   )
 }
