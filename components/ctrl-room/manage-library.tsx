@@ -305,7 +305,6 @@ export function ManageLibrary() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Manage Audio Library</h2>
         
         {selectedTracks.size > 0 && (
           <Button 
