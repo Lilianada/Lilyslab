@@ -13,12 +13,10 @@ export async function checkUserIsAdmin(email: string): Promise<boolean> {
   }
 
   try {
-    console.log("Checking admin status for:", email)
     const adminDocRef = doc(db, ADMINS_COLLECTION, email.toLowerCase())
     const adminDoc = await getDoc(adminDocRef)
 
     const isAdmin = adminDoc.exists() && adminDoc.data()?.isAdmin === true
-    console.log("Admin status:", isAdmin, "for email:", email)
 
     return isAdmin
   } catch (error) {
