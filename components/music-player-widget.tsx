@@ -47,6 +47,12 @@ export const MusicPlayerWidget = ({
     // Load play count from Firestore
     const fetchPlayCount = async () => {
       try {
+        // Check if Firestore is initialized
+        if (!db) {
+          console.error('Firestore not initialized');
+          throw new Error('Firestore not initialized');
+        }
+        
         // Reference to the audio stats document
         const audioStatsRef = doc(db, 'audioStats', 'intro');
         const docSnap = await getDoc(audioStatsRef);
@@ -132,6 +138,12 @@ export const MusicPlayerWidget = ({
       // Save to Firestore
       const updateFirestorePlayCount = async () => {
         try {
+          // Check if Firestore is initialized
+          if (!db) {
+            console.error('Firestore not initialized');
+            throw new Error('Firestore not initialized');
+          }
+          
           const audioStatsRef = doc(db, 'audioStats', 'intro');
           await updateDoc(audioStatsRef, {
             playCount: increment(1)
