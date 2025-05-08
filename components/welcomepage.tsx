@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Lock, X } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useToast } from "@/hooks/use-toast"
-import logoImage from '@/public/logo.png';
+import logoImage from '@/public/images/logo.png';
 import { useRouter } from "next/navigation"
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog"
 

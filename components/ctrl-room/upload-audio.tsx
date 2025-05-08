@@ -55,7 +55,7 @@ export default function UploadAudio() {
 
           <Card className="flex flex-col">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-base">
                 <Music className="h-5 w-5 text-primary" />
                 <span>Manage Library</span>
               </CardTitle>
@@ -83,7 +83,7 @@ export default function UploadAudio() {
 
           <Card className="flex flex-col">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-base">
                 <Settings className="h-5 w-5 text-primary" />
                 <span>Audio Settings</span>
               </CardTitle>

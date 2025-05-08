@@ -14,7 +14,7 @@ interface FooterProps {
   // Navigation props (all optional)
   prevPost?: { title: string; slug: string; };
   nextPost?: { title: string; slug: string; };
-  contentType?: 'writing' | 'note' | 'digital-garden/notes';
+  contentType?: 'writing' | 'digital-garden/notes';
 }
 
 export function Footer({
@@ -53,9 +53,10 @@ export function Footer({
      // This completely avoids the permissions policy violation
      setLocation("Lily's Lab - Digital Garden & Workshop");
      
-     // Fetch the last edited date
+     // Fetch the last edited date from Git commit history
      const fetchLastEdited = async () => {
        try {
+         // Simply fetch the latest Git commit date
          const response = await fetch('/api/last-updated');
          if (response.ok) {
            const data = await response.json();
@@ -91,7 +92,7 @@ export function Footer({
               className="flex items-center text-sm hover:text-primary transition-colors p-2 border rounded-md w-full sm:w-auto justify-center sm:justify-start"
             >
               <span className="mr-2">←</span>
-              <span className="truncate">{prevPost.title}</span>
+              <span className="truncate">Prev</span>
             </Link>
           ) : <div className="w-full sm:w-auto"></div>}
           
@@ -100,7 +101,7 @@ export function Footer({
               href={`/${contentType}/${nextPost.slug}`}
               className="flex items-center text-sm hover:text-primary transition-colors p-2 border rounded-md w-full sm:w-auto justify-center sm:justify-end"
             >
-              <span className="truncate">{nextPost.title}</span>
+              <span className="truncate">Next</span>
               <span className="ml-2">→</span>
             </Link>
           )}
