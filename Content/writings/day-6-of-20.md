@@ -1,7 +1,7 @@
 ---
 author: Lilian
 cover: 
-date: 2025-05-06
+date: 2025-05-07
 excerpt: Building tools for devs
 published: true
 slug: day-6-of-20

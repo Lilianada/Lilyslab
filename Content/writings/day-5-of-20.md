@@ -46,7 +46,7 @@ MINI is a clean, lightweight web app where users can write, publish, and read a
 I built this app after exploring a wide range of dead simple sites. It's simple, minimal, lightweight, ads free, distraction free and just refreshing.  
   
 𝗘𝘅𝗽𝗹𝗼𝗿𝗲 →  
-MINI app: [https://lnkd.in/dFdMpE7n](https://lnkd.in/dFdMpE7n)  
-Github: [https://lnkd.in/dGXbvypU](https://lnkd.in/dGXbvypU)  
+- MINI app: [https://lnkd.in/dFdMpE7n](https://lnkd.in/dFdMpE7n)  
+- Github: [https://lnkd.in/dGXbvypU](https://lnkd.in/dGXbvypU)  
   
 Let me know in the comments if you tried it out.

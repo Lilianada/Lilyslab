@@ -85,11 +85,11 @@ export function Footer({
     <footer className="mt-auto pt-16 pb-8 w-full">
       {/* Previous/Next Post Navigation */}
       {(prevPost || nextPost) && (
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 w-full">
+        <div className="flex flex-row justify-between items-center gap-4 mb-8 w-full">
           {prevPost ? (
             <Link 
               href={`/${contentType}/${prevPost.slug}`}
-              className="flex items-center text-sm hover:text-primary transition-colors p-2 border rounded-md w-full sm:w-auto justify-center sm:justify-start"
+              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-center justify-start"
             >
               <span className="mr-2">←</span>
               <span className="truncate">Prev</span>
@@ -99,7 +99,7 @@ export function Footer({
           {nextPost && (
             <Link 
               href={`/${contentType}/${nextPost.slug}`}
-              className="flex items-center text-sm hover:text-primary transition-colors p-2 border rounded-md w-full sm:w-auto justify-center sm:justify-end"
+              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-center justify-end"
             >
               <span className="truncate">Next</span>
               <span className="ml-2">→</span>

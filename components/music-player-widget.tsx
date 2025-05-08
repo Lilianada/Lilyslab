@@ -3,6 +3,14 @@ import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Volume2 } from "lucide-react";
 import { format } from "date-fns";
 
+// Helper function to format time in MM:SS format
+const formatTime = (seconds: number): string => {
+  if (isNaN(seconds) || !isFinite(seconds)) return "00:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+};
+
 interface MusicPlayerWidgetProps {
   imageUrl: string;
   title?: string; // Made optional to allow default value
@@ -20,6 +28,8 @@ export const MusicPlayerWidget = ({
   const [volume, setVolume] = useState(5); // Volume from 1-10
   const [lastPlayed, setLastPlayed] = useState<string>("");
   const [playCount, setPlayCount] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
   // Initialize audio on component mount
@@ -41,8 +51,12 @@ export const MusicPlayerWidget = ({
     // Update progress during playback
     const updateProgress = () => {
       if (audioRef.current) {
-        const currentProgress = 
-          (audioRef.current.currentTime / audioRef.current.duration) * 100;
+        const current = audioRef.current.currentTime;
+        const total = audioRef.current.duration;
+        const currentProgress = (current / total) * 100;
+        
+        setCurrentTime(current);
+        setDuration(total);
         setProgress(currentProgress);
       }
     };
@@ -61,6 +75,9 @@ export const MusicPlayerWidget = ({
     if (audio) {
       audio.addEventListener("timeupdate", updateProgress);
       audio.addEventListener("ended", handleEnded);
+      audio.addEventListener("loadedmetadata", () => {
+        setDuration(audio.duration);
+      });
     }
     
     // Clean up on unmount
@@ -155,15 +172,25 @@ export const MusicPlayerWidget = ({
           <p className="font-medium text-sm text-card-foreground truncate">{title}</p>
           <p className="text-xs text-muted-foreground truncate">{artist}</p>
           
-          {/* Progress bar */}
-          <div 
-            className="h-1.5 bg-muted-foreground/20 rounded-full mt-1 cursor-pointer"
-            onClick={handleProgressClick}
-          >
+          {/* Progress bar and duration */}
+          <div className="mt-1">
             <div 
-              className="h-full bg-primary rounded-full"
-              style={{ width: `${progress}%` }}
-            />
+              className="h-1.5 bg-muted-foreground/20 rounded-full cursor-pointer"
+              onClick={handleProgressClick}
+            >
+              <div 
+                className="h-full bg-primary rounded-full"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="flex justify-between mt-0.5">
+              <span className="text-[10px] text-muted-foreground">
+                {formatTime(currentTime)}
+              </span>
+              <span className="text-[10px] text-muted-foreground">
+                {formatTime(duration)}
+              </span>
+            </div>
           </div>
           
           {/* Volume control */}
