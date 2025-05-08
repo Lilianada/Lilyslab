@@ -163,10 +163,9 @@ export function ManageLibrary() {
       // Update track in Cloudinary
       await updateAudioMetadata(updatedTrack)
       
-      // Update state
-      setAudioItems(prev => 
-        prev.map(t => t.id === updatedTrack.id ? updatedTrack : t)
-      )
+      // Fetch fresh data from Cloudinary instead of just updating state
+      // This ensures we have the latest data from the server
+      await fetchAudioItems()
       
       setIsEditDialogOpen(false)
       setEditingTrack(null)

@@ -9,28 +9,36 @@ import { Footer } from "@/components/footer"
 import UploadAudio from "@/components/ctrl-room/upload-audio"
 
 export default function CtrlRoomPage() {
-  const { user, userRoles } = useAuth()
+  const { user, userRoles, loading } = useAuth()
   const router = useRouter()
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check if user is admin
-    if (user && userRoles) {
-      setIsAdmin(userRoles.includes('admin'))
-    } else {
-      setIsAdmin(false)
+    // Only update state when auth is no longer loading
+    if (!loading) {
+      // Check if user is admin
+      if (user && userRoles) {
+        setIsAdmin(userRoles.includes('admin'))
+      } else {
+        setIsAdmin(false)
+      }
+      setIsLoading(false)
     }
-    setIsLoading(false)
-  }, [user, userRoles])
+  }, [user, userRoles, loading])
 
   // Redirect non-admin users
   useEffect(() => {
-    // Only redirect if we've confirmed the user is logged in but not an admin
-    if (!isLoading && user && !isAdmin) {
+    // Only redirect if auth loading is complete and we've confirmed the user is logged in but not an admin
+    // Don't redirect if still loading auth state
+    if (!loading && !isLoading && user && !isAdmin) {
       router.push('/')
     }
-  }, [isAdmin, isLoading, router, user])
+    // Only redirect if auth loading is complete and there's no user (not logged in)
+    else if (!loading && !isLoading && !user) {
+      router.push('/')
+    }
+  }, [isAdmin, isLoading, router, user, loading])
 
   if (isLoading) {
     return (

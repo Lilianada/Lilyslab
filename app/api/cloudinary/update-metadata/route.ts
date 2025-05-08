@@ -28,19 +28,16 @@ export async function PUT(request: Request) {
       );
     }
     
+    console.log('Updating metadata for:', publicId, metadata);
+    
     // Update the metadata in Cloudinary
     const result = await cloudinary.uploader.explicit(publicId, {
       resource_type: 'video', // Cloudinary uses 'video' for audio files
       type: 'upload',
-      context: {
-        custom: {
-          title: metadata.title,
-          artist: metadata.artist,
-          category: metadata.category,
-          isPremium: metadata.isPremium ? 'true' : 'false',
-        }
-      }
+      context: `custom|title=${metadata.title}|artist=${metadata.artist}|category=${metadata.category}|isPremium=${metadata.isPremium ? 'true' : 'false'}`
     });
+    
+    console.log('Cloudinary update result:', result);
     
     return NextResponse.json({ 
       result: 'ok', 

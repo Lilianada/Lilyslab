@@ -4,7 +4,8 @@ import { MusicPlayer } from "@/components/playground/music-player"
 
 export default function MusicPlayerPage() {
   return (
-    <div className="sm:container max-w-4xl mx-auto py-8 animate-fade-in">
+    <div className=" animate-fade-in">
+      <div className="max-w-3xl mx-auto sm:px-4 py-12">
       <header className="mb-8">
         <h1 className="text-2xl font-bold mb-2">Music Player</h1>
         <p className="text-sm text-muted-foreground">
@@ -13,7 +14,7 @@ export default function MusicPlayerPage() {
       </header>
       
       <MusicPlayer />
-    
+    </div>
     </div>
   )
 }

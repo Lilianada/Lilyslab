@@ -35,6 +35,7 @@ class HowlerService {
   private currentTrack: AudioTrack | null = null;
   private listeners: Map<string, Function[]> = new Map();
   private seekInterval: NodeJS.Timeout | null = null;
+  private lastVolume: number = 0.8; // Store the last used volume
   
   // Initialize a new Howl instance for a track
   loadTrack(track: AudioTrack): Promise<void> {
@@ -83,7 +84,7 @@ class HowlerService {
         src: [audioUrl],
         html5: true, // Enable streaming
         preload: true,
-        volume: 0.8,
+        volume: this.lastVolume, // Use the persisted volume setting
         rate: 1.0,
         // Explicitly specify the format for proxy endpoint URLs to avoid codec detection issues
         format: isProxyEndpoint ? 'mp3' : undefined,
@@ -158,6 +159,28 @@ class HowlerService {
     if (this.howl) {
       this.howl.seek(position);
       this.emit('timeupdate', position);
+      this.emit('seek', position);
+    }
+  }
+  
+  // Skip forward by a specified number of seconds
+  skipForward(seconds: number = 10): void {
+    if (this.howl) {
+      const currentTime = this.getCurrentTime();
+      const duration = this.getDuration();
+      // Calculate new position, ensuring we don't exceed the track duration
+      const newPosition = Math.min(currentTime + seconds, duration);
+      this.seek(newPosition);
+    }
+  }
+  
+  // Skip backward by a specified number of seconds
+  skipBackward(seconds: number = 10): void {
+    if (this.howl) {
+      const currentTime = this.getCurrentTime();
+      // Calculate new position, ensuring we don't go below 0
+      const newPosition = Math.max(currentTime - seconds, 0);
+      this.seek(newPosition);
     }
   }
   
@@ -179,6 +202,9 @@ class HowlerService {
   
   // Set volume (0 to 1)
   setVolume(volume: number): void {
+    // Store the volume setting for persistence between tracks
+    this.lastVolume = volume;
+    
     if (this.howl) {
       this.howl.volume(volume);
       this.emit('volumechange', volume);
@@ -277,8 +303,14 @@ class HowlerService {
       if (this.howl && this.isPlaying()) {
         const currentTime = this.getCurrentTime();
         this.emit('timeupdate', currentTime);
+        
+        // Also emit duration to ensure it's always available
+        const duration = this.getDuration();
+        if (duration > 0) {
+          this.emit('durationchange', duration);
+        }
       }
-    }, 100); // Update every 100ms for smooth progress bar
+    }, 50); // Update more frequently (50ms) for smoother progress bar
   }
   
   // Stop the seek interval

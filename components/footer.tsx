@@ -81,7 +81,7 @@ export function Footer({
    }
    
   return (
-    <footer className="mt-32">
+    <footer className="mt-auto pt-16 pb-8 w-full">
       {/* Previous/Next Post Navigation */}
       {(prevPost || nextPost) && (
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 w-full">

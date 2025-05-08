@@ -24,7 +24,7 @@ export function ProgressBar({
       <Slider
         value={[currentTime]}
         min={0}
-        max={duration || 100}
+        max={duration}
         step={0.1}
         onValueChange={(value) => onSeek(value[0])}
         className="w-full"

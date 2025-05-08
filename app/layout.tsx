@@ -132,9 +132,11 @@ export default function RootLayout({
             <main id="main-content" className="flex min-h-screen flex-col bg-background transition-colors duration-300 lg:flex-row relative">
               <Sidebar />
               <MobileNav />
-              <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10" role="region" aria-label="Main content"> 
+              <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 flex flex-col min-h-[calc(100vh-4rem)]" role="region" aria-label="Main content"> 
                 <Breadcrumb />
-                {children}
+                <div className="flex-1 flex flex-col">
+                  {children}
+                </div>
               </div>
             </main>
             <Toaster />
