@@ -1,5 +1,6 @@
 Fixes
 - fix bookshelf card display
+- catalog
 
 
 
