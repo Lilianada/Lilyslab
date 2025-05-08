@@ -79,7 +79,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
             glowColor="rgba(var(--extra-steelBlue), 0.6)"
             glowIntensity="12px"
           />
-    <div className="max-w-3xl mx-auto animate-fade-in">
+    <div className="max-w-2xl w-full mx-auto animate-fade-in">
       <div className="my-6 flex items-center sm:my-12">
         <Link
           href="/writing"
