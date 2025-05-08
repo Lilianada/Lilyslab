@@ -1,26 +1,44 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { execSync } from 'child_process';
 
-// This file will store the last update timestamp
-const LAST_UPDATE_FILE = path.join(process.cwd(), 'last-updated.json');
+// Cache the git date to avoid running the command multiple times
+let cachedGitDate: string | null = null;
+let cacheTime: number = 0;
+const CACHE_DURATION = 3600000; // 1 hour in milliseconds
 
 export async function GET() {
   try {
-    // Check if the file exists
-    if (!fs.existsSync(LAST_UPDATE_FILE)) {
-      // If not, create it with current timestamp
-      const initialData = {
-        lastUpdated: new Date().toISOString(),
-        source: 'initial'
-      };
-      fs.writeFileSync(LAST_UPDATE_FILE, JSON.stringify(initialData, null, 2));
-      return NextResponse.json(initialData);
+    // Check if we have a cached date that's still valid
+    const now = Date.now();
+    if (cachedGitDate && (now - cacheTime < CACHE_DURATION)) {
+      return NextResponse.json({
+        lastUpdated: cachedGitDate,
+        source: 'git-cached'
+      });
     }
 
-    // Read the last update data
-    const data = JSON.parse(fs.readFileSync(LAST_UPDATE_FILE, 'utf8'));
-    return NextResponse.json(data);
+    // Get the latest commit date using Git
+    let gitDate;
+    try {
+      // Format the date in ISO format
+      const gitCommand = 'git log -1 --format=%cI';
+      gitDate = execSync(gitCommand, { encoding: 'utf-8' }).trim();
+      
+      // Update the cache
+      cachedGitDate = gitDate;
+      cacheTime = now;
+      
+      console.log(`Got Git last commit date: ${gitDate}`);
+    } catch (gitError) {
+      console.error('Error getting Git commit date:', gitError);
+      // Fallback to current date if Git command fails
+      gitDate = new Date().toISOString();
+    }
+    
+    return NextResponse.json({
+      lastUpdated: gitDate,
+      source: 'git-commit'
+    });
   } catch (error) {
     console.error('Error getting last update time:', error);
     return NextResponse.json(
@@ -42,14 +60,27 @@ export async function POST(request: Request) {
       );
     }
 
-    // Update the last update time
-    const updateData = {
-      lastUpdated: new Date().toISOString(),
-      source: body.source
-    };
-
-    fs.writeFileSync(LAST_UPDATE_FILE, JSON.stringify(updateData, null, 2));
-    return NextResponse.json(updateData);
+    // With the Git-based approach, we don't need to update any files
+    // We'll just invalidate the cache to force a fresh Git date lookup on next GET
+    cachedGitDate = null;
+    cacheTime = 0;
+    
+    // Get the latest Git commit date right now
+    let gitDate;
+    try {
+      const gitCommand = 'git log -1 --format=%cI';
+      gitDate = execSync(gitCommand, { encoding: 'utf-8' }).trim();
+      console.log(`Refreshed Git last commit date: ${gitDate}`);
+    } catch (gitError) {
+      console.error('Error getting Git commit date:', gitError);
+      gitDate = new Date().toISOString();
+    }
+    
+    return NextResponse.json({
+      lastUpdated: gitDate,
+      source: body.source,
+      refreshed: true
+    });
   } catch (error) {
     console.error('Error updating last update time:', error);
     return NextResponse.json(

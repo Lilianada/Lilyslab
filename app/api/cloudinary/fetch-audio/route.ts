@@ -34,15 +34,27 @@ export async function GET(request: Request) {
     // Add a timestamp parameter to prevent caching
     const timestamp = Date.now();
     
-    // Search for resources in the specified folder
-    const result = await cloudinary.search
-      .expression(`folder:${folder}`)
-      .sort_by('created_at', 'desc')
-      .max_results(100)
-      .with_field('context')
-      .execute();
-      
-    console.log('Fetched resources with metadata:', JSON.stringify(result.resources[0]?.context, null, 2));
+    // Use the Admin API to get resources with their contextual metadata
+    // This is the proper way to fetch resources with complete metadata
+    console.log(`Fetching resources from folder: ${folder}`);
+    
+    // Get a list of all resources in the folder
+    const result = await cloudinary.api.resources({
+      resource_type: 'video', // Cloudinary uses 'video' for audio files
+      type: 'upload',
+      prefix: folder, // Get resources with this prefix (folder)
+      max_results: 100,
+      context: true, // Important: This ensures we get the contextual metadata
+      metadata: true // Get structured metadata as well
+    });
+    
+    console.log(`Found ${result.resources.length} resources in folder ${folder}`);
+    
+    // Log the first resource for debugging
+    if (result.resources.length > 0) {
+      console.log('First resource details:', JSON.stringify(result.resources[0], null, 2));
+      console.log('Context metadata:', JSON.stringify(result.resources[0].context, null, 2));
+    }
     
     // Define the expected resource structure
     interface CloudinaryResource {
@@ -50,7 +62,7 @@ export async function GET(request: Request) {
       secure_url: string;
       duration?: number;
       context?: {
-        custom?: {
+        custom?: string | {
           title?: string;
           artist?: string;
           coverImage?: string;
@@ -58,49 +70,114 @@ export async function GET(request: Request) {
           isPremium?: string;
         }
       };
+      // Additional properties that might contain metadata
+      metadata?: Record<string, any>;
+      title?: string;
+      artist?: string;
+      category?: string;
+      isPremium?: string;
+      [key: string]: any; // Allow indexing with string keys
     }
     
     // Transform Cloudinary resources into AudioTrack format
     const audioTracks: AudioTrack[] = result.resources.map((resource: CloudinaryResource) => {
-      // Extract metadata from Cloudinary resource
+      // Extract basic info from Cloudinary resource
       const { public_id, secure_url, duration, context } = resource;
       
-      // Get metadata from context if available, or use defaults
-      const metadata = context?.custom || {};
+      // Log the raw resource for debugging
+      console.log(`Processing resource: ${public_id}`);
       
-      // Log the metadata for debugging
-      console.log(`Processing track ${public_id} with metadata:`, metadata);
+      // Initialize metadata object
+      let extractedMetadata: Record<string, any> = {};
       
-      // Parse the metadata values correctly
-      // The context.custom object contains the metadata as a string in format "key=value"
-      let parsedMetadata: Record<string, string> = {};
-      
-      // If context.custom is a string, parse it
-      if (typeof metadata === 'string') {
-        const pairs = (metadata as string).split('|');
-        pairs.forEach((pair: string) => {
-          const [key, value] = pair.split('=');
-          if (key && value) {
-            parsedMetadata[key.trim()] = value.trim();
+      // STEP 1: Extract metadata from context (this is the contextual metadata)
+      // This is where Cloudinary stores custom metadata set via the API
+      if (context) {
+        console.log(`Context for ${public_id}:`, JSON.stringify(context, null, 2));
+        
+        // The context object might have different formats
+        // It could be { custom: { key: value } } or { custom: "key=value|key2=value2" }
+        if (context.custom) {
+          // If it's a string (pipe-delimited format)
+          if (typeof context.custom === 'string') {
+            const customStr = context.custom as string;
+            const pairs = customStr.split('|');
+            pairs.forEach((pair: string) => {
+              const parts = pair.split('=');
+              if (parts.length === 2) {
+                const [key, value] = parts;
+                extractedMetadata[key.trim()] = value.trim();
+              }
+            });
+          }
+          // If it's already an object
+          else if (typeof context.custom === 'object') {
+            extractedMetadata = { ...extractedMetadata, ...context.custom };
+          }
+        }
+        
+        // Some Cloudinary responses might have direct context properties
+        Object.keys(context).forEach(key => {
+          if (key !== 'custom' && !['resource_type', 'type'].includes(key)) {
+            // Use type assertion to avoid TypeScript error
+            extractedMetadata[key] = (context as Record<string, any>)[key];
           }
         });
-      } 
-      // If it's already an object, use it directly
-      else if (metadata && typeof metadata === 'object') {
-        parsedMetadata = metadata as Record<string, string>;
       }
       
-      return {
+      // STEP 2: Check for structured metadata
+      // Cloudinary also supports structured metadata which might be in a different location
+      if (resource.metadata) {
+        console.log(`Structured metadata for ${public_id}:`, JSON.stringify(resource.metadata, null, 2));
+        extractedMetadata = { ...extractedMetadata, ...resource.metadata };
+      }
+      
+      // STEP 3: Check for direct properties
+      // Sometimes metadata is directly on the resource object
+      ['title', 'artist', 'category', 'isPremium'].forEach(key => {
+        if (resource[key] !== undefined) {
+          extractedMetadata[key] = resource[key];
+        }
+      });
+      
+      // STEP 4: Check for tags
+      // Tags might contain useful information
+      if (resource.tags) {
+        console.log(`Tags for ${public_id}:`, resource.tags);
+        // You could parse tags if they contain metadata
+      }
+      
+      // Log the extracted metadata
+      console.log(`Extracted metadata for ${public_id}:`, extractedMetadata);
+      
+      // Build the AudioTrack with the extracted metadata
+      const fileName = public_id.split('/').pop() || 'Untitled';
+      
+      // Log duration information for debugging
+      console.log(`Duration info for ${public_id}:`, {
+        resourceDuration: resource.duration,
+        durationVar: duration,
+        rawDuration: resource.raw_duration
+      });
+      
+      const track: AudioTrack = {
         id: public_id,
-        title: parsedMetadata.title || metadata.title || public_id.split('/').pop() || 'Untitled',
-        artist: parsedMetadata.artist || metadata.artist || 'Unknown Artist',
-        duration: duration || 0,
+        title: extractedMetadata.title || fileName,
+        artist: extractedMetadata.artist || 'Unknown Artist',
+        // Make sure we're getting the duration from the right place
+        // Cloudinary stores duration in seconds
+        duration: resource.duration || 0, // Prioritize the duration from the resource
         url: `${secure_url}?_cb=${Date.now()}`, // Add cache-busting parameter
-        coverImage: parsedMetadata.coverImage || metadata.coverImage || null,
-        category: parsedMetadata.category || metadata.category || (isVoiceMemo ? 'Voice Memo' : 'Music'),
-        isPremium: parsedMetadata.isPremium === 'true' || metadata.isPremium === 'true',
-        isVoiceMemo,
+        coverImage: extractedMetadata.coverImage || null,
+        category: extractedMetadata.category || (isVoiceMemo ? 'Voice Memo' : 'Music'),
+        isPremium: extractedMetadata.isPremium === 'true',
+        isVoiceMemo
       };
+      
+      // Log the final track object
+      console.log(`Final track object for ${public_id}:`, track);
+      
+      return track;
     });
     
     // Log the first track for debugging
