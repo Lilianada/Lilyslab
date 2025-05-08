@@ -121,7 +121,7 @@ const config = {
         progress: "progress 1s ease-in-out infinite",
       },
       backgroundImage: {
-        'noise': "url('/Noise.png')",
+        'noise': "url('/images/Noise.png')",
       },
     },
   },

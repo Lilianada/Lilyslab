@@ -38,6 +38,14 @@ export async function uploadAudioToCloudinary(
     formData.append('public_id', publicId);
     formData.append('tags', isVoiceMemo ? 'voice_memo' : 'music_track');
     
+    // Add eager transformation to ensure duration is extracted
+    // Setting eager_async to false makes Cloudinary wait for the analysis to complete
+    formData.append('eager', JSON.stringify([{ audio_codec: 'none' }]));
+    formData.append('eager_async', 'false');
+    
+    // Request resource info to ensure we get all metadata including duration
+    formData.append('resource_type', 'video'); // Cloudinary uses 'video' for audio files
+    
     const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
       method: 'POST',
       body: formData
@@ -181,6 +189,7 @@ export async function updateAudioMetadata(track: AudioTrack): Promise<AudioTrack
           artist: track.artist,
           category: track.category,
           isPremium: track.isPremium,
+          displayName: track.displayName || track.title,
         },
       }),
     });

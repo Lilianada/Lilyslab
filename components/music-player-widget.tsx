@@ -44,6 +44,9 @@ export const MusicPlayerWidget = ({
       audioRef.current.volume = volume / 10;
     }
     
+    // Request animation frame ID for smooth progress updates
+    let animationFrameId: number | null = null;
+    
     // Load play count from Firestore
     const fetchPlayCount = async () => {
       try {
@@ -78,9 +81,9 @@ export const MusicPlayerWidget = ({
     
     fetchPlayCount();
     
-    // Update progress during playback
+    // Update progress during playback - smooth animation with requestAnimationFrame
     const updateProgress = () => {
-      if (audioRef.current) {
+      if (audioRef.current && isPlaying) {
         const current = audioRef.current.currentTime;
         const total = audioRef.current.duration;
         const currentProgress = (current / total) * 100;
@@ -88,6 +91,9 @@ export const MusicPlayerWidget = ({
         setCurrentTime(current);
         setDuration(total);
         setProgress(currentProgress);
+        
+        // Continue animation loop only while playing
+        animationFrameId = requestAnimationFrame(updateProgress);
       }
     };
     
@@ -103,10 +109,29 @@ export const MusicPlayerWidget = ({
     // Set up event listeners
     const audio = audioRef.current;
     if (audio) {
-      audio.addEventListener("timeupdate", updateProgress);
+      // Only use timeupdate for initial loading and as a fallback
+      audio.addEventListener("timeupdate", () => {
+        // Update duration when it becomes available
+        if (duration === 0 && audio.duration > 0) {
+          setDuration(audio.duration);
+        }
+      });
       audio.addEventListener("ended", handleEnded);
       audio.addEventListener("loadedmetadata", () => {
         setDuration(audio.duration);
+      });
+      audio.addEventListener("play", () => {
+        // Start the smooth animation loop when playing
+        if (animationFrameId === null) {
+          animationFrameId = requestAnimationFrame(updateProgress);
+        }
+      });
+      audio.addEventListener("pause", () => {
+        // Stop the animation loop when paused
+        if (animationFrameId !== null) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
       });
     }
     
@@ -116,6 +141,13 @@ export const MusicPlayerWidget = ({
         audio.pause();
         audio.removeEventListener("timeupdate", updateProgress);
         audio.removeEventListener("ended", handleEnded);
+        audio.removeEventListener("play", updateProgress);
+        audio.removeEventListener("pause", updateProgress);
+      }
+      
+      // Cancel any pending animation frame
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
       }
     };
   }, []);

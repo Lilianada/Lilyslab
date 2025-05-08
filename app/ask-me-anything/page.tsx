@@ -59,7 +59,7 @@ export default function AMAPage() {
     try {
       setIsLoading(true)
       console.log("Fetching AMA questions...")
-      const response = await fetch("/api/ama")
+      const response = await fetch("/api/ask-me-anything")
 
       if (!response.ok) {
         throw new Error(`Failed to fetch questions: ${response.status} ${response.statusText}`)
@@ -85,7 +85,7 @@ export default function AMAPage() {
 
     try {
       console.log("Submitting question:", { name: user.displayName, email: user.email, question })
-      const response = await fetch("/api/ama", {
+      const response = await fetch("/api/ask-me-anything", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,25 +127,29 @@ export default function AMAPage() {
     }
   }
 
-  // Add the function to handle admin replies to questions
+  // Function to handle admin replies to questions
   const handleAdminReply = async (questionId: string, replyText: string) => {
     if (!user || !isAdmin) return
 
     try {
-      const response = await fetch(`/api/ama/${questionId}/reply`, {
+      setIsSubmitting(true)
+      
+      const response = await fetch("/api/ask-me-anything", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          answer: replyText,
+          questionId,
+          adminResponse: replyText,
           adminEmail: user.email,
         }),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || "Failed to submit reply")
+        throw new Error(data.error || "Failed to submit reply")
       }
 
       setSubmitMessage({ type: "success", text: "Your answer has been submitted successfully!" })
@@ -158,7 +162,7 @@ export default function AMAPage() {
   }
 
   return (
-    <div className={`max-w-xl mx-auto ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-2xl mx-auto ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <div className="flex items-center justify-between mb-1">
           <h1 className="text-xl font-medium">Ask Me Anything</h1>
@@ -264,12 +268,20 @@ export default function AMAPage() {
                 {isAdmin && !q.answer && (
                   <div className="mt-3 pt-2 border-t">
                     <Disclosure>
-                      <DisclosureButton className="py-1 px-2 text-[10px] rounded-md bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:hover:bg-purple-800/40 flex items-center">
-                        <Crown size={12} className="mr-1" /> Answer as Admin
-                      </DisclosureButton>
-                      <DisclosurePanel className="mt-2 p-2 bg-purple-50 dark:bg-purple-900/20 rounded-md animate-fade-in">
-                        <AdminReplyForm questionId={q.id} onSubmit={handleAdminReply} />
-                      </DisclosurePanel>
+                      {({ close }) => (
+                        <>
+                          <DisclosureButton className="py-1 px-2 text-[10px] rounded-md bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:hover:bg-purple-800/40 flex items-center">
+                            <Crown size={12} className="mr-1" /> Answer as Admin
+                          </DisclosureButton>
+                          <DisclosurePanel className="mt-2 p-2 bg-purple-50 dark:bg-purple-900/20 rounded-md animate-fade-in">
+                            <AdminReplyForm 
+                              questionId={q.id} 
+                              onSubmit={handleAdminReply} 
+                              onCancel={() => close()}
+                            />
+                          </DisclosurePanel>
+                        </>
+                      )}
                     </Disclosure>
                   </div>
                 )}
@@ -315,9 +327,10 @@ export default function AMAPage() {
 interface AdminReplyFormProps {
   questionId: string
   onSubmit: (id: string, text: string) => Promise<void>
+  onCancel?: () => void
 }
 
-function AdminReplyForm({ questionId, onSubmit }: AdminReplyFormProps) {
+function AdminReplyForm({ questionId, onSubmit, onCancel }: AdminReplyFormProps) {
   const [replyText, setReplyText] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -329,11 +342,18 @@ function AdminReplyForm({ questionId, onSubmit }: AdminReplyFormProps) {
     try {
       await onSubmit(questionId, replyText)
       setReplyText("")
+      // Close the form after successful submission
+      if (onCancel) onCancel()
     } catch (error) {
       console.error("Error in admin reply form:", error)
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleCancel = () => {
+    setReplyText("")
+    if (onCancel) onCancel()
   }
 
   return (
@@ -348,7 +368,7 @@ function AdminReplyForm({ questionId, onSubmit }: AdminReplyFormProps) {
         />
       </div>
       <div className="flex justify-end gap-2">
-        <Button type="button" variant="outline" size="sm" onClick={() => setReplyText("")} className="text-[10px] h-7">
+        <Button type="button" variant="outline" size="sm" onClick={handleCancel} className="text-[10px] h-7">
           Cancel
         </Button>
         <Button

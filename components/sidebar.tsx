@@ -170,7 +170,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         {!mobile && (
           <div className="mb-4 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
+              <Image src="/images/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
 
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
@@ -189,7 +189,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={300} />
             <NavItem href="/someday" icon={<FileText size={16} />} label="Someday" onClick={onNavClick} delay={400} />
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
-            <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={450} />
+            <NavItem href="/ask-me-anything" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={450} />
           </div>
 
           <div className="space-y-1">

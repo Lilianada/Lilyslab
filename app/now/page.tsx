@@ -84,13 +84,13 @@ export default function NowPage() {
   return (
     <>
       <ScrollProgress
-        color="bg-extra-yellow"
+        color="bg-extra-lavender"
         height={3}
         glow={true}
-        glowColor="rgba(var(--extra-yellow), 0.6)"
+        glowColor="rgba(var(--extra-lavender), 0.6)"
         glowIntensity="12px"
       />
-      <div className={`max-w-3xl mx-auto sm:px-6 py-12 ${isClientLoaded ? "animate-fade-in" : "opacity-0"}`}>
+      <div className={`max-w-2xl w-full mx-auto sm:px-6 py-12 ${isClientLoaded ? "animate-fade-in" : "opacity-0"}`}>
         <header className="mb-8">
           <h1 className="mb-2 text-xl font-medium">Now</h1>
           {nowData?.frontmatter?.lastUpdated && (
@@ -100,7 +100,7 @@ export default function NowPage() {
                 href="https://nownownow.com/about"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline"
+                className="text-extra-lavender hover:underline"
               >
                 nownownow.com
               </a>
@@ -114,7 +114,7 @@ export default function NowPage() {
           renderError()
         ) : nowData ? (
           <>
-            <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h2]:text-[16px] [&_h2]:font-medium [&_h2]:tracking-tight [&_h2]:mb-4 [&_h2]:text-foreground">
+            <div className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h4]:text-[16px] [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mb-4 [&_h4]:text-foreground [&_strong]:text-extra-lavender [&_a]:hover:underline">
               <ReactMarkdown>
                 {nowData.content}
               </ReactMarkdown>

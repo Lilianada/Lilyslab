@@ -24,3 +24,5 @@ where are women?
 
 Add a mini IDE or code editor
 Add flip cards
+Catalog for everything mundane
+Audio blog

@@ -41,7 +41,7 @@ This is a modern Next.js application with a rich set of features and a well-orga
 5. **Notable Routes**:
    - `/welcome`: Likely a landing or introduction page
    - `/playground`: Interactive development/testing area
-   - `/ama`: "Ask Me Anything" section
+   - `/ask-me-anything`: "Ask Me Anything" section
    - `/stack`: Technology stack showcase
    - `/writing`: Blog or content section
 

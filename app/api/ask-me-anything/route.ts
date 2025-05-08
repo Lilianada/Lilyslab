@@ -56,10 +56,60 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, question } = body;
+    const { name, email, question, questionId, adminResponse } = body;
+    
+    // Handle admin response to an existing question
+    if (questionId && adminResponse) {
+      // Verify this is an admin (you should add proper auth check here)
+      const filePath = path.join(AMA_DIR, `${questionId}.md`);
+      
+      try {
+        // Read the existing file
+        const content = await fs.readFile(filePath, "utf-8");
+        
+        // Extract frontmatter and question content
+        const match = content.match(/^---(\s\S*?)---\s*([\s\S]*)$/);
+        if (!match) {
+          return NextResponse.json({ error: "Invalid question format" }, { status: 400 });
+        }
+        
+        // Get the frontmatter and question content
+        const frontmatter = match[1];
+        const questionContent = match[2].trim();
+        
+        // Update the frontmatter with the response
+        const updatedFrontmatter = frontmatter.replace(
+          /response: ".*"/,
+          `response: "${adminResponse.replace(/"/g, '\\"')}"`
+        );
+        
+        // Format the question content and response
+        let formattedContent = questionContent;
+        if (!formattedContent.startsWith("Question:")) {
+          formattedContent = `Question: ${formattedContent}`;
+        }
+        
+        // Create the updated markdown content with the response
+        const updatedContent = `---${updatedFrontmatter}---\n${formattedContent}\n\nResponse: ${adminResponse}`;
+        
+        // Write the updated content back to the file
+        await fs.writeFile(filePath, updatedContent, "utf-8");
+        
+        return NextResponse.json({ success: true, questionId });
+      } catch (error: any) {
+        console.error("API: Error updating question with admin response:", error);
+        return NextResponse.json(
+          { error: "Failed to update question with admin response", details: error.message },
+          { status: 500 }
+        );
+      }
+    }
+    
+    // Handle new question submission
     if (!question) {
       return NextResponse.json({ error: "Question is required" }, { status: 400 });
     }
+    
     await fs.mkdir(AMA_DIR, { recursive: true });
     const files = await fs.readdir(AMA_DIR);
     const nums = files
@@ -68,7 +118,7 @@ export async function POST(request: Request) {
     const nextNum = (nums.length > 0 ? Math.max(...nums) : 0) + 1;
     const filename = String(nextNum).padStart(3, "0") + ".md";
     const now = new Date().toISOString();
-    const md = `---\nname: "${name || "Anonymous"}"\nemail: "${email || ""}"\ndate: "${now}"\nresponse: ""\n---\n${question}\n`;
+    const md = `---\nname: "${name || "Anonymous"}"\nemail: "${email || ""}"\ndate: "${now}"\nresponse: ""\n---\n${question}`;
     await fs.writeFile(path.join(AMA_DIR, filename), md, "utf-8");
     return NextResponse.json({ success: true, filename });
   } catch (error: any) {

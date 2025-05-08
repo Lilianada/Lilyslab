@@ -102,14 +102,18 @@ export async function GET(request: Request) {
           if (typeof context.custom === 'string') {
             const customStr = context.custom as string;
             const pairs = customStr.split('|');
-            pairs.forEach((pair: string) => {
-              const parts = pair.split('=');
-              if (parts.length === 2) {
-                const [key, value] = parts;
-                extractedMetadata[key.trim()] = value.trim();
+            
+            // Process each key-value pair
+            pairs.forEach(pair => {
+              // Split by the first equals sign only
+              const equalIndex = pair.indexOf('=');
+              if (equalIndex > 0) {
+                const key = pair.substring(0, equalIndex).trim();
+                const value = pair.substring(equalIndex + 1).trim();
+                extractedMetadata[key] = value;
               }
             });
-          }
+          } 
           // If it's already an object
           else if (typeof context.custom === 'object') {
             extractedMetadata = { ...extractedMetadata, ...context.custom };
@@ -153,11 +157,22 @@ export async function GET(request: Request) {
       // Build the AudioTrack with the extracted metadata
       const fileName = public_id.split('/').pop() || 'Untitled';
       
+      // Extract duration from various possible locations in the resource
+      // Cloudinary might store duration in different places depending on the upload method
+      const resourceDuration = resource.duration || 
+                             resource.video?.duration || 
+                             resource.audio?.duration || 
+                             resource.raw_duration || 
+                             extractedMetadata.duration || 
+                             0;
+      
       // Log duration information for debugging
       console.log(`Duration info for ${public_id}:`, {
-        resourceDuration: resource.duration,
-        durationVar: duration,
-        rawDuration: resource.raw_duration
+        resourceDuration,
+        extractedDuration: extractedMetadata.duration,
+        rawDuration: resource.raw_duration,
+        videoDuration: resource.video?.duration,
+        audioDuration: resource.audio?.duration
       });
       
       const track: AudioTrack = {
@@ -166,7 +181,7 @@ export async function GET(request: Request) {
         artist: extractedMetadata.artist || 'Unknown Artist',
         // Make sure we're getting the duration from the right place
         // Cloudinary stores duration in seconds
-        duration: resource.duration || 0, // Prioritize the duration from the resource
+        duration: resourceDuration, // Use our comprehensive duration extraction
         url: `${secure_url}?_cb=${Date.now()}`, // Add cache-busting parameter
         coverImage: extractedMetadata.coverImage || null,
         category: extractedMetadata.category || (isVoiceMemo ? 'Voice Memo' : 'Music'),

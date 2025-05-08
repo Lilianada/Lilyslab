@@ -3,13 +3,13 @@
 import { ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Define types for clarity (should match API response structure)
 interface StackItem {
   name: string;
   description: string;
   url: string;
-  // Add other fields if returned by the API
 }
 
 interface Category {
@@ -17,10 +17,9 @@ interface Category {
   items: StackItem[];
 }
 
-// Removed the hardcoded categories array
 
 export default function StackPage() {
-  const [isLoaded, setIsLoaded] = useState(false) // For initial fade-in animation
+  const [isLoaded, setIsLoaded] = useState(false) 
   const [categories, setCategories] = useState<Category[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -97,7 +96,15 @@ export default function StackPage() {
   );
 
   return (
-    <div className={`max-w-xl mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <>
+     <ScrollProgress
+            color="bg-extra-peach"
+            height={3}
+            glow={true}
+            glowColor="rgba(var(--extra-peach), 0.6)"
+            glowIntensity="12px"
+          />
+    <div className={`max-w-2xl w-full mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
         <h1 className="mb-1 text-xl font-medium">My Stack</h1>
         <p className="text-muted-foreground text-sm">Tools, apps, and services I use daily.</p>
@@ -133,17 +140,17 @@ export default function StackPage() {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group block rounded-lg border p-4 transition-colors duration-200 hover:border-primary/50 hover:bg-card" // Adjusted hover bg/border
+                    className="group block rounded-lg border p-4 transition-colors duration-200 hover:border-extra-peach/50 hover:bg-card" // Adjusted hover bg/border
                   >
                     <div className="flex items-center justify-between">
-                      <h3 className="font-medium group-hover:text-primary text-sm transition-colors duration-200">{item.name}</h3>
+                      <h3 className="font-medium group-hover:text-extra-peach text-sm transition-colors duration-200">{item.name}</h3>
                       {/* Updated ExternalLink styling */}
                       <ExternalLink
                         size={16}
-                        className="text-muted-foreground transition-transform transition-colors duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary"
+                        className="text-muted-foreground transition-transform transition-colors duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-extra-peach"
                       />
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground">{item.description}</p>
+                    <p className="mt-1 text-xs text-muted-foreground group-hover:text-extra-peach">{item.description}</p>
                   </a>
                 ))}
               </div>
@@ -152,5 +159,6 @@ export default function StackPage() {
         </motion.div>
       )}
     </div>
+    </>
   )
 }

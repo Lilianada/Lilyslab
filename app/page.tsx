@@ -61,7 +61,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={`max-w-xl space-y-12 grid mx-auto sm:x-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-2xl space-y-12 grid mx-auto sm:x-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       {error ? (
         <div className="text-center py-8 border rounded-lg">
           <p className="text-red-500 mb-2">This section is still under construction.</p>
@@ -88,26 +88,10 @@ export default function Home() {
               </Link>
               . This personal website is my cozy corner of the internet — part digital living room, part creative workshop. It’s where I share my work, interests, and curiosities freely, without the noise of algorithms or the pressure to perform.
             </p>
-            <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-              By day, I manage and build digital products — blending a background in software engineering with product thinking to turn creative ideas into real, user-focused solutions.
-
-            </p>
+            
 
             <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-
-              By night (and most weekends), this space becomes my lab for experimenting with new tools, exploring AI, and bringing dream projects to life one pixel at a time. I hope you enjoy exploring it as much as I’ve enjoyed crafting and tinkering with it.  {" "}
-            </p>
-
-            <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-              My goal with this site to show how much you can achieve with AI at the intersection of creativity and innovation. We should all strive to work smarter not harder. You don’t have to learn a new skill each time you want to accomplish something. Steal an idea, refine it, tweak it until it becomes new, until it becomes yours. {" "}
-            </p>
-
-            <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-              <span className="font-semibold text-extra-yellow">Status: </span> Actively looking
-              <br />
-              Having taken some time off to recharge and explore, I am looking to get back into it.
-
-              If you are looking for someone whose mission is to demonstrate the vast potential of AI when it’s used as a partner in the creative process, I am always open to chat and make connections, so please do not hesitate to reach out!
+            I hope you enjoy exploring it as much as I’ve enjoyed crafting and tinkering with it. Listen to my short intro below and then navigate to the <a href="/about">about</a> page to learn more about me. {" "}
             </p>
           </section>
 
@@ -120,7 +104,7 @@ export default function Home() {
               :
               (<MusicPlayerWidget
                 imageUrl="/images/Headshot1.png"
-                title="Introduction"
+                title="Welcome to my digital garden & workshop!"
                 artist="Written by Lily, recorded with Play.ai"
               />)}
           </section>

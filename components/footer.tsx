@@ -82,7 +82,7 @@ export function Footer({
    }
    
   return (
-    <footer className="mt-auto pt-16 pb-8 w-full">
+    <footer className="mt-auto w-full">
       {/* Previous/Next Post Navigation */}
       {(prevPost || nextPost) && (
         <div className="flex flex-row justify-between items-center gap-4 mb-8 w-full">
@@ -118,7 +118,7 @@ export function Footer({
       )}
       
       <p className="text-xs text-muted-foreground/60">
-        Subscribe to my <a href='/feed' className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">RSS Feed</a> for the latest updates. You can also <a href="https://www.buymeacoffee.com/lilian.ada" className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">buy me a coffee</a> if you find my content helpful. 
+        Subscribe to my <a href='/feed' className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">RSS Feed</a> for the latest updates. I have an <a href='/audioblog' className="text-extra-steelBlue hover:underline">audioblog page</a> you should defintiely checkout. You can also <a href="https://www.buymeacoffee.com/lilian.ada" className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">buy me a coffee</a> if you find my content interesting or helpful. 
       </p>
       <div className="mt-4">
         <span className="block text-xs text-muted-foreground/60">Currently: {dateTime}</span>

@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
           use_filename: true, // Use the original filename
           unique_filename: true, // Make sure filename is unique
           overwrite: false, // Don't overwrite existing files
-          eager_async: true, // Process asynchronously to make upload faster
+          eager_async: false, // Process synchronously to ensure duration is available immediately
           eager: [ // Generate metadata like duration
             { audio_codec: 'none' } // This triggers audio analysis without transcoding
           ],

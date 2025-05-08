@@ -10,6 +10,7 @@ export interface AudioTrack {
   category: string;
   isPremium: boolean;
   isVoiceMemo?: boolean;
+  displayName?: string;
 }
 
 export interface AudioBookmark {

@@ -32,8 +32,8 @@ export async function PUT(request: Request) {
     
     // Update the metadata in Cloudinary
     // Prepare the metadata in the correct format for Cloudinary
-    // The format should be: "custom=key1=value1|key2=value2"
-    const contextString = `title=${metadata.title}|artist=${metadata.artist}|category=${metadata.category}|isPremium=${metadata.isPremium ? 'true' : 'false'}`;
+    // The format should be: "key1=value1|key2=value2" (without "custom=" prefix in the string itself)
+    const contextString = `title=${metadata.title}|artist=${metadata.artist}|category=${metadata.category}|isPremium=${metadata.isPremium ? 'true' : 'false'}${metadata.displayName ? `|displayName=${metadata.displayName}` : ''}`;
     
     console.log('Updating metadata with context string:', contextString);
     
@@ -41,7 +41,9 @@ export async function PUT(request: Request) {
     const result = await cloudinary.uploader.explicit(publicId, {
       resource_type: 'video', // Cloudinary uses 'video' for audio files
       type: 'upload',
-      context: `custom=${contextString}`
+      context: {
+        custom: contextString
+      }
     });
     
     // Second attempt: If the first attempt doesn't work, try updating with the update method

@@ -10,6 +10,7 @@ import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { Breadcrumb } from "@/components/breadcrumb-nav"
 import { BuyMeCoffee } from "@/components/buy-me-coffee"
+import { AudioProvider } from "@/lib/audio/audio-context"
 // ViewCounter temporarily removed to fix build errors
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
@@ -126,22 +127,24 @@ export default function RootLayout({
       <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-background focus:z-50" aria-label="Skip to main content">
-              Skip to main content
-            </a>
-            <main id="main-content" className="flex min-h-screen flex-col bg-background transition-colors duration-300 lg:flex-row relative">
-              <Sidebar />
-              <MobileNav />
-              <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 flex flex-col min-h-[calc(100vh-4rem)]" role="region" aria-label="Main content"> 
-                <Breadcrumb />
-                <div className="flex-1 flex flex-col">
-                  {children}
+            <AudioProvider>
+              <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-background focus:z-50" aria-label="Skip to main content">
+                Skip to main content
+              </a>
+              <main id="main-content" className="flex min-h-screen flex-col bg-background transition-colors duration-300 lg:flex-row relative">
+                <Sidebar />
+                <MobileNav />
+                <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 flex flex-col min-h-[calc(100vh-4rem)]" role="region" aria-label="Main content"> 
+                  <Breadcrumb />
+                  <div className="flex-1 flex flex-col">
+                    {children}
+                  </div>
                 </div>
-              </div>
-            </main>
-            <Toaster />
-            <BuyMeCoffee />
-            {/* ViewCounter temporarily removed to fix build errors */}
+              </main>
+              <Toaster />
+              <BuyMeCoffee />
+              {/* ViewCounter temporarily removed to fix build errors */}
+            </AudioProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

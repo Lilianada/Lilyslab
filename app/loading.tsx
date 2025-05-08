@@ -6,7 +6,7 @@ export default function Loading() {
       <div className="relative flex flex-col items-center">
         <div className="relative h-16 w-16 animate-pulse">
           <Image
-            src="/12.png"
+            src="/images/12.png"
             alt="Loading..."
             fill
             className="rounded-lg object-cover"

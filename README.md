@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Notion as a CMS. This project serves as a personal website showcasing work experience, projects, writing, and more.
 
-![Lily's Lab Screenshot](public/screenshot.png)
+![Lily's Lab Screenshot](public/images/screenshot.png)
 
 ## Features
 
@@ -216,9 +216,9 @@ Admin features include:
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+2. Create your feature branch (`git checkout -b feature/ask-me-anythingzing-feature`)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+4. Push to the branch (`git push origin feature/ask-me-anythingzing-feature`)
 5. Open a Pull Request
 
 ## 📄 License
