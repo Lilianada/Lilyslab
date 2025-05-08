@@ -2,6 +2,8 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Volume2 } from "lucide-react";
 import { format } from "date-fns";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 // Helper function to format time in MM:SS format
 const formatTime = (seconds: number): string => {
@@ -42,11 +44,33 @@ export const MusicPlayerWidget = ({
       audioRef.current.volume = volume / 10;
     }
     
-    // Load play count from localStorage if available
-    const savedPlayCount = localStorage.getItem('musicPlayerPlayCount');
-    if (savedPlayCount) {
-      setPlayCount(parseInt(savedPlayCount, 10));
-    }
+    // Load play count from Firestore
+    const fetchPlayCount = async () => {
+      try {
+        // Reference to the audio stats document
+        const audioStatsRef = doc(db, 'audioStats', 'intro');
+        const docSnap = await getDoc(audioStatsRef);
+        
+        if (docSnap.exists()) {
+          // Document exists, get the play count
+          const data = docSnap.data();
+          setPlayCount(data.playCount || 0);
+        } else {
+          // Document doesn't exist yet, create it with initial count of 0
+          await setDoc(audioStatsRef, { playCount: 0 });
+          setPlayCount(0);
+        }
+      } catch (error) {
+        console.error('Error fetching play count:', error);
+        // Fallback to localStorage if Firestore fails
+        const savedPlayCount = localStorage.getItem('musicPlayerPlayCount');
+        if (savedPlayCount) {
+          setPlayCount(parseInt(savedPlayCount, 10));
+        }
+      }
+    };
+    
+    fetchPlayCount();
     
     // Update progress during playback
     const updateProgress = () => {
@@ -101,12 +125,26 @@ export const MusicPlayerWidget = ({
       // Update last played timestamp when play is clicked
       setLastPlayed(format(new Date(), "MMM d, yyyy h:mm a"));
       
-      // Increment play count
+      // Increment play count locally
       const newPlayCount = playCount + 1;
       setPlayCount(newPlayCount);
       
-      // Save to localStorage
-      localStorage.setItem('musicPlayerPlayCount', newPlayCount.toString());
+      // Save to Firestore
+      const updateFirestorePlayCount = async () => {
+        try {
+          const audioStatsRef = doc(db, 'audioStats', 'intro');
+          await updateDoc(audioStatsRef, {
+            playCount: increment(1)
+          });
+          console.log('Play count updated in Firestore');
+        } catch (error) {
+          console.error('Error updating play count in Firestore:', error);
+          // Fallback to localStorage if Firestore fails
+          localStorage.setItem('musicPlayerPlayCount', newPlayCount.toString());
+        }
+      };
+      
+      updateFirestorePlayCount();
     }
     
     setIsPlaying(!isPlaying);
