@@ -119,10 +119,9 @@ export default function Home() {
               </div>)
               :
               (<MusicPlayerWidget
-                imageUrl="/cover.png"
-                title="Aura Phonk"
-                artist="Curse Devil"
-                lastPlayed="Last played on Apr 22, 09:13 AM WAT"
+                imageUrl="/images/Headshot1.png"
+                title="Introduction"
+                artist="Written by Lily, recorded with Play.ai"
               />)}
           </section>
 
