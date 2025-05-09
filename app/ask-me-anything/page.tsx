@@ -35,6 +35,17 @@ export default function AMAPage() {
     fetchQuestions()
   }, [])
 
+  // Clear success/error messages after 3 seconds
+  useEffect(() => {
+    if (submitMessage) {
+      const timer = setTimeout(() => {
+        setSubmitMessage(null)
+      }, 3000)
+      
+      return () => clearTimeout(timer)
+    }
+  }, [submitMessage])
+
   const fetchQuestions = async () => {
     try {
       setIsLoading(true)
