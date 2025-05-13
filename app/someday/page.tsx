@@ -13,7 +13,7 @@ export default function SomedayPage() {
       <div className="prose prose-sm dark:prose-invert max-w-lg">
         <p>This page is still under construction. Check back later for content about future plans and aspirations.</p>
 
-        <p>
+        <div>
           In the mean time, you check out these other pages
           <ul className="text-sm ">
             <li><Link href="/writing">Writing 📝</Link></li>
@@ -29,7 +29,7 @@ export default function SomedayPage() {
             <li><Link href="/playground/note-widgets">Note Widgets 📝</Link></li>
             <li><Link href="/colophon">Colophon 📝</Link></li>
           </ul>
-        </p>
+        </div>
       </div>
 
       </div>

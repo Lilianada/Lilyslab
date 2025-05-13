@@ -22,8 +22,8 @@ export default function Document() {
 
         {/* Favicon and PWA icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/logo.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/images/logo.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/logo.png" />
 
         {/* PWA meta tags */}
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />

@@ -170,7 +170,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         {!mobile && (
           <div className="mb-4 animate-fade-in">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
+              <Image src="/images/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
 
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
@@ -189,7 +189,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={300} />
             <NavItem href="/someday" icon={<FileText size={16} />} label="Someday" onClick={onNavClick} delay={400} />
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
-            <NavItem href="/ama" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={450} />
+            <NavItem href="/ask-me-anything" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={450} />
           </div>
 
           <div className="space-y-1">
@@ -213,19 +213,19 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1">
             <SectionTitle title="Playground" delay={1100} />
-            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator App" onClick={onNavClick} delay={1150} />
-            <NavItem href="/playground/note-widgets" icon={<NotepadText size={16} />} label="Note Widgets" onClick={onNavClick} delay={1200} />
-            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1250} />
-            <NavItem href="/playground/music-player" icon={<BookHeartIcon size={16} />} label="Music Player" onClick={onNavClick} delay={1300} />
+            <NavItem href="/playground/music-player" icon={<BookHeartIcon size={16} />} label="Music Player" onClick={onNavClick} delay={1150} />
+            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1200} />
+            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator App" onClick={onNavClick} delay={1250} />
+            <NavItem href="/playground/note-widgets" icon={<NotepadText size={16} />} label="Note Widgets" onClick={onNavClick} delay={1300} />
           </div>
 
           <Separator />
 
           <div className="space-y-1">
-            <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1250} />
-            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1300} hasNotification={true} />
+            <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1350} />
+            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1400} hasNotification={true} />
             {isAdmin && (
-              <NavItem href="/ctrl-room" icon={<Shield size={16} />} label="CTRL Room" onClick={onNavClick} delay={1350} />
+              <NavItem href="/ctrl-room" icon={<Shield size={16} />} label="CTRL Room" onClick={onNavClick} delay={1450} />
             )}
           </div>
 

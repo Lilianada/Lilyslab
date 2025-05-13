@@ -55,6 +55,19 @@ export function EditTrackDialog({
               onChange={(e) => {
                 setEditingTrack({ ...editingTrack, title: e.target.value })
               }}
+              placeholder="Track title"
+            />
+          </div>
+          
+          <div className="grid gap-2">
+            <Label htmlFor="displayName">Display Name</Label>
+            <Input
+              id="displayName"
+              value={editingTrack.displayName || editingTrack.title}
+              onChange={(e) => {
+                setEditingTrack({ ...editingTrack, displayName: e.target.value })
+              }}
+              placeholder="How the track should be displayed"
             />
           </div>
           

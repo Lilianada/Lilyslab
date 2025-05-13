@@ -4,17 +4,6 @@ import { initializeApp, getApps, getApp } from "firebase/app"
 import { GoogleAuthProvider } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
-// Let's log the environment variables to verify they exist (only in development)
-if (process.env.NODE_ENV === "development") {
-  console.log("Firebase config check:", {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ? "✓ exists" : "✗ missing",
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ? "✓ exists" : "✗ missing",
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID ? "✓ exists" : "✗ missing",
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET ? "✓ exists" : "✗ missing",
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID ? "✓ exists" : "✗ missing",
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID ? "✓ exists" : "✗ missing",
-  })
-}
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

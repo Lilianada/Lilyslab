@@ -28,19 +28,54 @@ export async function PUT(request: Request) {
       );
     }
     
+    console.log('Updating metadata for:', publicId, metadata);
+    
     // Update the metadata in Cloudinary
+    // Prepare the metadata in the correct format for Cloudinary
+    // The format should be: "key1=value1|key2=value2" (without "custom=" prefix in the string itself)
+    const contextString = `title=${metadata.title}|artist=${metadata.artist}|category=${metadata.category}|isPremium=${metadata.isPremium ? 'true' : 'false'}${metadata.displayName ? `|displayName=${metadata.displayName}` : ''}`;
+    
+    console.log('Updating metadata with context string:', contextString);
+    
+    // First attempt: Try updating with the explicit method and context parameter
     const result = await cloudinary.uploader.explicit(publicId, {
       resource_type: 'video', // Cloudinary uses 'video' for audio files
       type: 'upload',
       context: {
-        custom: {
-          title: metadata.title,
-          artist: metadata.artist,
-          category: metadata.category,
-          isPremium: metadata.isPremium ? 'true' : 'false',
-        }
+        custom: contextString
       }
     });
+    
+    // Second attempt: If the first attempt doesn't work, try updating with the update method
+    // This is an alternative approach that sometimes works better
+    if (!result.context || !result.context.custom) {
+      console.log('First update attempt did not set context properly, trying alternative method');
+      
+      // Create an object with the metadata values
+      const contextObj = {
+        title: metadata.title,
+        artist: metadata.artist,
+        category: metadata.category,
+        isPremium: metadata.isPremium ? 'true' : 'false'
+      };
+      
+      // Update using the update API
+      await cloudinary.api.update(publicId, {
+        resource_type: 'video',
+        context: { custom: contextObj }
+      });
+    }
+    
+    console.log('Cloudinary update result:', JSON.stringify(result, null, 2));
+    
+    // Verify the update was successful by fetching the resource
+    const resource = await cloudinary.api.resource(publicId, {
+      resource_type: 'video',
+      context: true
+    });
+    
+    console.log('Resource after update:', JSON.stringify(resource, null, 2));
+    console.log('Updated context:', JSON.stringify(resource.context, null, 2));
     
     return NextResponse.json({ 
       result: 'ok', 

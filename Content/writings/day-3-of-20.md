@@ -8,7 +8,7 @@ slug: day-3-of-20
 tags:
   - 20-days-challenge
   - digital-workshop
-title: Day 3/20
+title: Day 3 of 20
 readingTime: 3
 wordCount: 545
 ---

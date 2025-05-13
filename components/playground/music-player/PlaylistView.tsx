@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { ChevronDown, Download } from "lucide-react"
+import { ChevronDown, Download, RefreshCw } from "lucide-react"
 import { ColorCover } from "../ColorCover"
 import { AudioTrack } from "@/lib/audio/howler-service"
 
@@ -67,7 +67,7 @@ export function PlaylistView({
       <div className="flex-1 overflow-hidden flex flex-col">
         {isLoading ? (
           <div className="flex items-center justify-center h-full flex-1">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+           <RefreshCw className={cn("h-4 w-4 m-2", isLoading && "animate-spin")} />
           </div>
         ) : error ? (
           <div className="flex flex-col items-center justify-center h-full flex-1 p-6 text-center">

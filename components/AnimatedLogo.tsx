@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 // Define image paths and constants
-const IMAGES = ["/12.png", "/13.png"];
+const IMAGES = ["/images/12.png", "/images/13.png"];
 const IMAGE_SIZE = 80; // 5rem in px (tailwind w-20/h-20)
 const PAUSE_DURATION = 2000; // ms each image is fully visible
 const TRANSITION_DURATION = 1200; // ms for blur-down

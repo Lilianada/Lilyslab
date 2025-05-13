@@ -163,10 +163,9 @@ export function ManageLibrary() {
       // Update track in Cloudinary
       await updateAudioMetadata(updatedTrack)
       
-      // Update state
-      setAudioItems(prev => 
-        prev.map(t => t.id === updatedTrack.id ? updatedTrack : t)
-      )
+      // Fetch fresh data from Cloudinary instead of just updating state
+      // This ensures we have the latest data from the server
+      await fetchAudioItems()
       
       setIsEditDialogOpen(false)
       setEditingTrack(null)
@@ -306,7 +305,6 @@ export function ManageLibrary() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Manage Audio Library</h2>
         
         {selectedTracks.size > 0 && (
           <Button 

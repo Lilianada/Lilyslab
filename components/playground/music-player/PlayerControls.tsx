@@ -1,49 +1,64 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Play, Pause, SkipBack, SkipForward } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface PlayerControlsProps {
   isPlaying: boolean
   onPlayPause: () => void
   onSkipForward: () => void
   onSkipBackward: () => void
+  onPreviousTrack: () => void
+  onNextTrack: () => void
 }
 
 export function PlayerControls({
   isPlaying,
   onPlayPause,
-  onSkipForward,
-  onSkipBackward
+  onPreviousTrack,
+  onNextTrack
 }: PlayerControlsProps) {
   return (
-    <div className="flex items-center justify-center gap-4 mt-6">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={onSkipBackward}
-        title="Skip back 10 seconds"
+    <div className="flex items-center justify-center gap-12 md:gap-16 w-full max-w-md mx-auto py-4">
+      {/* Previous Track Button */}
+      <button
+        onClick={onPreviousTrack}
+        title="Previous track"
+        className="text-white hover:text-white/80 transition-colors focus:outline-none"
+        aria-label="Previous track"
       >
-        <SkipBack size={20} />
-      </Button>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7,6V18L2,12L7,6z M9,18l11-6L9,6V18z"/>
+        </svg>
+      </button>
       
-      <Button
-        variant="default"
-        size="icon"
-        className="h-12 w-12 rounded-full"
+      {/* Play/Pause Button */}
+      <button
         onClick={onPlayPause}
+        className="text-white hover:text-white/80 transition-colors focus:outline-none"
+        aria-label={isPlaying ? "Pause" : "Play"}
       >
-        {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-      </Button>
+        {isPlaying ? (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6,5L6,19L10,19L10,5L6,5zM14,5L14,19L18,19L18,5L14,5z"/>
+          </svg>
+        ) : (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8,5L8,19L19,12L8,5z"/>
+          </svg>
+        )}
+      </button>
       
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={onSkipForward}
-        title="Skip forward 10 seconds"
+      {/* Next Track Button */}
+      <button
+        onClick={onNextTrack}
+        title="Next track"
+        className="text-white hover:text-white/80 transition-colors focus:outline-none"
+        aria-label="Next track"
       >
-        <SkipForward size={20} />
-      </Button>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17,6V18L22,12L17,6z M15,18L4,12L15,6V18z"/>
+        </svg>
+      </button>
     </div>
   )
 }

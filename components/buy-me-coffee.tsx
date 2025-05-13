@@ -29,7 +29,7 @@ export const BuyMeCoffee = () => {
         tabIndex={0}
       >
         <Image
-          src="/bmc-logo.png"
+          src="/images/bmc-logo.png"
           alt="Buy Me a Coffee"
           width={30}
           height={30}
@@ -41,7 +41,7 @@ export const BuyMeCoffee = () => {
         <DialogContent className="sm:max-w-[600px]">
           <DialogTitle className="flex flex-col items-center justify-center space-y-4 p-6 font-normal">
             <Image
-              src="/bmc-logo.png"
+              src="/images/bmc-logo.png"
               alt="Buy Me a Coffee"
               width={60}
               height={60}

@@ -62,7 +62,7 @@ const DigitalClock: React.FC = () => {
 
   // Initialize alarm sound
   useEffect(() => {
-    alarmRef.current = new Audio("/alarm.mp3");
+    alarmRef.current = new Audio("/audio/alarm.mp3");
   }, []);
 
   // Clock update effect

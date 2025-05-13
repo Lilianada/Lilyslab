@@ -10,6 +10,7 @@ import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { Breadcrumb } from "@/components/breadcrumb-nav"
 import { BuyMeCoffee } from "@/components/buy-me-coffee"
+import { AudioProvider } from "@/lib/audio/audio-context"
 // ViewCounter temporarily removed to fix build errors
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "Lily's Lab",
     images: [
       {
-        url: "/logo.png",
+        url: "/images/logo.png",
         width: 512,
         height: 512,
         alt: "Lily's Lab",
@@ -65,12 +66,12 @@ export const metadata: Metadata = {
     title: "Lily's Lab",
     description: "Designer, software engineer, product manager, and digital creator",
     creator: "@lilian_ada_",
-    images: ["/logo.png"],
+    images: ["/images/logo.png"],
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/logo.png",
+    apple: "/images/logo.png",
   },
   manifest: "/manifest.json",
   alternates: {
@@ -126,20 +127,24 @@ export default function RootLayout({
       <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-background focus:z-50" aria-label="Skip to main content">
-              Skip to main content
-            </a>
-            <main id="main-content" className="flex min-h-screen flex-col bg-background transition-colors duration-300 lg:flex-row relative">
-              <Sidebar />
-              <MobileNav />
-              <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10" role="region" aria-label="Main content"> 
-                <Breadcrumb />
-                {children}
-              </div>
-            </main>
-            <Toaster />
-            <BuyMeCoffee />
-            {/* ViewCounter temporarily removed to fix build errors */}
+            <AudioProvider>
+              <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-background focus:z-50" aria-label="Skip to main content">
+                Skip to main content
+              </a>
+              <main id="main-content" className="flex min-h-screen flex-col bg-background transition-colors duration-300 lg:flex-row relative">
+                <Sidebar />
+                <MobileNav />
+                <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 flex flex-col min-h-[calc(100vh-4rem)]" role="region" aria-label="Main content"> 
+                  <Breadcrumb />
+                  <div className="flex-1 flex flex-col">
+                    {children}
+                  </div>
+                </div>
+              </main>
+              <Toaster />
+              <BuyMeCoffee />
+              {/* ViewCounter temporarily removed to fix build errors */}
+            </AudioProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

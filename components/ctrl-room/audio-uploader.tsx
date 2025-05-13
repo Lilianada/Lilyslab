@@ -228,19 +228,34 @@ export function AudioUploader() {
         };
         
         // Simulate upload progress since we can't get real-time progress from the server
+        // Use a faster, more responsive progress simulation
         progressInterval = setInterval(() => {
           setFiles(prev => {
             const currentFile = prev.find(f => f.id === file.id);
-            if (currentFile && currentFile.status === 'uploading' && currentFile.progress < 90) {
+            if (currentFile && currentFile.status === 'uploading') {
+              // Faster progress simulation with dynamic increments
+              // This ensures the progress bar moves more quickly
+              let increment = 10; // Default fast increment
+              
+              if (currentFile.progress < 50) {
+                increment = 15; // Very fast at the beginning
+              } else if (currentFile.progress < 80) {
+                increment = 8; // Medium speed in the middle
+              } else if (currentFile.progress < 98) {
+                increment = 3; // Slower near the end
+              }
+              
+              // Allow progress to go up to 98% during simulation
+              // The final 100% will be set when the upload actually completes
               return prev.map(f => 
                 f.id === file.id 
-                  ? { ...f, progress: f.progress + 5 } 
+                  ? { ...f, progress: Math.min(98, f.progress + increment) } 
                   : f
               );
             }
             return prev;
           });
-        }, 500);
+        }, 300); // Faster interval for more responsive UI
         
         // 1. Upload the audio file to Cloudinary using our server-side API
         const audioFormData = new FormData();
@@ -248,6 +263,19 @@ export function AudioUploader() {
         audioFormData.append('folder', 'tracks');
         audioFormData.append('resourceType', 'video');
         audioFormData.append('tags', 'music_track');
+        
+        // Add metadata to the form data
+        audioFormData.append('title', file.metadata.title);
+        audioFormData.append('artist', file.metadata.artist);
+        audioFormData.append('category', file.metadata.category);
+        audioFormData.append('isPremium', file.metadata.isPremium ? 'true' : 'false');
+        
+        console.log('Uploading file with metadata:', {
+          title: file.metadata.title,
+          artist: file.metadata.artist,
+          category: file.metadata.category,
+          isPremium: file.metadata.isPremium
+        });
         
         // Use our server-side API route for the upload
         const audioRes = await fetch('/api/cloudinary/upload', {
