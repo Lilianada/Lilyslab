@@ -2,28 +2,69 @@ import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { AudioTrack } from '@/lib/audio/howler-service';
 
-// Configure Cloudinary with server-side credentials
-cloudinary.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUD_NAME || '',
-  api_key: process.env.CLOUDINARY_API_KEY || '',
-  api_secret: process.env.CLOUDINARY_API_SECRET || '',
-  secure: true,
-});
-
 // Define folder paths for different audio types
 const TRACKS_FOLDER = 'tracks';
 const RECORDS_FOLDER = 'records';
 
-export async function GET(request: Request) {
-  // Validate Cloudinary configuration
-  if (!process.env.NEXT_PUBLIC_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-    console.error('Missing Cloudinary configuration');
-    return NextResponse.json(
-      { error: 'Server configuration error' },
-      { status: 500 }
-    );
+// Helper function to configure Cloudinary
+function configureCloudinary() {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  const apiSecret = process.env.CLOUDINARY_API_SECRET;
+  
+  if (!cloudName || !apiKey || !apiSecret) {
+    throw new Error('Missing required Cloudinary configuration');
   }
+  
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: apiSecret,
+    secure: true,
+  });
+  
+  return { cloudName, apiKey };
+}
+
+// Add this to the top of the file with other imports
+import { headers } from 'next/headers';
+
+export async function GET(request: Request) {
+  // Get the request URL for logging
+  const requestUrl = request.url;
+  const headersList = headers();
+  let host = 'unknown';
   try {
+    // In Next.js 13+, headers() returns a Promise in some cases
+    const hostHeader = headersList.get('host');
+    if (hostHeader) {
+      host = hostHeader;
+    }
+  } catch (error) {
+    console.warn('Could not get host from headers:', error);
+  }
+  const isProduction = process.env.NODE_ENV === 'production';
+  
+  console.log(`[${new Date().toISOString()}] Fetching audio from Cloudinary (${isProduction ? 'production' : 'development'})`);
+  console.log(`Request URL: ${requestUrl}`);
+  console.log(`Host: ${host}`);
+  
+  try {
+    // Configure Cloudinary with proper error handling
+    try {
+      const { cloudName } = configureCloudinary();
+      console.log(`Successfully configured Cloudinary with cloud name: ${cloudName}`);
+    } catch (configError) {
+      console.error('Failed to configure Cloudinary:', configError);
+      return NextResponse.json(
+        { 
+          error: 'Server configuration error',
+          details: 'Failed to initialize Cloudinary configuration',
+          timestamp: new Date().toISOString()
+        },
+        { status: 500 }
+      );
+    }
     // Get the isVoiceMemo parameter from the URL
     const { searchParams } = new URL(request.url);
     const isVoiceMemo = searchParams.get('isVoiceMemo') === 'true';
@@ -31,29 +72,64 @@ export async function GET(request: Request) {
     // Determine which folder to search in
     const folder = isVoiceMemo ? RECORDS_FOLDER : TRACKS_FOLDER;
     
+    console.log(`Fetching ${isVoiceMemo ? 'voice memos' : 'music tracks'} from folder: ${folder}`);
+    
     // Add a timestamp parameter to prevent caching
     const timestamp = Date.now();
     
     // Use the Admin API to get resources with their contextual metadata
-    // This is the proper way to fetch resources with complete metadata
-    console.log(`Fetching resources from folder: ${folder}`);
+    console.log(`[${new Date().toISOString()}] Fetching resources from Cloudinary folder: ${folder}`);
     
-    // Get a list of all resources in the folder
-    const result = await cloudinary.api.resources({
-      resource_type: 'video', // Cloudinary uses 'video' for audio files
-      type: 'upload',
-      prefix: folder, // Get resources with this prefix (folder)
-      max_results: 100,
-      context: true, // Important: This ensures we get the contextual metadata
-      metadata: true // Get structured metadata as well
-    });
-    
-    console.log(`Found ${result.resources.length} resources in folder ${folder}`);
+    let result;
+    try {
+      // Get a list of all resources in the folder with error handling
+      result = await cloudinary.api.resources({
+        resource_type: 'video', // Cloudinary uses 'video' for audio files
+        type: 'upload',
+        prefix: folder, // Get resources with this prefix (folder)
+        max_results: 100,
+        context: true, // Important: This ensures we get the contextual metadata
+        metadata: true, // Get structured metadata as well
+        tags: true, // Include tags for additional metadata
+        image_metadata: true // Include any image metadata
+      });
+      
+      console.log(`[${new Date().toISOString()}] Successfully retrieved ${result.resources?.length || 0} resources from folder ${folder}`);
+    } catch (error) {
+      const apiError = error as Error;
+      console.error('Cloudinary API Error:', {
+        message: apiError.message,
+        error: apiError,
+        stack: apiError.stack,
+        timestamp: new Date().toISOString()
+      });
+      
+      return NextResponse.json(
+        { 
+          error: 'Failed to fetch audio from Cloudinary',
+          details: apiError.message,
+          timestamp: new Date().toISOString()
+        },
+        { status: 500 }
+      );
+    }
     
     // Log the first resource for debugging
-    if (result.resources.length > 0) {
-      console.log('First resource details:', JSON.stringify(result.resources[0], null, 2));
-      console.log('Context metadata:', JSON.stringify(result.resources[0].context, null, 2));
+    if (result?.resources?.length > 0) {
+      try {
+        console.log('First resource details:', JSON.stringify({
+          public_id: result.resources[0].public_id,
+          format: result.resources[0].format,
+          duration: result.resources[0].duration,
+          bytes: result.resources[0].bytes,
+          created_at: result.resources[0].created_at,
+          secure_url: result.resources[0].secure_url ? '***URL_REDACTED***' : null,
+          context: result.resources[0].context ? '***CONTEXT_PRESENT***' : null,
+          metadata: result.resources[0].metadata ? '***METADATA_PRESENT***' : null
+        }, null, 2));
+      } catch (logError) {
+        console.error('Error logging resource details:', logError);
+      }
     }
     
     // Define the expected resource structure

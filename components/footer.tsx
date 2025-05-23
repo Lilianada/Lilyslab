@@ -67,7 +67,6 @@ export function Footer({
              const lastUpdatedDate = new Date(data.lastUpdated);
              if (!isNaN(lastUpdatedDate.getTime())) {
                const formattedDate = format(lastUpdatedDate, 'MMMM d, yyyy h:mm:ss a');
-               console.log('Formatted Date:', formattedDate); // Debug log
                setLastEdited(`${formattedDate} (${data.source})`);
                return;
              }
@@ -80,11 +79,8 @@ export function Footer({
          if (process.env.NEXT_PUBLIC_BUILD_TIME) {
            const buildDate = new Date(process.env.NEXT_PUBLIC_BUILD_TIME);
            const formattedBuildDate = format(buildDate, 'MMMM d, yyyy h:mm:ss a');
-           console.log('Using build time:', formattedBuildDate); // Debug log
            setLastEdited(`${formattedBuildDate} (build time)`);
-         } else {
-           console.log('No build time available, skipping last edited date');
-         }
+         } 
        } catch (error) {
          console.error('Error fetching last edited date:', error);
          // Don't show any error to the user, just don't display the date
