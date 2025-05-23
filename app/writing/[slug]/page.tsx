@@ -42,7 +42,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { slug } = resolvedParams;
 
-  const writingsDir = path.join(process.cwd(), 'Content/Writings');
+  const writingsDir = path.join(process.cwd(), 'Content/writings');
   const filePath = path.join(writingsDir, `${slug}.md`);
 
   // Check if the file exists
