@@ -56,17 +56,38 @@ export function Footer({
      // Fetch the last edited date from Git commit history
      const fetchLastEdited = async () => {
        try {
-         // Simply fetch the latest Git commit date
+         // Try to fetch from the API first
          const response = await fetch('/api/last-updated');
          if (response.ok) {
            const data = await response.json();
-           const lastUpdatedDate = new Date(data.lastUpdated);
-           setLastEdited(format(lastUpdatedDate, 'MMMM d, yyyy'));
+           console.log('API Response:', data); // Debug log
+           
+           // Check if we got a valid date
+           if (data.lastUpdated) {
+             const lastUpdatedDate = new Date(data.lastUpdated);
+             if (!isNaN(lastUpdatedDate.getTime())) {
+               const formattedDate = format(lastUpdatedDate, 'MMMM d, yyyy h:mm:ss a');
+               console.log('Formatted Date:', formattedDate); // Debug log
+               setLastEdited(`${formattedDate} (${data.source})`);
+               return;
+             }
+           }
          } else {
-           console.error('Failed to fetch last edited date');
+           console.error('API Error:', response.status, response.statusText);
+         }
+         
+         // Fallback to build time if API fails
+         if (process.env.NEXT_PUBLIC_BUILD_TIME) {
+           const buildDate = new Date(process.env.NEXT_PUBLIC_BUILD_TIME);
+           const formattedBuildDate = format(buildDate, 'MMMM d, yyyy h:mm:ss a');
+           console.log('Using build time:', formattedBuildDate); // Debug log
+           setLastEdited(`${formattedBuildDate} (build time)`);
+         } else {
+           console.log('No build time available, skipping last edited date');
          }
        } catch (error) {
          console.error('Error fetching last edited date:', error);
+         // Don't show any error to the user, just don't display the date
        }
      };
      
@@ -123,7 +144,7 @@ export function Footer({
       <div className="mt-4">
         <span className="block text-xs text-muted-foreground/60">Currently: {dateTime}</span>
         {lastEdited && (
-          <span className="block text-xs text-muted-foreground/60">Last edited: {lastEdited}</span>
+          <span className="block text-xs text-muted-foreground/60">Last updated: {lastEdited}</span>
         )}
         {/* <span className="block text-xs text-muted-foreground/60">Location: {location}</span> */}
       </div>

@@ -1,10 +1,23 @@
 import { NextResponse } from 'next/server';
 import { execSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
 // Cache the git date to avoid running the command multiple times
 let cachedGitDate: string | null = null;
 let cacheTime: number = 0;
 const CACHE_DURATION = 3600000; // 1 hour in milliseconds
+
+// Fallback to build time if git is not available
+const getBuildTime = (): string => {
+  // Try to get build time from environment variable
+  if (process.env.NEXT_PUBLIC_BUILD_TIME) {
+    return process.env.NEXT_PUBLIC_BUILD_TIME;
+  }
+  
+  // Fallback to current time
+  return new Date().toISOString();
+};
 
 export async function GET() {
   try {
@@ -13,38 +26,87 @@ export async function GET() {
     if (cachedGitDate && (now - cacheTime < CACHE_DURATION)) {
       return NextResponse.json({
         lastUpdated: cachedGitDate,
-        source: 'git-cached'
+        source: 'cached'
       });
     }
 
-    // Get the latest commit date using Git
-    let gitDate;
+    // Try to get the date from git
+    let gitDate: string | null = null;
+    let source = 'fallback';
+    
     try {
-      // Format the date in ISO format
-      const gitCommand = 'git log -1 --format=%cI';
-      gitDate = execSync(gitCommand, { encoding: 'utf-8' }).trim();
+      // First try to get the latest commit date using Git
+      try {
+        const gitCommand = 'git log -1 --format=%cI';
+        gitDate = execSync(gitCommand, { 
+          encoding: 'utf-8',
+          // Use a short timeout to prevent hanging
+          timeout: 1000,
+          // Set a default cwd in case process.cwd() doesn't work
+          cwd: process.cwd() || __dirname
+        }).trim();
+        
+        // Validate the date format
+        if (gitDate && !isNaN(new Date(gitDate).getTime())) {
+          source = 'git-commit';
+          console.log(`Got Git last commit date: ${gitDate}`);
+        } else {
+          gitDate = null;
+          console.warn('Invalid date format from git log');
+        }
+      } catch (gitError) {
+        console.warn('Error getting Git commit date:', gitError);
+        gitDate = null;
+      }
+      
+      // If git date is not available, try to get it from the .git directory
+      if (!gitDate) {
+        try {
+          const gitDir = path.join(process.cwd(), '.git');
+          const headPath = path.join(gitDir, 'FETCH_HEAD');
+          
+          if (fs.existsSync(headPath)) {
+            const stats = fs.statSync(headPath);
+            gitDate = stats.mtime.toISOString();
+            source = 'git-fetch-head';
+            console.log(`Got date from .git/FETCH_HEAD: ${gitDate}`);
+          }
+        } catch (fsError) {
+          console.warn('Error reading .git directory:', fsError);
+        }
+      }
+      
+      // If still no date, fall back to build time
+      if (!gitDate) {
+        gitDate = getBuildTime();
+        console.log(`Using build time as fallback: ${gitDate}`);
+      }
       
       // Update the cache
       cachedGitDate = gitDate;
       cacheTime = now;
       
-      console.log(`Got Git last commit date: ${gitDate}`);
-    } catch (gitError) {
-      console.error('Error getting Git commit date:', gitError);
-      // Fallback to current date if Git command fails
-      gitDate = new Date().toISOString();
+      return NextResponse.json({
+        lastUpdated: gitDate,
+        source
+      });
+      
+    } catch (error) {
+      console.error('Error in last-updated API:', error);
+      // Return build time as final fallback
+      const fallbackDate = getBuildTime();
+      return NextResponse.json({
+        lastUpdated: fallbackDate,
+        source: 'fallback'
+      });
     }
-    
-    return NextResponse.json({
-      lastUpdated: gitDate,
-      source: 'git-commit'
-    });
   } catch (error) {
-    console.error('Error getting last update time:', error);
-    return NextResponse.json(
-      { error: 'Failed to get last update time' },
-      { status: 500 }
-    );
+    console.error('Unexpected error in last-updated API:', error);
+    // Return current time as last resort
+    return NextResponse.json({
+      lastUpdated: new Date().toISOString(),
+      source: 'error-fallback'
+    }, { status: 200 }); // Still return 200 to prevent UI errors
   }
 }
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Volume2 } from "lucide-react";
 import { format } from "date-fns";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 // Helper function to format time in MM:SS format
@@ -34,6 +34,19 @@ export const MusicPlayerWidget = ({
   const [duration, setDuration] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
+  // Handle timeupdate event
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      const current = audioRef.current.currentTime;
+      const total = audioRef.current.duration || 1;
+      const currentProgress = (current / total) * 100;
+      
+      setCurrentTime(current);
+      setDuration(total);
+      setProgress(currentProgress);
+    }
+  };
+
   // Initialize audio on component mount
   useEffect(() => {
     // Create audio element with intro audio
@@ -83,16 +96,17 @@ export const MusicPlayerWidget = ({
     
     // Update progress during playback - smooth animation with requestAnimationFrame
     const updateProgress = () => {
-      if (audioRef.current && isPlaying) {
+      if (audioRef.current) {
         const current = audioRef.current.currentTime;
-        const total = audioRef.current.duration;
+        const total = audioRef.current.duration || 1; // Avoid division by zero
         const currentProgress = (current / total) * 100;
         
         setCurrentTime(current);
         setDuration(total);
         setProgress(currentProgress);
         
-        // Continue animation loop only while playing
+        // Continue animation loop
+        if (!isPlaying) return; // Only continue if still playing
         animationFrameId = requestAnimationFrame(updateProgress);
       }
     };
@@ -101,6 +115,7 @@ export const MusicPlayerWidget = ({
     const handleEnded = () => {
       setIsPlaying(false);
       setProgress(0);
+      setCurrentTime(0);
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
       }
@@ -109,24 +124,21 @@ export const MusicPlayerWidget = ({
     // Set up event listeners
     const audio = audioRef.current;
     if (audio) {
-      // Only use timeupdate for initial loading and as a fallback
-      audio.addEventListener("timeupdate", () => {
-        // Update duration when it becomes available
-        if (duration === 0 && audio.duration > 0) {
-          setDuration(audio.duration);
-        }
-      });
+      // Use timeupdate for accurate progress updates
+      audio.addEventListener("timeupdate", handleTimeUpdate);
       audio.addEventListener("ended", handleEnded);
       audio.addEventListener("loadedmetadata", () => {
         setDuration(audio.duration);
       });
       audio.addEventListener("play", () => {
+        setIsPlaying(true);
         // Start the smooth animation loop when playing
         if (animationFrameId === null) {
           animationFrameId = requestAnimationFrame(updateProgress);
         }
       });
       audio.addEventListener("pause", () => {
+        setIsPlaying(false);
         // Stop the animation loop when paused
         if (animationFrameId !== null) {
           cancelAnimationFrame(animationFrameId);
@@ -139,10 +151,11 @@ export const MusicPlayerWidget = ({
     return () => {
       if (audio) {
         audio.pause();
-        audio.removeEventListener("timeupdate", updateProgress);
+        audio.removeEventListener("timeupdate", handleTimeUpdate);
         audio.removeEventListener("ended", handleEnded);
-        audio.removeEventListener("play", updateProgress);
-        audio.removeEventListener("pause", updateProgress);
+        audio.removeEventListener("loadedmetadata", () => {});
+        audio.removeEventListener("play", () => {});
+        audio.removeEventListener("pause", () => {});
       }
       
       // Cancel any pending animation frame
@@ -152,6 +165,18 @@ export const MusicPlayerWidget = ({
     };
   }, []);
   
+  // Update volume when it changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 10;
+    }
+  }, [volume]);
+  
+  // Check if running on localhost
+  const isLocalhost = typeof window !== 'undefined' && 
+    (window.location.hostname === 'localhost' || 
+     window.location.hostname === '127.0.0.1');
+
   // Handle play/pause
   const togglePlayback = () => {
     if (!audioRef.current) return;
@@ -163,32 +188,35 @@ export const MusicPlayerWidget = ({
       // Update last played timestamp when play is clicked
       setLastPlayed(format(new Date(), "MMM d, yyyy h:mm a"));
       
-      // Increment play count locally
-      const newPlayCount = playCount + 1;
-      setPlayCount(newPlayCount);
-      
-      // Save to Firestore
-      const updateFirestorePlayCount = async () => {
-        try {
-          // Check if Firestore is initialized
-          if (!db) {
-            console.error('Firestore not initialized');
-            throw new Error('Firestore not initialized');
+      // Only increment play count if not running on localhost
+      if (!isLocalhost) {
+        // Increment play count locally
+        const newPlayCount = playCount + 1;
+        setPlayCount(newPlayCount);
+        
+        // Save to Firestore
+        const updateFirestorePlayCount = async () => {
+          try {
+            // Check if Firestore is initialized
+            if (!db) {
+              console.error('Firestore not initialized');
+              throw new Error('Firestore not initialized');
+            }
+            
+            const audioStatsRef = doc(db, 'audioStats', 'intro');
+            await updateDoc(audioStatsRef, {
+              playCount: increment(1)
+            });
+            console.log('Play count updated in Firestore');
+          } catch (error) {
+            console.error('Error updating play count in Firestore:', error);
+            // Fallback to localStorage if Firestore fails
+            localStorage.setItem('musicPlayerPlayCount', newPlayCount.toString());
           }
-          
-          const audioStatsRef = doc(db, 'audioStats', 'intro');
-          await updateDoc(audioStatsRef, {
-            playCount: increment(1)
-          });
-          console.log('Play count updated in Firestore');
-        } catch (error) {
-          console.error('Error updating play count in Firestore:', error);
-          // Fallback to localStorage if Firestore fails
-          localStorage.setItem('musicPlayerPlayCount', newPlayCount.toString());
-        }
-      };
-      
-      updateFirestorePlayCount();
+        };
+        
+        updateFirestorePlayCount();
+      }
     }
     
     setIsPlaying(!isPlaying);
