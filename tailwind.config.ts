@@ -27,9 +27,6 @@ const config = {
       },
     },
     extend: {
-      animation: {
-        "spin-slow": "spin 8s linear infinite",
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -121,7 +118,9 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        progress: "progress 1s ease-in-out infinite",
+        "progress": "progress 1s ease-in-out infinite",
+        "spin-slow": "spin 12s linear infinite",
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       backgroundImage: {
         'noise': "url('/images/Noise.png')",

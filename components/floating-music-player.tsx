@@ -4,15 +4,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// Simple configuration
 const AUDIO_FILE = "/audio/wherehaveallthecowboysgone.mp3";
 const LOCAL_STORAGE_KEY = "music_player_paused";
-// These colors will be applied as style backgrounds using CSS variables
 const COLOR_VARS = [
   "--extra-lavender",
   "--extra-yellow",
   "--extra-green",
   "--extra-pink",
-  "--extra-Blue",
   "--extra-cream",
   "--extra-lilac",
   "--extra-peach",
@@ -20,107 +19,85 @@ const COLOR_VARS = [
   "--extra-steelBlue"
 ];
 
-export const FloatingMusicPlayer: React.FC = () => {
+function FloatingMusicPlayer() {
+  // Basic state
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentColorVar, setCurrentColorVar] = useState(COLOR_VARS[0]);
+  const [currentColor, setCurrentColor] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const colorIntervalRef = useRef<NodeJS.Timeout>();
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Initialize once on mount
   useEffect(() => {
-    // Initialize audio element
+    // Create audio element
     audioRef.current = new Audio(AUDIO_FILE);
     audioRef.current.loop = true;
+    audioRef.current.volume = 0.7;
     
-    // Check local storage for saved state
-    const savedPaused = localStorage.getItem(LOCAL_STORAGE_KEY);
-    const shouldPlay = savedPaused !== "true";
+    // Check saved state
+    const isPaused = localStorage.getItem(LOCAL_STORAGE_KEY) === "true";
+    setIsPlaying(!isPaused);
     
-    if (shouldPlay) {
-      // We need to wait for user interaction before playing
-      setIsPlaying(true);
-      // Note: actual play() happens on click due to browser autoplay policies
-    }
-
-    // Clean up
+    // Set up color rotation
+    intervalRef.current = setInterval(() => {
+      setCurrentColor(prev => (prev + 1) % COLOR_VARS.length);
+    }, 3000);
+    
+    // Cleanup
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.src = "";
       }
-      if (colorIntervalRef.current) {
-        clearInterval(colorIntervalRef.current);
-      }
-    };
-  }, []);
-
-  // Start color rotation when component mounts
-  useEffect(() => {
-    let colorIndex = 0;
-    
-    const rotateColors = () => {
-      colorIndex = (colorIndex + 1) % COLOR_VARS.length;
-      setCurrentColorVar(COLOR_VARS[colorIndex]);
-    };
-    
-    colorIntervalRef.current = setInterval(rotateColors, 2000);
-    
-    return () => {
-      if (colorIntervalRef.current) {
-        clearInterval(colorIntervalRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
     };
   }, []);
-
-  // Handle play/pause when isPlaying changes
+  
+  // Handle play/pause state changes
   useEffect(() => {
     if (!audioRef.current) return;
     
     if (isPlaying) {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.error("Audio play failed:", error);
-          setIsPlaying(false);
-        });
-      }
+      audioRef.current.play().catch(() => setIsPlaying(false));
     } else {
       audioRef.current.pause();
     }
     
-    // Save state to localStorage
+    // Save state
     localStorage.setItem(LOCAL_STORAGE_KEY, isPlaying ? "false" : "true");
   }, [isPlaying]);
 
-  const togglePlayPause = () => {
-    setIsPlaying(prev => !prev);
-  };
+  // Simple toggle function
+  const togglePlayPause = () => setIsPlaying(prev => !prev);
 
-  // Get the current color value from CSS variable
+  // Button styling
   const buttonStyle = {
-    backgroundColor: `hsl(var(${currentColorVar}))`,
+    backgroundColor: `hsl(var(${COLOR_VARS[currentColor]}))`,
+    transition: 'background-color 1s ease-in-out',
+    boxShadow: isPlaying 
+      ? '0 0 15px rgba(255, 255, 255, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2)' 
+      : '0 4px 12px rgba(0, 0, 0, 0.15)',
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center justify-center">
+    <div className="fixed bottom-6 right-6 z-50">
       <button 
-        ref={buttonRef}
         onClick={togglePlayPause}
         className={cn(
-          "h-10 w-10 rounded-full shadow-lg flex items-center justify-center transition-all duration-300",
+          "h-14 w-14 rounded-full flex items-center justify-center transition-all",
           isPlaying && "animate-spin-slow"
         )}
         style={buttonStyle}
         aria-label={isPlaying ? "Pause music" : "Play music"}
       >
         {isPlaying ? (
-          <Pause className="h-4 w-4 text-white" />
+          <Pause className="h-6 w-6 text-white" />
         ) : (
-          <Play className="h-4 w-4 text-white ml-1" />
+          <Play className="h-6 w-6 text-white ml-1" />
         )}
       </button>
     </div>
   );
-};
+}
 
 export default FloatingMusicPlayer;

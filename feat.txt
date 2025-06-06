@@ -65,5 +65,11 @@ Form fields:
 Name
 Email (optional, not published)
 URL (optional, linked from Name)
-placeholder https://example.com
+Spam bot blocker
+Please enter the word “guestbook” below, lovely human. We don’t think that the 🤖spam bots🤖 will figure this out. Thank you!
 Message
+
+Create a page called /web-manifesto
+This should be under digital-garden
+
+Its a page tha returns a markdown file 
