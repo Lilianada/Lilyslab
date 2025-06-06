@@ -5,7 +5,8 @@ const urlsToCache = [
   '/manifest.json',
   '/favicon.ico',
   '/images/logo.png',
-  '/images/icon-512x512.png'
+  '/images/icon-512x512.png',
+  '/audio/wherehaveallthecowboysgone.mp3'
 ];
 
 // Install event - cache assets

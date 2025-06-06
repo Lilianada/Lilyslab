@@ -1,6 +1,6 @@
+import "./globals.css"
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import "./globals.css"
 import Sidebar from "@/components/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import MobileNav from "@/components/mobile-nav"
@@ -15,6 +15,7 @@ import { AudioProvider } from "@/lib/audio/audio-context"
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
+import FloatingMusicPlayer from '@/components/floating-music-player';
 
 
 
@@ -142,7 +143,8 @@ export default function RootLayout({
                 </div>
               </main>
               <Toaster />
-              <BuyMeCoffee />
+              <FloatingMusicPlayer />
+              {/* <BuyMeCoffee /> */}
               {/* ViewCounter temporarily removed to fix build errors */}
             </AudioProvider>
           </AuthProvider>
