@@ -26,6 +26,7 @@ export default function AMAPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [question, setQuestion] = useState("")
+  const [name, setName] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
@@ -78,7 +79,7 @@ export default function AMAPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: user?.displayName || "Anonymous",
+          name: user?.displayName || (name.trim() ? name.trim() : "Anonymous"),
           email: user?.email || "",
           photoURL: user?.photoURL || "",
           question: question.trim(),
@@ -210,10 +211,16 @@ export default function AMAPage() {
                   <span className="text-sm">{user.displayName || "User"}</span>
                 </>
               ) : (
-                <span className="text-sm text-muted-foreground">Posting as Anonymous</span>
-              )}
-              {!user && (
-                <span className="text-xs text-muted-foreground ml-2">(Sign in for personalized submissions)</span>
+                <div className="w-full">
+                  <input 
+                    type="text" 
+                    placeholder="Your Name (optional)" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full mb-2 p-2 text-sm rounded border border-input bg-background placeholder:text-muted-foreground focus:border-primary"
+                  />
+                  <p className="text-xs text-muted-foreground">Leave blank to post anonymously</p>
+                </div>
               )}
             </div>
             

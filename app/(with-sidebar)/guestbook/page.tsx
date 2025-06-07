@@ -155,11 +155,11 @@ export default function GuestbookPage() {
   };
 
   return (
-    <div className="sm:container pb-12 max-w-4xl">
+    <div className="sm:container pb-12 max-w-3xl">
       <div className="space-y-6">
         <div>
           <h1 className="text-xl font-medium tracking-tight mb-4">Guestbook</h1>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-sm text-muted-foreground mb-8">
             Welcome, fellow wanderer! 🌱
             <br />
             <br />
@@ -175,8 +175,7 @@ export default function GuestbookPage() {
             your guestbook too.
             <br />
             <br />
-            Thanks for stopping by and sharing a little bit of yourself. <br />
-            <span className="italic">Happy browsing!</span> ✨
+            Thanks for stopping by and sharing a little bit of yourself.
           </p>
         </div>
 
