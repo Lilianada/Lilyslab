@@ -72,4 +72,4 @@ Message
 Create a page called /web-manifesto
 This should be under digital-garden
 
-Its a page tha returns a markdown file 
+Its a page that returns a markdown file 

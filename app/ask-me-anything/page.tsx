@@ -178,6 +178,7 @@ export default function AMAPage() {
         </div>
         <p className="text-sm text-muted-foreground">
           Have a question? I'll do my best to answer it here. You can also leave a comment if you have any.
+          You can now ask questions or leave comments on a post you read without having to sign in.
         </p>
       </header>
 

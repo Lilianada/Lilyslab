@@ -30,6 +30,7 @@ import {
   PersonStandingIcon,
   Timer,
   Shield,
+  MessageCircleHeart,
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"
@@ -189,6 +190,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/someday" icon={<FileText size={16} />} label="Someday" onClick={onNavClick} delay={300} />
             <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
             <NavItem href="/ask-me-anything" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={400} />
+            <NavItem href="/guestbook" icon={<MessageCircleHeart size={16} />} label="Guestbook" onClick={onNavClick} delay={450} />
           </div>
 
           <div className="space-y-1">
