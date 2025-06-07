@@ -118,11 +118,8 @@ export default function AMAPage() {
   }
 
   const handleAskButtonClick = () => {
-    if (user) {
-      setShowForm(true)
-    } else {
-      setIsAuthModalOpen(true)
-    }
+    // Show form regardless of authentication status
+    setShowForm(true)
   }
 
   // Function to handle admin replies to questions
@@ -178,7 +175,7 @@ export default function AMAPage() {
         </div>
         <p className="text-sm text-muted-foreground">
           Have a question? I'll do my best to answer it here. You can also leave a comment if you have any.
-          You can now ask questions or leave comments on a post you read without having to sign in.
+          You can ask questions or leave comments anonymously - no sign in required!
         </p>
       </header>
 
@@ -199,16 +196,25 @@ export default function AMAPage() {
 
           <form onSubmit={handleSubmit} className="space-y-3 p-4 border rounded-lg">
             <div className="flex items-center gap-2 mb-2">
-              {user?.photoURL && (
-                <Image
-                  src={user.photoURL}
-                  alt={user.displayName || "User"}
-                  width={24}
-                  height={24}
-                  className="rounded-full"
-                />
+              {user ? (
+                <>
+                  {user.photoURL && (
+                    <Image
+                      src={user.photoURL}
+                      alt={user.displayName || "User"}
+                      width={24}
+                      height={24}
+                      className="rounded-full"
+                    />
+                  )}
+                  <span className="text-sm">{user.displayName || "User"}</span>
+                </>
+              ) : (
+                <span className="text-sm text-muted-foreground">Posting as Anonymous</span>
               )}
-              <span className="text-sm">{user?.displayName}</span>
+              {!user && (
+                <span className="text-xs text-muted-foreground ml-2">(Sign in for personalized submissions)</span>
+              )}
             </div>
             
             <Textarea
@@ -333,7 +339,7 @@ export default function AMAPage() {
         )}
       </section>
 
-      {/* Custom Auth Modal */}
+      {/* We could keep the auth modal for future functionality, but make it optional */}
       <AuthSignInModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}

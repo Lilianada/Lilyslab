@@ -77,7 +77,7 @@ export default function AboutPage() {
                 <img src="/images/about2.jpeg" alt="A beautiful arrangement of lilies" className="rounded-lg shadow-md h-[450px] w-full object-cover" />
                 <figcaption className="text-center text-sm text-muted-foreground mt-2">lilies</figcaption>
               </figure>
-              <p className="mb-3 text-sm opacity-0 leading-normal mb-6 animate-slide-up">Hi! I’m Lily, a software engineer, digital creator, lifestyle connoisseur, design enthusiast, and lifelong learner. I love exploring creative coding, frontend design, lifestyle content and sharing what I learn with others. This site is my digital home for projects, notes, experiments, and inspiration. </p>
+              <p className="mb-3 text-sm opacity-0 leading-normal animate-slide-up">Hi! I’m Lily, a software engineer, digital creator, lifestyle connoisseur, design enthusiast, and lifelong learner. I love exploring creative coding, frontend design, lifestyle content and sharing what I learn with others. This site is my digital home for projects, notes, experiments, and inspiration. </p>
 
               <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
                 By day, I build and manage digital products — blending a background in software engineering with product thinking to turn creative ideas into real, user-focused solutions.
@@ -91,19 +91,19 @@ export default function AboutPage() {
               </p>
 
               <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                <span className="font-semibold text-extra-yellow">Status: </span> Actively looking
+                <span className="font-semibold text-extra-green">Status: </span> Actively looking
                 <br />
                 Having taken some time off to recharge and explore, I am looking to get back into it.
 
                 If you are looking for someone whose mission is to demonstrate the vast potential of AI when it’s used as a partner in the creative process, I am always open to chat and make connections, so please do not hesitate to reach out!
               </p>
             </div>
-            <div className=" mt-6">
+            <div className=" mt-6 mb-3">
               <h2 className="text-base font-semibold tracking-tight text-foreground">Time to explore 😃</h2>
-              <p className="text-sm leading-normal mb-6">While you're here, be sure to explore all the amazing corners of this space. I suggest you check what I'm currently up to in my <a href="/now" className="text-extra-yellow">Now</a> page and also what I will most likely be doing <a href="/someday" className="text-extra-yellow">Someday</a>.</p>
+              <p className="text-sm leading-normal mb-6">While you're here, be sure to explore all the amazing corners of this space. I suggest you check what I'm currently up to in my <a href="/now" className="text-extra-green">Now</a> page and also what I will most likely be doing <a href="/someday" className="text-extra-green">Someday</a>.</p>
 
               <p className="text-sm leading-normal mb-6">
-                Other interesting pages that I have put together for you are all listed on the sidebar, be sure to scroll to the bottom in order not to miss anything. And if you have any questions for me, you can either email me or use the <a href="/ask-me-anything" className="text-extra-yellow">Ask Me Anything (AMA)</a> page.
+                Other interesting pages that I have put together for you are all listed on the sidebar, be sure to scroll to the bottom in order not to miss anything. And if you have any questions for me, you can either email me or use the <a href="/ask-me-anything" className="text-extra-green">Ask Me Anything (AMA)</a> page and most importantly I'd love if you leave me a note in my <a href="/guestbook" className="text-extra-green">Guestbook</a> so I know you stopped by.
               </p>
             </div>
 
