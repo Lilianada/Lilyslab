@@ -19,7 +19,7 @@ A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Not
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **Performance Optimized**: Fast loading times and optimized assets
 
-## Tech Stack
+## Tech uses
 
 - **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS
 - **Authentication**: Firebase Authentication
@@ -37,7 +37,7 @@ portfolio-dashboard/
 │   ├── ama/                # Ask Me Anything section
 │   ├── playground/         # Playground section (app dissections, resources)
 │   ├── now/                # Now page
-│   ├── stack/              # Tech stack page
+│   ├── uses/              # Tech stack page
 │   ├── globals.css         # Global styles
 │   └── layout.tsx          # Root layout
 ├── components/             # Reusable components

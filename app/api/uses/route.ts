@@ -4,7 +4,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 // Define types for clarity
-interface StackItem {
+interface UsesItem {
   name: string;
   description: string;
   url: string;
@@ -13,12 +13,13 @@ interface StackItem {
 
 interface Category {
   name: string;
-  items: StackItem[];
+  items: UsesItem[];
 }
 
 // Main function to handle GET requests
 export async function GET() {
-  const contentDir = path.join(process.cwd(), 'Content', 'stack');
+  // Try to load from Content/uses directory, if it exists
+  const contentDir = path.join(process.cwd(), 'Content', 'uses');
   // Define the desired display order for categories
   const desiredOrder = ["Hardware", "Development", "Design", "Tech Stack", "Productivity"];
   let categoriesData: Category[] = [];
@@ -33,7 +34,7 @@ export async function GET() {
       .map(async (dirent) => {
         const categoryName = dirent.name;
         const categoryPath = path.join(contentDir, categoryName);
-        let items: StackItem[] = [];
+        let items: UsesItem[] = [];
 
         try {
           // Read all files within the category directory
@@ -70,7 +71,7 @@ export async function GET() {
           // Allow processing to continue even if one category fails
         }
 
-        // Format the category name (e.g., 'tech-stack' -> 'Tech Stack')
+        // Format the category name (e.g., 'tech-Uses' -> 'Tech Uses')
         const formattedCategoryName = categoryName
           .split('-')
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -100,9 +101,9 @@ export async function GET() {
     categoriesData = validCategories;
 
   } catch (error) {
-    console.error("Error fetching stack data:", error);
+    console.error("Error fetching Uses data:", error);
     // Return an error response if the top-level directory read fails
-    return NextResponse.json({ error: 'Failed to load stack categories' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to load Uses categories' }, { status: 500 });
   }
 
   // Return the structured category data

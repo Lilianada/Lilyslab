@@ -186,7 +186,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/about" icon={<PersonStandingIcon size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={250} />
             <NavItem href="/someday" icon={<FileText size={16} />} label="Someday" onClick={onNavClick} delay={300} />
-            <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
+            <NavItem href="/uses" icon={<Layers size={16} />} label="Uses" onClick={onNavClick} delay={350} />
+            <NavItem href="/web-manifesto" icon={<Shield size={16} />} label="Web Manifesto" onClick={onNavClick} delay={375} />
             <NavItem href="/ask-me-anything" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={400} />
             <NavItem href="/guestbook" icon={<MessageCircleHeart size={16} />} label="Guestbook" onClick={onNavClick} delay={450} />
           </div>

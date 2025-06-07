@@ -42,7 +42,7 @@ This is a modern Next.js application with a rich set of features and a well-orga
    - `/welcome`: Likely a landing or introduction page
    - `/playground`: Interactive development/testing area
    - `/ask-me-anything`: "Ask Me Anything" section
-   - `/stack`: Technology stack showcase
+   - `/uses`: Technology stack showcase
    - `/writing`: Blog or content section
 
 To add new features to this application, you would typically:

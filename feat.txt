@@ -32,7 +32,7 @@ Audio blog
 A list of pages to add to lilyslab to make it more fun, personal and a site of exploration for my visitors.
 
 1. A redesign?
-2. Guestbook page
+2. Guestbook page *
 3. Offline page
 4. Blogroll page
 5. Postroll page
@@ -44,30 +44,16 @@ A list of pages to add to lilyslab to make it more fun, personal and a site of e
 11. Easter eggs
 12. Add a custom cursor
 13. Sitemap Page
-14. Web manifesto
+14. Web manifesto *
 15. Add an 88x31 button
 16. [Feedbackless feed ](https://fromemily.com/feedbackless-feed/)
 17. Places - A list of places I've visited e.g cafes [List of restaurants and cafes Nikita has gone to](https://nikita.galaiko.rocks/places/)
-18. Switch 'stack' to 'Uses', add 'services'
+18. Switch 'stack' to 'Uses', add 'services' *
 19. Any weird collection I have (links)
 20. Wants/Intentions - A page for things I want to do different from a someday page [Kenan wanats page](https://gkeenan.co/wants/) [kayserifserif intentions page](https://kayserifserif.place/intentions/)
 21. 
 
-Create a page under /digital-garden called Guestbook.
-The Guestbook is a page where visitors can leave messages or feedback. guestbook is a way to allow visitors to your site to leave a comment about the website as a whole, instead of a comment about a specific post.
-Read this essay on guestbook https://indieweb.org/guestbook
-Title: Guestbook
-Page Note:
-I have enjoyed surfing the web and finding out about the concept that is a Guestbook was really fascinating to me. If you come across my site and find anything interesting you like, leave me a little message. Your messages will certainly make my entire day.
-If you also have a guestbook, be sure to drop it in the url field so that I can sign it as well.
-Cheers.
-Form fields:
-Name
-Email (optional, not published)
-URL (optional, linked from Name)
-Spam bot blocker
-Please enter the word “guestbook” below, lovely human. We don’t think that the 🤖spam bots🤖 will figure this out. Thank you!
-Message
+
 
 Create a page called /web-manifesto
 This should be under digital-garden

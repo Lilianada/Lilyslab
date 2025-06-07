@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Define types for clarity (should match API response structure)
-interface StackItem {
+interface UsesItem {
   name: string;
   description: string;
   url: string;
@@ -14,11 +14,11 @@ interface StackItem {
 
 interface Category {
   name: string;
-  items: StackItem[];
+  items: UsesItem[];
 }
 
 
-export default function StackPage() {
+export default function UsesPage() {
   const [isLoaded, setIsLoaded] = useState(false) 
   const [categories, setCategories] = useState<Category[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -30,15 +30,15 @@ export default function StackPage() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch("/api/stack");
+        const response = await fetch("/api/uses");
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ error: 'Failed to fetch stack data' }));
+          const errorData = await response.json().catch(() => ({ error: 'Failed to fetch uses data' }));
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
         const data: Category[] = await response.json();
         setCategories(data);
       } catch (error) {
-        console.error("Error fetching stack data:", error);
+        console.error("Error fetching uses data:", error);
         setError(error instanceof Error ? error.message : "An unknown error occurred");
       } finally {
         setIsLoading(false);
@@ -106,7 +106,7 @@ export default function StackPage() {
           />
     <div className={`max-w-2xl w-full mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
-        <h1 className="mb-1 text-xl font-medium">My Stack</h1>
+        <h1 className="mb-1 text-xl font-medium">Uses</h1>
         <p className="text-muted-foreground text-sm">Tools, apps, and services I use daily.</p>
       </header>
 
@@ -115,12 +115,12 @@ export default function StackPage() {
         renderLoadingSkeleton()
       ) : error ? (
         <div className="text-center py-8 border border-destructive/50 bg-destructive/10 rounded-lg">
-          <p className="text-red-500 mb-2">Error loading stack</p>
+          <p className="text-red-500 mb-2">Error loading uses data</p>
           <p className="text-sm text-muted-foreground">{error}</p>
         </div>
       ) : categories.length === 0 ? (
          <div className="text-center py-8 border rounded-lg">
-           <p className="text-muted-foreground text-sm">No stack items found.</p>
+           <p className="text-muted-foreground text-sm">No items found.</p>
          </div>
       ) : (
         <motion.div // Wrap categories list for potential stagger animation
@@ -147,7 +147,7 @@ export default function StackPage() {
                       {/* Updated ExternalLink styling */}
                       <ExternalLink
                         size={16}
-                        className="text-muted-foreground transition-transform transition-colors duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-extra-peach"
+                        className="text-muted-foreground transition-colors duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-extra-peach"
                       />
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground group-hover:text-extra-peach">{item.description}</p>
