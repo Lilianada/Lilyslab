@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import AnimatedLogo from "@/components/AnimatedLogo";
-import { SocialLink, WorkItemComponent } from "@/components/homepage-items"
+import AnimatedLogo from "@/components/comps/AnimatedLogo";
+import { SocialLink, WorkItemComponent } from "@/components/comps/homepage-items"
 import { MusicPlayerWidget } from "@/components/audio/music-player-widget"
 import { Footer } from "@/components/layout/footer";
 

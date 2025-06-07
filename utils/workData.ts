@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { WorkItem } from '@/components/homepage-items';
+import { WorkItem } from '@/components/comps/homepage-items';
 
 export async function fetchWorkData(): Promise<WorkItem[]> {
   const workDir = path.join(process.cwd(), 'Content/work');

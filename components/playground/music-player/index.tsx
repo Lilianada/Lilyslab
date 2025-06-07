@@ -18,7 +18,7 @@ import { VolumeControl } from "./VolumeControl"
 import { PlaybackOptions } from "./PlaybackOptions"
 import { TrackInfo } from "./TrackInfo"
 import { PlaylistView } from "./PlaylistView"
-import { BuyMeCoffeeDialog } from "./BuyMeCoffeeDialog"
+import { BuyMeCoffeeDialog } from "../../comps/BuyMeCoffeeDialog"
 
 export function MusicPlayer() {
   // State for tracks and playlists
