@@ -96,26 +96,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // This will be true for all routes except those in the (no-sidebar) group
+  // Next.js handles this automatically based on route groups
+
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <head>
-        {/* PWA Meta Tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        
-        {/* Performance Optimization */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
-        
-        {/* Security Headers */}
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        {/* <meta httpEquiv="X-Frame-Options" content="DENY" /> */}
         <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
         
         {/* Structured Data for SEO */}
@@ -132,20 +127,11 @@ export default function RootLayout({
               <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-background focus:z-50" aria-label="Skip to main content">
                 Skip to main content
               </a>
-              <main id="main-content" className="flex min-h-screen flex-col bg-background transition-colors duration-300 lg:flex-row relative">
-                <Sidebar />
-                <MobileNav />
-                <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 flex flex-col min-h-[calc(100vh-4rem)]" role="region" aria-label="Main content"> 
-                  <Breadcrumb />
-                  <div className="flex-1 flex flex-col">
-                    {children}
-                  </div>
-                </div>
+              <main id="main-content">
+                {children}
               </main>
               <Toaster />
               <FloatingMusicPlayer />
-              {/* <BuyMeCoffee /> */}
-              {/* ViewCounter temporarily removed to fix build errors */}
             </AudioProvider>
           </AuthProvider>
         </ThemeProvider>
