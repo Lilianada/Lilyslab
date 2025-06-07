@@ -12,7 +12,7 @@ import Link from "next/link"
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { ArrowLeft } from "lucide-react"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/layout/footer"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 
 type PageProps = {

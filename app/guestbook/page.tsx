@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import { Button } from "@/components/ui/button"
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,23 +14,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Footer } from '@/components/footer';
-import { useToast } from "@/hooks/use-toast"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Footer } from "@/components/layout/footer";
+import { useToast } from "@/hooks/use-toast";
 
 // Define schema for form validation
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }).max(100),
-  email: z.string().email({ message: "Invalid email address" }).optional().or(z.string().length(0)),
-  url: z.string().url({ message: "Invalid URL" }).optional().or(z.string().length(0)),
-  spam_check: z.string().refine(val => val.toLowerCase() === 'guestbook', {
-    message: 'Please enter "guestbook" to prove you are human'
+  email: z
+    .string()
+    .email({ message: "Invalid email address" })
+    .optional()
+    .or(z.string().length(0)),
+  url: z
+    .string()
+    .url({ message: "Invalid URL" })
+    .optional()
+    .or(z.string().length(0)),
+  spam_check: z.string().refine((val) => val.toLowerCase() === "guestbook", {
+    message: 'Please enter "guestbook" to prove you are human',
   }),
   message: z.string().min(1, { message: "Message is required" }).max(1000),
-})
+});
 
 interface GuestbookEntry {
   id: string;
@@ -61,17 +76,18 @@ export default function GuestbookPage() {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const response = await fetch('/api/guestbook');
+        const response = await fetch("/api/guestbook");
         const data = await response.json();
-        
+
         if (data.entries) {
           setEntries(data.entries);
         }
       } catch (error) {
-        console.error('Failed to fetch guestbook entries:', error);
+        console.error("Failed to fetch guestbook entries:", error);
         toast({
           title: "Error",
-          description: "Failed to load guestbook entries. Please try again later.",
+          description:
+            "Failed to load guestbook entries. Please try again later.",
           variant: "destructive",
         });
       } finally {
@@ -86,10 +102,10 @@ export default function GuestbookPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/guestbook', {
-        method: 'POST',
+      const response = await fetch("/api/guestbook", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
       });
@@ -97,12 +113,12 @@ export default function GuestbookPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit');
+        throw new Error(result.error || "Failed to submit");
       }
 
       // Add new entry to the list
       if (result.entry) {
-        setEntries(prev => [result.entry, ...prev]);
+        setEntries((prev) => [result.entry, ...prev]);
       }
 
       // Reset form
@@ -113,12 +129,14 @@ export default function GuestbookPage() {
         title: "Success!",
         description: "Thank you for signing my guestbook!",
       });
-
     } catch (error) {
-      console.error('Error submitting guestbook entry:', error);
+      console.error("Error submitting guestbook entry:", error);
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to submit your message. Please try again.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Failed to submit your message. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -129,26 +147,36 @@ export default function GuestbookPage() {
   // Format date for display
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }).format(date);
   };
 
   return (
-    <div className="container pb-12 max-w-4xl">
+    <div className="sm:container pb-12 max-w-4xl">
       <div className="space-y-6">
         <div>
           <h1 className="text-xl font-medium tracking-tight mb-4">Guestbook</h1>
           <p className="text-muted-foreground mb-8">
-            I have enjoyed surfing the web and finding out about the concept that is a Guestbook was really fascinating to me. 
-            If you come across my site and find anything interesting you like, leave me a little message. 
-            Your messages will certainly make my entire day.
-            <br /><br />
-            If you also have a guestbook, be sure to drop it in the url field so that I can sign it as well.
-            <br /><br />
-            Cheers.
+            Welcome, fellow wanderer! 🌱
+            <br />
+            <br />
+            I absolutely love exploring the web and stumbled upon the charming
+            tradition of the Guestbook—it’s like leaving a footprint on
+            someone’s digital garden. If you’ve found something here that caught
+            your eye, I’d be thrilled if you left me a note below. Your words
+            will genuinely brighten my day!
+            <br />
+            <br />
+            Do you have a guestbook of your own? Drop your link in the URL
+            field—I’d love to pay your corner of the internet a visit and sign
+            your guestbook too.
+            <br />
+            <br />
+            Thanks for stopping by and sharing a little bit of yourself. <br />
+            <span className="italic">Happy browsing!</span> ✨
           </p>
         </div>
 
@@ -161,7 +189,10 @@ export default function GuestbookPage() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
                 <div className="grid gap-6 sm:grid-cols-2">
                   <FormField
                     control={form.control}
@@ -202,7 +233,10 @@ export default function GuestbookPage() {
                     <FormItem>
                       <FormLabel>Website URL</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://your-website.com" {...field} />
+                        <Input
+                          placeholder="https://your-website.com"
+                          {...field}
+                        />
                       </FormControl>
                       <FormDescription>
                         Your name will link to this URL (optional)
@@ -219,10 +253,10 @@ export default function GuestbookPage() {
                     <FormItem>
                       <FormLabel>Message *</FormLabel>
                       <FormControl>
-                        <Textarea 
-                          placeholder="Leave a message..." 
+                        <Textarea
+                          placeholder="Leave a message..."
                           className="min-h-[120px]"
-                          {...field} 
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -240,15 +274,21 @@ export default function GuestbookPage() {
                         <Input placeholder="Enter 'guestbook'" {...field} />
                       </FormControl>
                       <FormDescription>
-                        Please enter the word &quot;guestbook&quot; below, lovely human. We don&apos;t think that the 🤖spam bots🤖 will figure this out. Thank you!
+                        Please enter the word &quot;guestbook&quot; below,
+                        lovely human. We don&apos;t think that the 🤖spam bots🤖
+                        will figure this out. Thank you!
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? 'Signing...' : 'Sign the Guestbook'}
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Signing..." : "Sign the Guestbook"}
                 </Button>
               </form>
             </Form>
@@ -257,7 +297,7 @@ export default function GuestbookPage() {
 
         <div className="mt-12">
           <h2 className="text-2xl font-bold mb-6">Messages</h2>
-          
+
           {isLoading ? (
             <div className="flex justify-center py-12">
               <div className="animate-pulse text-center">
@@ -266,21 +306,26 @@ export default function GuestbookPage() {
             </div>
           ) : entries.length === 0 ? (
             <div className="text-center py-12 border rounded-lg bg-muted/50">
-              <p className="text-muted-foreground">No messages yet. Be the first to sign!</p>
+              <p className="text-muted-foreground">
+                No messages yet. Be the first to sign!
+              </p>
             </div>
           ) : (
             <div className="space-y-6">
               {entries.map((entry) => (
-                <Card key={entry.id} className="overflow-hidden border border-border hover:border-primary/20 transition-all duration-300">
+                <Card
+                  key={entry.id}
+                  className="overflow-hidden border border-border hover:border-primary/20 transition-all duration-300"
+                >
                   <CardHeader className="bg-muted/30 py-4">
                     <div className="flex justify-between items-center">
                       <div>
                         {entry.url ? (
-                          <a 
-                            href={entry.url} 
-                            target="_blank" 
+                          <a
+                            href={entry.url}
+                            target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium hover:underline text-primary"
+                            className="font-medium hover:underline text-primary underline"
                           >
                             {entry.name}
                           </a>
@@ -295,7 +340,7 @@ export default function GuestbookPage() {
                   </CardHeader>
                   <CardContent className="py-4">
                     <div className="prose dark:prose-invert prose-sm max-w-none">
-                      <p style={{ whiteSpace: 'pre-wrap' }}>{entry.message}</p>
+                      <p style={{ whiteSpace: "pre-wrap" }}>{entry.message}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -304,7 +349,7 @@ export default function GuestbookPage() {
           )}
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );

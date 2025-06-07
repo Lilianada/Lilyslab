@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { ChevronRight, Home } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { BreadcrumbStructuredData } from "./structured-data"
+import { BreadcrumbStructuredData } from "@/components/structured-data"
 
 export function Breadcrumb() {
   const pathname = usePathname() || "/"
@@ -83,19 +83,19 @@ export function Breadcrumb() {
               className={cn(
                 "px-2 py-1 rounded",
                 item.isLast 
-                  ? "font-medium text-foreground" 
+                  ? "font-medium text-foreground"
                   : "hover:bg-accent hover:text-foreground transition-colors"
               )}
             >
               {item.isLast ? (
                 <span itemProp="name">{item.label}</span>
               ) : (
-                <Link href={item.path} itemProp="item">
+                <Link href={item.path} className="block" itemProp="item">
                   <span itemProp="name">{item.label}</span>
                 </Link>
               )}
+              <meta itemProp="position" content={`${index + 2}`} />
             </div>
-            <meta itemProp="position" content={`${index + 2}`} />
           </li>
         ))}
       </ol>

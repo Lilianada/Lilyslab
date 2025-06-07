@@ -12,7 +12,7 @@ import { ArrowLeft } from "lucide-react"
 import { DraftRouteParams, SlugParams } from "@/lib/types/route-params"
 import { NotesClientWrapper } from "./notes-client-wrapper"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/layout/footer"
 import { getAllNotesData } from "@/lib/notes"
 
 /**

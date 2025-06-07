@@ -7,7 +7,7 @@ import { MessageSquare, Crown, X } from "lucide-react"
 import Image from "next/image"
 import { useAuth } from "@/contexts/auth-context"
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
-import AuthSignInModal from "@/components/auth-sign-in-modal"
+import AuthSignInModal from "@/components/auth/auth-sign-in-modal"
 
 interface Question {
   id: string

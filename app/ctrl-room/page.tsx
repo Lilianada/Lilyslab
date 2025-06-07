@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Music, Settings, User, FileText } from "lucide-react"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/layout/footer"
 import UploadAudio from "@/components/ctrl-room/upload-audio"
 
 export default function CtrlRoomPage() {

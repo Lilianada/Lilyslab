@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { formatDate } from "@/lib/utils"
 import ReactMarkdown from "react-markdown"
 import { Loader2 } from "lucide-react"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/layout/footer"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 
 interface NowData {

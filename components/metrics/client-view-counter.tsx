@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 // Import the ViewCounterWrapper component with SSR disabled
 const ViewCounterClient = dynamic(
-  () => import('./view-counter-wrapper').then(mod => mod.ViewCounterWrapper),
+  () => import('@/components/metrics/view-counter-wrapper').then(mod => mod.ViewCounterWrapper),
   { ssr: false }
 );
 

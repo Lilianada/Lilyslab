@@ -1,46 +1,19 @@
 "use client"
 
-import { LogOut, Crown } from "lucide-react"
+import { Crown } from "lucide-react"
 import { useState } from "react"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import Sidebar from "./sidebar"
-import { Button } from "./ui/button"
+import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
-import { ThemeToggle } from "./theme-toggle"
-import { UserProfileSection } from "./user-profile-section"
+import { ThemeToggle } from "../theme/theme-toggle"
+import { UserProfileSection } from "../auth/user-profile-section"
 import { useAuth } from "@/contexts/auth-context"
-import { useToast } from "@/hooks/use-toast"
-import Image from "next/image"
 import Link from "next/link"
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false)
-  const { user, signOut, isAdmin } = useAuth()
-  const [isSigningOut, setIsSigningOut] = useState(false)
-  const { toast } = useToast()
-
-  const handleSignOut = async () => {
-    setIsSigningOut(true)
-    try {
-      await signOut()
-      setOpen(false)
-      toast({
-        title: "Signed out successfully",
-        description: "You have been signed out of your account.",
-        duration: 3000,
-      })
-    } catch (error) {
-      console.error("Error signing out:", error)
-      toast({
-        title: "Sign out failed",
-        description: "There was a problem signing you out. Please try again.",
-        variant: "destructive",
-        duration: 3000,
-      })
-    } finally {
-      setIsSigningOut(false)
-    }
-  }
+  const { isAdmin } = useAuth()
 
   return (
     <div className="flex items-center justify-between border-b  p-4 lg:hidden">

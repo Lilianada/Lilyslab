@@ -1,12 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-// Import only the icons we need, but in a TypeScript-compatible way
 import {
   Home,
   BookOpen,
@@ -32,10 +30,10 @@ import {
   Shield,
   MessageCircleHeart,
 } from "lucide-react"
-import { ThemeToggle } from "./theme-toggle"
+import { ThemeToggle } from "../theme/theme-toggle"
 import { useEffect, useState } from "react"
-import { UserProfileSection } from "./user-profile-section"
-import { Separator } from "./ui/separator"
+import { UserProfileSection } from "../auth/user-profile-section"
+import { Separator } from "../ui/separator"
 import { useAuth } from "@/contexts/auth-context"
 
 interface NavItemProps {

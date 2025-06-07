@@ -1,6 +1,6 @@
 "use client"
 
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/layout/footer"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 import { useEffect, useState } from "react"
 import Link from "next/link"

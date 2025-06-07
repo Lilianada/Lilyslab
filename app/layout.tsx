@@ -1,21 +1,21 @@
 import "./globals.css"
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import Sidebar from "@/components/sidebar"
-import { ThemeProvider } from "@/components/theme-provider"
-import MobileNav from "@/components/mobile-nav"
+import Sidebar from "@/components/layout/sidebar"
+import { ThemeProvider } from "@/components/theme/theme-provider"
+import MobileNav from "@/components/layout/mobile-nav"
 import { AuthProvider } from "@/contexts/auth-context"
 import { Toaster } from "@/components/ui/toaster"
 import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
-import { Breadcrumb } from "@/components/breadcrumb-nav"
+import { Breadcrumb } from "@/components/layout/breadcrumb-nav"
 import { BuyMeCoffee } from "@/components/buy-me-coffee"
 import { AudioProvider } from "@/lib/audio/audio-context"
 // ViewCounter temporarily removed to fix build errors
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
-import FloatingMusicPlayer from '@/components/floating-music-player';
+import FloatingMusicPlayer from '@/components/audio/floating-music-player';
 
 
 

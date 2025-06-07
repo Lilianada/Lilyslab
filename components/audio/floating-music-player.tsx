@@ -33,7 +33,7 @@ function FloatingMusicPlayerContent() {
     // Create audio element
     audioRef.current = new Audio(AUDIO_FILE);
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.9;
+    audioRef.current.volume = 0.7;
     
     // Play if not paused
     if (!isPaused && audioRef.current) {
@@ -43,7 +43,7 @@ function FloatingMusicPlayerContent() {
     // Set up color rotation
     intervalRef.current = setInterval(() => {
       setCurrentColor(prev => (prev + 1) % COLOR_VARS.length);
-    }, 1500);
+    }, 3000);
     
     // Cleanup
     return () => {
@@ -81,16 +81,16 @@ function FloatingMusicPlayerContent() {
       <button 
         onClick={() => setIsPaused(prev => !prev)}
         className={cn(
-          "h-12 w-12 rounded-full flex items-center justify-center transition-all",
+          "h-14 w-14 rounded-full flex items-center justify-center transition-all",
           !isPaused && "animate-spin-slow"
         )}
         style={buttonStyle}
         aria-label={isPaused ? "Play music" : "Pause music"}
       >
         {!isPaused ? (
-          <Pause className="h-4 w-4 text-white" />
+          <Pause className="h-6 w-6 text-white" />
         ) : (
-          <Play className="h-4 w-4 text-white ml-1" />
+          <Play className="h-6 w-6 text-white ml-1" />
         )}
       </button>
     </div>

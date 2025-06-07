@@ -14,23 +14,11 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        // Cache each URL individually to prevent failures
-        return Promise.all(
-          urlsToCache.map(url => {
-            return fetch(url)
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(`Failed to fetch ${url}`);
-                }
-                return cache.put(url, response);
-              })
-              .catch(error => {
-                console.warn(`Caching failed for ${url}:`, error);
-                // Continue despite errors
-                return Promise.resolve();
-              });
-          })
-        );
+        console.log('Service Worker: Caching files');
+        // Add all URLs to cache at once, which is more reliable
+        return cache.addAll(urlsToCache).catch(error => {
+          console.warn(`Failed to cache some resources: ${error}`);
+        });
       })
       .then(() => self.skipWaiting())
   );

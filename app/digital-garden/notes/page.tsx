@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { z } from 'zod';
 import { read } from 'zod-matter';
-import { Footer } from '@/components/footer';
+import { Footer } from '@/components/layout/footer';
 
 // Define schema for front matter validation
 const NoteMetaSchema = z.object({

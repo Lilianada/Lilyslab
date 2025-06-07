@@ -32,11 +32,11 @@ import { headers } from 'next/headers';
 export async function GET(request: Request) {
   // Get the request URL for logging
   const requestUrl = request.url;
-  const headersList = headers();
   let host = 'unknown';
   try {
     // In Next.js 13+, headers() returns a Promise in some cases
-    const hostHeader = headersList.get('host');
+    // Use the request.headers instead which is more reliable
+    const hostHeader = request.headers.get('host');
     if (hostHeader) {
       host = hostHeader;
     }

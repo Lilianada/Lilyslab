@@ -4,6 +4,8 @@ import React, { createContext, useContext, useState, useEffect, ReactNode, useRe
 import { AudioTrack } from './howler-service'
 import { getAudioFromCloudinary } from '@/lib/cloudinary/audio-service'
 import howlerService from './howler-service'
+import { useLocalStorage } from '@/hooks/use-local-storage'
+import { ClientOnly } from '@/components/hydration/client-only'
 
 interface AudioContextType {
   audioTracks: AudioTrack[]
@@ -35,11 +37,12 @@ interface AudioProviderProps {
   children: ReactNode
 }
 
-export function AudioProvider({ children }: AudioProviderProps) {
+// Inner component to prevent hydration issues
+function AudioProviderContent({ children }: AudioProviderProps) {
   const [audioTracks, setAudioTracks] = useState<AudioTrack[]>([])
   const [loadingTracks, setLoadingTracks] = useState(false)
   const [initialized, setInitialized] = useState(false)
-  const [currentTrack, setCurrentTrack] = useState<AudioTrack | null>(null)
+  const [currentTrack, setCurrentTrack] = useLocalStorage<AudioTrack | null>('currentAudioTrack', null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -53,8 +56,14 @@ export function AudioProvider({ children }: AudioProviderProps) {
       // Fetch regular tracks
       const tracks = await getAudioFromCloudinary(false)
       
-      // Cache the tracks in localStorage for persistence
-      localStorage.setItem('cachedAudioTracks', JSON.stringify(tracks))
+      // Cache the tracks in localStorage for persistence (safely)
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem('cachedAudioTracks', JSON.stringify(tracks))
+        } catch (e) {
+          console.error('Error caching tracks:', e)
+        }
+      }
       
       setAudioTracks(tracks)
       return tracks
@@ -68,35 +77,38 @@ export function AudioProvider({ children }: AudioProviderProps) {
 
   // Load tracks on initial mount
   useEffect(() => {
+    // Skip during server-side rendering
+    if (typeof window === 'undefined') return;
+    
     if (!initialized) {
       // Try to load from cache first
-      const cachedTracks = localStorage.getItem('cachedAudioTracks')
-      
-      if (cachedTracks) {
-        try {
+      try {
+        const cachedTracks = localStorage.getItem('cachedAudioTracks')
+        
+        if (cachedTracks) {
           const parsedTracks = JSON.parse(cachedTracks)
           setAudioTracks(parsedTracks)
-        } catch (e) {
-          console.error('Error parsing cached tracks:', e)
         }
+      } catch (e) {
+        console.error('Error loading cached tracks:', e)
       }
       
-      // Try to restore current track from localStorage
-      const savedCurrentTrack = localStorage.getItem('currentAudioTrack')
-      if (savedCurrentTrack) {
-        try {
+      // Try to restore current track from localStorage (safely)
+      try {
+        const savedCurrentTrack = localStorage.getItem('currentAudioTrack')
+        if (savedCurrentTrack) {
           const parsedTrack = JSON.parse(savedCurrentTrack)
           setCurrentTrack(parsedTrack)
-        } catch (e) {
-          console.error('Error parsing current track:', e)
         }
+      } catch (e) {
+        console.error('Error parsing current track:', e)
       }
       
       // Then fetch fresh data in the background
       fetchAudioTracks()
       setInitialized(true)
     }
-  }, [initialized])
+  }, [initialized, fetchAudioTracks])
   
   // Set up event listeners for howler service
   useEffect(() => {
@@ -120,8 +132,15 @@ export function AudioProvider({ children }: AudioProviderProps) {
   
   // Save current track to localStorage when it changes
   useEffect(() => {
+    // Skip during server-side rendering
+    if (typeof window === 'undefined') return;
+    
     if (currentTrack) {
-      localStorage.setItem('currentAudioTrack', JSON.stringify(currentTrack))
+      try {
+        localStorage.setItem('currentAudioTrack', JSON.stringify(currentTrack))
+      } catch (e) {
+        console.error('Error saving current track:', e)
+      }
     }
   }, [currentTrack])
 
@@ -169,5 +188,14 @@ export function AudioProvider({ children }: AudioProviderProps) {
     }}>
       {children}
     </AudioContext.Provider>
+  )
+}
+
+// Export the wrapped version that prevents hydration issues
+export function AudioProvider({ children }: AudioProviderProps) {
+  return (
+    <ClientOnly>
+      <AudioProviderContent>{children}</AudioProviderContent>
+    </ClientOnly>
   )
 }

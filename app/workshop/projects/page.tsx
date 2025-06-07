@@ -5,7 +5,7 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/components/layout/footer";
 
 interface Project {
   number: string;
