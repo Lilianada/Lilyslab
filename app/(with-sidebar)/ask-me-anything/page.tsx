@@ -164,7 +164,7 @@ export default function AMAPage() {
     <div className="max-w-2xl mx-auto py-8 px-4">
       <header className="mb-8 space-y-2">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Ask Me Anything</h1>
+          <h1 className="text-xl font-medium">Ask Me Anything</h1>
           <Button
             onClick={handleAskButtonClick}
             size="sm"

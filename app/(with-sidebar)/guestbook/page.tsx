@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -21,7 +20,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -155,12 +153,12 @@ export default function GuestbookPage() {
   };
 
   return (
-    <div className="sm:container pb-12 max-w-3xl">
+    <div className="pb-12 mx-auto w-full max-w-2xl">
       <div className="space-y-6">
         <div>
           <h1 className="text-xl font-medium tracking-tight mb-4">Guestbook</h1>
           <p className="text-sm text-muted-foreground mb-8">
-            Welcome, fellow wanderer! 🌱
+            Welcome, fellow wanderer! 
             <br />
             <br />
             I absolutely love exploring the web and stumbled upon the charming
@@ -181,7 +179,7 @@ export default function GuestbookPage() {
 
         <Card className="border border-border bg-card shadow-sm transition-all">
           <CardHeader>
-            <CardTitle>Sign the Guestbook</CardTitle>
+            <CardTitle className="text-lg ">Sign the Guestbook</CardTitle>
             <CardDescription>
               Leave a message for me and future visitors
             </CardDescription>
@@ -295,7 +293,7 @@ export default function GuestbookPage() {
         </Card>
 
         <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-6">Messages</h2>
+          <h2 className="text-xl font-medium mb-6">Messages</h2>
 
           {isLoading ? (
             <div className="flex justify-center py-12">
