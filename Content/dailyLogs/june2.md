@@ -1,5 +1,6 @@
 ---
-createdAt: 2025-06-02
+date: "2025-06-02"
+mood: "📚"
 ---
 
 Everyone... okay not everyone, most people. Most people have that one thing or 2 that they enjoy collecting, could be physical or digital. For a long time, I had no idea what that was for me but I found out today.

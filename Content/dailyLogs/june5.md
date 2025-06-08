@@ -1,5 +1,6 @@
 ---
-createdAt: 2025-06-05
+date: "2025-06-05"
+mood: "💡"
 lastUpdated: 2025-06-06
 ---
 

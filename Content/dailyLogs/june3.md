@@ -1,5 +1,6 @@
 ---
-createdAt: 2025-06-03
+date: "2025-06-03"
+mood: "🎯"
 ---
 
 In April of 2025 I got introduced into vibe coding and I've been exploring building different tools, ideas and basically anything that came to mind, many of which have been abandoned due to me not been able to afford many of the tools I used. Some of these projects are ones that I dearly want to see to the end and I've taken a step back to actually learn the languages used in building them so that I can possibly complete them myself, rebuild them or have a better understanding of them.

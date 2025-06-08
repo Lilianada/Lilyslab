@@ -8,6 +8,7 @@ export interface DailyLog {
   slug: string;
   date: Date;
   content: string;
+  mood?: string;
   createdAt: string;
 }
 
@@ -26,15 +27,17 @@ export async function getAllDailyLogs(): Promise<DailyLog[]> {
         
         const { data, content } = matter(fileContents);
         
-        // Format date from fileName (e.g., june2.md -> 2025-06-02)
-        let date = new Date(data.createdAt);
+        // Use the new date field if available, fallback to createdAt
+        const dateString = data.date || data.createdAt;
+        let date = new Date(dateString);
         
         return {
           id: slug,
           slug,
           date,
           content,
-          createdAt: data.createdAt
+          mood: data.mood,
+          createdAt: dateString
         };
       })
   );

@@ -1,5 +1,6 @@
 ---
-createdAt: 2025-05-18
+date: "2025-05-18"
+mood: "🌅"
 ---
 
 It's *5:12am* (18th May) in the morning as I sit in front of my mac writing this.
