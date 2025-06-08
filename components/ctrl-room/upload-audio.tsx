@@ -15,7 +15,7 @@ export default function UploadAudio() {
     <>
       {/* Show cards only when no component is active */}
       {activeComponent === "upload" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card className="flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">

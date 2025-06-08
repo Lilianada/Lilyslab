@@ -1,0 +1,50 @@
+/* Daily Logs Custom Styles */
+
+/* Override any default link colors in markdown content */
+.daily-logs-content a {
+  @apply text-orange-500 hover:text-orange-600 underline;
+}
+
+/* Ensure proper spacing for masonry layout */
+.daily-logs-masonry {
+  display: flex;
+  margin-left: -1.5rem;
+  width: auto;
+}
+
+.daily-logs-masonry-column {
+  padding-left: 1.5rem;
+  background-clip: padding-box;
+}
+
+/* Custom scrollbar for better aesthetics */
+.daily-logs-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.daily-logs-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.daily-logs-content::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 2px;
+}
+
+.daily-logs-content::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Print styles */
+@media print {
+  .daily-logs-header,
+  .daily-logs-footer {
+    display: none;
+  }
+  
+  .daily-logs-card {
+    break-inside: avoid;
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+  }
+}

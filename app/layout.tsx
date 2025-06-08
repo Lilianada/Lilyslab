@@ -110,9 +110,6 @@ export default function RootLayout({
         {/* Structured Data for SEO */}
         <PersonStructuredData />
         <WebsiteStructuredData />
-        
-        {/* Service Worker */}
-        <script src="/sw-register.js" defer></script>
       </head>
       <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>

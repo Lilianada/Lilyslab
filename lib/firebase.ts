@@ -40,23 +40,14 @@ if (isConfigValid && app) {
   // Initialize Firestore
   db = getFirestore(app);
   
-  // Initialize Auth with a safer approach
-  try {
-    // Use a synchronous import for better reliability
-    require('firebase/auth');
-    const { getAuth } = require('firebase/auth');
-    auth = getAuth(app);
-  } catch (err) {
-    console.error('Error initializing Firebase auth:', err);
-    // Fallback to dynamic import if synchronous import fails
-    import('firebase/auth')
-      .then(({ getAuth }) => {
-        auth = getAuth(app!);
-      })
-      .catch(err => {
-        console.error('Error loading auth module (fallback):', err);
-      });
-  }
+  // Initialize Auth using dynamic import
+  import('firebase/auth')
+    .then(({ getAuth }) => {
+      auth = getAuth(app!);
+    })
+    .catch(err => {
+      console.error('Error initializing Firebase auth:', err);
+    });
 }
 
 // Create Google provider and configure it to always prompt for account selection

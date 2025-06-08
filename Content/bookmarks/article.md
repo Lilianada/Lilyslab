@@ -1105,3 +1105,33 @@ tags:
 type: article
 id: article-088
 ---
+
+---
+
+---
+id: article-088
+title: When AI Sells You What You Want
+URL: https://kinduff.com/2025/05/28/when-ai-sells-you-what-you-want/
+date: 2025-06-08
+tags:
+  - airtificial intelligence
+type: article
+publish: true
+---
+
+
+
+---
+
+---
+id: article-089
+title: I'm a Fucking Webmaster
+URL: https://justinjackson.ca/webmaster/
+date: 2025-06-08
+tags:
+  - web-manifesto
+  - webmaster
+type: article
+publish: true
+---
+

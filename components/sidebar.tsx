@@ -1,10 +1,12 @@
 "use client"
 
 import type React from "react"
+
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+// Import only the icons we need, but in a TypeScript-compatible way
 import {
   Home,
   BookOpen,
@@ -30,10 +32,10 @@ import {
   Shield,
   MessageCircleHeart,
 } from "lucide-react"
-import { ThemeToggle } from "../theme/theme-toggle"
+import { ThemeToggle } from "./theme/theme-toggle"
 import { useEffect, useState } from "react"
-import { UserProfileSection } from "../auth/user-profile-section"
-import { Separator } from "../ui/separator"
+import { UserProfileSection } from "./auth/user-profile-section"
+import { Separator } from "./ui/separator"
 import { useAuth } from "@/contexts/auth-context"
 
 interface NavItemProps {
@@ -186,8 +188,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/about" icon={<PersonStandingIcon size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={250} />
             <NavItem href="/someday" icon={<FileText size={16} />} label="Someday" onClick={onNavClick} delay={300} />
-            <NavItem href="/uses" icon={<Layers size={16} />} label="Uses" onClick={onNavClick} delay={350} />
-            <NavItem href="/web-manifesto" icon={<Shield size={16} />} label="Web Manifesto" onClick={onNavClick} delay={375} />
+            <NavItem href="/stack" icon={<Layers size={16} />} label="Stack" onClick={onNavClick} delay={350} />
             <NavItem href="/ask-me-anything" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={400} />
             <NavItem href="/guestbook" icon={<MessageCircleHeart size={16} />} label="Guestbook" onClick={onNavClick} delay={450} />
           </div>
@@ -196,7 +197,6 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <SectionTitle title="Digital Garden" delay={450} />
             <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writings" onClick={onNavClick} delay={500} />
             <NavItem href="/digital-garden/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={550} />
-            <NavItem href="/daily-logs" icon={<CalendarDaysIcon size={16} />} label="Daily Logs" onClick={onNavClick} delay={575} />
             <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={600} />
             <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={650} />
             <NavItem href="/digital-garden/bucket-list" icon={<BadgeCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={700} />
