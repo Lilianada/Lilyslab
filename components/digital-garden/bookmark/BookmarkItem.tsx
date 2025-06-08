@@ -2,6 +2,7 @@
 import React from "react";
 
 export type Bookmark = {
+  id?: string;
   link: string;
   title: string;
   cover: string;
