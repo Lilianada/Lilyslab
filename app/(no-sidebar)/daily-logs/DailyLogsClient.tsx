@@ -6,7 +6,25 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import localFont from 'next/font/local';
 import type { DisplayLog } from "./page";
+
+const nitti = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Nitti-Normal.woff',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/Nitti-Bold.woff',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-nitti',
+  display: 'swap',
+});
 
 function isExternal(href: string) {
   return /^https?:\/\//.test(href);
@@ -67,11 +85,12 @@ const useContentOverflow = () => {
 
 export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
   const [modalLog, setModalLog] = useState<null | DisplayLog>(null);
+  const [showWhyModal, setShowWhyModal] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-4 sm:p-8 font-mono">
+    <div className={`min-h-screen bg-background text-foreground sm:p-8 ${nitti.className}`}>
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
         <div className="flex items-center gap-3">
           <button
             onClick={() => window.history.back()}
@@ -80,7 +99,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
           >
             <ArrowLeft size={18} />
           </button>
-          <h1 className="text-lg font-mono tracking-wide">DAILY LOGS</h1>
+          <h1 className="text-lg font-bold tracking-wide">DAILY LOGS</h1>
         </div>
         <div className="flex gap-2">
           <Link
@@ -89,12 +108,12 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
           >
             Ask me anything
           </Link>
-          <Link
-            href="/daily-logs/why-keep-a-log"
+          <button
+            onClick={() => setShowWhyModal(true)}
             className="px-3 py-1 rounded border border-muted text-muted-foreground font-mono text-sm hover:bg-muted/50 transition"
           >
-            Why keep a log?
-          </Link>
+            Why keep daily logs?
+          </button>
         </div>
       </div>
 
@@ -124,7 +143,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
               <div className="relative flex-1 mb-6">
                 <div
                   ref={contentRef}
-                  className="pr-2 overflow-hidden whitespace-pre-wrap text-muted-foreground font-mono text-sm"
+                  className="pr-2 overflow-hidden whitespace-pre-wrap tracking-[-1px] text-muted-foreground"
                   style={{
                     display: "-webkit-box",
                     WebkitLineClamp: 6,
@@ -177,6 +196,59 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
             <div className="flex-1 overflow-y-auto p-6 pt-4">
               <div className="prose prose-sm dark:prose-invert max-w-none font-mono text-sm">
                 <MarkdownWithColoredLinks>{modalLog.body}</MarkdownWithColoredLinks>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Why Keep a Note Modal */}
+      {showWhyModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <div className="bg-card border-2 border-dashed border-border rounded-lg max-w-2xl w-full max-h-[80vh] shadow-xl relative flex flex-col">
+            <button
+              onClick={() => setShowWhyModal(false)}
+              className="absolute top-3 right-3 text-muted-foreground hover:text-foreground text-xl leading-none z-10"
+              aria-label="Close"
+            >
+              ×
+            </button>
+            
+            {/* Modal Header */}
+            <div className="p-6 pb-4 border-b border-border">
+              <h2 className="font-semibold text-foreground text-lg">Why Keep Daily Logs?</h2>
+            </div>
+            
+            {/* Modal Content - Scrollable */}
+            <div className="flex-1 overflow-y-auto p-6 pt-4">
+              <div className="prose prose-sm dark:prose-invert max-w-none font-mono text-sm space-y-4">
+                <p>
+                  Keeping daily notes is like having a conversation with your future self. It's a practice that transforms fleeting thoughts into lasting insights.
+                </p>
+                
+                <h3 className="text-base font-semibold">Memory & Reflection</h3>
+                <p>
+                  Our brains are terrible at remembering the details of our daily experiences. Writing them down preserves not just what happened, but how we felt about it in that moment.
+                </p>
+                
+                <h3 className="text-base font-semibold">Pattern Recognition</h3>
+                <p>
+                  Over time, patterns emerge. You start to notice what energizes you, what drains you, and what circumstances lead to your best work or deepest insights.
+                </p>
+                
+                <h3 className="text-base font-semibold">Creative Catalyst</h3>
+                <p>
+                  Ideas often come from unexpected connections. When you document your thoughts regularly, you create a repository of raw material that can spark new creative breakthroughs.
+                </p>
+                
+                <h3 className="text-base font-semibold">Mindful Practice</h3>
+                <p>
+                  The act of writing forces you to slow down and process your experiences more intentionally. It's a form of mindfulness that helps you stay present and aware.
+                </p>
+                
+                <blockquote className="border-l-4 border-yellow-400 pl-4 italic">
+                  "The palest ink is better than the best memory." — Chinese Proverb
+                </blockquote>
               </div>
             </div>
           </div>
