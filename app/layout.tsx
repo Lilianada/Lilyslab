@@ -7,8 +7,7 @@ import { Toaster } from "@/components/ui/sonner"
 import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { AudioProvider } from "@/lib/audio/audio-context"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
+import { GeistSans } from 'geist/font/sans';
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
 import FloatingMusicPlayer from '@/components/audio/floating-music-player';
 
@@ -112,7 +111,7 @@ export default function RootLayout({
         <PersonStructuredData />
         <WebsiteStructuredData />
       </head>
-      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
+      <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
             <AudioProvider>

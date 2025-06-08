@@ -99,7 +99,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
           >
             <ArrowLeft size={18} />
           </button>
-          <h1 className="text-lg font-bold tracking-wide">DAILY LOGS</h1>
+          <h1 className="text-lg font-semibold tracking-wide">DAILY LOGS</h1>
         </div>
         <div className="flex gap-2">
           <Link
@@ -121,6 +121,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {logs.map((log, idx) => {
           const [contentRef, isOverflowing] = useContentOverflow();
+          const chronologicalNumber = logs.length - idx;
 
           return (
             <div
@@ -136,7 +137,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
                   </span>
                 </div>
                 <span className="text-xs text-muted-foreground tracking-widest">
-                  #{String(idx + 1).padStart(3, "0")}
+                  #{String(chronologicalNumber).padStart(3, "0")}
                 </span>
               </div>
               {/* Log Content */}

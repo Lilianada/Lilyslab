@@ -1,148 +1,184 @@
 "use client";
+
 import React from "react";
 import clsx from "clsx";
 
-// For cover color and code
-const covers = [
-  { color: "bg-blue-200", code: "SH" }, // Self-help
-  { color: "bg-teal-200", code: "ME" }, // Memoir
-  { color: "bg-purple-200", code: "FIC" }, // Fiction
-  { color: "bg-pink-200", code: "NF" }, // Nonfiction
-  { color: "bg-yellow-200", code: "FAN" }, // Fantasy
-  { color: "bg-orange-200", code: "FIC" }, // Fiction
+// 6 ASCII arts for demonstration (book, tree, cat, coffee, lamp, house)
+const asciiArts = [
+  // Book
+  `
+   _______
+  /      //
+ /      //
+/______//
+(______(/
+  `,
+  // Tree
+  `
+   &&& &&  & &&
+  && &\\/&\\|& ()|/ @, &&
+  &\\/(/&/&||/& /_/)_&/_&
+&() &\\/&|()|/&\\/ '%" & ()
+&_\\_&&_\\ |& |&&/&__%_/_& &&
+&&   && & &| &| /& & % ()& /&&
+ ()&_---()&\\&\\|&&-&&--%---()~
+     &&     \\|||
+             |||
+             |||
+             |||
+       , -=-~  .-^- _`,
+  // Cat
+  `
+ /\\_/\\  
+( o.o ) 
+ > ^ < 
+  `,
+  // Coffee
+  `
+   ( (
+    ) )
+  ........
+  |      |]
+  \\      /
+   '----'
+  `,
+  // Lamp
+  `
+    |
+   /|\\
+  /_|_\\
+    |
+   / \\
+  `,
+  // House
+  `
+   /\\
+  /  \\
+ /----\\
+[______]
+ |    |
+ |[]  |
+ |    |
+  `
 ];
 
+// Example bookshelf data for entries
 const bookshelfEntries = [
   {
     month: "January",
     title: "How to Stay Motivated",
-    genre: "Self-help",
+    genre: "self-help",
     released: 2021,
     pages: 223,
-    format: "Paperback",
+    format: "paperback",
     status: "finished",
-    cover: covers[0],
+    ascii: 0,
   },
   {
     month: "February",
     title: "The Quiet Programmer",
-    genre: "Memoir",
+    genre: "memoir",
     released: 2023,
     pages: 188,
-    format: "Ebook",
+    format: "ebook",
     status: "finished",
-    cover: covers[1],
+    ascii: 1,
   },
   {
     month: "March",
     title: "Gardens of Code",
-    genre: "Fiction",
+    genre: "fiction",
     released: 2022,
     pages: 320,
-    format: "Paperback",
+    format: "paperback",
     status: "finished",
-    cover: covers[2],
+    ascii: 2,
   },
   {
     month: "April",
     title: "Coffee Break Algorithms",
-    genre: "Nonfiction",
+    genre: "nonfiction",
     released: 2023,
     pages: 141,
-    format: "Paperback",
+    format: "paperback",
     status: "favorite",
-    cover: covers[3],
+    ascii: 3,
   },
   {
     month: "May",
     title: "Lamp Light Reading",
-    genre: "Fantasy",
+    genre: "fantasy",
     released: 2019,
     pages: 409,
-    format: "Paperback",
+    format: "paperback",
     status: "finished",
-    cover: covers[4],
+    ascii: 4,
   },
   {
     month: "June",
     title: "Home is a Feeling",
-    genre: "Fiction",
+    genre: "fiction",
     released: 2024,
     pages: 251,
-    format: "Ebook",
+    format: "ebook",
     status: "favorite",
-    cover: covers[5],
+    ascii: 5,
   },
 ];
 
+// Status color mapping
 const statusColor: Record<string, string> = {
-  finished: "bg-green-200 text-green-900 border-green-300",
-  favorite: "bg-yellow-100 text-yellow-900 border-yellow-300",
+  finished: "bg-green-200 text-green-800 border-green-400",
+  favorite: "bg-yellow-200 text-yellow-900 border-yellow-400",
 };
 
 export default function BookshelfPage() {
   return (
-    <div className="min-h-screen bg-neutral-100 py-12 flex flex-col items-center">
-      <div className="max-w-6xl w-full px-2">
-        {/* Header */}
-        <div className="flex justify-between items-end mb-10">
-          <h2 className="font-serif text-2xl font-bold text-neutral-700 tracking-tight">
-            Monthly Favorites
-          </h2>
-          <span className="font-mono text-lg text-neutral-400">2024</span>
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100 py-8 flex justify-center items-center">
+      <div className="bg-[#f8f6f6] rounded-xl shadow-xl border-4 border-[#dccfc2] w-full max-w-5xl p-8 flex flex-col">
+        <div className="flex justify-between mb-6">
+          <div className="font-serif text-xl font-bold text-[#6d5d51]">Monthly favorites</div>
+          <div className="font-mono text-md text-[#9e8c7a]">2024</div>
         </div>
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7">
+        <div className="grid grid-cols-3 gap-6">
           {bookshelfEntries.map((entry, i) => (
             <div
               key={entry.month}
               className={clsx(
-                "relative flex flex-col rounded-2xl border border-neutral-200 bg-white shadow px-6 pt-7 pb-5 min-h-[310px]"
+                "flex flex-col items-center bg-white border-2 border-[#e0d2c2] rounded-lg shadow-sm pb-2 pt-2 px-2 relative overflow-hidden"
               )}
+              style={{ minHeight: 320 }}
             >
-              {/* Status badge */}
+              {/* Month */}
+              <div className="font-mono text-xs text-[#c0b0a0] mb-1">{entry.month}</div>
+              {/* ASCII Art */}
+              <pre className="w-full flex-1 text-xs font-mono text-[#8d7a63] bg-[#f9f7f4] rounded p-2 mb-2 text-center leading-4 overflow-x-auto" style={{ minHeight: 92 }}>
+                {asciiArts[entry.ascii]}
+              </pre>
+              {/* Title */}
+              <div className="font-semibold text-sm text-center mb-1 text-[#765d47]">{entry.title}</div>
+              {/* Status banner */}
               <div
                 className={clsx(
-                  "absolute top-4 right-4 px-2 py-0.5 border rounded font-mono font-semibold text-xs shadow-sm",
-                  statusColor[entry.status] || "bg-gray-100 border-gray-300 text-gray-700"
+                  "absolute top-3 -right-8 px-6 py-0.5 rotate-45 border text-xs font-mono font-bold shadow",
+                  statusColor[entry.status] || "bg-gray-200 text-gray-700 border-gray-400"
                 )}
               >
                 {entry.status.charAt(0).toUpperCase() + entry.status.slice(1)}
               </div>
-              {/* "Cover" colored shape */}
-              <div className="flex justify-center mb-2">
-                <div
-                  className={clsx(
-                    entry.cover.color,
-                    "w-16 h-24 rounded-lg flex items-center justify-center shadow-inner border border-neutral-200"
-                  )}
-                >
-                  <span className="font-mono font-bold text-xl text-neutral-600 select-none">
-                    {entry.cover.code}
-                  </span>
+              {/* Details */}
+              <div className="mt-1 grid grid-cols-2 gap-x-2 gap-y-0.5 font-mono text-[0.76rem] text-[#b49c7a]">
+                <div className="col-span-2">
+                  <span className="font-bold text-[#b77b3e]">Genre:</span> {entry.genre}
                 </div>
-              </div>
-              {/* Title */}
-              <div className="font-bold text-lg text-center text-neutral-700 mb-0.5">{entry.title}</div>
-              {/* Month */}
-              <div className="mb-3 text-neutral-400 font-mono text-xs tracking-wide text-center">{entry.month}</div>
-              {/* Metadata */}
-              <div className="mt-auto flex flex-col gap-0.5 text-[0.97rem]">
-                <div className="flex justify-between text-neutral-500">
-                  <span className="font-mono text-neutral-400">Genre</span>
-                  <span>{entry.genre}</span>
+                <div>
+                  <span className="font-bold text-[#b77b3e]">Released:</span> {entry.released}
                 </div>
-                <div className="flex justify-between text-neutral-500">
-                  <span className="font-mono text-neutral-400">Released</span>
-                  <span>{entry.released}</span>
+                <div>
+                  <span className="font-bold text-[#b77b3e]">Pages:</span> {entry.pages}
                 </div>
-                <div className="flex justify-between text-neutral-500">
-                  <span className="font-mono text-neutral-400">Pages</span>
-                  <span>{entry.pages}</span>
-                </div>
-                <div className="flex justify-between text-neutral-500">
-                  <span className="font-mono text-neutral-400">Format</span>
-                  <span>{entry.format}</span>
+                <div className="col-span-2">
+                  <span className="font-bold text-[#b77b3e]">Format:</span> {entry.format}
                 </div>
               </div>
             </div>
@@ -151,9 +187,9 @@ export default function BookshelfPage() {
           {Array.from({ length: 12 - bookshelfEntries.length }).map((_, i) => (
             <div
               key={`empty-${i}`}
-              className="flex flex-col items-center justify-center bg-neutral-50 border border-dashed border-neutral-200 rounded-2xl shadow-inner min-h-[310px]"
+              className="flex flex-col items-center justify-center bg-[#f7f4ef] border-2 border-dashed border-[#e0d2c2] rounded-lg shadow-inner min-h-[320px]"
             >
-              <div className="font-mono text-xs text-neutral-200">No entry</div>
+              <div className="font-mono text-xs text-[#e0d2c2]">No entry</div>
             </div>
           ))}
         </div>
