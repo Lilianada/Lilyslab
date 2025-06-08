@@ -41,21 +41,15 @@ export async function GET(request: Request) {
       host = hostHeader;
     }
   } catch (error) {
-    console.warn('Could not get host from headers:', error);
+    // Silently handle error without logging
   }
   const isProduction = process.env.NODE_ENV === 'production';
-  
-  console.log(`[${new Date().toISOString()}] Fetching audio from Cloudinary (${isProduction ? 'production' : 'development'})`);
-  console.log(`Request URL: ${requestUrl}`);
-  console.log(`Host: ${host}`);
   
   try {
     // Configure Cloudinary with proper error handling
     try {
       const { cloudName } = configureCloudinary();
-      console.log(`Successfully configured Cloudinary with cloud name: ${cloudName}`);
     } catch (configError) {
-      console.error('Failed to configure Cloudinary:', configError);
       return NextResponse.json(
         { 
           error: 'Server configuration error',
@@ -72,13 +66,8 @@ export async function GET(request: Request) {
     // Determine which folder to search in
     const folder = isVoiceMemo ? RECORDS_FOLDER : TRACKS_FOLDER;
     
-    console.log(`Fetching ${isVoiceMemo ? 'voice memos' : 'music tracks'} from folder: ${folder}`);
-    
     // Add a timestamp parameter to prevent caching
     const timestamp = Date.now();
-    
-    // Use the Admin API to get resources with their contextual metadata
-    console.log(`[${new Date().toISOString()}] Fetching resources from Cloudinary folder: ${folder}`);
     
     let result;
     try {
@@ -93,16 +82,8 @@ export async function GET(request: Request) {
         tags: true, // Include tags for additional metadata
         image_metadata: true // Include any image metadata
       });
-      
-      console.log(`[${new Date().toISOString()}] Successfully retrieved ${result.resources?.length || 0} resources from folder ${folder}`);
     } catch (error) {
       const apiError = error as Error;
-      console.error('Cloudinary API Error:', {
-        message: apiError.message,
-        error: apiError,
-        stack: apiError.stack,
-        timestamp: new Date().toISOString()
-      });
       
       return NextResponse.json(
         { 
@@ -112,24 +93,6 @@ export async function GET(request: Request) {
         },
         { status: 500 }
       );
-    }
-    
-    // Log the first resource for debugging
-    if (result?.resources?.length > 0) {
-      try {
-        console.log('First resource details:', JSON.stringify({
-          public_id: result.resources[0].public_id,
-          format: result.resources[0].format,
-          duration: result.resources[0].duration,
-          bytes: result.resources[0].bytes,
-          created_at: result.resources[0].created_at,
-          secure_url: result.resources[0].secure_url ? '***URL_REDACTED***' : null,
-          context: result.resources[0].context ? '***CONTEXT_PRESENT***' : null,
-          metadata: result.resources[0].metadata ? '***METADATA_PRESENT***' : null
-        }, null, 2));
-      } catch (logError) {
-        console.error('Error logging resource details:', logError);
-      }
     }
     
     // Define the expected resource structure
@@ -160,17 +123,12 @@ export async function GET(request: Request) {
       // Extract basic info from Cloudinary resource
       const { public_id, secure_url, duration, context } = resource;
       
-      // Log the raw resource for debugging
-      console.log(`Processing resource: ${public_id}`);
-      
       // Initialize metadata object
       let extractedMetadata: Record<string, any> = {};
       
       // STEP 1: Extract metadata from context (this is the contextual metadata)
       // This is where Cloudinary stores custom metadata set via the API
       if (context) {
-        console.log(`Context for ${public_id}:`, JSON.stringify(context, null, 2));
-        
         // The context object might have different formats
         // It could be { custom: { key: value } } or { custom: "key=value|key2=value2" }
         if (context.custom) {
@@ -208,7 +166,6 @@ export async function GET(request: Request) {
       // STEP 2: Check for structured metadata
       // Cloudinary also supports structured metadata which might be in a different location
       if (resource.metadata) {
-        console.log(`Structured metadata for ${public_id}:`, JSON.stringify(resource.metadata, null, 2));
         extractedMetadata = { ...extractedMetadata, ...resource.metadata };
       }
       
@@ -223,12 +180,8 @@ export async function GET(request: Request) {
       // STEP 4: Check for tags
       // Tags might contain useful information
       if (resource.tags) {
-        console.log(`Tags for ${public_id}:`, resource.tags);
         // You could parse tags if they contain metadata
       }
-      
-      // Log the extracted metadata
-      console.log(`Extracted metadata for ${public_id}:`, extractedMetadata);
       
       // Build the AudioTrack with the extracted metadata
       const fileName = public_id.split('/').pop() || 'Untitled';
@@ -241,15 +194,6 @@ export async function GET(request: Request) {
                              resource.raw_duration || 
                              extractedMetadata.duration || 
                              0;
-      
-      // Log duration information for debugging
-      console.log(`Duration info for ${public_id}:`, {
-        resourceDuration,
-        extractedDuration: extractedMetadata.duration,
-        rawDuration: resource.raw_duration,
-        videoDuration: resource.video?.duration,
-        audioDuration: resource.audio?.duration
-      });
       
       const track: AudioTrack = {
         id: public_id,
@@ -265,21 +209,11 @@ export async function GET(request: Request) {
         isVoiceMemo
       };
       
-      // Log the final track object
-      console.log(`Final track object for ${public_id}:`, track);
-      
       return track;
     });
     
-    // Log the first track for debugging
-    if (audioTracks.length > 0) {
-      console.log('First processed track:', audioTracks[0]);
-    }
-    
     return NextResponse.json(audioTracks);
   } catch (error) {
-    console.error('Error fetching audio from Cloudinary:', error);
-    
     // Provide more specific error messages based on the error type
     let errorMessage = 'Failed to fetch audio files';
     let statusCode = 500;

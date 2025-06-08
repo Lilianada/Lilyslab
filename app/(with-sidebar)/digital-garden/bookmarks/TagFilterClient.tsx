@@ -65,35 +65,69 @@ export default function TagFilterClient({ bookmarks }: Props) {
           <div className="my-8">
             {/* Category filter */}
             <div className="mb-4">
-              <h3 className="mb-2 font-mono text-sm font-medium">Filter by Category</h3>
-              <div className="flex flex-wrap gap-2">
+              <h3 className="mb-2 text-sm font-medium flex items-center gap-2">
+                Categories
+                <span className="text-xs text-muted-foreground font-normal">(click to filter)</span>
+              </h3>
+              <div className="flex flex-wrap gap-4 font-mono text-xs">
                 <button
-                  className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedCategory === null
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-muted border-border text-muted-foreground hover:bg-accent"
-                    }`}
+                  className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
+                    selectedCategory === null ? "font-medium text-primary" : ""
+                  }`}
                   onClick={() => setSelectedCategory(null)}
                 >
-                  All Categories ({bookmarks.length})
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-mint border border-gray-300"></span>
+                  All <span className="ml-1 text-muted-foreground">({bookmarks.length})</span>
                 </button>
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedCategory === category
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-muted border-border text-muted-foreground hover:bg-accent"
-                      }`}
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category.charAt(0).toUpperCase() + category.slice(1)} ({categoryCounts[category]})
-                  </button>
-                ))}
+                
+                <button
+                  className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
+                    selectedCategory === "article" ? "font-medium text-primary" : ""
+                  }`}
+                  onClick={() => setSelectedCategory("article")}
+                >
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-lavender border border-gray-300"></span>
+                  Article <span className="ml-1 text-muted-foreground">({categoryCounts.article})</span>
+                </button>
+                
+                <button
+                  className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
+                    selectedCategory === "website" ? "font-medium text-primary" : ""
+                  }`}
+                  onClick={() => setSelectedCategory("website")}
+                >
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-peach border border-gray-300"></span>
+                  Website <span className="ml-1 text-muted-foreground">({categoryCounts.website})</span>
+                </button>
+                
+                <button
+                  className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
+                    selectedCategory === "video" ? "font-medium text-primary" : ""
+                  }`}
+                  onClick={() => setSelectedCategory("video")}
+                >
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-steelBlue border border-gray-300"></span>
+                  Video <span className="ml-1 text-muted-foreground">({categoryCounts.video})</span>
+                </button>
+                
+                <button
+                  className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
+                    selectedCategory === "misc" ? "font-medium text-primary" : ""
+                  }`}
+                  onClick={() => setSelectedCategory("misc")}
+                >
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-yellow border border-gray-300"></span>
+                  Misc <span className="ml-1 text-muted-foreground">({categoryCounts.misc})</span>
+                </button>
               </div>
             </div>
             
             {/* Tag filter */}
-            <div>
-              <h3 className="mb-2 font-mono text-sm font-medium">Filter by Tag</h3>
+            <div className="mt-6">
+              <h3 className="mb-2 text-sm font-medium flex items-center gap-2">
+                Tags
+                <span className="text-xs text-muted-foreground font-normal">(click to filter)</span>
+              </h3>
               <div className="flex flex-wrap gap-2">
                 <button
                   className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTag === null
@@ -113,7 +147,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                       }`}
                     onClick={() => setSelectedTag(tag)}
                   >
-                    {tag} ({tagCounts[tag]})
+                    #{tag} ({tagCounts[tag]})
                   </button>
                 ))}
               </div>

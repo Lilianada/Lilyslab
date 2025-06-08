@@ -1,5 +1,3 @@
-
-
 - [Postroll](https://notes.jeddacp.com/postroll/) by JEDDACP
 - [Bear blog challenge](https://blog.avas.space/bear-blog-challenge/) from Ava's website
 - [Technology is not an end itself](https://aramzs.xyz/microblogs/technology-is-not-an-end-in-itself/) by Aramzs

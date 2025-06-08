@@ -1,40 +1,38 @@
 ---
 publish: true
+title: Cosmos
+url: https://cosmos.so
 date: 2025-04-26
 tags:
   - design
   - websites
-title: Cosmos
-URL: https://cosmos.so
 type: website
 id: website-001
 ---
 
 ---
+publish: true
 title: Godly Websites
+url: https://godly.website/
 date: 2025-04-26
-URL: https://godly.website/
 tags:
   - design
   - websites
   - inspiration
-publish: true
 type: website
 id: website-002
-url: https://godly.website/
 ---
 
 ---
 publish: true
+title: Great Stuff
+url: https://greatstuff.fyi/
 date: 2025-04-26
 tags:
   - design
   - websites
-title: Great Stuff
-url: https://greatstuff.fyi/
 type: website
 id: website-003
-URL: https://greatstuff.fyi/
 ---
 
 ---
@@ -49,7 +47,6 @@ tags:
   - inspiration
 type: website
 id: website-004
-URL: https://read.cv/explore
 ---
 
 ---
@@ -62,7 +59,6 @@ tags:
   - community
 type: website
 id: website-005
-URL: https://post.cv
 ---
 
 ---
@@ -75,7 +71,6 @@ tags:
   - community
 type: website
 id: website-006
-URL: https://gist.so/
 ---
 
 ---
@@ -88,71 +83,65 @@ tags:
   - inspiration
 type: website
 id: website-007
-URL: http://onepagelove.com/
 ---
 
 ---
-Publish: true
+publish: true
 title: Curated Designs
-URL: https://www.curated.design/
+url: https://www.curated.design/
 date: 2025-04-26
 tags:
   - design
   - inspiration
 type: website
 id: website-008
-url: https://www.curated.design/
 ---
 
 ---
-Publish: true
+publish: true
 title: Dead Simple Sites
-URL: https://deadsimplesites.com/
+url: https://deadsimplesites.com/
 date: 2025-04-29
 tags:
   - design
   - inspiration
 type: website
 id: website-009
-url: https://deadsimplesites.com/
 ---
 
 ---
 publish: true
+title: Minimal Gallery
+url: https://minimal.gallery/tag/startup/
 date: 2025-05-02
 tags:
   - websites
   - inspiration
-title: Minimal Gallery
-URL: https://minimal.gallery/tag/startup/
 type: website
 id: website-010
-url: https://minimal.gallery/tag/startup/
 ---
 
 ---
 publish: true
+title: Fuck what I wish I knew
+url: https://fuckiwishiknewth.at/
 date: 2025-05-13
 tags:
   - websites
   - bookmarks
-title: Fuck what I wish I knew
-URL: https://fuckiwishiknewth.at/
 type: website
 id: website-012
-url: https://fuckiwishiknewth.at/
 ---
 
 ---
 publish: true
+title: Dark mode designs
+url: https://www.darkmodedesign.com/
 date: 2025-05-13
 tags:
   - websites
   - design
   - inspiration
-title: Dark mode designs
-URL: https://www.darkmodedesign.com/
 type: website
 id: website-013
-url: https://www.darkmodedesign.com/
 ---
