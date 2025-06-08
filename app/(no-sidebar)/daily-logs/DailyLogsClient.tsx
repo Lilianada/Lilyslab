@@ -1,13 +1,50 @@
 "use client";
 
-import React, { useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+import React, { useState, lazy, Suspense } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import localFont from 'next/font/local';
 import type { DisplayLog } from "./page";
+
+// Lazy load markdown rendering dependencies
+const MarkdownRenderer = lazy(() => 
+  Promise.all([
+    import("react-markdown"),
+    import("remark-gfm"),
+    import("rehype-highlight")
+  ]).then(([ReactMarkdownModule, remarkGfmModule, rehypeHighlightModule]) => {
+    const ReactMarkdown = ReactMarkdownModule.default;
+    const remarkGfm = remarkGfmModule.default;
+    const rehypeHighlight = rehypeHighlightModule.default;
+    
+    return {
+      default: ({ children }: { children: string }) => (
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeHighlight]}
+          components={{
+            a: ({ href = "", ...props }) => {
+              const isExt = /^https?:\/\//.test(href);
+              const yellowLink = "text-yellow-500 dark:text-yellow-300 hover:underline transition-colors";
+              const codeRedLink = "text-red-400 dark:text-red-300 hover:underline transition-colors";
+              return (
+                <a
+                  {...props}
+                  href={href}
+                  className={isExt ? codeRedLink : yellowLink}
+                  target={isExt ? "_blank" : undefined}
+                  rel={isExt ? "noopener noreferrer" : undefined}
+                />
+              );
+            },
+          }}
+        >
+          {children}
+        </ReactMarkdown>
+      )
+    };
+  })
+);
 
 const nitti = localFont({
   src: [
@@ -26,35 +63,19 @@ const nitti = localFont({
   display: 'swap',
 });
 
-function isExternal(href: string) {
-  return /^https?:\/\//.test(href);
-}
-
-const yellowLink = "text-yellow-500 dark:text-yellow-300 hover:underline transition-colors";
-const codeRedLink = "text-red-400 dark:text-red-300 hover:underline transition-colors";
-
 function MarkdownWithColoredLinks({ children }: { children: string }) {
   return (
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeHighlight]}
-      components={{
-        a: ({ href = "", node, ...props }) => {
-          const isExt = isExternal(href);
-          return (
-            <a
-              {...props}
-              href={href}
-              className={isExt ? codeRedLink : yellowLink}
-              target={isExt ? "_blank" : undefined}
-              rel={isExt ? "noopener noreferrer" : undefined}
-            />
-          );
-        },
-      }}
+    <Suspense 
+      fallback={
+        <div className="animate-pulse space-y-2">
+          <div className="h-4 bg-muted rounded w-full"></div>
+          <div className="h-4 bg-muted rounded w-3/4"></div>
+          <div className="h-4 bg-muted rounded w-1/2"></div>
+        </div>
+      }
     >
-      {children}
-    </ReactMarkdown>
+      <MarkdownRenderer>{children}</MarkdownRenderer>
+    </Suspense>
   );
 }
 

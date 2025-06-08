@@ -1,12 +1,14 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, lazy, Suspense } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Music, Settings, User, FileText } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
-import UploadAudio from "@/components/ctrl-room/upload-audio"
+
+// Lazy load heavy components
+const UploadAudio = lazy(() => import("@/components/ctrl-room/upload-audio"))
 
 export default function CtrlRoomPage() {
   const { user, userRoles, loading } = useAuth()
@@ -88,7 +90,13 @@ export default function CtrlRoomPage() {
         </TabsList>
 
         <TabsContent value="audio" className="space-y-6">
-        <UploadAudio/>
+          <Suspense fallback={
+            <div className="flex items-center justify-center h-64">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            </div>
+          }>
+            <UploadAudio/>
+          </Suspense>
         </TabsContent>
 
         <TabsContent value="content">

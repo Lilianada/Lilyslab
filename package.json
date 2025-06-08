@@ -4,25 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-   "build": "NEXT_PUBLIC_BUILD_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ') next build",
+    "build": "NEXT_PUBLIC_BUILD_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ') next build",
+    "analyze": "ANALYZE=true npm run build",
     "start": "next start",
     "lint": "next lint",
     "create:log": "node scripts/create-content.js log",
     "create:note": "node scripts/create-content.js note",
     "create:writing": "node scripts/create-content.js writing",
     "create:bookmark": "node scripts/add-bookmark.js",
-    "bookmarks:organize": "node scripts/reorganize-bookmarks.js",
-    "bookmarks:migrate-to-category": "node scripts/bookmark-migration.js to-category",
-    "bookmarks:migrate-to-individual": "node scripts/bookmark-migration.js to-individual",
-    "bookmarks:normalize": "node scripts/normalize-bookmark-urls.js",
-    "bookmarks:update-structure": "node scripts/update-bookmarks-structure.js",
-    "bookmarks:add-articles": "node scripts/add-new-articles.js",
-    "bookmarks:fix-files": "node scripts/fix-bookmark-files.js",
-    "update:metadata": "node scripts/update-metadata.js",
-    "generate:backlinks": "node scripts/generate-backlinks.js",
-    "optimize:images": "node scripts/optimize-images.js",
-    "check:links": "node scripts/check-links.js",
-    "generate:og": "node scripts/generate-og-images.js"
+    "bookmarks:add-articles": "node scripts/add-new-articles.js"
   },
   "dependencies": {
     "@headlessui/react": "latest",
@@ -109,6 +99,7 @@
     "zod-matter": "^0.1.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.3.3",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -1,12 +1,14 @@
-import { useState } from "react"
+import { useState, lazy, Suspense } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Upload } from "lucide-react"
 import { FileAudio, Music, Database, Settings } from "lucide-react"
-import { AudioUploader } from "./audio-uploader"
-import { ManageLibrary } from "./manage-library"
-import { AudioSettings } from "./audio-settings"
+
+// Lazy load heavy components
+const AudioUploader = lazy(() => import("./audio-uploader").then(mod => ({ default: mod.AudioUploader })))
+const ManageLibrary = lazy(() => import("./manage-library").then(mod => ({ default: mod.ManageLibrary })))
+const AudioSettings = lazy(() => import("./audio-settings").then(mod => ({ default: mod.AudioSettings })))
 
 export default function UploadAudio() {
   const [activeComponent, setActiveComponent] = useState<"upload" | "manage" | "settings">("upload")
@@ -47,7 +49,13 @@ export default function UploadAudio() {
                       Upload MP3 files to your library. Metadata will be automatically extracted when possible.
                     </DialogDescription>
                   </DialogHeader>
-                  <AudioUploader />
+                  <Suspense fallback={
+                    <div className="flex items-center justify-center h-64">
+                      <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+                    </div>
+                  }>
+                    <AudioUploader />
+                  </Suspense>
                 </DialogContent>
               </Dialog>
             </CardFooter>
@@ -119,7 +127,13 @@ export default function UploadAudio() {
               Back to Dashboard
             </Button>
           </div>
-          <ManageLibrary />
+          <Suspense fallback={
+            <div className="flex items-center justify-center h-64">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            </div>
+          }>
+            <ManageLibrary />
+          </Suspense>
         </div>
       )}
 
@@ -132,7 +146,13 @@ export default function UploadAudio() {
               Back to Dashboard
             </Button>
           </div>
-          <AudioSettings />
+          <Suspense fallback={
+            <div className="flex items-center justify-center h-64">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            </div>
+          }>
+            <AudioSettings />
+          </Suspense>
         </div>
       )}
     </>

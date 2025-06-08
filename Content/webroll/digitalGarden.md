@@ -182,20 +182,6 @@ id: digital-gardens-013
 
 ---
 publish: true
-title: Maggie Appleton's Digital Garden Resources
-url: https://maggieappleton.com/garden-history
-date: 2025-06-08
-tags:
-  - digital-garden
-  - resources
-  - history
-type: webroll
-category: digital-gardens
-id: digital-gardens-014
----
-
----
-publish: true
 title: Bartosz Ciechanowski's Interactive Essays
 url: https://ciechanow.ski/
 date: 2025-06-08
@@ -234,20 +220,6 @@ tags:
 type: webroll
 category: digital-gardens
 id: digital-gardens-017
----
-
----
-publish: true
-title: Maggie Appleton's Digital Garden Directory
-url: https://maggieappleton.com/garden-directory
-date: 2025-06-08
-tags:
-  - directory
-  - resources
-  - community
-type: webroll
-category: digital-gardens
-id: digital-gardens-018
 ---
 
 ---
@@ -295,7 +267,7 @@ id: digital-gardens-021
 ---
 publish: true
 title: Jacky Zhao's Digital Garden
-url: https://garden.jzhao.xyz/
+url: https://jzhao.xyz/
 date: 2025-06-08
 tags:
   - development
@@ -471,7 +443,7 @@ tags:
   - development
   - notes
   - learning
-notes: ★ love the nuggets and notebooks page
+notes: ★ love the nuggets and notebooks page, we've also exchanged emails
 type: webroll
 category: digital-gardens
 id: digital-gardens-034
@@ -503,20 +475,6 @@ tags:
 type: webroll
 category: digital-gardens
 id: digital-gardens-036
----
-
----
-publish: true
-title: Maggie Appleton's Commonplace Book
-url: https://maggieappleton.com/commonplace
-date: 2025-06-08
-tags:
-  - commonplace-book
-  - resources
-  - knowledge-management
-type: webroll
-category: digital-gardens
-id: digital-gardens-037
 ---
 
 ---

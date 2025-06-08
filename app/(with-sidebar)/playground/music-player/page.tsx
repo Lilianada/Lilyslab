@@ -1,6 +1,9 @@
 "use client"
 
-import { MusicPlayer } from "@/components/playground/music-player"
+import { lazy, Suspense } from "react"
+
+// Lazy load the heavy MusicPlayer component
+const MusicPlayer = lazy(() => import("@/components/playground/music-player").then(mod => ({ default: mod.MusicPlayer })))
 
 export default function MusicPlayerPage() {
   return (
@@ -13,7 +16,16 @@ export default function MusicPlayerPage() {
         </p>
       </header>
       
-      <MusicPlayer />
+      <Suspense fallback={
+        <div className="flex items-center justify-center h-64 border rounded-lg bg-muted/30">
+          <div className="text-center">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading music player...</p>
+          </div>
+        </div>
+      }>
+        <MusicPlayer />
+      </Suspense>
     </div>
     </div>
   )

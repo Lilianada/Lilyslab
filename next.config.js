@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 console.log('Using next.config.js');
 const nextConfig = {
   async headers() {
@@ -25,6 +29,58 @@ const nextConfig = {
   },
   reactStrictMode: true,
   
+  // Performance optimizations
+  experimental: {
+    // Enable modern bundling optimizations
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-accordion', '@radix-ui/react-dialog'],
+  },
+  
+  // Better tree shaking for server components
+  serverExternalPackages: ['sharp'],
+  
+  // Configure webpack for better optimization
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      // Split chunks more aggressively for better caching
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            // Separate vendor chunks
+            radix: {
+              test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,
+              name: 'radix-ui',
+              chunks: 'all',
+              priority: 30,
+            },
+            audio: {
+              test: /[\\/]node_modules[\\/](howler|music-metadata-browser)[\\/]/,
+              name: 'audio-libs',
+              chunks: 'all',
+              priority: 25,
+            },
+            markdown: {
+              test: /[\\/]node_modules[\\/](react-markdown|remark|rehype|gray-matter)[\\/]/,
+              name: 'markdown-libs',
+              chunks: 'all',
+              priority: 20,
+            },
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              priority: 10,
+              minChunks: 2,
+            },
+          },
+        },
+      };
+    }
+    
+    return config;
+  },
+  
   // Configure allowed image domains
   images: {
     domains: [
@@ -35,4 +91,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

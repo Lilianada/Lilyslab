@@ -2,10 +2,10 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import AnimatedLogo from "@/components/comps/AnimatedLogo";
 import { SocialLink, WorkItemComponent } from "@/components/comps/homepage-items"
-import { MusicPlayerWidget } from "@/components/audio/music-player-widget"
 import { Footer } from "@/components/layout/footer";
+import AnimatedLogo from "@/components/comps/AnimatedLogo"
+import { MusicPlayerWidget } from "@/components/audio/music-player-widget"
 
 
 interface WorkItem {

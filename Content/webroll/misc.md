@@ -152,3 +152,87 @@ type: webroll
 category: misc
 id: misc-011
 ---
+
+---
+publish: true
+title: Terminal.pink
+url: https://terminal.pink/
+date: 2025-06-08
+tags:
+  - terminal
+  - tools
+  - development
+type: webroll
+category: misc
+id: misc-012
+---
+
+---
+publish: true
+title: Itty.bitty.site
+url: https://itty.bitty.site/
+date: 2025-06-08
+tags:
+  - tools
+  - web
+  - experimental
+type: webroll
+category: misc
+id: misc-013
+---
+
+---
+publish: true
+title: Utrecht.jp
+url: https://utrecht.jp/
+date: 2025-06-08
+tags:
+  - design
+  - japanese
+  - culture
+type: webroll
+category: misc
+id: misc-014
+---
+
+---
+publish: true
+title: Generative Artistry
+url: https://generativeartistry.com/
+date: 2025-06-08
+tags:
+  - art
+  - generative
+  - creative-coding
+type: webroll
+category: misc
+id: misc-015
+---
+
+---
+publish: true
+title: Pitscher.net
+url: https://pitscher.net/index_v1.7.txt
+date: 2025-06-08
+tags:
+  - personal-site
+  - text
+  - minimalism
+type: webroll
+category: misc
+id: misc-016
+---
+
+---
+publish: true
+title: Music For Programming
+url: https://musicforprogramming.net/
+date: 2025-06-08
+tags:
+  - music
+  - programming
+  - focus
+type: webroll
+category: misc
+id: misc-017
+---

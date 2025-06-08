@@ -263,3 +263,45 @@ type: webroll
 category: portfolios
 id: portfolios-019
 ---
+
+---
+publish: true
+title: Damiano GUI
+url: https://damianogui.com/
+date: 2025-06-08
+tags:
+  - design
+  - portfolio
+  - creative
+type: webroll
+category: portfolios
+id: portfolios-020
+---
+
+---
+publish: true
+title: Valia Fetisov
+url: https://valiafetisov.com/
+date: 2025-06-08
+tags:
+  - design
+  - portfolio
+  - personal-site
+type: webroll
+category: portfolios
+id: portfolios-021
+---
+
+---
+publish: true
+title: Dennis Hatwieger
+url: https://dennishatwieger.de/
+date: 2025-06-08
+tags:
+  - development
+  - portfolio
+  - personal-site
+type: webroll
+category: portfolios
+id: portfolios-022
+---

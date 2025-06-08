@@ -1,21 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import {
   Card,
   CardContent,
@@ -26,24 +11,9 @@ import {
 import { Footer } from "@/components/layout/footer";
 import { useToast } from "@/hooks/use-toast";
 
-// Define schema for form validation
-const formSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }).max(100),
-  email: z
-    .string()
-    .email({ message: "Invalid email address" })
-    .optional()
-    .or(z.string().length(0)),
-  url: z
-    .string()
-    .url({ message: "Invalid URL" })
-    .optional()
-    .or(z.string().length(0)),
-  spam_check: z.string().refine((val) => val.toLowerCase() === "guestbook", {
-    message: 'Please enter "guestbook" to prove you are human',
-  }),
-  message: z.string().min(1, { message: "Message is required" }).max(1000),
-});
+// Lazy load form-related components and validation
+const GuestbookForm = lazy(() => import("./guestbook-form"));
+const GuestbookEntries = lazy(() => import("./guestbook-entries"));
 
 interface GuestbookEntry {
   id: string;
@@ -56,19 +26,7 @@ interface GuestbookEntry {
 export default function GuestbookPage() {
   const [entries, setEntries] = useState<GuestbookEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      url: "",
-      spam_check: "",
-      message: "",
-    },
-  });
 
   // Fetch guestbook entries
   useEffect(() => {
@@ -94,62 +52,10 @@ export default function GuestbookPage() {
     };
 
     fetchEntries();
-  }, [toast]);
+  }, []); // Remove toast dependency to prevent infinite loop
 
-  // Form submission handler
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    try {
-      const response = await fetch("/api/guestbook", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to submit");
-      }
-
-      // Add new entry to the list
-      if (result.entry) {
-        setEntries((prev) => [result.entry, ...prev]);
-      }
-
-      // Reset form
-      form.reset();
-
-      // Show success message
-      toast({
-        title: "Success!",
-        description: "Thank you for signing my guestbook!",
-      });
-    } catch (error) {
-      console.error("Error submitting guestbook entry:", error);
-      toast({
-        title: "Error",
-        description:
-          error instanceof Error
-            ? error.message
-            : "Failed to submit your message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
-  // Format date for display
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }).format(date);
+  const handleEntryAdded = (newEntry: GuestbookEntry) => {
+    setEntries((prev) => [newEntry, ...prev]);
   };
 
   return (
@@ -162,14 +68,14 @@ export default function GuestbookPage() {
             <br />
             <br />
             I absolutely love exploring the web and stumbled upon the charming
-            tradition of the Guestbook—it’s like leaving a footprint on
-            someone’s digital garden. If you’ve found something here that caught
-            your eye, I’d be thrilled if you left me a note below. Your words
+            tradition of the Guestbook—it's like leaving a footprint on
+            someone's digital garden. If you've found something here that caught
+            your eye, I'd be thrilled if you left me a note below. Your words
             will genuinely brighten my day!
             <br />
             <br />
             Do you have a guestbook of your own? Drop your link in the URL
-            field—I’d love to pay your corner of the internet a visit and sign
+            field—I'd love to pay your corner of the internet a visit and sign
             your guestbook too.
             <br />
             <br />
@@ -179,171 +85,59 @@ export default function GuestbookPage() {
 
         <Card className="border border-border bg-card shadow-sm transition-all">
           <CardHeader>
-            <CardTitle className="text-lg ">Sign the Guestbook</CardTitle>
+            <CardTitle className="text-lg">Sign the Guestbook</CardTitle>
             <CardDescription>
               Leave a message for me and future visitors
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
-              >
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Name *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Your name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email (not published)</FormLabel>
-                        <FormControl>
-                          <Input placeholder="your@email.com" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                          This will not be published
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+            <Suspense 
+              fallback={
+                <div className="animate-pulse space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="h-10 bg-muted rounded"></div>
+                    <div className="h-10 bg-muted rounded"></div>
+                  </div>
+                  <div className="h-10 bg-muted rounded"></div>
+                  <div className="h-24 bg-muted rounded"></div>
+                  <div className="h-10 bg-muted rounded"></div>
+                  <div className="h-10 bg-muted rounded w-full"></div>
                 </div>
-
-                <FormField
-                  control={form.control}
-                  name="url"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Website URL</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="https://your-website.com"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        Your name will link to this URL (optional)
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message *</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Leave a message..."
-                          className="min-h-[120px]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="spam_check"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Spam protection</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter 'guestbook'" {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        Please enter the word &quot;guestbook&quot; below,
-                        lovely human. We don&apos;t think that the 🤖spam bots🤖
-                        will figure this out. Thank you!
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Signing..." : "Sign the Guestbook"}
-                </Button>
-              </form>
-            </Form>
+              }
+            >
+              <GuestbookForm onEntryAdded={handleEntryAdded} />
+            </Suspense>
           </CardContent>
         </Card>
 
         <div className="mt-12">
-          <h2 className="text-xl font-medium mb-6">Messages</h2>
-
-          {isLoading ? (
-            <div className="flex justify-center py-12">
-              <div className="animate-pulse text-center">
-                <p className="text-muted-foreground">Loading messages...</p>
-              </div>
-            </div>
-          ) : entries.length === 0 ? (
-            <div className="text-center py-12 border rounded-lg bg-muted/50">
-              <p className="text-muted-foreground">
-                No messages yet. Be the first to sign!
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {entries.map((entry) => (
-                <Card
-                  key={entry.id}
-                  className="overflow-hidden border border-border hover:border-primary/20 transition-all duration-300"
-                >
-                  <CardHeader className="bg-muted/30 py-4">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        {entry.url ? (
-                          <a
-                            href={entry.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-medium hover:underline text-primary underline"
-                          >
-                            {entry.name}
-                          </a>
-                        ) : (
-                          <span className="font-medium">{entry.name}</span>
-                        )}
+          <h2 className="text-xl font-medium mb-6">Entries</h2>
+          <Suspense 
+            fallback={
+              <div className="space-y-4">
+                {[...Array(3)].map((_, i) => (
+                  <Card key={i} className="animate-pulse">
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <div className="h-4 bg-muted rounded w-32 mb-2"></div>
+                          <div className="h-3 bg-muted rounded w-24"></div>
+                        </div>
                       </div>
-                      <time className="text-sm text-muted-foreground">
-                        {formatDate(entry.date)}
-                      </time>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="py-4">
-                    <div className="prose dark:prose-invert prose-sm max-w-none">
-                      <p style={{ whiteSpace: "pre-wrap" }}>{entry.message}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        <div className="h-3 bg-muted rounded w-full"></div>
+                        <div className="h-3 bg-muted rounded w-3/4"></div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            }
+          >
+            <GuestbookEntries entries={entries} isLoading={isLoading} />
+          </Suspense>
         </div>
       </div>
 

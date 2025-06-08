@@ -11,3 +11,4 @@ Each submission should follow this format:
 ## Submissions
 
 <!-- New submissions will be added below this line -->
+- [Lilyslab.xyz](https://www.lilyslab.xyz/) - Category: digital-gardens - Submitted: 2025-06-08

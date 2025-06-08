@@ -90,7 +90,7 @@ function FloatingMusicPlayerContent() {
         {!isPaused ? (
           <Pause className="h-4 w-4 text-white" />
         ) : (
-          <Play className="h-4 w-4 text-white ml-1" />
+          <Play className="h-4 w-4 text-white" />
         )}
       </button>
     </div>
