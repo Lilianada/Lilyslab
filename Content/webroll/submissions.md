@@ -1,0 +1,13 @@
+# Webroll Submissions
+
+This file contains user-submitted links to the webroll.
+
+## Format
+Each submission should follow this format:
+```
+- [Title](URL) - Category: category-name - Submitted: YYYY-MM-DD - Notes: optional notes
+```
+
+## Submissions
+
+<!-- New submissions will be added below this line -->

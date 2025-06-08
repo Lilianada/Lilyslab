@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import localFont from 'next/font/local';
+import { WebrollLink } from '@/lib/webroll';
 
 const nitti = localFont({
   src: [
@@ -21,112 +23,116 @@ const nitti = localFont({
   display: 'swap',
 });
 
-// Mock data for now - you can replace this with actual data later
-const mockLinks = [
-  {
-    id: 1,
-    title: "Kenan.fyi",
-    url: "https://kenan.fyi/",
-    category: "digital-gardens"
-  },
-  {
-    id: 2,
-    title: "Maggie Appleton",
-    url: "https://maggieappleton.com/",
-    category: "digital-gardens"
-  },
-  {
-    id: 3,
-    title: "Tom Critchlow",
-    url: "https://tomcritchlow.com/",
-    category: "digital-gardens"
-  },
-  {
-    id: 4,
-    title: "Andy Matuschak",
-    url: "https://notes.andymatuschak.org/",
-    category: "personal-wikis"
-  },
-  {
-    id: 5,
-    title: "Gwern",
-    url: "https://www.gwern.net/",
-    category: "personal-wikis"
-  }
-];
-
 const categories = [
-  { value: "postrolls", label: "Postrolls" },
-  { value: "portfolios", label: "Portfolios" },
-  { value: "web-directories", label: "Web Directories" },
+  { value: "all", label: "All" },
   { value: "digital-gardens", label: "Digital Gardens" },
   { value: "personal-wikis", label: "Personal Wikis" },
-  { value: "personal-websites", label: "Personal Websites" },
-  { value: "miscellaneous", label: "Miscellaneous" }
+  { value: "portfolios", label: "Portfolios" },
+  { value: "web-directories", label: "Web Directories" },
+  { value: "512kb", label: "512kb Websites" },
+  { value: "misc", label: "Miscellaneous" }
 ];
 
-export default function BlogrollPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+interface WebrollClientProps {
+  initialLinks: WebrollLink[];
+}
+
+export default function WebrollClient({ initialLinks }: WebrollClientProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [linkInput, setLinkInput] = useState("");
   const [titleInput, setTitleInput] = useState("");
-  const [categoryInput, setCategoryInput] = useState("postrolls");
+  const [categoryInput, setCategoryInput] = useState("digital-gardens");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
 
-  const filteredLinks = selectedCategory 
-    ? mockLinks.filter(link => link.category === selectedCategory)
-    : mockLinks;
+  const filteredLinks = selectedCategory === "all" 
+    ? initialLinks
+    : initialLinks.filter(link => link.category === selectedCategory);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log({ linkInput, titleInput, categoryInput });
-    // Reset form
-    setLinkInput("");
-    setTitleInput("");
-    setCategoryInput("postrolls");
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      const response = await fetch('/api/webroll/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: titleInput,
+          url: linkInput,
+          category: categoryInput,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitMessage("Thank you! Your submission has been saved.");
+        setLinkInput("");
+        setTitleInput("");
+        setCategoryInput("digital-gardens");
+      } else {
+        setSubmitMessage("Failed to submit. Please try again.");
+      }
+    } catch (error) {
+      setSubmitMessage("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className={`min-h-screen grid grid-cols-1 lg:grid-cols-[368px_1fr] bg-[#f5f5f5] gap-4 ${nitti.className}`}>
       {/* Sidebar */}
       <header className="bg-[#0f02d0] border-[1.5px] border-[#69a4ff] max-h-screen h-screen overflow-y-auto p-6 sticky top-0 left-0 w-full lg:w-[368px] z-100 scrollbar-none">
-        <h2 className="text-white text-xl font-bold tracking-wider mb-8 underline decoration-[#fe3902] decoration-[6px] underline-offset-[-5px]">
-          BLOGROLL
-        </h2>
+        {/* Back arrow and title */}
+        <div className="flex items-center gap-4 mb-8">
+          <Link 
+            href="/" 
+            className="text-white hover:text-[#fe3902] transition-colors"
+            title="Back to home"
+          >
+            <ArrowLeft size={20} />
+          </Link>
+          <h2 className="text-white text-xl font-bold tracking-wider underline decoration-[#fe3902] decoration-[6px] underline-offset-[-5px]">
+            WEBROLL
+          </h2>
+        </div>
         
-        <nav className="grid gap-8 mt-8">
+        <nav className="grid gap-8">
           {/* Categories */}
-          <div className="flex flex-col lg:flex-row gap-10">
-            <div>
-              <p className="text-white uppercase text-base mb-4">Categories</p>
-              <ul className="flex flex-col space-y-1">
-                {categories.map((category) => (
-                  <li key={category.value}>
-                    <button
-                      onClick={() => setSelectedCategory(selectedCategory === category.value ? null : category.value)}
-                      className={`text-white text-sm px-2 py-1 hover:underline hover:decoration-[#fe3902] transition-colors text-left ${
-                        selectedCategory === category.value ? 'underline decoration-[#fe3902]' : ''
-                      }`}
-                    >
-                      {category.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div>
+            <p className="text-white uppercase text-base mb-4">Categories</p>
+            <ul className="flex flex-col space-y-1">
+              {categories.map((category) => (
+                <li key={category.value}>
+                  <button
+                    onClick={() => setSelectedCategory(category.value)}
+                    className={`text-white text-sm px-2 py-1 hover:underline hover:decoration-[#fe3902] transition-colors text-left ${
+                      selectedCategory === category.value ? 'underline decoration-[#fe3902]' : ''
+                    }`}
+                  >
+                    {category.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="hidden lg:flex flex-col gap-3.5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
             <label htmlFor="link" className="text-sm text-white font-bold tracking-[0.3px]">
               Leave a link
             </label>
             <input
               id="link"
-              type="text"
+              type="url"
               value={linkInput}
               onChange={(e) => setLinkInput(e.target.value)}
-              className="px-3 py-2.5 border-[1.5px] border-[#69a4ff] bg-transparent rounded text-[#0f02d0] transition-all outline-none focus:border-[#fe3902] focus:bg-[#f5f5f5]"
+              className="px-3 py-2.5 border-[1.5px] border-[#69a4ff] bg-transparent rounded text-[#0f02d0] transition-all outline-none focus:border-[#fe3902] focus:bg-[#f5f5f5] placeholder:text-[#69a4ff]"
               placeholder="https://yoursite.com/"
+              required
             />
 
             <label htmlFor="title" className="text-sm text-white font-bold tracking-[0.3px]">
@@ -137,8 +143,9 @@ export default function BlogrollPage() {
               type="text"
               value={titleInput}
               onChange={(e) => setTitleInput(e.target.value)}
-              className="px-3 py-2.5 border-[1.5px] border-[#69a4ff] bg-transparent rounded text-[#0f02d0] transition-all outline-none focus:border-[#fe3902] focus:bg-[#f5f5f5]"
+              className="px-3 py-2.5 border-[1.5px] border-[#69a4ff] bg-transparent rounded text-[#0f02d0] transition-all outline-none focus:border-[#fe3902] focus:bg-[#f5f5f5] placeholder:text-[#69a4ff]"
               placeholder="Your site name"
+              required
             />
 
             <label htmlFor="category" className="text-sm text-white font-bold tracking-[0.3px]">
@@ -150,7 +157,7 @@ export default function BlogrollPage() {
               onChange={(e) => setCategoryInput(e.target.value)}
               className="px-3 py-2.5 border-[1.5px] border-[#69a4ff] bg-[#f5f5f5] rounded text-[#0f02d0] transition-all outline-none focus:border-[#fe3902]"
             >
-              {categories.map((category) => (
+              {categories.filter(cat => cat.value !== 'all').map((category) => (
                 <option key={category.value} value={category.value}>
                   {category.label}
                 </option>
@@ -159,10 +166,17 @@ export default function BlogrollPage() {
 
             <button
               type="submit"
-              className="py-2.5 bg-[#fe3902] text-white border-none rounded cursor-pointer font-bold tracking-[0.5px] mt-2 transition-all hover:bg-[#f5f5f5] hover:text-[#fe3902] focus:outline-none"
+              disabled={isSubmitting}
+              className="py-2.5 bg-[#fe3902] text-white border-none rounded cursor-pointer font-bold tracking-[0.5px] mt-2 transition-all hover:bg-[#f5f5f5] hover:text-[#fe3902] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
+
+            {submitMessage && (
+              <p className={`text-sm mt-2 ${submitMessage.includes('Thank you') ? 'text-green-300' : 'text-red-300'}`}>
+                {submitMessage}
+              </p>
+            )}
           </form>
         </nav>
       </header>
@@ -204,34 +218,43 @@ export default function BlogrollPage() {
         {/* Links Section */}
         <section className="border border-[#69a4ff] rounded relative h-fit">
           <span className="absolute -top-3.5 left-[18px] bg-[#f5f5f5] px-3 font-bold text-base text-[#fe3902] tracking-[1px]">
-            Links {selectedCategory && `- ${categories.find(c => c.value === selectedCategory)?.label}`}
+            Links {selectedCategory !== "all" && `- ${categories.find(c => c.value === selectedCategory)?.label}`}
           </span>
           <div className="p-4">
             <table className="w-full border-collapse text-sm bg-[#f5f5f5] text-[#0f02d0] mx-auto rounded overflow-hidden">
               <thead>
                 <tr className="bg-[#0f02d0] text-white">
-                  <th className="p-2 text-left font-normal w-[70px]">S/N</th>
-                  <th className="p-2 text-left font-normal">Title</th>
-                  <th className="p-2 text-left font-normal w-[90px]">Link</th>
+                  <th className="p-2 text-left font-bold w-[70px] tracking-wide">S/N</th>
+                  <th className="p-2 text-left font-bold tracking-wide">Title</th>
+                  <th className="p-2 text-left font-bold w-[90px] tracking-wide">Link</th>
                 </tr>
               </thead>
-              <tbody className="border border-[#69a4ff]">
+              <tbody className="border border-[#69a4ff] border-t-white">
                 {filteredLinks.map((link, index) => (
-                  <tr key={link.id} className="border-b border-[#69a4ff] border-r border-[#69a4ff] transition-colors hover:bg-[#fe3902] hover:text-white">
-                    <td className="p-2">{String(index + 1).padStart(3, '0')}</td>
-                    <td className="p-2">{link.title}</td>
+                  <tr key={link.id} className="border-b border-[#69a4ff] transition-colors hover:bg-[#fe3902] hover:text-white group">
+                    <td className="p-2 font-mono">{String(index + 1).padStart(3, '0')}</td>
+                    <td className="p-2">
+                      {link.title} {link.notes && <span className="text-[#fe3902] group-hover:text-white">{link.notes}</span>}
+                    </td>
                     <td className="p-2">
                       <a
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#0f02d0] no-underline font-normal text-sm transition-colors hover:text-white hover:underline"
+                        className="text-[#0f02d0] no-underline font-normal text-sm transition-colors group-hover:text-white hover:underline"
                       >
                         Visit →
                       </a>
                     </td>
                   </tr>
                 ))}
+                {filteredLinks.length === 0 && (
+                  <tr>
+                    <td colSpan={3} className="p-4 text-center text-gray-500">
+                      No links found for this category.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

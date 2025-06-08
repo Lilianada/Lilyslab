@@ -7,7 +7,7 @@ Everyone... okay not everyone, most people. Most people have that one thing or 2
 
 Last month I started building this notes app, it was supposed to be dead simple and then I started wanting more features, the features meant, more lines of code, which meant more complexities, which meant more bugs and so on.
 
-I started curating links to blogrolls and postroll on my notes app [NoteIt-Down](https://notes.lilyslab.xyz) in May and on this faithful day, a bug I didn't know existed decided to show forth its ugly head by making me lose my notes twice that day.
+I started curating links to webrolls and postroll on my notes app [NoteIt-Down](https://notes.lilyslab.xyz) in May and on this faithful day, a bug I didn't know existed decided to show forth its ugly head by making me lose my notes twice that day.
 
 First one to go was my Blogroll note, this had almost a hundred links to portfolios, digital gardens, personal websites, web directories and misc. Just like that I lost it. 
 

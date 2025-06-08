@@ -201,7 +201,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={600} />
             <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={650} />
             <NavItem href="/digital-garden/bucket-list" icon={<BadgeCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={700} />
-            <NavItem href="/blogroll" icon={<Link2 size={16} />} label="Blogroll" onClick={onNavClick} delay={750} />
+            <NavItem href="/webroll" icon={<Link2 size={16} />} label="Webroll" onClick={onNavClick} delay={750} />
             {/* <NavItem href="/digital-garden/catalog" icon={<ImageIcon size={16} />} label="Catalog" onClick={onNavClick} delay={800} /> */}
           </div>
 
