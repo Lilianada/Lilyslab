@@ -11,6 +11,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<Bookmark['type'] | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showAllTags, setShowAllTags] = useState(false);
   
   // Count bookmarks per tag
   const tagCounts: Record<string, number> = {};
@@ -19,7 +20,17 @@ export default function TagFilterClient({ bookmarks }: Props) {
       tagCounts[tag] = (tagCounts[tag] || 0) + 1;
     });
   });
-  const tags = Object.keys(tagCounts).sort();
+  
+  // Sort tags by count (most used first)
+  const popularTags = Object.entries(tagCounts)
+    .sort(([, countA], [, countB]) => countB - countA)
+    .map(([tag]) => tag);
+  
+  // Get top tags (tags with at least 2 occurrences or the top 10, whichever is more)
+  const topTags = popularTags.filter(tag => tagCounts[tag] >= 2).slice(0, 12);
+  
+  // All tags sorted alphabetically for expanded view
+  const allTags = Object.keys(tagCounts).sort();
   
   // Count bookmarks per category
   const categoryCounts: Record<string, number> = {
@@ -124,11 +135,29 @@ export default function TagFilterClient({ bookmarks }: Props) {
             
             {/* Tag filter */}
             <div className="mt-6">
-              <h3 className="mb-2 text-sm font-medium flex items-center gap-2">
-                Tags
-                <span className="text-xs text-muted-foreground font-normal">(click to filter)</span>
-              </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-medium flex items-center gap-2">
+                  Tags
+                  <span className="text-xs text-muted-foreground font-normal">(click to filter)</span>
+                </h3>
+                <button 
+                  onClick={() => setShowAllTags(!showAllTags)} 
+                  className="text-xs flex items-center gap-1 text-primary hover:opacity-80 transition-all font-mono"
+                >
+                  {showAllTags ? (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      Show Popular Tags
+                    </>
+                  ) : (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      View All Tags ({allTags.length})
+                    </>
+                  )}
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2 transition-all duration-300">
                 <button
                   className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTag === null
                       ? "bg-primary text-primary-foreground border-primary"
@@ -138,18 +167,27 @@ export default function TagFilterClient({ bookmarks }: Props) {
                 >
                   All Tags ({bookmarks.length})
                 </button>
-                {tags.map((tag) => (
+                
+                {/* Show either popular tags or all tags based on state */}
+                {(showAllTags ? allTags : topTags).map((tag) => (
                   <button
                     key={tag}
-                    className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTag === tag
+                    className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${
+                      selectedTag === tag
                         ? "bg-primary text-primary-foreground border-primary"
                         : "bg-muted border-border text-muted-foreground hover:bg-accent"
-                      }`}
+                    }`}
                     onClick={() => setSelectedTag(tag)}
                   >
-                    #{tag} ({tagCounts[tag]})
+                    #{tag} <span className="opacity-80">({tagCounts[tag]})</span>
                   </button>
                 ))}
+                
+                {!showAllTags && allTags.length > topTags.length && (
+                  <div className="flex items-center">
+                    <span className="text-xs text-muted-foreground px-3 py-1 rounded-full bg-muted border border-border">+{allTags.length - topTags.length} more tags</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
