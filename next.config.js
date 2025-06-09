@@ -13,6 +13,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false, // Set to true if you want to ignore TS errors too
   },
+  // Enable Vercel Analytics
+  analytics: {
+    enabled: true,
+  },
   
   async headers() {
     return [

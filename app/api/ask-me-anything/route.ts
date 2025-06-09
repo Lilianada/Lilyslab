@@ -24,6 +24,7 @@ export async function GET() {
             return null;
           }
           
+          console.log("Match found:", !!match);
           
           const frontmatter = match[1];
           const responseContent = match[2].trim();
@@ -52,7 +53,10 @@ export async function GET() {
     
     // Filter out null values and sort by date (most recent first)
     const validQuestions = questions.filter(q => q !== null);
-  
+    
+    if (validQuestions.length > 0) {
+      console.log("Sample question:", JSON.stringify(validQuestions[0], null, 2));
+    } 
     
     validQuestions.sort((a, b) => {
       const dateA = a?.date ? new Date(a.date).getTime() : 0;
