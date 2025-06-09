@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 import { useAuth } from "@/contexts/auth-context"
 import AuthSignInModal from "@/components/auth/auth-sign-in-modal"
-import AMAForm from "./ama-form"
-import AMAEntries from "./ama-entries"
+import AMAForm from "../../../components/ama/ama-form"
+import AMAEntries from "../../../components/ama/ama-entries"
 
 interface Question {
   id: string

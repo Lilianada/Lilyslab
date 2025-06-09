@@ -52,7 +52,7 @@ export default function GuestbookPage() {
     };
 
     fetchEntries();
-  }, []); // Remove toast dependency to prevent infinite loop
+  }, [toast]);
 
   const handleEntryAdded = (newEntry: GuestbookEntry) => {
     setEntries((prev) => [newEntry, ...prev]);

@@ -42,8 +42,8 @@ export const LazyAudioSettings = lazy(() => import('@/components/ctrl-room/audio
 export const LazyUploadAudio = lazy(() => import('@/components/ctrl-room/upload-audio'));
 
 // Form and interaction lazy imports
-export const LazyGuestbookForm = lazy(() => import('@/app/(with-sidebar)/guestbook/guestbook-form'));
-export const LazyGuestbookEntries = lazy(() => import('@/app/(with-sidebar)/guestbook/guestbook-entries'));
+export const LazyGuestbookForm = lazy(() => import('@/components/guestbook/guestbook-form'));
+export const LazyGuestbookEntries = lazy(() => import('@/components/guestbook/guestbook-entries'));
 
 // Markdown renderer lazy import with optimization
 export const LazyReactMarkdown = lazy(() => import("react-markdown"));
