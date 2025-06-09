@@ -1,4 +1,4 @@
-import { Clock, Sprout } from "lucide-react"
+ import { Clock, Sprout } from "lucide-react"
 
 export default function ComingSoonPage() {
   return (

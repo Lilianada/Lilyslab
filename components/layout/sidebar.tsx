@@ -41,7 +41,9 @@ import {
   Network,
   PenTool,
   Plus,
-  Calendar
+  Calendar,
+  UserSquare2,
+  PaintBucketIcon
 } from "lucide-react"
 import { ThemeToggle } from "../theme/theme-toggle"
 // import { FontToggle } from "../theme/font-toggle"
@@ -220,10 +222,12 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Me" delay={150} />
+            <NavItem href="/about" icon={<UserSquare2 size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={200} />
             <NavItem href="/someday" icon={<Calendar size={16} />} label="Someday" onClick={onNavClick} delay={250} />
             <NavItem href="/wants" icon={<Heart size={16} />} label="Wants" onClick={onNavClick} delay={300} />
             <NavItem href="/todo" icon={<BadgeCheck size={16} />} label="Todo" onClick={onNavClick} delay={350} />
+            <NavItem href="/bucket-list" icon={<PaintBucketIcon size={16} />} label="Bucket List" onClick={onNavClick} delay={350} />
           </div>
 
           <div className="space-y-1.5 mb-2">
@@ -236,7 +240,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Garden" delay={650} />
-            <NavItem href="/essays" icon={<FileText size={16} />} label="Essays" onClick={onNavClick} delay={700} />
+            <NavItem href="/writings" icon={<FileText size={16} />} label="Essays" onClick={onNavClick} delay={700} />
             <NavItem href="/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={750} />
             <NavItem href="/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={800} />
           </div>
@@ -264,8 +268,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Playground" delay={1450} />
-            <NavItem href="/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1500} />
-            <NavItem href="/calculator" icon={<Calculator size={16} />} label="Calculator" onClick={onNavClick} delay={1550} />
+            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1500} />
+            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator" onClick={onNavClick} delay={1550} />
           </div>
 
           <div className="space-y-1.5 mb-2">
