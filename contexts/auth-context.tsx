@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import { type User, signOut as firebaseSignOut, onAuthStateChanged } from "firebase/auth"
-import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "@/lib/firebase"
+import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "@/lib/garden/firebase"
 import { checkUserIsAdmin, setUserIsLoggedIn } from "@/lib/admin-service"
 
 interface AuthContextType {

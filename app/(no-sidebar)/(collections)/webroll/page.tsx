@@ -1,5 +1,5 @@
 import React from "react";
-import { getWebrollLinks } from '@/lib/webroll';
+import { getWebrollLinks } from '@/lib/garden/webroll';
 import WebrollClient from './webroll-client';
 
 export default async function WebrollPage() {

@@ -1,6 +1,6 @@
 import { Feed } from 'feed';
-import { getAllWritings, Writing } from '@/lib/writings/writings';
-import { getAllLogsData, LogData } from '@/lib/logs';
+import { getAllWritings, Writing } from '@/lib/garden/writings';
+import { getAllLogsData, LogData } from '@/lib/garden/logs';
 import { getAllNotesData, NoteData } from '@/lib/notes';
 import { NextResponse } from 'next/server';
 

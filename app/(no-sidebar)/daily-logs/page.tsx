@@ -1,5 +1,5 @@
 
-import { getAllDailyLogs, type DailyLog } from "@/lib/daily-logs";
+import { getAllDailyLogs, type DailyLog } from "@/lib/garden/daily-logs";
 import DailyLogsClient from "./DailyLogsClient";
 
 // Define the display format for logs

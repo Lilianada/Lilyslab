@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { formatDate } from "@/lib/utils"
 import { Annoyed } from "lucide-react"
-import { getAllWritings, Writing } from "@/lib/writings/writings"
+import { getAllWritings, Writing } from "@/lib/garden/writings"
 
 // Helper function to count words in a string
 function countWords(text: string): number {

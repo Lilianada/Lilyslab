@@ -1,5 +1,5 @@
-import type { Bookmark } from "@/lib/bookmarks";
-import { getBookmarks } from "@/lib/bookmarks";
+import type { Bookmark } from "@/lib/garden/bookmarks";
+import { getBookmarks } from "@/lib/garden/bookmarks";
 
 // TagFilter must be a Client Component if it uses useState
 import TagFilterClient from "./TagFilterClient";

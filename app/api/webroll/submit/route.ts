@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addWebrollSubmission } from '@/lib/webroll';
+import { addWebrollSubmission } from '@/lib/garden/webroll';
 
 export async function POST(request: NextRequest) {
   try {

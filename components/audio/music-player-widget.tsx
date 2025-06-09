@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Volume2 } from "lucide-react";
 import { format } from "date-fns";
 import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/garden/firebase";
 
 // Helper function to format time in MM:SS format
 const formatTime = (seconds: number): string => {

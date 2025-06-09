@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import localFont from 'next/font/local';
-import { WebrollLink } from '@/lib/webroll';
+import { WebrollLink } from '@/lib/garden/webroll';
 import {
   Accordion,
   AccordionContent,

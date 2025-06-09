@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getWritingBySlug, getAllWritings } from "@/lib/writings/writings"
+import { getWritingBySlug, getAllWritings } from "@/lib/garden/writings"
 import { formatDate } from "@/lib/utils"
 import { Metadata } from "next"
 import { Separator } from "@/components/ui/separator"
