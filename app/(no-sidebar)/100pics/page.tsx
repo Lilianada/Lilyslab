@@ -11,6 +11,52 @@ interface PictureData {
   dateTaken: string
   imageUrl: string
   dayNumber: number
+  blurDataURL?: string
+}
+
+// Generate a simple blur placeholder
+function generateBlurDataURL(color = '#e5e7eb'): string {
+  // Create a 10x10 SVG with the specified color
+  const svg = `
+    <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg">
+      <rect width="10" height="10" fill="${color}"/>
+    </svg>
+  `
+  return `data:image/svg+xml;base64,${btoa(svg)}`
+}
+
+// Generate different colored placeholders for variety
+function getColoredBlurDataURL(index: number): string {
+  const colors = [
+    '#f3f4f6', // gray-100
+    '#e5e7eb', // gray-200
+    '#d1d5db', // gray-300
+    '#f9fafb', // gray-50
+    '#f1f5f9', // slate-100
+    '#f8fafc', // slate-50
+    '#fef3f2', // red-50
+    '#fef7f0', // orange-50
+    '#fefbf0', // yellow-50
+    '#f7fef0', // green-50
+  ]
+  return generateBlurDataURL(colors[index % colors.length])
+}
+
+// Generate a shimmer effect for loading state
+function generateShimmerDataURL(): string {
+  const svg = `
+    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#f1f5f9;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#e2e8f0;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#f1f5f9;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect width="40" height="40" fill="url(#shimmer)"/>
+    </svg>
+  `
+  return `data:image/svg+xml;base64,${btoa(svg)}`
 }
 
 // Helper: Get grid dimensions to fill available area with 100 squares
@@ -113,6 +159,8 @@ function ImageModal({
             fill
             className="object-cover"
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 50vw"
+            placeholder="blur"
+            blurDataURL={image.blurDataURL || generateBlurDataURL()}
             unoptimized
             priority
           />
@@ -151,6 +199,7 @@ export default function HundredPicsPage() {
     dateTaken: `2025-06-0${i + 1}`,
     imageUrl: `https://picsum.photos/id/${100 + i}/400/400`,
     dayNumber: i + 1,
+    blurDataURL: getColoredBlurDataURL(i),
   }))
 
   const router = useRouter()
@@ -255,7 +304,7 @@ export default function HundredPicsPage() {
               <div
                 key={day.id}
                 style={{width: "100%", height: "100%"}}
-                className="bg-gray-100 dark:bg-gray-800 rounded cursor-pointer border-2 border-transparent hover:border-primary transition-colors duration-200 overflow-hidden"
+                className="bg-gray-100 dark:bg-gray-800 rounded cursor-pointer border-2 border-transparent hover:border-primary transition-all duration-200 overflow-hidden group"
                 onClick={() => handleImageClick(day.picture!)}
               >
                 <Image
@@ -263,18 +312,28 @@ export default function HundredPicsPage() {
                   alt={day.picture.title}
                   width={100}
                   height={100}
-                  className="w-full h-full object-cover rounded"
+                  className="w-full h-full object-cover rounded transition-transform duration-300 group-hover:scale-105"
+                  placeholder="blur"
+                  blurDataURL={day.picture.blurDataURL || getColoredBlurDataURL(day.dayNumber)}
                   loading="lazy"
                   unoptimized
+                  
                 />
               </div>
             ) : (
               <div
                 key={day.id}
                 style={{width: "100%", height: "100%"}}
-                className="bg-gray-50 dark:bg-gray-900 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded flex items-center justify-center"
+                className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded flex items-center justify-center relative overflow-hidden hover:border-gray-400 dark:hover:border-gray-600 transition-colors duration-200"
               >
-                <span className="text-gray-400 dark:text-gray-600 font-mono font-medium text-xs">
+                {/* Subtle background pattern */}
+                <div className="absolute inset-0 opacity-5">
+                  <div className="w-full h-full" style={{
+                    backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
+                    backgroundSize: '8px 8px'
+                  }}></div>
+                </div>
+                <span className="relative text-gray-400 dark:text-gray-600 font-mono font-medium text-xs hover:text-gray-500 dark:hover:text-gray-500 transition-colors duration-200">
                   {day.dayNumber}
                 </span>
               </div>

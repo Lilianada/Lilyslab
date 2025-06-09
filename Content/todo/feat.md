@@ -50,7 +50,7 @@ A list of pages to add to lilyslab to make it more fun, personal and a site of e
 17. Places - A list of places I've visited e.g cafes [List of restaurants and cafes Nikita has gone to](https://nikita.galaiko.rocks/places/)
 18. Switch 'stack' to 'Uses', add 'services' *
 19. Any weird collection I have (links)
-20. Wants/Intentions - A page for things I want to do different from a someday page [Kenan wanats page](https://gkeenan.co/wants/) [kayserifserif intentions page](https://kayserifserif.place/intentions/)
+20. Wants/Intentions - A page for things I want to do different from a someday page [Kenan wanats page](https://gkeenan.co/wants/) [kayserifserif intentions page](https://kayserifserif.place/intentions/) [David's list 100](https://davidumoru.me/list-100)
 21. 
 
 

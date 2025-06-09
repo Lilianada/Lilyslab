@@ -165,7 +165,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                     }`}
                   onClick={() => setSelectedTag(null)}
                 >
-                  All Tags ({bookmarks.length})
+                  All Tags ({allTags.length})
                 </button>
                 
                 {/* Show either popular tags or all tags based on state */}

@@ -23,15 +23,29 @@ import {
   Image as ImageIcon,
   BookHeart as BookHeartIcon,
   Calculator,
-  NotepadText,
   CalendarDaysIcon,
   PersonStandingIcon,
   Timer,
   Shield,
   MessageCircleHeart,
   Link2,
+  Heart,
+  Settings,
+  Mail,
+  Instagram,
+  Linkedin,
+  Twitter,
+  User,
+  Package,
+  Boxes,
+  Network,
+  PenTool,
+  Plus,
+  Calendar
 } from "lucide-react"
 import { ThemeToggle } from "../theme/theme-toggle"
+// import { FontToggle } from "../theme/font-toggle"
+// import { ThemeColorToggle } from "../theme/theme-color-toggle"
 import { useEffect, useState } from "react"
 import { UserProfileSection } from "../auth/user-profile-section"
 import { Separator } from "../ui/separator"
@@ -52,6 +66,7 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
   const pathname = usePathname() || ''
   const isActive = pathname === href || pathname.startsWith(`${href}/`)
   const [isVisible, setIsVisible] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -66,12 +81,16 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-all duration-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+        className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent/50 hover:text-foreground transition-all duration-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
         onClick={onClick}
         style={{ transitionDelay: `${delay}ms` }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        {icon}
+        <div className={`transition-transform duration-200 ${isHovered ? "scale-110" : ""}`}>
+          {icon}
+        </div>
         <span>{label}</span>
         <span className="ml-auto text-sm opacity-60">
           <ArrowUpRight size={16} />
@@ -85,14 +104,18 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
       <Link
         href={href}
         className={cn(
-          "flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent transition-all duration-300",
-          isActive ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:text-foreground",
+          "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm hover:bg-accent/50 transition-all duration-300",
+          isActive ? "bg-accent/70 text-foreground font-medium shadow-sm" : "text-muted-foreground hover:text-foreground",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
         )}
         onClick={onClick}
         style={{ transitionDelay: `${delay}ms` }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        {icon}
+        <div className={`transition-transform duration-200 ${isHovered ? "scale-110" : ""}`}>
+          {icon}
+        </div>
         <span>{label}</span>
         <span className="ml-auto text-sm opacity-60">
           <Store size={16} />
@@ -105,21 +128,29 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent transition-all duration-300",
-        isActive ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:text-foreground",
+        "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition-all duration-300 relative group",
+        isActive 
+          ? "bg-accent/70 text-foreground font-medium shadow-sm" 
+          : "text-muted-foreground hover:text-foreground hover:bg-accent/50",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
       )}
       onClick={onClick}
       style={{ transitionDelay: `${delay}ms` }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div >
+      <div className={`text-accent-foreground transition-transform duration-200 ${isHovered || isActive ? "scale-110" : ""}`}>
         {icon}
       </div>
-      <span className="relative">{label}
+      <span className="relative">
+        {label}
         {hasNotification && (
-          <span className="absolute -top-1 -right-2 w-2 h-2 bg-mellow rounded-full" />
+          <span className="absolute -top-1 -right-2 w-2 h-2 bg-mellow rounded-full animate-pulse" />
         )}
       </span>
+      {isActive && (
+        <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-accent-foreground rounded-full" />
+      )}
     </Link>
   )
 }
@@ -140,7 +171,10 @@ const SectionTitle = ({ title, delay = 0 }: { title: string; delay?: number }) =
         }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <h3 className="text-xs font-medium text-foreground">{title}</h3>
+      <div className="flex items-center gap-2">
+        <h3 className="text-xs font-semibold text-foreground">{title}</h3>
+        <div className="h-[1px] flex-grow bg-gradient-to-r from-accent/90 to-transparent opacity-70"></div>
+      </div>
     </div>
   )
 }
@@ -161,90 +195,125 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
   return (
     <aside
       className={cn(
-        "border-r bg-card shadow-none transition-all duration-300",
-        mobile ? "w-full" : "hidden w-60 lg:block"
+        "border-r bg-gradient-to-b from-card to-card/95 shadow-none transition-all duration-300",
+        mobile ? "w-full" : "hidden w-64 lg:block"
       )}
       style={{ minHeight: '100vh', boxShadow: '0 0 0 0 transparent' }}
     >
       <div className={cn("p-4", mobile ? "" : "sticky top-0 h-screen flex flex-col justify-between")}>
         {!mobile && (
-          <div className="mb-4 animate-fade-in">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/images/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
+          <div className="mb-6 animate-fade-in">
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity p-1">
+              <div className="p-1.5 rounded-md bg-gradient-to-br from-accent/30 to-accent/10 shadow-sm backdrop-blur-sm">
+                <Image src="/images/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
+              </div>
 
               <h1 className="text-sm font-medium">Lily's Lab</h1>
             </Link>
           </div>
         )}
 
-        <nav className={cn("space-y-6 custom-scrollbar", mobile ? "" : "flex-1 overflow-y-auto")}>
-          <div className="space-y-1">
-            <NavItem href="/" icon={<Home size={16} />} label="Home" onClick={onNavClick} delay={100} />
+        <nav className={cn("space-y-6 custom-scrollbar", mobile ? "" : "flex-1 overflow-y-auto pt-2")}>
+          <div className="space-y-1.5 mb-2">
+            <NavItem href="/" icon={<Home size={16} />} label="Hello" onClick={onNavClick} delay={100} />
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1.5 mb-2">
             <SectionTitle title="Me" delay={150} />
-            <NavItem href="/about" icon={<PersonStandingIcon size={16} />} label="About" onClick={onNavClick} delay={200} />
-            <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={250} />
-            <NavItem href="/someday" icon={<FileText size={16} />} label="Someday" onClick={onNavClick} delay={300} />
-            <NavItem href="/uses" icon={<Layers size={16} />} label="Uses" onClick={onNavClick} delay={350} />
-            <NavItem href="/web-manifesto" icon={<Shield size={16} />} label="Web Manifesto" onClick={onNavClick} delay={375} />
-            <NavItem href="/ask-me-anything" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={400} />
+            <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={200} />
+            <NavItem href="/someday" icon={<Calendar size={16} />} label="Someday" onClick={onNavClick} delay={250} />
+            <NavItem href="/wants" icon={<Heart size={16} />} label="Wants" onClick={onNavClick} delay={300} />
+            <NavItem href="/todo" icon={<BadgeCheck size={16} />} label="Todo" onClick={onNavClick} delay={350} />
+          </div>
+
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="For You" delay={400} />
             <NavItem href="/guestbook" icon={<MessageCircleHeart size={16} />} label="Guestbook" onClick={onNavClick} delay={450} />
+            <NavItem href="/ask-me-anything" icon={<MessageSquare size={16} />} label="AMA" onClick={onNavClick} delay={500} />
+            <NavItem href="/uses" icon={<Layers size={16} />} label="Uses" onClick={onNavClick} delay={550} />
+            <NavItem href="/resources" icon={<WalletCards size={16} />} label="Resources" onClick={onNavClick} delay={600} />
           </div>
 
-          <div className="space-y-1">
-            <SectionTitle title="Digital Garden" delay={450} />
-            <NavItem href="/writing" icon={<BookOpen size={16} />} label="Writings" onClick={onNavClick} delay={500} />
-            <NavItem href="/digital-garden/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={550} />
-            <NavItem href="/daily-logs" icon={<CalendarDaysIcon size={16} />} label="Daily Logs" onClick={onNavClick} delay={575} />
-            <NavItem href="/digital-garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={600} />
-            <NavItem href="/digital-garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={650} />
-            <NavItem href="/digital-garden/bucket-list" icon={<BadgeCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={700} />
-            <NavItem href="/webroll" icon={<Link2 size={16} />} label="Webroll" onClick={onNavClick} delay={750} />
-            {/* <NavItem href="/digital-garden/catalog" icon={<ImageIcon size={16} />} label="Catalog" onClick={onNavClick} delay={800} /> */}
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Garden" delay={650} />
+            <NavItem href="/essays" icon={<FileText size={16} />} label="Essays" onClick={onNavClick} delay={700} />
+            <NavItem href="/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={750} />
+            <NavItem href="/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={800} />
           </div>
 
-          <div className="space-y-1">
-            <SectionTitle title="Workshop" delay={800} />
-            <NavItem href="/workshop/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={850} />
-            <NavItem href="/workshop/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={900} /> 
-            <NavItem href="/workshop/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={950} />
-            <NavItem href="/workshop/resources" icon={<WalletCards size={16} />} label="Resources" onClick={onNavClick} delay={1000} />
-            {/* <NavItem href="/workshop/shop" icon={<ShoppingCart size={16} />} label="Shop" onClick={onNavClick} delay={1050} />
-           */}
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Collections" delay={850} />
+            <NavItem href="/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={900} />
+            <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={950} />
+            <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1000} />
           </div>
 
-          <div className="space-y-1">
-            <SectionTitle title="Playground" delay={1100} />
-            <NavItem href="/playground/music-player" icon={<BookHeartIcon size={16} />} label="Music Player" onClick={onNavClick} delay={1150} />
-            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1200} />
-            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator App" onClick={onNavClick} delay={1250} />
-            <NavItem href="/playground/note-widgets" icon={<NotepadText size={16} />} label="Note Widgets" onClick={onNavClick} delay={1300} />
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="IndieWeb" delay={1050} />
+            <NavItem href="/manifesto" icon={<Shield size={16} />} label="Manifesto" onClick={onNavClick} delay={1100} />
+            <NavItem href="/webroll" icon={<Link2 size={16} />} label="Webroll" onClick={onNavClick} delay={1150} />
+            <NavItem href="/webrings" icon={<Network size={16} />} label="Webrings" onClick={onNavClick} delay={1200} />
           </div>
 
-          <Separator />
-
-          <div className="space-y-1">
-            <NavItem href="/colophon" icon={<WalletCards size={16} />} label="Colophon" onClick={onNavClick} delay={1350} />
-            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1400} hasNotification={true} />
-            {isAdmin && (
-              <NavItem href="/ctrl-room" icon={<Shield size={16} />} label="CTRL Room" onClick={onNavClick} delay={1450} />
-            )}
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Workshop" delay={1250} />
+            <NavItem href="/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={1300} />
+            <NavItem href="/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={1350} /> 
+            <NavItem href="/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={1400} />
           </div>
 
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Playground" delay={1450} />
+            <NavItem href="/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1500} />
+            <NavItem href="/calculator" icon={<Calculator size={16} />} label="Calculator" onClick={onNavClick} delay={1550} />
+          </div>
 
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Misc" delay={1600} />
+            <NavItem href="/stuff" icon={<Boxes size={16} />} label="Stuff" onClick={onNavClick} delay={1650} />
+          </div>
 
-          {!mobile && (
-            <div className="bg-card sticky bottom-0 space-y-1 pt-2 flex items-center justify-between gap-2">
-              <ThemeToggle />
-              <UserProfileSection />
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Imprint" delay={1700} />
+            <NavItem href="/colophon" icon={<Package size={16} />} label="Colophon" onClick={onNavClick} delay={1750} />
+            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1800} hasNotification={true} />
+          </div>
+
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Connect" delay={1900} />
+            <div className="grid grid-cols-4 gap-2 px-3 py-1.5">
+              <a href="mailto:lilyslab.gmail.com" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
+                <Mail size={16} className="mx-auto" />
+              </a>
+              <a href="https://instagram.com/defitcreative" target="_blank" rel="noreferrer" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
+                <Instagram size={16} className="mx-auto" />
+              </a>
+              <a href="https://linkedin.com/in/lilianada" target="_blank" rel="noreferrer" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
+                <Linkedin size={16} className="mx-auto" />
+              </a>
+              <a href="https://x.com/lilian_ada_" target="_blank" rel="noreferrer" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
+                <Twitter size={16} className="mx-auto" />
+              </a>
+            </div>
+          </div>
+
+          {isAdmin && (
+            <div className="space-y-1.5 mb-2">
+              <SectionTitle title="Admin" delay={1950} />
+              <NavItem href="/ctrl-room" icon={<Shield size={16} />} label="CTRL Room" onClick={onNavClick} delay={2000} />
             </div>
           )}
         </nav>
 
+        {!mobile && (
+          <div className="space-y-1.5 pt-4 mt-2 border-t border-accent/20 grid grid-cols-3 gap-2">
+            <UserProfileSection />
+              <ThemeToggle />
+              {/* <FontToggle />
+              <ThemeColorToggle /> */}
+          </div>
+        )}
       </div>
-      
       
       <style jsx global>{`
       .custom-scrollbar {
@@ -263,11 +332,11 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
       }
       .custom-scrollbar a, .custom-scrollbar .flex.items-center {
         border-radius: 0.5rem;
-        transition: background 0.18s, color 0.18s, box-shadow 0.18s;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        min-height: 2.5rem;
-        align-items: center;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .custom-scrollbar a:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       }
     `}</style>
     </aside>

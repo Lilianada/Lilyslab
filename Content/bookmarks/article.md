@@ -4,8 +4,9 @@ title: Obsidian Setup
 url: https://obsidian-bloger.pages.dev/git-setup-for-obsidian/
 date: 2025-04-26
 tags:
-  - CMS
   - productivity
+  - note-taking
+  - pkm
 type: article
 id: article-001
 ---
@@ -17,6 +18,7 @@ url: https://www.mathurah.com/thoughts/job-trifecta
 date: 2025-04-29
 tags:
   - career
+  - personal-development
 type: article
 id: article-002
 ---
@@ -27,7 +29,8 @@ title: Digital Gardening
 url: https://timrodenbroeker.de/digital-garden/
 date: 2025-04-30
 tags:
-  - digital garden
+  - digital-garden
+  - knowledge-management
 type: article
 id: article-003
 ---
@@ -38,7 +41,8 @@ title: Digital Garden History
 url: https://maggieappleton.com/garden-history/
 date: 2025-04-30
 tags:
-  - digital garden
+  - digital-garden
+  - web-history
 type: article
 id: article-004
 ---
@@ -49,7 +53,8 @@ title: About Nicole van der Hoevan
 url: https://nicolevanderhoeven.com/about/
 date: 2025-04-30
 tags:
-  - digital garden
+  - digital-garden
+  - personal-websites
 type: article
 id: article-005
 ---
@@ -60,7 +65,8 @@ title: Prioritize your project ideas
 url: https://thecreativeindependent.com/tips/tips-for-how-to-prioritize-your-project-ideas/
 date: 2025-04-30
 tags:
-  - projects
+  - productivity
+  - creativity
 type: article
 id: article-006
 ---
@@ -71,8 +77,8 @@ title: Putting your work out there
 url: https://thecreativeindependent.com/approaches/theme-putting-your-work-out-there/
 date: 2025-04-30
 tags:
-  - project
-  - approaches
+  - creativity
+  - self-expression
 type: article
 id: article-007
 ---
@@ -83,7 +89,8 @@ title: Building a personal archiving practice
 url: https://theanchoressarchives.substack.com/p/building-a-personal-archiving-practice
 date: 2025-04-30
 tags:
-  - building
+  - pkm
+  - organization
 type: article
 id: article-008
 ---
@@ -94,20 +101,20 @@ title: How to tell the story of your creative work
 url: https://thecreativeindependent.com/guides/how-to-tell-the-story-of-your-creative-work/
 date: 2025-04-30
 tags:
-  - guide
-  - project
+  - creativity
+  - storytelling
 type: article
 id: article-009
 ---
 
 ---
 publish: true
-title: How to tell the story of your creative work
+title: How to establish a daily writing practice
 url: https://thecreativeindependent.com/tips/how-to-establish-a-daily-writing-practice/
 date: 2025-04-30
 tags:
-  - tips
   - writing
+  - habits
 type: article
 id: article-010
 ---
@@ -119,6 +126,7 @@ url: https://someday.page/
 date: 2025-05-02
 tags:
   - writing
+  - personal-development
 type: article
 id: article-011
 ---
@@ -130,7 +138,7 @@ url: https://www.julian.com/blog/creativity-faucet
 date: 2025-05-03
 tags:
   - creativity
-  - inspiration
+  - productivity
 type: article
 id: article-012
 ---
@@ -141,8 +149,8 @@ title: Startup Guide
 url: https://www.julian.com/guide/startup/intro
 date: 2025-05-03
 tags:
-  - guide
-  - startup
+  - career
+  - business
 type: article
 id: article-013
 ---
@@ -153,8 +161,8 @@ title: Storytelling
 url: https://www.julian.com/blog/storytelling
 date: 2025-05-03
 tags:
-  - guide
   - storytelling
+  - writing
 type: article
 id: article-014
 ---
@@ -165,8 +173,8 @@ title: First Draft
 url: https://www.julian.com/guide/write/first-draft
 date: 2025-05-04
 tags:
-  - guide
   - writing
+  - guides
 type: article
 id: article-015
 ---
@@ -177,8 +185,8 @@ title: "My blog is a digital garden, not a blog"
 url: https://joelhooks.com/digital-garden
 date: 2025-05-04
 tags:
-  - writing
-  - Digital-Garden
+  - digital-garden
+  - blogging
 type: article
 id: article-016
 ---
@@ -189,9 +197,8 @@ title: The Slow Web
 url: https://www.jackcheng.com/the-slow-web/
 date: 2025-06-06
 tags:
-  - the internet
-  - web
-  - essay
+  - web-culture
+  - digital-wellbeing
 type: article
 id: article-017
 ---
@@ -202,8 +209,7 @@ title: "Emily's Website Manifesto"
 url: https://fromemily.com/website-manifesto/
 date: 2025-06-07
 tags:
-  - the internet
-  - web
+  - personal-websites
   - manifesto
 type: article
 id: article-018
@@ -215,9 +221,7 @@ title: Postroll
 url: https://notes.jeddacp.com/postroll/
 date: 2025-05-21
 tags:
-  - digital-notes
-  - reflection
-  - web-culture
+  - digital-garden
 type: article
 id: article-019
 ---
@@ -230,7 +234,6 @@ date: 2025-05-27
 tags:
   - blogging
   - minimalism
-  - challenge
 type: article
 id: article-020
 ---
@@ -243,7 +246,6 @@ date: 2025-05-18
 tags:
   - technology
   - ethics
-  - purpose
 type: article
 id: article-021
 ---
@@ -255,8 +257,7 @@ url: https://boffosocko.com/kind/exercise/
 date: 2025-05-21
 tags:
   - health
-  - routine
-  - personal-development
+  - habits
 type: article
 id: article-022
 ---
@@ -281,8 +282,8 @@ url: https://www.swyx.io/three-strikes
 date: 2025-05-28
 tags:
   - writing
+  - blogging
   - productivity
-  - content-creation
 type: article
 id: article-024
 ---
@@ -294,8 +295,7 @@ url: https://shkspr.mobi/blog/2024/10/tending-to-my-digital-garden/
 date: 2025-05-26
 tags:
   - digital-garden
-  - web-maintenance
-  - personal-knowledge
+  - knowledge-management
 type: article
 id: article-025
 ---
@@ -306,9 +306,8 @@ title: Internet is fun
 url: https://kwon.nyc/notes/internet-is-fun/
 date: 2025-05-19
 tags:
-  - internet-culture
+  - web-culture
   - creativity
-  - web-exploration
 type: article
 id: article-026
 ---
@@ -321,7 +320,6 @@ date: 2025-05-31
 tags:
   - blogging
   - reflection
-  - personal-growth
 type: article
 id: article-027
 ---
@@ -333,7 +331,6 @@ url: https://kwon.nyc/notes/things-i-dont-have-to-do/
 date: 2025-05-17
 tags:
   - personal-boundaries
-  - self-care
   - mindfulness
 type: article
 id: article-028
@@ -346,8 +343,7 @@ url: https://blog.avas.space/social-media-dependency/
 date: 2025-05-28
 tags:
   - social-media
-  - digital-health
-  - habits
+  - digital-wellbeing
 type: article
 id: article-029
 ---
@@ -359,8 +355,7 @@ url: https://blog.avas.space/no-trust/
 date: 2025-05-28
 tags:
   - privacy
-  - internet
-  - security
+  - web-culture
 type: article
 id: article-030
 ---
@@ -372,7 +367,6 @@ url: https://tracydurnell.com/2021/09/26/gardens-and-streams-ii/
 date: 2025-05-24
 tags:
   - digital-garden
-  - knowledge-management
   - web-theory
 type: article
 id: article-031
@@ -385,8 +379,7 @@ url: https://tracydurnell.com/2024/03/04/websites-as-gardens-of-the-internet-eco
 date: 2025-05-25
 tags:
   - web-design
-  - ecology
-  - internet-culture
+  - digital-garden
 type: article
 id: article-032
 ---
@@ -397,9 +390,9 @@ title: "Digital Garden & Zettelkasten"
 url: https://barnsworthburning.net/spaces/recNaicyEYDX4yie6
 date: 2025-05-27
 tags:
-  - note-taking
-  - knowledge-management
+  - digital-garden
   - zettelkasten
+  - knowledge-management
 type: article
 id: article-033
 ---
@@ -410,9 +403,9 @@ title: Digital Walled Gardens
 url: https://manuelmoreale.com/digital-walled-gardens
 date: 2025-05-22
 tags:
+  - digital-garden
   - privacy
-  - internet-evolution
-  - digital-spaces
+  - web-design
 type: article
 id: article-034
 ---
@@ -425,7 +418,7 @@ date: 2025-05-27
 tags:
   - productivity
   - reflection
-  - journaling
+  - habits
 type: article
 id: article-035
 ---
@@ -451,7 +444,6 @@ date: 2025-05-27
 tags:
   - curation
   - blogging
-  - resources
 type: article
 id: article-037
 ---
@@ -462,9 +454,9 @@ title: How to create a personal wiki
 url: https://wiki.garysheng.com/docs/guides/writing/howwiki
 date: 2025-05-29
 tags:
-  - knowledge-base
-  - documentation
-  - organization
+  - pkm
+  - knowledge-management
+  - guides
 type: article
 id: article-038
 ---
@@ -475,9 +467,9 @@ title: Why you should create a personal wiki
 url: https://wiki.garysheng.com/docs/guides/writing/whywiki
 date: 2025-05-18
 tags:
+  - pkm
   - knowledge-management
   - productivity
-  - personal-development
 type: article
 id: article-039
 ---
@@ -490,7 +482,7 @@ date: 2025-05-21
 tags:
   - digital-garden
   - zettelkasten
-  - note-systems
+  - note-taking
 type: article
 id: article-040
 ---
@@ -502,7 +494,7 @@ url: https://tomcritchlow.com/2019/02/17/building-digital-garden/
 date: 2025-05-22
 tags:
   - digital-garden
-  - web-development
+  - web-design
   - knowledge-management
 type: article
 id: article-041
@@ -516,7 +508,7 @@ date: 2025-05-18
 tags:
   - digital-garden
   - blogging
-  - web-publishing
+  - reflection
 type: article
 id: article-042
 ---
@@ -529,7 +521,6 @@ date: 2025-05-30
 tags:
   - digital-garden
   - web-development
-  - domains
 type: article
 id: article-043
 ---
@@ -542,7 +533,7 @@ date: 2025-05-18
 tags:
   - pkm
   - organization
-  - knowledge-systems
+  - knowledge-management
 type: article
 id: article-044
 ---
@@ -580,8 +571,7 @@ url: https://wibtal.com/67
 date: 2025-06-01
 tags:
   - relationships
-  - growth
-  - metaphor
+  - personal-development
 type: article
 id: article-047
 ---
@@ -593,8 +583,8 @@ url: https://wibtal.com/66
 date: 2025-05-25
 tags:
   - lifestyle
-  - balance
   - philosophy
+  - balance
 type: article
 id: article-048
 ---
@@ -619,7 +609,6 @@ url: https://wibtal.com/63
 date: 2025-05-29
 tags:
   - writing
-  - creativity
   - self-expression
 type: article
 id: article-050
@@ -632,7 +621,7 @@ url: https://wibtal.com/53
 date: 2025-06-05
 tags:
   - writing
-  - process
+  - guides
   - creativity
 type: article
 id: article-051
@@ -645,8 +634,8 @@ url: https://wibtal.com/50
 date: 2025-06-02
 tags:
   - focus
-  - goals
   - productivity
+  - goals
 type: article
 id: article-052
 ---
@@ -671,8 +660,8 @@ url: https://www.benkuhn.net/writing/
 date: 2025-06-05
 tags:
   - writing
-  - digital-presence
-  - communication
+  - web-culture
+  - guides
 type: article
 id: article-054
 ---
@@ -685,7 +674,6 @@ date: 2025-06-01
 tags:
   - web-culture
   - creativity
-  - digital-spaces
 type: article
 id: article-055
 ---
@@ -711,7 +699,6 @@ date: 2025-05-29
 tags:
   - writing
   - thinking
-  - expression
 type: article
 id: article-057
 ---
@@ -735,9 +722,8 @@ title: Make the Internet fun again
 url: https://www.notboring.co/p/make-the-internet-fun-again
 date: 2025-05-24
 tags:
-  - internet-culture
+  - web-culture
   - creativity
-  - web-exploration
 type: article
 id: article-059
 ---
@@ -750,7 +736,6 @@ date: 2025-05-21
 tags:
   - digital-garden
   - resources
-  - directory
 type: article
 id: article-060
 ---
@@ -762,7 +747,7 @@ url: https://maggieappleton.com/tools-for-thought
 date: 2025-06-03
 tags:
   - tools-for-thought
-  - cognition
+  - thinking
   - productivity
 type: article
 id: article-061
@@ -776,7 +761,6 @@ date: 2025-06-01
 tags:
   - digital-garden
   - methodology
-  - web-publishing
 type: article
 id: article-062
 ---
@@ -788,7 +772,6 @@ url: https://maggieappleton.com/evergreen-notes
 date: 2025-05-20
 tags:
   - note-taking
-  - evergreen-notes
   - knowledge-management
 type: article
 id: article-063
@@ -800,9 +783,8 @@ title: "Michael Ashcroft's Notes"
 url: https://michaelashcroft.org/notes
 date: 2025-05-17
 tags:
-  - notes
-  - thoughts
-  - personal-knowledge
+  - note-taking
+  - digital-garden
 type: article
 id: article-064
 ---
@@ -815,7 +797,6 @@ date: 2025-06-01
 tags:
   - digital-garden
   - web-history
-  - knowledge-systems
 type: article
 id: article-065
 ---
@@ -826,9 +807,9 @@ title: "Maggie Appleton's Digital Garden on Bi-Directional Links"
 url: https://maggieappleton.com/bi-directional-links
 date: 2025-05-22
 tags:
-  - bi-directional-links
-  - hypertext
   - note-taking
+  - hypertext
+  - pkm
 type: article
 id: article-066
 ---
@@ -840,8 +821,8 @@ url: https://blog.neocities.org/blog/2013/05/28/making-the-web-fun-again
 date: 2025-05-24
 tags:
   - web-culture
-  - creativity
   - personal-websites
+  - creativity
 type: article
 id: article-067
 ---
@@ -865,9 +846,8 @@ title: Why you should have a website
 url: https://rscottjones.com/why-you-should-have-a-website/
 date: 2025-05-26
 tags:
+  - personal-websites
   - web-presence
-  - personal-branding
-  - digital-identity
 type: article
 id: article-070
 ---
@@ -892,7 +872,6 @@ url: https://thoughts.melonking.net/thoughts/every-site-needs-a-links-page-why-l
 date: 2025-05-21
 tags:
   - web-design
-  - linking
   - community
 type: article
 id: article-072
@@ -919,7 +898,6 @@ date: 2025-05-28
 tags:
   - note-taking
   - organization
-  - documentation
 type: article
 id: article-074
 ---
@@ -930,8 +908,7 @@ title: Feedbackless feed
 url: https://fromemily.com/feedbackless-feed/
 date: 2025-05-17
 tags:
-  - social-media
-  - digital-health
+  - digital-wellbeing
   - interface-design
 type: article
 id: article-075
@@ -958,7 +935,6 @@ date: 2025-05-21
 tags:
   - writing
   - thinking
-  - cognition
 type: article
 id: article-077
 ---
@@ -971,7 +947,6 @@ date: 2025-05-31
 tags:
   - simplicity
   - design
-  - philosophy
 type: article
 id: article-078
 ---
@@ -984,7 +959,6 @@ date: 2025-06-01
 tags:
   - web-design
   - writing
-  - communication
 type: article
 id: article-079
 ---
@@ -1010,7 +984,7 @@ date: 2025-06-05
 tags:
   - thinking
   - cognition
-  - knowledge-structures
+  - knowledge-management
 type: article
 id: article-081
 ---
@@ -1023,7 +997,6 @@ date: 2025-05-28
 tags:
   - digital-independence
   - risk-management
-  - web-ownership
 type: article
 id: article-082
 ---
@@ -1075,7 +1048,7 @@ date: 2025-05-28
 tags:
   - blogging
   - self-expression
-  - purpose
+  - writing
 type: article
 id: article-086
 ---
@@ -1099,13 +1072,10 @@ title: Internet Manifesto
 url: https://goblin-heart.net/sadgrl/cyberspace/internet-manifesto
 date: 2025-05-22
 tags:
-  - internet-culture
-  - web-philosophy
   - digital-freedom
+  - manifesto
 type: article
 id: article-088
----
-
 ---
 
 ---
@@ -1114,13 +1084,11 @@ title: When AI Sells You What You Want
 URL: https://kinduff.com/2025/05/28/when-ai-sells-you-what-you-want/
 date: 2025-06-08
 tags:
-  - airtificial intelligence
+  - artificial-intelligence
+  - technology
+  - digital-culture
 type: article
 publish: true
----
-
-
-
 ---
 
 ---
@@ -1129,9 +1097,35 @@ title: I'm a Fucking Webmaster
 URL: https://justinjackson.ca/webmaster/
 date: 2025-06-08
 tags:
-  - web-manifesto
-  - webmaster
+  - web-culture
+  - personal-websites
+  - manifesto
 type: article
 publish: true
 ---
 
+---
+id: article-091
+title: Every site needs a Links Page / Why linking matters
+URL: https://thoughts.melonking.net/thoughts/every-site-needs-a-links-page-why-linking-matters
+date: 2025-06-02
+tags:
+  - web-design
+  - linking
+  - community
+type: article
+publish: true
+---
+
+---
+id: article-092
+title: Digital Minimalism
+URL: https://davesmyth.com/digital-minimalism
+date: 2025-06-09
+tags:
+  - digital-minimalism
+  - digital-wellbeing
+  - intentionality
+type: article
+publish: true
+---
