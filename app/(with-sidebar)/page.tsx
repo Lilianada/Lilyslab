@@ -75,7 +75,7 @@ export default function Home() {
             </div>
             <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
               Hi there, I'm Lilian. I'm a{" "}
-              <Link href="https://github.com/lilianokeke" className="text-primary hover:underline" rel="me">
+              <Link href="https://github.com/lilianada" className="text-primary hover:underline">
                 MERN-Stack Developer
               </Link>
               ,{" "}

@@ -68,7 +68,7 @@ export function UserProfileSection() {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm" className="w-full justify-start gap-2 text-xs">
             {isAdmin ? (
-              <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-0.5 flex items-center">
+              <span className="bg-purple-100 rounded-md py-2 px-4  text-purple-800 dark:bg-purple-900 dark:text-purple-200 flex items-center">
                 <Crown size={12} className="mr-1" /> Admin
               </span>
             ) : (

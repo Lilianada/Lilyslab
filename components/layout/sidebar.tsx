@@ -24,33 +24,29 @@ import {
   BookHeart as BookHeartIcon,
   Calculator,
   CalendarDaysIcon,
-  PersonStandingIcon,
   Timer,
   Shield,
   MessageCircleHeart,
   Link2,
   Heart,
-  Settings,
   Mail,
   Instagram,
   Linkedin,
   Twitter,
-  User,
   Package,
   Boxes,
   Network,
-  PenTool,
-  Plus,
   Calendar,
   UserSquare2,
-  PaintBucketIcon
+  PaintBucketIcon,
+  Smile,
+  Flower,
+  ListCheck,
+  ScrollText
 } from "lucide-react"
 import { ThemeToggle } from "../theme/theme-toggle"
-// import { FontToggle } from "../theme/font-toggle"
-// import { ThemeColorToggle } from "../theme/theme-color-toggle"
 import { useEffect, useState } from "react"
 import { UserProfileSection } from "../auth/user-profile-section"
-import { Separator } from "../ui/separator"
 import { useAuth } from "@/contexts/auth-context"
 
 interface NavItemProps {
@@ -217,17 +213,17 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
         <nav className={cn("space-y-6 custom-scrollbar", mobile ? "" : "flex-1 overflow-y-auto pt-2")}>
           <div className="space-y-1.5 mb-2">
-            <NavItem href="/" icon={<Home size={16} />} label="Hello" onClick={onNavClick} delay={100} />
+            <NavItem href="/" icon={<Flower size={16} />} label="Hello" onClick={onNavClick} delay={100} />
           </div>
 
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Me" delay={150} />
-            <NavItem href="/about" icon={<UserSquare2 size={16} />} label="About" onClick={onNavClick} delay={200} />
+            <NavItem href="/about" icon={<Smile size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={200} />
             <NavItem href="/someday" icon={<Calendar size={16} />} label="Someday" onClick={onNavClick} delay={250} />
             <NavItem href="/wants" icon={<Heart size={16} />} label="Wants" onClick={onNavClick} delay={300} />
             <NavItem href="/todo" icon={<BadgeCheck size={16} />} label="Todo" onClick={onNavClick} delay={350} />
-            <NavItem href="/bucket-list" icon={<PaintBucketIcon size={16} />} label="Bucket List" onClick={onNavClick} delay={350} />
+            <NavItem href="/bucket-list" icon={<ListCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={350} />
           </div>
 
           <div className="space-y-1.5 mb-2">
@@ -255,7 +251,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="IndieWeb" delay={1050} />
             <NavItem href="/manifesto" icon={<Shield size={16} />} label="Manifesto" onClick={onNavClick} delay={1100} />
-            <NavItem href="/webroll" icon={<Link2 size={16} />} label="Webroll" onClick={onNavClick} delay={1150} />
+            <NavItem href="/webroll" icon={<ScrollText size={16} />} label="Webroll" onClick={onNavClick} delay={1150} />
             <NavItem href="/webrings" icon={<Network size={16} />} label="Webrings" onClick={onNavClick} delay={1200} />
           </div>
 
@@ -310,7 +306,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         </nav>
 
         {!mobile && (
-          <div className="space-y-1.5 pt-4 mt-2 border-t border-accent/20 grid grid-cols-3 gap-2">
+          <div className="pt-4 mt-2 border-t border-accent/20 flex justify-between items-center">
             <UserProfileSection />
               <ThemeToggle />
           </div>
