@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy});om "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import localFont from 'next/font/local';
 import type { DisplayLog } from "./page";
 
 // Lazy load markdown rendering dependencies
@@ -46,22 +45,7 @@ const MarkdownRenderer = lazy(() =>
   })
 );
 
-const nitti = localFont({
-  src: [
-    {
-      path: '../../../public/fonts/Nitti-Normal.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/fonts/Nitti-Bold.woff',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-nitti',
-  display: 'swap',
-});
+
 
 function MarkdownWithColoredLinks({ children }: { children: string }) {
   return (
@@ -109,7 +93,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
   const [showWhyModal, setShowWhyModal] = useState(false);
 
   return (
-    <div className={`min-h-screen bg-background text-foreground sm:p-8 ${nitti.className}`}>
+    <div className={`min-h-screen bg-background text-foreground sm:p-8 font-nitti`}>
       {/* Header */}
       <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
         <div className="flex items-center gap-3">

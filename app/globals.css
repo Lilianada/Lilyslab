@@ -2,6 +2,23 @@
 @import "prismjs/themes/prism-tomorrow.css";
 @import "../styles/card-animations.css";
 
+/* Font declarations */
+@font-face {
+  font-family: 'Nitti';
+  src: url('/fonts/Nitti-Normal.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nitti';
+  src: url('/fonts/Nitti-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Then include Tailwind directives */
 @tailwind base;
 @tailwind components;

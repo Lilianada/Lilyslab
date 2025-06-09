@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import localFont from 'next/font/local';
 import { WebrollLink } from '@/lib/garden/webroll';
 import {
   Accordion,
@@ -11,23 +10,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const nitti = localFont({
-  src: [
-    {
-      path: '@/public/fonts/Nitti-Normal.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '@/public/fonts/Nitti-Bold.woff',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-nitti',
-  display: 'swap',
-});
 
 const categories = [
   { value: "all", label: "All" },
@@ -94,7 +76,7 @@ export default function WebrollClient({ initialLinks }: WebrollClientProps) {
   };
 
   return (
-    <div className={`min-h-screen grid grid-cols-1 lg:grid-cols-[368px_1fr] bg-[#f5f5f5] gap-0 lg:gap-4 ${nitti.className}`}>
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-[368px_1fr] bg-[#f5f5f5] gap-0 lg:gap-4 font-nitti">
       {/* Sidebar */}
       <header className="bg-[#0f02d0] border-[1.5px] border-[#69a4ff] lg:max-h-screen lg:h-screen overflow-y-auto p-4 md:p-6 lg:sticky top-0 left-0 w-full lg:w-[368px] z-100 scrollbar-none">
         {/* Back arrow and title */}
