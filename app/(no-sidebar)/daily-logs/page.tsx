@@ -1,4 +1,4 @@
-import React from "react";
+
 import { getAllDailyLogs, type DailyLog } from "@/lib/daily-logs";
 import DailyLogsClient from "./DailyLogsClient";
 

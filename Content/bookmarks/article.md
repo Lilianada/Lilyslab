@@ -1109,7 +1109,7 @@ id: article-088
 ---
 
 ---
-id: article-088
+id: article-089
 title: When AI Sells You What You Want
 URL: https://kinduff.com/2025/05/28/when-ai-sells-you-what-you-want/
 date: 2025-06-08
@@ -1124,7 +1124,7 @@ publish: true
 ---
 
 ---
-id: article-089
+id: article-090
 title: I'm a Fucking Webmaster
 URL: https://justinjackson.ca/webmaster/
 date: 2025-06-08
