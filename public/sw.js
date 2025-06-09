@@ -1,4 +1,4 @@
-// Service Worker for Lily's Lab - Optimized for Cache Management
+// Service Worker for Lily's Garden - Optimized for Cache Management
 const CACHE_NAME = 'lilyslab-cache-v2';
 const STATIC_CACHE = 'lilyslab-static-v2';
 const DYNAMIC_CACHE = 'lilyslab-dynamic-v2';

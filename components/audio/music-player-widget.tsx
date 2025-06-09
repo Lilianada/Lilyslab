@@ -21,7 +21,7 @@ interface MusicPlayerWidgetProps {
 
 export const MusicPlayerWidget = ({
   imageUrl = "/audio/placeholder-cover.jpg", // Default image
-  title = "Lily's Lab Intro", // Default title
+  title = "Lily's Garden Intro", // Default title
   artist = "Lily", // Default artist
 }: MusicPlayerWidgetProps) => {
   // Audio state

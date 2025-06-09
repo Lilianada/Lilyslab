@@ -12,8 +12,12 @@ import { Footer } from "@/components/layout/footer";
 import { useToast } from "@/hooks/use-toast";
 
 // Lazy load form-related components and validation
-const GuestbookForm = lazy(() => import("../../../components/guestbook/guestbook-form"));
-const GuestbookEntries = lazy(() => import("../../../components/guestbook/guestbook-entries"));
+const GuestbookForm = lazy(
+  () => import("../../../components/guestbook/guestbook-form")
+);
+const GuestbookEntries = lazy(
+  () => import("../../../components/guestbook/guestbook-entries")
+);
 
 interface GuestbookEntry {
   id: string;
@@ -68,7 +72,7 @@ export default function GuestbookPage() {
       name: entry.name,
       url: entry.url,
       date: entry.created_at,
-      message: entry.message
+      message: entry.message,
     };
     setEntries((prev) => [newEntry, ...prev]);
   };
@@ -79,22 +83,23 @@ export default function GuestbookPage() {
         <div>
           <h1 className="text-xl font-medium tracking-tight mb-4">Guestbook</h1>
           <p className="text-sm text-muted-foreground mb-8">
-            Welcome, fellow wanderer! 
+            Welcome, fellow wanderer!
             <br />
             <br />
-            I absolutely love exploring the web and stumbled upon the charming
-            tradition of the Guestbook—it's like leaving a footprint on
-            someone's digital garden. If you've found something here that caught
-            your eye, I'd be thrilled if you left me a note below. Your words
-            will genuinely brighten my day!
+            Happy to have you in my little, well kept and organised corner of
+            the amazing internet. I absolutely love exploring the web and
+            stumbled upon the charming tradition of the Guestbook, it’s like
+            leaving a footprint on someone’s digital garden. If you’ve found
+            something here that caught your eye, I’d be thrilled if you left me
+            a note below. Your words will genuinely brighten my day!
             <br />
             <br />
             Do you have a guestbook of your own? Drop your link in the URL
-            field—I'd love to pay your corner of the internet a visit and sign
+            field—I’d love to pay your corner of the internet a visit and sign
             your guestbook too.
             <br />
             <br />
-            Thanks for stopping by and sharing a little bit of yourself.
+            Thanks for stopping by 🫰🏾
           </p>
         </div>
 
@@ -106,7 +111,7 @@ export default function GuestbookPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Suspense 
+            <Suspense
               fallback={
                 <div className="animate-pulse space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -127,7 +132,7 @@ export default function GuestbookPage() {
 
         <div className="mt-12">
           <h2 className="text-xl font-medium mb-6">Entries</h2>
-          <Suspense 
+          <Suspense
             fallback={
               <div className="space-y-4">
                 {[...Array(3)].map((_, i) => (

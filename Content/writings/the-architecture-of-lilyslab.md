@@ -11,7 +11,7 @@ tags:
   - Strategy
   - NextJS
   - Web-Development
-title: The Architecture of Lily's Lab
+title: The Architecture of Lily's Garden
 readingTime: 7
 wordCount: 1540
 ---

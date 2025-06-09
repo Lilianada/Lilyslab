@@ -51,7 +51,7 @@ export function Footer({
      
      // Set a static location instead of using geolocation
      // This completely avoids the permissions policy violation
-     setLocation("Lily's Lab - Digital Garden & Workshop");
+     setLocation("Lily's Garden - Digital Garden & Workshop");
      
      // Fetch the last edited date from Git commit history
      const fetchLastEdited = async () => {

@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const manifesto = await getManifestoContent();
   
   return {
-    title: `${manifesto.title} | Lily's Lab`,
+    title: `${manifesto.title} | Lily's Garden`,
     description: manifesto.description,
     keywords: manifesto.tags,
   };

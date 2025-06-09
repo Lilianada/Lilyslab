@@ -18,7 +18,7 @@ export const PersonStructuredData = () => {
   "jobTitle": "Software Engineer",
   "worksFor": {
     "@type": "Organization",
-    "name": "Lily's Lab"
+    "name": "Lily's Garden"
   },
   "knowsAbout": [
     "Web Development",
@@ -43,7 +43,7 @@ export const WebsiteStructuredData = () => {
   const data = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Lily's Lab",
+  "name": "Lily's Garden",
   "alternateName": "Lilyslab",
   "url": "https://lilyslab.xyz",
   "description": "Software engineer, product manager, and digital creator",
@@ -92,7 +92,7 @@ export const ArticleStructuredData = ({ title, description, slug, date, image }:
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Lily's Lab",
+      "name": "Lily's Garden",
       "logo": {
         "@type": "ImageObject",
         "url": "https://lilyslab.xyz/12.png"

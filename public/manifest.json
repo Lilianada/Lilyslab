@@ -1,6 +1,6 @@
 {
-  "name": "Lily's Lab",
-  "short_name": "Lily's Lab",
+  "name": "Lily's Garden",
+  "short_name": "Lily's Garden",
   "description": "Software engineer, product manager, and digital creator",
   "start_url": "/",
   "display": "standalone",
@@ -32,7 +32,7 @@
       "sizes": "1280x720",
       "type": "image/jpeg",
       "platform": "wide",
-      "label": "Lily's Lab Homepage"
+      "label": "Lily's Garden Homepage"
     }
   ]
 }

@@ -1,8 +1,8 @@
-# Lily's Lab
+# Lily's Space
 
 A modern, responsive portfolio website built with Next.js, Tailwind CSS, and Notion as a CMS. This project serves as a personal website showcasing work experience, projects, writing, and more.
 
-![Lily's Lab Screenshot](public/images/screenshot.png)
+![Lily's Space Screenshot](public/images/screenshot.png)
 
 ## Features
 

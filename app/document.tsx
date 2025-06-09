@@ -32,8 +32,8 @@ export default function Document() {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content="Lily's Lab" />
-        <meta name="apple-mobile-web-app-title" content="Lily's Lab" />
+        <meta name="application-name" content="Lily's Garden" />
+        <meta name="apple-mobile-web-app-title" content="Lily's Garden" />
         
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

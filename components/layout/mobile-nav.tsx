@@ -18,7 +18,7 @@ export default function MobileNav() {
   return (
     <div className="flex items-center justify-between border-b  p-4 lg:hidden">
       <Link href="/" className="flex items-center gap-2">
-        <h1 className="text-sm font-medium">Lily's Lab</h1>
+        <h1 className="text-sm font-medium">Lily's Garden</h1>
       </Link>
       <div className="flex items-center gap-2">
 

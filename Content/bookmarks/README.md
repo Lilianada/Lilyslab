@@ -1,8 +1,8 @@
-# Lily's Lab Bookmarks System
+# Lily's Garden Bookmarks System
 
 ## Overview
 
-The bookmarks system in Lily's Lab has been reorganized to use a category-based approach rather than individual files for each bookmark. This improves scalability, makes filtering easier, and simplifies the process of adding new bookmarks.
+The bookmarks system in Lily's Garden has been reorganized to use a category-based approach rather than individual files for each bookmark. This improves scalability, makes filtering easier, and simplifies the process of adding new bookmarks.
 
 ## Directory Structure
 

@@ -205,10 +205,10 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
           <div className="mb-6 animate-fade-in">
             <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity p-1">
               <div className="p-1.5 rounded-md bg-gradient-to-br from-accent/30 to-accent/10 shadow-sm backdrop-blur-sm">
-                <Image src="/images/12.png" alt="Lily's Lab Logo" width={24} height={24} className="rounded-md" />
+                <Image src="/images/12.png" alt="Lily's Garden Logo" width={24} height={24} className="rounded-md" />
               </div>
 
-              <h1 className="text-sm font-medium">Lily's Lab</h1>
+              <h1 className="text-sm font-medium">Lily's Garden</h1>
             </Link>
           </div>
         )}
