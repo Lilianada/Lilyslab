@@ -29,7 +29,7 @@ export async function getAllDailyLogs(): Promise<DailyLog[]> {
         
         // Use the new date field if available, fallback to createdAt
         const dateString = data.date || data.createdAt;
-        let date = new Date(dateString);
+        const date = new Date(dateString);
         
         return {
           id: slug,

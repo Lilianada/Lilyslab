@@ -34,13 +34,6 @@ export {
   Eye
 } from "lucide-react"
 
-// Lazy loaded components for better performance
-export const LazyMusicPlayerWidget = lazy(() => import('@/components/audio/music-player-widget').then(m => ({ default: m.MusicPlayerWidget })));
-export const LazyAudioUploader = lazy(() => import('@/components/ctrl-room/audio-uploader').then(m => ({ default: m.AudioUploader })));
-export const LazyManageLibrary = lazy(() => import('@/components/ctrl-room/manage-library').then(m => ({ default: m.ManageLibrary })));
-export const LazyAudioSettings = lazy(() => import('@/components/ctrl-room/audio-settings').then(m => ({ default: m.AudioSettings })));
-export const LazyUploadAudio = lazy(() => import('@/components/ctrl-room/upload-audio'));
-
 // Form and interaction lazy imports
 export const LazyGuestbookForm = lazy(() => import('@/components/guestbook/guestbook-form'));
 export const LazyGuestbookEntries = lazy(() => import('@/components/guestbook/guestbook-entries'));

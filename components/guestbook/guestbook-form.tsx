@@ -42,7 +42,14 @@ const formSchema = z.object({
 });
 
 interface GuestbookFormProps {
-  onEntryAdded: (entry: any) => void;
+  onEntryAdded: (entry: {
+    id: string;
+    name: string;
+    url?: string;
+    email: string;
+    message: string;
+    created_at: string;
+  }) => void;
 }
 
 export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {

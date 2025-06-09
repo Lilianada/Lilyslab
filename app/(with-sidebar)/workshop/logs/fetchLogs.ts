@@ -6,7 +6,7 @@ export async function fetchLogs() {
   const logsDir = path.join(process.cwd(), 'Content', 'logs');
   const files = await fs.readdir(logsDir);
   const mdxFiles = files.filter((file) => file.endsWith('.mdx'));
-  let sections: any[] = [];
+  const sections: any[] = [];
 
   for (const file of mdxFiles) {
     const filePath = path.join(logsDir, file);
@@ -33,7 +33,7 @@ function parseLogContent(content: string) {
   // It finds bullet points and sub-bullets, and maps them to the UI shape
   const lines = content.split('\n');
   const items: any[] = [];
-  let currentItem: any = null;
+  const currentItem: any = null;
 
   for (let line of lines) {
     line = line.trim();

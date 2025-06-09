@@ -16,9 +16,6 @@ export async function GET() {
           const filePath = path.join(AMA_DIR, file);
           const content = await fs.readFile(filePath, "utf-8");
           
-          console.log(`Processing file: ${file}`);
-          console.log("Content:", content);
-          
           // Extract frontmatter and content - more permissive pattern
           const match = content.match(/^---([\s\S]*?)---([\s\S]*)$/);
           
@@ -56,13 +53,10 @@ export async function GET() {
     
     // Filter out null values and sort by date (most recent first)
     const validQuestions = questions.filter(q => q !== null);
-    console.log("Valid questions count:", validQuestions.length);
     
     if (validQuestions.length > 0) {
       console.log("Sample question:", JSON.stringify(validQuestions[0], null, 2));
-    } else {
-      console.log("No valid questions found");
-    }
+    } 
     
     validQuestions.sort((a, b) => {
       const dateA = a?.date ? new Date(a.date).getTime() : 0;
@@ -71,9 +65,10 @@ export async function GET() {
     });
     
     return NextResponse.json({ questions: validQuestions });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("API: Error fetching AMA questions:", error);
-    return NextResponse.json({ error: "Failed to fetch questions", details: error.message }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    return NextResponse.json({ error: "Failed to fetch questions", details: errorMessage }, { status: 500 });
   }
 }
 
@@ -126,10 +121,11 @@ export async function POST(request: Request) {
         await fs.writeFile(filePath, updatedContent, "utf-8");
         
         return NextResponse.json({ success: true, questionId });
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("API: Error updating question with admin response:", error);
+        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
         return NextResponse.json(
-          { error: "Failed to update question with admin response", details: error.message },
+          { error: "Failed to update question with admin response", details: errorMessage },
           { status: 500 }
         );
       }
@@ -154,8 +150,9 @@ export async function POST(request: Request) {
     
     await fs.writeFile(path.join(AMA_DIR, filename), md, "utf-8");
     return NextResponse.json({ success: true, filename });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("API: Error submitting AMA question:", error);
-    return NextResponse.json({ error: "Failed to submit question", details: error.message }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    return NextResponse.json({ error: "Failed to submit question", details: errorMessage }, { status: 500 });
   }
 }

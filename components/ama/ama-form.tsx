@@ -53,8 +53,9 @@ export default function AMAForm({ showForm, onShowFormChange, onSubmitSuccess, o
       onSubmitSuccess()
       setQuestion("")
       onShowFormChange(false)
-    } catch (error: any) {
-      onSubmitError(error.message || "An error occurred")
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "An error occurred"
+      onSubmitError(errorMessage)
     } finally {
       setIsSubmitting(false)
     }

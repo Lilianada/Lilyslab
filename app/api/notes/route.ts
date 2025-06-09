@@ -16,7 +16,7 @@ interface Note {
 
 export async function GET() {
   const notesDir = path.join(process.cwd(), 'Content', 'notes');
-  let notes: Note[] = [];
+  const notes: Note[] = [];
 
   try {
     const files = await fs.readdir(notesDir);

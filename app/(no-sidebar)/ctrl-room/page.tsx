@@ -1,14 +1,11 @@
 "use client"
 
-import { useEffect, useState, lazy, Suspense } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Music, Settings, User, FileText } from "lucide-react"
+import { Settings, User, FileText } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
-
-// Lazy load heavy components
-const UploadAudio = lazy(() => import("@/components/ctrl-room/upload-audio"))
 
 export default function CtrlRoomPage() {
   const { user, userRoles, loading } = useAuth()
@@ -68,13 +65,8 @@ export default function CtrlRoomPage() {
         </div>
       </header>
 
-      <Tabs defaultValue="audio" className="mb-8">
+      <Tabs defaultValue="content" className="mb-8">
         <TabsList className="mb-4">
-          <TabsTrigger value="audio" className="flex items-center gap-2">
-            <Music className="h-4 w-4" />
-            <span className="hidden md:flex">Audio Library</span>
-            <span className="md:hidden">Audio</span>
-          </TabsTrigger>
           <TabsTrigger value="content" className="flex items-center gap-2">
             <FileText className="h-4 w-4" />
             <span>Content</span>
@@ -89,14 +81,12 @@ export default function CtrlRoomPage() {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="audio" className="space-y-6">
-          <Suspense fallback={
-            <div className="flex items-center justify-center h-64">
-              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
-            </div>
-          }>
-            <UploadAudio/>
-          </Suspense>
+        <TabsContent value="content" className="space-y-6">
+          <div className="text-center p-8 border border-dashed rounded-lg">
+            <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+            <h3 className="text-lg font-medium mb-2">Content Management</h3>
+            <p className="text-muted-foreground">Content management features coming soon...</p>
+          </div>
         </TabsContent>
 
         <TabsContent value="content">
@@ -105,15 +95,19 @@ export default function CtrlRoomPage() {
           </div>
         </TabsContent>
 
-        <TabsContent value="users">
-          <div className="flex items-center justify-center h-64 border rounded-lg bg-muted/30">
-            <p className="text-muted-foreground">User management coming soon</p>
+        <TabsContent value="users" className="space-y-6">
+          <div className="text-center p-8 border border-dashed rounded-lg">
+            <User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+            <h3 className="text-lg font-medium mb-2">User Management</h3>
+            <p className="text-muted-foreground">User management features coming soon...</p>
           </div>
         </TabsContent>
 
-        <TabsContent value="settings">
-          <div className="flex items-center justify-center h-64 border rounded-lg bg-muted/30">
-            <p className="text-muted-foreground">Settings coming soon</p>
+        <TabsContent value="settings" className="space-y-6">
+          <div className="text-center p-8 border border-dashed rounded-lg">
+            <Settings className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+            <h3 className="text-lg font-medium mb-2">Settings</h3>
+            <p className="text-muted-foreground">Settings management features coming soon...</p>
           </div>
         </TabsContent>
       </Tabs>

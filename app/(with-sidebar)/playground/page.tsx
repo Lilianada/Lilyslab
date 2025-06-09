@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Pencil, Sparkles, Flame, Timer, Music } from "lucide-react";
+import { Calculator, Sparkles, Flame, Timer } from "lucide-react";
 
 export const metadata = {
   title: "Playground | Lilyslab",
@@ -34,25 +34,9 @@ export default function PlaygroundPage() {
               </div>
             </Link>
           </div>
-
-          {/* Note Widgets */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "100ms" }}>
-            <Link
-              href="/playground/note-widgets"
-              className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
-            >
-              <Pencil size={20} className="text-primary" />
-              <div>
-                <h2 className="font-medium text-sm">Note Widgets</h2>
-                <p className="text-xs text-muted-foreground">
-                  Interactive widgets for creating and managing notes
-                </p>
-              </div>
-            </Link>
-          </div>
           
           {/* Digital Clock */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "200ms" }}>
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "100ms" }}>
             <Link
               href="/playground/digital-clock"
               className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
@@ -66,25 +50,9 @@ export default function PlaygroundPage() {
               </div>
             </Link>
           </div>
-          
-          {/* Music Player */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
-            <Link
-              href="/playground/music-player"
-              className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
-            >
-              <Music size={20} className="text-primary" />
-              <div>
-                <h2 className="font-medium text-sm">Music Player</h2>
-                <p className="text-xs text-muted-foreground">
-                  A customizable audio player for your recordings and music
-                </p>
-              </div>
-            </Link>
-          </div>
 
           {/* Coming Soon: Animation Playground */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "400ms" }}>
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "200ms" }}>
             <div className="flex items-center gap-3 rounded-md border p-4 bg-muted/50">
               <Sparkles size={20} className="text-muted-foreground" />
               <div>
@@ -100,7 +68,7 @@ export default function PlaygroundPage() {
           </div>
 
           {/* Coming Soon: Color Theory */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "500ms" }}>
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
             <div className="flex items-center gap-3 rounded-md border p-4 bg-muted/50">
               <Flame size={20} className="text-muted-foreground" />
               <div>

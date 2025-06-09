@@ -10,7 +10,7 @@ import { Tool } from "@/types"; // Assuming you have a Tool type defined
  */
 export async function GET() {
   const toolsDir = path.join(process.cwd(), 'Content', 'tools');
-  let tools: Tool[] = [];
+  const tools: Tool[] = [];
 
   try {
     const files = await fs.readdir(toolsDir);

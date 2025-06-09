@@ -45,7 +45,7 @@ export async function getBookmarks(): Promise<Bookmark[]> {
     file => fs.existsSync(path.join(BOOKMARKS_DIR, file))
   );
   
-  let allBookmarks: Bookmark[] = [];
+  const allBookmarks: Bookmark[] = [];
   
   // Process each category file
   for (const file of categoryFiles) {
@@ -80,7 +80,7 @@ export async function getBookmarks(): Promise<Bookmark[]> {
           if (!published) continue;
           
           // Prefer date, fallback to Date, and always format as string
-          let dateObj = meta.date || meta.Date;
+          const dateObj = meta.date || meta.Date;
           let created = '';
           if (dateObj instanceof Date && !isNaN(dateObj.getTime())) {
             created = dateObj.toISOString().split('T')[0];
@@ -134,7 +134,7 @@ export async function getLegacyBookmarks(): Promise<Bookmark[]> {
     const published = meta.Publish === true || meta.publish === true || meta.published;
     if (!published) return null;
     // Prefer date, fallback to Date, and always format as string
-    let dateObj = meta.date || meta.Date;
+    const dateObj = meta.date || meta.Date;
     let created = '';
     if (dateObj instanceof Date && !isNaN(dateObj.getTime())) {
       created = dateObj.toISOString().split('T')[0];

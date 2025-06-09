@@ -26,7 +26,6 @@ export default function SomedayPage() {
             <li><Link href="/workshop/tools">Tools 🛠️</Link></li>
             <li><Link href="/workshop/resources">Resources 📚</Link></li>
             <li><Link href="/playground/calculator">Calculator 📊</Link></li>
-            <li><Link href="/playground/note-widgets">Note Widgets 📝</Link></li>
             <li><Link href="/colophon">Colophon 📝</Link></li>
           </ul>
         </div>

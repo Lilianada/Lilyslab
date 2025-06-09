@@ -17,8 +17,8 @@ const bucketListDirectory = join(process.cwd(), 'Content', 'bucketList');
 async function readDirectorySafe(dirPath: string): Promise<string[]> {
   try {
     return fs.readdirSync(dirPath);
-  } catch (error: any) {
-    if (error.code === 'ENOENT') {
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') {
       console.warn(`Bucket list directory not found: ${dirPath}`);
       return []; // Return empty array if directory doesn't exist
     }

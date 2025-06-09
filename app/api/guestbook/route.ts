@@ -106,7 +106,7 @@ export async function POST(req: Request) {
     await fs.mkdir(entriesDir, { recursive: true });
     
     // Find the next file number
-    let files: any[];
+    let files: string[];
     try {
       files = await fs.readdir(entriesDir);
     } catch {

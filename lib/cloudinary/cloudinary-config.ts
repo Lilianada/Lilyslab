@@ -8,7 +8,7 @@ export const cloudConfig = {
 };
 
 // Helper to construct Cloudinary URLs
-export function getCloudinaryUrl(publicId: string, options: any = {}) {
+export function getCloudinaryUrl(publicId: string, options: Record<string, unknown> = {}) {
   const { cloudName } = cloudConfig;
   const transformations = options.transformations || '';
   const resourceType = options.resourceType || 'video'; // Cloudinary uses 'video' for audio

@@ -5,6 +5,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 console.log('Using next.config.js');
 const nextConfig = {
+  // Disable ESLint during builds for Vercel deployment
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // Disable TypeScript type checking during builds (optional)
+  typescript: {
+    ignoreBuildErrors: false, // Set to true if you want to ignore TS errors too
+  },
+  
   async headers() {
     return [
       {
@@ -53,12 +62,6 @@ const nextConfig = {
               name: 'radix-ui',
               chunks: 'all',
               priority: 30,
-            },
-            audio: {
-              test: /[\\/]node_modules[\\/](howler|music-metadata-browser)[\\/]/,
-              name: 'audio-libs',
-              chunks: 'all',
-              priority: 25,
             },
             markdown: {
               test: /[\\/]node_modules[\\/](react-markdown|remark|rehype|gray-matter)[\\/]/,

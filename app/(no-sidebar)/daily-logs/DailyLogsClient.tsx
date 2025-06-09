@@ -248,7 +248,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
                   Keeping daily notes is like having a conversation with your future self. It's a practice that transforms fleeting thoughts into lasting insights.
                 </p>
                 
-                <h3 className="text-base font-semibold">Memory & Reflection</h3>
+                <h3 className="text-base font-semibold">Memory &amp; Reflection</h3>
                 <p>
                   Our brains are terrible at remembering the details of our daily experiences. Writing them down preserves not just what happened, but how we felt about it in that moment.
                 </p>

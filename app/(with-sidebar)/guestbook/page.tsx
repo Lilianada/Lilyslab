@@ -54,7 +54,22 @@ export default function GuestbookPage() {
     fetchEntries();
   }, []); // Remove toast dependency to prevent infinite loop
 
-  const handleEntryAdded = (newEntry: GuestbookEntry) => {
+  const handleEntryAdded = (entry: {
+    id: string;
+    name: string;
+    url?: string;
+    email: string;
+    message: string;
+    created_at: string;
+  }) => {
+    // Map the received entry to GuestbookEntry format
+    const newEntry: GuestbookEntry = {
+      id: entry.id,
+      name: entry.name,
+      url: entry.url,
+      date: entry.created_at,
+      message: entry.message
+    };
     setEntries((prev) => [newEntry, ...prev]);
   };
 

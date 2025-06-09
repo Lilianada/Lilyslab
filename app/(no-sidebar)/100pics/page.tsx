@@ -63,10 +63,10 @@ function generateShimmerDataURL(): string {
 function getBestGrid(width: number, height: number, boxCount: number) {
   let best = { cols: 1, rows: boxCount, size: 0 }
   for (let cols = 1; cols <= boxCount; cols++) {
-    let rows = Math.ceil(boxCount / cols)
-    let boxWidth = width / cols
-    let boxHeight = height / rows
-    let size = Math.floor(Math.min(boxWidth, boxHeight))
+    const rows = Math.ceil(boxCount / cols)
+    const boxWidth = width / cols
+    const boxHeight = height / rows
+    const size = Math.floor(Math.min(boxWidth, boxHeight))
     if (size > best.size) {
       best = { cols, rows, size }
     }

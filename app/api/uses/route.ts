@@ -34,7 +34,7 @@ export async function GET() {
       .map(async (dirent) => {
         const categoryName = dirent.name;
         const categoryPath = path.join(contentDir, categoryName);
-        let items: UsesItem[] = [];
+        const items: UsesItem[] = [];
 
         try {
           // Read all files within the category directory
