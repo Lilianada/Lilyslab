@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import {
   Card,
   CardContent,
@@ -13,10 +13,10 @@ import { useToast } from "@/hooks/use-toast";
 
 // Lazy load form-related components and validation
 const GuestbookForm = lazy(
-  () => import("../../../components/guestbook/guestbook-form")
+  () => import("@/components/guestbook/guestbook-form")
 );
 const GuestbookEntries = lazy(
-  () => import("../../../components/guestbook/guestbook-entries")
+  () => import("@/components/guestbook/guestbook-entries")
 );
 
 interface GuestbookEntry {

@@ -313,8 +313,6 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
           <div className="space-y-1.5 pt-4 mt-2 border-t border-accent/20 grid grid-cols-3 gap-2">
             <UserProfileSection />
               <ThemeToggle />
-              {/* <FontToggle />
-              <ThemeColorToggle /> */}
           </div>
         )}
       </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { SocialLink, WorkItemComponent } from "@/components/comps/homepage-items"
 import { Footer } from "@/components/layout/footer";
 import AnimatedLogo from "@/components/comps/AnimatedLogo"
@@ -75,7 +75,7 @@ export default function Home() {
             </div>
             <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
               Hi there, I'm Lilian. I'm a{" "}
-              <Link href="https://github.com/lilianokeke" className="text-primary hover:underline">
+              <Link href="https://github.com/lilianokeke" className="text-primary hover:underline" rel="me">
                 MERN-Stack Developer
               </Link>
               ,{" "}
@@ -102,11 +102,15 @@ export default function Home() {
                 <div className="h-16 bg-muted rounded"></div>
               </div>)
               :
-              (<MusicPlayerWidget
-                imageUrl="/images/Headshot1.png"
-                title="Welcome to my digital garden & workshop!"
-                artist="Written by Lily, recorded with Play.ai"
-              />)}
+              (<Suspense fallback={
+                <div className="h-16 bg-muted rounded animate-pulse"></div>
+              }>
+                <MusicPlayerWidget
+                  imageUrl="/images/Headshot1.png"
+                  title="Welcome to my digital garden & workshop!"
+                  artist="Written by Lily, recorded with Play.ai"
+                />
+              </Suspense>)}
           </section>
 
           {/* Work */}

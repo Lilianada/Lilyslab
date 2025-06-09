@@ -59,3 +59,12 @@ Create a page called /web-manifesto
 This should be under digital-garden
 
 Its a page that returns a markdown file 
+
+Let's design a more fancy and cool guestbook page.
+I want it to be really fancy.
+The experience I want for my visitors is, when they come to sign the guestbook, they should be in awe. My current guest book is pretty basic, a form and cards display of entries but I want them to be able to customise their entries. Change fonts, background color of  their entry card and any other fancy thinsg withing our capabilities tahat wouldn't require us to install dependencies.
+
+These are two fancy guestbook pages
+https://leanrada.com/guestbook/
+https://davidumoru.me/guestbook
+https://vhbelvadi.com/guestbook

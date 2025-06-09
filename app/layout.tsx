@@ -7,10 +7,9 @@ import { Toaster } from "@/components/ui/sonner"
 import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
 import FloatingMusicPlayer from '@/components/audio/floating-music-player';
-
-
 
 export const viewport: Viewport = {
   themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#000000' }, { media: '(prefers-color-scheme: light)', color: '#ffffff' }],

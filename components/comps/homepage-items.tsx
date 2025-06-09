@@ -34,7 +34,7 @@ export const SocialLink = ({ platform, url, action }: { platform: string; url: s
       <a
         href={url}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer me"
         className="flex items-center gap-1 text-xs text-primary hover:underline group"
       >
         {action}

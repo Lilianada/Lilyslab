@@ -15,12 +15,12 @@ import {
 const nitti = localFont({
   src: [
     {
-      path: '../../../public/fonts/Nitti-Normal.woff',
+      path: '@/public/fonts/Nitti-Normal.woff',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../../../public/fonts/Nitti-Bold.woff',
+      path: '@/public/fonts/Nitti-Bold.woff',
       weight: '700',
       style: 'normal',
     },
