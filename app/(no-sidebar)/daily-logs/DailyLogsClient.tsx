@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, lazy});om "react";
+import React, { useState, lazy} from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import type { DisplayLog } from "./page";
+import { Suspense } from "react";
 
 // Lazy load markdown rendering dependencies
 const MarkdownRenderer = lazy(() => 
@@ -49,7 +50,7 @@ const MarkdownRenderer = lazy(() =>
 
 function MarkdownWithColoredLinks({ children }: { children: string }) {
   return (
-    <Suspense 
+    <Suspense
       fallback={
         <div className="animate-pulse space-y-2">
           <div className="h-4 bg-muted rounded w-full"></div>
