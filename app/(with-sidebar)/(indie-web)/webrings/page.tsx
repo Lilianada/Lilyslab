@@ -1,192 +1,251 @@
-import Link from "next/link";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Webrings | Lily's Lab",
-  description: "Join me in exploring the interconnected web through curated webrings",
-};
-
 export default function WebringsPage() {
   return (
-    <div className="container max-w-4xl py-8 px-4 md:px-8">
-      {/* Page Header */}
-      <header className="mb-10">
-        <h1 className="text-4xl font-bold tracking-tight mb-3">Webrings</h1>
-        <p className="text-xl text-muted-foreground">
-          Discovering the interconnected web through curated communities
-        </p>
-      </header>
+    <div className="container max-w-4xl mx-auto py-12 px-4 md:px-8 text-foreground">
+      <h1 className="text-4xl font-bold mb-6 border-b border-accent/30 pb-2"># Webrings</h1>
       
-      <section className="mb-12 prose dark:prose-invert max-w-none">
-        <p className="text-lg text-muted-foreground">
-          Webrings are a beautiful throwback to the early days of the internet—a way of connecting like-minded websites together in a ring. 
-          By joining webrings, I'm participating in community-curated discovery and helping to rebuild the personal, interconnected web.
+      <div className="border-l-4 border-accent/50 pl-4 py-2 mb-8">
+        <p className="mb-2">
+          A <a href="https://en.wikipedia.org/wiki/Webring" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">webring↗</a> is a collection of websites made by like-minded folks, usually centered around a topic, aesthetic, or common interest.
         </p>
-      </section>
-      
-      <div className="space-y-12">
-        {/* Meta Ring */}
-        <WebringCard
-          title="Meta Ring"
-          description="A webring that connects digital gardens, personal wikis, and other thinking tools on the web."
-          url="https://meta-ring.hedy.dev/"
-          previousUrl="https://meta-ring.hedy.dev/previous"
-          randomUrl="https://meta-ring.hedy.dev/random"
-          nextUrl="https://meta-ring.hedy.dev/next"
-          accentColor="from-blue-500/10 to-indigo-500/10"
-        />
-        
-        {/* Bucketfish Webring */}
-        <WebringCard
-          title="Bucketfish Webring"
-          description="A collection of personal websites and creative spaces from around the web."
-          url="https://webring.bucketfish.me"
-          previousUrl="https://webring.bucketfish.me/redirect.html?to=prev&name=Lily's Lab"
-          randomUrl="https://webring.bucketfish.me/redirect.html?to=random&name=Lily's Lab"
-          nextUrl="https://webring.bucketfish.me/redirect.html?to=next&name=Lily's Lab"
-          accentColor="from-teal-500/10 to-emerald-500/10"
-        />
+        <p className="text-muted-foreground">
+          — from the <a href="https://safonts.com" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">safonts↗</a> webring
+        </p>
       </div>
       
-      <section className="mt-16">
-        <h2 className="text-2xl font-semibold mb-4">What are webrings?</h2>
-        <div className="prose dark:prose-invert max-w-none">
-          <p>
-            Webrings are a way to discover websites with similar content by linking them together in a circular fashion. 
-            Popular in the late 90s, they're making a comeback as people seek alternatives to algorithm-driven discovery.
+      <p className="mb-10">
+        Here are the webrings my personal website is part of. Click on the arrows to visit my neighbor sites on each ring. Some webrings also lets you visit a random site part of the ring. Pick a ring and you'll be off!
+      </p>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Meta Ring */}
+        <div className="border border-accent/30 bg-accent/5 p-6 rounded">
+          <h2 className="text-xl font-medium mb-3">
+            <a href="https://meta-ring.hedy.dev/" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+              Meta Ring↗
+            </a>
+          </h2>
+          <p className="mb-6">
+            Personal website tinkerers; those with meta pages or <a href="/colophon" className="text-accent hover:underline">colophons↗</a>.
           </p>
           
-          <h3 className="text-xl font-medium mt-6 mb-3">Why join webrings?</h3>
-          <ul className="space-y-2 list-disc pl-5">
-            <li>Discover like-minded websites and creators</li>
-            <li>Be part of intentional communities rather than algorithmic recommendations</li>
-            <li>Support the decentralized, human-curated web</li>
-            <li>Connect with others who share your interests and values</li>
-          </ul>
-          
-          <h3 className="text-xl font-medium mt-6 mb-3">Want to add Lily's Lab to your webring?</h3>
-          <p>
-            If you maintain a webring and think Lily's Lab would be a good fit, feel free to 
-            <Link href="/contact" className="text-accent hover:underline"> reach out</Link>. I'm always interested in joining thoughtful communities.
-          </p>
-          
-          <div className="mt-8 text-sm text-muted-foreground">
-            <p>Last updated: 2025-06-09</p>
+          <div className="flex items-center justify-between">
+            <a 
+              href="https://meta-ring.hedy.dev/previous" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Previous site in Meta Ring"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </a>
+            
+            <a 
+              href="https://meta-ring.hedy.dev/random" 
+              className="text-accent hover:text-accent/80 flex items-center gap-2" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M15 10 L12 12 L9 10" />
+                <path d="M15 14 L12 12 L9 14" />
+              </svg>
+              Random
+            </a>
+            
+            <a 
+              href="https://meta-ring.hedy.dev/next" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Next site in Meta Ring"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
           </div>
         </div>
-      </section>
-    </div>
-  );
-}
-
-interface WebringCardProps {
-  title: string;
-  description: string;
-  url: string;
-  previousUrl: string;
-  randomUrl: string;
-  nextUrl: string;
-  accentColor?: string;
-}
-
-function WebringCard({ 
-  title, 
-  description, 
-  url, 
-  previousUrl, 
-  randomUrl, 
-  nextUrl,
-  accentColor = "from-accent/5 to-accent/20"
-}: WebringCardProps) {
-  return (
-    <div className={`rounded-lg border border-accent/20 overflow-hidden bg-gradient-to-r ${accentColor}`}>
-      <div className="p-6 md:p-8">
-        <h2 className="text-2xl font-medium mb-2">{title}</h2>
-        <p className="text-muted-foreground mb-6">{description}</p>
         
-        <div className="flex items-center justify-between mb-6">
+        {/* IndieWeb */}
+        <div className="border border-accent/30 bg-accent/5 p-6 rounded">
+          <h2 className="text-xl font-medium mb-3 flex items-center gap-2">
+            <a href="https://indieweb.org/" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+              IndieWeb 🕸️↗
+            </a>
+          </h2>
+          <p className="mb-6">
+            "For folks adding <a href="https://indieweb.org/building-blocks" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">IndieWeb building blocks↗</a> to their personal websites to find (and be found by) other folks with IndieWeb building blocks on their sites!"
+          </p>
+          
+          <div className="flex items-center justify-between">
+            <a 
+              href="https://indieweb.org/previous" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Previous site in IndieWeb"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </a>
+            
+            <a 
+              href="https://indieweb.org/random" 
+              className="text-accent hover:text-accent/80 flex items-center gap-2" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M15 10 L12 12 L9 10" />
+                <path d="M15 14 L12 12 L9 14" />
+              </svg>
+              Random
+            </a>
+            
+            <a 
+              href="https://indieweb.org/next" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Next site in IndieWeb"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        {/* Bucketfish Webring */}
+        <div className="border border-accent/30 bg-accent/5 p-6 rounded">
+          <h2 className="text-xl font-medium mb-3">
+            <a href="https://webring.bucketfish.me" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+              Bucketfish Webring↗
+            </a>
+          </h2>
+          <p className="mb-6">
+            A collection of personal websites and creative spaces from around the web.
+          </p>
+          
+          <div className="flex items-center justify-between">
+            <a 
+              href="https://webring.bucketfish.me/redirect.html?to=prev&name=Lily's Lab" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Previous site in Bucketfish Webring"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </a>
+            
+            <a 
+              href="https://webring.bucketfish.me/redirect.html?to=random&name=Lily's Lab" 
+              className="text-accent hover:text-accent/80 flex items-center gap-2" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M15 10 L12 12 L9 10" />
+                <path d="M15 14 L12 12 L9 14" />
+              </svg>
+              Random
+            </a>
+            
+            <a 
+              href="https://webring.bucketfish.me/redirect.html?to=next&name=Lily's Lab" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Next site in Bucketfish Webring"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        {/* CSS JOY */}
+        <div className="border border-accent/30 bg-accent/5 p-6 rounded">
+          <h2 className="text-xl font-medium mb-3">
+            <a href="https://css-joy.com/" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+              CSS JOY↗
+            </a>
+          </h2>
+          <p className="mb-6">
+            CSS enjoyers.
+          </p>
+          
+          <div className="flex items-center justify-between">
+            <a 
+              href="https://css-joy.com/previous" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Previous site in CSS JOY"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </a>
+            
+            <a 
+              href="https://css-joy.com/random" 
+              className="text-accent hover:text-accent/80 flex items-center gap-2" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M15 10 L12 12 L9 10" />
+                <path d="M15 14 L12 12 L9 14" />
+              </svg>
+              Random
+            </a>
+            
+            <a 
+              href="https://css-joy.com/next" 
+              className="text-accent hover:text-accent/80" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Next site in CSS JOY"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        {/* Join a Ring */}
+        <div className="border border-dashed border-accent/30 p-6 rounded flex flex-col items-center justify-center text-center bg-transparent hover:bg-accent/5 transition-colors">
+          <h2 className="text-xl font-medium mb-3">Join a webring?</h2>
+          <p className="mb-4 text-muted-foreground">
+            Want to add your site to one of these rings or suggest a new one?
+          </p>
           <a 
-            href={url} 
-            target="_blank" 
-            rel="noopener noreferrer"
+            href="mailto:lilyslab.gmail.com" 
             className="inline-flex items-center gap-2 text-accent hover:underline"
           >
-            <span>Visit Webring</span>
+            <span>Contact me</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 17l9.2-9.2M17 17V7H7"/>
+              <path d="M5 12h14"/>
+              <path d="m12 5 7 7-7 7"/>
             </svg>
           </a>
         </div>
-        
-        {/* Navigation Controls */}
-        <div className="p-4 bg-background/80 backdrop-blur-sm rounded-lg border border-accent/10 flex items-center justify-between">
-          <a 
-            href={previousUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-3 py-1.5 rounded-md bg-accent/10 hover:bg-accent/20 transition-colors flex items-center gap-1"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m15 18-6-6 6-6"/>
-            </svg>
-            <span>Previous</span>
-          </a>
-          <a 
-            href={randomUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-3 py-1.5 rounded-md bg-accent/10 hover:bg-accent/20 transition-colors flex items-center gap-1"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 16.003v-6h-6M3 7.997v6h6M16 21.003l-4-4-4 4M16 2.997l-4 4-4-4"/>
-            </svg>
-            <span>Random</span>
-          </a>
-          <a 
-            href={nextUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-3 py-1.5 rounded-md bg-accent/10 hover:bg-accent/20 transition-colors flex items-center gap-1"
-          >
-            <span>Next</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m9 18 6-6-6-6"/>
-            </svg>
-          </a>
-        </div>
-        
-        {/* HTML Code Snippet */}
-        <div className="mt-6">
-          <details className="group">
-            <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
-              <span className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m7 8 10 8-10 8"></path>
-                </svg>
-                Show HTML code for embedding
-              </span>
-            </summary>
-            <div className="mt-3 p-3 bg-background rounded-md border border-accent/10 overflow-x-auto text-xs">
-              <pre className="text-muted-foreground">
-                {title === "Meta Ring" ? 
-                  `<p style="text-align: center;">
-  This site is part of the <a href="https://meta-ring.hedy.dev/">Meta Ring</a>:<br/>
-  [<a href="https://meta-ring.hedy.dev/previous">← Previous</a>]
-  [<a href="https://meta-ring.hedy.dev/random">Random</a>]
-  [<a href="https://meta-ring.hedy.dev/next">Next →</a>]
-</p>` : 
-                  `<!-- Bucketfish Webring -->
-<p style="text-align: center;">
-  This site is part of the <a href="https://webring.bucketfish.me/">Bucketfish Webring</a>:<br/>
-  [<a href="https://webring.bucketfish.me/redirect.html?to=prev&name=Lily's Lab">← Previous</a>]
-  [<a href="https://webring.bucketfish.me/redirect.html?to=random&name=Lily's Lab">Random</a>]
-  [<a href="https://webring.bucketfish.me/redirect.html?to=next&name=Lily's Lab">Next →</a>]
-</p>`
-                }
-              </pre>
-            </div>
-          </details>
-        </div>
+      </div>
+      
+      <div className="mt-12 text-sm text-muted-foreground">
+        <p>Last updated: June 10, 2025</p>
       </div>
     </div>
   );
