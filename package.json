@@ -12,7 +12,9 @@
     "create:note": "node scripts/create-content.js note",
     "create:writing": "node scripts/create-content.js writing",
     "create:bookmark": "node scripts/add-bookmark.js",
-    "bookmarks:add-articles": "node scripts/add-new-articles.js"
+    "bookmarks:add-articles": "node scripts/add-new-articles.js",
+    "install-hooks": "sh scripts/install-hooks.sh",
+    "postinstall": "npm run install-hooks"
   },
   "dependencies": {
     "@headlessui/react": "latest",
