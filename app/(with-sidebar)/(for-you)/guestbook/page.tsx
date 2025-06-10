@@ -82,7 +82,7 @@ export default function GuestbookPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-xl font-medium tracking-tight mb-4">Guestbook</h1>
-          <p className="text-sm text-muted-foreground mb-8">
+          <p className="text-sm text-muted-foreground mb-2">
             Welcome, fellow wanderer!
             <br />
             <br />
@@ -99,8 +99,86 @@ export default function GuestbookPage() {
             your guestbook too.
             <br />
             <br />
-            Thanks for stopping by 🫰🏾
-          </p>
+            Here are some of my favorite guestbooks that I’ve signed:
+            </p>
+            <ul className="list-disc pl-6 text-sm mb-8">
+              <li>
+                <a
+                  href="https://guestbook.aaronparecki.com/"
+                  className="text-primary hover:underline"
+                >
+                  Barry Hess's Guestbook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://manuelmoreale.com/guestbook"
+                  className="text-primary hover:underline"
+                >
+                  Manuel Moreale's Guestbook 
+                   <span className="text-xs text-muted-foreground">
+                  {" "}  (a great example of a simple guestbook)
+                  </span>
+                </a>
+              </li>     
+              <li>
+                <a
+                  href="https://eva.town/guestbook"
+                  className="text-primary hover:underline"
+                >
+                  Eva's Guestbook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://kinduff.com/guest-book/"
+                  className="text-primary hover:underline"
+                >
+                  Kinduff's Guestbook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://davidumoru.me/guestbook"
+                  className="text-primary hover:underline"
+                >
+                  David Umoru's Guestbook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://binarydigit.city/guestbook/"
+                  className="text-primary hover:underline"
+                >
+                  Liz's Guestbook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://riri.my/blog.php"
+                  className="text-primary hover:underline"
+                >
+                  Riri's Guestbook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://vhbelvadi.com/guestbook"
+                  className="text-primary hover:underline"
+                >
+                  Vhbelvadi's Guestbook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://leanrada.com/guestbook"
+                  className="text-primary hover:underline"
+                >
+                  Leanrada's Guestbook
+                  <span className="text-xs  text-muted-foreground"> {" "}Love their site, signed the guestbook too.</span>
+                </a>
+              </li>
+              </ul>
         </div>
 
         <Card className="border border-border bg-card shadow-sm transition-all">
