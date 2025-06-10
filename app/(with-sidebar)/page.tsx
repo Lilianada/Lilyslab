@@ -171,7 +171,7 @@ export default function Home() {
               <SocialLink platform="LinkedIn" url="https://linkedin.com/in/lilianada" action="Connect" />
               <SocialLink platform="GitHub" url="https://github.com/lilianada" action="Visit" />
               <SocialLink platform="Twitter" url="https://twitter.com/lilian_ada" action="Follow" />
-              <SocialLink platform="Email" url="mailto:lilianokeke.ca" action="Message" />
+              <SocialLink platform="Email" url="mailto:hello.lilysgarden@gmail.com" action="Message" />
             </div>
           </section>
 

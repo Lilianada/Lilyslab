@@ -53,7 +53,7 @@ If you enjoy my work or want to chat, follow me here:
 - [LinkedIn](https://linkedin.com/in/lilianada)
 - [GitHub](https://github.com/lilianokeke)
 - [Twitter](https://twitter.com/lilian_okeke)
-- [Email](mailto:lilianokeke.ca@gmail.com)
+- [Email](mailto:hello.lilysgarden@gmail.com)
 
 I’d love to connect, collaborate, or just say hi! 🌱
 

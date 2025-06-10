@@ -178,6 +178,14 @@ export default function GuestbookPage() {
                   <span className="text-xs  text-muted-foreground"> {" "}Love their site, signed the guestbook too.</span>
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://amalinalai.github.io/precipice/guestbook/"
+                  className="text-primary hover:underline"
+                >
+                  Lina's Guestbook
+                  </a>
+              </li>
               </ul>
         </div>
 

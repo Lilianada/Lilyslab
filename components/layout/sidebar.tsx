@@ -42,7 +42,7 @@ import {
   Smile,
   Flower,
   ListCheck,
-  ScrollText
+  ScrollText,
 } from "lucide-react"
 import { ThemeToggle } from "../theme/theme-toggle"
 import { useEffect, useState } from "react"
@@ -277,12 +277,29 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <SectionTitle title="Imprint" delay={1700} />
             <NavItem href="/colophon" icon={<Package size={16} />} label="Colophon" onClick={onNavClick} delay={1750} />
             <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1800} hasNotification={true} />
+            <NavItem 
+              href="/sitemap" 
+              icon={
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="6" height="6" />
+                  <rect x="15" y="3" width="6" height="6" />
+                  <rect x="9" y="15" width="6" height="6" />
+                  <line x1="6" y1="9" x2="6" y2="21" />
+                  <line x1="18" y1="9" x2="18" y2="15" />
+                  <line x1="9" y1="6" x2="15" y2="6" />
+                  <line x1="12" y1="9" x2="12" y2="15" />
+                </svg>
+              } 
+              label="Sitemap" 
+              onClick={onNavClick} 
+              delay={1850} 
+            />
           </div>
 
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Connect" delay={1900} />
             <div className="grid grid-cols-4 gap-2 px-3 py-1.5">
-              <a href="mailto:lilyslab.gmail.com" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
+              <a href="mailto:hello.lilysgarden@gmail.com" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
                 <Mail size={16} className="mx-auto" />
               </a>
               <a href="https://instagram.com/defitcreative" target="_blank" rel="noreferrer" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">

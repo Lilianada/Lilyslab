@@ -11,6 +11,7 @@ import {
   Globe,
   Link2,
 } from "lucide-react";
+import { Footer } from "@/components/layout/footer";
 
 export default function WebringsPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -43,6 +44,119 @@ export default function WebringsPage() {
     },
   };
 
+  // Type definitions for a webring
+  type WebRing = {
+    name: string;
+    url: string;
+    description: string;
+    color: string; // color theme class
+    previousUrl: string;
+    randomUrl?: string;
+    nextUrl: string;
+  };
+
+  // List of webrings
+  const webrings: WebRing[] = [
+    {
+      name: "Meta Ring",
+      url: "https://meta-ring.hedy.dev/",
+      description: "Personal website tinkerers; those with meta pages or colophons.",
+      color: "peach",
+      previousUrl: "https://meta-ring.hedy.dev/previous",
+      randomUrl: "https://meta-ring.hedy.dev/random",
+      nextUrl: "https://meta-ring.hedy.dev/next"
+    },
+    {
+      name: "IndieWeb",
+      url: "https://indieweb.org/",
+      description: "For folks adding IndieWeb building blocks to their personal websites.",
+      color: "lavender",
+      previousUrl: "https://xn--sr8hvo.ws/previous",
+      randomUrl: undefined, // No random for IndieWeb
+      nextUrl: "https://xn--sr8hvo.ws/next"
+    },
+    {
+      name: "Bucketfish Webring",
+      url: "https://webring.bucketfish.me",
+      description: "A collection of personal websites and creative spaces from around the web.",
+      color: "yellow",
+      previousUrl: "https://webring.bucketfish.me/redirect.html?to=prev&name=Lily's Lab",
+      randomUrl: "https://webring.bucketfish.me/redirect.html?to=random&name=Lily's Lab",
+      nextUrl: "https://webring.bucketfish.me/redirect.html?to=next&name=Lily's Lab"
+    },
+    {
+      name: "CSS JOY",
+      url: "https://css-joy.com/",
+      description: "A collection of websites celebrating the joy of CSS and creative web design.",
+      color: "steelBlue",
+      previousUrl: "https://css-joy.com/previous",
+      randomUrl: "https://css-joy.com/random",
+      nextUrl: "https://css-joy.com/next"
+    },
+    {
+      name: "Webmaster Webring",
+      url: "https://webmasterwebring.netlify.app",
+      description: "A community of web developers, designers, and enthusiasts who create and maintain websites.",
+      color: "green",
+      previousUrl: "https://webmasterwebring.netlify.app?LilysGarden-previous",
+      randomUrl: "https://webmasterwebring.netlify.app?LilysGarden-random",
+      nextUrl: "https://webmasterwebring.netlify.app?LilysGarden-next"
+    },
+    {
+      name: "GeekRing",
+      url: "http://geekring.net/",
+      description: "A community of geeky websites and blogs celebrating technology, coding, and all things nerdy.",
+      color: "lilac",
+      previousUrl: "http://geekring.net/site/NUMBER/previous",
+      randomUrl: "http://geekring.net/site/NUMBER/random",
+      nextUrl: "http://geekring.net/site/NUMBER/next"
+    }
+  ];
+
+  // Function to get color classes based on theme color
+  const getColorClasses = (color: string) => {
+    const colorMap: Record<string, { bg: string, border: string, hover: string, icon: string }> = {
+      peach: { 
+        bg: "bg-orange-50 dark:bg-orange-950/30", 
+        border: "border-orange-200 dark:border-orange-800/50", 
+        hover: "hover:bg-orange-100/50 dark:hover:bg-orange-900/30",
+        icon: "text-orange-500 dark:text-orange-400"
+      },
+      lavender: { 
+        bg: "bg-purple-50 dark:bg-purple-950/30", 
+        border: "border-purple-200 dark:border-purple-800/50", 
+        hover: "hover:bg-purple-100/50 dark:hover:bg-purple-900/30",
+        icon: "text-purple-500 dark:text-purple-400" 
+      },
+      yellow: { 
+        bg: "bg-amber-50 dark:bg-amber-950/30", 
+        border: "border-amber-200 dark:border-amber-800/50", 
+        hover: "hover:bg-amber-100/50 dark:hover:bg-amber-900/30",
+        icon: "text-amber-500 dark:text-amber-400" 
+      },
+      steelBlue: { 
+        bg: "bg-blue-50 dark:bg-blue-950/30", 
+        border: "border-blue-200 dark:border-blue-800/50", 
+        hover: "hover:bg-blue-100/50 dark:hover:bg-blue-900/30",
+        icon: "text-blue-500 dark:text-blue-400" 
+      },
+      green: { 
+        bg: "bg-emerald-50 dark:bg-emerald-950/30", 
+        border: "border-emerald-200 dark:border-emerald-800/50", 
+        hover: "hover:bg-emerald-100/50 dark:hover:bg-emerald-900/30",
+        icon: "text-emerald-500 dark:text-emerald-400" 
+      },
+      lilac: { 
+        bg: "bg-violet-50 dark:bg-violet-950/30", 
+        border: "border-violet-200 dark:border-violet-800/50", 
+        hover: "hover:bg-violet-100/50 dark:hover:bg-violet-900/30",
+        icon: "text-violet-500 dark:text-violet-400" 
+      }
+    };
+    
+    return colorMap[color] || colorMap.peach; // Default to peach if color not found
+  };
+
   return (
     <>
       <ScrollProgress
@@ -67,13 +181,13 @@ export default function WebringsPage() {
           </div>
           <motion.div
             variants={itemVariants}
-            className="mt-8 group md:col-span-2 relative bg-gradient-to-br from-transparent to-transparent backdrop-blur-sm border-2 border-dashed border-extra-peach/30 dark:border-extra-peach/20 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+            className="mt-8 group md:col-span-2 relative bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
           >
             <p className="text-sm">
               A{" "}
               <a
                 href="https://en.wikipedia.org/wiki/Webring"
-                className="text-extra-peach font-medium hover:underline"
+                className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -91,264 +205,95 @@ export default function WebringsPage() {
         </header>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Meta Ring */}
-          <motion.div
-            variants={itemVariants}
-            className="group relative bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-2 border-extra-cream/30 dark:border-extra-cream/10 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
-            <div className="absolute -right-4 -top-4 w-24 h-24 bg-extra-cream/10 dark:bg-extra-cream/5 rounded-full blur-2xl group-hover:bg-extra-cream/20 transition-all duration-500"></div>
-
-            <h2 className="text-xl font-medium mb-3 flex items-center">
-              <a
-                href="https://meta-ring.hedy.dev/"
-                className="text-extra-peach hover:text-extra-peach/80 inline-flex items-center gap-1 group/link"
-                target="_blank"
-                rel="noopener noreferrer"
+          {webrings.map((ring, index) => {
+            const colorClasses = getColorClasses(ring.color);
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`group relative ${colorClasses.bg} border ${colorClasses.border} rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300`}
               >
-                Meta Ring
-                <ArrowUpRight className="h-4 w-4 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-              </a>
-            </h2>
-            <p className="mb-6 text-sm text-foreground/80 dark:text-foreground/70">
-              Personal website tinkerers; those with meta pages or{" "}
-              <a
-                href="/colophon"
-                className="text-extra-lavender hover:underline"
-              >
-                colophons
-              </a>
-              .
-            </p>
-
-            <div className="flex items-center justify-between mt-4 border-t border-extra-cream/20 dark:border-extra-cream/10 pt-4">
-              <a
-                href="https://meta-ring.hedy.dev/previous"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Previous site in Meta Ring"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </a>
-
-              <a
-                href="https://meta-ring.hedy.dev/random"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CircleDot className="h-4 w-4 mr-1" />
-                <span className="text-sm">Random</span>
-              </a>
-
-              <a
-                href="https://meta-ring.hedy.dev/next"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Next site in Meta Ring"
-              >
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* IndieWeb */}
-          <motion.div
-            variants={itemVariants}
-            className="group relative bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-2 border-extra-lavender/30 dark:border-extra-lavender/10 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
-            <div className="absolute -right-4 -top-4 w-24 h-24 bg-extra-lavender/10 dark:bg-extra-lavender/5 rounded-full blur-2xl group-hover:bg-extra-lavender/20 transition-all duration-500"></div>
-
-            <h2 className="text-xl font-medium mb-3 flex items-center">
-              <a
-                href="https://indieweb.org/"
-                className="text-extra-peach hover:text-extra-peach/80 inline-flex items-center gap-1 group/link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                IndieWeb
-                <ArrowUpRight className="h-4 w-4 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-              </a>
-            </h2>
-            <p className="mb-6 text-sm text-foreground/80 dark:text-foreground/70">
-              For folks adding{" "}
-              <a
-                href="https://indieweb.org/building-blocks"
-                className="text-extra-lavender hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                IndieWeb building blocks
-                <ArrowUpRight className="inline h-3 w-3 ml-0.5" />
-              </a>{" "}
-              to their personal websites.
-            </p>
-
-            <div className="flex items-center justify-between mt-4 border-t border-extra-lavender/20 dark:border-extra-lavender/10 pt-4">
-              <a
-                href="https://xn--sr8hvo.ws/previous"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Previous site in IndieWeb Webring"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </a>
-
-              <a
-                href="https://xn--sr8hvo.ws"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Globe className="h-4 w-4 mr-1" />
-                <span className="text-sm">IndieWeb 🕸💍</span>
-              </a>
-
-              <a
-                href="https://xn--sr8hvo.ws/next"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Next site in IndieWeb Webring"
-              >
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Bucketfish Webring */}
-          <motion.div
-            variants={itemVariants}
-            className="group relative bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-2 border-extra-yellow/30 dark:border-extra-yellow/10 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
-            <div className="absolute -right-4 -top-4 w-24 h-24 bg-extra-yellow/10 dark:bg-extra-yellow/5 rounded-full blur-2xl group-hover:bg-extra-yellow/20 transition-all duration-500"></div>
-
-            <h2 className="text-xl font-medium mb-3 flex items-center">
-              <a
-                href="https://webring.bucketfish.me"
-                className="text-extra-peach hover:text-extra-peach/80 inline-flex items-center gap-1 group/link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Bucketfish Webring
-                <ArrowUpRight className="h-4 w-4 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-              </a>
-            </h2>
-            <p className="mb-6 text-sm text-foreground/80 dark:text-foreground/70">
-              A collection of personal websites and creative spaces from around
-              the web.
-            </p>
-
-            <div className="flex items-center justify-between mt-4 border-t border-extra-yellow/20 dark:border-extra-yellow/10 pt-4">
-              <a
-                href="https://webring.bucketfish.me/redirect.html?to=prev&name=Lily's Lab"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Previous site in Bucketfish Webring"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </a>
-
-              <a
-                href="https://webring.bucketfish.me/redirect.html?to=random&name=Lily's Lab"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CircleDot className="h-4 w-4 mr-1" />
-                <span className="text-sm">Random</span>
-              </a>
-
-              <a
-                href="https://webring.bucketfish.me/redirect.html?to=next&name=Lily's Lab"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Next site in Bucketfish Webring"
-              >
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </div>
-          </motion.div>
-
-          {/* CSS JOY */}
-          <motion.div
-            variants={itemVariants}
-            className="group relative bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-2 border-extra-steelBlue/30 dark:border-extra-steelBlue/10 rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
-            <div className="absolute -right-4 -top-4 w-24 h-24 bg-extra-steelBlue/10 dark:bg-extra-steelBlue/5 rounded-full blur-2xl group-hover:bg-extra-steelBlue/20 transition-all duration-500"></div>
-
-            <h2 className="text-xl font-medium mb-3 flex items-center">
-              <a
-                href="https://css-joy.com/"
-                className="text-extra-peach hover:text-extra-peach/80 inline-flex items-center gap-1 group/link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CSS JOY
-                <ArrowUpRight className="h-4 w-4 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-              </a>
-            </h2>
-            <p className="mb-6 text-sm text-foreground/80 dark:text-foreground/70">
-              A collection of websites celebrating the joy of CSS and creative
-              web design.
-            </p>
-
-            <div className="flex items-center justify-between mt-4 border-t border-extra-steelBlue/20 dark:border-extra-steelBlue/10 pt-4">
-              <a
-                href="https://css-joy.com/previous"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Previous site in CSS JOY"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </a>
-
-              <a
-                href="https://css-joy.com/random"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CircleDot className="h-4 w-4 mr-1" />
-                <span className="text-sm">Random</span>
-              </a>
-
-              <a
-                href="https://css-joy.com/next"
-                className="text-foreground hover:text-extra-peach transition-colors duration-200 p-2 rounded-full hover:bg-extra-peach/10"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Next site in CSS JOY"
-              >
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </div>
-          </motion.div>
+                <div className="absolute top-0 right-0 w-20 h-20 opacity-10 rounded-full bg-gradient-to-br from-transparent to-current" />
+                
+                <h2 className="text-xl font-medium mb-3 flex items-center relative">
+                  <a
+                    href={ring.url}
+                    className="text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 inline-flex items-center gap-1 group/link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {ring.name}
+                    <ArrowUpRight className={`h-4 w-4 opacity-70 ${colorClasses.icon} group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform`} />
+                  </a>
+                </h2>
+                
+                <p className="mb-6 text-sm text-gray-600 dark:text-gray-300">
+                  {ring.description}
+                </p>
+                
+                <div className={`flex items-center justify-between mt-4 border-t ${colorClasses.border} pt-4`}>
+                  <a
+                    href={ring.previousUrl}
+                    className={`text-gray-600 dark:text-gray-300 hover:${colorClasses.icon} transition-colors duration-200 p-2 rounded-full ${colorClasses.hover}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Previous site in ${ring.name}`}
+                  >
+                    <ArrowLeft className="h-5 w-5" />
+                  </a>
+                  
+                  {ring.randomUrl ? (
+                    <a
+                      href={ring.randomUrl}
+                      className={`text-gray-600 dark:text-gray-300 hover:${colorClasses.icon} transition-colors duration-200 flex items-center gap-1 px-3 py-1.5 rounded-full ${colorClasses.hover}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <CircleDot className="h-4 w-4 mr-1" />
+                      <span className="text-sm">Random</span>
+                    </a>
+                  ) : (
+                    <a
+                      href={ring.url}
+                      className={`text-gray-600 dark:text-gray-300 hover:${colorClasses.icon} transition-colors duration-200 flex items-center gap-1 px-3 py-1.5 rounded-full ${colorClasses.hover}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {ring.name === "IndieWeb" ? (
+                        <>
+                          <Globe className="h-4 w-4 mr-1" />
+                          <span className="text-sm">{ring.name} 🕸💍</span>
+                        </>
+                      ) : (
+                        <>
+                          <Globe className="h-4 w-4 mr-1" />
+                          <span className="text-sm">Visit</span>
+                        </>
+                      )}
+                    </a>
+                  )}
+                  
+                  <a
+                    href={ring.nextUrl}
+                    className={`text-gray-600 dark:text-gray-300 hover:${colorClasses.icon} transition-colors duration-200 p-2 rounded-full ${colorClasses.hover}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Next site in ${ring.name}`}
+                  >
+                    <ArrowRight className="h-5 w-5" />
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
-        <footer className="mt-12 flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-border pt-6 text-sm text-muted-foreground">
-          <p>Last updated: July 12, 2024</p>
-          <div className="flex items-center gap-1.5 mt-3 sm:mt-0">
-            <div className="h-2 w-2 rounded-full bg-extra-peach/70"></div>
-            <div className="h-2 w-2 rounded-full bg-extra-lavender/70"></div>
-            <div className="h-2 w-2 rounded-full bg-extra-yellow/70"></div>
-            <div className="h-2 w-2 rounded-full bg-extra-steelBlue/70"></div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

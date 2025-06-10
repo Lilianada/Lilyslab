@@ -212,7 +212,7 @@ export default function BucketListPage() {
             If you know someone working at any of these places who might be able to provide a referral or a friendly recommendation, I&apos;d be incredibly grateful. Please feel free to reach out!
           </p>
           <div className="flex justify-center gap-4">
-            <Link href="mailto:your-email@lilianokeke.ca@gmail.com"
+            <Link href="mailto:hello.lilysgarden@gmail.com"
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
               <Mail className="mr-2 h-4 w-4" /> Email Me
             </Link>
