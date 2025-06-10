@@ -29,7 +29,7 @@ try {
   data.lastUpdated = new Date().toISOString();
   data.source = "git-push"; // Update the source to indicate it was updated by a git push
   
-  // Write back to the file with pretty formatting and restore the comment
+  // Write back to the file with pretty formatting and a single comment
   const updatedContent = `// filepath: ${lastUpdatedPath}\n${JSON.stringify(data, null, 2)}`;
   fs.writeFileSync(lastUpdatedPath, updatedContent);
   
