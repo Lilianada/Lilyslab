@@ -169,8 +169,8 @@ export default function Home() {
             <h2 className="mb-4 text-sm font-medium text-muted-foreground">Online</h2>
             <div className="space-y-2 stagger-children">
               <SocialLink platform="LinkedIn" url="https://linkedin.com/in/lilianada" action="Connect" />
-              <SocialLink platform="GitHub" url="https://github.com/lilianokeke" action="Visit" />
-              <SocialLink platform="Twitter" url="https://twitter.com/lilian_okeke" action="Follow" />
+              <SocialLink platform="GitHub" url="https://github.com/lilianada" action="Visit" />
+              <SocialLink platform="Twitter" url="https://twitter.com/lilian_ada" action="Follow" />
               <SocialLink platform="Email" url="mailto:lilianokeke.ca" action="Message" />
             </div>
           </section>
