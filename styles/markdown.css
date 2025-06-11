@@ -5,33 +5,33 @@
 
 /* Headings */
 .markdown-content h1 {
-  @apply text-3xl md:text-4xl mb-6 mt-10 font-bold scroll-m-20;
+  @apply text-2xl md:text-4xl mb-6 mt-10 font-bold scroll-m-20;
 }
 
 .markdown-content h2 {
-  @apply text-2xl md:text-3xl mb-5 mt-8 font-semibold scroll-m-20;
+  @apply text-xl md:text-3xl mb-5 mt-8 font-semibold scroll-m-20;
 }
 
 .markdown-content h3 {
-  @apply text-xl font-semibold mt-6 mb-3 scroll-m-20;
+  @apply text-lg font-semibold mt-6 mb-3 scroll-m-20;
 }
 
 .markdown-content h4 {
-  @apply text-lg font-medium mt-4 mb-2 scroll-m-20;
+  @apply text-base font-medium mt-4 mb-2 scroll-m-20;
 }
 
 /* Paragraphs and text */
 .markdown-content p {
-  @apply my-4 leading-7;
+  @apply text-[15px] my-4 leading-6;
 }
 
 .markdown-content blockquote {
-  @apply my-6 italic pl-6 py-1 border-l-2 border-primary text-foreground/80;
+  @apply my-6 italic pl-6 py-1 border-l-4 border-primary text-foreground/80;
 }
 
 /* Code block styling */
 .markdown-content pre {
-  @apply bg-muted rounded-md overflow-x-auto my-4 p-0;
+  @apply bg-muted rounded-md overflow-x-auto my-4 py-1 w-fit text-xs;
 }
 
 .markdown-content pre > code {
@@ -70,7 +70,7 @@
 
 /* Links styling */
 .markdown-content a {
-  @apply text-primary underline underline-offset-4 hover:text-primary/80 transition-colors;
+  @apply text-primary font-normal underline underline-offset-4 hover:text-primary/80 transition-colors;
 }
 
 /* Image styling */

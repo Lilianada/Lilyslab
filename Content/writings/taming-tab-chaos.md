@@ -1,9 +1,10 @@
 ---
 author: Lilian
 cover:
-  - "[[tabs.jpg]]"
-date: 2025-04-05
-excerpt: How browser tab overload reflects our digital thinking habits and strategies to tame the chaos.
+  - '[[tabs.jpg]]'
+excerpt: >-
+  How browser tab overload reflects our digital thinking habits and strategies
+  to tame the chaos.
 published: true
 slug: taming-tab-chaos
 tags:
@@ -13,6 +14,8 @@ tags:
 title: Taming Tab Chaos
 readingTime: 3
 wordCount: 476
+createdAt: 2025-04-05
+type: evergreen
 ---
 
 I'll admit it: I'm a chronic tab hoarder. At this very moment, I have 34 browser tabs open across three windows. Each represents a different thread of thought, a different possibility, a different someday/maybe project. My browser has essentially become the externalized version of my brain—chaotic, overflowing with ideas, and desperately in need of some structure.

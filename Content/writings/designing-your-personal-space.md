@@ -1,17 +1,20 @@
 ---
 author: Lilian
 cover:
-  - ""
-date: 2021-05-05
-excerpt: "Why you should invest into designing your personal space? & How you can go about it, while relating to my personal experience."
+  - ''
+excerpt: >-
+  Why you should invest into designing your personal space? & How you can go
+  about it, while relating to my personal experience.
 published: true
 slug: designing-your-personal-space
 tags:
   - self-development
   - progress
-title: Designing Your Personal Space 
+title: "Designing Your Personal\_Space\_"
 readingTime: 3
 wordCount: 649
+createdAt: 2021-05-05
+type: evergreen
 ---
 
 

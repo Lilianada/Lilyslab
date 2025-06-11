@@ -1,7 +1,6 @@
 ---
 author: Lilian
-cover: 
-date: 2025-05-08
+cover: null
 excerpt: Working with AI and Prompts
 published: true
 slug: day-7-of-20
@@ -9,8 +8,10 @@ tags:
   - 20-days-challenge
   - ui-library
 title: Day 7 of 20
-readingTime: 
+readingTime: null
 wordCount: 0
+createdAt: 2025-05-08
+type: evergreen
 ---
 
 

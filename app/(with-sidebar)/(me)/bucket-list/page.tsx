@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Loader2, CheckSquare, Square, Mail, Linkedin, Sprout, ArrowUpNarrowWide, Blocks, HeartHandshake, Sparkles, CreditCard } from "lucide-react";
+import { Footer } from "@/components/layout/footer";
 
 // Interface for the bucket list item data (should match API)
 interface BucketListItem {
@@ -22,10 +23,6 @@ const specifications: Spec[] = [
     category: "Roles",
     details: "Associate Product Manager / Engineering Manager / Project Manager",
   },
-  // {
-  //   category: "Salary",
-  //   details: "$82,000 - $90,000",
-  // },
   {
     category: "Countries",
     details: "USA / UK / Mexico / Canada / France / Germany",
@@ -223,7 +220,7 @@ export default function BucketListPage() {
             </Link>
           </div>
         </section>
-
+<Footer/>
       </div>
     </div>
   );

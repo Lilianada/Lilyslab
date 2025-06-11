@@ -1,7 +1,6 @@
 ---
 author: Lilian
-cover: 
-date: 2025-05-06
+cover: null
 excerpt: What is MINI app?
 published: true
 slug: day-5-of-20
@@ -9,8 +8,10 @@ tags:
   - 20-days-challenge
   - new-app
 title: Day 5 of 20
-readingTime: 
+readingTime: null
 wordCount: -6
+createdAt: 2025-05-06
+type: evergreen
 ---
 
 

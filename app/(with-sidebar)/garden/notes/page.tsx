@@ -4,19 +4,40 @@ import matter from 'gray-matter';
 import { z } from 'zod';
 import { read } from 'zod-matter';
 import { Footer } from '@/components/layout/footer';
+import { safeFormatDate } from '@/lib/utils';
 
 // Define schema for front matter validation
 const NoteMetaSchema = z.object({
   title: z.string().optional(),
-  date: z.coerce.date().refine(
-    (val) => !isNaN(val.getTime()),
-    { message: "Invalid date format" }
-  ),
+  createdAt: z.union([
+    z.string(),
+    z.coerce.date().refine(
+      (val) => !isNaN(val.getTime()),
+      { message: "Invalid date format" }
+    )
+  ]).optional(),
+  date: z.union([
+    z.string(),
+    z.coerce.date().refine(
+      (val) => !isNaN(val.getTime()),
+      { message: "Invalid date format" }
+    )
+  ]).optional(),
+  lastUpdated: z.union([
+    z.string(),
+    z.coerce.date().refine(
+      (val) => !isNaN(val.getTime()),
+      { message: "Invalid date format" }
+    )
+  ]).optional(),
+  type: z.string().optional(),
 });
 
 interface NoteMeta {
   title: string;
-  date: string;
+  createdAt: string;
+  lastUpdated: string;
+  type: string;
   slug: string;
 }
 
@@ -50,9 +71,22 @@ export default function NotesPage() {
         // Try to parse and validate frontmatter, skip if ZodError or invalid date
         try {
           const result = read(filePath, NoteMetaSchema);
+          
+          // Use our centralized date formatting utility
+          // Determine the best date to use - prefer createdAt then fall back to date
+          const dateValue = result.data.createdAt || result.data.date;
+          const createdAtStr = safeFormatDate(dateValue).split('T')[0]; // Get just YYYY-MM-DD part
+          
+          // If lastUpdated is available use it, otherwise use createdAt
+          const lastUpdatedStr = result.data.lastUpdated ? 
+                                safeFormatDate(result.data.lastUpdated).split('T')[0] : 
+                                createdAtStr;
+          
           const validated = {
             title: result.data.title || filename.replace(/\.md$/, ''),
-            date: result.data.date.toISOString().split('T')[0],
+            createdAt: createdAtStr,
+            lastUpdated: lastUpdatedStr,
+            type: result.data.type || 'seedling',
             slug: filename.replace(/\.md$/, ''),
           };
           return [validated];
@@ -66,11 +100,11 @@ export default function NotesPage() {
       }
     });
 
-  // Sort and group notes by year and month
+  // Sort and group notes by year and month using createdAt
   const grouped = notes
-    .sort((a, b) => b.date.localeCompare(a.date))
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
     .reduce((acc, note) => {
-      const [year, month, day] = note.date.split('-');
+      const [year, month, day] = note.createdAt.split('-');
       if (!year || !month || !day) return acc; // Skip invalid dates
 
       // Format date as MM-DD
@@ -92,12 +126,12 @@ export default function NotesPage() {
       // Add the note to the appropriate year and month group
       acc[year][month].push({
         ...note,
-        date: formattedDate,
-        fullDate: note.date // Keep the original date for sorting if needed
+        displayDate: formattedDate,
+        fullDate: note.createdAt // Keep the original date for sorting if needed
       });
       
       return acc;
-    }, {} as Record<string, Record<string, (NoteMeta & { fullDate: string })[]>>);
+    }, {} as Record<string, Record<string, (NoteMeta & { displayDate: string; fullDate: string })[]>>);
 
   return (
     <div className="min-h-screen animate-fade-in">
@@ -146,7 +180,7 @@ export default function NotesPage() {
                           <span>{note.title}</span>
                         </a>
                         <span className="text-neutral-400 font-mono text-sm">
-                          {note.date}
+                          {note.displayDate}
                         </span>
                       </div>
                     ))}
@@ -156,12 +190,12 @@ export default function NotesPage() {
             })}
           </div>
         ))}
-      </div>
       <Footer 
           inspirationName="Linus Rogge"
           inspirationUrl="https://linusrogge.com/log/concerts"
           color='text-extra-steelBlue'
         />
+      </div>
 
     </div>
   );

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import type { Bookmark } from "@/lib/garden/bookmarks";
 import { BookmarkItem } from "@/components/digital-garden/bookmark/BookmarkItem";
+import { safeFormatDate } from "@/lib/utils";
 
 interface Props {
   bookmarks: Bookmark[];
@@ -52,10 +53,14 @@ export default function TagFilterClient({ bookmarks }: Props) {
     const timeout = setTimeout(() => setIsLoaded(true), 400);
     return () => clearTimeout(timeout);
   }, []);
-
   // Sort bookmarks by newest first
   const sortedBookmarks = [...bookmarks].sort((a, b) => {
-    return new Date(b.created).getTime() - new Date(a.created).getTime();
+    // Convert to Date objects for safe comparison
+    const dateA = new Date(a.created);
+    const dateB = new Date(b.created);
+    
+    // Sort newest first
+    return dateB.getTime() - dateA.getTime();
   });
   
   // Apply tag and category filtering

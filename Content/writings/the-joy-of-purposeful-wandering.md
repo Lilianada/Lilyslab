@@ -1,8 +1,7 @@
 ---
 author: Lilian
 cover:
-  - "[[rabbit-hole.jpg]]"
-date: 2025-05-01
+  - '[[rabbit-hole.jpg]]'
 excerpt: The goal isn't to eliminate rabbitholes entirely.
 published: true
 slug: the-joy-of-purposeful-wandering
@@ -13,11 +12,11 @@ tags:
 title: The Joy of Purposeful Wandering
 readingTime: 4
 wordCount: 689
+createdAt: 2025-05-01
+type: evergreen
 ---
 
 
-
-### The Joy of Purposeful Wandering
 
 The goal isn't to eliminate rabbitholes entirely – quite the opposite! Serendipitous discoveries and unexpected connections are the lifeblood of creativity. Some of my best ideas and most valuable discoveries have come from following these winding paths. Instead, I aim to transform unconscious tumbling into conscious exploration, enhancing the rabbithole experience rather than limiting it.
 

@@ -47,7 +47,7 @@ export async function GET(request: Request) {
           link: siteURL,
         },
       ],
-      date: new Date(writing.date),
+      date: writing.createdAt ? new Date(writing.createdAt) : new Date(),
       ...(writing.tags && writing.tags.length > 0 && { category: writing.tags.map(tag => ({ name: tag })) }),
     });
   });
@@ -69,7 +69,7 @@ export async function GET(request: Request) {
           link: siteURL,
         },
       ],
-      date: new Date(log.frontmatter.date),
+      date: log.frontmatter.date ? new Date(log.frontmatter.date) : new Date(),
       ...(log.frontmatter.tags && log.frontmatter.tags.length > 0 && { category: log.frontmatter.tags.map(tag => ({ name: tag })) }),
     });
   });
@@ -92,7 +92,7 @@ export async function GET(request: Request) {
           link: siteURL,
         },
       ],
-      date: new Date(note.frontmatter.date),
+      date: note.frontmatter.createdAt ? new Date(note.frontmatter.createdAt) : new Date(),
       ...(note.frontmatter.tags && note.frontmatter.tags.length > 0 && { category: note.frontmatter.tags.map(tag => ({ name: tag })) }),
     });
   });

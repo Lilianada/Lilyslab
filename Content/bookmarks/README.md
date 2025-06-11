@@ -22,7 +22,8 @@ Each bookmark is stored in a markdown file with YAML frontmatter. Here's an exam
 publish: true
 title: The Slow Web
 URL: https://www.jackcheng.com/the-slow-web/
-date: 2025-06-06
+createdAt: 2025-06-06
+lastUpdated: 2025-06-06
 tags:
   - the internet
   - web

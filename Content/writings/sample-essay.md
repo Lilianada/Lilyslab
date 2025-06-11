@@ -1,9 +1,15 @@
 ---
-title: "The Art of Creating Digital Gardens"
-date: "2025-06-11"
-tags: ["digital garden", "personal websites", "web development"]
-excerpt: "Exploring how personal websites can evolve into thriving digital gardens that grow with their creators."
+title: The Art of Creating Digital Gardens
+tags:
+  - digital garden
+  - personal websites
+  - web development
+excerpt: >-
+  Exploring how personal websites can evolve into thriving digital gardens that
+  grow with their creators.
 featured: true
+createdAt: 2025-06-11
+type: evergreen
 ---
 
 # The Art of Creating Digital Gardens

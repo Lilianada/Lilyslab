@@ -1,9 +1,10 @@
 ---
 author: Lilian
 cover:
-  - "[[rabbit-hole.jpg]]"
-date: 2025-04-10
-excerpt: Managing the endless paths of curiosity without losing yourself in the process.
+  - '[[rabbit-hole.jpg]]'
+excerpt: >-
+  Managing the endless paths of curiosity without losing yourself in the
+  process.
 published: true
 slug: escaping-the-rabbithole-problem
 tags:
@@ -13,6 +14,8 @@ tags:
 title: Escaping the Rabbithole Problem
 readingTime: 4
 wordCount: 689
+createdAt: 2025-04-10
+type: evergreen
 ---
 
 We've all been there: you open your browser to research something specific – maybe a JavaScript framework or a design pattern. Three hours later, you find yourself with 37 open tabs spanning everything from the original topic to cutting-edge design trends to fascinating creators you've never heard of before. Somewhere along the way, you fell down a rabbithole.

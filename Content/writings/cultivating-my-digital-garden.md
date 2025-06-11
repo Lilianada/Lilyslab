@@ -1,8 +1,7 @@
 ---
 author: Lilian
 cover:
-  - "[[garden-illustration.jpg]]"
-date: 2025-04-23
+  - '[[garden-illustration.jpg]]'
 excerpt: Exploring the art of tending a digital garden as a personal knowledge space.
 published: true
 slug: cultivating-my-digital-garden
@@ -13,6 +12,8 @@ tags:
 title: Cultivating My Digital Garden
 readingTime: 4
 wordCount: 712
+createdAt: 2025-04-23
+type: evergreen
 ---
 
 For years, I've been creating content online in different formats—from social media posts to polished blog articles. But there's always been this uncomfortable middle space: the ideas that aren't quite ready for prime time, but deserve more than being lost in a Twitter scroll. When I discovered the concept of digital gardening, something clicked. This wasn't just another internet trend; it was a philosophy that aligned perfectly with how I naturally think and create.

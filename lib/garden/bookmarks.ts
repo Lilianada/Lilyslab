@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { safeFormatDate } from '@/lib/utils';
 
 export interface Bookmark {
   id: string;
@@ -30,8 +31,9 @@ const BookmarkMetaSchema = z.object({
   publish: z.boolean().optional(),
   Publish: z.boolean().optional(),
   published: z.boolean().optional(),
-  date: z.coerce.date().optional(),
-  Date: z.coerce.date().optional(),
+  createdAt: z.union([z.string(), z.coerce.date()]).optional(),
+  date: z.union([z.string(), z.coerce.date()]).optional(),
+  Date: z.union([z.string(), z.coerce.date()]).optional(),
 });
 
 export async function getBookmarks(): Promise<Bookmark[]> {
@@ -79,14 +81,9 @@ export async function getBookmarks(): Promise<Bookmark[]> {
           const published = meta.Publish === true || meta.publish === true || meta.published !== false;
           if (!published) continue;
           
-          // Prefer date, fallback to Date, and always format as string
-          const dateObj = meta.date || meta.Date;
-          let created = '';
-          if (dateObj instanceof Date && !isNaN(dateObj.getTime())) {
-            created = dateObj.toISOString().split('T')[0];
-          } else if (typeof dateObj === 'string') {
-            created = dateObj;
-          }
+          // Prefer createdAt, then date, fallback to Date, using our safe date formatter
+          const dateValue = meta.createdAt || meta.date || meta.Date;
+          const created = safeFormatDate(dateValue);
           
           allBookmarks.push({
             id: meta.id || `${category}-unknown`,
@@ -108,9 +105,12 @@ export async function getBookmarks(): Promise<Bookmark[]> {
   
   // Sort from newest to oldest by date (created)
   allBookmarks.sort((a, b) => {
-    const dateA = new Date(a.created).getTime();
-    const dateB = new Date(b.created).getTime();
-    return dateB - dateA;
+    // Convert to Date objects for safe comparison
+    const dateA = new Date(a.created);
+    const dateB = new Date(b.created);
+    
+    // Sort newest first
+    return dateB.getTime() - dateA.getTime();
   });
   
   return allBookmarks;
@@ -133,14 +133,9 @@ export async function getLegacyBookmarks(): Promise<Bookmark[]> {
     // Only include if Publish/publish is true
     const published = meta.Publish === true || meta.publish === true || meta.published;
     if (!published) return null;
-    // Prefer date, fallback to Date, and always format as string
-    const dateObj = meta.date || meta.Date;
-    let created = '';
-    if (dateObj instanceof Date && !isNaN(dateObj.getTime())) {
-      created = dateObj.toISOString().split('T')[0];
-    } else if (typeof dateObj === 'string') {
-      created = dateObj;
-    }
+    // Prefer createdAt, then date, fallback to Date, using our safe date formatter
+    const dateValue = meta.createdAt || meta.date || meta.Date;
+    const created = safeFormatDate(dateValue);
     
     const bookmarkType = (meta.type || 'website').toLowerCase() as Bookmark['type'];
     
@@ -157,9 +152,12 @@ export async function getLegacyBookmarks(): Promise<Bookmark[]> {
   
   // Sort from newest to oldest by date (created)
   bookmarks.sort((a, b) => {
-    const dateA = new Date(a.created).getTime();
-    const dateB = new Date(b.created).getTime();
-    return dateB - dateA;
+    // Convert to Date objects for safe comparison
+    const dateA = new Date(a.created);
+    const dateB = new Date(b.created);
+    
+    // Sort newest first
+    return dateB.getTime() - dateA.getTime();
   });
   
   return bookmarks;

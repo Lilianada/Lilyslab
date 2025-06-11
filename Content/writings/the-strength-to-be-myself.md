@@ -1,9 +1,10 @@
 ---
 author: Lilian
 cover:
-  - "[[Building_Bloques_Creative_Studio_(21).png]]"
-date: 2025-04-20
-excerpt: Why I decided to grow stronger instead of smaller when the comments started coming.
+  - '[[Building_Bloques_Creative_Studio_(21).png]]'
+excerpt: >-
+  Why I decided to grow stronger instead of smaller when the comments started
+  coming.
 published: true
 slug: the-strength-to-be-myself
 tags:
@@ -12,6 +13,8 @@ tags:
 title: The Strength to Be Myself
 readingTime: 3
 wordCount: 545
+createdAt: 2025-04-20
+type: evergreen
 ---
 
 have you ever looked yourself in the mirror and thought…  

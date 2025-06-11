@@ -1,7 +1,6 @@
 ---
 author: Lilian
-cover: 
-date: 2025-05-05
+cover: null
 excerpt: Why Waiting for "Success" Steals Your Joy Every Time
 published: true
 slug: day-4-of-20
@@ -11,6 +10,8 @@ tags:
 title: Day 4 of 20
 readingTime: 3
 wordCount: 545
+createdAt: 2025-05-05
+type: evergreen
 ---
 You’ve probably heard this before ↴
 

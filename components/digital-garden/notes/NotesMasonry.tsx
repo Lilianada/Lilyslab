@@ -6,10 +6,12 @@ import NoteCard from "./NoteCard"
 interface Note {
   id: string;
   title: string;
+  createdAt: string;
+  lastUpdated: string;
   tags?: string[];
-  date: string;
   entry: string;
   image?: string | null;
+  type: string;
 }
 
 export default function NotesMasonry({ notes }: { notes: Note[] }) {

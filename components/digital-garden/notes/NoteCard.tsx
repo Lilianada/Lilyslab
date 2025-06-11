@@ -1,22 +1,23 @@
 "use client"
 
 import Image from "next/image"
+import { formatDate } from "@/lib/utils"
 
 interface Note {
     id: string;
     title: string;
-    date: string;
+    createdAt: string;
+    lastUpdated: string;
     entry: string;
     image?: string | null;
     tags?: string[];
+    type: string;
 }
 
 export default function NoteCard({ note }: { note: Note }) {
-    const formattedDate = new Date(note.date).toLocaleDateString("en-US", {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
+    // Use the centralized date formatting utility
+    const formattedCreatedDate = formatDate(note.createdAt);
+    const formattedUpdatedDate = formatDate(note.lastUpdated);
 
 
     return (
@@ -45,13 +46,27 @@ export default function NoteCard({ note }: { note: Note }) {
                     <p className="text-sm text-foreground/90 leading-relaxed whitespace-pre-line">
                         {note.entry}
                     </p>
-                    <div className="flex justify-between items-center text-xs text-muted-foreground mt-4">
-                        {note.tags?.map((tag) => (
-                            <span key={tag} className="inline-block bg-muted/50 px-2 py-1 rounded-full text-xs">
-                                {tag}
-                            </span>
-                        ))}
-                        <time dateTime={note.date}>{formattedDate}</time>
+                    <div className="flex flex-col gap-1 text-xs text-muted-foreground mt-4">
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Created:</span>
+                            <span>{formattedCreatedDate}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Updated:</span>
+                            <span>{formattedUpdatedDate}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">Type:</span>
+                            <span>{note.type}</span>
+                        </div>
+                        <div className="flex flex-wrap gap-1 mt-2">
+                            <span className="font-medium">Tags:</span>
+                            {note.tags?.map((tag) => (
+                                <span key={tag} className="inline-block bg-muted/50 px-2 py-1 rounded-full text-xs">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

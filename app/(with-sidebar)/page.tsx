@@ -6,6 +6,7 @@ import { SocialLink } from "@/components/comps/homepage-items";
 import { Footer } from "@/components/layout/footer";
 import AnimatedLogo from "@/components/comps/AnimatedLogo";
 import { MusicPlayerWidget } from "@/components/audio/music-player-widget";
+import { TopicsList } from "@/components/comps/topics-list";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,13 +25,13 @@ export default function Home() {
         <div className="w-20 h-20 mb-6 object-contain">
           <AnimatedLogo />
         </div>
-        <div className="flex flex-col text-xs text-muted-foreground">
-          <div>Created: April, 2025</div>
-          <div>Updated: June, 2025</div>
+        <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: April 10, 2025</div>
+          <div>Last updated: June 11, 2025</div>
         </div>
 
         <div className="space-y-4 text-sm leading-relaxed">
-          <p>Hi there friend,</p>
+          <p>Hello there friend,</p>
 
           <p>
             Greetings to you and happy to have you here. You've probably landed
@@ -141,47 +142,7 @@ export default function Home() {
             .
           </p>
 
-          <p>Here are a few of my favourite seedlings and ...:</p>
-
-          <ul className="space-y-1 pl-6 list-none">
-            <li className="flex items-center gap-1">
-              <span className="text-primary dark:text-codeRed">-&gt;</span>
-              <Link
-                href="/garden/writings"
-                className="text-primary dark:text-codeRed"
-              >
-                a random topic
-              </Link>
-            </li>
-            <li className="flex items-center gap-1">
-              <span className="text-primary dark:text-codeRed">-&gt;</span>
-              <Link
-                href="/garden/writings"
-                className="text-primary dark:text-codeRed"
-              >
-                a random topic
-              </Link>
-            </li>
-            <li className="flex items-center gap-1">
-              <span className="text-primary dark:text-codeRed">-&gt;</span>
-              <Link
-                href="/garden/writings"
-                className="text-primary dark:text-codeRed"
-              >
-                a random topic
-              </Link>
-            </li>
-            <li className="flex items-center gap-1">
-              <span className="text-primary dark:text-codeRed">-&gt;</span>
-              <Link
-                href="/garden/writings"
-                className="text-primary dark:text-codeRed"
-              >
-                a random topic
-              </Link>
-            </li>
-          </ul>
-
+          <TopicsList />
           <p>
             If you'd like to comment on any of my writings or notes, I have a
             comment modal that you can access by clicking the comment icon

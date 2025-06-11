@@ -2,16 +2,19 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { safeFormatDate } from '@/lib/utils';
 
 export type Writing = {
   slug: string;
   title: string;
-  date: string;
+  createdAt: string;
+  lastUpdated: string;
   excerpt?: string;
   tags?: string[];
   coverImage?: string;
   content: string;
   published: boolean;
+  type: string;
 };
 
 const writingsDir = path.join(process.cwd(), 'Content/writings');
@@ -34,20 +37,34 @@ export function getAllWritings(): Writing[] {
       const { data, content } = matter(raw);
 
       const published = data.published === true;
+      
+      // Handle dates safely
+      const createdAtValue = data.createdAt || data.date;
+      const createdAt = safeFormatDate(createdAtValue);
+      const lastUpdated = safeFormatDate(data.lastUpdated || createdAtValue);
 
       return {
         slug: file.replace(/\.mdx?$/, ''),
         title: data.title || 'Untitled',
-        date: data.date || '',
+        createdAt,
+        lastUpdated,
         excerpt: data.excerpt || '',
         tags: data.tags || [],
         coverImage: data.coverImage || null,
         published: published,
         content,
+        type: data.type || 'evergreen',
       };
     })
     .filter(writing => writing.published === true)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      // Convert to Date objects for safe comparison
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      
+      // Sort newest first
+      return dateB.getTime() - dateA.getTime();
+    });
 }
 
 export function getWritingBySlug(slug: string): Writing | null {
@@ -56,15 +73,22 @@ export function getWritingBySlug(slug: string): Writing | null {
 
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
+  
+  // Handle dates safely
+  const createdAtValue = data.createdAt || data.date;
+  const createdAt = safeFormatDate(createdAtValue);
+  const lastUpdated = safeFormatDate(data.lastUpdated || createdAtValue);
 
   return {
     slug,
     title: data.title || 'Untitled',
-    date: data.date || '',
+    createdAt,
+    lastUpdated,
     excerpt: data.excerpt || '',
     tags: data.tags || [],
     coverImage: data.coverImage || null,
     content,
     published: data.published === true,
+    type: data.type || 'evergreen',
   };
 }

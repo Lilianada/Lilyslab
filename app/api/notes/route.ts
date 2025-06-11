@@ -3,15 +3,17 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 
-// Update Note interface to include content and make entry optional
+// Updated Note interface with new metadata structure
 interface Note {
   id: string;
   title: string;
   tags?: string[];
-  date: string;
+  createdAt: string;
+  lastUpdated: string;
   image?: string | null;
   publish?: boolean;
-  content: string; // Add field for full markdown content
+  type: string;
+  content: string; // Field for full markdown content
 }
 
 export async function GET() {
@@ -29,21 +31,29 @@ export async function GET() {
       const { data, content } = matter(fileContent);
 
       // Validate required fields and publish status
-      if (data.publish === true && data.title && data.date && data.tags) {
+      if (data.publish === true && data.title) {
+        // Set default values for type, createdAt, and lastUpdated if not present
+        const type = data.type || 'seedling';
+        const createdAt = data.createdAt || data.date || new Date().toISOString();
+        const lastUpdated = data.lastUpdated || new Date().toISOString();
+        const tags = data.tags ? (Array.isArray(data.tags) ? data.tags : [data.tags]) : [];
+        
         notes.push({
           id: file.replace(/\.md$/, ''),
           title: data.title,
-          tags: Array.isArray(data.tags) ? data.tags : [data.tags],
-          date: data.date,
+          tags: tags,
+          createdAt: createdAt,
+          lastUpdated: lastUpdated,
           image: data.image || null,
           publish: data.publish,
-          content: content, // Add the full markdown content
+          type: type,
+          content: content, // The full markdown content
         });
       }
     }
 
-    // Sort notes by date, newest first
-    notes.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // Sort notes by createdAt, newest first
+    notes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
   } catch (error) {
     console.error("Error reading or parsing notes content:", error);

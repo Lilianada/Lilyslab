@@ -1,5 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
+import { formatDateForDisplay } from "@/lib/utils";
 
 interface NoteDetailCardProps {
   slug: string;
@@ -18,22 +19,7 @@ interface NoteDetailCardProps {
   onClose: () => void;
 }
 
-function formatDate(dateString: string) {
-  try {
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) {
-      console.warn(`Invalid date string received: ${dateString}`);
-      return 'Invalid Date';
-    }
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day} / ${month} / ${year}`;
-  } catch (e) {
-    console.error(`Error formatting date: ${dateString}`, e);
-    return 'Error Date';
-  }
-}
+// Using our centralized formatting function instead of a local one
 
 const BookDetailCard: React.FC<NoteDetailCardProps> = ({
   slug,
@@ -46,8 +32,9 @@ const BookDetailCard: React.FC<NoteDetailCardProps> = ({
   onClose,
 }) => {
   const title = frontmatter.title || (slug.endsWith(".md") ? slug.replace(/\.md$/, "").replace(/-/g, ' ') : slug.replace(/-/g, ' '));
-  const createdDate = formatDate(frontmatter.created);
-  const editedDate = formatDate(frontmatter.edited);
+  // Use our centralized date formatting utility
+  const createdDate = formatDateForDisplay(frontmatter.created);
+  const editedDate = formatDateForDisplay(frontmatter.edited);
   const displayCategory = frontmatter.category || propCategory || 'N/A';
 
   const renderBody = () => {

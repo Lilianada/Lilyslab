@@ -7,13 +7,13 @@ import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import { cn } from '@/lib/utils';
 
-// Import Prism CSS for code highlighting
-// We're already importing it globally in layout.tsx
 
-// Loading skeleton for markdown content
 export const MarkdownSkeleton = () => (
   <div className="animate-pulse space-y-4">
     <div className="h-4 bg-muted rounded w-full"></div>
+    <div className="h-4 bg-muted rounded w-full"></div>
+    <div className="h-4 bg-muted rounded w-full"></div>
+    <div className="h-4 bg-muted rounded w-5/6"></div>
     <div className="h-4 bg-muted rounded w-5/6"></div>
     <div className="h-4 bg-muted rounded w-4/6"></div>
   </div>
@@ -43,7 +43,7 @@ const MarkdownRenderer = ({
     h1: ({ node, className, ...props }: any) => (
       <h1 
         className={cn(
-          "text-3xl font-bold mt-8 mb-4 text-foreground scroll-m-20",
+          "text-xl font-semibold mt-8 mb-4 text-foreground scroll-m-20",
           className
         )} 
         {...props} 
@@ -52,7 +52,7 @@ const MarkdownRenderer = ({
     h2: ({ node, className, ...props }: any) => (
       <h2 
         className={cn(
-          "text-2xl font-semibold mt-8 mb-3 text-foreground scroll-m-20",
+          "text-lg font-medium mt-8 mb-3 text-foreground scroll-m-20",
           className
         )} 
         {...props} 
@@ -61,7 +61,7 @@ const MarkdownRenderer = ({
     h3: ({ node, className, ...props }: any) => (
       <h3 
         className={cn(
-          "text-xl font-semibold mt-6 mb-3 text-foreground scroll-m-20",
+          "text-base font-medium mt-6 mb-3 text-foreground scroll-m-20",
           className
         )} 
         {...props} 
@@ -70,7 +70,7 @@ const MarkdownRenderer = ({
     h4: ({ node, className, ...props }: any) => (
       <h4 
         className={cn(
-          "text-lg font-medium mt-4 mb-2 text-foreground scroll-m-20",
+          "text-[15px] font-medium mt-4 mb-2 text-foreground scroll-m-20",
           className
         )} 
         {...props} 
@@ -79,7 +79,7 @@ const MarkdownRenderer = ({
     p: ({ node, className, ...props }: any) => (
       <p 
         className={cn(
-          "leading-7 mb-4 text-foreground/90",
+          "text-sm leading-tight mb-4 text-foreground/90",
           className
         )} 
         {...props} 
@@ -126,7 +126,7 @@ const MarkdownRenderer = ({
     blockquote: ({ node, className, ...props }: any) => (
       <blockquote 
         className={cn(
-          "mt-6 border-l-2 pl-6 italic text-foreground/80",
+          "text-sm font-normal mt-6 border-l-3 pl-6 italic text-muted-foreground",
           className
         )} 
         {...props} 
@@ -173,7 +173,7 @@ const MarkdownRenderer = ({
     pre: ({ node, className, ...props }: any) => (
       <pre 
         className={cn(
-          "mt-6 mb-4 p-0 overflow-hidden rounded-md bg-transparent",
+          "mt-6 mb-4 w-fit p-0 overflow-hidden rounded-md bg-transparent",
           className
         )} 
         {...props} 
@@ -249,8 +249,8 @@ const MarkdownRenderer = ({
 
   return (
     <article className={cn(
-      "prose prose-sm sm:prose-base dark:prose-invert max-w-none markdown-content", 
-      "text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-8",
+      "prose prose-sm  dark:prose-invert max-w-none markdown-content", 
+      "text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-4",
       className
     )}>
       <ReactMarkdown

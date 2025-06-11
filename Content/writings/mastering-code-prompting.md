@@ -1,9 +1,10 @@
 ---
 author: Lilian
 Cover:
-  - "[[Trainer_info.jpeg]]"
-date: 2025-04-24
-excerpt: LLMs aren't just for text; they can be powerful tools for working with code too and you’ll learn how to use prompts for various coding tasks here.
+  - '[[Trainer_info.jpeg]]'
+excerpt: >-
+  LLMs aren't just for text; they can be powerful tools for working with code
+  too and you’ll learn how to use prompts for various coding tasks here.
 published: true
 slug: mastering-code-prompting
 tags:
@@ -11,6 +12,8 @@ tags:
 title: Mastering Code Prompting
 readingTime: 2
 wordCount: 347
+createdAt: 2025-04-24
+type: evergreen
 ---
 
 LLMs aren't just for text; they can be powerful tools for working with **code** too. Here's how you can use prompts for various coding tasks:

@@ -1,9 +1,10 @@
 ---
 author: Lilian
 cover:
-  - "[[workshop.jpg]]"
-date: 2025-04-02
-excerpt: How I turned my website into a living studio for projects in all stages of completion.
+  - '[[workshop.jpg]]'
+excerpt: >-
+  How I turned my website into a living studio for projects in all stages of
+  completion.
 published: true
 slug: building-a-digital-workshop
 tags:
@@ -13,6 +14,8 @@ tags:
 title: Building a Digital Workshop
 readingTime: 3
 wordCount: 495
+createdAt: 2025-04-02
+type: evergreen
 ---
 
 When most people build a portfolio website, they aim to present only their most polished, perfect work. But I've taken a different approach with Lilyslab—I've built it as a digital workshop rather than a pristine gallery. Like any real workshop, it's filled with projects in various stages of completion: half-assembled prototypes, abandoned experiments, and finished pieces all sharing the same space.

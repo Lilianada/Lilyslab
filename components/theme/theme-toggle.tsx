@@ -25,7 +25,6 @@ export function ThemeToggle() {
       {mounted ? (
         theme === "dark" ? <Sun className="" /> : <Moon className="" />
       ) : (
-        // Optionally render nothing or a neutral icon while mounting
         <span className="w-5 h-5" />
       )}
       <span className="sr-only">Toggle theme</span>

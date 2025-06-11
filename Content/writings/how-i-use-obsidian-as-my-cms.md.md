@@ -5,9 +5,10 @@ tags:
   - content
   - productivity
   - article
-date: 2025-04-26
 excerpt: Easy peasy content management system
 published: true
+createdAt: 2025-04-26
+type: evergreen
 ---
 
 ### **How I Set Up Obsidian as My Content Management System After Encountering Bugs in Notion's Renderer**

@@ -1,7 +1,6 @@
 ---
 author: Lilian
-cover: 
-date: 2025-05-02
+cover: null
 excerpt: The Reimagined Todo List
 published: true
 slug: day-2-of-20
@@ -9,8 +8,10 @@ tags:
   - 20-days-challenge
   - to-do-list
 title: Day 2 of 20
-readingTime: 
-wordCount:
+readingTime: null
+wordCount: null
+createdAt: 2025-05-02
+type: evergreen
 ---
 
 

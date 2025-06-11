@@ -22,9 +22,9 @@ function groupWritingsByMonth(writings: Writing[]) {
   const grouped: Record<string, Writing[]> = {}
 
   writings.forEach(writing => {
-    if (!writing.date) return
+    if (!writing.createdAt) return
     
-    const date = new Date(writing.date)
+    const date = new Date(writing.createdAt)
     const monthYear = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
     
     if (!grouped[monthYear]) {
@@ -37,8 +37,8 @@ function groupWritingsByMonth(writings: Writing[]) {
   // Sort the keys (month-year) in reverse chronological order
   return Object.keys(grouped)
     .sort((a, b) => {
-      const dateA = new Date(grouped[a][0].date)
-      const dateB = new Date(grouped[b][0].date)
+      const dateA = new Date(grouped[a][0].createdAt)
+      const dateB = new Date(grouped[b][0].createdAt)
       return dateB.getTime() - dateA.getTime()
     })
     .map(monthYear => ({
@@ -68,7 +68,7 @@ export default async function WritingPage() {
     <div className="max-w-2xl w-full mx-auto animate-fade-in sm:px-6 py-12">
       <header className="mb-6">
         <h1 className="mb-1 text-xl font-medium">Writings</h1>
-        <p className="text-sm text-muted-foreground">Not limited by topic.</p>
+        <p className="text-sm text-muted-foreground">There's no limitation to what I can and will write.</p>
       </header>
 
       {error ? (
@@ -93,7 +93,7 @@ export default async function WritingPage() {
                           {post.title}
                         </h2>
                         <div className="flex gap-2 items-center text-[10px] text-muted-foreground mb-1">
-                          <span>{formatDate(post.date)}</span>
+                          <span>{formatDate(post.createdAt)}</span>
                           <span>•</span>
                           <span>{calculateReadingTime(post.content)} min read</span>
                         </div>
@@ -133,7 +133,7 @@ export default async function WritingPage() {
                         </h2>
                         <div className="w-full border-t-2 border-dashed border-muted-foreground opacity-50 mx-2 group-hover:border-primary" />
                         <span className="text-xs text-muted-foreground whitespace-nowrap group-hover:text-primary ">
-                          {post.date ? formatDate(post.date) : "No date"}
+                          {post.createdAt ? formatDate(post.createdAt) : "No date"}
                         </span>
                       </div>
                       {/* Second line: Reading time */}

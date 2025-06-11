@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/auth-context"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
+import { formatDate } from "@/lib/utils"
 
 interface Question {
   id: string
@@ -29,18 +30,7 @@ interface AMAEntriesProps {
 export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEntriesProps) {
   const { user, isAdmin } = useAuth()
 
-  const formatDate = (dateString: string) => {
-    try {
-      const date = new Date(dateString)
-      return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      }).format(date)
-    } catch (error) {
-      return "Unknown date"
-    }
-  }
+  // Using centralized formatDate function from utils
 
   return (
     <section>
@@ -70,7 +60,7 @@ export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEn
                   <h3 className="text-sm font-medium">{q.name}</h3>
                 </div>
                 <span className="text-xs text-muted-foreground">
-                  {q.date || q.dateSubmitted ? formatDate(String(q.date || q.dateSubmitted)) : "Unknown date"}
+                  {formatDate(q.date || q.dateSubmitted || "")}
                 </span>
               </div>
               <p className="text-sm">{q.question}</p>

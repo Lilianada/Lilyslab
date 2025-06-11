@@ -1,7 +1,6 @@
 ---
 author: Lilian
-cover: 
-date: 2025-05-03
+cover: null
 excerpt: Building tools for the web.
 published: true
 slug: day-3-of-20
@@ -11,6 +10,8 @@ tags:
 title: Day 3 of 20
 readingTime: 3
 wordCount: 545
+createdAt: 2025-05-03
+type: evergreen
 ---
 
 On a random day, I asked myself…

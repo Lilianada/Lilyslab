@@ -1,7 +1,6 @@
 ---
 author: Lilian
-cover: 
-date: 2025-05-07
+cover: null
 excerpt: Building tools for devs
 published: true
 slug: day-6-of-20
@@ -9,8 +8,10 @@ tags:
   - 20-days-challenge
   - ui-library
 title: Day 6 of 20
-readingTime: 
+readingTime: null
 wordCount: -6
+createdAt: 2025-05-07
+type: evergreen
 ---
 
 "The biggest barrier to sharing our work is often the voice in our heads telling us it's not good enough. But even unfinished creations can inspire and grow into something incredible when shared with the world."

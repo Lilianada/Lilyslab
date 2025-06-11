@@ -1,40 +1,32 @@
 ---
 author: Lilian
 cover:
-  - ""
-date: 2025-05-01
+  - ''
 excerpt: What this site is about.
 published: true
 slug: what-is-lilyslab
 tags:
-  - digital garden
-  - personal site
-title: "What is Lilyslab?"
+  - digital-garden
+  - personal-site
+title: What is Lilyslab?
 readingTime: 1
-wordCount: 205
+wordCount: null
+createdAt: 2025-05-01
+lastUpdated: 2025-06-11
+type: evergreen
 ---
 
-#### What is Lilyslab?
+I built this website first as a way to freely express myself, play and write.
+The only three things that matter to me at the moment are playing, reading and writing, oh and going to the gym so make that 4.
 
-Lilyslab is my personal space for growth, learning, and sharing. It's a mix of three main areas:
+Lilyslab has helped me to achieve this as I play with this website and other projects that I work on.
 
-- **Digital Garden**: Where I grow and share my ideas, writings, notes, and bookmarks. It's not a formal blog, but a living collection of thoughts that grow over time.
+Since I started playing with Lilyslab, I have discovered so much more than I knew all my life and the more I discover, the more I yearn to know more.
 
-- **Workshop**: Where I show my projects (like logs and shop items), track my progress, and share my building process.
+This is my outlet.
 
-- **Playground**: Where I build and test small web tools and apps like calculators and note widgets.
+Each time you come back here, something must have changed and that is the beauty of it all. Change is constant even in Lilyslab.
 
-#### Why I Built It
+I employ you to come back whenever you can to find and notice the changes no matter how small.
 
-I needed a home for my thoughts and projects - a place where I could:
-
-- Link related ideas together (like my articles on digital gardens, rabbit holes, and tab management)
-- Show my work in an easy-to-browse way
-- Test new coding ideas
-- Share what I learn with others
-
-#### How It Works
-
-The site is built with Next.js, Tailwind CSS, and MDX files for content. I've designed it to be simple to use, fast to load, and easy to update. Everything is stored as plain text files, which makes adding new content quick and easy.
-
-Explore the different sections to see my growing collection of projects, writings, and web experiments!
+✦

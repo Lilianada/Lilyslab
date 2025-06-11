@@ -1,5 +1,6 @@
 'use client';
 import React from "react";
+import { formatDateForDisplay } from "@/lib/utils";
 
 export type Bookmark = {
   id?: string;
@@ -16,16 +17,16 @@ interface Props {
 }
 
 export function BookmarkItem({ bookmark }: Props) {
-
-  const date = new Date(bookmark.created);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  const formattedDate = `${day}-${month}-${year}`;
+  // Use the central utility to format dates
+  const formattedDate = formatDateForDisplay(bookmark.created);
+  
+  // Extract domain from link
   let domain = "";
   try {
     domain = new URL(bookmark.link).hostname;
-  } catch { }
+  } catch (error) {
+    console.warn(`Invalid URL in bookmark: ${bookmark.link}`);
+  } 
 
   // Color dots
   const colorMap = {

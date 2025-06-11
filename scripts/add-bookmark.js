@@ -37,8 +37,9 @@ async function addBookmark() {
   const tagsInput = await askQuestion('Tags (comma-separated): ');
   const tags = tagsInput.split(',').map(tag => tag.trim()).filter(Boolean);
   
-  const dateInput = await askQuestion('Date (YYYY-MM-DD, leave blank for today): ');
-  const date = dateInput || new Date().toISOString().split('T')[0];
+  const dateInput = await askQuestion('CreatedAt (YYYY-MM-DD, leave blank for today): ');
+  const createdAt = dateInput || new Date().toISOString().split('T')[0];
+  const lastUpdated = createdAt; // Initially lastUpdated is the same as createdAt
   
   // Generate ID
   let id;
@@ -64,7 +65,8 @@ async function addBookmark() {
     id,
     title,
     URL: url,
-    date,
+    createdAt,
+    lastUpdated,
     tags,
     type: category,
     publish: true

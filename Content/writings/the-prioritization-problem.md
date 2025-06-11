@@ -1,9 +1,10 @@
 ---
 author: Lilian
 cover:
-  - "[[prioritization.jpg]]"
-date: 2025-03-25
-excerpt: Strategies for managing multiple creative projects without getting overwhelmed.
+  - '[[prioritization.jpg]]'
+excerpt: >-
+  Strategies for managing multiple creative projects without getting
+  overwhelmed.
 published: true
 slug: the-prioritization-problem
 tags:
@@ -13,6 +14,8 @@ tags:
 title: The Prioritization Problem
 readingTime: 3
 wordCount: 487
+createdAt: 2025-03-25
+type: evergreen
 ---
 
 Every creator faces the same challenge: too many ideas, too little time. I call this "the prioritization problem" – the eternal struggle to decide which projects deserve our limited attention and energy. As my [digital garden](/cultivating-my-digital-garden) grows, this challenge becomes increasingly apparent.

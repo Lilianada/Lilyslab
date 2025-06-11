@@ -1,8 +1,7 @@
 ---
 author: Lilian
 cover:
-  - "[[__(17).jpeg]]"
-date: 2025-04-18
+  - '[[__(17).jpeg]]'
 excerpt: Riding the wave of AI development.
 published: true
 slug: my-takes-on-vibe-coding
@@ -12,6 +11,8 @@ tags:
 title: My Takes on Vibe Coding
 readingTime: 3
 wordCount: 496
+createdAt: 2025-04-18
+type: evergreen
 ---
 
 Remember when coding meant hours of debugging and Stack Overflow searches? Those days aren't gone, but they're definitely changing. As someone who's spent countless nights wrestling with code, I've watched the landscape transform dramatically with AI tools flooding the market.

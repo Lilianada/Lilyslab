@@ -55,6 +55,29 @@ export function Footer({
      
      setLocation("Lily's Garden - Digital Garden & Workshop");
      
+     // Helper function to safely format dates
+     const safeFormatDate = (dateValue: string | Date | undefined): { formattedDate: string; formattedTime: string } | null => {
+       if (!dateValue) return null;
+       
+       try {
+         const date = typeof dateValue === 'string' ? new Date(dateValue) : dateValue;
+         
+         // Check if the date is valid
+         if (isNaN(date.getTime())) {
+           console.warn(`Invalid date value in footer: ${dateValue}`);
+           return null;
+         }
+         
+         return {
+           formattedDate: format(date, 'MMMM d, yyyy'),
+           formattedTime: format(date, 'HH:mm')
+         };
+       } catch (error) {
+         console.warn(`Error parsing date ${dateValue}: ${error}`);
+         return null;
+       }
+     };
+     
      // Fetch the last edited date from Git commit history
      const fetchLastEdited = async () => {
        try {
@@ -62,13 +85,12 @@ export function Footer({
          const response = await fetch('/api/last-updated');
          if (response.ok) {
            const data = await response.json();
-           console.log('API Response:', data); // Debug log             // Check if we got a valid date
+           
+           // Check if we got a valid date
            if (data.lastUpdated) {
-             const lastUpdatedDate = new Date(data.lastUpdated);
-             if (!isNaN(lastUpdatedDate.getTime())) {
-               const formattedDate = format(lastUpdatedDate, 'MMMM d, yyyy');
-               const formattedTime = format(lastUpdatedDate, 'HH:mm');
-               setLastEdited(`${formattedDate} at ${formattedTime}`);
+             const formatted = safeFormatDate(data.lastUpdated);
+             if (formatted) {
+               setLastEdited(`${formatted.formattedDate} at ${formatted.formattedTime}`);
                return;
              }
            }
@@ -78,10 +100,10 @@ export function Footer({
          
          // Fallback to build time if API fails
          if (process.env.NEXT_PUBLIC_BUILD_TIME) {
-           const buildDate = new Date(process.env.NEXT_PUBLIC_BUILD_TIME);
-           const formattedBuildDate = format(buildDate, 'MMMM d, yyyy');
-           const formattedBuildTime = format(buildDate, 'HH:mm');
-           setLastEdited(`${formattedBuildDate} at ${formattedBuildTime}`);
+           const formatted = safeFormatDate(process.env.NEXT_PUBLIC_BUILD_TIME);
+           if (formatted) {
+             setLastEdited(`${formatted.formattedDate} at ${formatted.formattedTime}`);
+           }
          } 
        } catch (error) {
          console.error('Error fetching last edited date:', error);
@@ -101,7 +123,7 @@ export function Footer({
    }
    
   return (
-    <footer className="mt-auto w-full">
+    <footer className="mt-auto w-full font-nitti">
       {/* Previous/Next Post Navigation */}
       {(prevPost || nextPost) && (
         <div className="flex flex-row justify-between items-center gap-4 mb-8 w-full">
@@ -129,24 +151,24 @@ export function Footer({
 
       {(prevPost || nextPost) && <Separator className="my-6" />}
 
-      <div className="mt-12 bg-card border-border text-gray-800 dark:text-gray-200 py-4 px-6">
+      <div className="mt-12 bg-card border-border text-gray-800 dark:text-gray-200 py-6 px-6">
         <div className="container mx-auto text-center">
           <Link href="/misc" className="text-xs hover:text-zinc-400 underline">
             Misc
           </Link>{" "}
-          <span className="mx-2">|</span>
+          <span className="mr-2">•</span>
           <Link href="/guestbook" className="text-xs hover:text-zinc-400 underline">
             Guestbook
           </Link>{" "}
-          <span className="mx-2">|</span>
+          <span className="mr-2">•</span>
           <Link href="/colophon" className="text-xs hover:text-zinc-400 underline">
             Colophon
           </Link>{" "}
-          <span className="mx-2">|</span>
+          <span className="mr-2">•</span>
           <Link href="/sitemap" className="text-xs hover:text-zinc-400 underline">
             Sitemap
           </Link>{" "}
-          <span className="mx-2">|</span>
+          <span className="mr-2">•</span>
           <Link href="/changelog" className="text-xs hover:text-zinc-400 underline">
             Changelog
           </Link>
@@ -185,7 +207,7 @@ export function Footer({
             </a>
           </div>
           <div className="mt-2 text-xs">
-            {lastEdited && `Updated on ${lastEdited}`}
+            {lastEdited && `Last updated on ${lastEdited}`}
           </div>
           <span>
             <Flower className="inline-block h-3 w-3 text-primary" />
