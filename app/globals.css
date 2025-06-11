@@ -25,6 +25,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Backlinks styling */
+@layer components {
+  .backlink {
+    @apply bg-primary/10 text-primary px-1 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors no-underline cursor-pointer relative inline-flex items-center;
+  }
+  
+  .backlink::before {
+    content: '🔗';
+    @apply text-[10px] mr-0.5 opacity-70;
+  }
+  
+  /* Dark mode adjustments */
+  .dark .backlink {
+    @apply bg-primary/20 border-primary/30 hover:bg-primary/30;
+  }
+}
+
  
 @layer base {
   :root {

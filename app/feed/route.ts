@@ -3,6 +3,7 @@ import { getAllWritings, Writing } from '@/lib/garden/writings';
 import { getAllLogsData, LogData } from '@/lib/garden/logs';
 import { getAllNotesData, NoteData } from '@/lib/notes';
 import { NextResponse } from 'next/server';
+import { safeFormatDate } from '@/lib/utils';
 
 export async function GET(request: Request) {
   const siteURL = 'https://lilyslab.com';
@@ -47,7 +48,7 @@ export async function GET(request: Request) {
           link: siteURL,
         },
       ],
-      date: writing.createdAt ? new Date(writing.createdAt) : new Date(),
+      date: new Date(writing.createdAt), // createdAt is already validated in getAllWritings
       ...(writing.tags && writing.tags.length > 0 && { category: writing.tags.map(tag => ({ name: tag })) }),
     });
   });
@@ -69,7 +70,8 @@ export async function GET(request: Request) {
           link: siteURL,
         },
       ],
-      date: log.frontmatter.date ? new Date(log.frontmatter.date) : new Date(),
+      // Use createdAt if available, otherwise fall back to date with validation
+      date: new Date(safeFormatDate(log.frontmatter.createdAt || log.frontmatter.date)),
       ...(log.frontmatter.tags && log.frontmatter.tags.length > 0 && { category: log.frontmatter.tags.map(tag => ({ name: tag })) }),
     });
   });
@@ -92,7 +94,7 @@ export async function GET(request: Request) {
           link: siteURL,
         },
       ],
-      date: note.frontmatter.createdAt ? new Date(note.frontmatter.createdAt) : new Date(),
+      date: new Date(note.frontmatter.createdAt), // createdAt is already validated in getAllNotesData
       ...(note.frontmatter.tags && note.frontmatter.tags.length > 0 && { category: note.frontmatter.tags.map(tag => ({ name: tag })) }),
     });
   });

@@ -247,18 +247,64 @@ const MarkdownRenderer = ({
     rehypePlugins.unshift(rehypeRaw as any);
   }
 
+  // Process backlinks in the content
+  const processBacklinks = (content: string) => {
+    // Regex to match [[text]] patterns
+    const backlinkRegex = /\[\[(.*?)\]\]/g;
+    
+    // Replace all instances of [[text]] with custom link components
+    return content.replace(backlinkRegex, (match, linkText) => {
+      return `[${linkText}](/__backlink/${encodeURIComponent(linkText)})`;
+    });
+  };
+
+  // Processed content with backlinks
+  const processedContent = processBacklinks(content);
+
   return (
-    <article className={cn(
-      "prose prose-sm  dark:prose-invert max-w-none markdown-content", 
-      "text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-4",
-      className
-    )}>
+    <article className={cn("markdown-content", className)}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={rehypePlugins}
-        components={components}
+        components={{
+          ...components,
+          // Override the 'a' component to handle backlinks specially
+          a: ({ node, href, className, ...props }: any) => {
+            // Check if this is a backlink (starts with /__backlink/)
+            if (href && href.startsWith('/__backlink/')) {
+              const linkText = decodeURIComponent(href.replace('/__backlink/', ''));
+              return (
+                <span 
+                  className="backlink"
+                  data-backlink={linkText}
+                  onClick={() => {
+                    // You can handle the backlink click here, e.g., navigate to a search page
+                    window.location.href = `/garden/search?q=${encodeURIComponent(linkText)}`;
+                  }}
+                  {...props}
+                >
+                  {props.children}
+                </span>
+              );
+            }
+            
+            // Default link behavior for non-backlinks
+            return (
+              <a 
+                className={cn(
+                  "text-primary underline underline-offset-4 hover:text-primary/80 transition-colors",
+                  className
+                )} 
+                href={href}
+                target="_blank" 
+                rel="noopener noreferrer"
+                {...props} 
+              />
+            );
+          }
+        }}
       >
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </article>
   );

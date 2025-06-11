@@ -1,6 +1,7 @@
 /* Custom markdown styles */
 .markdown-content {
-  @apply text-foreground leading-relaxed;
+  @apply text-foreground leading-relaxed prose prose-sm dark:prose-invert max-w-none text-justify mt-4;
+  @apply [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4;
 }
 
 /* Headings */
@@ -22,24 +23,24 @@
 
 /* Paragraphs and text */
 .markdown-content p {
-  @apply text-[15px] my-4 leading-6;
+  @apply text-sm my-4 leading-6 text-foreground/90;
 }
 
 .markdown-content blockquote {
-  @apply my-6 italic pl-6 py-1 border-l-4 border-primary text-foreground/80;
+  @apply text-sm font-normal mt-6 border-l-3 pl-6 italic text-muted-foreground;
 }
 
 /* Code block styling */
 .markdown-content pre {
-  @apply bg-muted rounded-md overflow-x-auto my-4 py-1 w-fit text-xs;
+  @apply mt-6 mb-4 w-fit p-0 overflow-hidden rounded-md bg-transparent;
 }
 
 .markdown-content pre > code {
-  @apply bg-transparent text-sm p-4 block;
+  @apply bg-muted font-mono text-sm block p-4 my-4 rounded-md overflow-auto;
 }
 
-.markdown-content code {
-  @apply font-mono text-sm bg-muted px-1.5 py-0.5 rounded;
+.markdown-content code:not(pre code) {
+  @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
 }
 
 /* Table styling */
@@ -48,20 +49,32 @@
 }
 
 .markdown-content th {
-  @apply p-3 text-left font-medium bg-muted/50;
+  @apply p-4 text-left font-medium text-foreground [&[align=center]]:text-center [&[align=right]]:text-right;
 }
 
 .markdown-content td {
-  @apply p-3 border-t border-border;
+  @apply p-4 text-foreground/90 [&[align=center]]:text-center [&[align=right]]:text-right;
+}
+
+.markdown-content thead {
+  @apply bg-muted/50;
+}
+
+.markdown-content tbody {
+  @apply divide-y divide-border;
+}
+
+.markdown-content tr {
+  @apply transition-colors;
 }
 
 /* Lists styling */
 .markdown-content ul {
-  @apply my-4 ml-6 list-disc;
+  @apply my-6 ml-6 list-disc text-foreground/90;
 }
 
 .markdown-content ol {
-  @apply my-4 ml-6 list-decimal;
+  @apply my-6 ml-6 list-decimal text-foreground/90;
 }
 
 .markdown-content li {
@@ -70,15 +83,34 @@
 
 /* Links styling */
 .markdown-content a {
-  @apply text-primary font-normal underline underline-offset-4 hover:text-primary/80 transition-colors;
+  @apply text-primary underline underline-offset-4 hover:text-primary/80 transition-colors;
 }
 
 /* Image styling */
 .markdown-content img {
-  @apply rounded-md max-w-full h-auto my-6;
+  @apply rounded-md my-8 max-w-full h-auto;
+}
+
+/* Horizontal rule */
+.markdown-content hr {
+  @apply my-8 border-border;
+}
+
+/* Backlinks styling - NEW */
+.backlink {
+  @apply bg-primary/10 text-primary px-1 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors no-underline cursor-pointer relative;
+}
+
+.backlink::before {
+  content: '🔗';
+  @apply text-[10px] mr-0.5 opacity-70;
 }
 
 /* Dark mode adjustments */
 .dark .markdown-content pre {
   @apply bg-muted/80;
+}
+
+.dark .backlink {
+  @apply bg-primary/20 border-primary/30 hover:bg-primary/30;
 }
