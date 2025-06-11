@@ -1,6 +1,7 @@
 /* Import external CSS first */
 @import "prismjs/themes/prism-tomorrow.css";
 @import "../styles/card-animations.css";
+@import "../styles/markdown.css";
 
 /* Font declarations */
 @font-face {
@@ -31,7 +32,7 @@
     --background: 0 0% 100%;           /* #ffffff */
     --foreground: 0 0% 4%;             /* #0a0a0a */
     --card: 210 1% 98%;               /* #ebedef - light zinc */
-    --card-foreground: 0 0% 6%;        /* #101010 */
+    --card-foreground: 0 0% 8%;        /* #101010 */
     --popover: 0 0% 100%;              /* #ffffff */
     --popover-foreground: 0 0% 4%;     /* #0a0a0a */
     --primary: 250 100% 83%;            /* #e9c6f7 - soft lavender-pink */
@@ -67,7 +68,7 @@
     /* Dark mode with #161616 background */
     --background: 0 0% 5%;           /* #161616 */
     --foreground: 0 0% 95%;             /* #f2f2f2 */
-    --card: 0 0% 6%;               /* #2a2e33 - slightly lighter zinc */
+    --card: 0 0% 8%;               /* #2a2e33 - slightly lighter zinc */
     --card-foreground: 0 0% 95%;        /* #f2f2f2 */
     --popover: 210 10% 12%;             /* #212529 - dark zinc */
     --popover-foreground: 0 0% 95%;     /* #f2f2f2 */

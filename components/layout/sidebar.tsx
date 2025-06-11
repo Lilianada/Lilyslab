@@ -43,6 +43,8 @@ import {
   Flower,
   ListCheck,
   ScrollText,
+  LineChart,
+  MessageCircleCodeIcon,
 } from "lucide-react"
 import { ThemeToggle } from "../theme/theme-toggle"
 import { useEffect, useState } from "react"
@@ -213,7 +215,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
         <nav className={cn("space-y-6 custom-scrollbar", mobile ? "" : "flex-1 overflow-y-auto pt-2")}>
           <div className="space-y-1.5 mb-2">
-            <NavItem href="/" icon={<Flower size={16} />} label="Hello" onClick={onNavClick} delay={100} />
+            <NavItem href="/" icon={<Flower size={16} />} label="Home" onClick={onNavClick} delay={100} />
           </div>
 
           <div className="space-y-1.5 mb-2">
@@ -221,8 +223,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/about" icon={<Smile size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={200} />
             <NavItem href="/someday" icon={<Calendar size={16} />} label="Someday" onClick={onNavClick} delay={250} />
-            <NavItem href="/wants" icon={<Heart size={16} />} label="Wants" onClick={onNavClick} delay={300} />
-            <NavItem href="/todo" icon={<BadgeCheck size={16} />} label="Todo" onClick={onNavClick} delay={350} />
+            {/* <NavItem href="/wants" icon={<Heart size={16} />} label="Wants" onClick={onNavClick} delay={300} /> */}
             <NavItem href="/bucket-list" icon={<ListCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={350} />
           </div>
 
@@ -236,11 +237,28 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Garden" delay={650} />
-            <NavItem href="/writings" icon={<FileText size={16} />} label="Essays" onClick={onNavClick} delay={700} />
-            <NavItem href="/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={750} />
-            <NavItem href="/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={800} />
+            <NavItem href="/garden/writings" icon={<FileText size={16} />} label="Essays" onClick={onNavClick} delay={700} />
+            <NavItem href="/garden/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={750} />
+            <NavItem href="/garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={800} />
+            <NavItem href="/garden/threads" icon={<MessageCircleCodeIcon size={16} />} label="Threads" onClick={onNavClick} delay={750} />
           </div>
 
+
+
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Workshop" delay={1250} />
+            <NavItem href="/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={1300} />
+            <NavItem href="/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={1350} /> 
+            <NavItem href="/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={1400} />
+            <NavItem href="/todo" icon={<BadgeCheck size={16} />} label="Todo" onClick={onNavClick} delay={350} />
+          </div>
+
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Playground" delay={1450} />
+            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1500} />
+            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator" onClick={onNavClick} delay={1550} />
+          </div>
+          
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Collections" delay={850} />
             <NavItem href="/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={900} />
@@ -255,64 +273,6 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/webrings" icon={<Network size={16} />} label="Webrings" onClick={onNavClick} delay={1200} />
           </div>
 
-          <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Workshop" delay={1250} />
-            <NavItem href="/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={1300} />
-            <NavItem href="/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={1350} /> 
-            <NavItem href="/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={1400} />
-          </div>
-
-          <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Playground" delay={1450} />
-            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1500} />
-            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator" onClick={onNavClick} delay={1550} />
-          </div>
-
-          <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Misc" delay={1600} />
-            <NavItem href="/stuff" icon={<Boxes size={16} />} label="Stuff" onClick={onNavClick} delay={1650} />
-          </div>
-
-          <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Imprint" delay={1700} />
-            <NavItem href="/colophon" icon={<Package size={16} />} label="Colophon" onClick={onNavClick} delay={1750} />
-            <NavItem href="/changelog" icon={<History size={16} />} label="Changelog" onClick={onNavClick} delay={1800} hasNotification={true} />
-            <NavItem 
-              href="/sitemap" 
-              icon={
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="6" height="6" />
-                  <rect x="15" y="3" width="6" height="6" />
-                  <rect x="9" y="15" width="6" height="6" />
-                  <line x1="6" y1="9" x2="6" y2="21" />
-                  <line x1="18" y1="9" x2="18" y2="15" />
-                  <line x1="9" y1="6" x2="15" y2="6" />
-                  <line x1="12" y1="9" x2="12" y2="15" />
-                </svg>
-              } 
-              label="Sitemap" 
-              onClick={onNavClick} 
-              delay={1850} 
-            />
-          </div>
-
-          <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Connect" delay={1900} />
-            <div className="grid grid-cols-4 gap-2 px-3 py-1.5">
-              <a href="mailto:hello.lilysgarden@gmail.com" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
-                <Mail size={16} className="mx-auto" />
-              </a>
-              <a href="https://instagram.com/defitcreative" target="_blank" rel="noreferrer" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
-                <Instagram size={16} className="mx-auto" />
-              </a>
-              <a href="https://linkedin.com/in/lilianada" target="_blank" rel="noreferrer" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
-                <Linkedin size={16} className="mx-auto" />
-              </a>
-              <a href="https://x.com/lilian_ada_" target="_blank" rel="noreferrer" className="p-2 rounded-md bg-accent/30 hover:bg-accent/50 transition-colors text-center">
-                <Twitter size={16} className="mx-auto" />
-              </a>
-            </div>
-          </div>
 
           {isAdmin && (
             <div className="space-y-1.5 mb-2">

@@ -4,6 +4,16 @@ import { Separator } from "@/components/ui/separator"
 import { useEffect as useFooterEffect, useState as useFooterState } from "react";
 import { format } from "date-fns";
 import Link from "next/link";
+import {
+  Flower,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  MessageSquare,
+  Rss,
+  Twitter,
+} from "lucide-react";
 
 interface FooterProps {
   // Page credit props (all optional)
@@ -60,14 +70,13 @@ export function Footer({
          const response = await fetch('/api/last-updated');
          if (response.ok) {
            const data = await response.json();
-           console.log('API Response:', data); // Debug log
-           
-           // Check if we got a valid date
+           console.log('API Response:', data); // Debug log             // Check if we got a valid date
            if (data.lastUpdated) {
              const lastUpdatedDate = new Date(data.lastUpdated);
              if (!isNaN(lastUpdatedDate.getTime())) {
                const formattedDate = format(lastUpdatedDate, 'MMMM d, yyyy');
-               setLastEdited(formattedDate);
+               const formattedTime = format(lastUpdatedDate, 'HH:mm');
+               setLastEdited(`${formattedDate} at ${formattedTime}`);
                return;
              }
            }
@@ -79,7 +88,8 @@ export function Footer({
          if (process.env.NEXT_PUBLIC_BUILD_TIME) {
            const buildDate = new Date(process.env.NEXT_PUBLIC_BUILD_TIME);
            const formattedBuildDate = format(buildDate, 'MMMM d, yyyy');
-           setLastEdited(formattedBuildDate);
+           const formattedBuildTime = format(buildDate, 'HH:mm');
+           setLastEdited(`${formattedBuildDate} at ${formattedBuildTime}`);
          } 
        } catch (error) {
          console.error('Error fetching last edited date:', error);
@@ -125,24 +135,70 @@ export function Footer({
         </div>
       )}
 
-      <Separator className="my-6" />
-      
-      {/* Page Credit (if provided) */}
-      {inspirationName && inspirationUrl && (
-        <p className="text-xs text-muted-foreground/60 ">
-          Credit to <a href={inspirationUrl} className={`${color} hover:underline`} target="_blank" rel="noopener noreferrer">{inspirationName}</a> for the inspiration behind {pageName || 'this page'}. 
-        </p>
-      )}
-      
-      <p className="text-xs text-muted-foreground/60">
-        Subscribe to my <a href='/feed' className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">RSS Feed</a> for the latest updates. I have a <a href='/guestbook' className="text-extra-steelBlue hover:underline">/guestbook page</a> you should defintiely checkout. You can also <a href="https://www.buymeacoffee.com/lilian.ada" className="text-extra-steelBlue hover:underline" target="_blank" rel="noopener noreferrer">buy me a coffee</a> if you find my content interesting or helpful. 
-      </p>
-      <div className="mt-4">
-        <span className="block text-xs text-muted-foreground/60">Currently: {dateTime}</span>
-        {lastEdited && (
-          <span className="block text-xs text-muted-foreground/60">Last updated: {lastEdited}</span>
-        )}
-        {/* <span className="block text-xs text-muted-foreground/60">Location: {location}</span> */}
+      {(prevPost || nextPost) && <Separator className="my-6" />}
+
+      <div className="mt-12 bg-card rounded-lg text-gray-800 dark:text-gray-200 py-4 px-6">
+        <div className="container mx-auto text-center">
+          <Link href="/misc" className="text-xs hover:text-zinc-400 underline">
+            Misc
+          </Link>{" "}
+          <span className="mx-2">|</span>
+          <Link href="/guestbook" className="text-xs hover:text-zinc-400 underline">
+            Guestbook
+          </Link>{" "}
+          <span className="mx-2">|</span>
+          <Link href="/colophon" className="text-xs hover:text-zinc-400 underline">
+            Colophon
+          </Link>{" "}
+          <span className="mx-2">|</span>
+          <Link href="/sitemap" className="text-xs hover:text-zinc-400 underline">
+            Sitemap
+          </Link>{" "}
+          <span className="mx-2">|</span>
+          <Link href="/changelog" className="text-xs hover:text-zinc-400 underline">
+            Changelog
+          </Link>
+          <div className="mt-2 flex justify-center space-x-4">
+            <a href="/feed.xml" className="hover:text-zinc-400">
+              <Rss className="h-3 w-3 inline-block" />   
+            </a>
+            <a
+              href="mailto:hello.lilysgarden@gmail.com"
+              className="hover:text-zinc-400"
+            >
+              <Mail className="h-3 w-3 inline-block" />
+            </a>
+            <a
+              href="https://github.com/lilianada"
+              className="hover:text-zinc-400"
+            >
+              <Github className="h-3 w-3 inline-block" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/lilianada/"
+              className="hover:text-zinc-400"
+            >
+              <Linkedin className="h-3 w-3 inline-block" />
+            </a>
+            <a
+              href="https://www.instagram.com/defitcreative/"
+              className="hover:text-zinc-400"
+            >
+              <Instagram className="h-3 w-3 inline-block" />
+            </a>
+            <a
+              href="https://twitter.com/lilian_ada_"
+              className="hover:text-zinc-400">
+              <Twitter className="h-3 w-3 inline-block" />
+            </a>
+          </div>
+          <div className="mt-2 text-xs">
+            {lastEdited && `Updated on ${lastEdited}`}
+          </div>
+          <span>
+            <Flower className="inline-block h-3 w-3 text-primary" />
+          </span>
+        </div>
       </div>
     </footer>
   )

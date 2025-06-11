@@ -3,17 +3,15 @@ import { getWritingBySlug, getAllWritings } from "@/lib/garden/writings"
 import { formatDate } from "@/lib/utils"
 import { Metadata } from "next"
 import { Separator } from "@/components/ui/separator"
-import ReactMarkdown from "react-markdown";
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Image from "next/image"
 import Link from "next/link"
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
 import { ArrowLeft } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
+import { WritingMarkdownWrapper } from "./writing-markdown-wrapper"
 
 type PageProps = {
   params: Promise<{
@@ -124,15 +122,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
         </header>
 
         <Separator />
-        <article className="mt-8 prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h2]:text-[22px] [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:mb-4 [&_h2]:text-foreground [&_h3]:text-[18px] [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:mb-4 [&_h3]:text-foreground [&_h4]:text-[16px] [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mb-3 [&_h4]:text-foreground [&_a]:text-extra-steelBlue">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight]}
-          >
-            {content}
-          </ReactMarkdown>
-
-        </article>
+        <WritingMarkdownWrapper content={content} />
       </div>
 
       <Footer 

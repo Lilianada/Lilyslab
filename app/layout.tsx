@@ -93,7 +93,7 @@ export default function RootLayout({
   // Next.js handles this automatically based on route groups
 
   return (
-    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${GeistMono.variable} ${GeistSans.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />

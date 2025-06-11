@@ -1,5 +1,6 @@
 "use client";
 
+import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Simple interface for sitemap entries
@@ -17,7 +18,7 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Home",
     pages: [
-      { name: "Hello", url: "/", description: "Welcome page" }
+      { name: "Home", url: "/", description: "Welcome page" }
     ]
   },
   {
@@ -143,12 +144,7 @@ export default function Sitemap() {
             </div>
           ))}
         </div>
-
-        <footer className="mt-12 pt-4 border-t text-sm text-muted-foreground">
-          <div className="flex justify-between items-center">
-            <p>Last updated: June 10, 2025</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

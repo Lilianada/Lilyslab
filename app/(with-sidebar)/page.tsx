@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Suspense, useEffect, useState } from "react"
 import { SocialLink, WorkItemComponent } from "@/components/comps/homepage-items"
 import { Footer } from "@/components/layout/footer";
+import Foot from "@/components/layout/foot";
 import AnimatedLogo from "@/components/comps/AnimatedLogo"
 import { MusicPlayerWidget } from "@/components/audio/music-player-widget"
 
@@ -174,7 +175,6 @@ export default function Home() {
               <SocialLink platform="Email" url="mailto:hello.lilysgarden@gmail.com" action="Message" />
             </div>
           </section>
-
 
           <Footer />
         </>

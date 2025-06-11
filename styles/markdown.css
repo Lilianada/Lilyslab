@@ -1,0 +1,84 @@
+/* Custom markdown styles */
+.markdown-content {
+  @apply text-foreground leading-relaxed;
+}
+
+/* Headings */
+.markdown-content h1 {
+  @apply text-3xl md:text-4xl mb-6 mt-10 font-bold scroll-m-20;
+}
+
+.markdown-content h2 {
+  @apply text-2xl md:text-3xl mb-5 mt-8 font-semibold scroll-m-20;
+}
+
+.markdown-content h3 {
+  @apply text-xl font-semibold mt-6 mb-3 scroll-m-20;
+}
+
+.markdown-content h4 {
+  @apply text-lg font-medium mt-4 mb-2 scroll-m-20;
+}
+
+/* Paragraphs and text */
+.markdown-content p {
+  @apply my-4 leading-7;
+}
+
+.markdown-content blockquote {
+  @apply my-6 italic pl-6 py-1 border-l-2 border-primary text-foreground/80;
+}
+
+/* Code block styling */
+.markdown-content pre {
+  @apply bg-muted rounded-md overflow-x-auto my-4 p-0;
+}
+
+.markdown-content pre > code {
+  @apply bg-transparent text-sm p-4 block;
+}
+
+.markdown-content code {
+  @apply font-mono text-sm bg-muted px-1.5 py-0.5 rounded;
+}
+
+/* Table styling */
+.markdown-content table {
+  @apply w-full my-6 text-sm border-collapse;
+}
+
+.markdown-content th {
+  @apply p-3 text-left font-medium bg-muted/50;
+}
+
+.markdown-content td {
+  @apply p-3 border-t border-border;
+}
+
+/* Lists styling */
+.markdown-content ul {
+  @apply my-4 ml-6 list-disc;
+}
+
+.markdown-content ol {
+  @apply my-4 ml-6 list-decimal;
+}
+
+.markdown-content li {
+  @apply mt-2;
+}
+
+/* Links styling */
+.markdown-content a {
+  @apply text-primary underline underline-offset-4 hover:text-primary/80 transition-colors;
+}
+
+/* Image styling */
+.markdown-content img {
+  @apply rounded-md max-w-full h-auto my-6;
+}
+
+/* Dark mode adjustments */
+.dark .markdown-content pre {
+  @apply bg-muted/80;
+}

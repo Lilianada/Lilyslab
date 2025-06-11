@@ -186,6 +186,14 @@ export default function GuestbookPage() {
                   Lina's Guestbook
                   </a>
               </li>
+              <li>
+                <a
+                  href="https://eileenramos.com/guestbook/"
+                  className="text-primary hover:underline"
+                >
+                  Eileen's Guestbook
+                  </a>
+              </li>
               </ul>
         </div>
 
