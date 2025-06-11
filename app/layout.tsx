@@ -93,7 +93,7 @@ export default function RootLayout({
   // Next.js handles this automatically based on route groups
 
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${GeistMono.variable} ${GeistSans.variable}`}>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -111,7 +111,7 @@ export default function RootLayout({
         <PersonStructuredData />
         <WebsiteStructuredData />
       </head>
-      <body className={GeistSans.className}>
+      <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>
               <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-background focus:z-50" aria-label="Skip to main content">
@@ -122,6 +122,7 @@ export default function RootLayout({
               </main>
               <Toaster />
               <FloatingMusicPlayer />
+              <Analytics />
           </AuthProvider>
         </ThemeProvider>
       </body>
