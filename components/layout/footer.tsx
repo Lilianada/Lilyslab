@@ -106,7 +106,7 @@ export function Footer({
           {prevPost ? (
             <Link 
               href={`/${contentType}/${prevPost.slug}`}
-              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-center justify-start"
+              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-start"
             >
               <span className="mr-2">←</span>
               <span className="truncate">Prev</span>
@@ -116,7 +116,7 @@ export function Footer({
           {nextPost && (
             <Link 
               href={`/${contentType}/${nextPost.slug}`}
-              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-center justify-end"
+              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-end"
             >
               <span className="truncate">Next</span>
               <span className="ml-2">→</span>
