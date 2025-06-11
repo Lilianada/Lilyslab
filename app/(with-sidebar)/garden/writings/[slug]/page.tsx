@@ -11,7 +11,7 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
-import { WritingMarkdownWrapper } from "./writing-markdown-wrapper"
+import { WritingMarkdownWrapper } from "./markdown-wrapper"
 
 type PageProps = {
   params: Promise<{
@@ -80,7 +80,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
     <div className="max-w-2xl w-full mx-auto animate-fade-in">
       <div className="my-6 flex items-center sm:my-12">
         <Link
-          href="/writing"
+          href="/writings"
           className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
         >
           <ArrowLeft size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
@@ -121,14 +121,14 @@ export default async function WritingSlugPage({ params }: PageProps) {
           </div>
         </header>
 
-        <Separator />
+        {/* <Separator /> */}
         <WritingMarkdownWrapper content={content} />
       </div>
 
       <Footer 
         prevPost={prevPost ? { title: prevPost.title, slug: prevPost.slug } : undefined}
         nextPost={nextPost ? { title: nextPost.title, slug: nextPost.slug } : undefined}
-        contentType="writing"
+        contentType="garden/writings"
       />
     </div>
     </>

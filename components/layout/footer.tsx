@@ -24,16 +24,10 @@ interface FooterProps {
   // Navigation props (all optional)
   prevPost?: { title: string; slug: string; };
   nextPost?: { title: string; slug: string; };
-  contentType?: 'writing' | 'digital-garden/notes';
+  contentType?: 'garden/writings' | 'garden/notes';
 }
 
 export function Footer({
-  // Page credit props
-  inspirationName,
-  inspirationUrl,
-  pageName,
-  color = "text-extra-steelBlue",
-  // Navigation props
   prevPost,
   nextPost,
   contentType
@@ -59,8 +53,6 @@ export function Footer({
      updateTime();
      const intervalId = setInterval(updateTime, 1000);
      
-     // Set a static location instead of using geolocation
-     // This completely avoids the permissions policy violation
      setLocation("Lily's Garden - Digital Garden & Workshop");
      
      // Fetch the last edited date from Git commit history
@@ -137,7 +129,7 @@ export function Footer({
 
       {(prevPost || nextPost) && <Separator className="my-6" />}
 
-      <div className="mt-12 bg-card rounded-lg text-gray-800 dark:text-gray-200 py-4 px-6">
+      <div className="mt-12 bg-card border-border text-gray-800 dark:text-gray-200 py-4 px-6">
         <div className="container mx-auto text-center">
           <Link href="/misc" className="text-xs hover:text-zinc-400 underline">
             Misc

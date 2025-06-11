@@ -67,8 +67,8 @@ export default async function WritingPage() {
   return (
     <div className="max-w-2xl w-full mx-auto animate-fade-in sm:px-6 py-12">
       <header className="mb-6">
-        <h1 className="mb-1 text-xl font-medium">Writing</h1>
-        <p className="text-sm text-muted-foreground">Thoughts on design, engineering, and building products.</p>
+        <h1 className="mb-1 text-xl font-medium">Writings</h1>
+        <p className="text-sm text-muted-foreground">Not limited by topic.</p>
       </header>
 
       {error ? (
@@ -88,7 +88,7 @@ export default async function WritingPage() {
                 <div className="space-y-5">
                   {group.writings.map(post => (
                     <article key={post.slug} className="pb-4">
-                      <Link href={`/writing/${post.slug}`} prefetch>
+                      <Link href={`/garden/writings/${post.slug}`} prefetch>
                         <h2 className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 mb-1">
                           {post.title}
                         </h2>
@@ -121,7 +121,7 @@ export default async function WritingPage() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <Link
-                  href={`/writing/${post.slug}`}
+                  href={`/garden/writings/${post.slug}`}
                   className="block transition-transform duration-300 hover:translate-x-1"
                   prefetch
                 >

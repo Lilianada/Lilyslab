@@ -1129,3 +1129,14 @@ tags:
 type: article
 publish: true
 ---
+
+---
+id: article-093
+title: Retain Everything You Read
+URL: https://fs.blog/reading/
+date: 2025-06-11
+tags:
+  - reading
+type: article
+publish: true
+---

@@ -22,6 +22,14 @@ export interface RouteParams {
 }
 
 /**
+ * Next.js 15 compatible PageProps type
+ */
+export interface NextPageProps {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}
+
+/**
  * Specific params type for writing routes
  */
 export type WritingRouteParams = RouteParams;
@@ -29,4 +37,4 @@ export type WritingRouteParams = RouteParams;
 /**
  * Specific params type for draft routes
  */
-export type DraftRouteParams = RouteParams;
+export type NoteRouteParams = RouteParams;

@@ -10,6 +10,15 @@ import { cn } from '@/lib/utils';
 // Import Prism CSS for code highlighting
 // We're already importing it globally in layout.tsx
 
+// Loading skeleton for markdown content
+export const MarkdownSkeleton = () => (
+  <div className="animate-pulse space-y-4">
+    <div className="h-4 bg-muted rounded w-full"></div>
+    <div className="h-4 bg-muted rounded w-5/6"></div>
+    <div className="h-4 bg-muted rounded w-4/6"></div>
+  </div>
+);
+
 // Define the interfaces for custom components and markdown content
 interface CustomComponents {
   [key: string]: React.ComponentType<any>;
@@ -239,7 +248,11 @@ const MarkdownRenderer = ({
   }
 
   return (
-    <div className={cn("prose prose-neutral dark:prose-invert max-w-none markdown-content", className)}>
+    <article className={cn(
+      "prose prose-sm sm:prose-base dark:prose-invert max-w-none markdown-content", 
+      "text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-8",
+      className
+    )}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={rehypePlugins}
@@ -247,7 +260,7 @@ const MarkdownRenderer = ({
       >
         {content}
       </ReactMarkdown>
-    </div>
+    </article>
   );
 };
 

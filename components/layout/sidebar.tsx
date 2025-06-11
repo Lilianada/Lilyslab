@@ -246,31 +246,31 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
 
 
           <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Workshop" delay={1250} />
-            <NavItem href="/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={1300} />
-            <NavItem href="/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={1350} /> 
-            <NavItem href="/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={1400} />
-            <NavItem href="/todo" icon={<BadgeCheck size={16} />} label="Todo" onClick={onNavClick} delay={350} />
+            <SectionTitle title="Workshop" delay={850} />
+            <NavItem href="/projects" icon={<BriefcaseBusiness size={16} />} label="Projects" onClick={onNavClick} delay={900} />
+            <NavItem href="/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={950} /> 
+            <NavItem href="/tools" icon={<Wrench size={16} />} label="Tools" onClick={onNavClick} delay={1000} />
+            <NavItem href="/todo" icon={<BadgeCheck size={16} />} label="Todo" onClick={onNavClick} delay={1050} />
           </div>
 
           <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Playground" delay={1450} />
-            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1500} />
-            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator" onClick={onNavClick} delay={1550} />
+            <SectionTitle title="Playground" delay={1100} />
+            <NavItem href="/playground/digital-clock" icon={<Timer size={16} />} label="Digital Clock" onClick={onNavClick} delay={1150} />
+            <NavItem href="/playground/calculator" icon={<Calculator size={16} />} label="Calculator" onClick={onNavClick} delay={1200} />
           </div>
           
           <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Collections" delay={850} />
-            <NavItem href="/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={900} />
-            <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={950} />
-            <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1000} />
+            <SectionTitle title="Collections" delay={1250} />
+            <NavItem href="/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={1300} />
+            <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={1350} />
+            <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1400} />
           </div>
 
           <div className="space-y-1.5 mb-2">
-            <SectionTitle title="IndieWeb" delay={1050} />
-            <NavItem href="/manifesto" icon={<Shield size={16} />} label="Manifesto" onClick={onNavClick} delay={1100} />
-            <NavItem href="/webroll" icon={<ScrollText size={16} />} label="Webroll" onClick={onNavClick} delay={1150} />
-            <NavItem href="/webrings" icon={<Network size={16} />} label="Webrings" onClick={onNavClick} delay={1200} />
+            <SectionTitle title="IndieWeb" delay={1450} />
+            <NavItem href="/manifesto" icon={<Shield size={16} />} label="Manifesto" onClick={onNavClick} delay={1500} />
+            <NavItem href="/webroll" icon={<ScrollText size={16} />} label="Webroll" onClick={onNavClick} delay={1550} />
+            <NavItem href="/webrings" icon={<Network size={16} />} label="Webrings" onClick={onNavClick} delay={1600} />
           </div>
 
 

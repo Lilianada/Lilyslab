@@ -37,7 +37,7 @@ export default function DigitalGardenHome() {
         {
             title: "Notes",
             description: "Fleeting thoughts, ideas, and learnings.",
-            href: "/digital-garden/notes",
+            href: "/garden/notes/",
             icon: NotepadText
         },
         {

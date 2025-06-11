@@ -1,27 +1,25 @@
 import { notFound } from "next/navigation"
 import { formatDate } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
-import ReactMarkdown from "react-markdown"
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import Link from "next/link"
-import remarkGfm from "remark-gfm"
-import rehypeHighlight from "rehype-highlight"
 import { ArrowLeft } from "lucide-react"
-import { DraftRouteParams, SlugParams } from "@/lib/types/route-params"
-import { NotesClientWrapper } from "./notes-client-wrapper"
-import { ScrollProgress } from "@/components/ui/scroll-progress"
+import { NoteRouteParams, SlugParams } from "@/lib/types/route-params"
+import { NotesClientWrapper } from "./client-wrapper"
+import { NotesMarkdownWrapper } from "./markdown-wrapper"
 import { Footer } from "@/components/layout/footer"
 import { getAllNotesData } from "@/lib/notes"
+import { ScrollProgress } from "@/components/ui/scroll-progress"
 
 /**
- * Get draft content by slug
+ * Get note content by slug
  * 
- * @param slug The draft slug to retrieve
- * @returns The draft content or null if not found
+ * @param slug The note slug to retrieve
+ * @returns The note content or null if not found
  */
-async function getDraftContent(slug: string) {
+async function getNotesContent(slug: string) {
   try {
     const notesDir = path.join(process.cwd(), 'Content/notes')
     const filePath = path.join(notesDir, `${slug}.md`)
@@ -41,29 +39,29 @@ async function getDraftContent(slug: string) {
       excerpt: data.excerpt || null
     }
   } catch (error) {
-    console.error(`Error getting draft content for ${slug}:`, error)
+    console.error(`Error getting note content for ${slug}:`, error)
     return null
   }
 }
 
 /**
- * Generate metadata for the draft page
+ * Generate metadata for the note page
  */
-export async function generateMetadata({ params }: DraftRouteParams) {
+export async function generateMetadata({ params }: NoteRouteParams) {
   // Params is already a Promise in the updated type definition
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
-  const draft = await getDraftContent(slug);
+  const note = await getNotesContent(slug);
   
-  if (!draft) {
+  if (!note) {
     return {
-      title: "Draft Not Found"
+      title: "Notes Not Found"
     }
   }
   
   return {
-    title: draft.title,
-    description: draft.excerpt
+    title: note.title,
+    description: note.excerpt
   }
 }
 
@@ -88,15 +86,15 @@ export function generateStaticParams(): SlugParams[] {
 }
 
 /**
- * Draft page component
+ * Notes page component
  */
-export default async function DraftPage({ params }: DraftRouteParams) {
+export default async function NotesPage({ params }: NoteRouteParams) {
   // Params is already a Promise in the updated type definition
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
-  const draft = await getDraftContent(slug);
+  const note = await getNotesContent(slug);
   
-  if (!draft) {
+  if (!note) {
     notFound()
   }
   
@@ -110,13 +108,13 @@ export default async function DraftPage({ params }: DraftRouteParams) {
   const previousPost = currentIndex > 0 ? {
     title: allNotes[currentIndex - 1].frontmatter.title,
     slug: allNotes[currentIndex - 1].slug,
-    path: "/digital-garden/notes"
+    path: "/garden/notes"
   } : undefined;
   
   const nextPost = currentIndex < allNotes.length - 1 ? {
     title: allNotes[currentIndex + 1].frontmatter.title,
     slug: allNotes[currentIndex + 1].slug,
-    path: "/digital-garden/notes"
+    path: "/garden/notes"
   } : undefined;
   
   return (
@@ -130,7 +128,7 @@ export default async function DraftPage({ params }: DraftRouteParams) {
       />
       <div className="max-w-3xl mx-auto sm:px-6 py-12 animate-fade-in">
       <Link 
-            href="/digital-garden/notes" 
+            href="/garden/notes" 
             className="flex items-center text-muted-foreground hover:text-foreground transition-colors text-sm mb-8"
           >
             <ArrowLeft className="w-3 h-3 mr-2" />
@@ -139,13 +137,13 @@ export default async function DraftPage({ params }: DraftRouteParams) {
        
         <div className="mb-8">
           <header className="mb-8">
-            <h1 className="mb-2 text-2xl font-bold text-foreground">{draft.title}</h1>
+            <h1 className="mb-2 text-2xl font-bold text-foreground">{note.title}</h1>
             <div className="flex flex-col gap-2">
-              {draft.date && <p className="text-xs text-muted-foreground">Last updated: {draft.date}</p>}
+              {note.date && <p className="text-xs text-muted-foreground">Last updated: {note.date}</p>}
               
-              {draft.tags && draft.tags.length > 0 && (
+              {note.tags && note.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1">
-                  {draft.tags.map((tag: string) => (
+                  {note.tags.map((tag: string) => (
                     <span 
                       key={tag} 
                       className="rounded-full bg-muted px-2 py-0.5 text-[10px] text-muted-foreground"
@@ -158,21 +156,14 @@ export default async function DraftPage({ params }: DraftRouteParams) {
             </div>
           </header>
 
-          <Separator />
-          <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none text-justify [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4 mt-8 ">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeHighlight]}
-            >
-              {draft.content}
-            </ReactMarkdown>
-          </article>
+          {/* <Separator /> */}
+          <NotesMarkdownWrapper content={note.content} />
 
         </div>
         <Footer
           prevPost={previousPost ? { title: previousPost.title, slug: previousPost.slug } : undefined}
           nextPost={nextPost ? { title: nextPost.title, slug: nextPost.slug } : undefined}
-          contentType="digital-garden/notes"
+          contentType="garden/notes"
         />
       </div>
     </NotesClientWrapper>

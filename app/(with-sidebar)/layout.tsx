@@ -12,7 +12,7 @@ export default function WithSidebarLayout({
       <Sidebar />
       <MobileNav />
       <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 flex flex-col min-h-[calc(100vh-4rem)]" role="region" aria-label="Main content"> 
-        <Breadcrumb />
+        {/* <Breadcrumb /> */}
         <div className="flex-1 flex flex-col">
           {children}
         </div>

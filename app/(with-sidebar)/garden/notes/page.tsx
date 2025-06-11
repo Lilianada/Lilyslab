@@ -140,7 +140,7 @@ export default function NotesPage() {
                         className="group flex items-center py-2 transition-transform duration-150 hover:scale-[1.02]"
                       >
                         <a
-                          href={`/digital-garden/notes/${note.slug}`}
+                          href={`/garden/notes//${note.slug}`}
                           className="text-sm text-extra-steelBlue hover:underline flex-1 flex items-center justify-between"
                         >
                           <span>{note.title}</span>

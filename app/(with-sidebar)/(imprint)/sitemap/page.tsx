@@ -27,8 +27,6 @@ const sitemapData: SitemapSection[] = [
       { name: "About", url: "/about", description: "About me" },
       { name: "Now", url: "/now", description: "What I'm doing now" },
       { name: "Someday", url: "/someday", description: "Things I plan to do someday" },
-      { name: "Wants", url: "/wants", description: "100 things I want to do in my life-time" },
-      { name: "Todo", url: "/todo", description: "My messy website todo list" },
       { name: "Bucket List", url: "/bucket-list", description: "My career bucket list" }
     ]
   },
@@ -44,10 +42,26 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Garden",
     pages: [
-      { name: "Essays", url: "/writings", description: "My writings and essays" },
-      { name: "Notes", url: "/notes", description: "My notes and thoughts" },
-      { name: "Bookshelf", url: "/bookshelf", description: "Books I've read, am reading or plan on reading" },
-      { name: "Archives", url: "/archives", description: "Random things I've written in the past" }
+      { name: "Essays", url: "/garden/writings", description: "My writings and essays" },
+      { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
+      { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
+      { name: "Threads", url: "/garden/threads", description: "Short-form thoughts and musings" }
+    ]
+  },
+  {
+    title: "Workshop",
+    pages: [
+      { name: "Projects", url: "/projects", description: "My web projects" },
+      { name: "Logs", url: "/logs", description: "Project logs" }, 
+      { name: "Tools", url: "/tools", description: "Tools I've used or plan on using" },
+      { name: "Todo", url: "/todo", description: "My messy website todo list" }
+    ]
+  },
+  {
+    title: "Playground",
+    pages: [
+      { name: "Digital Clock", url: "/playground/digital-clock", description: "A digital clock experiment" },
+      { name: "Calculator", url: "/playground/calculator", description: "A calculator experiment" }
     ]
   },
   {
@@ -67,32 +81,13 @@ const sitemapData: SitemapSection[] = [
     ]
   },
   {
-    title: "Workshop",
+    title: "Footer Links",
     pages: [
-      { name: "Projects", url: "/projects", description: "My web projects" },
-      { name: "Logs", url: "/logs", description: "Project logs" },
-      { name: "Tools", url: "/tools", description: "Tools I've used or plan on using" }
-    ]
-  },
-  {
-    title: "Playground",
-    pages: [
-      { name: "Digital Clock", url: "/playground/digital-clock", description: "A digital clock experiment" },
-      { name: "Calculator", url: "/playground/calculator", description: "A calculator experiment" }
-    ]
-  },
-  {
-    title: "Misc",
-    pages: [
-      { name: "Stuff", url: "/stuff", description: "Random stuff" }
-    ]
-  },
-  {
-    title: "Imprint",
-    pages: [
+      { name: "Misc", url: "/misc", description: "Random stuff" },
+      { name: "Guestbook", url: "/guestbook", description: "Sign my guestbook" },
       { name: "Colophon", url: "/colophon", description: "About this site" },
-      { name: "Changelog", url: "/changelog", description: "Recent changes" },
-      { name: "Sitemap", url: "/sitemap", description: "This page" }
+      { name: "Sitemap", url: "/sitemap", description: "This page" },
+      { name: "Changelog", url: "/changelog", description: "Recent changes" }
     ]
   }
 ];

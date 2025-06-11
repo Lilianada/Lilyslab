@@ -120,6 +120,10 @@
   button {
     @apply transition-colors duration-200;
   }
+
+  p {
+    @apply leading-relaxed text-sm;
+  }
 }
 
 /* Loading animation */

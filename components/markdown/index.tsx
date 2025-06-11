@@ -1,6 +1,6 @@
 "use client";
 
-import MarkdownRenderer from './markdown-renderer';
+import MarkdownRenderer, { MarkdownSkeleton } from './markdown-renderer';
 
-export { MarkdownRenderer };
+export { MarkdownRenderer, MarkdownSkeleton };
 export default MarkdownRenderer;

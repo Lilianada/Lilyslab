@@ -78,7 +78,7 @@ export async function GET(request: Request) {
   const notes = getAllNotesData();
   
   notes.forEach((note: NoteData) => {
-    const url = `${siteURL}/digital-garden/notes/${note.slug}`;
+    const url = `${siteURL}/garden/notes//${note.slug}`;
     
     feed.addItem({
       title: note.frontmatter.title,
