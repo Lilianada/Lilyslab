@@ -46,25 +46,29 @@ export default function TodoPage() {
         <header className="mb-8">
           <h1 className="mb-1 text-xl font-medium">Website Todo List</h1>
           <p className="text-sm text-muted-foreground">
-            Things I want to add to my digital garden
+            Features and fixes to implement on my website. This is a simple todo list that I use to keep track of what I want to do next on my website. I will update this list as I complete tasks and add new ones.  {" "}
+            <br/>
+            <br/>
+            <span className="text-primary text-xs"> Completed {todoItems.filter(todo => todo.completed).length} of {todoItems.length} tasks.</span>
+            
           </p>
         </header>
         
         <section className="space-y-6">
           {todoItems.map((todo, index) => (
-            <div key={index} className="flex items-start gap-3">
+            <div key={index} className="text-sm flex items-start gap-3">
               <div className={`mt-0.5 w-5 h-5 rounded border ${
                 todo.completed 
                   ? 'border-primary bg-primary/10' 
                   : 'border-border'
               } flex items-center justify-center flex-shrink-0`}>
                 {todo.completed && (
-                  <span className="text-xs text-primary">[x]</span>
+                  <span className="text-xs text-primary">x</span>
                 )}
               </div>
               <div className={`${
                 todo.completed 
-                  ? 'line-through text-muted-foreground' 
+                  ? 'text-sm line-through text-muted-foreground' 
                   : 'text-foreground'
               }`}>
                 {todo.text}
@@ -72,12 +76,6 @@ export default function TodoPage() {
             </div>
           ))}
         </section>
-        
-        <div className="mt-8 pt-4 border-t border-border">
-          <p className="text-xs text-muted-foreground">
-            {todoItems.filter(todo => todo.completed).length} of {todoItems.length} tasks completed
-          </p>
-        </div>
         
         <Footer />
       </div>
