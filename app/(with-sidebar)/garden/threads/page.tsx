@@ -5,118 +5,101 @@ import { motion } from "framer-motion";
 import { format, parseISO } from "date-fns";
 import { Heart } from "lucide-react";
 import { useTheme } from "next-themes";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Thread interface
 interface Thread {
   id: string;
+  title: string;
   content: string;
   date: string;
-  likes: number;
-  liked: boolean;
+  likeCount: number;
+  liked?: boolean;
   tags?: string[];
 }
 
-// Mock data for threads
-const mockThreads: Thread[] = [
-  {
-    id: "t1",
-    content: "Just shipped a new feature for my digital garden: a threads page where I can post short thoughts and musings. It's like a micro-blog within my site!",
-    date: "2025-06-10T09:15:00Z",
-    likes: 12,
-    liked: false,
-    tags: ["webdev", "design"]
-  },
-  {
-    id: "t2",
-    content: "Been thinking about the balance between creating and consuming content. Trying to spend more time making things rather than endlessly scrolling. Been thinking about the balance between creating and consuming content. Trying to spend more time making things rather than endlessly scrolling. Been thinking about the balance between creating and consuming content. Trying to spend more time making things rather than endlessly scrolling.",
-    date: "2025-06-08T14:22:00Z",
-    likes: 8,
-    liked: true,
-    tags: ["reflection"]
-  },
-  {
-    id: "t3",
-    content: "CSS Grid and custom properties have completely transformed how I build layouts. I remember the days of float-based designs and it's amazing how far we've come.",
-    date: "2025-06-05T19:34:00Z",
-    likes: 15,
-    liked: false,
-    tags: ["css", "webdev"]
-  },
-  {
-    id: "t4",
-    content: "Reading 'Designing for the Digital Age' by Kim Goodwin. So many timeless UX principles that apply regardless of the technology stack.",
-    date: "2025-06-03T08:12:00Z",
-    likes: 6,
-    liked: false
-  },
-  {
-    id: "t5",
-    content: "Personal websites are such an underrated form of expression. They're like digital homes we can design however we want, without algorithms or engagement metrics dictating our choices.",
-    date: "2025-05-29T11:45:00Z",
-    likes: 24,
-    liked: true,
-    tags: ["indieweb"]
-  },
-  {
-    id: "t6",
-    content: "Just discovered the 'prefers-reduced-motion' media query. Accessibility should never be an afterthought in our designs.",
-    date: "2025-05-25T16:08:00Z",
-    likes: 9,
-    liked: false,
-    tags: ["a11y", "css"]
-  },
-  {
-    id: "t7",
-    content: "There's something special about writing HTML by hand. It keeps me connected to the foundations of the web in a way that abstractions sometimes don't.",
-    date: "2025-05-22T13:19:00Z",
-    likes: 17,
-    liked: false,
-    tags: ["html", "webdev"]
-  },
-  {
-    id: "t8",
-    content: "Spent the weekend redesigning my digital garden. Focused on improving typography and reading experience. Small changes that make a big difference.",
-    date: "2025-05-18T20:41:00Z",
-    likes: 11,
-    liked: true,
-    tags: ["design", "typography"]
-  },
-  {
-    id: "t9",
-    content: "The best designs are often the ones that don't draw attention to themselves but quietly support the content and functionality.",
-    date: "2025-05-15T10:27:00Z",
-    likes: 19,
-    liked: false,
-    tags: ["design"]
-  },
-  {
-    id: "t10",
-    content: "Starting this threads section as an experiment in casual, chronological thought-sharing. Sometimes I have ideas that aren't quite blog posts but deserve more permanence than social media.",
-    date: "2025-05-10T15:33:00Z",
-    likes: 31,
-    liked: true,
-    tags: ["meta"]
-  }
-];
-
 export default function ThreadsPage() {
-  const [threads, setThreads] = useState<Thread[]>(mockThreads);
-  const [loading, setLoading] = useState(false);
+  const [threads, setThreads] = useState<Thread[]>([]);
+  const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
+  
+  // Local storage key for liked threads
+  const LIKED_THREADS_KEY = 'liked_threads';
 
   // Initialize
   useEffect(() => {
     setMounted(true);
+    
+    // Load initial threads
+    fetchThreads();
+    
+    // Load liked threads from localStorage
+    const likedThreadsFromStorage = getLikedThreadsFromStorage();
+    
+    // Function to load liked state into threads
+    const setLikedState = (threads: Thread[]) => {
+      return threads.map(thread => ({
+        ...thread,
+        liked: likedThreadsFromStorage.includes(thread.id)
+      }));
+    };
+    
+    // Update threads with liked state when they change
+    setThreads(prevThreads => setLikedState(prevThreads));
   }, []);
+
+  // Get liked threads from localStorage
+  const getLikedThreadsFromStorage = (): string[] => {
+    if (typeof window === 'undefined') return [];
+    const saved = localStorage.getItem(LIKED_THREADS_KEY);
+    return saved ? JSON.parse(saved) : [];
+  };
+
+  // Save liked threads to localStorage
+  const saveLikedThreadsToStorage = (likedThreads: string[]) => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(LIKED_THREADS_KEY, JSON.stringify(likedThreads));
+  };
+
+  // Fetch threads from API
+  const fetchThreads = async () => {
+    setLoading(true);
+    
+    try {
+      const response = await fetch('/api/threads');
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch threads');
+      }
+      
+      const data: Thread[] = await response.json();
+      
+      // Apply liked state from localStorage
+      const likedThreadsFromStorage = getLikedThreadsFromStorage();
+      const threadsWithLikedState = data.map(thread => ({
+        ...thread,
+        liked: likedThreadsFromStorage.includes(thread.id)
+      }));
+      
+      setThreads(threadsWithLikedState);
+      setHasMore(data.length >= 10); // If we have less than 10 threads, we've reached the end
+    } catch (error) {
+      console.error('Error fetching threads:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Handle infinite scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        if (entry.isIntersecting && !loading) {
+        if (entry.isIntersecting && !loading && hasMore) {
           loadMoreThreads();
         }
       },
@@ -132,47 +115,97 @@ export default function ThreadsPage() {
         observer.unobserve(loadMoreRef.current);
       }
     };
-  }, [loading]);
+  }, [loading, hasMore]);
 
-  // Simulate loading more threads
+  // Load more threads (we don't have pagination yet in the API, this is a placeholder)
   const loadMoreThreads = () => {
-    setLoading(true);
-    
-    // Simulate API call delay
-    setTimeout(() => {
-      // Create copies of existing threads with new IDs to simulate new content
-      const newThreads = mockThreads.map((thread, index) => ({
-        ...thread,
-        id: `additional-${Date.now()}-${index}`,
-        date: new Date(new Date(thread.date).getTime() - 15 * 24 * 60 * 60 * 1000).toISOString(), // 15 days earlier
-        likes: Math.floor(Math.random() * 30),
-        liked: Math.random() > 0.5
-      }));
-      
-      setThreads(prevThreads => [...prevThreads, ...newThreads]);
-      setLoading(false);
-    }, 1500);
+    // Currently the API doesn't support pagination, so we're not loading more threads
+    // This is left as a placeholder for when pagination is added
+    setPage(prevPage => prevPage + 1);
+    setHasMore(false); // For now, we'll always set this to false since we load all threads at once
   };
 
   // Format date for display
   const formatThreadDate = (dateString: string) => {
-    const date = parseISO(dateString);
-    return format(date, "MMM d, yyyy 'at' h:mm a");
+    try {
+      const date = parseISO(dateString);
+      return format(date, "MMM d, yyyy");
+    } catch (error) {
+      // Handle cases where date might be in a different format
+      return dateString;
+    }
   };
 
-  // Handle like/unlike
-  const toggleLike = (id: string) => {
+  // Handle like/unlike with persistent storage
+  const toggleLike = async (id: string) => {
+    // Get current liked state from threads
+    const thread = threads.find(t => t.id === id);
+    if (!thread) return;
+    
+    const currentlyLiked = thread.liked || false;
+    const newLikedState = !currentlyLiked;
+    
+    // Update local state first (optimistic update)
     setThreads(prevThreads =>
       prevThreads.map(thread =>
         thread.id === id
           ? {
               ...thread,
-              liked: !thread.liked,
-              likes: thread.liked ? thread.likes - 1 : thread.likes + 1
+              liked: newLikedState,
+              likeCount: newLikedState ? thread.likeCount + 1 : Math.max(0, thread.likeCount - 1)
             }
           : thread
       )
     );
+    
+    // Update localStorage
+    const likedThreads = getLikedThreadsFromStorage();
+    let updatedLikedThreads: string[];
+    
+    if (newLikedState) {
+      updatedLikedThreads = [...likedThreads, id];
+    } else {
+      updatedLikedThreads = likedThreads.filter(threadId => threadId !== id);
+    }
+    
+    saveLikedThreadsToStorage(updatedLikedThreads);
+    
+    // Update the server
+    try {
+      const response = await fetch('/api/threads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          action: newLikedState ? 'like' : 'unlike'
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update like count');
+      }
+      
+      // We could get the updated count from the server response if needed
+    } catch (error) {
+      console.error('Error updating like count:', error);
+      // Revert optimistic update if server update fails
+      setThreads(prevThreads =>
+        prevThreads.map(thread =>
+          thread.id === id
+            ? {
+                ...thread,
+                liked: currentlyLiked,
+                likeCount: currentlyLiked ? thread.likeCount : thread.likeCount - 1
+              }
+            : thread
+        )
+      );
+      
+      // Also revert localStorage
+      saveLikedThreadsToStorage(likedThreads);
+    }
   };
 
   if (!mounted) {
@@ -180,25 +213,38 @@ export default function ThreadsPage() {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 animate-fade-in">
-      <div className="max-w-2xl mx-auto">
-        <header className="mb-10">
-          <h1 className="text-2xl font-medium tracking-tight mb-2">Threads</h1>
-          <p className="text-muted-foreground text-sm">
-            A feedbackless feed, got the inspiration for this page <a href="https://fromemily.com/feedbackless-feed/" className="text-extra-paleYellow">From Emily's</a> own feedbackless feed page. These are random thoughts that I might or might not have also shared on Twitter.
-          </p>
-        </header>
+    <>
+      <ScrollProgress
+        color="bg-primary"
+        height={3}
+        glow={true}
+        glowColor="rgba(var(--primary), 0.6)"
+        glowIntensity="12px"
+      />
+      <div className="min-h-screen py-12 px-4 animate-fade-in">
+        <div className="max-w-2xl mx-auto">
+          <header className="mb-10">
+            <h1 className="mb-2 text-2xl font-medium">Threads</h1>
+            <p className="text-muted-foreground text-sm">
+              A feedbackless feed, got the inspiration for this page <a href="https://fromemily.com/feedbackless-feed/" className="text-extra-paleYellow hover:underline">from Emily's</a> own feedbackless feed page. These are random thoughts that I might or might not have also shared on Twitter.
+            </p>
+          </header>
 
         {/* Threads Timeline */}
         <div className="relative">
           {/* Timeline Line */}
           <div 
-            className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent to-transparent"
+            className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border"
             style={{ transform: 'translateX(-50%)' }}
           ></div>
 
           {/* Threads */}
-          <div className="space-y-8 relative">
+          <div className="space-y-12 relative">
+            {threads.length === 0 && !loading ? (
+              <div className="text-center py-10">
+                <p className="text-muted-foreground">No threads found. Check back soon!</p>
+              </div>
+            ) : null}
             {threads.map((thread, index) => (
               <motion.div 
                 key={thread.id}
@@ -212,10 +258,10 @@ export default function ThreadsPage() {
               >
                 {/* Thread connector dot */}
                 <div 
-                  className={`absolute left-1/2 top-0 w-3 h-3 rounded-full border-2 
+                  className={`absolute left-1/2 top-0 w-4 h-4 rounded-full border-2 z-10
                   ${thread.liked 
-                    ? "bg-accent border-accent" 
-                    : "bg-background border-accent/60"
+                    ? "bg-primary border-primary" 
+                    : "bg-background border-border hover:border-primary transition-colors duration-300"
                   }`}
                   style={{ transform: 'translate(-50%, -50%)' }}
                 ></div>
@@ -227,27 +273,16 @@ export default function ThreadsPage() {
                   } pt-6`}
                 >
                   <div 
-                    className="p-5 rounded-xl shadow-sm border border-dashed border-border bg-card hover:shadow-md transition-shadow duration-300 font-mono"
+                    className="p-5 rounded-xl shadow-sm border border-dashed border-border bg-card hover:shadow-md transition-all duration-300 text-[14px] hover:border-primary/40 font-nitti"
                   >
-                    <div className="text-sm text-muted-foreground mb-2">
+                    <div className="text-sm text-muted-foreground mb-3">
                       {formatThreadDate(thread.date)}
                     </div>
                     
-                    <p className="mb-4">{thread.content}</p>
+                    <p className="mb-4 leading-relaxed whitespace-pre-wrap">{thread.content}</p>
                     
-                    <div className="flex flex-wrap items-center justify-between">
-                      {thread.tags && (
-                        <div className="flex flex-wrap gap-2">
-                          {thread.tags.map(tag => (
-                            <span 
-                              key={tag} 
-                              className="inline-flex text-xs px-2 py-1 rounded-full bg-accent/10 text-accent/80"
-                            >
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                    <div className="flex flex-wrap items-center justify-end">
+                      {/* Tags removed as requested */}
                       
                       <button 
                         onClick={() => toggleLike(thread.id)}
@@ -259,20 +294,20 @@ export default function ThreadsPage() {
                         aria-label={thread.liked ? "Unlike" : "Like"}
                       >
                         <Heart size={12} className={thread.liked ? "fill-red-500 dark:fill-red-400" : ""} />
-                        <span>{thread.likes}</span>
+                        <span>{thread.likeCount}</span>
                       </button>
                     </div>
                   </div>
 
                   {/* Connecting line to timeline */}
-                  <div 
+                  {/* <div 
                     className={`absolute top-6 ${
                       index % 2 === 0 
-                        ? 'left-0 right-auto border-t border-dashed border-accent/30 w-[calc(50%-6px)]' 
-                        : 'right-0 left-auto border-t border-dashed border-accent/30 w-[calc(50%-6px)]'
+                        ? 'left-0 right-auto border-t-2 border-dashed border-border w-[calc(50%-8px)]' 
+                        : 'right-0 left-auto border-t-2 border-dashed border-border w-[calc(50%-8px)]'
                     }`}
                     style={{ top: '1.5rem' }}
-                  ></div>
+                  ></div> */}
                 </div>
               </motion.div>
             ))}
@@ -284,16 +319,17 @@ export default function ThreadsPage() {
             >
               {loading ? (
                 <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-accent"></div>
-                  <span className="ml-2 text-sm text-muted-foreground">Loading more threads...</span>
+                  <div className="h-8 w-8 rounded-full border-2 border-border border-t-primary animate-spin"></div>
+                  <span className="ml-3 text-sm text-muted-foreground">Loading more threads...</span>
                 </div>
               ) : (
-                <div className="h-5 w-5 bg-accent/20 rounded-full mx-auto"></div>
+                <div className="h-5 w-5 bg-border rounded-full mx-auto"></div>
               )}
             </div>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }

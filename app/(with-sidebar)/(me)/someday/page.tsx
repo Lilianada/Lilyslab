@@ -4,39 +4,53 @@ import React from "react";
 
 export default function SomedayPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16 ">
+    <div className="max-w-2xl mx-auto px-4 py-16 ">
       <header className="mb-8">
         <h1 className="mb-2 text-xl font-medium">Someday</h1>
-        <p className="text-sm text-zinc-500">Somebody, something, somewhere, someday.</p>
+        <p className="text-sm text-zinc-500">
+          This is a{" "}
+          <a href="https://someday.page/" className="text-extra-lavender">
+            Someday page
+          </a>
+          , a movement started by
+          <a
+            href="https://alexandersandberg.com/someday/"
+            className="text-extra-lavender"
+            target="_blank"
+          >
+            {" "}
+            Alexander Sandberg
+          </a>
+          . 
+        </p>
       </header>
-      <div className="">
-      <div className="prose prose-sm dark:prose-invert max-w-lg">
-        <p>This page is still under construction. Check back later for content about future plans and aspirations.</p>
 
-        <div>
-          In the mean time, you check out these other pages
-          <ul className="text-sm ">
-            <li><Link href="/writing">Writing 📝</Link></li>
-            <li><Link href="/digital-garden/notes">Notes ❤️</Link></li>
-            <li><Link href="/digital-garden/bookmarks">Bookmarks 📚</Link></li>
-            <li><Link href="/digital-garden/bucket-list">Bucket List 📝</Link></li>
-            <li><Link href="/digital-garden/bookshelf">Bookshelf 📚</Link></li>
-            <li><Link href="/workshop/projects">Projects 🏗️</Link></li>
-            <li><Link href="/workshop/logs">Logs 📝</Link></li>
-            <li><Link href="/workshop/tools">Tools 🛠️</Link></li>
-            <li><Link href="/workshop/resources">Resources 📚</Link></li>
-            <li><Link href="/playground/calculator">Calculator 📊</Link></li>
-            <li><Link href="/colophon">Colophon 📝</Link></li>
-          </ul>
+      <div className="space-y-6">
+        <div className="text-left">
+          <h3 className="text-[15px] font-medium tracking-tight mb-1">
+            Someday I hope to be at a job where I am valued and rightly rewarded
+            for my efforts.
+          </h3>
+          <p className="text-[13px]">
+            I would actually like to work a job that I enjoy being at and would also like to be rewarded rightly for the efforts I make and for my contributions.
+
+          </p>
         </div>
-      </div>
+        <div className="text-left">
+          <h3 className="text-[15px] font-medium tracking-tight mb-1">
+            Someday I hope to move to a new country and start over.
+          </h3>
+          <p className="text-[13px]">
+            I would actually like to work a job that I enjoy being at and would also like to be rewarded rightly for the efforts I make and for my contributions.
 
+          </p>
+        </div>
       </div>
 
       <Footer
         inspirationName="Alexander Sandberg"
         inspirationUrl="https://alexandersandberg.com/someday/"
-        pageName="my someday page" 
+        pageName="my someday page"
         color="text-extra-peach"
       />
     </div>

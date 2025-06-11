@@ -8,6 +8,7 @@ import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import { Analytics } from "@vercel/analytics/next"
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
 import FloatingMusicPlayer from '@/components/audio/floating-music-player';
 

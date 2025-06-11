@@ -10,7 +10,8 @@ export default function TodoPage() {
   // Simple array of todo items with completed status
   const todoItems = [
     { text: "Add a designed guestbook prompt card to the homepage.", completed: false },
-    { text: "Redesign guestbook page , entries by people should be a memo card design.", completed: false },
+    { text: "Redesign guestbook page, the entries card should be a memo card design.", completed: false },
+    { text: "Redesign home page, make it more personal", completed: false },
     { text: "Add 3 best writings to homepage.", completed: false },
     { text: "Redesign notes to display notes by default in a card with a next, previous, comment and like buttons under the card. The comment button opens the ask-me-anything page, like button simple adds or updates the like property in the frontmatter of the note and on the right sidebar, display list of all notes in gray text and as user nexts or previous, the note title on the right sidebar changes color from grey text to show the note is active.", completed: false },
     { text: "Design one markdown renderer as a reusable component round the app. This should help me in writing my essays and notes using just very few markdown styles to keep design or layout uniform.", completed: false },

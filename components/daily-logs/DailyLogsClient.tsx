@@ -3,7 +3,7 @@
 import React, { useState, lazy} from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import type { DisplayLog } from "./page";
+import type { DisplayLog } from "../../app/(no-sidebar)/daily-logs/page";
 import { Suspense } from "react";
 
 // Lazy load markdown rendering dependencies

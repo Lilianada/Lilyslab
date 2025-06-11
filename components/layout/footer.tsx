@@ -66,8 +66,8 @@ export function Footer({
            if (data.lastUpdated) {
              const lastUpdatedDate = new Date(data.lastUpdated);
              if (!isNaN(lastUpdatedDate.getTime())) {
-               const formattedDate = format(lastUpdatedDate, 'MMMM d, yyyy h:mm:ss a');
-               setLastEdited(`${formattedDate} (${data.source})`);
+               const formattedDate = format(lastUpdatedDate, 'MMMM d, yyyy');
+               setLastEdited(formattedDate);
                return;
              }
            }
@@ -78,8 +78,8 @@ export function Footer({
          // Fallback to build time if API fails
          if (process.env.NEXT_PUBLIC_BUILD_TIME) {
            const buildDate = new Date(process.env.NEXT_PUBLIC_BUILD_TIME);
-           const formattedBuildDate = format(buildDate, 'MMMM d, yyyy h:mm:ss a');
-           setLastEdited(`${formattedBuildDate} (build time)`);
+           const formattedBuildDate = format(buildDate, 'MMMM d, yyyy');
+           setLastEdited(formattedBuildDate);
          } 
        } catch (error) {
          console.error('Error fetching last edited date:', error);

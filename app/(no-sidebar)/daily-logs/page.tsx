@@ -1,6 +1,6 @@
 
 import { getAllDailyLogs, type DailyLog } from "@/lib/garden/daily-logs";
-import DailyLogsClient from "./DailyLogsClient";
+import DailyLogsClient from "../../../components/daily-logs/DailyLogsClient";
 
 // Define the display format for logs
 export interface DisplayLog {
@@ -34,7 +34,9 @@ function getMoodLabel(emoji: string): string {
     "😔": "Reflective",
     "🌙": "Peaceful",
     "🌅": "Optimistic",
-    "📝": "Reflective"
+    "📝": "Reflective",
+    "😒": "Sad",
+    "🔵": "Blue"
   };
   return moodMap[emoji] || "Contemplative";
 }
