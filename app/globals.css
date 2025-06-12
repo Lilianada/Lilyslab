@@ -28,13 +28,18 @@
 /* Backlinks styling */
 @layer components {
   .backlink {
-    @apply bg-primary/10 text-primary px-1 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors no-underline cursor-pointer relative inline-flex items-center;
+    @apply text-primary px-1 py-0.5 relative cursor-pointer inline-flex items-center;
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--extra-steelBlue));
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: .5em;
+    text-underline-offset: -.25em;
+    transition: text-decoration .3s;
   }
-  
-
-  /* Dark mode adjustments */
-  .dark .backlink {
-    @apply bg-primary/20 border-primary/30 hover:bg-primary/30;
+  .backlink:hover {
+    text-decoration-color: hsl(var(--extra-blue));
+    text-decoration-thickness: .6em;
   }
 }
 

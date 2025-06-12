@@ -96,16 +96,7 @@
   @apply my-8 border-border;
 }
 
-/* Backlinks styling - NEW */
-.backlink {
-  @apply bg-primary/10 text-primary px-1 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors no-underline cursor-pointer relative;
-}
-
 /* Dark mode adjustments */
 .dark .markdown-content pre {
   @apply bg-muted/80;
-}
-
-.dark .backlink {
-  @apply bg-primary/20 border-primary/30 hover:bg-primary/30;
 }

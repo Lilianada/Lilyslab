@@ -6,19 +6,18 @@ import remarkGfm from "remark-gfm";
 import { Card } from "@/components/ui/card";
 import { ExternalLink, Maximize2, Minimize2, X, Music, MapPin, Heart, Star, MessageSquare, Mail } from "lucide-react";
 
-
 interface GuestbookEntry {
   id: string;
   name: string;
   url?: string;
   date: string;
   message: string;
-  intro?: string; // Short introduction (recommended max: 150 characters)
-  location?: string; // Where they're from
-  mood?: string; // Current mood
-  song?: string; // Song they're listening to
-  email?: string; // Email (hidden but used for gravatar)
-  favorite?: string; // Favorite thing
+  intro?: string;
+  location?: string; 
+  mood?: string; 
+  song?: string;
+  email?: string;
+  favorite?: string; 
 }
 
 interface GuestbookEntriesProps {
@@ -48,19 +47,14 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
     }
   };
   
-  // Generate a color based on name using site's --extra- color palette
   const generateColor = (name: string) => {
     const colors = [
-      "from-[rgba(var(--extra-lavender),0.4)] to-[rgba(var(--extra-lavender),0.8)]", 
-      "from-[rgba(var(--extra-yellow),0.4)] to-[rgba(var(--extra-yellow),0.8)]",
-      "from-[rgba(var(--extra-green),0.4)] to-[rgba(var(--extra-green),0.8)]",
-      "from-[rgba(var(--extra-pink),0.4)] to-[rgba(var(--extra-pink),0.8)]",
-      "from-[rgba(var(--extra-blue),0.4)] to-[rgba(var(--extra-blue),0.8)]",
-      "from-[rgba(var(--extra-cream),0.4)] to-[rgba(var(--extra-cream),0.8)]",
-      "from-[rgba(var(--extra-lilac),0.4)] to-[rgba(var(--extra-lilac),0.8)]",
-      "from-[rgba(var(--extra-peach),0.4)] to-[rgba(var(--extra-peach),0.8)]",
-      "from-[rgba(var(--extra-paleYellow),0.4)] to-[rgba(var(--extra-paleYellow),0.8)]",
-      "from-[rgba(var(--extra-steelBlue),0.4)] to-[rgba(var(--extra-steelBlue),0.8)]"
+      "from-pink-200 to-purple-500",
+      "from-blue-200 to-cyan-500", 
+      "from-green-200 to-emerald-500",
+      "from-yellow-200 to-orange-500",
+      "from-indigo-200 to-violet-500",
+      "from-rose-200 to-red-500",
     ];
     
     let hash = 0;
@@ -193,7 +187,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
             
             {/* Website Content */}
             <div className="bg-gradient-to-b from-background to-muted/10">
-              {/* Y2K Style Header/Banner */}
+              {/* Y2K Style Header/Banner - FIXED */}
               <div className={`bg-gradient-to-r ${personColor} h-16 flex items-center justify-center p-3 overflow-hidden relative`}>
                 {/* Decorative elements with higher opacity */}
                 <div className="absolute inset-0">
@@ -302,18 +296,18 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
                       </div>
                     </div>
                     
-                    {/* Y2K Style Elements */}
+                   {/* Y2K Style Elements */}
                     <div className="mt-3 flex flex-col items-center">
                       {/* Pixel Divider */}
                       <div className="w-full h-[5px] my-2 bg-repeat-x" 
                           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='10' height='5' viewBox='0 0 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h5v5H0zM5 0h5v5H5z' fill='%23999999' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E\")" }}>
                       </div>
-                      
-                      {/* Online Now */}
+                           {/* Online Now */}
                       <div className="text-xs text-center mt-1 font-mono">
-                        <span className="inline-block w-2 h-2 rounded-full bg-[rgba(var(--extra-green),0.8)] mr-1 animate-pulse"></span>
+                        <span className="inline-block w-2 h-2 rounded-full bg-green-400 mr-1 animate-pulse"></span>
                         online now
                       </div>
+                     
                     </div>
                   </div>
                   

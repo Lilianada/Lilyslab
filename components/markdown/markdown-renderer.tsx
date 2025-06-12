@@ -273,14 +273,54 @@ const MarkdownRenderer = ({
             // Check if this is a backlink (starts with /__backlink/)
             if (href && href.startsWith('/__backlink/')) {
               const linkText = decodeURIComponent(href.replace('/__backlink/', ''));
+              
+              // Custom handler for backlink click - find and navigate to the matching page
+              const handleBacklinkClick = async () => {
+                try {
+                  // Fetch notes and writings to find a matching title
+                  const [notesResponse, writingsResponse] = await Promise.all([
+                    fetch('/api/notes'),
+                    fetch('/api/writings')
+                  ]);
+                  
+                  if (!notesResponse.ok || !writingsResponse.ok) {
+                    throw new Error('Failed to fetch content');
+                  }
+                  
+                  const notesData = await notesResponse.json();
+                  const writingsData = await writingsResponse.json();
+                  
+                  // Find exact match or case-insensitive match
+                  const exactNote = notesData.find((note: any) => note.title === linkText);
+                  const exactWriting = writingsData.find((writing: any) => writing.title === linkText);
+                  
+                  const caseInsensitiveNote = notesData.find((note: any) => 
+                    note.title.toLowerCase() === linkText.toLowerCase()
+                  );
+                  const caseInsensitiveWriting = writingsData.find((writing: any) => 
+                    writing.title.toLowerCase() === linkText.toLowerCase()
+                  );
+                  
+                  // Navigate to the first match found
+                  if (exactNote) {
+                    window.location.href = `/garden/notes/${exactNote.title}`;
+                  } else if (exactWriting) {
+                    window.location.href = `/garden/writings/${exactWriting.slug}`;
+                  } else if (caseInsensitiveNote) {
+                    window.location.href = `/garden/notes/${caseInsensitiveNote.title}`;
+                  } else if (caseInsensitiveWriting) {
+                    window.location.href = `/garden/writings/${caseInsensitiveWriting.slug}`;
+                  } 
+                } catch (error) {
+                  console.error('Error handling backlink:', error);
+                }
+              };
+              
               return (
                 <span 
                   className="backlink"
                   data-backlink={linkText}
-                  onClick={() => {
-                    // You can handle the backlink click here, e.g., navigate to a search page
-                    window.location.href = `/garden/search?q=${encodeURIComponent(linkText)}`;
-                  }}
+                  onClick={handleBacklinkClick}
                   {...props}
                 >
                   {props.children}

@@ -15,9 +15,6 @@ const config = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  experimental: {
-    optimizeUniversalDefaults: true,
-  },
   theme: {
     container: {
       center: true,
