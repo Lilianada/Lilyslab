@@ -76,6 +76,7 @@ export default function Colophon() {
             { name: "Mason Watson", url: "https://mw.works/" },
             { name: "Nicole van der Hoeven", url: "https://nicolevanderhoeven.com/about" },
             { name: "Alexander Sandberg", url: "https://alexandersandberg.com/" },
+            { name: "Kenan ", url: "https://kenan.fyi/" },
             
           ].map((site) => (
             <a

@@ -15,7 +15,7 @@ type ContentType = {
 export default function BacklinkSearch() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const query = searchParams.get('q') || '';
+  const query = searchParams?.get('q') || '';
   const [results, setResults] = useState<ContentType[]>([]);
   const [loading, setLoading] = useState(true);
 

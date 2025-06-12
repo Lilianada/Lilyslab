@@ -148,11 +148,23 @@ export default function BucketListPage() {
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: April 20, 2025</div>
             <div>Last updated: June 12, 2025</div>
-            <div>Inspired by: The need for a new job.</div>
+            <div>Inspired by: ✳︎✳︎✳︎</div>
           </div>
         </header>
 
-        <div className="w-full h-40 bg-extra-yellow/50 rounded-lg border border-extra-peach/50 mb-8"></div>
+        <div className="w-full h-40 rounded-lg border border-border mb-8 flex items-center justify-center overflow-hidden font-mono">
+          <pre className="text-xs leading-tight select-none">
+{`01010000 01110010 01101111 01100110 01100101 01110011 01110011 01101001 01101111 01101110 01100001 01101100
+00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101
+01000011 01100001 01110010 01100101 01100101 01110010 00100000 01000111 01110010 01101111 01110111 01110100 01101000
+00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101
+01001100 01100101 01100001 01110010 01101110 01101001 01101110 01100111 00100000 00100110 00100000 01000100 01100101 01110110
+00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101
+01001111 01110000 01110000 01101111 01110010 01110100 01110101 01101110 01101001 01110100 01101001 01100101 01110011
+00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101 00101101
+01000010 01110101 01100011 01101011 01100101 01110100 00100000 01001100 01101001 01110011 01110100 00100000 00110010 00110000 00110010 00110101`}
+          </pre>
+        </div>
 
         <section className="mb-16">
           <span className="text-xl mb-2">✳︎</span>
@@ -190,10 +202,10 @@ export default function BucketListPage() {
               <table className="w-full text-sm">
                 <thead className="bg-muted/50">
                   <tr>
-                    <th className="p-3 text-left font-medium text-muted-foreground w-16 border-r border-border">
+                    <th className="px-3 py-2 text-left font-medium text-muted-foreground w-16 border-r border-border">
                       S/N
                     </th>
-                    <th className="p-3 text-left font-medium text-muted-foreground">
+                    <th className="px-3 py-2 text-left font-medium text-muted-foreground">
                       Companies
                     </th>
                   </tr>
@@ -230,10 +242,10 @@ export default function BucketListPage() {
              
                <thead className="bg-muted/50">
                   <tr>
-                    <th className="p-3 text-left font-medium text-muted-foreground w-16 border-r border-border">
+                    <th className="px-3 py-2 text-left font-medium text-muted-foreground w-16 border-r border-border">
                       Categories
                     </th>
-                    <th className="p-3 text-left font-medium text-muted-foreground">
+                    <th className="px-3 py-2 text-left font-medium text-muted-foreground">
                       Details
                     </th>
                   </tr>
