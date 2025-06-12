@@ -13,10 +13,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false, // Set to true if you want to ignore TS errors too
   },
-  // Enable Vercel Analytics
-  analytics: {
-    enabled: true,
-  },
+  // Analytics is handled by Vercel platform automatically
+  // Remove the custom analytics property as it's not supported
+  // For more information: https://vercel.com/docs/analytics
   
   async headers() {
     return [

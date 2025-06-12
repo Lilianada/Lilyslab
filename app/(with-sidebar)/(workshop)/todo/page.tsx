@@ -9,8 +9,7 @@ export default function TodoPage() {
   
   // Simple array of todo items with completed status
   const todoItems = [
-    { text: "Add a designed guestbook prompt card to the homepage.", completed: false },
-    { text: "Create postcard-style guestbook entries with customizable fonts and colors.", completed: true },
+    { text: "Create y2k browser style card for guestbook entries.", completed: true },
     { text: "Redesign home page, make it more personal", completed: false },
     { text: "Add a list of topics I'll like to write on to homepage.", completed: true },
     { text: "Redesign notes to display notes by default in a card with a next, previous, comment and like buttons under the card. The comment button opens the ask-me-anything page, like button simple adds or updates the like property in the frontmatter of the note and on the right sidebar, display list of all notes in gray text and as user nexts or previous, the note title on the right sidebar changes color from grey text to show the note is active.", completed: false },

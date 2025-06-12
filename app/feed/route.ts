@@ -1,9 +1,55 @@
 import { Feed } from 'feed';
-import { getAllWritings, Writing } from '@/lib/garden/writings';
-import { getAllLogsData, LogData } from '@/lib/garden/logs';
-import { getAllNotesData, NoteData } from '@/lib/notes';
 import { NextResponse } from 'next/server';
 import { safeFormatDate } from '@/lib/utils';
+import fs from 'fs/promises';
+import path from 'path';
+import matter from 'gray-matter';
+
+// Define the types locally to avoid client-side imports
+export interface Writing {
+  slug: string;
+  title: string;
+  createdAt: string;
+  lastUpdated: string;
+  excerpt?: string;
+  tags?: string[];
+  coverImage?: string;
+  content: string;
+  published: boolean;
+  type: string;
+}
+
+export interface LogFrontmatter {
+  title: string;
+  date: string;
+  tags?: string[];
+  published: boolean;
+  [key: string]: any;
+}
+
+export interface LogData {
+  slug: string;
+  frontmatter: LogFrontmatter;
+  content: string;
+}
+
+export interface NoteFrontmatter {
+  title: string;
+  createdAt: string;
+  lastUpdated: string;
+  publish?: boolean;
+  tags: string[];
+  type: string;
+  image?: string;
+  date?: string;
+  [key: string]: any;
+}
+
+export interface NoteData {
+  slug: string;
+  frontmatter: NoteFrontmatter;
+  content: string;
+}
 
 export async function GET(request: Request) {
   const siteURL = 'https://lilyslab.com';
@@ -30,6 +76,57 @@ export async function GET(request: Request) {
     },
   });
 
+  // Server-side implementation of getAllWritings
+  async function getAllWritings(): Promise<Writing[]> {
+    const writingsPath = path.join(process.cwd(), "Content/writings");
+    
+    try {
+      const files = await fs.readdir(writingsPath);
+      
+      const writingsPromises = files
+        .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
+        .map(async file => {
+          const filePath = path.join(writingsPath, file);
+          const raw = await fs.readFile(filePath, 'utf-8');
+          const { data, content } = matter(raw);
+
+          const published = data.published === true;
+          if (!published) return null;
+          
+          // Handle dates safely
+          const createdAtValue = data.createdAt || data.date;
+          const createdAt = safeFormatDate(createdAtValue);
+          const lastUpdated = safeFormatDate(data.lastUpdated || createdAtValue);
+
+          return {
+            slug: file.replace(/\.mdx?$/, ''),
+            title: data.title || 'Untitled',
+            createdAt,
+            lastUpdated,
+            excerpt: data.excerpt || '',
+            tags: data.tags || [],
+            coverImage: data.coverImage || null,
+            content,
+            published: true,
+            type: data.type || 'evergreen',
+          };
+        });
+
+      const writings = (await Promise.all(writingsPromises))
+        .filter((writing): writing is NonNullable<typeof writing> => writing !== null)
+        .sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB.getTime() - dateA.getTime();
+        });
+
+      return writings;
+    } catch (error) {
+      console.error("Error getting writings:", error);
+      return [];
+    }
+  }
+  
   // Add writings to feed
   const writings = await getAllWritings();
   
@@ -53,8 +150,53 @@ export async function GET(request: Request) {
     });
   });
 
+  // Server-side implementation of getAllLogsData
+  async function getAllLogsData(): Promise<LogData[]> {
+    const logsDirectory = path.join(process.cwd(), 'Content/logs');
+    
+    try {
+      const filenames = await fs.readdir(logsDirectory);
+      
+      const logsPromises = filenames
+        .filter((filename) => /\.mdx?$/.test(filename))
+        .map(async (filename) => {
+          const slug = filename.replace(/\.mdx?$/, '');
+          const fullPath = path.join(logsDirectory, filename);
+          
+          try {
+            const fileContents = await fs.readFile(fullPath, 'utf8');
+            const { data, content } = matter(fileContents);
+            
+            if (data.published !== true) return null;
+            
+            return {
+              slug,
+              frontmatter: data as LogFrontmatter,
+              content
+            };
+          } catch (error) {
+            console.error(`Error processing log file ${filename}:`, error);
+            return null;
+          }
+        });
+        
+      const logs = (await Promise.all(logsPromises))
+        .filter((log): log is LogData => log !== null)
+        .sort((a, b) => {
+          const dateA = new Date(a.frontmatter.date);
+          const dateB = new Date(b.frontmatter.date);
+          return dateB.getTime() - dateA.getTime();
+        });
+        
+      return logs;
+    } catch (error) {
+      console.error("Error reading logs directory:", error);
+      return [];
+    }
+  }
+
   // Add logs to feed
-  const logs = getAllLogsData();
+  const logs = await getAllLogsData();
   
   logs.forEach((log: LogData) => {
     const url = `${siteURL}/workshop/logs/${log.slug}`;
@@ -76,8 +218,79 @@ export async function GET(request: Request) {
     });
   });
   
+  // Server-side implementation of getAllNotesData
+  async function getAllNotesData(): Promise<NoteData[]> {
+    const notesDirectory = path.join(process.cwd(), 'Content/notes');
+    
+    try {
+      const filenames = await fs.readdir(notesDirectory);
+      
+      const notesPromises = filenames
+        .filter((filename) => /\.mdx?$/.test(filename))
+        .map(async (filename) => {
+          const slug = filename.replace(/\.mdx?$/, '');
+          const fullPath = path.join(notesDirectory, filename);
+          
+          try {
+            const fileContents = await fs.readFile(fullPath, 'utf8');
+            const { data, content } = matter(fileContents);
+            
+            // Basic validation
+            if (!data.title) {
+              console.warn(`Skipping ${filename}: missing title in frontmatter.`);
+              return null;
+            }
+            
+            // Check if the note should be published
+            if (data.publish === false) {
+              return null;
+            }
+            
+            // Handle date fields with proper validation
+            const createdAt = data.createdAt || data.date;
+            const formattedCreatedAt = safeFormatDate(createdAt);
+            
+            // If provided, ensure lastUpdated is valid, otherwise use createdAt
+            const lastUpdated = data.lastUpdated ? 
+              safeFormatDate(data.lastUpdated) : 
+              formattedCreatedAt;
+            
+            const frontmatter = {
+              ...data,
+              createdAt: formattedCreatedAt,
+              lastUpdated,
+              type: data.type || 'seedling',
+              tags: data.tags || []
+            } as NoteFrontmatter;
+            
+            return {
+              slug,
+              frontmatter,
+              content
+            };
+          } catch (error) {
+            console.error(`Error processing note file ${filename}:`, error);
+            return null;
+          }
+        });
+        
+      const notes = (await Promise.all(notesPromises))
+        .filter((note): note is NoteData => note !== null)
+        .sort((a, b) => {
+          const dateA = new Date(a.frontmatter.createdAt);
+          const dateB = new Date(b.frontmatter.createdAt);
+          return dateB.getTime() - dateA.getTime();
+        });
+        
+      return notes;
+    } catch (error) {
+      console.error("Error reading notes directory:", error);
+      return [];
+    }
+  }
+  
   // Add notes to feed
-  const notes = getAllNotesData();
+  const notes = await getAllNotesData();
   
   notes.forEach((note: NoteData) => {
     const url = `${siteURL}/garden/notes//${note.slug}`;

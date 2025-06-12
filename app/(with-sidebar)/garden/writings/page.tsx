@@ -1,7 +1,20 @@
 import Link from "next/link"
 import { formatDate } from "@/lib/utils"
 import { Annoyed } from "lucide-react"
-import { getAllWritings, Writing } from "@/lib/garden/writings"
+
+// Define the Writing interface directly here instead of importing from lib
+export interface Writing {
+  slug: string;
+  title: string;
+  createdAt: string;
+  lastUpdated: string;
+  excerpt?: string;
+  tags?: string[];
+  coverImage?: string;
+  content: string;
+  published: boolean;
+  type: string;
+}
 
 // Helper function to count words in a string
 function countWords(text: string): number {
@@ -48,12 +61,20 @@ function groupWritingsByMonth(writings: Writing[]) {
 }
 
 export default async function WritingPage() {
-  let posts: Writing [] = []
+  let posts: Writing[] = []
   let error: string | null = null
 
   try {
     console.log("Fetching writings...")
-    posts = await getAllWritings()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/writings`, {
+      next: { revalidate: 3600 } // revalidate every hour
+    })
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch writings: ${response.status} ${response.statusText}`)
+    }
+    
+    posts = await response.json()
     console.log(`Fetched ${posts.length} writings`)
   } catch (err) {
     console.error("Error in WritingPage:", err)
