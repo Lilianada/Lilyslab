@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import {
   ArrowUpRight,
@@ -20,18 +20,19 @@ export default function WebringsPage() {
     setIsLoaded(true);
   }, []);
 
-  // Animation variants
-  const containerVariants = {
+  // Animation variants with proper typing for Vercel's build environment
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-      },
+      }
     },
   };
 
-  const itemVariants = {
+  // Define more strictly typed variants for framer-motion
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -40,7 +41,7 @@ export default function WebringsPage() {
         type: "spring",
         stiffness: 100,
         damping: 12,
-      },
+      }
     },
   };
 

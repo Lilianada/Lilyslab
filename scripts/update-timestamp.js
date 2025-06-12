@@ -13,13 +13,13 @@ const lastUpdatedPath = path.join(__dirname, '..', 'last-updated.json');
 
 // Update the last-updated.json file
 try {
-  // Read the current file content - handle comment at the top of the file
+  // Read the current file content - handle any comments at the top of the file
   let fileContent = fs.readFileSync(lastUpdatedPath, 'utf-8');
   
-  // Remove the comment at the top of the file if it exists
-  if (fileContent.trim().startsWith('//')) {
+  // Remove all comment lines at the top of the file
+  while (fileContent.trim().startsWith('//')) {
     const lines = fileContent.split('\n');
-    lines.shift(); // Remove first line (comment)
+    lines.shift(); // Remove comment line
     fileContent = lines.join('\n');
   }
   

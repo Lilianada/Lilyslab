@@ -38,9 +38,9 @@ export async function GET() {
         // Read the file content
         const fileContent = fs.readFileSync(lastUpdatedPath, 'utf-8');
         
-        // Parse the JSON (handling potential comments at the start)
+        // Parse the JSON (handling potential multiple comments at the start)
         let jsonContent = fileContent;
-        if (jsonContent.trim().startsWith('//')) {
+        while (jsonContent.trim().startsWith('//')) {
           const lines = jsonContent.split('\n');
           lines.shift(); // Remove comment line
           jsonContent = lines.join('\n');
