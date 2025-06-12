@@ -82,6 +82,10 @@ export default function GuestbookPage() {
       name: "Meadow's Guestbook",
       url: "https://meadow.cafe/guestbook/",
     },
+    {
+      name: "Bechnokid's Guestbook",
+      url: "https://bechnokid.neocities.org/guestbook/"
+    }
   ];
 
   // Fetch guestbook entries

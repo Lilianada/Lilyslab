@@ -92,7 +92,10 @@ const nextConfig = {
     domains: [
       'lh3.googleusercontent.com',  // Google profile images
       'firebasestorage.googleapis.com',  // Firebase Storage images
-      'res.cloudinary.com',  // Cloudinary images
+       'm.media-amazon.com',
+      'images-na.ssl-images-amazon.com',
+      'images-eu.ssl-images-amazon.com',
+      'images.gr-assets.com',
     ],
   },
 };

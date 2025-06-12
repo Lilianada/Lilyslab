@@ -176,13 +176,13 @@ export default function WebringsPage() {
         <header className="mb-12">
           <div className="flex flex-col mb-4">
             <h1 className="mb-1 text-xl font-medium">Webrings</h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs font-mono text-muted-foreground">
               Collections of like-minded websites connected in a virtual circle.
             </p>
           </div>
           <motion.div
             variants={itemVariants}
-            className="mt-8 group md:col-span-2 relative bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
+            className="mt-8"
           >
             <p className="text-sm">
               A{" "}
