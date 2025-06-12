@@ -83,7 +83,10 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
         rel="noopener noreferrer"
         className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent/50 hover:text-foreground transition-all duration-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
-        onClick={onClick}
+        onClick={(e) => {
+          // Call the onClick callback if provided
+          if (onClick) onClick();
+        }}
         style={{ transitionDelay: `${delay}ms` }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -100,18 +103,20 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
   }
 
   if (template) {
-    return (
-      <Link
-        href={href}
-        className={cn(
-          "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm hover:bg-accent/50 transition-all duration-300",
-          isActive ? "bg-accent/70 text-foreground font-medium shadow-sm" : "text-muted-foreground hover:text-foreground",
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
-        )}
-        onClick={onClick}
-        style={{ transitionDelay: `${delay}ms` }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+    return (    <Link
+      href={href}
+      className={cn(
+        "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm hover:bg-accent/50 transition-all duration-300",
+        isActive ? "bg-accent/70 text-foreground font-medium shadow-sm" : "text-muted-foreground hover:text-foreground",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
+      )}
+      onClick={(e) => {
+        // Call the onClick callback if provided, but don't prevent default navigation
+        if (onClick) onClick();
+      }}
+      style={{ transitionDelay: `${delay}ms` }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       >
         <div className={`transition-transform duration-200 ${isHovered ? "scale-110" : ""}`}>
           {icon}
@@ -134,7 +139,10 @@ const NavItem = ({ href, icon, label, external = false, template = false, hasNot
           : "text-muted-foreground hover:text-foreground hover:bg-accent/50",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
       )}
-      onClick={onClick}
+      onClick={(e) => {
+        // Call the onClick callback if provided, but don't prevent default navigation
+        if (onClick) onClick();
+      }}
       style={{ transitionDelay: `${delay}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -196,7 +204,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
     <aside
       className={cn(
         "border-r bg-gradient-to-b from-card to-card/95 shadow-none transition-all duration-300",
-        mobile ? "w-full" : "hidden w-64 lg:block"
+        mobile ? "w-full" : "hidden w-64 "
       )}
       style={{ minHeight: '100vh', boxShadow: '0 0 0 0 transparent' }}
     >

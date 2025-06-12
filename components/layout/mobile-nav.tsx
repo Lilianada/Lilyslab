@@ -1,6 +1,6 @@
 "use client"
 
-import { Crown } from "lucide-react"
+import { GripVertical, Crown } from "lucide-react"
 import { useState } from "react"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import Sidebar from "./sidebar"
@@ -16,7 +16,7 @@ export default function MobileNav() {
   const { isAdmin } = useAuth()
 
   return (
-    <div className="flex items-center justify-between border-b  p-4 lg:hidden">
+    <div className="flex items-center justify-between border-b border-dashed  p-4 ">
       <Link href="/" className="flex items-center gap-2">
         <h1 className="text-sm font-medium">Lily's Garden</h1>
       </Link>
@@ -24,8 +24,8 @@ export default function MobileNav() {
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-md p-0">
-              <Menu size={20} />
+            <Button variant="outline" size="icon" className="h-8 w-8 rounded-md p-0 m-0" aria-label="Toggle menu">
+              <GripVertical size={20} />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
@@ -43,7 +43,6 @@ export default function MobileNav() {
             
               <div className="border-t p-4 flex justify-between">
                 
-                <ThemeToggle />
                 {isAdmin ? (
                   <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-0.5 flex items-center text-xs">
                     <Crown size={12} className="mr-1" /> Admin
@@ -51,6 +50,7 @@ export default function MobileNav() {
                 ) : (
                   <UserProfileSection />
                 )}
+                <ThemeToggle />
               </div>
             
           </SheetContent>

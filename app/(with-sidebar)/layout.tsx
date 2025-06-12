@@ -8,7 +8,7 @@ export default function WithSidebarLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-background transition-colors duration-300 lg:flex-row relative">
+    <div className="flex min-h-screen flex-col bg-background transition-colors duration-300  relative">
       <Sidebar />
       <MobileNav />
       <div className="flex-1 px-4 py-6 lg:px-8 lg:py-10 flex flex-col min-h-[calc(100vh-4rem)]" role="region" aria-label="Main content"> 

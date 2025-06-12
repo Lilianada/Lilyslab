@@ -26,7 +26,7 @@ export default function Home() {
           <AnimatedLogo />
         </div>
         <div className="flex flex-col text-xs text-muted-foreground font-mono">
-          <div>Created: April 10, 2025</div>
+          <div>Created: May 3, 2025</div>
           <div>Last updated: June 11, 2025</div>
         </div>
 

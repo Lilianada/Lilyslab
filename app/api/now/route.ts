@@ -7,12 +7,13 @@ import matter from 'gray-matter';
 interface NowData {
   frontmatter: {
     lastUpdated?: string;
-    [key: string]: any; // Allow other frontmatter fields
+    creaytedAt?: string;
+    [key: string]: any; 
   };
   content: string;
 }
 
-const nowFilePath = join(process.cwd(), 'Content', 'now', 'entry.md');
+const nowFilePath = join(process.cwd(), 'Content', 'now', 'entry01.md');
 
 export async function GET() {
   try {
