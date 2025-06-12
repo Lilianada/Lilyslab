@@ -15,7 +15,7 @@ createdAt: 2025-04-30
 type: evergreen
 ---
 
-If you've been following my journey since January, you know I'm all about learning, building, and sharing. The past few months have been a whirlwind of progress, and I'm excited to finally share what's been happening behind the scenes.
+If you've been following my journey since January, you know I'm all about learning, building, and sharing. The past few months have been a whirlwind of progress, and I'm excited to finally share what's been happening behind the scenes. [[Creating Digital Gardens]]
 
 ### Professional Growth
 

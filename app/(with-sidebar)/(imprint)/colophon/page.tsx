@@ -133,7 +133,7 @@ export default function Colophon() {
             { name: 'Cream', var: 'var(--extra-cream)' },
             { name: 'PaleYellow', var: 'var(--extra-paleYellow)' },
             { name: 'Yellow', var: 'var(--extra-yellow)' },
-            { name: 'Blue', var: 'var(--extra-Blue)' },
+            { name: 'Blue', var: 'var(--extra-blue)' },
             { name: 'SteelBlue', var: 'var(--extra-steelBlue)' },
             { name: 'Lavender', var: 'var(--extra-lavender)' },
             { name: 'Primary', var: 'var(--primary)' },

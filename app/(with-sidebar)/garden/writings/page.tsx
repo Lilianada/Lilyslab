@@ -66,7 +66,8 @@ export default async function WritingPage() {
 
   try {
     console.log("Fetching writings...")
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/writings`, {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+    const response = await fetch(`${baseUrl}/api/writings`, {
       next: { revalidate: 3600 } // revalidate every hour
     })
     

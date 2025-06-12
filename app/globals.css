@@ -31,11 +31,7 @@
     @apply bg-primary/10 text-primary px-1 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors no-underline cursor-pointer relative inline-flex items-center;
   }
   
-  .backlink::before {
-    content: '🔗';
-    @apply text-[10px] mr-0.5 opacity-70;
-  }
-  
+
   /* Dark mode adjustments */
   .dark .backlink {
     @apply bg-primary/20 border-primary/30 hover:bg-primary/30;
@@ -73,7 +69,7 @@
     --extra-yellow: 48 95% 76%;      /* #FAE680 */
     --extra-green: 148 28% 72%;      /* #A2CBAF */
     --extra-pink: 350 54% 80%;       /* #E8ADB1 */
-    --extra-Blue: 213 61% 80%;       /* #A6C2EB */
+    --extra-blue: 213 61% 80%;       /* #A6C2EB */
     --extra-cream: 43 68% 89%;       /* #F4E8C8 */
     --extra-lilac: 270 64% 80%;      /* #CCA7ED */
     --extra-peach: 18 86% 71%;       /* #F29874 */
@@ -109,7 +105,7 @@
     --extra-yellow: 48 95% 30%;      /* #7a6e2b */
     --extra-green: 148 28% 32%;      /* #4e695b */
     --extra-pink: 350 54% 38%;       /* #8d5b60 */
-    --extra-Blue: 213 61% 38%;       /* #546d8c */
+    --extra-blue: 213 61% 38%;       /* #546d8c */
     --extra-cream: 43 68% 24%;       /* #6b6246 */
     --extra-lilac: 270 64% 37%;      /* #7a5b8f */
     --extra-peach: 18 86% 36%;       /* #a15c3d */

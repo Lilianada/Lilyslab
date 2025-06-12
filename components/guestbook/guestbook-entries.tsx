@@ -55,7 +55,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
       "from-[rgba(var(--extra-yellow),0.4)] to-[rgba(var(--extra-yellow),0.8)]",
       "from-[rgba(var(--extra-green),0.4)] to-[rgba(var(--extra-green),0.8)]",
       "from-[rgba(var(--extra-pink),0.4)] to-[rgba(var(--extra-pink),0.8)]",
-      "from-[rgba(var(--extra-Blue),0.4)] to-[rgba(var(--extra-Blue),0.8)]",
+      "from-[rgba(var(--extra-blue),0.4)] to-[rgba(var(--extra-blue),0.8)]",
       "from-[rgba(var(--extra-cream),0.4)] to-[rgba(var(--extra-cream),0.8)]",
       "from-[rgba(var(--extra-lilac),0.4)] to-[rgba(var(--extra-lilac),0.8)]",
       "from-[rgba(var(--extra-peach),0.4)] to-[rgba(var(--extra-peach),0.8)]",

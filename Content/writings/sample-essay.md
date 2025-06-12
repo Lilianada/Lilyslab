@@ -1,5 +1,5 @@
 ---
-title: The Art of Creating Digital Gardens
+title: Creating Digital Gardens
 tags:
   - digital garden
   - personal websites

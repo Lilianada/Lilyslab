@@ -101,11 +101,6 @@
   @apply bg-primary/10 text-primary px-1 py-0.5 rounded border border-primary/20 hover:bg-primary/20 transition-colors no-underline cursor-pointer relative;
 }
 
-.backlink::before {
-  content: '🔗';
-  @apply text-[10px] mr-0.5 opacity-70;
-}
-
 /* Dark mode adjustments */
 .dark .markdown-content pre {
   @apply bg-muted/80;
