@@ -10,20 +10,20 @@ export default function TodoPage() {
   // Simple array of todo items with completed status
   const todoItems = [
     { text: "Add a designed guestbook prompt card to the homepage.", completed: false },
-    { text: "Redesign guestbook page, the entries card should be a memo card design.", completed: false },
+    { text: "Create postcard-style guestbook entries with customizable fonts and colors.", completed: true },
     { text: "Redesign home page, make it more personal", completed: false },
-    { text: "Add 3 best writings to homepage.", completed: false },
+    { text: "Add a list of topics I'll like to write on to homepage.", completed: true },
     { text: "Redesign notes to display notes by default in a card with a next, previous, comment and like buttons under the card. The comment button opens the ask-me-anything page, like button simple adds or updates the like property in the frontmatter of the note and on the right sidebar, display list of all notes in gray text and as user nexts or previous, the note title on the right sidebar changes color from grey text to show the note is active.", completed: false },
-    { text: "Design one markdown renderer as a reusable component round the app. This should help me in writing my essays and notes using just very few markdown styles to keep design or layout uniform.", completed: false },
+    { text: "Design one markdown renderer as a reusable component round the app. This should help me in writing my essays and notes using just very few markdown styles to keep design or layout uniform.", completed: true },
     { text: "Stuff - create it with its header under no-sidebar. The design for stuff will be 3x3 grid on available screen size. The stuff grids will have random stuff like Total site visitors, 3 different 88x31 button designs for anyone who wants to mention me on their website to choose from.", completed: true },
     { text: "/Todo page redesign with this list as its content.", completed: true },
     { text: "/Wants page - under with sidebar with 100 things I want to do in my lifetime.", completed: false },
     { text: "Update someday page with content.", completed: true },
     { text: "Update now page to use the custom markdown renderer component.", completed: true },
-    { text: "Update web Manifesto.", completed: false },
+    { text: "Update Manifesto.", completed: false },
     { text: "Update 'Why I keep a daily log'.", completed: false },
-    { text: "Create /Archives page with a simple table list of all my past notes.", completed: false },
-    { text: "Garden/page.tsx add suggest something modal - what to do?", completed: false },
+    { text: "Create /Archives page with a simple table list of all my past essays/notes.", completed: false },
+    { text: "Garden/page.tsx, change the suggest modal to be a comment modal that is accessible to all garden pages for comments.", completed: false },
     { text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.", completed: false },
   ];
   

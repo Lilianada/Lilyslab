@@ -4,7 +4,7 @@ import React from "react";
 
 export default function SomedayPage() {
   return (
-    <div className="max-w-2xl mx-auto px-4 py-16 ">
+    <div className="max-w-2xl mx-auto sm:px-4 py-16 ">
       <header className="mb-8">
         <h1 className="mb-2 text-xl font-medium">Someday</h1>
         <div className="flex flex-col text-xs text-muted-foreground font-mono">

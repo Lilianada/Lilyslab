@@ -17,6 +17,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 // Validation schema
 const formSchema = z.object({
@@ -25,16 +31,39 @@ const formSchema = z.object({
   url: z
     .string()
     .optional()
-    .transform((val) => val === "" ? undefined : val)
+    .transform((val) => (val === "" ? undefined : val))
     .refine(
       (val) => !val || /^https?:\/\/.+\..+/.test(val),
       "Please enter a valid URL starting with http:// or https://"
     ),
-  spam_check: z
+  intro: z
     .string()
-    .refine((val) => val.toLowerCase() === "guestbook", {
-      message: "Please type 'guestbook' to verify you're human",
-    }),
+    .max(150, "Bio should be at most 150 characters")
+    .optional()
+    .transform((val) => (val === "" ? undefined : val)),
+  location: z
+    .string()
+    .max(50, "Location should be at most 50 characters")
+    .optional()
+    .transform((val) => (val === "" ? undefined : val)),
+  mood: z
+    .string()
+    .max(30, "Mood should be at most 30 characters")
+    .optional()
+    .transform((val) => (val === "" ? undefined : val)),
+  song: z
+    .string()
+    .max(80, "Song name should be at most 80 characters")
+    .optional()
+    .transform((val) => (val === "" ? undefined : val)),
+  favorite: z
+    .string()
+    .max(50, "Favorite thing should be at most 50 characters")
+    .optional()
+    .transform((val) => (val === "" ? undefined : val)),
+  spam_check: z.string().refine((val) => val.toLowerCase() === "guestbook", {
+    message: "Please type 'guestbook' to verify you're human",
+  }),
   message: z
     .string()
     .min(10, "Message must be at least 10 characters")
@@ -47,6 +76,11 @@ interface GuestbookFormProps {
     name: string;
     url?: string;
     email: string;
+    intro?: string;
+    location?: string;
+    mood?: string;
+    song?: string;
+    favorite?: string;
     message: string;
     created_at: string;
   }) => void;
@@ -62,6 +96,11 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
       name: "",
       email: "",
       url: "",
+      intro: "",
+      location: "",
+      mood: "",
+      song: "",
+      favorite: "",
       spam_check: "",
       message: "",
     },
@@ -108,17 +147,62 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {/* Required Fields Section */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium">Sign My Guestbook</h3>
+          
+          {/* Required Fields (Name, Email, Website) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name *</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Your name"
+                      className="bg-background"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email *</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="your@email.com"
+                      className="bg-background"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Your email won't be displayed publicly
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <FormField
             control={form.control}
-            name="name"
+            name="url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name *</FormLabel>
+                <FormLabel>Website (optional)</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Your name"
+                    placeholder="https://your-website.com"
                     className="bg-background"
                     {...field}
                   />
@@ -127,22 +211,43 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
-            name="email"
+            name="intro"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email *</FormLabel>
+                <FormLabel>Short Intro (optional)</FormLabel>
                 <FormControl>
                   <Input
-                    type="email"
-                    placeholder="your@email.com"
+                    placeholder="A brief introduction about yourself"
                     className="bg-background"
                     {...field}
                   />
                 </FormControl>
                 <FormDescription>
-                  Your email won't be displayed publicly
+                  This will appear as your "about me" section (max 150 chars)
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message for Lily *</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Leave your message here... You can use Markdown formatting!"
+                    className="min-h-[120px] bg-background resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  You can use Markdown formatting (links, **bold**, *italic*, etc.)
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -150,24 +255,91 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
           />
         </div>
 
-        <FormField
-          control={form.control}
-          name="url"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Website (optional)</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="https://your-website.com"
-                  className="bg-background"
-                  {...field}
+        {/* Optional Fields - Collapsible */}
+        <Accordion type="single" collapsible className="border px-4 py-2 rounded-md">
+          <AccordionItem value="optional-fields" className="border-none">
+            <AccordionTrigger className="text-sm py-2">
+              More Y2K Profile Details (Optional)
+            </AccordionTrigger>
+            <AccordionContent className="pt-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="location"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Location</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Where are you from?"
+                          className="bg-background"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                
+                <FormField
+                  control={form.control}
+                  name="mood"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Current Mood</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="How are you feeling today?"
+                          className="bg-background"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
+                <FormField
+                  control={form.control}
+                  name="song"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Currently Listening To</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="What song/artist are you enjoying?"
+                          className="bg-background"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="favorite"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Favorite Thing</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="What's something you love?"
+                          className="bg-background"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+
+        {/* Bot Protection */}
         <FormField
           control={form.control}
           name="spam_check"
@@ -184,29 +356,8 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
                 />
               </FormControl>
               <FormDescription>
-               To help keep this space genuine and spam-free, please type &quot;guestbook&quot; below. 
-                        It's a simple way to confirm you're a real person wanting to share something meaningful!
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message *</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Leave your message here... You can use Markdown formatting!"
-                  className="min-h-[120px] bg-background resize-none"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                You can use Markdown formatting (links, **bold**, *italic*, etc.)
+                To help keep this space genuine and spam-free, please type "guestbook" below.
+                It's a simple way to confirm you're a real person wanting to share something meaningful!
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -214,7 +365,7 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
         />
 
         <Button type="submit" disabled={isSubmitting} className="w-full">
-          {isSubmitting ? "Submitting..." : "Sign Guestbook"}
+          {isSubmitting ? "Submitting..." : "✩ Sign Guestbook ✩"}
         </Button>
       </form>
     </Form>

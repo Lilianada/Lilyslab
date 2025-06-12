@@ -45,7 +45,7 @@ const sitemapData: SitemapSection[] = [
       { name: "Essays", url: "/garden/writings", description: "My writings and essays" },
       { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
-      { name: "Threads", url: "/garden/threads", description: "Short-form thoughts and musings" }
+      { name: "Threads", url: "/garden/micro-blog", description: "Short-form thoughts and musings" }
     ]
   },
   {
@@ -106,26 +106,30 @@ export default function Sitemap() {
       <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
         <header className="mb-8">
           <h1 className="text-2xl font-medium tracking-tight mb-3">Sitemap</h1>
-          <p className="text-sm text-muted-foreground">
+            <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: June 10, 2025</div>
+          <div>Last updated: June 12, 2025</div>
+        </div>
+        </header>
+
+        <div className="space-y-8">
+          <p className="text-sm">
             This is my website's sitemap, a list of all the pages I have so far and their sections. I have organised my pages this way for the sake of hireachy and ease of navigation. You can use this page to find what you're looking for, or just to explore my website.
             <br />
             <br />
             If you have any questions, feel free to <a href="/ask-me-anything" className="text-extra-steelBlue hover:underline">ask me anything</a> and in the absence of no questions, you can leave me a footprint by signing my <a href="/guestbook" className="text-extra-steelBlue hover:underline">guestbook</a> to let me know that you were here.
           </p>
-        </header>
-
-        <div className="space-y-8">
           {sitemapData.map((section, index) => (
             <div key={index} className="pb-6 last:border-0">
-              <h2 className="font-medium text-extra-steelBlue w-3/4 mb-4 border border-extra-steelBlue/50  rounded-md px-4 py-2">{section.title}</h2>
-              <ul className="ml-8 space-y-2.5">
+              <h2 className="font-medium text-extra-steelBlue w-full mb-4 border border-extra-steelBlue/50  rounded-md px-4 py-2">{section.title}</h2>
+              <ul className="ml-4 space-y-2.5">
                 {section.pages.map((page, pageIndex) => (
                   <li key={pageIndex}>
                     <a 
                       href={page.url}
                       className="text-sm inline-flex items-center hover:underline"
                     >
-                      <span className="mr-3">⇢</span>
+                      <span className="mr-3">❃</span>
                       <span className="font-medium">{page.name}</span>
                     </a>
                     {page.description && (

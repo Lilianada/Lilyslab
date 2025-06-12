@@ -70,7 +70,7 @@ export default function ThreadsPage() {
     setLoading(true);
     
     try {
-      const response = await fetch('/api/threads');
+      const response = await fetch('/api/micro-blog');
       
       if (!response.ok) {
         throw new Error('Failed to fetch threads');
@@ -172,7 +172,7 @@ export default function ThreadsPage() {
     
     // Update the server
     try {
-      const response = await fetch('/api/threads', {
+      const response = await fetch('/api/micro-blog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -298,16 +298,6 @@ export default function ThreadsPage() {
                       </button>
                     </div>
                   </div>
-
-                  {/* Connecting line to timeline */}
-                  {/* <div 
-                    className={`absolute top-6 ${
-                      index % 2 === 0 
-                        ? 'left-0 right-auto border-t-2 border-dashed border-border w-[calc(50%-8px)]' 
-                        : 'right-0 left-auto border-t-2 border-dashed border-border w-[calc(50%-8px)]'
-                    }`}
-                    style={{ top: '1.5rem' }}
-                  ></div> */}
                 </div>
               </motion.div>
             ))}

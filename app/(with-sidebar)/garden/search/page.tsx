@@ -79,7 +79,7 @@ export default function BacklinkSearch() {
       } else if (result.type === 'writing') {
         path = `/garden/writings/${result.slug}`;
       } else if (result.type === 'thread') {
-        path = `/garden/threads/${result.slug}`;
+        path = `/garden/micro-blog/${result.slug}`;
       }
       
       if (path) {
@@ -125,7 +125,7 @@ export default function BacklinkSearch() {
               All Writings
             </Link>
             <Link 
-              href="/garden/threads" 
+              href="/garden/micro-blog" 
               className="px-4 py-2 bg-primary/10 hover:bg-primary/20 rounded-md transition-colors"
             >
               All Threads
@@ -148,7 +148,7 @@ export default function BacklinkSearch() {
                 ? `/garden/notes/${item.slug}`
                 : item.type === 'writing'
                 ? `/garden/writings/${item.slug}`
-                : `/garden/threads/${item.slug}`
+                : `/garden/micro-blog/${item.slug}`
             }
             key={`${item.type}-${item.slug}`}
             className="block p-4 border border-border rounded-md hover:bg-muted/50 transition-colors"

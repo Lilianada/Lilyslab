@@ -129,7 +129,7 @@ export default function Home() {
             content that I have recently planted and still tend to. I even have
             a{" "}
             <Link
-              href="/garden/threads"
+              href="/garden/micro-blog"
               className="text-primary dark:text-codeRed"
             >
               micro-blog

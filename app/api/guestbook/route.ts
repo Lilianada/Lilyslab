@@ -5,13 +5,21 @@ import { z } from 'zod';
 
 // Define schema for guestbook entry validation
 const GuestbookEntrySchema = z.object({
+  id: z.string().optional().or(z.string().length(0).transform(() => '')),
   name: z.string().min(1).max(100).trim(),
   email: z.string().email().optional().or(z.string().length(0).transform(() => undefined)),
   url: z.string().url().optional().or(z.string().length(0).transform(() => undefined)),
   spam_check: z.string().refine(val => val.toLowerCase() === 'guestbook', {
     message: 'Please enter "guestbook" to prove you are human'
   }),
-  message: z.string().min(1).max(1000).trim(),
+  message: z.string().min(1).max(2000).trim(),
+  date: z.string().optional().or(z.string().length(0).transform(() => new Date().toISOString())),
+  // Y2K profile fields
+  intro: z.string().max(150).optional().or(z.string().length(0).transform(() => undefined)),
+  location: z.string().max(50).optional().or(z.string().length(0).transform(() => undefined)),
+  mood: z.string().max(30).optional().or(z.string().length(0).transform(() => undefined)),
+  song: z.string().max(80).optional().or(z.string().length(0).transform(() => undefined)),
+  favorite: z.string().max(50).optional().or(z.string().length(0).transform(() => undefined)),
 });
 
 type GuestbookEntry = z.infer<typeof GuestbookEntrySchema>;
@@ -69,7 +77,13 @@ export async function GET() {
             name: entryData.name || 'Anonymous',
             url: entryData.url || undefined,
             date: entryData.date || new Date().toISOString(),
-            message: message.trim()
+            message: message.trim(),
+            // Include Y2K profile fields if they exist
+            intro: entryData.intro || undefined,
+            location: entryData.location || undefined,
+            mood: entryData.mood || undefined,
+            song: entryData.song || undefined,
+            favorite: entryData.favorite || undefined
           };
         })
     );
@@ -85,10 +99,6 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  if (req.method !== 'POST') {
-    return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
-  }
-  
   try {
     // Parse request body
     const body = await req.json();
@@ -133,6 +143,14 @@ export async function POST(req: Request) {
     if (entryData.email) content += `email: ${entryData.email}\n`;
     if (entryData.url) content += `url: ${entryData.url}\n`;
     content += `date: ${date}\n`;
+    
+    // Add Y2K profile fields to frontmatter if they exist
+    if (entryData.intro) content += `intro: ${entryData.intro}\n`;
+    if (entryData.location) content += `location: ${entryData.location}\n`;
+    if (entryData.mood) content += `mood: ${entryData.mood}\n`;
+    if (entryData.song) content += `song: ${entryData.song}\n`;
+    if (entryData.favorite) content += `favorite: ${entryData.favorite}\n`;
+    
     content += '---\n\n';
     content += entryData.message;
     
@@ -140,6 +158,7 @@ export async function POST(req: Request) {
     const filePath = path.join(entriesDir, fileName);
     await fs.writeFile(filePath, content);
     
+    // Prepare response with all fields for immediate display
     return NextResponse.json({ 
       success: true, 
       message: 'Thank you for signing my guestbook!',
@@ -148,7 +167,13 @@ export async function POST(req: Request) {
         name: entryData.name,
         url: entryData.url,
         date,
-        message: entryData.message
+        message: entryData.message,
+        // Include Y2K profile fields in the response
+        intro: entryData.intro,
+        location: entryData.location,
+        mood: entryData.mood,
+        song: entryData.song,
+        favorite: entryData.favorite
       }
     });
     

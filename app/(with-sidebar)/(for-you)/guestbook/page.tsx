@@ -32,6 +32,54 @@ export default function GuestbookPage() {
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
+  // Guestbook links array
+  const guestbooks = [
+    {
+      name: "Barry Hess's Guestbook",
+      url: "https://guestbook.aaronparecki.com/",
+    },
+    {
+      name: "Manuel Moreale's Guestbook",
+      url: "https://manuelmoreale.com/guestbook",
+    },
+    {
+      name: "Eva's Guestbook",
+      url: "https://eva.town/guestbook",
+    },
+    {
+      name: "Kinduff's Guestbook",
+      url: "https://kinduff.com/guest-book/",
+    },
+    {
+      name: "David Umoru's Guestbook",
+      url: "https://davidumoru.me/guestbook",
+    },
+    {
+      name: "Liz's Guestbook",
+      url: "https://binarydigit.city/guestbook/",
+    },
+    {
+      name: "Riri's Guestbook",
+      url: "https://riri.my/blog.php",
+    },
+    {
+      name: "Vhbelvadi's Guestbook",
+      url: "https://vhbelvadi.com/guestbook",
+    },
+    {
+      name: "Leanrada's Guestbook",
+      url: "https://leanrada.com/guestbook",
+    },
+    {
+      name: "Lina's Guestbook",
+      url: "https://amalinalai.github.io/precipice/guestbook/",
+    },
+    {
+      name: "Eileen's Guestbook",
+      url: "https://eileenramos.com/guestbook/",
+    },
+  ];
+
   // Fetch guestbook entries
   useEffect(() => {
     const fetchEntries = async () => {
@@ -78,17 +126,23 @@ export default function GuestbookPage() {
   };
 
   return (
-    <div className="pb-12 mx-auto w-full max-w-2xl">
-      <div className="space-y-6">
+    <div className="max-w-2xl mx-auto sm:px-4 py-16 ">
+      <header className="mb-8">
+        <h1 className="mb-2 text-xl font-medium">Guestbook</h1>
+        <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: April 10, 2025</div>
+          <div>Last updated: June 12, 2025</div>
+        </div>
+      </header>
+      <div>
         <div>
-          <h1 className="text-xl font-medium tracking-tight mb-4">Guestbook</h1>
-          <p className="text-sm text-muted-foreground mb-2">
+          <p className="text-sm mb-2">
             Welcome, fellow wanderer!
             <br />
             <br />
             Happy to have you in my little, well kept and organised corner of
             the amazing internet. I absolutely love exploring the web and
-            stumbled upon the charming tradition of the Guestbook, it’s like
+            stumbled upon the charming tradition of the Guestbook. It’s like
             leaving a footprint on someone’s digital garden. If you’ve found
             something here that caught your eye, I’d be thrilled if you left me
             a note below. Your words will genuinely brighten my day!
@@ -99,110 +153,29 @@ export default function GuestbookPage() {
             your guestbook too.
             <br />
             <br />
-            Here are some of my favorite guestbooks that I’ve signed:
-            </p>
-            <ul className="list-disc pl-6 text-sm mb-8">
-              <li>
+            Here are some of the guestbooks that I've signed:
+          </p>
+          <ol className="list-none pl-4 text-sm mb-8">
+            {guestbooks.map((guestbook, index) => (
+              <li key={index}>
+                <span className="mr-2">﹡</span>
                 <a
-                  href="https://guestbook.aaronparecki.com/"
+                  href={guestbook.url}
                   className="text-primary hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Barry Hess's Guestbook
+                  {guestbook.name}
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://manuelmoreale.com/guestbook"
-                  className="text-primary hover:underline"
-                >
-                  Manuel Moreale's Guestbook 
-                   <span className="text-xs text-muted-foreground">
-                  {" "}  (a great example of a simple guestbook)
-                  </span>
-                </a>
-              </li>     
-              <li>
-                <a
-                  href="https://eva.town/guestbook"
-                  className="text-primary hover:underline"
-                >
-                  Eva's Guestbook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://kinduff.com/guest-book/"
-                  className="text-primary hover:underline"
-                >
-                  Kinduff's Guestbook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://davidumoru.me/guestbook"
-                  className="text-primary hover:underline"
-                >
-                  David Umoru's Guestbook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://binarydigit.city/guestbook/"
-                  className="text-primary hover:underline"
-                >
-                  Liz's Guestbook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://riri.my/blog.php"
-                  className="text-primary hover:underline"
-                >
-                  Riri's Guestbook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://vhbelvadi.com/guestbook"
-                  className="text-primary hover:underline"
-                >
-                  Vhbelvadi's Guestbook
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://leanrada.com/guestbook"
-                  className="text-primary hover:underline"
-                >
-                  Leanrada's Guestbook
-                  <span className="text-xs  text-muted-foreground"> {" "}Love their site, signed the guestbook too.</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://amalinalai.github.io/precipice/guestbook/"
-                  className="text-primary hover:underline"
-                >
-                  Lina's Guestbook
-                  </a>
-              </li>
-              <li>
-                <a
-                  href="https://eileenramos.com/guestbook/"
-                  className="text-primary hover:underline"
-                >
-                  Eileen's Guestbook
-                  </a>
-              </li>
-              </ul>
+            ))}
+          </ol>
         </div>
 
         <Card className="border border-border bg-card shadow-sm transition-all">
           <CardHeader>
             <CardTitle className="text-lg">Sign the Guestbook</CardTitle>
-            <CardDescription>
-              Leave a message for me and future visitors
-            </CardDescription>
+            <CardDescription>Leave a message for me</CardDescription>
           </CardHeader>
           <CardContent>
             <Suspense

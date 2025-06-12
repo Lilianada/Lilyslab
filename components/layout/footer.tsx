@@ -156,6 +156,10 @@ export function Footer({
           <Link href="/misc" className="text-xs hover:text-zinc-400 underline">
             Misc
           </Link>{" "}
+           <span className="mr-2">•</span>
+          <Link href="/webrings" className="text-xs hover:text-zinc-400 underline">
+            Webrings
+          </Link>{" "}
           <span className="mr-2">•</span>
           <Link href="/guestbook" className="text-xs hover:text-zinc-400 underline">
             Guestbook
