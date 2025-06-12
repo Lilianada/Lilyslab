@@ -3,27 +3,34 @@ createdAt: "2025-04-27"
 lastUpdated: "2025-06-12"
 ---
 
-#### What I'm working on
-I'm currently focused on building a new AI-powered financial tool designed to help users simplify budgeting, automate savings, optimize debt repayment, and make smarter investment decisions using AI-driven financial tools.
+You can find my previous now entries in my [/then](/then) page.
 
-I'm also doing some exploring into using AI powered tools to build and ship web apps fast.
-
-
-#### What I'm learning
-I've been diving deeper into AI and data analysis, particularly focusing on how these technologies can enhance user experiences and boost business success.
+#### ✳︎ What I'm working on
+Currently focused on making [NoteIt-Down](https://notes.lilyslab.xyz/) production ready. This is a simple note taking app built for the web and desktop devices only. I built this app as a way for me to organise my thoughts and findings while surfing the web. Instead of moving browser to app(notion, apple notes or obsidian) I wanted something web based, that's free, offline compatible, very minimal but loaded with features that would help me write better, articulate and organise my thoughts better. This app does it so well to a fault.
 
 
-#### What I'm reading
+#### ✳︎ What I'm learning
+I'm learning to read better, manage my knowledge better and write more.
+
+
+#### ✳︎ What I'm reading
+You won't belive it if I told you... 
+I still haven't completed these three books:
 *   **Atomic Habits** by James Clear — An easy and proven way to build good habits that lasts.
 *   **Ikigai** by Francesc Miralles and Hector Garcia — The Japanese secret to a long and happy life.
 *   **Feel-Good Productivity Book** by Ali Abdaal — The three fundamental energizers that make us feel good and lead to true productivity.
 
+But, I plan on finishing Ikigai this weekend, surely. 
 
-#### Where I'm at
-I'm currently based in Abuja, Nigeria. I plan to travel to Ghana and Tokyo sometime this year.
+I have completed these ones during that time:
+* **Who Moved My Cheese?** by Spencer Johnson - The book is written as a parable about two mice and two "Littlepeople" during their hunt for cheese.
+* **Steal Like an Artist** by Austin Kleon - An inspiring guide to creativity in the digital age.
+
+And I'm now also reading this one:
+* **An Orchestra of Minorities** by Chigozie Obioma - The book is narrated by the chi, or spirit of a young poultry farmer named Chinonso.
 
 
-#### What I'm excited about
-The intersection of AI and creativity is particularly exciting to me right now. I'm fascinated by how these tools can augment human creativity rather than replace it.
+#### ✳︎ What I'm excited about
+Still very much excited about the intersection of AI and creativity. I've been using AI to build whatever I need right now. Take my NoteIt-Down for example, even the website which you are reading this essay on is built with the asistance of AI. I lead and it assists, as it should be.
 
-I'm also excited about the growing focus on digital wellbeing and how we can design technology that enhances our lives without dominating them. 
+Happy about how my focus on achieveing [[digital minimalism]] has been proving fruitful as I am very intentional about it.

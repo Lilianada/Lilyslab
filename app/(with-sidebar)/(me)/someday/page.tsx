@@ -10,6 +10,7 @@ export default function SomedayPage() {
         <div className="flex flex-col text-xs text-muted-foreground font-mono">
           <div>Created: April 10, 2025</div>
           <div>Last updated: June 12, 2025</div>
+          <div>Inspired by: Alexander Sandberg</div>
         </div>
       </header>
 

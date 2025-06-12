@@ -111,7 +111,7 @@ export default function NowPage() {
             <div className="max-w-none text-justify">
               <MarkdownRenderer
                 content={nowData.content}
-                className="[&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h4]:text-[16px] [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mb-4 [&_h4]:text-foreground [&_strong]:text-extra-lavender [&_a]:hover:underline"
+                className="[&_p]:my-0 [&_p]:mb-2 [&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h4]:text-[16px] [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mb-2 [&_h4]:text-foreground [&_a]:text-extra-lavender [&_a]:hover:underline"
                 allowHtml={true}
               />
             </div>

@@ -23,7 +23,7 @@
 
 /* Paragraphs and text */
 .markdown-content p {
-  @apply text-sm my-4 leading-6 text-foreground/90;
+  @apply text-sm my-2 leading-6 text-foreground/90;
 }
 
 .markdown-content blockquote {
@@ -70,11 +70,11 @@
 
 /* Lists styling */
 .markdown-content ul {
-  @apply my-6 ml-6 list-disc text-foreground/90;
+  @apply my-4 ml-4 list-disc text-foreground/90;
 }
 
 .markdown-content ol {
-  @apply my-6 ml-6 list-decimal text-foreground/90;
+  @apply my-4 ml-4 list-decimal text-foreground/90;
 }
 
 .markdown-content li {
