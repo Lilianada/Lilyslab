@@ -78,6 +78,10 @@ export default function GuestbookPage() {
       name: "Eileen's Guestbook",
       url: "https://eileenramos.com/guestbook/",
     },
+    {
+      name: "Meadow's Guestbook",
+      url: "https://meadow.cafe/guestbook/",
+    },
   ];
 
   // Fetch guestbook entries

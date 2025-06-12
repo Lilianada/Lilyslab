@@ -29,26 +29,38 @@ interface GuestbookEntriesProps {
 export default function GuestbookEntries({ entries, isLoading }: GuestbookEntriesProps) {
   const formatDate = (dateString: string) => {
     try {
-      const date = new Date(dateString);
-      return new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "short", 
-        day: "numeric",
-      }).format(date);
+      // Handle YYYY-MM-DD format properly
+      if (dateString && dateString.length >= 10) {
+        // This will work with both YYYY-MM-DD and ISO formats
+        const date = new Date(dateString);
+        if (!isNaN(date.getTime())) {
+          return new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "short", 
+            day: "numeric",
+          }).format(date);
+        }
+      }
+      return "Unknown date";
     } catch (error) {
+      console.error("Error formatting date:", error, dateString);
       return "Unknown date";
     }
   };
   
-  // Generate a simple color based on name for consistent personalization
+  // Generate a color based on name using site's --extra- color palette
   const generateColor = (name: string) => {
     const colors = [
-      "from-pink-200 to-purple-500",
-      "from-blue-200 to-cyan-500", 
-      "from-green-200 to-emerald-500",
-      "from-yellow-200 to-orange-500",
-      "from-indigo-200 to-violet-500",
-      "from-rose-200 to-red-500",
+      "from-[rgba(var(--extra-lavender),0.4)] to-[rgba(var(--extra-lavender),0.8)]", 
+      "from-[rgba(var(--extra-yellow),0.4)] to-[rgba(var(--extra-yellow),0.8)]",
+      "from-[rgba(var(--extra-green),0.4)] to-[rgba(var(--extra-green),0.8)]",
+      "from-[rgba(var(--extra-pink),0.4)] to-[rgba(var(--extra-pink),0.8)]",
+      "from-[rgba(var(--extra-Blue),0.4)] to-[rgba(var(--extra-Blue),0.8)]",
+      "from-[rgba(var(--extra-cream),0.4)] to-[rgba(var(--extra-cream),0.8)]",
+      "from-[rgba(var(--extra-lilac),0.4)] to-[rgba(var(--extra-lilac),0.8)]",
+      "from-[rgba(var(--extra-peach),0.4)] to-[rgba(var(--extra-peach),0.8)]",
+      "from-[rgba(var(--extra-paleYellow),0.4)] to-[rgba(var(--extra-paleYellow),0.8)]",
+      "from-[rgba(var(--extra-steelBlue),0.4)] to-[rgba(var(--extra-steelBlue),0.8)]"
     ];
     
     let hash = 0;
@@ -299,7 +311,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
                       
                       {/* Online Now */}
                       <div className="text-xs text-center mt-1 font-mono">
-                        <span className="inline-block w-2 h-2 rounded-full bg-green-400 mr-1"></span>
+                        <span className="inline-block w-2 h-2 rounded-full bg-[rgba(var(--extra-green),0.8)] mr-1 animate-pulse"></span>
                         online now
                       </div>
                     </div>

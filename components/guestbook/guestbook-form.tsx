@@ -109,12 +109,21 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
+      // Format date to YYYY-MM-DD for consistency
+      const currentDateYMD = new Date().toISOString().split('T')[0]; 
+      
+      // Include the date in the submission
+      const submissionData = {
+        ...values,
+        date: currentDateYMD
+      };
+      
       const response = await fetch("/api/guestbook", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(submissionData),
       });
 
       const result = await response.json();
@@ -125,6 +134,13 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
           description: "Your message has been added to the guestbook.",
         });
         form.reset();
+        
+        // Make sure the entry has consistent format with what the component expects
+        // created_at should be equivalent to date for the onEntryAdded handler
+        if (result.entry && !result.entry.created_at && result.entry.date) {
+          result.entry.created_at = result.entry.date;
+        }
+        
         onEntryAdded(result.entry);
       } else {
         toast({
