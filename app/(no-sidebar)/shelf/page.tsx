@@ -1,197 +1,230 @@
 "use client";
 
-import React from "react";
-import clsx from "clsx";
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Search, BookOpen, BookMarked } from "lucide-react";
 
-// 6 ASCII arts for demonstration (book, tree, cat, coffee, lamp, house)
-const asciiArts = [
-  // Book
-  `
-   _______
-  /      //
- /      //
-/______//
-(______(/
-  `,
-  // Tree
-  `
-   &&& &&  & &&
-  && &\\/&\\|& ()|/ @, &&
-  &\\/(/&/&||/& /_/)_&/_&
-&() &\\/&|()|/&\\/ '%" & ()
-&_\\_&&_\\ |& |&&/&__%_/_& &&
-&&   && & &| &| /& & % ()& /&&
- ()&_---()&\\&\\|&&-&&--%---()~
-     &&     \\|||
-             |||
-             |||
-             |||
-       , -=-~  .-^- _`,
-  // Cat
-  `
- /\\_/\\  
-( o.o ) 
- > ^ < 
-  `,
-  // Coffee
-  `
-   ( (
-    ) )
-  ........
-  |      |]
-  \\      /
-   '----'
-  `,
-  // Lamp
-  `
-    |
-   /|\\
-  /_|_\\
-    |
-   / \\
-  `,
-  // House
-  `
-   /\\
-  /  \\
- /----\\
-[______]
- |    |
- |[]  |
- |    |
-  `
-];
-
-// Example bookshelf data for entries
-const bookshelfEntries = [
-  {
-    month: "January",
-    title: "How to Stay Motivated",
-    genre: "self-help",
-    released: 2021,
-    pages: 223,
-    format: "paperback",
-    status: "finished",
-    ascii: 0,
-  },
-  {
-    month: "February",
-    title: "The Quiet Programmer",
-    genre: "memoir",
-    released: 2023,
-    pages: 188,
-    format: "ebook",
-    status: "finished",
-    ascii: 1,
-  },
-  {
-    month: "March",
-    title: "Gardens of Code",
-    genre: "fiction",
-    released: 2022,
-    pages: 320,
-    format: "paperback",
-    status: "finished",
-    ascii: 2,
-  },
-  {
-    month: "April",
-    title: "Coffee Break Algorithms",
-    genre: "nonfiction",
-    released: 2023,
-    pages: 141,
-    format: "paperback",
-    status: "favorite",
-    ascii: 3,
-  },
-  {
-    month: "May",
-    title: "Lamp Light Reading",
-    genre: "fantasy",
-    released: 2019,
-    pages: 409,
-    format: "paperback",
-    status: "finished",
-    ascii: 4,
-  },
-  {
-    month: "June",
-    title: "Home is a Feeling",
-    genre: "fiction",
-    released: 2024,
-    pages: 251,
-    format: "ebook",
-    status: "favorite",
-    ascii: 5,
-  },
-];
-
-// Status color mapping
-const statusColor: Record<string, string> = {
-  finished: "bg-green-200 text-green-800 border-green-400",
-  favorite: "bg-yellow-200 text-yellow-900 border-yellow-400",
+type Book = {
+  id: string;
+  title: string;
+  author: string;
+  coverUrl: string;
+  rating: number;
+  status: "read" | "reading" | "to-read";
+  reviewUrl?: string;
+  genre?: string[];
 };
 
+// Sample book data - replace with your actual books
+const booksData: Book[] = [
+  {
+    id: "1",
+    title: "Atomic Habits",
+    author: "James Clear",
+    coverUrl: "https://m.media-amazon.com/images/I/51-nXsSRfZL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg",
+    rating: 4.5,
+    status: "read",
+    reviewUrl: "/blog/atomic-habits-review",
+    genre: ["Self-Help", "Productivity"]
+  },
+  {
+    id: "2",
+    title: "Educated",
+    author: "Tara Westover",
+    coverUrl: "https://m.media-amazon.com/images/I/41+aN7ZbS9L._SY344_BO1,204,203,200_.jpg",
+    rating: 5,
+    status: "read",
+    genre: ["Memoir", "Biography"]
+  },
+  {
+    id: "3",
+    title: "Project Hail Mary",
+    author: "Andy Weir",
+    coverUrl: "https://m.media-amazon.com/images/I/81zD9kaVW9L._SY522_.jpg",
+    rating: 4,
+    status: "reading",
+    genre: ["Science Fiction", "Adventure"]
+  },
+  // Add more books as needed
+];
+
 export default function BookshelfPage() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+
+  const genres = Array.from(
+    new Set(booksData.flatMap((book) => book.genre || []))
+  );
+
+  const filteredBooks = booksData.filter((book) => {
+    // Search filter
+    const matchesSearch = 
+      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Genre filter
+    const matchesGenre = !activeFilter || 
+      (book.genre && book.genre.includes(activeFilter));
+    
+    return matchesSearch && matchesGenre;
+  });
+
+  // Group books by status
+  const readingBooks = filteredBooks.filter(book => book.status === "reading");
+  const readBooks = filteredBooks.filter(book => book.status === "read");
+  const toReadBooks = filteredBooks.filter(book => book.status === "to-read");
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100 py-8 flex justify-center items-center">
-      <div className="bg-[#f8f6f6] rounded-xl shadow-xl border-4 border-[#dccfc2] w-full max-w-5xl p-8 flex flex-col">
-        <div className="flex justify-between mb-6">
-          <div className="font-serif text-xl font-bold text-[#6d5d51]">Monthly favorites</div>
-          <div className="font-mono text-md text-[#9e8c7a]">2024</div>
+    <div className="container mx-auto py-8 px-4">
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-2">My Bookshelf</h1>
+          <p className="text-muted-foreground">
+            A collection of books I've read, am reading, or plan to read
+          </p>
         </div>
-        <div className="grid grid-cols-3 gap-6">
-          {bookshelfEntries.map((entry, i) => (
-            <div
-              key={entry.month}
-              className={clsx(
-                "flex flex-col items-center bg-white border-2 border-[#e0d2c2] rounded-lg shadow-sm pb-2 pt-2 px-2 relative overflow-hidden"
-              )}
-              style={{ minHeight: 320 }}
+
+        {/* Search and Filters */}
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+          <div className="relative w-full max-w-xs">
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search books or authors..."
+              className="pl-8"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={activeFilter === null ? "secondary" : "outline"}
+              size="sm"
+              onClick={() => setActiveFilter(null)}
             >
-              {/* Month */}
-              <div className="font-mono text-xs text-[#c0b0a0] mb-1">{entry.month}</div>
-              {/* ASCII Art */}
-              <pre className="w-full flex-1 text-xs font-mono text-[#8d7a63] bg-[#f9f7f4] rounded p-2 mb-2 text-center leading-4 overflow-x-auto" style={{ minHeight: 92 }}>
-                {asciiArts[entry.ascii]}
-              </pre>
-              {/* Title */}
-              <div className="font-semibold text-sm text-center mb-1 text-[#765d47]">{entry.title}</div>
-              {/* Status banner */}
-              <div
-                className={clsx(
-                  "absolute top-3 -right-8 px-6 py-0.5 rotate-45 border text-xs font-mono font-bold shadow",
-                  statusColor[entry.status] || "bg-gray-200 text-gray-700 border-gray-400"
-                )}
+              All
+            </Button>
+            {genres.map((genre) => (
+              <Button
+                key={genre}
+                variant={activeFilter === genre ? "secondary" : "outline"}
+                size="sm"
+                onClick={() => setActiveFilter(genre)}
               >
-                {entry.status.charAt(0).toUpperCase() + entry.status.slice(1)}
-              </div>
-              {/* Details */}
-              <div className="mt-1 grid grid-cols-2 gap-x-2 gap-y-0.5 font-mono text-[0.76rem] text-[#b49c7a]">
-                <div className="col-span-2">
-                  <span className="font-bold text-[#b77b3e]">Genre:</span> {entry.genre}
-                </div>
-                <div>
-                  <span className="font-bold text-[#b77b3e]">Released:</span> {entry.released}
-                </div>
-                <div>
-                  <span className="font-bold text-[#b77b3e]">Pages:</span> {entry.pages}
-                </div>
-                <div className="col-span-2">
-                  <span className="font-bold text-[#b77b3e]">Format:</span> {entry.format}
-                </div>
-              </div>
+                {genre}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Currently Reading Section */}
+        {readingBooks.length > 0 && (
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <BookOpen className="h-5 w-5 text-primary" />
+              <h2 className="text-2xl font-semibold">Currently Reading</h2>
             </div>
-          ))}
-          {/* Fill up 12 months if less entries: empty boxes */}
-          {Array.from({ length: 12 - bookshelfEntries.length }).map((_, i) => (
-            <div
-              key={`empty-${i}`}
-              className="flex flex-col items-center justify-center bg-[#f7f4ef] border-2 border-dashed border-[#e0d2c2] rounded-lg shadow-inner min-h-[320px]"
-            >
-              <div className="font-mono text-xs text-[#e0d2c2]">No entry</div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+              {readingBooks.map((book) => (
+                <BookCard key={book.id} book={book} />
+              ))}
             </div>
-          ))}
+          </section>
+        )}
+
+        {/* Read Books Section */}
+        {readBooks.length > 0 && (
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <BookMarked className="h-5 w-5 text-primary" />
+              <h2 className="text-2xl font-semibold">Books I've Read</h2>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+              {readBooks.map((book) => (
+                <BookCard key={book.id} book={book} />
+              ))}
+            </div>
+          </section>
+        )}
+        
+        {/* To Read Books Section (if you have any in this category) */}
+        {toReadBooks.length > 0 && (
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <BookOpen className="h-5 w-5 text-primary" />
+              <h2 className="text-2xl font-semibold">Want to Read</h2>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+              {toReadBooks.map((book) => (
+                <BookCard key={book.id} book={book} />
+              ))}
+            </div>
+          </section>
+        )}
+        
+        {/* No results message */}
+        {filteredBooks.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">
+              No books found. Try adjusting your search or filters.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function BookCard({ book }: { book: Book }) {
+  // Format the rating to show only one decimal place if needed
+  const formattedRating = book.rating % 1 === 0 
+    ? book.rating.toString() 
+    : book.rating.toFixed(1);
+
+  return (
+    <div className="flex flex-col h-full">
+      {/* Book Cover with Aspect Ratio */}
+      <div className="relative aspect-[2/3] w-full mb-3 group">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-3">
+          {book.reviewUrl ? (
+            <Link href={book.reviewUrl} className="text-white text-sm font-medium hover:underline">
+              Read Review
+            </Link>
+          ) : (
+            <span className="text-white text-sm font-medium">No Review Yet</span>
+          )}
+        </div>
+        <Image
+          src={book.coverUrl}
+          alt={`Cover of ${book.title}`}
+          fill
+          className="object-cover rounded-md shadow-md"
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
+        />
+        
+        {/* Status Badge */}
+        {book.status === "reading" && (
+          <Badge className="absolute top-2 right-2 bg-primary">Reading</Badge>
+        )}
+      </div>
+      
+      {/* Book Details */}
+      <div className="flex-1">
+        <h3 className="font-medium text-sm leading-tight mb-1" title={book.title}>
+          {book.title.length > 25 ? `${book.title.substring(0, 22)}...` : book.title}
+        </h3>
+        <p className="text-xs text-muted-foreground mb-1">
+          {book.author}
+        </p>
+        <div className="flex items-center mt-auto">
+          <div className="text-xs font-semibold bg-primary/10 dark:bg-primary/20 text-primary px-2 py-0.5 rounded">
+            {formattedRating}/5
+          </div>
         </div>
       </div>
     </div>

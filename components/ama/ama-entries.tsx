@@ -44,20 +44,10 @@ export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEn
         <div className="space-y-4">
           {questions.map((q, id) => (
             <div key={id} className="p-4 border rounded-lg space-y-2 animate-in fade-in slide-in-from-bottom-3 duration-300" data-question-id={q.filename}>
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start font-mono">
                 <div className="flex items-center space-x-2">
-                  {q.photoURL ? (
-                    <Image
-                      src={q.photoURL || "/placeholder.svg"}
-                      alt={q.name}
-                      width={32}
-                      height={32}
-                      className="rounded-full"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 rounded-full bg-primary/20"></div>
-                  )}
-                  <h3 className="text-sm font-medium">{q.name}</h3>
+                  
+                  <span className="text-xs font-medium text-extra-peach">{q.name}</span>
                 </div>
                 <span className="text-xs text-muted-foreground">
                   {formatDate(q.date || q.dateSubmitted || "")}
@@ -90,12 +80,12 @@ export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEn
 
               {q.response && q.response.trim() !== "" ? (
                 <div className="mt-2 pt-2 border-t">
-                  <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
-                    <div className="flex items-center mb-1">
-                      <Crown size={12} className="mr-1 text-purple-600 dark:text-purple-400" />
-                      <span className="text-xs font-medium text-purple-600 dark:text-purple-400">Lily's response</span>
+                  <div className="p-3 bg-card rounded-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+                    <div className="flex items-center mb-1 font-mono">
+                      <Crown size={12} className="mr-1 text-extra-peach" />
+                      <span className="text-xs font-medium text-extra-peach">Lily's response</span>
                     </div>
-                    <p className="text-xs">{q.response}</p>
+                    <p className="text-sm">{q.response}</p>
                   </div>
                 </div>
               ) : (

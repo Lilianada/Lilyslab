@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { Footer } from "@/components/layout/footer"
-import { ScrollProgress } from "@/components/ui/scroll-progress"
-import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Footer } from "@/components/layout/footer";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function AboutPage() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoaded(true)
+    setIsLoaded(true);
     // Simulate data loading
     const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
+      setIsLoading(false);
+    }, 1000);
 
-    return () => clearTimeout(timer)
-  }, [])
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -28,10 +28,18 @@ export default function AboutPage() {
         glowColor="rgba(var(--extra-green), 0.6)"
         glowIntensity="12px"
       />
-      <div className={`max-w-2xl w-full mx-auto md:px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+      <div
+        className={`max-w-2xl w-full mx-auto md:px-6 py-12 ${
+          isLoaded ? "animate-fade-in" : "opacity-0"
+        }`}
+      >
         <header className="mb-8">
-          <h1 className="mb-2 text-2xl font-medium">About me</h1>
-          <p className="text-xs text-extra-green">Last updated: May 8, 2025</p>
+          <h1 className="mb-2 text-xl font-medium">About Me</h1>
+          <div className="flex flex-col text-xs text-muted-foreground font-mono">
+            <div>Created: May 8, 2025</div>
+            <div>Last updated: June 12, 2025</div>
+            <div>Inspired by: ✳︎✳︎✳︎</div>
+          </div>
         </header>
 
         {isLoading ? (
@@ -39,7 +47,7 @@ export default function AboutPage() {
             {/* Image skeleton */}
             <div className="w-full h-[450px] bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
             <div className="h-4 w-24 mx-auto bg-gray-200 dark:bg-gray-700 rounded"></div>
-            
+
             {/* Text paragraphs skeletons */}
             <div className="space-y-6 mb-8">
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
@@ -47,7 +55,7 @@ export default function AboutPage() {
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-[95%]"></div>
             </div>
-            
+
             <div className="space-y-6 mb-8">
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-[90%]"></div>
@@ -60,7 +68,7 @@ export default function AboutPage() {
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-[92%]"></div>
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
             </div>
-            
+
             {/* Footer section skeleton */}
             <div className="mt-12 pt-4 border-t border-gray-200 dark:border-gray-700">
               <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-4"></div>
@@ -72,41 +80,130 @@ export default function AboutPage() {
           </div>
         ) : (
           <>
-            <div className="space-y-4 text-justify">
+            <div className="text-justify">
               <figure className="space-y-2 mb-6 w-full">
-                <img src="/images/about2.jpeg" alt="A beautiful arrangement of lilies" className="rounded-lg shadow-md h-[450px] w-full object-cover" />
-                <figcaption className="text-center text-sm text-muted-foreground mt-2">lilies</figcaption>
+                <img
+                  src="/images/about2.jpeg"
+                  alt="A beautiful arrangement of lilies"
+                  className="rounded-lg shadow-md h-[450px] w-full object-cover"
+                />
+                <figcaption className="text-center text-sm text-muted-foreground mt-2">
+                  lilies
+                </figcaption>
               </figure>
-              <p className="mb-3 text-sm opacity-0 leading-normal animate-slide-up">Hi! I’m Lily, a software engineer, digital creator, lifestyle connoisseur, design enthusiast, and lifelong learner. I love exploring creative coding, frontend design, lifestyle content and sharing what I learn with others. This site is my digital home for projects, notes, experiments, and inspiration. </p>
+              
+                <h2 className="text-sm font-semibold tracking-tight text-extra-green">
+                  ✳︎✳︎whoami✳︎✳︎
+                </h2>
+                <p className="mb-3 text-sm opacity-0 leading-normal animate-slide-up pl-2">
+                  ⎯ Lily <br />
+                  ⎯ 24 yrs <br />
+                  ⎯ Female <br />
+                  {/* ⎯ Nigerian <br /> */}
+                  ⎯ Feminist <br />
+                  {/* ⎯ Heterosexual <br /> */}
+                  {/* ⎯ Content creator <br /> */}
+                  ⎯ Fitness athelete <br />
+                  ⎯ Product manager <br />
+                  ⎯ Frontent developer <br />
+                  ⎯ Lifestyle connoisseur <br />
+                  ⎯ This is what I'm doing{" "}
+                  <Link href="/now" className="text-extra-green underline">
+                    Now{" "}
+                  </Link>{" "}
+                  <br />
+                  ⎯ This is what I hope to do{" "}
+                  <Link href="/someday" className="text-extra-green underline">
+                    Someday{" "}
+                  </Link>{" "}
+                  <br />
+                  ⎯ My not so detailed career/job{" "}
+                  <Link href="/bucket-list" className="text-extra-green underline">
+                    bucket list{" "}
+                  </Link>{" "}
+                  <br />
+                  ⎯ I love to code, go to the gym, read and{" "}
+                  <Link href="/garden/writings" className="text-extra-green underline">
+                    write
+                  </Link>{" "}
+                  <br />
+                  ⎯ I like to collect things digitally so check my{" "}
+                  <Link href="/bookmarks" className="text-extra-green underline">
+                    bookmarks{" "}
+                  </Link>{" "}
+                  <br />
+                </p>
 
-              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                By day, I build and manage digital products — blending a background in software engineering with product thinking to turn creative ideas into real, user-focused solutions.
-              </p>
-              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                By night (and most weekends), this space becomes my lab for experimenting with new tools, exploring AI, and bringing dream projects to life one pixel at a time.
-              </p>
+              <div className="space-y-3">
+                <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                  I love exploring creative coding, frontend design, lifestyle
+                  content and sharing what I learn with others. This site is my
+                  digital home for projects, notes, experiments, and
+                  inspiration.
+                </p>
+                <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                  By day, I build and manage digital products — blending a
+                  background in software engineering with product thinking to
+                  turn creative ideas into real, user-focused solutions.
+                </p>
+                <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                  By night (and most weekends), this space becomes my lab for
+                  experimenting with new tools, exploring AI, and bringing dream
+                  projects to life one pixel at a time.
+                </p>
 
-              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                My goal with this site to show how much you can achieve with AI at the intersection of creativity and innovation. We should all strive to work smarter not harder. You don’t have to learn a new skill each time you want to accomplish something. Steal an idea, refine it, tweak it until it becomes new, until it becomes yours. {" "}
-              </p>
+                <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                  My goal with this site to show how much you can achieve with
+                  AI at the intersection of creativity and innovation. We should
+                  all strive to work smarter not harder.
+                </p>
+              </div>
 
-              <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                <span className="font-semibold text-extra-green">Status: </span> Actively looking
-                <br />
-                Having taken some time off to recharge and explore, I am looking to get back into it.
 
-                If you are looking for someone whose mission is to demonstrate the vast potential of AI when it’s used as a partner in the creative process, I am always open to chat and make connections, so please do not hesitate to reach out!
-              </p>
+              <div className="mt-4">
+                <h2 className="text-sm font-semibold tracking-tight text-extra-green">
+                  ✳︎✳︎my matra:✳︎✳︎
+                  </h2>
+                <p className="mb-3 text-sm leading-normal opacity-0 animate-slide-up">
+                  You don’t have to learn a new skill each time you want to accomplish something. Steal an idea, refine it, tweak it until it becomes new, until it becomes yours.
+                </p>
+            </div>
+
+              <div className="mt-4">
+                <h2 className="text-sm font-semibold tracking-tight text-extra-green">
+                  ✳︎✳︎what's next✳︎✳︎
+                  </h2>
+                <p className="mb-3 text-sm leading-normal opacity-0 animate-slide-up">
+                  Having taken some time off to recharge and explore, I am looking
+                  to get back into it. If you are looking for someone whose
+                  mission is to demonstrate the vast potential of AI when it’s
+                  used as a partner in the creative process, I am always open to
+                  chat and make connections, so please do not hesitate to reach
+                  out!
+                </p>
+            </div>
             </div>
             <div className=" mt-6 mb-3">
-              <h2 className="text-base font-semibold tracking-tight text-foreground">Time to explore 😃</h2>
-              <p className="text-sm leading-normal mb-6">While you're here, be sure to explore all the amazing corners of this space. I suggest you check what I'm currently up to in my <a href="/now" className="text-extra-green">Now</a> page and also what I will most likely be doing <a href="/someday" className="text-extra-green">Someday</a>.</p>
-
+              <h2 className="text-sm font-semibold tracking-tight text-extra-green">
+                  ✳︎✳︎time to explore✳︎✳︎
+              </h2>
+             
               <p className="text-sm leading-normal mb-6">
-                Other interesting pages that I have put together for you are all listed on the sidebar, be sure to scroll to the bottom in order not to miss anything. And if you have any questions for me, you can either email me or use the <a href="/ask-me-anything" className="text-extra-green">Ask Me Anything (AMA)</a> page and most importantly I'd love if you leave me a note in my <a href="/guestbook" className="text-extra-green">Guestbook</a> so I know you stopped by.
+                Other interesting pages that I have put together for you are all
+                listed on the  <Link href="/sitemap" className="text-extra-green underline">
+                    sitemap
+                  </Link>{" "}, be sure to scroll to the bottom in order
+                not to miss anything.  And if you have any questions for me, you can either email me or use the{" "}
+                <Link href="/ask-me-anything" className="text-extra-green underline">
+                  Ask Me Anything (AMA)
+                </Link>{" "}
+                page and most importantly I'd love if you leave me a note in my{" "}
+                <a href="/guestbook" className="text-extra-green underline">
+                  Guestbook
+                </a>{" "}
+                so I know you stopped by.
               </p>
             </div>
-
 
             <Footer
               inspirationName="Nicole"
@@ -114,8 +211,7 @@ export default function AboutPage() {
               color="text-extra-green"
             />
           </>
-        )
-        }
+        )}
       </div>
     </>
   );
