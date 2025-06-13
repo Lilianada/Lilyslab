@@ -3,7 +3,6 @@ publish: true
 title: Obsidian Setup
 url: 'https://obsidian-bloger.pages.dev/git-setup-for-obsidian/'
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - productivity
   - note-taking
@@ -17,7 +16,6 @@ publish: true
 title: The Job Trifectra
 url: https://www.mathurah.com/thoughts/job-trifecta
 createdAt: 2025-04-29
-lastUpdated: 2025-04-29
 tags:
   - career
   - personal-development
@@ -30,7 +28,6 @@ publish: true
 title: Digital Gardening
 url: https://timrodenbroeker.de/digital-garden/
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - digital-garden
   - knowledge-management
@@ -43,7 +40,6 @@ publish: true
 title: Digital Garden History
 url: https://maggieappleton.com/garden-history/
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - digital-garden
   - web-history
@@ -56,7 +52,6 @@ publish: true
 title: About Nicole van der Hoevan
 url: https://nicolevanderhoeven.com/about/
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - digital-garden
   - personal-websites
@@ -69,7 +64,6 @@ publish: true
 title: Prioritize your project ideas
 url: https://thecreativeindependent.com/tips/tips-for-how-to-prioritize-your-project-ideas/
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - productivity
   - creativity
@@ -82,7 +76,6 @@ publish: true
 title: Putting your work out there
 url: https://thecreativeindependent.com/approaches/theme-putting-your-work-out-there/
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - creativity
   - self-expression
@@ -95,7 +88,6 @@ publish: true
 title: Building a personal archiving practice
 url: https://theanchoressarchives.substack.com/p/building-a-personal-archiving-practice
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - pkm
   - organization
@@ -108,7 +100,6 @@ publish: true
 title: How to tell the story of your creative work
 url: https://thecreativeindependent.com/guides/how-to-tell-the-story-of-your-creative-work/
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - creativity
   - storytelling
@@ -121,7 +112,6 @@ publish: true
 title: How to establish a daily writing practice
 url: https://thecreativeindependent.com/tips/how-to-establish-a-daily-writing-practice/
 createdAt: 2025-04-30
-lastUpdated: 2025-04-30
 tags:
   - writing
   - habits
@@ -134,7 +124,6 @@ publish: true
 title: "The \"Someday page\""
 url: https://someday.page/
 createdAt: 2025-05-02
-lastUpdated: 2025-05-02
 tags:
   - writing
   - personal-development
@@ -147,7 +136,6 @@ publish: true
 title: Creativity Faucet
 url: https://www.julian.com/blog/creativity-faucet
 createdAt: 2025-05-03
-lastUpdated: 2025-05-03
 tags:
   - creativity
   - productivity
@@ -160,7 +148,6 @@ publish: true
 title: Startup Guide
 url: https://www.julian.com/guide/startup/intro
 createdAt: 2025-05-03
-lastUpdated: 2025-05-03
 tags:
   - career
   - business
@@ -173,7 +160,6 @@ publish: true
 title: Storytelling
 url: https://www.julian.com/blog/storytelling
 createdAt: 2025-05-03
-lastUpdated: 2025-05-03
 tags:
   - storytelling
   - writing
@@ -186,7 +172,6 @@ publish: true
 title: First Draft
 url: https://www.julian.com/guide/write/first-draft
 createdAt: 2025-05-04
-lastUpdated: 2025-05-04
 tags:
   - writing
   - guides
@@ -199,7 +184,6 @@ publish: true
 title: "My blog is a digital garden, not a blog"
 url: https://joelhooks.com/digital-garden
 createdAt: 2025-05-04
-lastUpdated: 2025-05-04
 tags:
   - digital-garden
   - blogging
@@ -212,7 +196,6 @@ publish: true
 title: The Slow Web
 url: https://www.jackcheng.com/the-slow-web/
 createdAt: 2025-06-06
-lastUpdated: 2025-06-06
 tags:
   - web-culture
   - digital-wellbeing
@@ -225,7 +208,6 @@ publish: true
 title: "Emily's Website Manifesto"
 url: https://fromemily.com/website-manifesto/
 createdAt: 2025-06-07
-lastUpdated: 2025-06-07
 tags:
   - personal-websites
   - manifesto
@@ -238,7 +220,6 @@ publish: true
 title: Postroll
 url: https://notes.jeddacp.com/postroll/
 createdAt: 2025-05-21
-lastUpdated: 2025-05-21
 tags:
   - digital-garden
 type: article
@@ -250,7 +231,6 @@ publish: true
 title: Bear blog challenge
 url: https://blog.avas.space/bear-blog-challenge/
 createdAt: 2025-05-27
-lastUpdated: 2025-05-27
 tags:
   - blogging
   - minimalism
@@ -263,7 +243,6 @@ publish: true
 title: Technology is not an end itself
 url: https://aramzs.xyz/microblogs/technology-is-not-an-end-in-itself/
 createdAt: 2025-05-18
-lastUpdated: 2025-05-18
 tags:
   - technology
   - ethics
@@ -276,7 +255,6 @@ publish: true
 title: Exercise page
 url: https://boffosocko.com/kind/exercise/
 createdAt: 2025-05-21
-lastUpdated: 2025-05-21
 tags:
   - health
   - habits
@@ -289,7 +267,6 @@ publish: true
 title: Damn Phone
 url: https://blog.avas.space/damn-phone/
 createdAt: 2025-05-27
-lastUpdated: 2025-05-27
 tags:
   - digital-wellbeing
   - technology
@@ -303,7 +280,6 @@ publish: true
 title: Three Strikes Rule for Blogging
 url: https://www.swyx.io/three-strikes
 createdAt: 2025-05-28
-lastUpdated: 2025-05-28
 tags:
   - writing
   - blogging
@@ -317,7 +293,6 @@ publish: true
 title: Tending to my Digital Garden
 url: https://shkspr.mobi/blog/2024/10/tending-to-my-digital-garden/
 createdAt: 2025-05-26
-lastUpdated: 2025-05-26
 tags:
   - digital-garden
   - knowledge-management
@@ -330,7 +305,6 @@ publish: true
 title: Internet is fun
 url: https://kwon.nyc/notes/internet-is-fun/
 createdAt: 2025-05-19
-lastUpdated: 2025-05-19
 tags:
   - web-culture
   - creativity
@@ -343,7 +317,6 @@ publish: true
 title: Blog Questions Challenge
 url: https://kwon.nyc/notes/blog-questions-challenge/
 createdAt: 2025-05-31
-lastUpdated: 2025-05-31
 tags:
   - blogging
   - reflection
@@ -356,7 +329,6 @@ publish: true
 title: "Things I don't have to do"
 url: https://kwon.nyc/notes/things-i-dont-have-to-do/
 createdAt: 2025-05-17
-lastUpdated: 2025-05-17
 tags:
   - personal-boundaries
   - mindfulness
@@ -369,7 +341,6 @@ publish: true
 title: Social Media Dependency
 url: https://blog.avas.space/social-media-dependency/
 createdAt: 2025-05-28
-lastUpdated: 2025-05-28
 tags:
   - social-media
   - digital-wellbeing
@@ -382,7 +353,6 @@ publish: true
 title: No Trust
 url: https://blog.avas.space/no-trust/
 createdAt: 2025-05-28
-lastUpdated: 2025-05-28
 tags:
   - privacy
   - web-culture
@@ -395,7 +365,6 @@ publish: true
 title: Gardens and Streams
 url: https://tracydurnell.com/2021/09/26/gardens-and-streams-ii/
 createdAt: 2025-05-24
-lastUpdated: 2025-05-24
 tags:
   - digital-garden
   - web-theory
@@ -408,7 +377,6 @@ publish: true
 title: Websites as Gardens of the Internet Ecosystem
 url: https://tracydurnell.com/2024/03/04/websites-as-gardens-of-the-internet-ecosystem/
 createdAt: 2025-05-25
-lastUpdated: 2025-05-25
 tags:
   - web-design
   - digital-garden
@@ -421,7 +389,6 @@ publish: true
 title: "Digital Garden & Zettelkasten"
 url: https://barnsworthburning.net/spaces/recNaicyEYDX4yie6
 createdAt: 2025-05-27
-lastUpdated: 2025-05-27
 tags:
   - digital-garden
   - zettelkasten
@@ -435,7 +402,6 @@ publish: true
 title: Digital Walled Gardens
 url: https://manuelmoreale.com/digital-walled-gardens
 createdAt: 2025-05-22
-lastUpdated: 2025-05-22
 tags:
   - digital-garden
   - privacy
@@ -449,7 +415,6 @@ publish: true
 title: New Weekly Review Format
 url: https://writingatlarge.com/2025/01/29/my-new-weekly-review-format/
 createdAt: 2025-05-27
-lastUpdated: 2025-05-27
 tags:
   - productivity
   - reflection
@@ -463,7 +428,6 @@ publish: true
 title: Zettelkasten provides a space for deep contextual and nuanced thinking
 url: https://wesleyfinck.org/zettelkasten-provides-a-space-for-deep-contextual-and-nuanced-thinking
 createdAt: 2025-05-22
-lastUpdated: 2025-05-22
 tags:
   - zettelkasten
   - thinking
@@ -477,7 +441,6 @@ publish: true
 title: "Tracy Durnell's links to blog about"
 url: https://tracydurnell.com/mind-garden/links-to-blog-about/
 createdAt: 2025-05-27
-lastUpdated: 2025-05-27
 tags:
   - curation
   - blogging
@@ -490,7 +453,6 @@ publish: true
 title: How to create a personal wiki
 url: https://wiki.garysheng.com/docs/guides/writing/howwiki
 createdAt: 2025-05-29
-lastUpdated: 2025-05-29
 tags:
   - pkm
   - knowledge-management
@@ -504,7 +466,6 @@ publish: true
 title: Why you should create a personal wiki
 url: https://wiki.garysheng.com/docs/guides/writing/whywiki
 createdAt: 2025-05-18
-lastUpdated: 2025-05-18
 tags:
   - pkm
   - knowledge-management
@@ -518,7 +479,6 @@ publish: true
 title: Notes on Digital Gardens and Zettelkasten
 url: https://nick.groenen.me/notes/digital-gardens/
 createdAt: 2025-05-21
-lastUpdated: 2025-05-21
 tags:
   - digital-garden
   - zettelkasten
@@ -532,7 +492,6 @@ publish: true
 title: Building a digital garden
 url: https://tomcritchlow.com/2019/02/17/building-digital-garden/
 createdAt: 2025-05-22
-lastUpdated: 2025-05-22
 tags:
   - digital-garden
   - web-design
@@ -546,7 +505,6 @@ publish: true
 title: Reflections on Digital Gardening
 url: https://strikingloo.github.io/reflections-digital-gardening
 createdAt: 2025-05-18
-lastUpdated: 2025-05-18
 tags:
   - digital-garden
   - blogging
@@ -560,7 +518,6 @@ publish: true
 title: How to grow your digital garden with subdomains
 url: https://www.alanwsmith.com/en/28/da/ka/rf/
 createdAt: 2025-05-30
-lastUpdated: 2025-05-30
 tags:
   - digital-garden
   - web-development
@@ -573,7 +530,6 @@ publish: true
 title: Personal Knowledge Management (PKM)
 url: https://www.ssp.sh/brain/personal-knowledge-management-pkm
 createdAt: 2025-05-18
-lastUpdated: 2025-05-18
 tags:
   - pkm
   - organization
@@ -587,7 +543,6 @@ publish: true
 title: Smart Note Taking
 url: https://www.ssp.sh/brain/smart-note-taking
 createdAt: 2025-05-31
-lastUpdated: 2025-05-31
 tags:
   - note-taking
   - productivity
@@ -601,7 +556,6 @@ publish: true
 title: On the Athletic Club
 url: https://wibtal.com/69
 createdAt: 2025-05-31
-lastUpdated: 2025-05-31
 tags:
   - fitness
   - community
@@ -615,7 +569,6 @@ publish: true
 title: Relationship plants
 url: https://wibtal.com/67
 createdAt: 2025-06-01
-lastUpdated: 2025-06-01
 tags:
   - relationships
   - personal-development
@@ -628,7 +581,6 @@ publish: true
 title: "I don't want to be a monk"
 url: https://wibtal.com/66
 createdAt: 2025-05-25
-lastUpdated: 2025-05-25
 tags:
   - lifestyle
   - philosophy
@@ -642,7 +594,6 @@ publish: true
 title: Incentives Rule Everything Inside Me
 url: https://wibtal.com/64
 createdAt: 2025-05-30
-lastUpdated: 2025-05-30
 tags:
   - motivation
   - psychology
@@ -656,7 +607,6 @@ publish: true
 title: You should write
 url: https://wibtal.com/63
 createdAt: 2025-05-29
-lastUpdated: 2025-05-29
 tags:
   - writing
   - self-expression
@@ -669,7 +619,6 @@ publish: true
 title: My Writing Process
 url: https://wibtal.com/53
 createdAt: 2025-06-05
-lastUpdated: 2025-06-05
 tags:
   - writing
   - guides
@@ -683,7 +632,6 @@ publish: true
 title: "Don't Lose Sight of the Goal"
 url: https://wibtal.com/50
 createdAt: 2025-06-02
-lastUpdated: 2025-06-02
 tags:
   - focus
   - productivity
@@ -697,7 +645,6 @@ publish: true
 title: Why have a blog
 url: https://guzey.com/personal/why-have-a-blog/
 createdAt: 2025-05-26
-lastUpdated: 2025-05-26
 tags:
   - blogging
   - writing
@@ -711,7 +658,6 @@ publish: true
 title: Why and how to write on the internet
 url: https://www.benkuhn.net/writing/
 createdAt: 2025-06-05
-lastUpdated: 2025-06-05
 tags:
   - writing
   - web-culture
@@ -725,7 +671,6 @@ publish: true
 title: Make the internet fun again
 url: https://www.arca.so/make-the-internet-fun-again
 createdAt: 2025-06-01
-lastUpdated: 2025-06-01
 tags:
   - web-culture
   - creativity
@@ -738,7 +683,6 @@ publish: true
 title: Write simply
 url: https://www.paulgraham.com/simply.html
 createdAt: 2025-06-02
-lastUpdated: 2025-06-02
 tags:
   - writing
   - clarity
@@ -752,7 +696,6 @@ publish: true
 title: Putting ideas into words
 url: https://www.paulgraham.com/words.html
 createdAt: 2025-05-29
-lastUpdated: 2025-05-29
 tags:
   - writing
   - thinking
@@ -765,7 +708,6 @@ publish: true
 title: Write faster
 url: https://sashachapin.substack.com/p/write-faster-130
 createdAt: 2025-05-19
-lastUpdated: 2025-05-19
 tags:
   - writing
   - productivity
@@ -779,7 +721,6 @@ publish: true
 title: Make the Internet fun again
 url: https://www.notboring.co/p/make-the-internet-fun-again
 createdAt: 2025-05-24
-lastUpdated: 2025-05-24
 tags:
   - web-culture
   - creativity
@@ -792,7 +733,6 @@ publish: true
 title: "Maggie Appleton's Digital Garden Directory"
 url: https://maggieappleton.com/garden-directory
 createdAt: 2025-05-21
-lastUpdated: 2025-05-21
 tags:
   - digital-garden
   - resources
@@ -805,7 +745,6 @@ publish: true
 title: "Maggie Appleton's Digital Garden on Tools for Thought"
 url: https://maggieappleton.com/tools-for-thought
 createdAt: 2025-06-03
-lastUpdated: 2025-06-03
 tags:
   - tools-for-thought
   - thinking
@@ -819,7 +758,6 @@ publish: true
 title: "Maggie Appleton's Digital Garden on Digital Gardening"
 url: https://maggieappleton.com/digital-gardening
 createdAt: 2025-06-01
-lastUpdated: 2025-06-01
 tags:
   - digital-garden
   - methodology
@@ -832,7 +770,6 @@ publish: true
 title: "Maggie Appleton's Digital Garden on Evergreen Notes"
 url: https://maggieappleton.com/evergreen-notes
 createdAt: 2025-05-20
-lastUpdated: 2025-05-20
 tags:
   - note-taking
   - knowledge-management
@@ -845,7 +782,6 @@ publish: true
 title: "Michael Ashcroft's Notes"
 url: https://michaelashcroft.org/notes
 createdAt: 2025-05-17
-lastUpdated: 2025-05-17
 tags:
   - note-taking
   - digital-garden
@@ -858,7 +794,6 @@ publish: true
 title: "Maggie Appleton's Digital Garden on Digital Gardens"
 url: https://maggieappleton.com/digital-gardens
 createdAt: 2025-06-01
-lastUpdated: 2025-06-01
 tags:
   - digital-garden
   - web-history
@@ -871,7 +806,6 @@ publish: true
 title: "Maggie Appleton's Digital Garden on Bi-Directional Links"
 url: https://maggieappleton.com/bi-directional-links
 createdAt: 2025-05-22
-lastUpdated: 2025-05-22
 tags:
   - note-taking
   - hypertext
@@ -885,7 +819,6 @@ publish: true
 title: Make the web fun again
 url: https://blog.neocities.org/blog/2013/05/28/making-the-web-fun-again
 createdAt: 2025-05-24
-lastUpdated: 2025-05-24
 tags:
   - web-culture
   - personal-websites
@@ -899,7 +832,6 @@ publish: true
 title: "Cultivating a Simpler, Thoughtful Web"
 url: https://glasp.co/hatch/kazuki/p/Y012vhekgBkzKmd5Jb99
 createdAt: 2025-06-05
-lastUpdated: 2025-06-05
 tags:
   - digital-minimalism
   - web-design
@@ -913,7 +845,6 @@ publish: true
 title: Why you should have a website
 url: https://rscottjones.com/why-you-should-have-a-website/
 createdAt: 2025-05-26
-lastUpdated: 2025-05-26
 tags:
   - personal-websites
   - web-presence
@@ -926,7 +857,6 @@ publish: true
 title: On walking
 url: https://marblethoughts.bearblog.dev/on-walking/
 createdAt: 2025-06-03
-lastUpdated: 2025-06-03
 tags:
   - walking
   - mindfulness
@@ -940,7 +870,6 @@ publish: true
 title: Every site needs a Links Page / Why linking matters
 url: https://thoughts.melonking.net/thoughts/every-site-needs-a-links-page-why-linking-matters
 createdAt: 2025-05-21
-lastUpdated: 2025-05-21
 tags:
   - web-design
   - community
@@ -953,7 +882,6 @@ publish: true
 title: A system to organise your life
 url: https://johnnydecimal.com/10-19-concepts/11-core/11.01-introduction/
 createdAt: 2025-05-17
-lastUpdated: 2025-05-17
 tags:
   - organization
   - systems
@@ -967,7 +895,6 @@ publish: true
 title: Keeping notes
 url: https://johnnydecimal.com/10-19-concepts/11-core/11.07-keeping-notes/
 createdAt: 2025-05-28
-lastUpdated: 2025-05-28
 tags:
   - note-taking
   - organization
@@ -980,7 +907,6 @@ publish: true
 title: Feedbackless feed
 url: https://fromemily.com/feedbackless-feed/
 createdAt: 2025-05-17
-lastUpdated: 2025-05-17
 tags:
   - digital-wellbeing
   - interface-design
@@ -993,7 +919,6 @@ publish: true
 title: Blogging Has Just Changed Forever and No One Is Talking About It
 url: https://www.bramadams.dev/202306052325/
 createdAt: 2025-05-27
-lastUpdated: 2025-05-27
 tags:
   - blogging
   - technology
@@ -1007,7 +932,6 @@ publish: true
 title: Writing is thinking
 url: https://iamfran.com/blog/writing-is-thinking/
 createdAt: 2025-05-21
-lastUpdated: 2025-05-21
 tags:
   - writing
   - thinking
@@ -1020,7 +944,6 @@ publish: true
 title: Keep it simple stupid
 url: https://techcrunch.com/2009/04/28/keep-it-simple-stupid/
 createdAt: 2025-05-31
-lastUpdated: 2025-05-31
 tags:
   - simplicity
   - design
@@ -1033,7 +956,6 @@ publish: true
 title: Every website is an essay
 url: https://css-tricks.com/every-website-is-an-essay/
 createdAt: 2025-06-01
-lastUpdated: 2025-06-01
 tags:
   - web-design
   - writing
@@ -1046,7 +968,6 @@ publish: true
 title: A gardening guide for your mind
 url: https://www.mentalnodes.com/a-gardening-guide-for-your-mind
 createdAt: 2025-05-25
-lastUpdated: 2025-05-25
 tags:
   - mindfulness
   - knowledge-management
@@ -1060,7 +981,6 @@ publish: true
 title: Threaded thinking instead of linear thinking
 url: https://www.mentalnodes.com/threaded-thinking-instead-of-linear-thinking
 createdAt: 2025-06-05
-lastUpdated: 2025-06-05
 tags:
   - thinking
   - cognition
@@ -1074,7 +994,6 @@ publish: true
 title: Putting all your eggs in one basket
 url: https://kevquirk.com/blog/putting-your-eggs-in-one-basket
 createdAt: 2025-05-28
-lastUpdated: 2025-05-28
 tags:
   - digital-independence
   - risk-management
@@ -1087,7 +1006,6 @@ publish: true
 title: When you love something made by a terrible person
 url: https://anniemueller.com/posts/when-you-love-something-made-by-a-terrible-person
 createdAt: 2025-05-21
-lastUpdated: 2025-05-21
 tags:
   - ethics
   - consumerism
@@ -1101,7 +1019,6 @@ publish: true
 title: Please please please please please please share your big dumb beautiful self with the world
 url: https://gkeenan.co/avgb/please-please-please-please-please-please-share-your-big-dumb-beautiful-self-with-the-world/
 createdAt: 2025-05-18
-lastUpdated: 2025-05-18
 tags:
   - self-expression
   - creativity
@@ -1115,7 +1032,6 @@ publish: true
 title: The shitification of social media
 url: https://dospuntostr.es/post/social-media/
 createdAt: 2025-05-23
-lastUpdated: 2025-05-23
 tags:
   - social-media
   - digital-culture
@@ -1129,7 +1045,6 @@ publish: true
 title: "Why Blog?"
 url: https://www.visruth.com/blog/first/
 createdAt: 2025-05-28
-lastUpdated: 2025-05-28
 tags:
   - blogging
   - self-expression
@@ -1143,7 +1058,6 @@ publish: true
 title: Creation and Consumption
 url: https://proseandconst.xyz/blog/creation-consumption/
 createdAt: 2025-05-27
-lastUpdated: 2025-05-27
 tags:
   - creativity
   - consumption
@@ -1157,7 +1071,6 @@ publish: true
 title: Internet Manifesto
 url: https://goblin-heart.net/sadgrl/cyberspace/internet-manifesto
 createdAt: 2025-05-22
-lastUpdated: 2025-05-22
 tags:
   - digital-freedom
   - manifesto
@@ -1170,7 +1083,6 @@ id: article-089
 title: When AI Sells You What You Want
 URL: https://kinduff.com/2025/05/28/when-ai-sells-you-what-you-want/
 createdAt: 2025-06-08
-lastUpdated: 2025-06-08
 tags:
   - ai
   - technology
@@ -1184,7 +1096,6 @@ id: article-090
 title: I'm a Fucking Webmaster
 URL: https://justinjackson.ca/webmaster/
 createdAt: 2025-06-08
-lastUpdated: 2025-06-08
 tags:
   - web-culture
   - personal-websites
@@ -1198,7 +1109,6 @@ id: article-091
 title: Every site needs a Links Page / Why linking matters
 URL: https://thoughts.melonking.net/thoughts/every-site-needs-a-links-page-why-linking-matters
 createdAt: 2025-06-02
-lastUpdated: 2025-06-02
 tags:
   - web-design
   - linking
@@ -1212,7 +1122,6 @@ id: article-092
 title: Digital Minimalism
 URL: https://davesmyth.com/digital-minimalism
 createdAt: 2025-06-09
-lastUpdated: 2025-06-09
 tags:
   - digital-minimalism
   - digital-wellbeing
@@ -1226,7 +1135,6 @@ id: article-093
 title: Retain Everything You Read
 URL: https://fs.blog/reading/
 createdAt: 2025-06-11
-lastUpdated: 2025-06-11
 tags:
   - reading
 type: article
@@ -1238,7 +1146,6 @@ id: article-094
 title: Blank Sheet
 URL: https://fs.blog/blank-sheet/
 createdAt: 2025-06-11
-lastUpdated: 2025-06-11
 tags:
   - reading
   - writing
