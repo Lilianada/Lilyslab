@@ -26,6 +26,7 @@ const sitemapData: SitemapSection[] = [
     pages: [
       { name: "About", url: "/about", description: "About me" },
       { name: "Now", url: "/now", description: "What I'm doing now" },
+      { name: "Then", url: "/then", description: "Archive of previous Now pages" },
       { name: "Someday", url: "/someday", description: "Things I plan to do someday" },
       { name: "Bucket List", url: "/bucket-list", description: "My career bucket list" }
     ]
@@ -45,7 +46,8 @@ const sitemapData: SitemapSection[] = [
       { name: "Essays", url: "/garden/writings", description: "My writings and essays" },
       { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
-      { name: "Threads", url: "/garden/micro-blog", description: "Short-form thoughts and musings" }
+      { name: "Threads", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },
+      { name: "Archives", url: "/garden/archives", description: "Archive of previous writings and notes" }
     ]
   },
   {
@@ -77,7 +79,8 @@ const sitemapData: SitemapSection[] = [
     pages: [
       { name: "Manifesto", url: "/manifesto", description: "My IndieWeb principles" },
       { name: "Webroll", url: "/webroll", description: "People who I love their website" },
-      { name: "Webrings", url: "/webrings", description: "Webrings I'm part of" }
+      { name: "Webrings", url: "/webrings", description: "Webrings I'm part of" },
+      { name: "Then", url: "/then", description: "Archive of previous Now pages" }
     ]
   },
   {

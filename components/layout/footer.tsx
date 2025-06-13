@@ -176,6 +176,9 @@ export function Footer({
           <Link href="/changelog" className="text-xs hover:text-zinc-400 underline">
             Changelog
           </Link>
+          <div className="mt-2 text-xs">
+            {lastEdited && `Last updated on ${lastEdited}`}
+          </div>
           <div className="mt-2 flex justify-center space-x-4">
             <a href="/feed.xml" className="hover:text-zinc-400">
               <Rss className="h-3 w-3 inline-block" />   
@@ -209,9 +212,6 @@ export function Footer({
               className="hover:text-zinc-400">
               <Twitter className="h-3 w-3 inline-block" />
             </a>
-          </div>
-          <div className="mt-2 text-xs">
-            {lastEdited && `Last updated on ${lastEdited}`}
           </div>
           <span>
             <Flower className="inline-block h-3 w-3 text-primary" />
