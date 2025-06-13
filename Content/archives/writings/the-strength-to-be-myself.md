@@ -1,7 +1,4 @@
 ---
-author: Lilian
-cover:
-  - '[[Building_Bloques_Creative_Studio_(21).png]]'
 excerpt: >-
   Why I decided to grow stronger instead of smaller when the comments started
   coming.
@@ -11,9 +8,8 @@ tags:
   - Fitness
   - Personal-Growth
 title: The Strength to Be Myself
-readingTime: 3
-wordCount: 545
 createdAt: 2025-04-20
+lastUpdated:
 type: evergreen
 ---
 
@@ -63,7 +59,7 @@ you’re now seeing progress—and so is everyone else.
   
 
 — the compliments are coming.  
-— but so are the backhanded comments and side remarks.  
+— but so are the backhanded comments and snide remarks.  
 
   
 
@@ -83,16 +79,16 @@ i didn’t quit.
   
 
 instead—  
-✔ i owned my progress and results with my full chest.  
-✔ i responded to every backhanded compliment with an even worse remark.  
-✔ i became even more confident and proud of my work.  
+✓ i owned my progress and results with my full chest.  
+✓ i responded to every backhanded compliment with an even worse remark.  
+✓ i became even more confident and proud of my work.  
 
   
 
 and in turn—  
-✔ more people became attracted to my journey.  
-✔ they wanted to know how i did it.  
-✔ they wanted me to train them—or their girlfriend.  
+✓ more people became attracted to my journey.  
+✓ they wanted to know how i did it.  
+✓ they wanted me to train them—or their girlfriend.  
 
   
 
@@ -102,4 +98,5 @@ this is what you should also do.
 — never conform to standards that aren’t yours.  
 — be confident in yourself and your work.  
 
-own your progress. don’t shrink. don’t quit. keep going.~~
+own your progress. don’t shrink. don’t quit. keep going.
+❃

@@ -81,7 +81,7 @@ export default function ArchiveItemPage() {
   return (
     <>
       <ScrollProgress color="bg-primary" height={3} glow={true} />
-      <div className="container max-w-3xl mx-auto px-4 py-8">
+      <div className="container max-w-2xl mx-auto px-4 py-8">
         <button
           onClick={() => router.push("/garden/archives")}
           className="flex items-center text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"

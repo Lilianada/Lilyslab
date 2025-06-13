@@ -105,27 +105,24 @@ export default function ArchivesPage() {
             size="sm"
             variant={filter === "all" ? "default" : "outline"}
             onClick={() => setFilter("all")}
-            className="text-xs font-mono"
+            className="text-xs font-mono h-8"
           >
-            <Filter className="mr-1 h-3 w-3" />
             All
           </Button>
           <Button
             size="sm"
             variant={filter === "writings" ? "default" : "outline"}
             onClick={() => setFilter("writings")}
-            className="text-xs font-mono"
+            className="text-xs font-mono h-8"
           >
-            <FileText className="mr-1 h-3 w-3" />
             Writings
           </Button>
           <Button
             size="sm"
             variant={filter === "notes" ? "default" : "outline"}
             onClick={() => setFilter("notes")}
-            className="text-xs font-mono"
+            className="text-xs font-mono h-8"
           >
-            <BookOpen className="mr-1 h-3 w-3" />
             Notes
           </Button>
         </div>

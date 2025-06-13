@@ -1,5 +1,4 @@
 ---
-author: Lilian
 cover:
   - ''
 excerpt: What this site is about.
@@ -9,8 +8,6 @@ tags:
   - digital-garden
   - personal-site
 title: What is Lilyslab?
-readingTime: 1
-wordCount: null
 createdAt: 2025-05-01
 lastUpdated: 2025-06-11
 type: evergreen
