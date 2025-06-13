@@ -1,5 +1,6 @@
 ---
 title: Unconditional Love
+slug: unconditional-love
 tags:
   - love
   - transactions

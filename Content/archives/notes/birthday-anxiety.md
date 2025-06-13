@@ -7,6 +7,7 @@ image: null
 publish: true
 createdAt: 2021-10-26
 type: budding
+slug: birthday-anxiety
 ---
 
 

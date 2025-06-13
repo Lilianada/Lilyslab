@@ -1246,3 +1246,50 @@ tags:
 type: article
 publish: true
 ---
+
+---
+id: article-095
+title: Indieweb Manifesto
+URL: https://vhbelvadi.com/indieweb
+createdAt: 2025-06-13
+tags:
+  - web-culture
+  - manifesto
+type: article
+publish: true
+---
+
+---
+id: article-096
+title: Make your own independent website
+URL: https://victoria.dev/posts/make-your-own-independent-website/
+createdAt: 2025-06-13
+tags:
+  - web-culture
+  - manifesto
+type: article
+publish: true
+---
+
+---
+id: article-097
+title: The Perfect Site Doesn't Exist
+URL: https://branch.climateaction.tech/issues/issue-8/the-perfect-site-doesnt-exist/
+createdAt: 2025-06-13
+tags:
+  - web-culture
+type: article
+publish: true
+---
+
+---
+id: article-098
+title: Manifesto for a Humane Web
+URL: https://humanewebmanifesto.com/
+createdAt: 2025-06-13
+tags:
+  - web-culture
+  - manifesto
+type: article
+publish: true
+---

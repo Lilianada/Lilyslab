@@ -1,5 +1,6 @@
 ---
 title: Digital Minimalism
+slug: digital-minimalism
 tags:
   - minimalism
 updated: null
@@ -9,8 +10,6 @@ type: budding
 createdAt: 2025-06-11
 ---
  
-
-
 Digital minimalism doesn't mean not using social media at all. Just the same way we apply minimalism to other aspects of our lives, the same applies here. Using social media in a way that doesn't rule you or take the better part of your life. Minimalism in whatever we do is key, same applies here as the cons are more than the pro.
 
 When I came across the first blog post, it seemed like a nice concept but after reading this [second one](https://davesmyth.com/digital-minimalism), I knew I had to write on it. I have been practicing digital minimalism on and off for a few years now, starting from when I decided to uninstall Snapchat, Twitter and Tiktok from my device. I still used Twitter but only when I need to post something or fimd someone and I do this via the web app. 

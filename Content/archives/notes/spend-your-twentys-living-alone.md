@@ -1,9 +1,9 @@
 ---
-title: "Spend Your Twenty’s Living\_Alone"
+title: "Spend Your Twentys Living Alone"
+slug: spend-your-twentys-living-alone
 tags:
   - toxicity
   - positivity
-image: null
 publish: true
 createdAt: 2021-05-28
 type: budding

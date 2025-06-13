@@ -1,5 +1,6 @@
 ---
 title: Strict Parents - Failure Set-up
+slug: strict-parents-failure-set-up
 tags:
   - parenting
   - failure

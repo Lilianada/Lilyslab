@@ -1,8 +1,8 @@
 ---
 title: Why We Should All Be Feminists?
+slug: why-we-shoukd-all-be-feminist
 tags:
   - feminism
-image: null
 publish: true
 createdAt: 2021-05-08
 type: budding

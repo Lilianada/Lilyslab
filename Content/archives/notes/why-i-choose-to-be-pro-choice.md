@@ -1,5 +1,6 @@
 ---
-title: Why I Chose to be Pro-Choice
+title: Why I Choose to be Pro-Choice
+slug: why-i-choose-to-be-pro-choice
 tags:
   - pro-choice
   - women

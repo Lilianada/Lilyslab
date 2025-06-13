@@ -1,5 +1,6 @@
 ---
 title: Toxic Positivity
+slug: toxic-positivity
 tags:
   - toxicity
   - positivity
@@ -8,8 +9,6 @@ publish: true
 createdAt: 2021-05-31
 type: budding
 ---
-
-
 
 
 Are you wondering how positivity can be toxic? Take a seat as I explain with a personal story.
