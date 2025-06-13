@@ -57,8 +57,14 @@ export default function WorkshopLogPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
       <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-2 text-xl font-medium">Projects</h1>
-        <p className="text-sm text-zinc-500">Too many ideas, not enough <span className="line-through">time </span>focus.</p>
+        <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: 2025-04-01</div>
+          <div>Last updated: 2025-06-13</div>
+          <div>Inspired by: ✳︎✳︎✳︎</div>
+        </div>
+        <p className="text-sm text-muted-foreground mt-2">Too many ideas, not enough <span className="line-through">time </span>focus.</p>
       </header>
       <div>
         {projects.map((item, i) => {

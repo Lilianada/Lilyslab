@@ -46,7 +46,7 @@ const sitemapData: SitemapSection[] = [
       { name: "Essays", url: "/garden/writings", description: "My writings and essays" },
       { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
-      { name: "Threads", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },
+      { name: "Micro-blog", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },
       { name: "Archives", url: "/garden/archives", description: "Archive of previous writings and notes" }
     ]
   },
@@ -108,6 +108,7 @@ export default function Sitemap() {
       
       <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="text-2xl font-medium tracking-tight mb-3">Sitemap</h1>
             <div className="flex flex-col text-xs text-muted-foreground font-mono">
           <div>Created: June 10, 2025</div>

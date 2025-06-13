@@ -11,6 +11,7 @@ const DigitalClockPage: React.FC = () => {
     <div className=" animate-fade-in">
       <div className="max-w-3xl mx-auto sm:px-4 py-12">
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Digital Clock</h1>
           <p className="text-sm text-muted-foreground">
             A responsive digital clock with timer functionality. Use it as a clock or switch to timer mode

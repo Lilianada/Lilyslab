@@ -70,6 +70,7 @@ export default function ToolsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
       <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-1 text-xl font-medium">Tools</h1>
         <p className="text-sm text-muted-foreground">
           A curated collection of tools and resources for digital minimalists.

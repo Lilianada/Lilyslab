@@ -58,9 +58,15 @@ export default function ResourcesPage() {
 
   return (
     <div className={`max-w-4xl mx-auto px-6 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
-      <header className="mb-6">
-        <h1 className="mb-1 text-xl font-medium">Resources</h1>
-        <p className="text-sm text-muted-foreground">
+      <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
+        <h1 className="mb-2 text-xl font-medium">Resources</h1>
+        <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: 2025-05-01</div>
+          <div>Last updated: 2025-06-13</div>
+          <div>Inspired by: ✳︎✳︎✳︎</div>
+        </div>
+        <p className="text-sm text-muted-foreground mt-2">
           A collection of tools, templates, and resources I've created or found useful.
         </p>
       </header>
@@ -96,7 +102,7 @@ export default function ResourcesPage() {
       </div>
 
       {isLoading ? (
-        <div className="grid gap-4 sm:grid-cols-2 animate-pulse">
+        <div className="grid gap-4 sm:grid-cols-2 animate-pulse w-full">
           <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
           <div className="h-40 bg-muted animate-pulse rounded-lg"></div>
           <div className="h-40 bg-muted animate-pulse rounded-lg"></div>

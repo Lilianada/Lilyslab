@@ -124,6 +124,7 @@ export default function AMAPage() {
   return (
     <div className="container max-w-2xl mx-auto py-8 px-4">
          <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Ask Me Anything</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Curious about something? </div>

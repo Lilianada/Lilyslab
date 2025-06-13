@@ -106,8 +106,14 @@ export default function UsesPage() {
           />
     <div className={`max-w-2xl w-full mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
-        <h1 className="mb-1 text-xl font-medium">Uses</h1>
-        <p className="text-muted-foreground text-sm">Tools, apps, and services I use daily.</p>
+          <span className="text-2xl animate-spin">✳︎</span>
+        <h1 className="mb-2 text-xl font-medium">Uses</h1>
+        <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: 2025-04-05</div>
+          <div>Last updated: 2025-06-13</div>
+          <div>Inspired by: uses.tech</div>
+        </div>
+        <p className="text-sm text-muted-foreground mt-2">Tools, apps, and services I use daily.</p>
       </header>
 
       {/* Conditional Rendering based on state */}

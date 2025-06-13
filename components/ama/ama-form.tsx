@@ -29,10 +29,18 @@ const formSchema = z.object({
     .max(1000, "Question is too long (max 1000 characters)"),
   spam_check: z
     .string()
-    .refine((val) => val.toLowerCase() === "ama", {
-      message: 'Please type "ama" to verify you are human',
-    }),
+    .refine((val) => val === "7", {
+      message: 'Please solve the simple math problem to verify you are human',
+    })
+    .transform((val) => val as string),
 });
+
+type FormData = {
+  name: string;
+  email: string;
+  question: string;
+  spam_check: string;
+};
 
 interface AMAFormProps {
   showForm: boolean;
@@ -49,7 +57,7 @@ export default function AMAForm({
 }: AMAFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -59,7 +67,7 @@ export default function AMAForm({
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormData) {
     setIsSubmitting(true);
     try {
       const response = await fetch("/api/ask-me-anything", {
@@ -131,7 +139,7 @@ export default function AMAForm({
                 <FormControl>
                   <Input type="email" placeholder="your@email.com" {...field} />
                 </FormControl>
-                <FormDescription>
+                <FormDescription className="text-xs">
                   Your email won't be displayed publicly
                 </FormDescription>
                 <FormMessage />
@@ -153,7 +161,7 @@ export default function AMAForm({
                   {...field} 
                 />
               </FormControl>
-              <FormDescription>
+              <FormDescription className="text-xs">
                 Be specific and clear. Your question will be displayed publicly.
               </FormDescription>
               <FormMessage />
@@ -166,13 +174,10 @@ export default function AMAForm({
           name="spam_check"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Verification</FormLabel>
+              <FormLabel> 5 + 2 = ?</FormLabel>
               <FormControl>
-                <Input placeholder='Type "ama" here' {...field} />
+                <Input placeholder='Enter the answer' {...field} />
               </FormControl>
-              <FormDescription>
-                To prevent spam, please type "ama" in the field above
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

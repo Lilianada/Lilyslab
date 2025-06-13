@@ -45,6 +45,7 @@ export default function TodoPage() {
       />
       <div className="container max-w-3xl mx-auto py-12 px-4 animate-fade-in">
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-1 text-xl font-medium">Website Todo List</h1>
           <p className="text-sm text-muted-foreground">
             Features and fixes to implement on my website. This is a simple todo list that I use to keep track of what I want to do next on my website. I will update this list as I complete tasks and add new ones.  {" "}

@@ -88,9 +88,15 @@ export default async function WritingPage() {
 
   return (
     <div className="max-w-2xl w-full mx-auto animate-fade-in sm:px-6 py-12">
-      <header className="mb-6">
-        <h1 className="mb-1 text-xl font-medium">Writings</h1>
-        <p className="text-sm text-muted-foreground">There's no limitation to what I can and will write.</p>
+      <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
+        <h1 className="mb-2 text-xl font-medium">Writings</h1>
+        <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: 2025-04-10</div>
+          <div>Last updated: 2025-06-13</div>
+          <div>Inspired by: Essays and blogs</div>
+        </div>
+        <p className="text-sm text-muted-foreground mt-2">There's no limitation to what I can and will write.</p>
       </header>
 
       {error ? (

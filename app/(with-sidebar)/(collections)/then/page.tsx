@@ -68,6 +68,7 @@ export default function ThenPage() {
       <ScrollProgress color="bg-primary" height={3} glow={true} />
       <div className="container max-w-2xl mx-auto px-4 py-8">
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="text-xl font-medium mb-2">Then</h1>
           <p className="text-sm text-muted-foreground">
             An archive of previous "Now" pages, capturing snapshots of what I was focused on at different points in time.

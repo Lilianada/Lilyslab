@@ -17,10 +17,10 @@ interface ArchiveItemData {
 
 export async function GET(
   request: Request,
-  { params }: { params: { category: string; slug: string } }
+  { params }: { params: Promise<{ category: string; slug: string }> }
 ) {
   try {
-    const { category, slug } = params;
+    const { category, slug } = await params;
     
     if (!slug || !category) {
       return NextResponse.json({ error: 'Category and slug parameters are required' }, { status: 400 });

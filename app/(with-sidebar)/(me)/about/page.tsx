@@ -34,6 +34,7 @@ export default function AboutPage() {
         }`}
       >
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">About Me</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: May 8, 2025</div>

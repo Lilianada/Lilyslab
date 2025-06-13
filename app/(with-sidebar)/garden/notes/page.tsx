@@ -136,13 +136,17 @@ export default function NotesPage() {
   return (
     <div className="min-h-screen animate-fade-in">
       <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
-        <header className="flex items-center justify-between mb-8">
-          <div className="flex flex-col">
-            <h1 className="mb-1 text-xl font-medium">Notes</h1>
-            <p className="text-sm text-muted-foreground">
-              A collection of thoughts, quotes, and reflections.
-            </p>
+        <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
+          <h1 className="mb-2 text-xl font-medium">Notes</h1>
+          <div className="flex flex-col text-xs text-muted-foreground font-mono">
+            <div>Created: 2025-04-20</div>
+            <div>Last updated: 2025-06-13</div>
+            <div>Inspired by: Digital gardens</div>
           </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            A collection of thoughts, quotes, and reflections.
+          </p>
         </header>
         {/* Sort years in descending order (newest first) */}
         {Object.entries(grouped)

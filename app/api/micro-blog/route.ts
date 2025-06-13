@@ -11,7 +11,6 @@ interface MicroBlog {
   content: string;
   date: string;
   likeCount: number;
-  tags?: string[];
 }
 
 export async function GET() {
@@ -41,8 +40,7 @@ export async function GET() {
           title: data.title || '',
           content: content,
           date: data.date,
-          likeCount: data.likeCount || 0,
-          tags: data.tags || []
+          likeCount: data.likeCount || 0
         });
       }
     }

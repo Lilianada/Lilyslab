@@ -144,13 +144,16 @@ export default function BucketListPage() {
     <div className="min-h-screen animate-fade-in">
       <div className="container max-w-2xl mx-auto p-0 sm:px-4 py-8">
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Career Bucket List</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: April 20, 2025</div>
             <div>Last updated: June 12, 2025</div>
-            <div>Inspired by: The Need For A Job</div>
+            <div>Inspired by: ✳︎✳︎✳︎</div>
           </div>
         </header>
+
+        <div className="w-full h-40 bg-extra-yellow/50 rounded-lg border border-extra-peach/50 mb-8"></div>
 
         <section className="mb-16">
           <span className="text-xl mb-2">✳︎</span>
@@ -185,13 +188,13 @@ export default function BucketListPage() {
             renderError()
           ) : bucketListItems && (
             <div className="overflow-x-auto rounded-lg border">
-              <table className="w-full text-sm font-mono ">
+              <table className="w-full text-sm">
                 <thead className="bg-muted/50">
                   <tr>
-                    <th className="px-3 py-2 text-left font-medium text-muted-foreground w-16 border-r border-border">
+                    <th className="p-3 text-left font-medium text-muted-foreground w-16 border-r border-border">
                       S/N
                     </th>
-                    <th className="px-3 py-2 text-left font-medium text-muted-foreground">
+                    <th className="p-3 text-left font-medium text-muted-foreground">
                       Companies
                     </th>
                   </tr>
@@ -202,7 +205,7 @@ export default function BucketListPage() {
                       key={item.id}
                       className="hover:bg-muted/50 transition-colors"
                     >
-                      <td className="px-3 py-2 text-muted-foreground text-xs border-r border-border">
+                      <td className="px-3 py-2 font-mono text-muted-foreground text-xs border-r border-border">
                         {String(index + 1).padStart(2, "0")}
                       </td>
                       <td
@@ -223,15 +226,15 @@ export default function BucketListPage() {
           <h2 className="text-base font-medium tracking-tight mb-2 pb-3 text-foreground">
             Specifications
           </h2>
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="w-full text-sm font-mono" >
+          <div className="overflow-x-auto rounded-lg border bg-card">
+            <table className="w-full text-sm">
              
                <thead className="bg-muted/50">
                   <tr>
-                    <th className="px-3 py-2 text-left font-medium text-muted-foreground w-16 border-r border-border">
+                    <th className="p-3 text-left font-medium text-muted-foreground w-16 border-r border-border">
                       Categories
                     </th>
-                    <th className="px-3 py-2 text-left font-medium text-muted-foreground">
+                    <th className="p-3 text-left font-medium text-muted-foreground">
                       Details
                     </th>
                   </tr>

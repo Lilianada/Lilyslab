@@ -78,6 +78,7 @@ export default function NowPage() {
         }`}
       >
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Now</h1>
           {nowData?.frontmatter?.lastUpdated && (
             <div className="flex flex-col text-xs text-muted-foreground font-mono">

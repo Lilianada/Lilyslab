@@ -86,8 +86,13 @@ export default function DailyLogPage() {
       <div className="max-w-3xl mx-auto sm:p-6 h-full">
         {/* Main Heading - Using theme colors */}
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Project Logs</h1>
-          <p className="text-sm text-zinc-500">A build log of all my new projects.</p>
+          <div className="flex flex-col text-xs text-muted-foreground font-mono">          <div>Created: 2025-04-05</div>
+          <div>Last updated: 2025-06-13</div>
+          <div>Inspired by: ✳︎✳︎✳︎</div>
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">A build log of all my new projects.</p>
         </header>
 
         {/* Sections */}

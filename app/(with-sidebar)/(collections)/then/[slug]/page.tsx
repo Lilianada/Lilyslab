@@ -82,6 +82,7 @@ export default function ThenEntryPage() {
         </button>
         
         <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
           {isLoading ? (
             <div className="animate-pulse space-y-3">
               <div className="h-7 bg-muted-foreground/20 rounded w-2/3"></div>

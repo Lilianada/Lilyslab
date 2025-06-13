@@ -17,6 +17,7 @@ export default function Colophon() {
       />
       <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
       <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-1 text-xl font-medium tracking-tight">Colophon</h1>
         <p className="text-sm text-muted-foreground mb-6">The tools, technologies, and inspirations behind this website.</p>
       </header>

@@ -87,7 +87,7 @@ export default function ArchiveItemPage() {
           className="flex items-center text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to archives
+          Return
         </button>
 
         {isLoading ? (
@@ -102,32 +102,25 @@ export default function ArchiveItemPage() {
         ) : itemData ? (
           <>
             <header className="mb-8">
+          <span className="text-2xl animate-spin">✳︎</span>
               <h1 className="text-xl font-medium mb-3">{itemData.frontmatter.title || "Untitled"}</h1>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground flex-wrap">
-                <div className="flex items-center">
-                  {getCategoryIcon()}
-                  <span className="ml-1 capitalize">{category}</span>
-                </div>
+              <div className="flex flex-col text-xs text-muted-foreground ">
                 {itemData.frontmatter.createdAt && (
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4" />
-                    <span className="ml-1">{formatDate(itemData.frontmatter.createdAt)}</span>
-                  </div>
+                  <span>Created: {formatDate(itemData.frontmatter.createdAt)}</span>
                 )}
+                <span className="capitalize">Category: {category}</span>
                 {itemData.frontmatter.tags && itemData.frontmatter.tags.length > 0 && (
-                  <div className="flex items-center flex-wrap gap-1">
-                    <Tag className="h-4 w-4" />
                     <div className="flex gap-1 flex-wrap">
+                      Tags:
                       {itemData.frontmatter.tags.map((tag: string) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 bg-muted rounded-md text-xs"
+                          className=""
                         >
                           #{tag}
                         </span>
                       ))}
                     </div>
-                  </div>
                 )}
               </div>
             </header>
