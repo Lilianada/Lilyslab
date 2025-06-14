@@ -3,6 +3,7 @@ import { getBookmarks } from "@/lib/garden/bookmarks";
 
 // TagFilter must be a Client Component if it uses useState
 import TagFilterClient from "./TagFilterClient";
+import { Footer } from "@/components/layout/footer";
 
 // Bookmark component
 export default async function BookmarkPage() {
@@ -28,6 +29,7 @@ export default async function BookmarkPage() {
           <div>
             <TagFilterClient bookmarks={bookmarks} />
           </div>
+          <Footer />
     </div>
     </div>
   );

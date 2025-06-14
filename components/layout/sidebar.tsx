@@ -204,11 +204,11 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
     <aside
       className={cn(
         "border-r bg-gradient-to-b from-card to-card/95 shadow-none transition-all duration-300",
-        mobile ? "w-full" : "hidden w-64 "
+        mobile ? "w-full" : "hidden w-64"
       )}
       style={{ minHeight: '100vh', boxShadow: '0 0 0 0 transparent' }}
     >
-      <div className={cn("p-4", mobile ? "" : "sticky top-0 h-screen flex flex-col justify-between")}>
+      <div className={cn("p-4", mobile ? "" : "sticky top-0 z-50 h-screen flex flex-col justify-between")}>
         {!mobile && (
           <div className="mb-6 animate-fade-in">
             <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity p-1">
@@ -271,8 +271,9 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Collections" delay={1300} />
             <NavItem href="/garden/archives" icon={<History size={16} />} label="Archives" onClick={onNavClick} delay={1350} />
-            <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={1400} />
-            <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1450} />
+            <NavItem href="/then" icon={<History size={16} />} label="Then" onClick={onNavClick} delay={1400} />
+            {/* <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={1400} />
+            <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1450} /> */}
           </div>
 
           <div className="space-y-1.5 mb-2">

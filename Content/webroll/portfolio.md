@@ -305,3 +305,53 @@ type: webroll
 category: portfolios
 id: portfolios-022
 ---
+
+---
+publish: true
+title: Junaid Anjum
+url: https://junaidanjum.com/
+date: 2025-06-14
+tags:
+  - portfolio
+  - simple
+notes: portfolio that's simple and clean
+type: webroll
+category: portfolios
+id: portfolios-023
+---
+
+---
+publish: true
+title: Atroyn
+url: https://atroyn.netlify.app/
+date: 2025-06-14
+tags:
+  - portfolio
+type: webroll
+category: portfolios
+id: portfolios-024
+---
+
+---
+publish: true
+title: Yihui Hu
+url: https://www.yihuihu.com/
+date: 2025-06-14
+tags:
+  - portfolio
+type: webroll
+category: portfolios
+id: portfolios-025
+---
+
+---
+publish: true
+title: Jim Nielsen
+url: https://www.jim-nielsen.com/
+date: 2025-06-14
+tags:
+  - portfolio
+type: webroll
+category: portfolios
+id: portfolios-026
+---

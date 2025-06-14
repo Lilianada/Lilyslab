@@ -490,3 +490,199 @@ type: webroll
 category: digital-gardens
 id: digital-gardens-038
 ---
+
+---
+publish: true
+title: V.H. Belvadi
+url: https://vhbelvadi.com/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+  - writing
+notes: Love his site organisation, the way the pages are organised is chef kisses and he writes so well.
+type: webroll
+category: digital-gardens
+id: digital-gardens-039
+---
+
+---
+publish: true
+title: V.H. Belvadi Alt
+url: https://v6alt.vhbelvadi.com/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+  - writing
+notes: a previous look for the above site. The writings table has my heart, and the themes and sidebar? I'm in love.
+type: webroll
+category: digital-gardens
+id: digital-gardens-040
+---
+
+---
+publish: true
+title: Dave Smyth
+url: https://davesmyth.com/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+  - blog
+notes: has so many pages to explore.
+type: webroll
+category: digital-gardens
+id: digital-gardens-041
+---
+
+---
+publish: true
+title: TNTM
+url: https://ttntm.me/sitemap/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+  - sitemap
+notes: randomly dialed a site and found this page. Love the sitemap page, just like me, he has a lot of pages for you to explore.
+type: webroll
+category: digital-gardens
+id: digital-gardens-042
+---
+
+---
+publish: true
+title: 47nil
+url: https://47nil.com/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+type: webroll
+category: digital-gardens
+id: digital-gardens-043
+---
+
+---
+publish: true
+title: Oliver Lorton
+url: https://www.oliverlorton.co.uk/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+type: webroll
+category: digital-gardens
+id: digital-gardens-044
+---
+
+---
+publish: true
+title: Zinzy Waleson
+url: https://www.zinzy.website/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+type: webroll
+category: digital-gardens
+id: digital-gardens-045
+---
+
+---
+publish: true
+title: Carl Barenbrug
+url: https://carlbarenbrug.com/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+type: webroll
+category: digital-gardens
+id: digital-gardens-046
+---
+
+---
+publish: true
+title: Tom Farrant
+url: https://farrant.me/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+notes: It's giving bar vibes, it's giving club vibes
+type: webroll
+category: digital-gardens
+id: digital-gardens-047
+---
+
+---
+publish: true
+title: Martin Morales
+url: https://mrtnmrls.com/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+notes: very organised
+type: webroll
+category: digital-gardens
+id: digital-gardens-048
+---
+
+---
+publish: true
+title: Ballpoint Carrot
+url: https://www.ballpointcarrot.net/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+notes: minimal, mono-font
+type: webroll
+category: digital-gardens
+id: digital-gardens-049
+---
+
+---
+publish: true
+title: Zach Barocas
+url: https://zachbarocas.com/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+notes: Minimal, mono-font, love the primary color
+type: webroll
+category: digital-gardens
+id: digital-gardens-050
+---
+
+---
+publish: true
+title: Minim Blog
+url: https://minim.blog/posts.txt
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+notes: No nav, minimalist to the core, mono-font
+type: webroll
+category: digital-gardens
+id: digital-gardens-051
+---
+
+---
+publish: true
+title: RDJS Info
+url: http://rdjs.info/
+date: 2025-06-14
+tags:
+  - personal-site
+  - digital-garden
+notes: love the navigation and simplicity
+type: webroll
+category: digital-gardens
+id: digital-gardens-052
+---

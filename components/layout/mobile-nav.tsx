@@ -5,7 +5,6 @@ import { useState } from "react"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import Sidebar from "./sidebar"
 import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
 import { ThemeToggle } from "../theme/theme-toggle"
 import { UserProfileSection } from "../auth/user-profile-section"
 import { useAuth } from "@/contexts/auth-context"
@@ -16,12 +15,12 @@ export default function MobileNav() {
   const { isAdmin } = useAuth()
 
   return (
-    <div className="flex items-center justify-between border-b border-dashed  p-4 ">
+    <div className="flex items-center justify-between nav_bar p-4 w-full">
       <Link href="/" className="flex items-center gap-2">
         <h1 className="text-sm font-medium">Lily's Garden</h1>
       </Link>
-      <div className="flex items-center gap-2">
 
+      <div className="flex items-center gap-2">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="h-8 w-8 rounded-md p-0 m-0" aria-label="Toggle menu">

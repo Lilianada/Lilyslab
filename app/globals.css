@@ -5,16 +5,16 @@
 
 /* Font declarations */
 @font-face {
-  font-family: 'Nitti';
-  src: url('/fonts/Nitti-Normal.woff') format('woff');
+  font-family: "Nitti";
+  src: url("/fonts/Nitti-Normal.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Nitti';
-  src: url('/fonts/Nitti-Bold.woff') format('woff');
+  font-family: "Nitti";
+  src: url("/fonts/Nitti-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -33,92 +33,90 @@
     text-decoration-color: hsl(var(--extra-steelBlue));
     text-decoration-style: solid;
     text-decoration-skip-ink: none;
-    text-decoration-thickness: .5em;
-    text-underline-offset: -.25em;
-    transition: text-decoration .3s;
+    text-decoration-thickness: 0.5em;
+    text-underline-offset: -0.25em;
+    transition: text-decoration 0.3s;
   }
   .backlink:hover {
     text-decoration-color: hsl(var(--extra-blue));
-    text-decoration-thickness: .6em;
+    text-decoration-thickness: 0.6em;
   }
 }
 
- 
 @layer base {
   :root {
     /* Light mode */
-    --background: 0 0% 100%;           /* #ffffff */
-    --foreground: 0 0% 4%;             /* #0a0a0a */
-    --card: 210 1% 98%;               /* #ebedef - light zinc */
-    --card-foreground: 0 0% 8%;        /* #101010 */
-    --popover: 0 0% 100%;              /* #ffffff */
-    --popover-foreground: 0 0% 4%;     /* #0a0a0a */
-    --primary: 250 100% 83%;            /* #e9c6f7 - soft lavender-pink */
-    --primary-foreground: 0 0% 99%;   /* #fcfcfc */
-    --secondary: 210 10% 87%;          /* #dbe1e8 - zinc light */
-    --secondary-foreground: 0 0% 15%;  /* #262626 */
-    --muted: 210 7% 90%;               /* #a9aeb5 - muted zinc */
-    --muted-foreground: 210 7% 40%;   /* #5f6368 */
-    --accent: 210 0% 94%;              /* #d6dbdf - zinc accent */
-    --accent-foreground: 0 0% 15%;    /* #262626 */
-    --destructive: 0 84% 60%;          /* #f03d3d */
-    --destructive-foreground: 0 0% 99%;/* #fcfcfc */
-    --border: 210 10% 88%;             /* #d7dde3 */
-    --input: 210 10% 88%;              /* #d7dde3 */
-    --ring: 0 0% 15%;                  /* #262626 */
+    --background: 0 0% 100%; /* #ffffff */
+    --foreground: 0 0% 4%; /* #0a0a0a */
+    --card: 210 1% 98%; /* #ebedef - light zinc */
+    --card-foreground: 0 0% 8%; /* #101010 */
+    --popover: 0 0% 100%; /* #ffffff */
+    --popover-foreground: 0 0% 4%; /* #0a0a0a */
+    --primary: 250 100% 83%; /* #e9c6f7 - soft lavender-pink */
+    --primary-foreground: 0 0% 99%; /* #fcfcfc */
+    --secondary: 210 10% 87%; /* #dbe1e8 - zinc light */
+    --secondary-foreground: 0 0% 15%; /* #262626 */
+    --muted: 210 7% 90%; /* #a9aeb5 - muted zinc */
+    --muted-foreground: 210 7% 40%; /* #5f6368 */
+    --accent: 210 0% 94%; /* #d6dbdf - zinc accent */
+    --accent-foreground: 0 0% 15%; /* #262626 */
+    --destructive: 0 84% 60%; /* #f03d3d */
+    --destructive-foreground: 0 0% 99%; /* #fcfcfc */
+    --border: 210 10% 88%; /* #d7dde3 */
+    --input: 210 10% 88%; /* #d7dde3 */
+    --ring: 0 0% 15%; /* #262626 */
     --radius: 0.5rem;
-    --mellow: 38 100% 55%;             /* #ffc04d */
+    --mellow: 38 100% 55%; /* #ffc04d */
 
     /* Extra palette for bg-extra-... */
-    --extra-lavender: 234 91% 80%;   /* #9EAAFA */
-    --extra-yellow: 48 95% 76%;      /* #FAE680 */
-    --extra-green: 148 28% 72%;      /* #A2CBAF */
-    --extra-pink: 350 54% 80%;       /* #E8ADB1 */
-    --extra-blue: 213 61% 80%;       /* #A6C2EB */
-    --extra-cream: 43 68% 89%;       /* #F4E8C8 */
-    --extra-lilac: 270 64% 80%;      /* #CCA7ED */
-    --extra-peach: 18 86% 71%;       /* #F29874 */
-    --extra-paleYellow: 45 82% 80%;  /* #F4DAA0 */
-    --extra-steelBlue: 218 47% 61%;  /* #6C95CF */
+    --extra-lavender: 234 91% 80%; /* #9EAAFA */
+    --extra-yellow: 48 95% 76%; /* #FAE680 */
+    --extra-green: 148 28% 72%; /* #A2CBAF */
+    --extra-pink: 350 54% 80%; /* #E8ADB1 */
+    --extra-blue: 213 61% 80%; /* #A6C2EB */
+    --extra-cream: 43 68% 89%; /* #F4E8C8 */
+    --extra-lilac: 270 64% 80%; /* #CCA7ED */
+    --extra-peach: 18 86% 71%; /* #F29874 */
+    --extra-paleYellow: 45 82% 80%; /* #F4DAA0 */
+    --extra-steelBlue: 218 47% 61%; /* #6C95CF */
   }
 
   .dark {
     /* Dark mode with #161616 background */
-    --background: 0 0% 5%;           /* #161616 */
-    --foreground: 0 0% 95%;             /* #f2f2f2 */
-    --card: 0 0% 8%;               /* #2a2e33 - slightly lighter zinc */
-    --card-foreground: 0 0% 95%;        /* #f2f2f2 */
-    --popover: 210 10% 12%;             /* #212529 - dark zinc */
-    --popover-foreground: 0 0% 95%;     /* #f2f2f2 */
-    --primary: 295 60% 85%;             /* #e9c6f7 - same accent */
-    --primary-foreground: 0 0% 15%;     /* #262626 */
-    --secondary: 210 10% 20%;           /* #343a40 - zinc medium-dark */
-    --secondary-foreground: 0 0% 95%;   /* #f2f2f2 */
-    --muted: 210 5% 10%;                /* #40464d - muted zinc */
-    --muted-foreground: 0 0% 60%;       /* #999999 */
-    --accent: 210 5% 15%;               /* #3b424a - zinc accent */
-    --accent-foreground: 0 0% 95%;      /* #f2f2f2 */
-    --destructive: 0 70% 40%;           /* #a94444 */
+    --background: 0 0% 5%; /* #161616 */
+    --foreground: 0 0% 95%; /* #f2f2f2 */
+    --card: 0 0% 8%; /* #2a2e33 - slightly lighter zinc */
+    --card-foreground: 0 0% 95%; /* #f2f2f2 */
+    --popover: 210 10% 12%; /* #212529 - dark zinc */
+    --popover-foreground: 0 0% 95%; /* #f2f2f2 */
+    --primary: 295 60% 85%; /* #e9c6f7 - same accent */
+    --primary-foreground: 0 0% 15%; /* #262626 */
+    --secondary: 210 10% 20%; /* #343a40 - zinc medium-dark */
+    --secondary-foreground: 0 0% 95%; /* #f2f2f2 */
+    --muted: 210 5% 10%; /* #40464d - muted zinc */
+    --muted-foreground: 0 0% 60%; /* #999999 */
+    --accent: 210 5% 15%; /* #3b424a - zinc accent */
+    --accent-foreground: 0 0% 95%; /* #f2f2f2 */
+    --destructive: 0 70% 40%; /* #a94444 */
     --destructive-foreground: 0 0% 95%; /* #f2f2f2 */
-    --border: 210 6% 18%;              /* #2f343a */
-    --input: 210 10% 12%;               /* #2f343a */
-    --ring: 210 8% 50%;                 /* #7a828b */
-    --mellow: 38 90% 45%;               /* #b3821b */
+    --border: 210 6% 18%; /* #2f343a */
+    --input: 210 10% 12%; /* #2f343a */
+    --ring: 210 8% 50%; /* #7a828b */
+    --mellow: 38 90% 45%; /* #b3821b */
 
     /* Extra palette for bg-extra-... (dark mode) */
-    --extra-lavender: 234 91% 35%;   /* #4c529b */
-    --extra-yellow: 48 95% 30%;      /* #7a6e2b */
-    --extra-green: 148 28% 32%;      /* #4e695b */
-    --extra-pink: 350 54% 38%;       /* #8d5b60 */
-    --extra-blue: 213 61% 38%;       /* #546d8c */
-    --extra-cream: 43 68% 24%;       /* #6b6246 */
-    --extra-lilac: 270 64% 37%;      /* #7a5b8f */
-    --extra-peach: 18 86% 36%;       /* #a15c3d */
-    --extra-paleYellow: 45 82% 32%;  /* #85743a */
-    --extra-steelBlue: 218 47% 32%;  /* #354c6b */
+    --extra-lavender: 234 91% 35%; /* #4c529b */
+    --extra-yellow: 48 95% 30%; /* #7a6e2b */
+    --extra-green: 148 28% 32%; /* #4e695b */
+    --extra-pink: 350 54% 38%; /* #8d5b60 */
+    --extra-blue: 213 61% 38%; /* #546d8c */
+    --extra-cream: 43 68% 24%; /* #6b6246 */
+    --extra-lilac: 270 64% 37%; /* #7a5b8f */
+    --extra-peach: 18 86% 36%; /* #a15c3d */
+    --extra-paleYellow: 45 82% 32%; /* #85743a */
+    --extra-steelBlue: 218 47% 32%; /* #354c6b */
   }
 }
-
 
 @layer base {
   * {
@@ -131,7 +129,9 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 
   a,
@@ -142,6 +142,13 @@
   p {
     @apply leading-relaxed text-sm;
   }
+}
+
+.nav_bar {
+  background: linear-gradient(hsl(var(--background)), 80%, transparent);
+  position: fixed;
+  user-select: none;
+  z-index: 40;
 }
 
 /* Loading animation */
@@ -164,7 +171,6 @@
     opacity: 1;
   }
 }
-
 
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
@@ -206,7 +212,6 @@
   animation-delay: 1s;
 }
 
-
 /* Page transition */
 .page-transition-enter {
   opacity: 0;
@@ -216,7 +221,9 @@
 .page-transition-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 .page-transition-exit {
@@ -255,7 +262,7 @@
 
 /* Create a custom checkbox */
 .task-list-container ul li:before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0.25rem;
@@ -275,7 +282,7 @@
 
 /* Create the checkmark */
 .task-list-container ul li:has(input[type="checkbox"]:checked):after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0.3rem;
   top: 0.3rem;
@@ -297,15 +304,21 @@
 .page-transition-exit-active {
   opacity: 0;
   transform: translateY(-8px);
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 .tickets {
   clip-path: polygon(
-    15px 0%, calc(100% - 15px) 0%, 
-    100% 15px, 100% calc(100% - 15px), 
-    calc(100% - 15px) 100%, 15px 100%, 
-    0% calc(100% - 15px), 0% 15px
+    15px 0%,
+    calc(100% - 15px) 0%,
+    100% 15px,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,
+    15px 100%,
+    0% calc(100% - 15px),
+    0% 15px
   );
 }
 
@@ -313,8 +326,14 @@
   position: relative;
   /* Subtle inward curves on top/bottom edges */
   clip-path: polygon(
-    0% 8px, 8px 0%, calc(100% - 8px) 0%, 100% 8px,
-    100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px)
+    0% 8px,
+    8px 0%,
+    calc(100% - 8px) 0%,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0% calc(100% - 8px)
   );
   border: 3px solid #fff;
   box-sizing: border-box;
@@ -329,9 +348,29 @@
   z-index: 2;
 }
 
-.ticket .scallop.left1 { left: -12px; top: 25%; }
-.ticket .scallop.left2 { left: -12px; top: 50%; transform: translateY(-50%); }
-.ticket .scallop.left3 { left: -12px; top: 75%; }
-.ticket .scallop.right1 { right: -12px; top: 25%; }
-.ticket .scallop.right2 { right: -12px; top: 50%; transform: translateY(-50%); }
-.ticket .scallop.right3 { right: -12px; top: 75%; }
+.ticket .scallop.left1 {
+  left: -12px;
+  top: 25%;
+}
+.ticket .scallop.left2 {
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket .scallop.left3 {
+  left: -12px;
+  top: 75%;
+}
+.ticket .scallop.right1 {
+  right: -12px;
+  top: 25%;
+}
+.ticket .scallop.right2 {
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket .scallop.right3 {
+  right: -12px;
+  top: 75%;
+}

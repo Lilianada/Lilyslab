@@ -47,7 +47,7 @@ const sitemapData: SitemapSection[] = [
       { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
       { name: "Micro-blog", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },
-      { name: "Archives", url: "/garden/archives", description: "Archive of previous writings and notes" }
+      { name: "Bookmarks", url: "/bookmarks", description: "Articles I've read and bookmarked for later" },
     ]
   },
   {
@@ -69,9 +69,10 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Collections",
     pages: [
-      { name: "Bookmarks", url: "/bookmarks", description: "Articles I've read and bookmarked for later" },
-      { name: "100Pics", url: "/100pics", description: "A collection of 100 pictures in 100 days" },
-      { name: "365days", url: "/365days", description: "A collection of stuff done in 365 days" }
+      { name: "Archives", url: "/garden/archives", description: "Archive of previous writings and notes" },
+      { name: "Then", url: "/then", description: "Archive of previous now pages" },
+      // { name: "100Pics", url: "/100pics", description: "A collection of 100 pictures in 100 days" },
+      // { name: "365days", url: "/365days", description: "A collection of stuff done in 365 days" }
     ]
   },
   {
@@ -86,7 +87,7 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Footer Links",
     pages: [
-      { name: "Misc", url: "/misc", description: "Random stuff" },
+      // { name: "Misc", url: "/misc", description: "Random stuff" },
       { name: "Guestbook", url: "/guestbook", description: "Sign my guestbook" },
       { name: "Colophon", url: "/colophon", description: "About this site" },
       { name: "Sitemap", url: "/sitemap", description: "This page" },

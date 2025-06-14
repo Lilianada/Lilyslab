@@ -236,3 +236,151 @@ type: webroll
 category: misc
 id: misc-017
 ---
+
+---
+publish: true
+title: Modul
+url: https://modul.so/
+date: 2025-06-14
+tags:
+  - tools
+  - minimalism
+notes: love the simplicity of the landing page
+type: webroll
+category: misc
+id: misc-018
+---
+
+---
+publish: true
+title: Miriscient
+url: https://www.miriscient.org/
+date: 2025-06-14
+tags:
+  - single-page
+notes: Single page
+type: webroll
+category: misc
+id: misc-019
+---
+
+---
+publish: true
+title: Ramen Tools
+url: https://ramen.tools/
+date: 2025-06-14
+tags:
+  - tools
+notes: cool website
+type: webroll
+category: misc
+id: misc-020
+---
+
+---
+publish: true
+title: Listen to Quran
+url: https://listentoquran.vercel.app/
+date: 2025-06-14
+tags:
+  - religion
+  - audio
+notes: Not a muslim but found this very soothing to look at and to listen to
+type: webroll
+category: misc
+id: misc-021
+---
+
+---
+publish: true
+title: Webrew
+url: https://webrew.vercel.app/
+date: 2025-06-14
+tags:
+  - timer
+  - coffee
+notes: a timer app built for coffee lovers
+type: webroll
+category: misc
+id: misc-022
+---
+
+---
+publish: true
+title: Connect 4 Game
+url: https://connect-4-game.web.app/#/
+date: 2025-06-14
+tags:
+  - game
+  - neobrutalism
+notes: a game - neobrutalism
+type: webroll
+category: misc
+id: misc-023
+---
+
+---
+publish: true
+title: Moonlight
+url: https://www.moonlight.ng/
+date: 2025-06-14
+tags:
+  - minimalism
+  - brutalism
+notes: love the minimalism and brutalism of the landing page.
+type: webroll
+category: misc
+id: misc-024
+---
+
+---
+publish: true
+title: Do 100 Things
+url: https://do100things.com/
+date: 2025-06-14
+tags:
+  - productivity
+notes: an inspiration for my 365 challenge
+type: webroll
+category: misc
+id: misc-025
+---
+
+---
+publish: true
+title: Map of Internet
+url: https://map.joodaloop.com/
+date: 2025-06-14
+tags:
+  - map
+notes: Map of Internet
+type: webroll
+category: misc
+id: misc-026
+---
+
+---
+publish: true
+title: Internet Phonebook
+url: https://internetphonebook.net/#dial-a-site
+date: 2025-06-14
+tags:
+  - directory
+notes: Internet phone book
+type: webroll
+category: misc
+id: misc-027
+---
+
+---
+publish: true
+title: Good Enough
+url: https://goodenough.us/
+date: 2025-06-14
+tags:
+  - philosophy
+notes: Good enough
+type: webroll
+category: misc
+id: misc-028
+---

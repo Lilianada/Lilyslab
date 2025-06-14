@@ -19,9 +19,9 @@ export default function TodoPage() {
     { text: "/Wants page - under with sidebar with 100 things I want to do in my lifetime.", completed: false },
     { text: "Update someday page with content.", completed: true },
     { text: "Update now page to use the custom markdown renderer component.", completed: true },
-    { text: "Update Manifesto.", completed: false },
+    { text: "Update Manifesto.", completed: true },
     { text: "Update 'Why I keep a daily log'.", completed: false },
-    { text: "Create /Archives page with a simple table list of all my past essays/notes.", completed: false },
+    { text: "Create /Archives page with a simple table list of all my past essays/notes.", completed: true },
     { text: "Garden/page.tsx, change the suggest modal to be a comment modal that is accessible to all garden pages for comments.", completed: false },
     { text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.", completed: false },
     { text: "Implement web mentions", completed: false },
@@ -45,15 +45,18 @@ export default function TodoPage() {
         glowIntensity="12px"
       />
       <div className="container max-w-3xl mx-auto py-12 px-4 animate-fade-in">
-        <header className="mb-8">
+         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
-          <h1 className="mb-1 text-xl font-medium">Website Todo List</h1>
-          <p className="text-sm text-muted-foreground">
+          <h1 className="text-2xl font-medium tracking-tight mb-3">Website Todo List</h1>
+            <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Created: June 10, 2025</div>
+          <div>Last updated: June 14, 2025</div>
+        </div>
+         <p className="text-sm text-muted-foreground">
             Features and fixes to implement on my website. This is a simple todo list that I use to keep track of what I want to do next on my website. I will update this list as I complete tasks and add new ones.  {" "}
             <br/>
             <br/>
             <span className="text-primary text-xs"> Completed {todoItems.filter(todo => todo.completed).length} of {todoItems.length} tasks.</span>
-            
           </p>
         </header>
         
