@@ -106,7 +106,7 @@ export default function Sitemap() {
         glowIntensity="12px"
       />
       
-      <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
+      <div className="max-w-2xl mx-auto py-12 px-4 animate-fade-in">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="text-2xl font-medium tracking-tight mb-3">Sitemap</h1>

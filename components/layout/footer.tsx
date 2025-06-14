@@ -153,10 +153,10 @@ export function Footer({
 
       <div className="mt-12 bg-card border-border text-gray-800 dark:text-gray-200 py-6 px-6">
         <div className="container mx-auto text-center">
-          <Link href="/misc" className="text-xs hover:text-zinc-400 underline">
+          {/* <Link href="/misc" className="text-xs hover:text-zinc-400 underline">
             Misc
           </Link>{" "}
-           <span className="mr-2">•</span>
+           <span className="mr-2">•</span> */}
           <Link href="/webrings" className="text-xs hover:text-zinc-400 underline">
             Webrings
           </Link>{" "}

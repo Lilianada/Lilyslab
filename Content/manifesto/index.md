@@ -1,6 +1,6 @@
 ---
 title: Let's Make The Internet Fun Again
-description: A web manifesto.
+description: My personal web manifesto.
 createdAt: 2025-06-07
 lastUpdated: 2025-06-13
 tags: [manifesto, web memoir]

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { formatDate } from "@/lib/utils"
 import { Annoyed } from "lucide-react"
+import { Footer } from "@/components/layout/footer";
 
 // Define the Writing interface directly here instead of importing from lib
 export interface Writing {
@@ -183,6 +184,7 @@ export default async function WritingPage() {
           </p>
         </div>
       )}
+      <Footer />
     </div>
   )
 }

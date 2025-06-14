@@ -61,7 +61,7 @@ export default function WorkshopLogPage() {
         <h1 className="mb-2 text-xl font-medium">Projects</h1>
         <div className="flex flex-col text-xs text-muted-foreground font-mono">
           <div>Created: 2025-04-01</div>
-          <div>Last updated: 2025-06-13</div>
+          <div>Last updated: 2025-06-14</div>
           <div>Inspired by: ✳︎✳︎✳︎</div>
         </div>
         <p className="text-sm text-muted-foreground mt-2">Too many ideas, not enough <span className="line-through">time </span>focus.</p>

@@ -20,8 +20,8 @@ async function getManifestoContent() {
       content,
       title: data.title || 'Web Manifesto',
       description: data.description || 'My personal web manifesto',
-      createdAt: data.createdAt ? String(data.createdAt) : null,
-      lastUpdated: data.lastUpdated ? String(data.lastUpdated) : null,
+      createdAt: data.createdAt,
+      lastUpdated: data.lastUpdated,
       tags: data.tags || [],
     };
   } catch (error) {
@@ -58,20 +58,17 @@ export default async function WebManifestoPage() {
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">{manifesto.title}</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
-            <div>Created: {manifesto.createdAt || '2025-05-15'}</div>
-            <div>Last updated: {manifesto.lastUpdated || '2025-06-13'}</div>
+            <div>Created: {formatDate(manifesto.createdAt)}</div>
+            <div>Last updated: {formatDate(manifesto.lastUpdated)}</div>
             <div>Inspired by: IndieWeb principles</div>
-          </div>
-          <p className="text-sm text-muted-foreground mt-2">{manifesto.description}</p>
-          <div className="flex gap-2 flex-wrap mt-3">
-            {manifesto.tags?.map((tag: string) => (
+            <div className="">Tags: {manifesto.tags?.map((tag: string) => (
               <span 
                 key={tag} 
-                className="inline-flex items-center px-2 py-1 rounded-md text-xs bg-muted text-muted-foreground"
+                className="inline-flex "
               >
                 #{tag}
               </span>
-            ))}
+            ))}</div>
           </div>
         </header>
         

@@ -180,7 +180,7 @@ export default function NotesPage() {
                       >
                         <a
                           href={`/garden/notes//${note.slug}`}
-                          className="text-sm text-extra-lavender hover:underline flex-1 flex items-center justify-between"
+                          className="text-sm hover:underline flex-1 flex items-center justify-between"
                         >
                           <span>{note.title}</span>
                         </a>
