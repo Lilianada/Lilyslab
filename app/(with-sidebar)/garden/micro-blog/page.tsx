@@ -8,8 +8,8 @@ import { useTheme } from "next-themes";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { MarkdownRenderer } from "@/components/markdown";
 
-// Thread interface
-interface Thread {
+// Microblog interface
+interface Microblog {
   id: string;
   title: string;
   content: string;
@@ -18,8 +18,8 @@ interface Thread {
   liked?: boolean;
 }
 
-export default function ThreadsPage() {
-  const [threads, setThreads] = useState<Thread[]>([]);
+export default function MicroblogPage() {
+  const [microblogs, setMicroblogs] = useState<Microblog[]>([]);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [page, setPage] = useState(1);
@@ -27,68 +27,68 @@ export default function ThreadsPage() {
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   
-  // Local storage key for liked threads
-  const LIKED_THREADS_KEY = 'liked_threads';
+  // Local storage key for liked microblogs
+  const LIKED_MICROBLOGS_KEY = 'liked_microblogs';
 
   // Initialize
   useEffect(() => {
     setMounted(true);
     
-    // Load initial threads
-    fetchThreads();
+    // Load initial microblogs
+    fetchMicroblogs();
     
-    // Load liked threads from localStorage
-    const likedThreadsFromStorage = getLikedThreadsFromStorage();
+    // Load liked microblogs from localStorage
+    const likedMicroblogsFromStorage = getLikedMicroblogsFromStorage();
     
-    // Function to load liked state into threads
-    const setLikedState = (threads: Thread[]) => {
-      return threads.map(thread => ({
-        ...thread,
-        liked: likedThreadsFromStorage.includes(thread.id)
+    // Function to load liked state into microblogs
+    const setLikedState = (microblogs: Microblog[]) => {
+      return microblogs.map(microblog => ({
+        ...microblog,
+        liked: likedMicroblogsFromStorage.includes(microblog.id)
       }));
     };
     
-    // Update threads with liked state when they change
-    setThreads(prevThreads => setLikedState(prevThreads));
+    // Update microblogs with liked state when they change
+    setMicroblogs(prevMicroblogs => setLikedState(prevMicroblogs));
   }, []);
 
-  // Get liked threads from localStorage
-  const getLikedThreadsFromStorage = (): string[] => {
+  // Get liked microblogs from localStorage
+  const getLikedMicroblogsFromStorage = (): string[] => {
     if (typeof window === 'undefined') return [];
-    const saved = localStorage.getItem(LIKED_THREADS_KEY);
+    const saved = localStorage.getItem(LIKED_MICROBLOGS_KEY);
     return saved ? JSON.parse(saved) : [];
   };
 
-  // Save liked threads to localStorage
-  const saveLikedThreadsToStorage = (likedThreads: string[]) => {
+  // Save liked microblogs to localStorage
+  const saveLikedMicroblogsToStorage = (likedMicroblogs: string[]) => {
     if (typeof window === 'undefined') return;
-    localStorage.setItem(LIKED_THREADS_KEY, JSON.stringify(likedThreads));
+    localStorage.setItem(LIKED_MICROBLOGS_KEY, JSON.stringify(likedMicroblogs));
   };
 
-  // Fetch threads from API
-  const fetchThreads = async () => {
+  // Fetch microblogs from API
+  const fetchMicroblogs = async () => {
     setLoading(true);
     
     try {
       const response = await fetch('/api/micro-blog');
       
       if (!response.ok) {
-        throw new Error('Failed to fetch threads');
+        throw new Error('Failed to fetch microblogs');
       }
       
-      const data: Thread[] = await response.json();
+      const data: Microblog[] = await response.json();
       
       // Apply liked state from localStorage
-      const likedThreadsFromStorage = getLikedThreadsFromStorage();
-      const threadsWithLikedState = data.map(thread => ({
-        ...thread,
-        liked: likedThreadsFromStorage.includes(thread.id)
+      const likedMicroblogsFromStorage = getLikedMicroblogsFromStorage();
+      const microblogsWithLikedState = data.map(microblog => ({
+        ...microblog,
+        liked: likedMicroblogsFromStorage.includes(microblog.id)
       }));
       
-      setThreads(threadsWithLikedState);
-      setHasMore(data.length >= 10); // If we have less than 10 threads, we've reached the end
+      setMicroblogs(microblogsWithLikedState);
+      setHasMore(data.length >= 10); // If we have less than 10 microblogs, we've reached the end
     } catch (error) {
-      console.error('Error fetching threads:', error);
+      console.error('Error fetching microblogs:', error);
     } finally {
       setLoading(false);
     }
@@ -100,7 +100,7 @@ export default function ThreadsPage() {
       (entries) => {
         const [entry] = entries;
         if (entry.isIntersecting && !loading && hasMore) {
-          loadMoreThreads();
+          loadMoreMicroblogs();
         }
       },
       { threshold: 0.5 }
@@ -117,16 +117,16 @@ export default function ThreadsPage() {
     };
   }, [loading, hasMore]);
 
-  // Load more threads (we don't have pagination yet in the API, this is a placeholder)
-  const loadMoreThreads = () => {
-    // Currently the API doesn't support pagination, so we're not loading more threads
+  // Load more microblogs (we don't have pagination yet in the API, this is a placeholder)
+  const loadMoreMicroblogs = () => {
+    // Currently the API doesn't support pagination, so we're not loading more microblogs
     // This is left as a placeholder for when pagination is added
     setPage(prevPage => prevPage + 1);
-    setHasMore(false); // For now, we'll always set this to false since we load all threads at once
+    setHasMore(false); // For now, we'll always set this to false since we load all microblogs at once
   };
 
   // Format date for display
-  const formatThreadDate = (dateString: string) => {
+  const formatMicroblogDate = (dateString: string) => {
     try {
       const date = parseISO(dateString);
       return format(date, "MMM d, yyyy");
@@ -138,37 +138,37 @@ export default function ThreadsPage() {
 
   // Handle like/unlike with persistent storage
   const toggleLike = async (id: string) => {
-    // Get current liked state from threads
-    const thread = threads.find(t => t.id === id);
-    if (!thread) return;
+    // Get current liked state from microblogs
+    const microblog = microblogs.find(m => m.id === id);
+    if (!microblog) return;
     
-    const currentlyLiked = thread.liked || false;
+    const currentlyLiked = microblog.liked || false;
     const newLikedState = !currentlyLiked;
     
     // Update local state first (optimistic update)
-    setThreads(prevThreads =>
-      prevThreads.map(thread =>
-        thread.id === id
+    setMicroblogs(prevMicroblogs =>
+      prevMicroblogs.map(microblog =>
+        microblog.id === id
           ? {
-              ...thread,
+              ...microblog,
               liked: newLikedState,
-              likeCount: newLikedState ? thread.likeCount + 1 : Math.max(0, thread.likeCount - 1)
+              likeCount: newLikedState ? microblog.likeCount + 1 : Math.max(0, microblog.likeCount - 1)
             }
-          : thread
+          : microblog
       )
     );
     
     // Update localStorage
-    const likedThreads = getLikedThreadsFromStorage();
-    let updatedLikedThreads: string[];
+    const likedMicroblogs = getLikedMicroblogsFromStorage();
+    let updatedLikedMicroblogs: string[];
     
     if (newLikedState) {
-      updatedLikedThreads = [...likedThreads, id];
+      updatedLikedMicroblogs = [...likedMicroblogs, id];
     } else {
-      updatedLikedThreads = likedThreads.filter(threadId => threadId !== id);
+      updatedLikedMicroblogs = likedMicroblogs.filter(microblogId => microblogId !== id);
     }
     
-    saveLikedThreadsToStorage(updatedLikedThreads);
+    saveLikedMicroblogsToStorage(updatedLikedMicroblogs);
     
     // Update the server
     try {
@@ -191,20 +191,20 @@ export default function ThreadsPage() {
     } catch (error) {
       console.error('Error updating like count:', error);
       // Revert optimistic update if server update fails
-      setThreads(prevThreads =>
-        prevThreads.map(thread =>
-          thread.id === id
+      setMicroblogs(prevMicroblogs =>
+        prevMicroblogs.map(microblog =>
+          microblog.id === id
             ? {
-                ...thread,
+                ...microblog,
                 liked: currentlyLiked,
-                likeCount: currentlyLiked ? thread.likeCount : thread.likeCount - 1
+                likeCount: currentlyLiked ? microblog.likeCount : microblog.likeCount - 1
               }
-            : thread
+            : microblog
         )
       );
       
       // Also revert localStorage
-      saveLikedThreadsToStorage(likedThreads);
+      saveLikedMicroblogsToStorage(likedMicroblogs);
     }
   };
 
@@ -236,7 +236,7 @@ export default function ThreadsPage() {
           </p>
           </header>
 
-            {/* Threads Timeline */}
+            {/* Microblogs Timeline */}
           <div className="relative">
             {/* Timeline Line */}
             <div 
@@ -244,16 +244,16 @@ export default function ThreadsPage() {
               style={{ transform: 'translateX(-50%)' }}
             ></div>
 
-            {/* Threads */}
+            {/* Microblogs */}
             <div className="space-y-12 relative">
-              {threads.length === 0 && !loading ? (
+              {microblogs.length === 0 && !loading ? (
                 <div className="text-center py-10">
-                  <p className="text-muted-foreground">No threads found. Check back soon!</p>
+                  <p className="text-muted-foreground">No microblogs found. Check back soon!</p>
                 </div>
               ) : null}
-              {threads.map((thread, index) => (
+              {microblogs.map((microblog, index) => (
                 <motion.div 
-                  key={thread.id}
+                  key={microblog.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
@@ -262,19 +262,19 @@ export default function ThreadsPage() {
                   }}
                   className="relative"
                 >
-                  {/* Thread connector dot */}
+                  {/* Microblog connector dot */}
                   <div 
                     className={`absolute left-1/2 top-0 w-4 h-4 rounded-full border-2 z-10
-                    ${thread.liked 
+                    ${microblog.liked 
                       ? "bg-primary border-primary" 
                       : "bg-background border-border hover:border-primary transition-colors duration-300"
                     }`}
                     style={{ transform: 'translate(-50%, -50%)' }}
                   ></div>
 
-                  {/* Thread card */}
+                  {/* Microblog card */}
                   <div 
-                    className={`relative w-full sm:w-[85%] ${
+                    className={`relative w-full ${
                       index % 2 === 0 ? 'ml-auto pr-4 sm:pr-0' : 'mr-auto pl-4 sm:pl-0'
                     } pt-6`}
                   >
@@ -282,12 +282,12 @@ export default function ThreadsPage() {
                       className="p-5 rounded-xl shadow-sm border border-dashed border-border bg-card hover:shadow-md transition-all duration-300 text-[14px] hover:border-primary/40 font-nitti"
                     >
                       <div className="text-sm text-muted-foreground mb-3">
-                        {formatThreadDate(thread.date)}
+                        {formatMicroblogDate(microblog.date)}
                       </div>
                       
                       <div className="mb-4 leading-relaxed">
                         <MarkdownRenderer 
-                          content={thread.content}
+                          content={microblog.content}
                           className="[&_p]:text-[14px] [&_p]:leading-relaxed [&_p]:mb-2 [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary/80 [&_strong]:font-medium"
                         />
                       </div>
@@ -296,16 +296,16 @@ export default function ThreadsPage() {
                         {/* Tags removed as requested */}
                         
                         <button 
-                          onClick={() => toggleLike(thread.id)}
+                          onClick={() => toggleLike(microblog.id)}
                           className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full transition-colors
-                          ${thread.liked 
+                          ${microblog.liked 
                             ? "text-red-500 dark:text-red-400" 
                             : "text-muted-foreground hover:text-red-500 dark:hover:text-red-400"
                           }`}
-                          aria-label={thread.liked ? "Unlike" : "Like"}
+                          aria-label={microblog.liked ? "Unlike" : "Like"}
                         >
-                          <Heart size={12} className={thread.liked ? "fill-red-500 dark:fill-red-400" : ""} />
-                          <span>{thread.likeCount}</span>
+                          <Heart size={12} className={microblog.liked ? "fill-red-500 dark:fill-red-400" : ""} />
+                          <span>{microblog.likeCount}</span>
                         </button>
                       </div>
                     </div>
@@ -321,7 +321,7 @@ export default function ThreadsPage() {
                 {loading ? (
                   <div className="flex items-center justify-center">
                     <div className="h-8 w-8 rounded-full border-2 border-border border-t-primary animate-spin"></div>
-                    <span className="ml-3 text-sm text-muted-foreground">Loading more threads...</span>
+                    <span className="ml-3 text-sm text-muted-foreground">Loading more microblogs...</span>
                   </div>
                 ) : (
                   <div className="h-5 w-5 bg-border rounded-full mx-auto"></div>

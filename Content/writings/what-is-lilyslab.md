@@ -1,15 +1,12 @@
 ---
-cover:
-  - ''
-excerpt: What this site is about.
 published: true
 slug: what-is-lilyslab
 tags:
   - digital-garden
   - personal-site
+  - self-expression
 title: What is Lilyslab?
 createdAt: 2025-05-01
-lastUpdated: 2025-06-11
 type: evergreen
 ---
 

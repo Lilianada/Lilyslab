@@ -104,7 +104,7 @@ export async function GET(request: Request) {
             createdAt,
             lastUpdated,
             excerpt: data.excerpt || '',
-            tags: data.tags || [],
+            tags: (data.tags || []).slice(0, 3), // Limit to 3 tags
             coverImage: data.coverImage || null,
             content,
             published: true,
@@ -241,8 +241,8 @@ export async function GET(request: Request) {
               return null;
             }
             
-            // Check if the note should be published
-            if (data.publish === false) {
+            // Check if the note should be published - use 'publish' field for notes
+            if (data.publish !== true) {
               return null;
             }
             
@@ -260,7 +260,7 @@ export async function GET(request: Request) {
               createdAt: formattedCreatedAt,
               lastUpdated,
               type: data.type || 'seedling',
-              tags: data.tags || []
+              tags: (data.tags || []).slice(0, 3) // Limit to 3 tags
             } as NoteFrontmatter;
             
             return {

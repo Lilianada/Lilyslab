@@ -34,6 +34,7 @@ export const getAllNotesData = (): NoteData[] => {
 
   const allNotesData = filenames
     .filter((filename) => /\.mdx?$/.test(filename)) // Filter for .md or .mdx files
+    .filter((filename) => filename !== 'README.md') // Skip README files
     .map((filename): NoteData | null => {
       // Remove ".mdx" from file name to get slug
       const slug = filename.replace(/\.mdx?$/, '');
@@ -72,8 +73,8 @@ export const getAllNotesData = (): NoteData[] => {
             frontmatter.type = 'seedling';
         }
 
-        // Check if the note should be published
-        if (frontmatter.publish === false) {
+        // Check if the note should be published - use 'publish' field for notes
+        if (frontmatter.publish !== true) {
             return null;
         }
 

@@ -1,21 +1,16 @@
 ---
-author: Lilian
-cover:
-  - '[[progress.jpg]]'
-excerpt: A personal summary of my professional and personal growth in Q1 2025.
 published: true
 slug: q1-life-update
 tags:
-  - self-development
-  - progress
-title: Q1 Life Update - Building Momentum
-readingTime: 4
-wordCount: 560
+  - life-update
+  - personal-growth
+  - career-development
+title: Q1 Life Update
 createdAt: 2025-04-30
 type: evergreen
 ---
 
-If you've been following my journey since January, you know I'm all about learning, building, and sharing. The past few months have been a whirlwind of progress, and I'm excited to finally share what's been happening behind the scenes. [[Creating Digital Gardens]]
+If you've been following my journey since January, you know I'm all about learning, building, and sharing. The past few months have been a whirlwind of progress, and I'm excited to finally share what's been happening behind the scenes.
 
 ### Professional Growth
 

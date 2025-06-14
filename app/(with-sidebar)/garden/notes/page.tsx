@@ -63,6 +63,7 @@ export default function NotesPage() {
 
   const notes: NoteMeta[] = files
     .filter(f => f.endsWith('.md'))
+    .filter(f => f !== 'README.md') // Skip README files
     .flatMap(filename => {
       try {
         const filePath = path.join(notesDir, filename);
@@ -135,7 +136,7 @@ export default function NotesPage() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
+      <div className="container max-w-2xl mx-auto px-0 sm:px-4 py-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Notes</h1>
@@ -179,7 +180,7 @@ export default function NotesPage() {
                       >
                         <a
                           href={`/garden/notes//${note.slug}`}
-                          className="text-sm text-extra-steelBlue hover:underline flex-1 flex items-center justify-between"
+                          className="text-sm text-extra-lavender hover:underline flex-1 flex items-center justify-between"
                         >
                           <span>{note.title}</span>
                         </a>

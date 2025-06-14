@@ -1,16 +1,17 @@
 ---
-title: Mini Writing App
-excerpt:
 published: true
-tags:
-createdAt: 2025-05-06
-lastUpdated:
 slug: mini-writing-app
+tags:
+  - web-development
+  - writing-platform
+  - product-development
+title: Mini Writing App
+createdAt: 2025-05-06
 type: evergreen
 ---
 
-If an app is free, you’re the product.
-They don’t just want your data…
+If an app is free, you're the product.
+They don't just want your data…
 
 They want:
 Your thoughts (algorithms)

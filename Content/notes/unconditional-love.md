@@ -1,21 +1,22 @@
 ---
 title: Unconditional Love
-slug: unconditional-love
+publish: true
 tags:
   - love
-  - transactions
-image: null
-publish: true
+  - relationships
+  - philosophy
+  - human-nature
+  - psychology
+  - emotions
 createdAt: 2021-06-15
 type: budding
 ---
 
-
 Does Unconditional Love truly exist?
 
-Many times, I’ve heard people talk about unconditional love and I thought to myself “must be nice to get that”. 
+Many times, I've heard people talk about unconditional love and I thought to myself "must be nice to get that". 
 
-#### And bop! went my bubbles
+#### And bop! went my bubbles
 
 ---
 

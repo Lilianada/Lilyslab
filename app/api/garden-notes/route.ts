@@ -26,19 +26,22 @@ export async function GET() {
     const mdFiles = files.filter((file) => file.endsWith('.md') || file.endsWith('.mdx'));
 
     for (const file of mdFiles) {
+      // Skip README files
+      if (file === 'README.md') continue;
+      
       const filePath = path.join(notesDir, file);
       const fileContent = await fs.readFile(filePath, 'utf-8');
       // Destructure content along with data
       const { data, content } = matter(fileContent);
 
-      // Validate required fields and publish status
-      if (data.publish !== false && data.title) {
+      // Validate required fields and publish status - use 'publish' field for notes
+      if (data.publish === true && data.title) {
         // Set default values for type, createdAt, and lastUpdated if not present
         const type = data.type || 'seedling';
         const createdAtValue = data.createdAt || data.date;
         const createdAt = safeFormatDate(createdAtValue);
         const lastUpdated = safeFormatDate(data.lastUpdated || createdAtValue);
-        const tags = data.tags ? (Array.isArray(data.tags) ? data.tags : [data.tags]) : [];
+        const tags = data.tags ? (Array.isArray(data.tags) ? data.tags.slice(0, 3) : [data.tags]) : [];
         
         notes.push({
           id: file.replace(/\.mdx?$/, ''),

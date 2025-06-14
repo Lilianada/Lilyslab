@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Search, BookOpen, BookMarked } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { ExternalLink, BookOpen } from "lucide-react";
 
 type Book = {
   id: string;
@@ -25,7 +23,7 @@ const booksData: Book[] = [
     id: "1",
     title: "Atomic Habits",
     author: "James Clear",
-    coverUrl: "https://m.media-amazon.com/images/I/51-nXsSRfZL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg",
+    coverUrl: "/images/books/atomic-habits.jpg", // Moved to local storage to avoid external domain issues
     rating: 4.5,
     status: "read",
     reviewUrl: "/blog/atomic-habits-review",
@@ -35,7 +33,7 @@ const booksData: Book[] = [
     id: "2",
     title: "Educated",
     author: "Tara Westover",
-    coverUrl: "https://m.media-amazon.com/images/I/41+aN7ZbS9L._SY344_BO1,204,203,200_.jpg",
+    coverUrl: "/images/books/educated.jpg",
     rating: 5,
     status: "read",
     genre: ["Memoir", "Biography"]
@@ -44,138 +42,101 @@ const booksData: Book[] = [
     id: "3",
     title: "Project Hail Mary",
     author: "Andy Weir",
-    coverUrl: "https://m.media-amazon.com/images/I/81zD9kaVW9L._SY522_.jpg",
+    coverUrl: "/images/books/project-hail-mary.jpg",
     rating: 4,
     status: "reading",
     genre: ["Science Fiction", "Adventure"]
+  },
+  {
+    id: "4",
+    title: "The Midnight Library",
+    author: "Matt Haig",
+    coverUrl: "/images/books/midnight-library.jpg",
+    rating: 4.2,
+    status: "read",
+    genre: ["Fiction", "Fantasy"]
+  },
+  {
+    id: "5",
+    title: "Four Thousand Weeks",
+    author: "Oliver Burkeman",
+    coverUrl: "/images/books/four-thousand-weeks.jpg",
+    rating: 4.8,
+    status: "read",
+    reviewUrl: "/blog/four-thousand-weeks-review",
+    genre: ["Productivity", "Philosophy"]
+  },
+  {
+    id: "6",
+    title: "Klara and the Sun",
+    author: "Kazuo Ishiguro",
+    coverUrl: "/images/books/klara-and-the-sun.jpg",
+    rating: 4.1,
+    status: "to-read",
+    genre: ["Science Fiction", "Literary Fiction"]
   },
   // Add more books as needed
 ];
 
 export default function BookshelfPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
-
-  const genres = Array.from(
-    new Set(booksData.flatMap((book) => book.genre || []))
-  );
-
-  const filteredBooks = booksData.filter((book) => {
-    // Search filter
-    const matchesSearch = 
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    // Genre filter
-    const matchesGenre = !activeFilter || 
-      (book.genre && book.genre.includes(activeFilter));
-    
-    return matchesSearch && matchesGenre;
-  });
-
   // Group books by status
-  const readingBooks = filteredBooks.filter(book => book.status === "reading");
-  const readBooks = filteredBooks.filter(book => book.status === "read");
-  const toReadBooks = filteredBooks.filter(book => book.status === "to-read");
+  const readingBooks = booksData.filter(book => book.status === "reading");
+  const readBooks = booksData.filter(book => book.status === "read");
+  const toReadBooks = booksData.filter(book => book.status === "to-read");
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="space-y-6">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">My Bookshelf</h1>
-          <p className="text-muted-foreground">
-            A collection of books I've read, am reading, or plan to read
-          </p>
-        </div>
+    <div className="container max-w-5xl mx-auto py-6 px-4">
+      <div className="mb-6">
+        <h1 className="text-2xl font-medium mb-1">My Bookshelf</h1>
+        <p className="text-sm text-muted-foreground">
+          A collection of books I've read, am reading, or plan to read.
+        </p>
+      </div>
 
-        {/* Search and Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-          <div className="relative w-full max-w-xs">
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search books or authors..."
-              className="pl-8"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+      {/* Currently Reading Section */}
+      {readingBooks.length > 0 && (
+        <section className="mb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="h-4 w-4 text-primary" />
+            <h2 className="text-base font-medium">Currently Reading</h2>
           </div>
-
-          <div className="flex gap-2 flex-wrap">
-            <Button
-              variant={activeFilter === null ? "secondary" : "outline"}
-              size="sm"
-              onClick={() => setActiveFilter(null)}
-            >
-              All
-            </Button>
-            {genres.map((genre) => (
-              <Button
-                key={genre}
-                variant={activeFilter === genre ? "secondary" : "outline"}
-                size="sm"
-                onClick={() => setActiveFilter(genre)}
-              >
-                {genre}
-              </Button>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {readingBooks.map((book) => (
+              <BookCard key={book.id} book={book} />
             ))}
           </div>
-        </div>
+        </section>
+      )}
 
-        {/* Currently Reading Section */}
-        {readingBooks.length > 0 && (
-          <section>
-            <div className="flex items-center gap-2 mb-4">
-              <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold">Currently Reading</h2>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {readingBooks.map((book) => (
-                <BookCard key={book.id} book={book} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Read Books Section */}
-        {readBooks.length > 0 && (
-          <section>
-            <div className="flex items-center gap-2 mb-4">
-              <BookMarked className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold">Books I've Read</h2>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {readBooks.map((book) => (
-                <BookCard key={book.id} book={book} />
-              ))}
-            </div>
-          </section>
-        )}
-        
-        {/* To Read Books Section (if you have any in this category) */}
-        {toReadBooks.length > 0 && (
-          <section>
-            <div className="flex items-center gap-2 mb-4">
-              <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold">Want to Read</h2>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {toReadBooks.map((book) => (
-                <BookCard key={book.id} book={book} />
-              ))}
-            </div>
-          </section>
-        )}
-        
-        {/* No results message */}
-        {filteredBooks.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              No books found. Try adjusting your search or filters.
-            </p>
+      {/* Read Books Section */}
+      {readBooks.length > 0 && (
+        <section className="mb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="h-4 w-4 text-primary" />
+            <h2 className="text-base font-medium">Books I've Read</h2>
           </div>
-        )}
-      </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {readBooks.map((book) => (
+              <BookCard key={book.id} book={book} />
+            ))}
+          </div>
+        </section>
+      )}
+      
+      {/* To Read Books Section */}
+      {toReadBooks.length > 0 && (
+        <section>
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="h-4 w-4 text-primary" />
+            <h2 className="text-base font-medium">Want to Read</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {toReadBooks.map((book) => (
+              <BookCard key={book.id} book={book} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
@@ -187,46 +148,54 @@ function BookCard({ book }: { book: Book }) {
     : book.rating.toFixed(1);
 
   return (
-    <div className="flex flex-col h-full">
+    <Card className="flex flex-col border-border bg-card h-full overflow-hidden">
       {/* Book Cover with Aspect Ratio */}
-      <div className="relative aspect-[2/3] w-full mb-3 group">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-3">
-          {book.reviewUrl ? (
-            <Link href={book.reviewUrl} className="text-white text-sm font-medium hover:underline">
-              Read Review
-            </Link>
-          ) : (
-            <span className="text-white text-sm font-medium">No Review Yet</span>
-          )}
-        </div>
+      <div className="relative aspect-[2/3] w-full mb-2">
         <Image
           src={book.coverUrl}
           alt={`Cover of ${book.title}`}
           fill
-          className="object-cover rounded-md shadow-md"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
+          className="object-cover"
+          sizes="(max-width: 768px) 40vw, (max-width: 1200px) 25vw, 16vw"
         />
         
-        {/* Status Badge */}
+        {/* Reading Status Badge */}
         {book.status === "reading" && (
-          <Badge className="absolute top-2 right-2 bg-primary">Reading</Badge>
+          <div className="absolute top-0 right-0 px-1.5 py-0.5 text-[10px] font-medium bg-primary text-white">
+            Reading
+          </div>
         )}
       </div>
       
       {/* Book Details */}
-      <div className="flex-1">
-        <h3 className="font-medium text-sm leading-tight mb-1" title={book.title}>
-          {book.title.length > 25 ? `${book.title.substring(0, 22)}...` : book.title}
+      <div className="p-2 flex-1 flex flex-col">
+        <h3 className="text-xs font-medium leading-tight mb-1" title={book.title}>
+          {book.title.length > 20 ? `${book.title.substring(0, 18)}...` : book.title}
         </h3>
-        <p className="text-xs text-muted-foreground mb-1">
+        <p className="text-[10px] text-muted-foreground mb-2">
           {book.author}
         </p>
-        <div className="flex items-center mt-auto">
-          <div className="text-xs font-semibold bg-primary/10 dark:bg-primary/20 text-primary px-2 py-0.5 rounded">
+        
+        <div className="mt-auto flex items-center justify-between">
+          <div className="text-[10px] font-medium bg-primary/10 px-1.5 py-0.5 rounded">
             {formattedRating}/5
+          </div>
+          
+          <div className="text-[10px] text-muted-foreground">
+            {book.reviewUrl ? (
+              <Link 
+                href={book.reviewUrl} 
+                className="flex items-center text-primary hover:underline"
+              >
+                <span>Review</span>
+                <ExternalLink className="h-2.5 w-2.5 ml-0.5" />
+              </Link>
+            ) : (
+              <span className="text-muted-foreground/70">No review</span>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

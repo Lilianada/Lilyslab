@@ -1,27 +1,24 @@
 ---
-excerpt: >-
-  Why I decided to grow stronger instead of smaller when the comments started
-  coming.
 published: true
-slug: the-strength-to-be-myself
+slug: being-me
 tags:
-  - Fitness
-  - Personal-Growth
-title: The Strength to Be Myself
+  - self-confidence
+  - personal-growth
+  - body-positivity
+title: being-me
 createdAt: 2025-04-20
-lastUpdated:
 type: evergreen
 ---
 
 have you ever looked yourself in the mirror and thought…  
-— “i look too muscular, maybe i should stop training my upper body.”  
+— "i look too muscular, maybe i should stop training my upper body."  
 
 well, this was me in the 4th quarter of 2024.
 
 my upper body was something i dedicated time to building—just as much as my lower body.
 
 i gained strength.  
-i developed muscle definition i didn’t even know i could build.  
+i developed muscle definition i didn't even know i could build.  
 in turn, this earned me:  
 
 
@@ -33,16 +30,16 @@ i was making visible progress, but suddenly, the noise got louder.
   
 people started saying things like:
 
-“don’t get too muscular, it’s not feminine.”  
-“you’re strong o, but you’ll soon look like a man.”  
-“are you trying to be a bodybuilder?”  
+"don't get too muscular, it's not feminine."  
+"you're strong o, but you'll soon look like a man."  
+"are you trying to be a bodybuilder?"  
 at some point, i started letting those voices get into my head.  
 
   
 
 — maybe i look too muscular.  
 — maybe i should stop working my upper body.  
-— maybe i shouldn’t go to the gym for a while.  
+— maybe i shouldn't go to the gym for a while.  
 — maybe i should cover up more to avoid stares and comments.  
 
   
@@ -53,8 +50,8 @@ why should i shrink myself to make others comfortable?
   
 
 this applies to you too.  
-you’ve worked so hard to get to where you are.  
-you’re now seeing progress—and so is everyone else.  
+you've worked so hard to get to where you are.  
+you're now seeing progress—and so is everyone else.  
 
   
 
@@ -63,7 +60,7 @@ you’re now seeing progress—and so is everyone else.
 
   
 
-now, you’re doubting yourself.  
+now, you're doubting yourself.  
 you want to take a break.  
 you want to conform to their standards of what they think you should be.  
 you want to quit.  
@@ -71,10 +68,10 @@ you want to quit.
   
 
 guess what?  
-i didn’t stop going to the gym.  
-i didn’t stop training upper body.  
-i didn’t cover up more to avoid stares and remarks.  
-i didn’t quit.  
+i didn't stop going to the gym.  
+i didn't stop training upper body.  
+i didn't cover up more to avoid stares and remarks.  
+i didn't quit.  
 
   
 
@@ -95,8 +92,8 @@ and in turn—
 this is what you should also do.  
 — with progress comes criticism. take it with a pinch of salt.  
 — never dim your light to make others feel comfortable.  
-— never conform to standards that aren’t yours.  
+— never conform to standards that aren't yours.  
 — be confident in yourself and your work.  
 
-own your progress. don’t shrink. don’t quit. keep going.
+own your progress. don't shrink. don't quit. keep going.
 ❃

@@ -1,16 +1,16 @@
 ---
 title: Why I Choose to be Pro-Choice
-slug: why-i-choose-to-be-pro-choice
+publish: true
 tags:
   - pro-choice
-  - women
-image: null
-publish: true
+  - reproductive-rights
+  - women-rights
+  - abortion
+  - bodily-autonomy
+  - feminism
 createdAt: 2021-05-05
 type: budding
 ---
-
-
 
 **pro-choice**
 
@@ -34,4 +34,4 @@ _adjective_
 
 I, as a woman have the right to choose whether or not I want to keep a child or abort it. The problem of the world is already enough with overpopulation in different countries. Opposing the rights of women to carryout an abortion because they simply do not want to keep a child is... 
 
-A lot of people lack the mental, emotional, moral and financial capacity to raise a child .
+A lot of people lack the mental, emotional, moral and financial capacity to raise a child .

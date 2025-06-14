@@ -54,7 +54,7 @@ export async function GET() {
         createdAt,
         lastUpdated,
         excerpt: data.excerpt || '',
-        tags: data.tags || [],
+        tags: (data.tags || []).slice(0, 3), // Limit to 3 tags
         coverImage: data.coverImage || null,
         content,
         published: true,

@@ -125,13 +125,6 @@ export default async function WritingPage() {
                           <span>•</span>
                           <span>{calculateReadingTime(post.content)} min read</span>
                         </div>
-                        {post.excerpt && (
-                          <p className="text-xs text-muted-foreground">
-                            {post.excerpt.split(" ").length > 15
-                              ? post.excerpt.split(" ").slice(0, 15).join(" ") + "…"
-                              : post.excerpt}
-                          </p>
-                        )}
                       </Link>
                     </article>
                   ))}
@@ -155,7 +148,7 @@ export default async function WritingPage() {
                 >
                   <article className=" rounded-md transition-all duration-200 group">
                       {/* First line: Title, line, date */}
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-2 ">
                         <h2 className="text-sm font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
                           {post.title}
                         </h2>
@@ -166,22 +159,15 @@ export default async function WritingPage() {
                       </div>
                       {/* Second line: Reading time */}
                       <div className="flex gap-2 items-center mb-1">
-                        <span className="text-xs text-muted-foreground italic group-hover:text-primary">
+                        <span className="text-[10px] text-muted-foreground italic group-hover:text-primary">
                           {`${countWords(post.content)} words`}
                         </span>
                         -
-                        <span className="text-xs text-muted-foreground italic group-hover:text-primary">
+                        <span className="text-[10px] text-muted-foreground italic group-hover:text-primary">
                           {`${calculateReadingTime(post.content)} min read`}
                         </span>
                       </div>
-                      {/* Third line: Excerpt */}
-                      <p className="text-sm text-muted-foreground group-hover:text-primary">
-                        {post.excerpt
-                          ? post.excerpt.split(" ").length > 10
-                            ? post.excerpt.split(" ").slice(0, 10).join(" ") + "…"
-                            : post.excerpt
-                          : "No excerpt available"}
-                      </p>
+                      {/* Third line: Remove excerpt display */}
                   </article>
                 </Link>
               </article>
