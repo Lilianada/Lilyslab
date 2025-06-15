@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/auth-context";
 import AMAForm  from "@/components/ama/ama-form";
 import AMAEntries from "@/components/ama/ama-entries";
+import { WebmentionList } from "@/components/ama/webmention-list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,9 +28,8 @@ export default function AMAPage() {
   const [showForm, setShowForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const { user, isAdmin } = useAuth();
   const [activeTab, setActiveTab] = useState("all");
+  const { user, isAdmin } = useAuth();
 
   useEffect(() => {
     fetchQuestions();
@@ -123,35 +123,33 @@ export default function AMAPage() {
 
   return (
     <div className="container max-w-2xl mx-auto py-8 px-4">
-         <header className="mb-8">
-          <span className="text-2xl animate-spin">✳︎</span>
-          <h1 className="mb-2 text-xl font-medium">Ask Me Anything</h1>
-          <div className="flex flex-col text-xs text-muted-foreground font-mono">
-            <div>Curious about something? </div>
-            <div>Feel free to ask me any question, </div>
-            <div>I'll do my best to answer it.</div>
-          </div>
-          <Button 
-            variant="link"
-            size="sm"
-            className="p-0 text-xs font-mono text-extra-peach hover:underline"
-            onClick={() => setShowForm(true)}
-            disabled={isSubmitting}
-          >
-            → Ask a Question
-            </Button>
-        </header>
+      <header className="mb-8">
+        <span className="text-2xl animate-spin">✳︎</span>
+        <h1 className="mb-2 text-xl font-medium">Ask Me Anything</h1>
+        <div className="flex flex-col text-xs text-muted-foreground font-mono">
+          <div>Curious about something? </div>
+          <div>Feel free to ask me any question, </div>
+          <div>I'll do my best to answer it.</div>
+        </div>
+        <Button 
+          variant="link"
+          size="sm"
+          className="p-0 text-xs font-mono text-extra-peach hover:underline"
+          onClick={() => setShowForm(true)}
+          disabled={isSubmitting}
+        >
+          → Ask a Question
+          </Button>
+      </header>
 
-
-      
-        {showForm && (
-            <AMAForm 
-              showForm={showForm}
-              onShowFormChange={setShowForm}
-              onSubmitSuccess={handleSubmitSuccess}
-              onSubmitError={handleSubmitError}
-            />
-        )}
+      {showForm && (
+        <AMAForm 
+          showForm={showForm}
+          onShowFormChange={setShowForm}
+          onSubmitSuccess={handleSubmitSuccess}
+          onSubmitError={handleSubmitError}
+        />
+      )}
 
       {submitMessage && (
         <div
@@ -183,7 +181,7 @@ export default function AMAPage() {
       <div className="space-y-6">
         <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="flex items-center justify-end mb-4">
-            <TabsList className="grid grid-cols-3 w-auto">
+            <TabsList className="grid grid-cols-4 w-auto">
               <TabsTrigger value="all" className="text-xs px-3 py-1.5">
                 All ({questions.length})
               </TabsTrigger>
@@ -192,6 +190,9 @@ export default function AMAPage() {
               </TabsTrigger>
               <TabsTrigger value="unanswered" className="text-xs px-3 py-1.5">
                 Pending ({unansweredCount})
+              </TabsTrigger>
+              <TabsTrigger value="mentions" className="text-xs px-3 py-1.5">
+                Mentions
               </TabsTrigger>
             </TabsList>
           </div>
@@ -216,6 +217,9 @@ export default function AMAPage() {
               isLoading={isLoading}
               onAdminReply={handleAdminReply}
             />
+          </TabsContent>
+          <TabsContent value="mentions" className="mt-0">
+            <WebmentionList isLoading={isLoading} />
           </TabsContent>
         </Tabs>
       </div>

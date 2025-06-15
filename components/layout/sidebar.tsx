@@ -231,7 +231,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <NavItem href="/about" icon={<Smile size={16} />} label="About" onClick={onNavClick} delay={200} />
             <NavItem href="/now" icon={<Clock size={16} />} label="Now" onClick={onNavClick} delay={200} />
             <NavItem href="/someday" icon={<Calendar size={16} />} label="Someday" onClick={onNavClick} delay={250} />
-            {/* <NavItem href="/wants" icon={<Heart size={16} />} label="Wants" onClick={onNavClick} delay={300} /> */}
+            <NavItem href="/daily-logs" icon={<Heart size={16} />} label="Daily Logs" onClick={onNavClick} delay={300} />
             <NavItem href="/bucket-list" icon={<ListCheck size={16} />} label="Bucket List" onClick={onNavClick} delay={350} />
           </div>
 

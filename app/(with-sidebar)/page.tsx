@@ -27,7 +27,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col text-xs text-muted-foreground font-mono">
           <div>Created: April 10, 2025</div>
-          <div>Last updated: June 11, 2025</div>
+          <div>Last updated: June 15, 2025</div>
         </div>
 
         <div className="space-y-4 text-sm leading-relaxed">
@@ -143,10 +143,9 @@ export default function Home() {
           </p>
 
           <TopicsList />
-          <p>
-            If you'd like to comment on any of my writings or notes, I have a
-            comment modal that you can access by clicking the comment icon
-            randomly placed on the different pages. And if you prefer to{" "}
+            <p>
+            If you'd like to comment on any of my writings or notes, you can now do so using web mentions! Just mention my site in your own post or reply, and your comment will show up here. 
+            And if you prefer to{" "}
             <Link
               href="/ask-me-anything"
               className="text-primary dark:text-codeRed"
@@ -154,11 +153,13 @@ export default function Home() {
               ask me a question
             </Link>{" "}
             that deserves an answer, then don't hesitate to do so.
-          </p>
+            </p>
 
           <p>
             Asides from the many pages displayed on my sidebar, my footer has
-            more links that you can explore. If you're still here at this point,
+            more links that you can explore. Thanks for stopping by.
+            
+            {/* If you're still here at this point,
             then I need your help. I have this little idea that's still a
             seedling and I am a bit confused on what to do or where to go with
             it. You can read about it{" "}
@@ -169,7 +170,7 @@ export default function Home() {
               here
             </Link>{" "}
             and leave a comment that can help in shaping this idea for our
-            little [[indie-web]] community.
+            little [[indie-web]] community. */}
           </p>
 
           <p className="pt-4 dark:text-codeRed">

@@ -1,22 +1,22 @@
 "use client";
 
-import React, { useState, lazy} from "react";
+import React, { useState, lazy } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import type { DisplayLog } from "../../app/(no-sidebar)/daily-logs/page";
 import { Suspense } from "react";
 
 // Lazy load markdown rendering dependencies
-const MarkdownRenderer = lazy(() => 
+const MarkdownRenderer = lazy(() =>
   Promise.all([
     import("react-markdown"),
     import("remark-gfm"),
-    import("rehype-highlight")
+    import("rehype-highlight"),
   ]).then(([ReactMarkdownModule, remarkGfmModule, rehypeHighlightModule]) => {
     const ReactMarkdown = ReactMarkdownModule.default;
     const remarkGfm = remarkGfmModule.default;
     const rehypeHighlight = rehypeHighlightModule.default;
-    
+
     return {
       default: ({ children }: { children: string }) => (
         <ReactMarkdown
@@ -25,8 +25,10 @@ const MarkdownRenderer = lazy(() =>
           components={{
             a: ({ href = "", ...props }) => {
               const isExt = /^https?:\/\//.test(href);
-              const yellowLink = "text-yellow-500 dark:text-yellow-300 hover:underline transition-colors";
-              const codeRedLink = "text-red-400 dark:text-red-300 hover:underline transition-colors";
+              const yellowLink =
+                "text-yellow-500 dark:text-yellow-300 hover:underline transition-colors";
+              const codeRedLink =
+                "text-red-400 dark:text-red-300 hover:underline transition-colors";
               return (
                 <a
                   {...props}
@@ -41,12 +43,10 @@ const MarkdownRenderer = lazy(() =>
         >
           {children}
         </ReactMarkdown>
-      )
+      ),
     };
   })
 );
-
-
 
 function MarkdownWithColoredLinks({ children }: { children: string }) {
   return (
@@ -94,7 +94,9 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
   const [showWhyModal, setShowWhyModal] = useState(false);
 
   return (
-    <div className={`min-h-screen bg-background text-foreground sm:p-8 font-nitti`}>
+    <div
+      className={`min-h-screen bg-background text-foreground sm:p-8 font-nitti`}
+    >
       {/* Header */}
       <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
         <div className="flex items-center gap-3">
@@ -137,7 +139,9 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
               {/* Heading row */}
               <div className="flex justify-between items-center mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-base text-muted-foreground">{formatDay(log.date)}</span>
+                  <span className="font-semibold text-base text-muted-foreground">
+                    {formatDay(log.date)}
+                  </span>
                   <span className="text-lg" title={log.mood.label}>
                     {log.mood.emoji}
                   </span>
@@ -158,7 +162,9 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
                     overflow: "hidden",
                   }}
                 >
-                  <MarkdownWithColoredLinks>{log.body}</MarkdownWithColoredLinks>
+                  <MarkdownWithColoredLinks>
+                    {log.body}
+                  </MarkdownWithColoredLinks>
                 </div>
               </div>
               {/* Footer row with date left, read more right */}
@@ -189,20 +195,26 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
             >
               ×
             </button>
-            
+
             {/* Modal Header */}
             <div className="p-6 pb-4 border-b border-border">
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-foreground">{formatDay(modalLog.date)}</span>
+                <span className="font-semibold text-foreground">
+                  {formatDay(modalLog.date)}
+                </span>
                 <span className="text-lg">{modalLog.mood.emoji}</span>
               </div>
-              <div className="text-right text-xs text-muted-foreground mt-2">{modalLog.date}</div>
+              <div className="text-right text-xs text-muted-foreground mt-2">
+                {modalLog.date}
+              </div>
             </div>
-            
+
             {/* Modal Content - Scrollable */}
             <div className="flex-1 overflow-y-auto p-6 pt-4">
               <div className="prose prose-sm dark:prose-invert max-w-none font-mono text-sm">
-                <MarkdownWithColoredLinks>{modalLog.body}</MarkdownWithColoredLinks>
+                <MarkdownWithColoredLinks>
+                  {modalLog.body}
+                </MarkdownWithColoredLinks>
               </div>
             </div>
           </div>
@@ -220,41 +232,41 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
             >
               ×
             </button>
-            
+
             {/* Modal Header */}
             <div className="p-6 pb-4 border-b border-border">
-              <h2 className="font-semibold text-foreground text-lg">Why Keep Daily Logs?</h2>
+              <h2 className="font-semibold text-foreground text-lg">
+                Why Keep Daily Logs?
+              </h2>
             </div>
-            
+
             {/* Modal Content - Scrollable */}
             <div className="flex-1 overflow-y-auto p-6 pt-4">
               <div className="prose prose-sm dark:prose-invert max-w-none font-mono text-sm space-y-4">
                 <p>
-                  Keeping daily notes is like having a conversation with your future self. It's a practice that transforms fleeting thoughts into lasting insights.
+                  Keeping daily notes is like having a conversation with your
+                  future self. It's a practice that transforms fleeting thoughts
+                  into lasting insights.
                 </p>
-                
-                <h3 className="text-base font-semibold">Memory &amp; Reflection</h3>
+
                 <p>
-                  Our brains are terrible at remembering the details of our daily experiences. Writing them down preserves not just what happened, but how we felt about it in that moment.
+                  My daily routines, interests and activities change through out
+                  the year. Keeping a daily log will allow me to identify
+                  probable causes of those changes and even growth. It'll also
+                  allow me keep track of my daily activities, moods, and
+                  recognize patterns. 
+                  <br/>
+                  <br/>
+                  Writing daily will yet again allow me to
+                  slow down, take things in, process them more intentionally and
+                  then write about them. I'll be able to notice the little
+                  things that made my day good or bad. It's a mindfull practice
+                  that I intend to keep up no matter how inconsistent I am.
                 </p>
-                
-                <h3 className="text-base font-semibold">Pattern Recognition</h3>
-                <p>
-                  Over time, patterns emerge. You start to notice what energizes you, what drains you, and what circumstances lead to your best work or deepest insights.
-                </p>
-                
-                <h3 className="text-base font-semibold">Creative Catalyst</h3>
-                <p>
-                  Ideas often come from unexpected connections. When you document your thoughts regularly, you create a repository of raw material that can spark new creative breakthroughs.
-                </p>
-                
-                <h3 className="text-base font-semibold">Mindful Practice</h3>
-                <p>
-                  The act of writing forces you to slow down and process your experiences more intentionally. It's a form of mindfulness that helps you stay present and aware.
-                </p>
-                
+
                 <blockquote className="border-l-4 border-yellow-400 pl-4 italic">
-                  "The palest ink is better than the best memory." — Chinese Proverb
+                  "The palest ink is better than the best memory." — Chinese
+                  Proverb
                 </blockquote>
               </div>
             </div>
