@@ -110,6 +110,16 @@ export default function RootLayout({
         {/* Structured Data for SEO */}
         <PersonStructuredData />
         <WebsiteStructuredData />
+
+        {/* Webmention endpoints */}
+        <link 
+          rel="webmention" 
+          href="https://webmention.io/www.lilyslab.xyz/webmention" 
+        />
+        <link 
+          rel="pingback" 
+          href="https://webmention.io/www.lilyslab.xyz/xmlrpc" 
+        />
       </head>
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>

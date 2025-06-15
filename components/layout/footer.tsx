@@ -14,6 +14,7 @@ import {
   Rss,
   Twitter,
 } from "lucide-react";
+import { WebmentionFooter } from './webmention-footer'
 
 interface FooterProps {
   // Page credit props (all optional)
@@ -30,7 +31,11 @@ interface FooterProps {
 export function Footer({
   prevPost,
   nextPost,
-  contentType
+  contentType,
+  inspirationName,
+  inspirationUrl,
+  pageName,
+  color = 'purple',
 }: FooterProps = {}) {
    // Use empty initial values to prevent hydration mismatch
    const [dateTime, setDateTime] = useFooterState("");
@@ -124,6 +129,9 @@ export function Footer({
    
   return (
     <footer className="mt-auto w-full font-nitti">
+      {/* Add Webmentions */}
+      <WebmentionFooter />
+
       {/* Previous/Next Post Navigation */}
       {(prevPost || nextPost) && (
         <div className="flex flex-row justify-between items-center gap-4 mb-8 w-full">

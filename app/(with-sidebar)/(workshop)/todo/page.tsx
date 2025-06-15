@@ -24,7 +24,7 @@ export default function TodoPage() {
     { text: "Create /Archives page with a simple table list of all my past essays/notes.", completed: true },
     { text: "Garden/page.tsx, change the suggest modal to be a comment modal that is accessible to all garden pages for comments.", completed: false },
     { text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.", completed: false },
-    { text: "Implement web mentions", completed: false },
+    { text: "Implement web mentions", completed: true },
   ];
   
   useEffect(() => {
