@@ -3,9 +3,7 @@ title: Commonplace Book
 tags:
   - note-taking
   - knowledge-management
-  - commonplace-book
-  - reading
-  - learning
+  - pkm
 publish: true
 createdAt: 2025-06-03
 type: budding

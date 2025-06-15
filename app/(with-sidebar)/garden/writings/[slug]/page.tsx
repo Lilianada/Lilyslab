@@ -67,12 +67,24 @@ export default async function WritingSlugPage({ params }: PageProps) {
     (writing) => writing.slug === slug
   );
 
-  // Get previous and next posts
+  // Get previous and next posts (previous = older, next = newer)
   const prevPost =
+    currentIndex > 0
+      ? {
+          title: allWritings[currentIndex - 1].title,
+          slug: allWritings[currentIndex - 1].slug,
+          path: "/garden/writings",
+        }
+      : undefined;
+
+  const nextPost =
     currentIndex < allWritings.length - 1
-      ? allWritings[currentIndex + 1]
-      : null;
-  const nextPost = currentIndex > 0 ? allWritings[currentIndex - 1] : null;
+      ? {
+          title: allWritings[currentIndex + 1].title,
+          slug: allWritings[currentIndex + 1].slug,
+          path: "/garden/writings",
+        }
+      : undefined;
 
   return (
     <>

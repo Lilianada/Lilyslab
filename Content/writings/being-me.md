@@ -5,7 +5,7 @@ tags:
   - self-confidence
   - personal-growth
   - body-positivity
-title: being-me
+title: Being Me
 createdAt: 2025-04-20
 type: evergreen
 ---

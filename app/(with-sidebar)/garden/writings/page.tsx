@@ -1,21 +1,9 @@
 import Link from "next/link"
-import { formatDate } from "@/lib/utils"
+import { formatDate, formatDateForDisplay } from "@/lib/utils"
 import { Annoyed } from "lucide-react"
-import { Footer } from "@/components/layout/footer";
-
-// Define the Writing interface directly here instead of importing from lib
-export interface Writing {
-  slug: string;
-  title: string;
-  createdAt: string;
-  lastUpdated: string;
-  excerpt?: string;
-  tags?: string[];
-  coverImage?: string;
-  content: string;
-  published: boolean;
-  type: string;
-}
+import { Footer } from "@/components/layout/footer"
+import { getAllWritings } from "@/lib/garden/writings"
+import type { Writing } from "@/lib/garden/writings"
 
 // Helper function to count words in a string
 function countWords(text: string): number {
@@ -31,52 +19,13 @@ function calculateReadingTime(text: string): number {
 
 export const revalidate = 3600 // Revalidate every hour
 
-// Helper to group writings by month and year
-function groupWritingsByMonth(writings: Writing[]) {
-  const grouped: Record<string, Writing[]> = {}
-
-  writings.forEach(writing => {
-    if (!writing.createdAt) return
-    
-    const date = new Date(writing.createdAt)
-    const monthYear = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
-    
-    if (!grouped[monthYear]) {
-      grouped[monthYear] = []
-    }
-    
-    grouped[monthYear].push(writing)
-  })
-
-  // Sort the keys (month-year) in reverse chronological order
-  return Object.keys(grouped)
-    .sort((a, b) => {
-      const dateA = new Date(grouped[a][0].createdAt)
-      const dateB = new Date(grouped[b][0].createdAt)
-      return dateB.getTime() - dateA.getTime()
-    })
-    .map(monthYear => ({
-      monthYear,
-      writings: grouped[monthYear]
-    }))
-}
-
 export default async function WritingPage() {
   let posts: Writing[] = []
   let error: string | null = null
 
   try {
     console.log("Fetching writings...")
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
-    const response = await fetch(`${baseUrl}/api/writings`, {
-      next: { revalidate: 3600 } // revalidate every hour
-    })
-    
-    if (!response.ok) {
-      throw new Error(`Failed to fetch writings: ${response.status} ${response.statusText}`)
-    }
-    
-    posts = await response.json()
+    posts = getAllWritings()
     console.log(`Fetched ${posts.length} writings`)
   } catch (err) {
     console.error("Error in WritingPage:", err)
@@ -88,103 +37,67 @@ export default async function WritingPage() {
   }
 
   return (
-    <div className="max-w-2xl w-full mx-auto animate-fade-in sm:px-6 py-12">
-      <header className="mb-8">
+    <div className="min-h-screen animate-fade-in">
+      <div className="container max-w-2xl mx-auto p-0 sm:px-4 py-8">
+        <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
-        <h1 className="mb-2 text-xl font-medium">Writings</h1>
-        <div className="flex flex-col text-xs text-muted-foreground font-mono">
-          <div>Created: 2025-04-10</div>
-          <div>Last updated: 2025-06-13</div>
-          <div>Inspired by: Essays and blogs</div>
-        </div>
-        <p className="text-sm text-muted-foreground mt-2">There's no limitation to what I can and will write.</p>
-      </header>
-
-      {error ? (
-        <div className="text-center py-8 border rounded-lg p-8">
-          <h2 className="text-base font-medium mb-2">This section is still under construction.</h2>
-          <p className="text-muted-foreground mb-4 text-sm">{error}</p>
-        </div>
-      ) : posts.length > 0 ? (
-        <>
-          {/* Mobile view: Group by month */}
-          <div className="sm:hidden space-y-8 mt-8">
-            {groupWritingsByMonth(posts).map(group => (
-              <div key={group.monthYear} className="opacity-0 animate-fade-in">
-                <h3 className="text-sm font-medium text-muted-foreground border-b pb-2 mb-4">
-                  {group.monthYear}
-                </h3>
-                <div className="space-y-5">
-                  {group.writings.map(post => (
-                    <article key={post.slug} className="pb-4">
-                      <Link href={`/garden/writings/${post.slug}`} prefetch>
-                        <h2 className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 mb-1">
-                          {post.title}
-                        </h2>
-                        <div className="flex gap-2 items-center text-[10px] text-muted-foreground mb-1">
-                          <span>{formatDate(post.createdAt)}</span>
-                          <span>•</span>
-                          <span>{calculateReadingTime(post.content)} min read</span>
-                        </div>
-                      </Link>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <h1 className="text-xl font-medium mb-2">Writings</h1>
+          <div className="flex flex-col text-xs text-muted-foreground font-mono">
+            <div>Created: 2025-04-10</div>
+            <div>Last updated: 2025-06-13</div>
+            <div>Inspired by: Essays and blogs</div>
           </div>
-          
-          {/* Desktop view: Original layout */}
-          <div className="hidden sm:block space-y-8 stagger-children mt-12">
-            {posts.map((post, index) => (
-              <article
-                key={post.slug}
-                className="group opacity-0 animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
+          <p className="text-sm text-muted-foreground mt-2">There's no limitation to what I can and will write.</p>
+        </header>
+
+        {error ? (
+          <div className="text-center py-8 border rounded-lg p-8">
+            <h2 className="text-base font-medium mb-2">This section is still under construction.</h2>
+            <p className="text-muted-foreground mb-4 text-sm">{error}</p>
+          </div>
+        ) : posts.length > 0 ? (
+          <ul className="mt-6 space-y-2">
+            {posts.map((post) => (
+              <li key={post.slug} className="group relative">
                 <Link
                   href={`/garden/writings/${post.slug}`}
-                  className="block transition-transform duration-300 hover:translate-x-1"
+                  className="flex items-center gap-4 py-2 hover:scale-[1.025] transition-all duration-300 group"
                   prefetch
                 >
-                  <article className=" rounded-md transition-all duration-200 group">
-                      {/* First line: Title, line, date */}
-                      <div className="flex items-center gap-2 ">
-                        <h2 className="text-sm font-medium whitespace-nowrap group-hover:text-primary transition-colors duration-200">
-                          {post.title}
-                        </h2>
-                        <div className="w-full border-t-2 border-dashed border-muted-foreground opacity-50 mx-2 group-hover:border-primary" />
-                        <span className="text-xs text-muted-foreground whitespace-nowrap group-hover:text-primary ">
-                          {post.createdAt ? formatDate(post.createdAt) : "No date"}
-                        </span>
-                      </div>
-                      {/* Second line: Reading time */}
-                      <div className="flex gap-2 items-center mb-1">
-                        <span className="text-[10px] text-muted-foreground italic group-hover:text-primary">
-                          {`${countWords(post.content)} words`}
-                        </span>
-                        -
-                        <span className="text-[10px] text-muted-foreground italic group-hover:text-primary">
-                          {`${calculateReadingTime(post.content)} min read`}
-                        </span>
-                      </div>
-                      {/* Third line: Remove excerpt display */}
-                  </article>
+                  {/* Left: Dot and Title */}
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="h-2 w-2 rounded-full bg-extra-steelBlue" />
+                    <p className="truncate text-sm">{post.title}</p>
+                  </div>
+                  {/* Middle: Connecting line */}
+                  <div className="flex-1 h-px bg-muted-foreground/30 mx-2 hidden md:block" />
+                  {/* Right: Date or Hover Details */}
+                  <div className="flex items-center gap-2  justify-end">
+                    <span className="hidden group-hover:inline text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
+                      {countWords(post.content)} words • {calculateReadingTime(post.content)} min
+                    </span>
+                    <time className="group-hover:hidden font-mono text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
+                      {formatDateForDisplay(post.createdAt)}
+                    </time>
+                  </div>
                 </Link>
-              </article>
+                {/* <div className="pointer-events-none absolute left-[-20px] top-[50%] transform translate-y-[-50%] z-10 hidden md:group-hover:block">
+                  <div className="h-full w-2 rounded-full bg-extra-steelBlue animate-pulse shadow-md" style={{ height: '24px' }} />
+                </div> */}
+              </li>
             ))}
+          </ul>
+        ) : (
+          <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">
+            <Annoyed size={16} />
+            <h2 className="mt-2 text-base font-medium mb-2">No Writings Found</h2>
+            <p className="text-muted-foreground mb-4 text-sm">
+              There are no writings available yet.
+            </p>
           </div>
-        </>
-      ) : (
-        <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">
-          <Annoyed size={16} />
-          <h2 className="mt-2 text-base font-medium mb-2">No Writings Found</h2>
-          <p className="text-muted-foreground mb-4 text-sm">
-            There are no writings available yet.
-          </p>
-        </div>
-      )}
-      <Footer />
+        )}
+        <Footer />
+      </div>
     </div>
   )
 }

@@ -1175,7 +1175,7 @@ tags:
   - web-culture
   - manifesto
 type: article
-publish: true
+publish: false
 ---
 
 ---

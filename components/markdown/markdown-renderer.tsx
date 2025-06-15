@@ -302,12 +302,14 @@ const MarkdownRenderer = ({
                   );
                   
                   // Navigate to the first match found
+                  // Fix: slugify the note title for the URL
+                  const slugify = (str: string) => str.toLowerCase().replace(/\s+/g, '-');
                   if (exactNote) {
-                    window.location.href = `/garden/notes/${exactNote.title}`;
+                    window.location.href = `/garden/notes/${slugify(exactNote.title)}`;
                   } else if (exactWriting) {
                     window.location.href = `/garden/writings/${exactWriting.slug}`;
                   } else if (caseInsensitiveNote) {
-                    window.location.href = `/garden/notes/${caseInsensitiveNote.title}`;
+                    window.location.href = `/garden/notes/${slugify(caseInsensitiveNote.title)}`;
                   } else if (caseInsensitiveWriting) {
                     window.location.href = `/garden/writings/${caseInsensitiveWriting.slug}`;
                   } 

@@ -1,0 +1,40 @@
+---
+published: true
+slug: am-i-hem
+tags:
+  - non-fiction
+  - productivity
+  - self-help
+title: Am I Hem?
+createdAt: 2025-06-08
+type: evergreen
+---
+
+ 
+ Completed 'Who Moved My Cheese?'
+ Pretty good book.
+ I'll have this review up on my [braindump app](braindump.lilyslab.xyz/wikis/books/who-moved-my-cheese) as well.
+ 
+ 
+ When I started this book last year around July, I had a job, so maybe I didn't understand the book as much as I should have and maybe that was why I didn't finish it. But I started it again this year after I had lost my job and I understood Hem and Haw more. 
+ 
+ It was easy for me to judge them before when I was still gainfully employed but I stopped judging them when the situation changed for me and I could relate to how they felt. I wasn't stuck on the old cheese though, I just couldn't get myself to get up and find new cheese. This is why I don't know which one of the two little humans I am.
+ 
+ While I can't exactly say for sure if I am Hem, here are a few things I considered:
+ - I haven't been able to apply for a job since I lost my old one. I tried severally but couldn;t be consistent. Maybe it was because of information overload on the internet telling us the best way to find a job and the outdated way. Basocally, everyone is saying different things and this is because everyone is trying to sell you a product. They don't care if you find a job on the platform, they just want your data.
+ - Fear of rejection: with this I don't know if I'm actually scared of being rejected because all the rejections I received this year, I simply shrugged them off and forgot them almost immediately.
+ - Laziness and procrastination: I'll start on Monday, I'll start next Month. And that's how time flies.
+ - Not just ready: this is where I think I am, I know I NEED a job ASAP, I know it is actually urgent because I have bills to pay but I am actually happy that I don't have tasks or deadlines that weren't self imposed. 'I am already had on myslef as is, why should I allow someone else add to that?' That's all I think of when I want to start checking all those job platforms.
+ 
+ So maybe not Hem?
+ 
+ I know my old job is gone, infact, I do not want it. I won't take it back if I was offered but I don't know if I am ready for the new change that comes with working in a new place. I enjoy working on all these random and exciting projects but corporate jobs are boring and they suck the life out of you. 
+ Still I don't know what to do. I wish I could summon up enough courage like Haw and leave cheese station C. I know my cheese station N awaits me.
+ 
+ I was ready for change, infact, I anticipated it. I applied to other roles while at my old job, I got mostly silences and rejections, maybe that's why I am unmotivated to start applying again. Maybe it is also burn out from working my old job, because, to be fair, I've been working since I left uni as a full-time freelancer and then right into full-time employment. Now I'm just vibing and taking things easy without external pressure.
+ 
+ I have dusted my running shoes and clothes, I've updated my CV, added more projects to my portfolio, drafted my cold mails templates. Now, all I just have to do is start.
+ 
+ The worst that could happen is a 'NO' and that doesn't mean that I'm not good enough, it just means they aren't a good fit for me and I should check another cheese station.
+ 
+ Hopefully I am able to come back real soon to share that I found my new Cheese Station.

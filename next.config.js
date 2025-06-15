@@ -96,6 +96,7 @@ const nextConfig = {
       'images-na.ssl-images-amazon.com',
       'images-eu.ssl-images-amazon.com',
       'images.gr-assets.com',
+      'i.pinimg.com',
     ],
   },
 };
