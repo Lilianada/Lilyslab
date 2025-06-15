@@ -247,8 +247,8 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
             <SectionTitle title="Garden" delay={650} />
             <NavItem href="/garden/writings" icon={<FileText size={16} />} label="Essays" onClick={onNavClick} delay={700} />
             <NavItem href="/garden/notes" icon={<BookHeartIcon size={16} />} label="Notes" onClick={onNavClick} delay={750} />
+            <NavItem href="/garden/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={850} />
             <NavItem href="/garden/bookshelf" icon={<BookOpen size={16} />} label="Bookshelf" onClick={onNavClick} delay={800} />
-            <NavItem href="/bookmarks" icon={<Bookmark size={16} />} label="Bookmarks" onClick={onNavClick} delay={850} />
             <NavItem href="/garden/micro-blog" icon={<MessageCircleCodeIcon size={16} />} label="Micro-blog" onClick={onNavClick} delay={900} />
           </div>
 

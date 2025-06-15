@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {
     Card,
@@ -10,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowUpRight, Book, ListCheckIcon, Lightbulb, Sprout, NotepadText, Images, BookmarkIcon } from "lucide-react"
+import { ArrowUpRight, Book, ListCheckIcon, Lightbulb, NotepadText, Bookmark, PenBox } from "lucide-react"
 import { SuggestionSidebar } from "@/components/workshop/suggestions/SuggestionSidebar"
 
 export default function DigitalGardenHome() {
@@ -23,16 +22,10 @@ export default function DigitalGardenHome() {
 
     const sections = [
         {
-            title: "Bucket List",
+            title: "Writings",
             description: "",
-            href: "/digital-garden/bucket-list",
+            href: "/garden/writings",
             icon: ListCheckIcon
-        },
-        {
-            title: "Bookshelf",
-            description: "Books I've read, am reading, or plan to read.",
-            href: "/digital-garden/bookshelf",
-            icon: Book
         },
         {
             title: "Notes",
@@ -41,23 +34,23 @@ export default function DigitalGardenHome() {
             icon: NotepadText
         },
         {
-            title: "Catalog",
-            description: "A visual collection of inspiring images.",
-            href: "/digital-garden/catalog",
-            icon: Images
+            title: "Bookshelf",
+            description: "Books I've read, am reading, or plan to read.",
+            href: "/garden/bookshelf",
+            icon: Book
         },
         {
             title: "Bookmarks",
-            description: "A visual collection of inspiring images.",
-            href: "/digital-garden/bookmarks",
-            icon: BookmarkIcon
+            description: "A collection of my favorite reads, tools, and discoveries.",
+            href: "/garden/bookmarks",
+            icon: Bookmark
         },
         {
-            title: "Coming Soon",
-            description: "An Empty Space",
-            href: "/digital-garden/coming-soon",
-            icon: Sprout
-        },
+            title: "Microblog",
+            description: "Short thoughts, updates, and musings.",
+            href: "/garden/micro-blog",
+            icon: PenBox
+        }
     ]
 
     return (
@@ -73,15 +66,14 @@ export default function DigitalGardenHome() {
                         </p>
                     </div>
                 </header> 
-                <div className="hidden sm:grid grid-cols-1 mb-8 w-1/2">
-               
+                {/* <div className="hidden sm:grid grid-cols-1 mb-8 w-1/2">
                     <Button
                         variant="outline"
                         onClick={() => setIsSuggestionSidebarOpen(true)}
                     >
                         <Lightbulb size={16} className="mr-2" /> Suggest Something
                     </Button>
-                </div>
+                </div> */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
                     {sections.map((section, index) => (
                         <Link key={section.title} href={section.href} className="block group">

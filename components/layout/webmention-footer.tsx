@@ -6,8 +6,6 @@ import { Avatar } from '@/components/ui/avatar'
 import { formatDistanceToNow } from 'date-fns'
 import type { WebmentionEntry, WebmentionFeed } from '@/lib/types/webmention'
 
-const WEBMENTION_TOKEN = 'VNTpGRWoCB8tvFmQtJ9wuQ'
-
 export function WebmentionFooter() {
   const [mentions, setMentions] = useState<WebmentionEntry[]>([])
   const [loading, setLoading] = useState(true)
@@ -21,7 +19,7 @@ export function WebmentionFooter() {
         
         // Fetch webmentions for this URL
         const response = await fetch(
-          `https://webmention.io/api/mentions.jf2?token=${WEBMENTION_TOKEN}&target=${encodeURIComponent(targetUrl)}`
+          `https://webmention.io/api/mentions.jf2?token=${process.env.NEXT_PUBLIC_WEBMENTION_TOKEN}&target=${encodeURIComponent(targetUrl)}`
         )
         
         if (!response.ok) {
