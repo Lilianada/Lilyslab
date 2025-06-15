@@ -3,7 +3,6 @@ publish: true
 title: Cosmos
 url: 'https://cosmos.so'
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - web-design
   - design-showcase
@@ -16,7 +15,6 @@ publish: true
 title: Godly Websites
 url: https://godly.website/
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - web-design
   - design-showcase
@@ -30,7 +28,6 @@ publish: true
 title: Great Stuff
 url: https://greatstuff.fyi/
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - web-design
   - design-showcase
@@ -43,7 +40,6 @@ publish: true
 title: Read CV (winding down)
 url: https://read.cv/explore
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - portfolio
   - web-design
@@ -58,7 +54,6 @@ publish: true
 title: Post CV (winding down)
 url: https://post.cv
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - web-design
   - community
@@ -71,7 +66,6 @@ publish: true
 title: Gist
 url: https://gist.so/
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - web-design
   - community
@@ -84,7 +78,6 @@ publish: true
 title: One Page Love
 url: http://onepagelove.com/
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - web-design
   - inspiration
@@ -97,7 +90,6 @@ publish: true
 title: Curated Designs
 url: https://www.curated.design/
 createdAt: 2025-04-26
-lastUpdated: 2025-04-26
 tags:
   - web-design
   - inspiration
@@ -111,7 +103,6 @@ publish: true
 title: Dead Simple Sites
 url: https://deadsimplesites.com/
 createdAt: 2025-04-29
-lastUpdated: 2025-04-29
 tags:
   - web-design
   - inspiration
@@ -125,7 +116,6 @@ publish: true
 title: Minimal Gallery
 url: https://minimal.gallery/tag/startup/
 createdAt: 2025-05-02
-lastUpdated: 2025-05-02
 tags:
   - web-design
   - inspiration
@@ -139,7 +129,6 @@ publish: true
 title: Fuck what I wish I knew
 url: https://fuckiwishiknewth.at/
 createdAt: 2025-05-13
-lastUpdated: 2025-05-13
 tags:
   - resource-collection
   - bookmarks
@@ -152,7 +141,6 @@ publish: true
 title: Dark mode designs
 url: https://www.darkmodedesign.com/
 createdAt: 2025-05-13
-lastUpdated: 2025-05-13
 tags:
   - web-design
   - inspiration
