@@ -35,6 +35,7 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        codeRed: "hsl(var(--codeRed))",
         // Bookshelf pastel palette for book/note cards
         extra: {
           lavender: '#9EAAFA', // lavender blue

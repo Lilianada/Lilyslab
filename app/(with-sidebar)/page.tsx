@@ -173,7 +173,7 @@ export default function Home() {
             little [[indie-web]] community. */}
           </p>
 
-          <p className="pt-4 dark:text-codeRed">
+          <p className="pt-4">
             This page was hand-written by Lily ❤️.
           </p>
         </div>

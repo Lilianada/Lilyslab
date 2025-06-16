@@ -45,6 +45,8 @@ import {
   ScrollText,
   LineChart,
   MessageCircleCodeIcon,
+  HandWave,
+  Sparkles,
 } from "lucide-react"
 import { ThemeToggle } from "../theme/theme-toggle"
 import { useEffect, useState } from "react"
@@ -224,6 +226,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
         <nav className={cn("space-y-6 custom-scrollbar", mobile ? "" : "flex-1 overflow-y-auto pt-2")}>
           <div className="space-y-1.5 mb-2">
             <NavItem href="/" icon={<Flower size={16} />} label="Home" onClick={onNavClick} delay={100} />
+            <NavItem href="/hello" icon={<Sparkles size={16} />} label="Hello" onClick={onNavClick} delay={120} />
           </div>
 
           <div className="space-y-1.5 mb-2">

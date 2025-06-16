@@ -67,6 +67,7 @@
     --ring: 0 0% 15%; /* #262626 */
     --radius: 0.5rem;
     --mellow: 38 100% 55%; /* #ffc04d */
+    --codeRed: 0 100% 52%;
 
     /* Extra palette for bg-extra-... */
     --extra-lavender: 234 91% 80%; /* #9EAAFA */
@@ -103,6 +104,7 @@
     --input: 210 10% 12%; /* #2f343a */
     --ring: 210 8% 50%; /* #7a828b */
     --mellow: 38 90% 45%; /* #b3821b */
+    --codeRed: 0 62% 57%;
 
     /* Extra palette for bg-extra-... (dark mode) */
     --extra-lavender: 234 91% 35%; /* #4c529b */
