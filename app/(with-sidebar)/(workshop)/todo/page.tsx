@@ -9,24 +9,25 @@ export default function TodoPage() {
   
   // Simple array of todo items with completed status
   const todoItems = [
-    { text: "Create y2k browser style card for guestbook entries.", completed: true },
     { text: "Redesign home page, make it more personal", completed: false },
+    { text: "Update bookshelf page with books I've read.", completed: false },
+    { text: "Update Misc page", completed: false },
+    { text: "/Wants page - under with sidebar with 100 things I want to do in my lifetime.", completed: false },
+    { text: "Project 365 Days & 100 Days of Pics", completed: false },
+    { text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.", completed: false },
+    { text: "Create y2k browser style card for guestbook entries.", completed: true },
     { text: "Add a list of topics I'll like to write on to homepage.", completed: true },
     { text: "Design one markdown renderer as a reusable component round the app. This should help me in writing my essays and notes using just very few markdown styles to keep design or layout uniform.", completed: true },
     { text: "Stuff - create it with its header under no-sidebar. The design for stuff will be 3x3 grid on available screen size. The stuff grids will have random stuff like Total site visitors, 3 different 88x31 button designs for anyone who wants to mention me on their website to choose from.", completed: true },
     { text: "/Todo page redesign with this list as its content.", completed: true },
-    { text: "/Wants page - under with sidebar with 100 things I want to do in my lifetime.", completed: false },
     { text: "Update someday page with content.", completed: true },
     { text: "Update now page to use the custom markdown renderer component.", completed: true },
     { text: "Update Manifesto.", completed: true },
     { text: "Update 'Why I keep a daily log'.", completed: true },
     { text: "Create /Archives page with a simple table list of all my past essays/notes.", completed: true },
-    { text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.", completed: false },
     { text: "Implement web mentions", completed: true },
-    { text: "Add an Hello page", completed: false },
-    { text: "Project 365 Days & 100 Days of Pics", completed: false },
-    { text: "Update Misc page", completed: false },
-    { text: "Change opengraph image", completed: false },
+    { text: "Add an Hello page", completed: true },
+    { text: "Change opengraph image", completed: true },
   ];
   
   useEffect(() => {
