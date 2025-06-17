@@ -1,6 +1,5 @@
 ---
 published: true
-slug: on-writing-everyday
 tags:
   - writing
   - self-expression

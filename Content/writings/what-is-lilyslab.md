@@ -1,6 +1,5 @@
 ---
 published: true
-slug: what-is-lilyslab
 tags:
   - digital-garden
   - personal-site

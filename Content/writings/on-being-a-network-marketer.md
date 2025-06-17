@@ -1,6 +1,5 @@
 ---
 published: true
-slug: on-being-a-network-marketer
 tags:
   - network-marketing
   - business-lessons

@@ -1,6 +1,5 @@
 ---
 published: true
-slug: mini-writing-app
 tags:
   - web-development
   - writing-platform

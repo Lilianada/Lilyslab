@@ -1,6 +1,5 @@
 ---
 published: true
-slug: my-bookmarks-tagging-system
 tags:
   - pkm
   - bookmarks

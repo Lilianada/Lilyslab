@@ -1,6 +1,5 @@
 ---
 published: true
-slug: being-me
 tags:
   - self-confidence
   - personal-growth

@@ -1,6 +1,5 @@
 ---
 published: true
-slug: designing-your-personal-space
 tags:
   - personal-space
   - self-care

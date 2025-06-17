@@ -1,13 +1,12 @@
 ---
-published: true
-slug: am-i-hem
+createdAt: 2025-06-08
+title: Am I Hem?
 tags:
   - non-fiction
   - productivity
   - self-help
-title: Am I Hem?
-createdAt: 2025-06-08
 type: evergreen
+published: true
 ---
 
  

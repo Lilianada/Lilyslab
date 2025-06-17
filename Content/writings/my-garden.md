@@ -1,6 +1,5 @@
 ---
 published: true
-slug: my-garden
 tags:
   - digital-garden
   - personal-website

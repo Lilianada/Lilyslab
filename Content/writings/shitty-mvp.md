@@ -1,6 +1,5 @@
 ---
 published: true
-slug: shitty-mvp
 tags:
   - mvp
   - product-development

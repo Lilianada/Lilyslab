@@ -1,6 +1,5 @@
 ---
 published: true
-slug: q1-life-update
 tags:
   - life-update
   - personal-growth
