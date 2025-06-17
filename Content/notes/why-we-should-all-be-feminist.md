@@ -4,11 +4,9 @@ publish: true
 tags:
   - feminism
   - gender-equality
-  - chimamanda-adichie
-  - social-justice
   - women-rights
-  - books
 createdAt: 2021-05-08
+lastUpdated: 2025-06-16
 type: budding
 ---
 

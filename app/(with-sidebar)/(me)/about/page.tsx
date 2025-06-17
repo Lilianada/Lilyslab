@@ -38,7 +38,7 @@ export default function AboutPage() {
           <h1 className="mb-2 text-xl font-medium">About Me</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: May 8, 2025</div>
-            <div>Last updated: June 12, 2025</div>
+            <div>Last updated: June 16, 2025</div>
             <div>Inspired by: ✳︎✳︎✳︎</div>
           </div>
         </header>
@@ -100,10 +100,7 @@ export default function AboutPage() {
                   ⎯ Lily <br />
                   ⎯ 24 yrs <br />
                   ⎯ Female <br />
-                  {/* ⎯ Nigerian <br /> */}
                   ⎯ Feminist <br />
-                  {/* ⎯ Heterosexual <br /> */}
-                  {/* ⎯ Content creator <br /> */}
                   ⎯ Fitness athelete <br />
                   ⎯ Product manager <br />
                   ⎯ Frontent developer <br />
@@ -149,13 +146,13 @@ export default function AboutPage() {
                 </p>
                 <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
                   By night (and most weekends), this space becomes my lab for
-                  experimenting with new tools, exploring AI, and bringing dream
-                  projects to life one pixel at a time.
+                  experimenting with new tools, exploring AI, bringing dream
+                  projects to life one pixel at a time, sharing insights about new things I discovered while reading new books, articles or surfing the internet.
                 </p>
 
                 <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                  My goal with this site to show how much you can achieve with
-                  AI at the intersection of creativity and innovation. We should
+                  My goal with this site is not just to show how much you can achieve with
+                  AI at the intersection of creativity and innovation, but also how much growth is possible when you are intentional about it. We should
                   all strive to work smarter not harder.
                 </p>
               </div>
@@ -163,10 +160,10 @@ export default function AboutPage() {
 
               <div className="mt-4">
                 <h2 className="text-sm font-semibold tracking-tight text-extra-green">
-                  ✳︎✳︎my matra:✳︎✳︎
+                  ✳︎✳︎my mantra:✳︎✳︎
                   </h2>
                 <p className="mb-3 text-sm leading-normal opacity-0 animate-slide-up">
-                  You don’t have to learn a new skill each time you want to accomplish something. Steal an idea, refine it, tweak it until it becomes new, until it becomes yours.
+                  Steal an idea, refine it, tweak it until it becomes new, until it becomes yours.
                 </p>
             </div>
 
@@ -176,7 +173,7 @@ export default function AboutPage() {
                   </h2>
                 <p className="mb-3 text-sm leading-normal opacity-0 animate-slide-up">
                   Having taken some time off to recharge and explore, I am looking
-                  to get back into it. If you are looking for someone whose
+                  to get back into the capitalist system. If you are looking for someone whose
                   mission is to demonstrate the vast potential of AI when it’s
                   used as a partner in the creative process, I am always open to
                   chat and make connections, so please do not hesitate to reach
@@ -202,7 +199,12 @@ export default function AboutPage() {
                 <a href="/guestbook" className="text-extra-green underline">
                   Guestbook
                 </a>{" "}
-                so I know you stopped by.
+                so I'd know you stopped by.
+
+                <br/>
+                <br/>
+
+                Many thanks.
               </p>
             </div>
 

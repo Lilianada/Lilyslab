@@ -79,12 +79,59 @@ const useContentOverflow = () => {
   const [isOverflowing, setIsOverflowing] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  const checkOverflow = React.useCallback(() => {
     const el = ref.current;
     if (el) {
-      setIsOverflowing(el.scrollHeight > el.clientHeight);
+      const hasOverflow = el.scrollHeight > el.clientHeight;
+      setIsOverflowing(hasOverflow);
     }
   }, []);
+
+  // Check overflow after mount and when window is resized
+  React.useEffect(() => {
+    // Initial check after a short delay to allow for hydration
+    const initialTimer = setTimeout(checkOverflow, 10);
+    
+    // Second check after content likely settled
+    const secondTimer = setTimeout(checkOverflow, 100);
+
+    // Setup resize observer for layout shifts
+    const resizeObserver = new ResizeObserver(() => {
+      checkOverflow();
+    });
+
+    if (ref.current) {
+      resizeObserver.observe(ref.current);
+    }
+
+    // Setup mutation observer for content changes
+    const mutationObserver = new MutationObserver(() => {
+      checkOverflow();
+    });
+
+    if (ref.current) {
+      mutationObserver.observe(ref.current, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
+
+    const handleResize = () => {
+      checkOverflow();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => {
+      clearTimeout(initialTimer);
+      clearTimeout(secondTimer);
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [checkOverflow]);
 
   return [ref, isOverflowing] as const;
 };
