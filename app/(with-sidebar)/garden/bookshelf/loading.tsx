@@ -5,7 +5,7 @@ import { BookOpen, Star } from "lucide-react";
 export default function BookshelfLoading() {
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
+      <div className="container max-w-3xl mx-auto px-0 sm:px-4 pt-16 pb-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <div className="h-7 w-32 bg-muted animate-pulse rounded mb-2" />

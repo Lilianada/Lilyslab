@@ -55,7 +55,7 @@ export default function DigitalGardenHome() {
 
     return (
         <>
-            <div className={`max-w-3xl mx-auto sm:px-4 py-12 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+            <div className={`max-w-3xl mx-auto sm:px-4 pt-16 pb-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
                 <header className="flex items-center justify-between mb-8">
                     <div>
                         <h1 className="mb-1 text-lg md:text-2xl font-bold tracking-tight">Digital Garden</h1>

@@ -136,7 +136,7 @@ export default function NotesPage() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-2xl mx-auto px-0 sm:px-4 py-8">
+      <div className="container max-w-2xl mx-auto px-0 sm:px-4 pt-16 pb-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Notes</h1>

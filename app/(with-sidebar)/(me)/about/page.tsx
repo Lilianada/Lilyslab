@@ -29,7 +29,7 @@ export default function AboutPage() {
         glowIntensity="12px"
       />
       <div
-        className={`max-w-2xl w-full mx-auto md:px-6 py-12 ${
+        className={`max-w-2xl w-full mx-auto sm:px-4 pt-16 pb-8 ${
           isLoaded ? "animate-fade-in" : "opacity-0"
         }`}
       >

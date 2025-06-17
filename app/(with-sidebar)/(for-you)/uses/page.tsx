@@ -104,7 +104,7 @@ export default function UsesPage() {
             glowColor="rgba(var(--extra-peach), 0.6)"
             glowIntensity="12px"
           />
-    <div className={`max-w-2xl w-full mx-auto py-12 px-6 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
+    <div className={`max-w-2xl w-full mx-auto sm:px-4 pt-16 pb-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
       <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-2 text-xl font-medium">Uses</h1>

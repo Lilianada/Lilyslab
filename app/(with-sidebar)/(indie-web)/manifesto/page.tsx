@@ -52,7 +52,7 @@ export default async function WebManifestoPage() {
   const manifesto = await getManifestoContent();
   
   return (
-    <div className="max-w-2xl mx-auto w-full sm:px-4 py-16">
+    <div className="max-w-2xl mx-auto w-full sm:px-4 pt-16 pb-8">
       <div className="space-y-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>

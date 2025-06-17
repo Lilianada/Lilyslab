@@ -14,6 +14,8 @@ export default function TodoPage() {
     { text: "Update Misc page", completed: false },
     { text: "/Wants page - under with sidebar with 100 things I want to do in my lifetime.", completed: false },
     { text: "Project 365 Days & 100 Days of Pics", completed: false },
+    { text: "Add services section to /uses", completed: false },
+    { text: "Redesign /notes list", completed: false },
     { text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.", completed: false },
     { text: "Create y2k browser style card for guestbook entries.", completed: true },
     { text: "Add a list of topics I'll like to write on to homepage.", completed: true },

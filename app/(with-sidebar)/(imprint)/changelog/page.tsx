@@ -27,7 +27,7 @@ async function loadChangelogs(): Promise<ChangelogEntry[]> {
 
 export default async function ChangelogPage() {
   return (
-    <div className="max-w-3xl mx-auto py-12 px-6">
+    <div className="max-w-3xl mx-auto sm:px-4 pt-16 pb-8">
       <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-1 text-xl font-medium">Changelog</h1>

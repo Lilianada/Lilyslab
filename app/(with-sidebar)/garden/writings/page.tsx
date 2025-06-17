@@ -38,7 +38,7 @@ export default async function WritingPage() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-2xl mx-auto p-0 sm:px-4 py-8">
+      <div className="container max-w-2xl mx-auto p-0 sm:px-4 pt-16 pb-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="text-xl font-medium mb-2">Writings</h1>

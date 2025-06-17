@@ -1,7 +1,7 @@
 export default function LoadingDraftsPage() {
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-3xl mx-auto px-0 sm:px-4 py-8">
+      <div className="container max-w-3xl mx-auto px-0 sm:px-4 pt-16 pb-8">
         <div className="flex flex-col mb-8">
           <div className="h-8 w-32 bg-muted animate-pulse rounded mb-2" />
           <div className="h-4 w-64 bg-muted animate-pulse rounded mb-1" />

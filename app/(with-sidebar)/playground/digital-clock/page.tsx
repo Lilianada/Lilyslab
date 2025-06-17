@@ -9,7 +9,7 @@ export const metadata = {
 const DigitalClockPage: React.FC = () => {
   return (
     <div className=" animate-fade-in">
-      <div className="max-w-3xl mx-auto sm:px-4 py-12">
+      <div className="max-w-3xl mx-auto sm:px-4 pt-16 pb-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Digital Clock</h1>
