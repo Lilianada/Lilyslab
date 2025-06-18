@@ -1,13 +1,10 @@
 ---
 title: Unconditional Love
-publish: true
+published: true
 tags:
   - love
   - relationships
-  - philosophy
   - human-nature
-  - psychology
-  - emotions
 createdAt: 2021-06-15
 type: budding
 ---

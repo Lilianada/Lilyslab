@@ -1,12 +1,9 @@
 ---
 title: Spend Your Twentys Living Alone
-publish: true
+published: true
 tags:
-  - independence
   - personal-growth
-  - relationships
   - self-discovery
-  - women
   - adulthood
 createdAt: 2021-05-28
 type: budding

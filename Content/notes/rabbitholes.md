@@ -1,13 +1,9 @@
 ---
 title: Rabbitholes
-publish: true
+published: true
 tags:
-  - rabbitholes
-  - exploration
-  - learning
   - indie-web
   - digital-garden
-  - curiosity
   - web-discovery
 createdAt: 2025-06-02
 type: budding

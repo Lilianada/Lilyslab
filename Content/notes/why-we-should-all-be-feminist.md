@@ -1,6 +1,6 @@
 ---
 title: Why We Should All Be Feminists
-publish: true
+published: true
 tags:
   - feminism
   - gender-equality

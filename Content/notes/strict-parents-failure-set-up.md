@@ -1,13 +1,10 @@
 ---
 title: Strict Parents - Failure Set-up
-publish: true
+published: true
 tags:
-  - parenting
   - child-development
   - family-dynamics
-  - psychology
   - mental-health
-  - independence
 createdAt: 2021-05-29
 type: budding
 ---

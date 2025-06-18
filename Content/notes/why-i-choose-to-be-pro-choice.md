@@ -1,12 +1,9 @@
 ---
 title: Why I Choose to be Pro-Choice
-publish: true
+published: true
 tags:
   - pro-choice
-  - reproductive-rights
   - women-rights
-  - abortion
-  - bodily-autonomy
   - feminism
 createdAt: 2021-05-05
 type: budding

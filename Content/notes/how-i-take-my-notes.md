@@ -1,13 +1,11 @@
 ---
 title: How I Take My Notes
-publish: true
+published: false
 tags:
-  - note-taking
+  - pkm
   - writing
-  - productivity
+  - self-expression
   - knowledge-management
-  - tools
-  - process
 createdAt: 2025-06-02
 type: budding
 ---

@@ -1,12 +1,11 @@
 ---
 title: Personal Knowledge Management
-publish: true
+published: true
 tags:
   - knowledge-management
   - zettelkasten
   - note-taking
   - pkm
-  - learning
   - digital-garden
 createdAt: 2025-05-29
 type: budding

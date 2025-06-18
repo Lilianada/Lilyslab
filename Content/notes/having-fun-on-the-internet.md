@@ -1,6 +1,6 @@
 ---
 title: Having Fun on the Internet
-publish: true
+published: true
 tags:
   - indie-web
   - internet

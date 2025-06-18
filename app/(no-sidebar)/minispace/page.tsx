@@ -29,7 +29,7 @@ export default function page() {
         <p className="">
           <a
             href="https://minispace.dev/home"
-            className="text-zinc-400 border-b border-dotted text-basefont-serif"
+            className="text-zinc-400 border-b border-dotted text-base font-serif border-zinc-400"
           >
             Explore and learn to create your own experiences.
           </a>

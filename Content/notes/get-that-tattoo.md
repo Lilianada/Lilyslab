@@ -1,13 +1,10 @@
 ---
 title: Get That Tattoo
-publish: true
+published: true
 tags:
-  - tattoo
   - self-expression
   - body-art
   - personal-choice
-  - confidence
-  - decision-making
 createdAt: 2021-05-04
 type: budding
 ---

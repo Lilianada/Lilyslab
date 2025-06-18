@@ -4,7 +4,7 @@ tags:
   - note-taking
   - knowledge-management
   - pkm
-publish: true
+published: true
 createdAt: 2025-06-03
 type: budding
 ---

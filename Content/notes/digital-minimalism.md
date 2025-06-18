@@ -1,12 +1,9 @@
 ---
 title: Digital Minimalism
-publish: true
+published: true
 tags:
   - digital-minimalism
   - social-media
-  - productivity
-  - mindfulness
-  - technology
   - lifestyle
 createdAt: 2025-06-11
 type: budding

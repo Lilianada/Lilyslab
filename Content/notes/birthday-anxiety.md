@@ -1,12 +1,9 @@
 ---
 title: Birthday Anxiety
-publish: true
-tags:
-  - anxiety
-  - birthday
+published: true
+tags
   - mental-health
   - personal-growth
-  - life-transitions
   - adulthood
 createdAt: 2021-10-26
 type: budding

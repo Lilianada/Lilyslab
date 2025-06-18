@@ -1,13 +1,10 @@
 ---
 title: Content Creation and Anxiety
-publish: true
+published: true
 tags:
   - content-creation
   - social-media
-  - anxiety
-  - algorithms
   - mental-health
-  - creativity
 createdAt: 2025-06-03
 type: budding
 ---

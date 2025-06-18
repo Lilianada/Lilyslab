@@ -9,7 +9,7 @@ export interface NoteFrontmatter {
   title: string;
   createdAt: string;
   lastUpdated: string;
-  publish?: boolean;
+  published?: boolean;
   tags: string[];
   type: string;
   image?: string;
@@ -73,8 +73,8 @@ export const getAllNotesData = (): NoteData[] => {
             frontmatter.type = 'seedling';
         }
 
-        // Check if the note should be published - use 'publish' field for notes
-        if (frontmatter.publish !== true) {
+        // Check if the note should be published - use 'published' field for notes
+        if (frontmatter.published !== true) {
             return null;
         }
 

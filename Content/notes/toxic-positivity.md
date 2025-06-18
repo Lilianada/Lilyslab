@@ -1,13 +1,10 @@
 ---
 title: Toxic Positivity
-publish: true
+published: true
 tags:
   - toxic-positivity
   - mental-health
   - workplace-culture
-  - psychology
-  - emotional-health
-  - boundaries
 createdAt: 2021-05-31
 type: budding
 ---
