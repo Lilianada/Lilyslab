@@ -3,7 +3,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import remarkFootnotes from 'remark-footnotes';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import { cn } from '@/lib/utils';
@@ -265,7 +264,7 @@ const MarkdownRenderer = ({
   return (
     <article className={cn("markdown-content", className)}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkFootnotes]}
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={rehypePlugins}
         components={{
           ...components,
@@ -303,14 +302,12 @@ const MarkdownRenderer = ({
                   );
                   
                   // Navigate to the first match found
-                  // Fix: slugify the note title for the URL
-                  const slugify = (str: string) => str.toLowerCase().replace(/\s+/g, '-');
                   if (exactNote) {
-                    window.location.href = `/garden/notes/${slugify(exactNote.title)}`;
+                    window.location.href = `/garden/notes/${exactNote.title}`;
                   } else if (exactWriting) {
                     window.location.href = `/garden/writings/${exactWriting.slug}`;
                   } else if (caseInsensitiveNote) {
-                    window.location.href = `/garden/notes/${slugify(caseInsensitiveNote.title)}`;
+                    window.location.href = `/garden/notes/${caseInsensitiveNote.title}`;
                   } else if (caseInsensitiveWriting) {
                     window.location.href = `/garden/writings/${caseInsensitiveWriting.slug}`;
                   } 
