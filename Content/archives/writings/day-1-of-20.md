@@ -1,7 +1,7 @@
 ---
 author: Lilian
 cover: null
-excerpt: Building my Digital Garden & Workshop - What is Lilyslab?
+excerpt: Building my Digital Garden & Workshop
 published: true
 slug: day-1-of-20
 tags:

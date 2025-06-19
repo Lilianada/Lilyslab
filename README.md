@@ -48,6 +48,8 @@ This is my personal digital space where I share:
 
 **Collections**
 - `/archives` - Previous Writings and Notes
+📚 **Collections**
+- `/archives` - Previous Writings and Notes
 - `/then` - Archive of past Now Page updates
 
 **IndieWeb**

@@ -12,7 +12,7 @@ createdAt: 2025-06-11
 type: evergreen
 ---
 
-# The Art of Creating Digital Gardens
+## The Art of Creating Digital Gardens
 
 In an era where social media platforms dictate how we share and consume content, there's a growing movement back towards personally owned spaces on the web. These aren't just blogs or static websites, but vibrant, evolving collections of thoughts, ideas, and creations—what many now call "digital gardens."
 

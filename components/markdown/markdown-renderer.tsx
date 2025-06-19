@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkFootnotes from 'remark-footnotes';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import { cn } from '@/lib/utils';
@@ -264,7 +265,7 @@ const MarkdownRenderer = ({
   return (
     <article className={cn("markdown-content", className)}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkFootnotes]}
         rehypePlugins={rehypePlugins}
         components={{
           ...components,

@@ -261,7 +261,7 @@ export default function Sidebar({ mobile = false, onNavClick }: { mobile?: boole
           
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Collections" delay={1300} />
-            <NavItem href="/garden/archives" icon={<History size={16} />} label="Archives" onClick={onNavClick} delay={1350} />
+            <NavItem href="/archives" icon={<History size={16} />} label="Archives" onClick={onNavClick} delay={1350} />
             <NavItem href="/then" icon={<History size={16} />} label="Then" onClick={onNavClick} delay={1400} />
             {/* <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={1400} />
             <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1450} /> */}

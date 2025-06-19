@@ -84,7 +84,7 @@ export default function TodoPage() {
           </h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: June 10, 2025</div>
-            <div>Last updated: June 14, 2025</div>
+            <div>Last updated: June 17, 2025</div>
           </div>
         </header>
 

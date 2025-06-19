@@ -166,7 +166,7 @@ export default function ArchivesPage() {
                   </td>
                   <td className="px-3 py-2.5 text-xs border-r border-border">
                     <Link 
-                      href={`/garden/archives/${item.category}/${item.slug}`}
+                      href={`/archives/${item.category}/${item.slug}`}
                       className="hover:underline hover:text-primary transition-colors"
                     >
                       {item.title}

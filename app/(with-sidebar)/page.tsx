@@ -68,7 +68,7 @@ export default function Home() {
             you see and interact with here. I try to make this website a living
             representation of my personal space so see it as my virtual home. So
             after you go round, be sure to leave your footprint by signing my{" "}
-            <Link href="/guestbook" className="text-primary dark:text-codeRed">
+            <Link href="/guestbook" className="text-codeRed">
               guestbook
             </Link>
             .
@@ -76,12 +76,12 @@ export default function Home() {
 
           <p>
             You should first learn a little more{" "}
-            <Link href="/about" className="text-primary dark:text-codeRed">
+            <Link href="/about" className="text-codeRed">
               about me
             </Link>
             , then find out what I'm currently up to at the moment by checking
             the{" "}
-            <Link href="/now" className="text-primary dark:text-codeRed">
+            <Link href="/now" className="text-codeRed">
               now
             </Link>{" "}
             page. If you don't have a now page on your mini space already,
@@ -92,16 +92,16 @@ export default function Home() {
           <p>
             I love to create sometimes and this site is my playground, you can
             see that by exploring the tiny projects I've added to my{" "}
-            <Link href="/playground" className="text-primary dark:text-codeRed">
+            <Link href="/playground" className="text-codeRed">
               playground
             </Link>
             . I also build random projects that I call [[seedlings]] which are
             all linked in my{" "}
-            <Link href="/projects" className="text-primary dark:text-codeRed">
+            <Link href="/projects" className="text-codeRed">
               projects
             </Link>{" "}
             page. I try to keep{" "}
-            <Link href="/logs" className="text-primary dark:text-codeRed">
+            <Link href="/logs" className="text-codeRed">
               logs
             </Link>{" "}
             on them, emphasis on 'try'.
@@ -109,20 +109,20 @@ export default function Home() {
 
           <p>
             If you like to read amature musings/writings, check my{" "}
-            <Link href="/garden" className="text-primary dark:text-codeRed">
+            <Link href="/garden" className="text-codeRed">
               garden
             </Link>
             . I have both{" "}
             <Link
               href="/garden/writings"
-              className="text-primary dark:text-codeRed"
+              className="text-codeRed"
             >
               long form
             </Link>{" "}
             and{" "}
             <Link
               href="/garden/notes"
-              className="text-primary dark:text-codeRed"
+              className="text-codeRed"
             >
               short form
             </Link>{" "}
@@ -130,7 +130,7 @@ export default function Home() {
             a{" "}
             <Link
               href="/garden/micro-blog"
-              className="text-primary dark:text-codeRed"
+              className="text-codeRed"
             >
               micro-blog
             </Link>{" "}
@@ -148,7 +148,7 @@ export default function Home() {
             And if you prefer to{" "}
             <Link
               href="/ask-me-anything"
-              className="text-primary dark:text-codeRed"
+              className="text-codeRed"
             >
               ask me a question
             </Link>{" "}
@@ -165,7 +165,7 @@ export default function Home() {
             it. You can read about it{" "}
             <Link
               href="/garden/writing/minipsace"
-              className="text-primary dark:text-codeRed"
+              className="text-codeRed"
             >
               here
             </Link>{" "}

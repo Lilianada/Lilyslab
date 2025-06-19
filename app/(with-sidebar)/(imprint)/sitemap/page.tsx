@@ -69,7 +69,7 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Collections",
     pages: [
-      { name: "Archives", url: "/garden/archives", description: "Archive of previous writings and notes" },
+      { name: "Archives", url: "/archives", description: "Archive of previous writings and notes" },
       { name: "Then", url: "/then", description: "Archive of previous now pages" },
       // { name: "100Pics", url: "/100pics", description: "A collection of 100 pictures in 100 days" },
       // { name: "365days", url: "/365days", description: "A collection of stuff done in 365 days" }
