@@ -11,7 +11,7 @@ interface Note {
   createdAt: string;
   lastUpdated: string;
   image?: string | null;
-  publish?: boolean;
+  published?: boolean;
   type: string;
   content: string; // Field for full markdown content
 }
@@ -30,8 +30,8 @@ export async function GET() {
       // Destructure content along with data
       const { data, content } = matter(fileContent);
 
-      // Validate required fields and publish status
-      if (data.publish === true && data.title) {
+      // Validate required fields and published status
+      if (data.published === true && data.title) {
         // Set default values for type, createdAt, and lastUpdated if not present
         const type = data.type || 'seedling';
         const createdAt = data.createdAt || data.date || new Date().toISOString();
@@ -45,7 +45,7 @@ export async function GET() {
           createdAt: createdAt,
           lastUpdated: lastUpdated,
           image: data.image || null,
-          publish: data.publish,
+          published: data.published,
           type: type,
           content: content, // The full markdown content
         });
@@ -61,4 +61,4 @@ export async function GET() {
   }
 
   return NextResponse.json(notes);
-} 
+}
