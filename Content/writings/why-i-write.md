@@ -35,15 +35,15 @@ I write for myself but I do it in public because it helps me to stay accountable
 
 ---
 
-**Quotes**
-"Words are the atomic unit of the internet." - David Perell
-"The internet is the library we always dreamed of. It’s a place to learn, network, and connect with experts." - David Perell
-"Re-writing is re-thinking. It’s the best single best way to sharpen your ideas." - David Perell
-"Writing is like weightlifting for the brain. Just as you’ll improve your food diet if you start cooking, you’ll improve your information diet if you start writing." - David Perell
-"The faintest power is sharper than the brightest brain" - Chinese proverb
+**Quotes** \
+[1] "Words are the atomic unit of the internet." - David Perell \
+[2] "The internet is the library we always dreamed of. It’s a place to learn, network, and connect with experts." - David Perell \
+[3] "Re-writing is re-thinking. It’s the best single best way to sharpen your ideas." - David Perell \
+[4] "Writing is like weightlifting for the brain. Just as you’ll improve your food diet if you start cooking, you’ll improve your information diet if you start writing." - David Perell \
+[5] "The faintest power is sharper than the brightest brain" - Chinese proverb
 
 **References** \
-[1] [Guide on writing](https://www.julian.com/guide/write/ideas)
+[1] [Guide on writing](https://www.julian.com/guide/write/ideas) \
 [2] [](https://perell.com/essay/why-you-should-write)
 
 
