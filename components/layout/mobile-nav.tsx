@@ -41,14 +41,7 @@ export default function MobileNav() {
             </div>
             
               <div className="border-t p-4 flex justify-between">
-                
-                {isAdmin ? (
-                  <span className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-full px-2 py-0.5 flex items-center text-xs">
-                    <Crown size={12} className="mr-1" /> Admin
-                  </span>
-                ) : (
-                  <UserProfileSection />
-                )}
+                <UserProfileSection />
                 <ThemeToggle />
               </div>
             

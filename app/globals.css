@@ -28,9 +28,9 @@
 /* Backlinks styling */
 @layer components {
   .backlink {
-    @apply text-primary px-1 py-0.5 relative cursor-pointer inline-flex items-center;
+    @apply text-primary px-1 py-0.5 relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--extra-steelBlue))];
     text-decoration: underline;
-    text-decoration-color: hsl(var(--extra-steelBlue));
+    text-decoration-color: hsl(218deg 100% 76.91% / 54%);
     text-decoration-style: solid;
     text-decoration-skip-ink: none;
     text-decoration-thickness: 0.5em;
@@ -309,70 +309,4 @@
   transition:
     opacity 300ms,
     transform 300ms;
-}
-
-.tickets {
-  clip-path: polygon(
-    15px 0%,
-    calc(100% - 15px) 0%,
-    100% 15px,
-    100% calc(100% - 15px),
-    calc(100% - 15px) 100%,
-    15px 100%,
-    0% calc(100% - 15px),
-    0% 15px
-  );
-}
-
-.ticket {
-  position: relative;
-  /* Subtle inward curves on top/bottom edges */
-  clip-path: polygon(
-    0% 8px,
-    8px 0%,
-    calc(100% - 8px) 0%,
-    100% 8px,
-    100% calc(100% - 8px),
-    calc(100% - 8px) 100%,
-    8px 100%,
-    0% calc(100% - 8px)
-  );
-  border: 3px solid #fff;
-  box-sizing: border-box;
-}
-
-.ticket .scallop {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background: #fff;
-  border-radius: 50%;
-  z-index: 2;
-}
-
-.ticket .scallop.left1 {
-  left: -12px;
-  top: 25%;
-}
-.ticket .scallop.left2 {
-  left: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.ticket .scallop.left3 {
-  left: -12px;
-  top: 75%;
-}
-.ticket .scallop.right1 {
-  right: -12px;
-  top: 25%;
-}
-.ticket .scallop.right2 {
-  right: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.ticket .scallop.right3 {
-  right: -12px;
-  top: 75%;
 }

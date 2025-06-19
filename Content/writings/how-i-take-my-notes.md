@@ -12,7 +12,7 @@ type: evergreen
 
 Writing for me is a way to properly process my thoughts, assimilate information and keep reference to things for future use. It is important to me to write in a manner that would make coming back to the note easy.
 
-I don't just write for the sake of it, I make sure that I am able to write what I understand or have understood, how I am feeling at the moment and how I felt at a particular time. I have a written note about [[why-i-write]] because it is important to know your objectives for writing and what motivates you to keep writing.
+I don't just write for the sake of it, I make sure that I am able to write what I understand or have understood, how I am feeling at the moment and how I felt at a particular time. I have a written note about [[why i write]] because it is important to know your objectives for writing and what motivates you to keep writing.
 
 I have used a number of note taking apps but my best two so far are:
 - Apple Notes App

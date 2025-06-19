@@ -43,7 +43,7 @@ export function BookmarkItem({ bookmark }: Props) {
         <a href={bookmark.link} className="flex items-center justify-between gap-4 py-2 transition-all duration-300 hover:scale-[1.025] " target="_blank" rel="noopener noreferrer" aria-label={`Visit ${bookmark.title}`}>
           <div className="flex max-w-[80%] shrink-0 items-center gap-2">
             <div className={`h-2 w-2 rounded-full ${colorMap[bookmark.type]}`} />
-            <p className="mr-2 truncate font-mono text-sm">{bookmark.title}</p>
+            <p className="mr-2 truncate text-sm">{bookmark.title}</p>
             {bookmark.tags.length > 0 && (
               <div className="flex gap-1 ">
                 {bookmark.tags.map((tag) => (
