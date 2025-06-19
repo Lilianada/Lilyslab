@@ -355,3 +355,27 @@ type: webroll
 category: portfolios
 id: portfolios-026
 ---
+
+---
+publish: true
+title: Hannah Lee
+url: https://hannahlee.ca/
+date: 2025-06-16
+tags:
+  - portfolio
+type: webroll
+category: portfolios
+id: portfolios-027
+---
+
+---
+publish: true
+title: Anthony Hobday
+url: https://www.anthonyhobday.com/
+date: 2025-06-17
+tags:
+  - portfolio
+type: webroll
+category: portfolios
+id: portfolios-028
+---

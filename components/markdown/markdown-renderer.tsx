@@ -88,7 +88,7 @@ const MarkdownRenderer = ({
     a: ({ node, className, ...props }: any) => (
       <a 
         className={cn(
-          "text-primary underline underline-offset-4 hover:text-primary/80 transition-colors",
+          "text-primary underline hover:text-primary/80 transition-colors",
           className
         )} 
         target="_blank" 

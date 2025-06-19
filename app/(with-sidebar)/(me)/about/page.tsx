@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { WorkItemComponent } from "@/components/comps/homepage-items";
 
 export default function AboutPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -140,7 +141,7 @@ export default function AboutPage() {
                   inspiration.
                 </p>
                 <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                  By day, I build and manage digital products — blending a
+                  By day, I <a href="https://www.lilianada.com/" className="text-extra-green underline" >build and manage digital products </a> — blending a
                   background in software engineering with product thinking to
                   turn creative ideas into real, user-focused solutions.
                 </p>

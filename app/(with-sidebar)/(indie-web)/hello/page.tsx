@@ -19,7 +19,7 @@ export default function HelloPage() {
           <h1 className="mb-2 text-xl font-medium">Hello</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: June 16, 2025</div>
-            <div>Last updated: June 16, 2025</div>
+            <div>Last updated: June 19, 2025</div>
             <div>Inspired by: Alastair Johnston</div>
           </div>
         </header>
@@ -105,7 +105,7 @@ export default function HelloPage() {
             see my content - @defitcreative.
           </p>
             <p className="text-muted-foreground">
-            This page inspired by <a href="https://alastairjohnston.com/introducing-hello-pages/" className="text-extra-peach">Alastair Johnston</a>.
+            This page inspired is by <a href="https://alastairjohnston.com/introducing-hello-pages/" className="text-extra-peach">Alastair Johnston</a>.
             </p>
         </div>
 
