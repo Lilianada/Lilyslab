@@ -1,6 +1,6 @@
 ---
 author: Lilian
-cover: null
+cover: 
 excerpt: Building my Digital Garden & Workshop
 published: true
 slug: day-1-of-20
@@ -12,6 +12,7 @@ readingTime: 3
 wordCount: 545
 createdAt: 2025-05-01
 type: evergreen
+lastUpdated: 2025-06-19
 ---
 
 

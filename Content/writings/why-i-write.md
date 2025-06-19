@@ -25,15 +25,10 @@ My objectives for writing are:
 My motivation for writing is simply for [[documentation]]. 
 I read a few things I wrote back in 2017 and 2021 and it made me realise that I write well when I'm not under pressure. I enjoyed reading those writings because it allowed me to re-live whatever I was feeling in the moment. It's like I captured a moment using words and it felt good to read and understand what that moment was like. 
 
-With documentation, you are able to relive experiences and emotions, you notice growth and change. You can see how your writing evolved, and for your writing to evolve and become better, it means you started reading and understanding better. Only words and actions can tell how mature a man is or if a man is maturing and the best way to capture these maturity for the future you is either by constantly recording yourself or writing. And as we all know, writing is the easiest to do.
+With documentation, you are able to relive experiences and emotions, you notice growth and change. You can see how your writing evolved, and for your writing to evolve and become better, it means you started reading and understanding better. Only words and actions can tell how mature a man is or if a man is maturing and the best way to capture[^1] these maturity for the future you is either by constantly recording yourself or writing. And as we all know, writing is the easiest to do.
 
-I write for myself but I do it in public because it helps me to stay accountable and stay consistent.
+I write for myself but I do it in public because it helps me to stay accountable and stay consistent...
 
----
-
-- Images captures your facial expressions, body languages in the moment, but they do not do a good work of capturing your emotions. We cover up heartbreaks and sufferings with the prettiest smiles, but when you write, you cannot mask your writings with smiles. You write exactly how you feel, because you have to do it with words, you might not be able to use the right words or be as descriptive as possible but in the words you write, you feel and you understand.
-
----
 
 **Quotes** \
 [1] "Words are the atomic unit of the internet." - David Perell \
@@ -44,6 +39,7 @@ I write for myself but I do it in public because it helps me to stay accountable
 
 **References** \
 [1] [Guide on writing](https://www.julian.com/guide/write/ideas) \
-[2] [](https://perell.com/essay/why-you-should-write)
+[2] [Why you should write](https://perell.com/essay/why-you-should-write) \
+[3] [Why I write](https://dominikhofer.me/why-i-write)
 
-
+[^1]: Images captures your facial expressions, body languages in the moment, but they do not do a good work of capturing your emotions. We cover up heartbreaks and sufferings with the prettiest smiles, but when you write, you cannot mask your writings with smiles. You write exactly how you feel, because you have to do it with words, you might not be able to use the right words or be as descriptive as possible but in the words you write, you feel and you understand.

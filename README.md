@@ -1,3 +1,7 @@
+---
+createdAt: 2025-06-19
+lastUpdated: 2025-06-19
+---
 # Lily's Space
 
 A modern, personal portfolio and blog website where I share my experiences, thoughts, and work. Built with Next.js, Tailwind CSS, and powered by Obsidian databases.

@@ -4,12 +4,11 @@ tags:
   - digital garden
   - personal websites
   - web development
-excerpt: >-
-  Exploring how personal websites can evolve into thriving digital gardens that
-  grow with their creators.
+excerpt: Exploring how personal websites can evolve into thriving digital gardens that grow with their creators.
 featured: true
 createdAt: 2025-06-11
 type: evergreen
+lastUpdated: 2025-06-19
 ---
 
 ## The Art of Creating Digital Gardens
