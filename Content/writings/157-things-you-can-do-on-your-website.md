@@ -230,15 +230,12 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 - [James G Blog: 100 things you can do on your personal website](https://jamesg.blog/2024/02/19/personal-website-ideas/)
 - [32-Bit Cafe: Personal Website Ideas](https://discuss.32bit.cafe/wiki/resources)
-- [Sive.rs /now page](https://sive.rs/nowff)
-- [Uses.tech](https://uses.tech)
+- [Personal Website Ideas](https://jamesg.blog/2024/02/19/personal-website-ideas)
 - [Webgardens](https://webgardens.neocities.org)
-- [Wayback Machine](https://web.archive.org/)
 - [Someday page movement](https://someday.page/)
 - [IndieWeb Wiki](https://indieweb.org/)
 - [Sadgrl.online Web Resources](https://sadgrl.online/projects/)
 - [Twine (interactive fiction)](https://twinery.org/)
-- [OpenGraph protocol](https://ogp.me/)
 - [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - [Defaults page idea](https://defaults.rknight.me/)
 - [Everyday Carry](https://everydaycarry.com/)
@@ -246,9 +243,6 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 - [Shrines explained](https://sadgrl.online/projects/shrines/)
 - [Small web manifesto](https://512kb.club/manifesto.html)
 - [Digital gardens](https://joelhooks.com/digital-garden)
-- [Pixel cliques explained](https://sadgrl.online/projects/pixel-cliques/)
-- [Blogroll history](https://en.wikipedia.org/wiki/Blogroll)
-- [Not by AI badge](https://notbyai.fyi/)
 
 
 
