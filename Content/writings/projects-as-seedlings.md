@@ -1,13 +1,11 @@
 ---
-excerpt: 
+title: The Prioritization Problem
+createdAt: 2025-05-20
+lastUpdated: 2025-06-19
 published: true
-slug: projects-as-seedlings
 tags:
   - project-management
   - digital-garden
-title: The Prioritization Problem
-createdAt: 2025-05-20
-lastUpdated:
 type: evergreen
 ---
 
@@ -23,12 +21,8 @@ You've planted the seed, you can come back to it weeks, months & even a year fro
 
 This is my current perspective on projects, I started Dexagames years ago. I came back to it but changed the name to Pentagames. The project isn't complete but it's one that I am tending to. 
 
-I now have several projects like this that I will be tending to for a long time. 
-
-Check out my projects page on https://lnkd.in/d2ZC5EpS to see all my seddlings. 
+I now have several projects like this that I will be tending to for a long time[^1]. 
 
 In the light of this, I might very well change the name of my projects page from *projects* to *seedlings* (wow I'm so cool!).
 
-Unfinished project:
-
-- https://lnkd.in/dMAHsm4B
+[^1]: Check out my projects page on [/projects](/projects) page to see all my seddlings. 

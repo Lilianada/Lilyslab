@@ -14,42 +14,43 @@ This is my personal digital space where I share:
 
 ## Site Map
 
-🏠 **Home**
+ **Home**
 - `/` - Welcome Page and Introduction
+- / 
 
-👤 **Me**
+**Me**
 - `/about` - About Me
 - `/now` - What I'm Doing Now
 - `/someday` - Future Plans and Ideas
 - `/bucket-list` - Career Bucket List
 
-🎁 **For You**
+**For You**
 - `/guestbook` - Sign My Guestbook
 - `/ask-me-anything` - Ask Me Anything (AMA)
 - `/uses` - Hardware and Software I Use
 - `/resources` - Useful Tools and Resources
 
-🌱 **Garden**
+ **Garden**
 - `/garden/writings` - Essays and Long-form Writing
 - `/garden/notes` - Notes and Thoughts
 - `/garden/bookshelf` - Reading List
 - `/garden/micro-blog` - Short-form Thoughts
 - `/bookmarks` - Saved Articles and Links
 
-🛠️ **Workshop**
+ **Workshop**
 - `/projects` - Web Projects
 - `/logs` - Project Logs
 - `/tools` - Development Tools
 - `/todo` - Website Todo List
 
-🎮 **Playground**
+**Playground**
 - Various interactive experiments and tools
 
-📚 **Collections**
-- `/garden/archives` - Previous Writings and Notes
+**Collections**
+- `/archives` - Previous Writings and Notes
 - `/then` - Archive of past Now Page updates
 
-🕸️ **IndieWeb**
+**IndieWeb**
 - `/manifesto` - Personal IndieWeb Manifesto
 - `/webroll` - Favorite Websites
 - `/webrings` - Connected Web Communities

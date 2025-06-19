@@ -1,6 +1,8 @@
 ---
-date: "2025-06-02"
-mood: "📚"
+date: 2025-06-02
+mood: 📚
+created: 2025-06-19T16:52
+updated: 2025-06-19T17:35
 ---
 
 Everyone... okay not everyone, most people. Most people have that one thing or 2 that they enjoy collecting, could be physical or digital. For a long time, I had no idea what that was for me but I found out today.
@@ -27,5 +29,4 @@ Oh and I need an Ipad cause I'd like to stay reading, stay exploring and going d
 
 From: [A Website is a Room](https://a-website-is-a-room.net/)
 "Unfortunately, the original Google Sheet containing all previously shared urls was lost in a school-wide data wipe.
-
 Part of me would like to rebuild this index to what it once was, but maybe there is something beautiful about letting information be lost forever and starting anew (after all there are still artifacts of its previous state floating around)."

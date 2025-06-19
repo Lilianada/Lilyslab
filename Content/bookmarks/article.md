@@ -1,7 +1,7 @@
 ---
 publish: true
 title: Obsidian Setup
-url: 'https://obsidian-bloger.pages.dev/git-setup-for-obsidian/'
+url: https://obsidian-bloger.pages.dev/git-setup-for-obsidian/
 createdAt: 2025-04-26
 tags:
   - productivity
@@ -9,6 +9,7 @@ tags:
   - pkm
 type: article
 id: article-001
+lastUpdated: 2025-06-19
 ---
 
 ---
@@ -1266,6 +1267,149 @@ URL: https://udara.io/creativity
 createdAt: 2025-06-15
 tags: 
   - creativity
+type: article
+publish: true
+---
+
+---
+id: article-105
+title: Personal Internet Home
+URL: https://dominikhofer.me/personal-internet-home
+createdAt: 2025-06-17
+tags: 
+  - digital-garden
+  - personal-website
+type: article
+publish: true
+---
+
+---
+id: article-106
+title: Why You Should Write
+URL: https://perell.com/essay/why-you-should-write
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+  - writing
+type: article
+publish: true
+---
+
+---
+id: article-107
+title: Joy of Writing Online
+URL: https://dominikhofer.me/joy-of-writing-online
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+  - writing
+type: article
+publish: true
+---
+
+---
+id: article-108
+title: Writing Habit
+URL: https://petersuhm.com/posts/writing-habit
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+  - writing
+  - habit
+type: article
+publish: true
+---
+
+---
+id: article-109
+title: Writing Ideas
+URL: https://www.julian.com/guide/write/ideas
+createdAt: 2025-06-19
+tags: 
+  - self-expression
+  - writing
+type: article
+publish: true
+---
+
+---
+id: article-110
+title: Writing Daily
+URL: https://dominikhofer.me/writing-daily
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+  - writing
+  - habit
+type: article
+publish: true
+---
+
+---
+id: article-111
+title: Serendipity
+URL: https://perell.com/essay/serendipity
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+type: article
+publish: true
+---
+
+---
+id: article-112
+title: Why I Write
+URL: https://dominikhofer.me/why-i-write
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+  - writing
+type: article
+publish: true
+---
+
+---
+id: article-113
+title: Why We Write
+URL: https://birming.com/why-we-write
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+  - writing
+type: article
+publish: true
+---
+
+---
+id: article-114
+title: Plaintext
+URL: https://sive.rs/plaintext
+createdAt: 2025-06-17
+tags: 
+  - self-expression
+  - writing
+type: article
+publish: true
+---
+
+---
+id: article-115
+title: Copy What You Like
+URL: https://paulgraham.com/copy.html
+createdAt: 2025-06-19
+tags: 
+  - self-expression
+type: article
+publish: true
+---
+
+---
+id: article-116
+title: How to Disagree
+URL: https://paulgraham.com/disagree.html
+createdAt: 2025-06-19
+tags: 
+  - self-expression
 type: article
 publish: true
 ---
