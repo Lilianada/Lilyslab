@@ -36,5 +36,5 @@ Choose the type of content that comes your way...
 - How do you know good information from bad information?
 - How do you know what information you should be devouring or saving and the one you should ignore? https://perell.com/essay/choose-reading https://perell.com/essay/swimming
 
-**References**
+**References** \
 [1] Building a Second Brain by Tiago Forte

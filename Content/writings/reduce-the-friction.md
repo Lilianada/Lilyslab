@@ -29,6 +29,6 @@ Knowing that 50% of the idea you started with will eventually be cut out or refi
 
 
 **References:** \
-[1]: Building a second brain \
+[1]: "Building a second brain" by Tiago Forte \
 [2]: [Write like you talk](https://paulgraham.com/talk.html) \
 [3]: [Write briefly](https://paulgraham.com/writing44.html)
