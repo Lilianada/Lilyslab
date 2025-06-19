@@ -6,7 +6,7 @@ tags:
   - projects
   - self-expression
   - creativity
-type: evergreen
+type: buddings
 published: true
 createdAt: 2025-06-19
 ---

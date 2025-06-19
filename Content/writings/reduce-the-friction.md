@@ -15,9 +15,9 @@ Writing more consistently is up there for me with eating healthier and exercisin
 
 This is an essay on how to reduce the friction between you and your writing. Reducing the friction is basically cancelling whatever might be the thing which hinders you from writing, the one which makes writing seem like a chore, difficult or what makes you have writers block. 
 
-What this means is that you need to lower the standards you have for your writings. This is usually the internal standards we didn't know we've set for our writings. To make them as polished as possible, like we're publishing the minute we're done writing. Write for the sake of writing, not publishing. Separating the process of writing from the process of publishing helps you to write without pressure and you are able to stick to just writing, no editing, no publishing, simply writing.
+What this means is that you need to lower the standards you have for your writings. This is usually the internal standards we didn't know we've set for our writings. To make them as polished as possible, like we're publishing the minute we're done writing. Write for the sake of writing, not publishing. Separating the process of writing from the process of publishing helps you to write without pressure and you are able to stick to just writing, no editing, no publishing, simply writing. The beauty of writing is, you don't need to find another person that wants to hear your idea, you simply open a blank page and pour your thoughts into it. 
 
-It's easier to start from **a rough draft** of an idea you've captured previously than to start with a blank page. And you can start these drafts in short sentences, to make points that you can continually build on into paragraphs that can then be backed with references, facts and quotes as you revisit...
+It's easier to start from **a rough draft** of an idea you've captured previously than to start with a blank page. And you can start these drafts in short sentences, to make points that you can continually build on into paragraphs that can then be backed with references, facts and quotes as you revisit. 
 
 As regards having writers block, it's not that you have writers block and can't write. It's that you do not have enough material to work with. You have to allow an idea to simmer with you for a bit, brainstorm the idea via different medium (writings both short and long, pictures, diagrams, music, podcasts etc). The longer an idea sits with you, and you continue to ponder on it, research about it, take notes on it, the better the material you'd gather to write about it.
 
@@ -27,11 +27,8 @@ Writing like you talk helps you to write simple. You should always write simply.
 
 Knowing that 50% of the idea you started with will eventually be cut out or refined should allow you to write, write as much as you can and write confidently. 80% of the ideas you end up publishing only happen after you start writing.
 
----
 
-- You don't need to find another person that wants to hear your idea, you simply open a blank page and pour your thoughts into it. 
-
-References:
-[1]: Building a second brain
-[2]: [Write like you talk](https://paulgraham.com/talk.html)
+**References:** \
+[1]: Building a second brain \
+[2]: [Write like you talk](https://paulgraham.com/talk.html) \
 [3]: [Write briefly](https://paulgraham.com/writing44.html)
