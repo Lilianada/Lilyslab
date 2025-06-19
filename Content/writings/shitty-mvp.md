@@ -43,5 +43,5 @@ The real talk → \
 
 Check out my "imperfect" app if you want (this version has been watered down to avoid complete copy/paste of clients' sites):
 
-➤ https://lnkd.in/dutb6ZPS \
-➤ https://lnkd.in/dVFaw2Fy
+➤ [firmco-admin.vercel.app](https://firmco-admin.vercel.app/) \
+➤ [firmco-client.vercel.app](https://firmco-client.vercel.app/)
