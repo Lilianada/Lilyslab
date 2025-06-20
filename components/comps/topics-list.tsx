@@ -13,6 +13,7 @@ export function TopicsList() {
     { title: "50 things I know", completed: false },
     { title: "Atomic notes", completed: false },
     { title: "Budding notes", completed: false },
+    { title: "Chi", completed: true, url: "/garden/notes/chi" },
     {
       title: "Commonplace book",
       completed: true,
@@ -21,7 +22,7 @@ export function TopicsList() {
     { title: "Content curation", completed: false },
     {
       title: "Digital Garden",
-      completed: false,
+      completed: true,
       url: "/garden/writings/digital-garden",
     },
     { title: "Digital Library", completed: false },
@@ -41,17 +42,16 @@ export function TopicsList() {
     { title: "How I Create My Wikis", completed: false },
     {
       title: "How I Take My Notes",
-      completed: false,
+      completed: true,
       url: "/garden/writings/how-i-take-my-notes",
     },
     { title: "How to create your digital garden", completed: false },
     { title: "Indie developer", completed: false },
-    { title: "Indie web", completed: false },
+    { title: "IndieWeb", completed: false },
     { title: "Javascript", completed: false },
     { title: "Journaling", completed: false },
     { title: "Map of Content", completed: false },
     { title: "Minimalism", completed: false },
-    { title: "My Chi", completed: false },
     { title: "My Name", completed: false },
     {
       title: "Personal knowledge management",
@@ -61,7 +61,7 @@ export function TopicsList() {
     { title: "Personal wiki", completed: false },
     {
       title: "Projects as Seedlings",
-      completed: false,
+      completed: true,
       url: "/garden/writings/projects-as-seedlings",
     },
     { title: "Rabbitholes", completed: true, url: "/garden/notes/rabbitholes" },
@@ -72,7 +72,7 @@ export function TopicsList() {
     { title: "Seedlings", completed: false },
     { title: "Social Media peformance", completed: false },
     { title: "Why I Read", completed: false },
-    { title: "Why I Write", completed: false },
+    { title: "Why I Write", completed: true, url: "/garden/writings/why-i-write" },
     { title: "Why Start a Digital Garden?", completed: false },
   ];
 

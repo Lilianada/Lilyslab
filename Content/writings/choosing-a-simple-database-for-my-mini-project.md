@@ -14,7 +14,7 @@ I also wanted to be able to share this mini project of mine with the world but a
 
 ---
 
-### Copilot said to do the following:
+#### Copilot said to do the following:
 
 - Push your app to GitHub.
 - Enable GitHub Pages in repo settings.
@@ -30,12 +30,12 @@ It won't work 😭😭😭 because I want to save new files directly to GitHub P
 
 ---
 
-### Obsidian
+#### Obsidian
 This won't work either. I can only update from my code editor or directly from obsidian app.
 
 ---
 
-## Notion
+#### Notion
 This is the only one that might work.
 Using **Notion as a database** for my app is a good option for simple, low-traffic projects or personal tools! 
 
@@ -76,12 +76,12 @@ Using **Notion as a database** for my app is a good option for simple, low-traff
 ---
 
 
-## TL;DR
+#### TL;DR
 
-→ **Host my frontend on my custom domain.**
-→ **Store content in Notion via the Notion API.**
-→ **Use a backend proxy (serverless function) to keep your Notion token safe.**
-→ **Frontend interacts with backend, backend interacts with Notion.**
+→ **Host my frontend on my custom domain.** \
+→ **Store content in Notion via the Notion API.** \
+→ **Use a backend proxy (serverless function) to keep your Notion token safe.** \
+→ **Frontend interacts with backend, backend interacts with Notion.** 
 
 
 *I'll try this and see how it goes, if I don't encounter any issues then I might migrate from Firebase to notion with this app*

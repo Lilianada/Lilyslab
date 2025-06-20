@@ -1,7 +1,7 @@
 ---
 title: 157 Things You Can Do For Your Website
 createdAt: 2025-06-02
-lastUpdated: 2025-06-19
+lastUpdated: 2025-06-20
 type: evergreen
 published: true
 tags:
@@ -14,10 +14,10 @@ The checklist I provided below contains **approximately 157** distinct items and
    
 This count includes all essential pages, social/community features, content creation ideas, interactive elements, technical improvements, accessibility, design/art, slash page ideas, and miscellaneous suggestions.
  
-It is a **comprehensive, categorized, and de-duplicated checklist of things you can do on your website**, combining the 82 ideas from James G’s blog, 32 bit Cafe and the additional ideas from my own diary.  
+It is a **comprehensive, categorized, and de-duplicated checklist of things you can do on your website**, combining the 82 ideas from James G’s blog, 32 bit Cafe and the additional ideas from my own diary. Feel free to check off what you’ve done or want to do. This list is designed to inspire and help you build a truly unique, personal, and feature-rich website!
   
 
-### Essential Pages & Site Structure
+#### Essential Pages & Site Structure
 
 - **Home page** */* The main landing page for your site.
 - **About page** (*about*) Introduce yourself, your background, and the purpose of your site. [About page inspiration](https://sive.rs/about)
@@ -74,7 +74,7 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 ---
 
-### Social & Community
+#### Social & Community
 
 - **Join or create a webring** [What is a webring?](https://indieweb.org/webring)
 - **Join a pixel clique or fanlisting**  [Pixel cliques explained](https://sadgrl.online/projects/pixel-cliques/)
@@ -87,7 +87,7 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 ---
 
-### Content Creation
+#### Content Creation
 
 - **Write blog posts about:**  
 	- Something that interests you  
@@ -117,7 +117,7 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 ---
 
-### Interactive & Fun Features
+#### Interactive & Fun Features
 
 - **Add a scavenger hunt**
 - **Add an easter egg**
@@ -141,7 +141,7 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 ---
 
-### Technical & Performance
+#### Technical & Performance
 
 - **Add robots.txt** [robots.txt reference](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
 - **Add humans.txt** [humans.txt standard](https://humanstxt.org/)
@@ -182,7 +182,7 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 ---
 
-### Accessibility & Inclusivity
+#### Accessibility & Inclusivity
 
 - **Test your site with a screen reader**
 - **Add a skip link for screen readers**
@@ -193,7 +193,7 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 ---
 
-### Art, Graphics, & Design
+#### Art, Graphics, & Design
 
 - **Make a pattern for your background**
 - **Make a favicon**
@@ -209,7 +209,7 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 
 ---
 
-### Miscellaneous
+#### Miscellaneous
 
 - **Add a PGP key for secure contact**
 - **Add a donation page**
@@ -245,5 +245,3 @@ It is a **comprehensive, categorized, and de-duplicated checklist of things you 
 - [Digital gardens](https://joelhooks.com/digital-garden)
 
 
-
-**Feel free to check off what you’ve done or want to do. This list is designed to inspire and help you build a truly unique, personal, and feature-rich website!**
