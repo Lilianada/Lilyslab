@@ -7,6 +7,7 @@ tags:
 title: Shitty MVP
 createdAt: 2025-05-23
 type: evergreen
+lastUpdated: 2025-06-19
 ---
 
 I built a shitty MVP and it actually worked 🤷‍♂️ \
