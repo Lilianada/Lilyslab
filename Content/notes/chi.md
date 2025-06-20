@@ -2,10 +2,10 @@
 createdAt: 2025-06-16
 lastUpdated: 2025-06-19
 title: Chi
-tags: 
-	- cosmotology
-	- pyshic
-	- spirituality
+tags:
+  - cosmotology
+  - pyshic
+  - spirituality
 type: evergreen
 published: true
 ---

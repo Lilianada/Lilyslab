@@ -17,7 +17,7 @@ export default function TodoPage() {
       completed: false,
     },
     { text: "Project 365 Days & 100 Days of Pics", completed: false },
-    { text: "Add services section to /uses", completed: false },
+    { text: "Add services section to /uses", completed: true },
     { text: "Redesign /notes list", completed: false },
     {
       text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.",
@@ -84,7 +84,7 @@ export default function TodoPage() {
           </h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: June 10, 2025</div>
-            <div>Last updated: June 17, 2025</div>
+            <div>Last updated: June 20, 2025</div>
           </div>
         </header>
 
