@@ -1,7 +1,7 @@
 ---
 title: Sonder
 createdAt: 2025-06-15
-lastUpdated: 2025-06-19
+lastUpdated: 2025-06-21
 type: budding
 published: true
 tags:

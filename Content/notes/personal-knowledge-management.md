@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-05-29
-lastUpdated: 2025-06-20
+lastUpdated: 2025-06-21
 title: Personal Knowledge Management
 tags:
   - zettelkasten

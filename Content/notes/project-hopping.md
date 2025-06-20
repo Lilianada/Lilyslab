@@ -1,7 +1,7 @@
 ---
 title: Project Hopping
 createdAt: 2025-06-17
-lastUpdated: 2025-06-20
+lastUpdated: 2025-06-21
 tags:
   - projects
   - self-expression

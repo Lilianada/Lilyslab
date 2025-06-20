@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-06-16
-lastUpdated: 2025-06-19
+lastUpdated: 2025-06-21
 title: Chi
 tags:
   - cosmotology

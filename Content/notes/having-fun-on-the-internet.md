@@ -6,6 +6,7 @@ tags:
   - indie-web
   - internet
 type: budding
+lastUpdated: 2025-06-21
 ---
 
 The internet is a network of...

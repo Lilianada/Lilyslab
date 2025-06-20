@@ -1,7 +1,7 @@
 ---
 title: Digital Zettelkasten
 createdAt: 2025-06-19
-lastUpdated: 2025-06-20
+lastUpdated: 2025-06-21
 tags:
   - note-taking
   - knowledge-management

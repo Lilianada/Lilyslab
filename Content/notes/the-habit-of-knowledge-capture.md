@@ -1,7 +1,7 @@
 ---
 title: The Habit of Knowledge Capture
 createdAt: 2025-06-17
-lastUpdated: 2025-06-19
+lastUpdated: 2025-06-21
 tags:
   - knowledge-management
   - note-taking
