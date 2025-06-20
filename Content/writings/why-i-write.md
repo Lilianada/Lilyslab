@@ -9,7 +9,7 @@ type: evergreen
 published: true
 ---
 
-After reading [Julian Shapiro's guide on writing](https://www.julian.com/guide/write/ideas) I realized that I do not write for anyone but myself. My objectives for writing makes the reason behind writing clear and my motivation ensures that I am able to see it through. When you have the wrong objective or haven't figured your reason for writing and have no motivation in place for it, this causes a friction between you and writing, and to write, you need to [[reduce the friction]].
+After reading [Julian Shapiro's guide on writing](https://www.julian.com/guide/write/ideas) I realized that I do not write for anyone but myself. My objectives for writing makes the reason behind writing clear and my motivation ensures that I am able to see through with it. When you have the wrong objective or haven't figured your reason for writing and have no motivation in place for it, this causes a friction between you and writing, and to write, you need to [[reduce the friction]].
 
 My objectives for writing are: 
 - I write because it helps me learn better. I am able to think about concepts and topics indepthly, distill the topics or ideas into simple chunks that I can understand, assimilate those chunks in order to be able to make sense of them and then write about them.
@@ -30,16 +30,16 @@ With documentation, you are able to relive experiences and emotions, you notice 
 I write for myself but I do it in public because it helps me to stay accountable and stay consistent...
 
 
-**Quotes** \
-[1] "Words are the atomic unit of the internet." - David Perell \
-[2] "The internet is the library we always dreamed of. It’s a place to learn, network, and connect with experts." - David Perell \
-[3] "Re-writing is re-thinking. It’s the best single best way to sharpen your ideas." - David Perell \
-[4] "Writing is like weightlifting for the brain. Just as you’ll improve your food diet if you start cooking, you’ll improve your information diet if you start writing." - David Perell \
-[5] "The faintest power is sharper than the brightest brain" - Chinese proverb
+**Quotes**
+1. "Words are the atomic unit of the internet." - David Perell
+2. "The internet is the library we always dreamed of. It’s a place to learn, network, and connect with experts." - David Perell
+3. "Re-writing is re-thinking. It’s the best single best way to sharpen your ideas." - David Perell
+4. "Writing is like weightlifting for the brain. Just as you’ll improve your food diet if you start cooking, you’ll improve your information diet if you start writing." - David Perell
+5. "The faintest power is sharper than the brightest brain" - Chinese proverb
 
-**References** \
-[1] [Guide on writing](https://www.julian.com/guide/write/ideas) \
-[2] [Why you should write](https://perell.com/essay/why-you-should-write) \
-[3] [Why I write](https://dominikhofer.me/why-i-write)
+**References**
+1. [Guide on writing](https://www.julian.com/guide/write/ideas) 
+2. [Why you should write](https://perell.com/essay/why-you-should-write) 
+3. [Why I write](https://dominikhofer.me/why-i-write)
 
 [^1]: Images captures your facial expressions, body languages in the moment, but they do not do a good work of capturing your emotions. We cover up heartbreaks and sufferings with the prettiest smiles, but when you write, you cannot mask your writings with smiles. You write exactly how you feel, because you have to do it with words, you might not be able to use the right words or be as descriptive as possible but in the words you write, you feel and you understand.

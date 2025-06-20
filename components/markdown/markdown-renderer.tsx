@@ -1,14 +1,25 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-import { toast } from "@/components/ui/use-toast"; // Import toast for showing errors
 
+// Helper functions for backlink handling
+const normalizeText = (text: string): string => {
+  return (text || '').toLowerCase().trim();
+};
+
+const slugify = (text: string): string => {
+  return normalizeText(text).replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+};
+
+// Global cache mechanism to avoid repeated API calls
+let notesCache: any[] | null = null;
+let writingsCache: any[] | null = null;
 
 export const MarkdownSkeleton = () => (
   <div className="animate-pulse space-y-4">
@@ -41,7 +52,6 @@ const MarkdownRenderer = ({
   allowHtml = true,
 }: MarkdownRendererProps) => {
   const router = useRouter();
-  const [isProcessingBacklink, setIsProcessingBacklink] = useState(false);
   
   // Create the components object with default styles and overrides
   const components = {
@@ -251,6 +261,97 @@ const MarkdownRenderer = ({
   if (allowHtml) {
     rehypePlugins.unshift(rehypeRaw as any);
   }
+  
+  // Function to safely fetch content with error handling
+  const fetchContent = async () => {
+    // Use cache if available to avoid repeated API calls
+    if (notesCache !== null && writingsCache !== null) {
+      return { notes: notesCache, writings: writingsCache };
+    }
+    
+    try {
+      // Fetch both resources in parallel with safe error handling
+      const [notesRes, writingsRes] = await Promise.allSettled([
+        fetch('/api/notes', { 
+          cache: 'no-store',
+          headers: { 'Content-Type': 'application/json' },
+        }),
+        fetch('/api/writings', { 
+          cache: 'no-store',
+          headers: { 'Content-Type': 'application/json' },
+        })
+      ]);
+      
+      // Process response for notes
+      let notes = [];
+      if (notesRes.status === 'fulfilled' && notesRes.value.ok) {
+        try {
+          notes = await notesRes.value.json();
+        } catch {}
+      }
+      
+      // Process response for writings
+      let writings = [];
+      if (writingsRes.status === 'fulfilled' && writingsRes.value.ok) {
+        try {
+          writings = await writingsRes.value.json();
+        } catch {}
+      }
+      
+      // Update cache
+      notesCache = notes;
+      writingsCache = writings;
+      
+      return { notes, writings };
+    } catch (error) {
+      // Return empty arrays on error
+      return { notes: [], writings: [] };
+    }
+  };
+  
+  // Helper function to find the best content match
+  const findBestMatch = (linkText: string, items: any[]): any | null => {
+    if (!items || !Array.isArray(items) || items.length === 0) return null;
+    
+    const normalized = normalizeText(linkText);
+    const slugified = slugify(linkText);
+    
+    // Try multiple matching strategies in decreasing order of strictness
+    return items.find(item => item.title === linkText) ||                        // Exact title match
+           items.find(item => normalizeText(item.title) === normalized) ||       // Case-insensitive title
+           items.find(item => item.slug === slugified) ||                        // Exact slug match
+           items.find(item => item.slug === normalized) ||                       // Normalized as slug
+           items.find(item => normalizeText(item.slug) === normalized) ||        // Case-insensitive slug
+           items.find(item => slugify(item.title) === slugified) ||              // Slugified title match
+           items.find(item => normalizeText(item.title).includes(normalized)) || // Title contains link
+           items.find(item => normalized.includes(normalizeText(item.title))) || // Link contains title
+           null;
+  };
+
+  // Handle backlink navigation with full error protection
+  const handleBacklinkClick = (linkText: string) => {
+    // Use a promise without await to avoid blocking
+    fetchContent()
+      .then(({ notes, writings }) => {
+        // Find best match
+        const noteMatch = findBestMatch(linkText, notes);
+        const writingMatch = findBestMatch(linkText, writings);
+        
+        if (noteMatch) {
+          router.push(`/garden/notes/${encodeURIComponent(noteMatch.title)}`);
+        } else if (writingMatch) {
+          router.push(`/garden/writings/${encodeURIComponent(writingMatch.slug)}`);
+        } else {
+          // Best-effort navigation - create a URL based on what's more likely
+          // This prevents errors by making an assumption about where it should go
+          router.push(`/garden/notes/${encodeURIComponent(linkText)}`);
+        }
+      })
+      .catch(() => {
+        // If anything goes wrong, take a best guess
+        router.push(`/garden/notes/${encodeURIComponent(linkText)}`);
+      });
+  };
 
   // Process backlinks in the content
   const processBacklinks = (content: string) => {
@@ -279,66 +380,20 @@ const MarkdownRenderer = ({
             if (href && href.startsWith('/__backlink/')) {
               const linkText = decodeURIComponent(href.replace('/__backlink/', ''));
               
-              // Custom handler for backlink click - find and navigate to the matching page
-              const handleBacklinkClick = async () => {
-                try {
-                  // Fetch notes and writings to find a matching title
-                  const [notesResponse, writingsResponse] = await Promise.all([
-                    fetch('/api/notes'),
-                    fetch('/api/writings')
-                  ]);
-                  
-                  if (!notesResponse.ok || !writingsResponse.ok) {
-                    throw new Error('Failed to fetch content');
-                  }
-                  
-                  const notesData = await notesResponse.json();
-                  const writingsData = await writingsResponse.json();
-                  
-                  // Find exact match or case-insensitive match
-                  const exactNote = notesData.find((note: any) => note.title === linkText);
-                  const exactWriting = writingsData.find((writing: any) => writing.title === linkText);
-                  
-                  const caseInsensitiveNote = notesData.find((note: any) => 
-                    note.title.toLowerCase() === linkText.toLowerCase()
-                  );
-                  const caseInsensitiveWriting = writingsData.find((writing: any) => 
-                    writing.title.toLowerCase() === linkText.toLowerCase()
-                  );
-                  
-                  // Navigate to the first match found
-                  if (exactNote) {
-                    window.location.href = `/garden/notes/${exactNote.title}`;
-                  } else if (exactWriting) {
-                    window.location.href = `/garden/writings/${exactWriting.slug}`;
-                  } else if (caseInsensitiveNote) {
-                    window.location.href = `/garden/notes/${caseInsensitiveNote.title}`;
-                  } else if (caseInsensitiveWriting) {
-                    window.location.href = `/garden/writings/${caseInsensitiveWriting.slug}`;
-                  } else {
-                    // Show error toast if no match is found
-                    toast({
-                      title: "Backlink not found",
-                      description: `No matching note or writing found for "${linkText}".`,
-                      variant: "destructive",
-                    });
-                  }
-                } catch (error) {
-                  console.error('Error handling backlink:', error);
-                  // Show error toast on exception
-                  toast({
-                    title: "Error",
-                    description: "An error occurred while processing the backlink.",
-                    variant: "destructive",
-                  });
-                }
-              };
-              
               return (
                 <span 
                   className="backlink"
                   data-backlink={linkText}
-                  onClick={handleBacklinkClick}
+                  onClick={() => handleBacklinkClick(linkText)}
+                  title={`Go to: ${linkText}`}
+                  role="link"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleBacklinkClick(linkText);
+                    }
+                  }}
                   {...props}
                 >
                   {props.children}

@@ -28,18 +28,38 @@
 /* Backlinks styling */
 @layer components {
   .backlink {
-    @apply text-primary px-1 py-0.5 relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--extra-steelBlue))];
+    @apply dark:text-primary relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--extra-steelBlue))];
+    /* color: hsl(var(--extra-lavender)); */
     text-decoration: underline;
-    text-decoration-color: hsla(218, 100%, 80%, 0.54);
+    text-decoration-color: hsla(218, 93%, 83%, 0.54);
     text-decoration-style: solid;
     text-decoration-skip-ink: none;
     text-decoration-thickness: 0.5em;
     text-underline-offset: -0.25em;
-    transition: text-decoration 0.3s;
+    transition: all 0.3s;
   }
   .backlink:hover {
     text-decoration-color: hsl(var(--extra-blue));
     text-decoration-thickness: 0.6em;
+  }
+  .backlink:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background rounded-sm;
+  }
+  .backlink[aria-disabled="true"] {
+    @apply opacity-50 cursor-not-allowed;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.9;
+    }
+    100% {
+      opacity: 0.6;
+    }
   }
 }
 
