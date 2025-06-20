@@ -9,7 +9,7 @@ type: evergreen
 published: true
 ---
 
-> "Writing is like weightlifting for the brain. Just as you’ll improve your food diet if you start cooking, you’ll improve your information diet if you start writing." - David Perell
+> Writing is like weightlifting for the brain. Just as you’ll improve your food diet if you start cooking, you’ll improve your information diet if you start writing. - David Perell
 
 Writing more consistently is up there for me with eating healthier and exercising more because these are habits that are essential for building a quality life. It helps you to build awareness of what is going on inside your mind, preserves what's going on there, discover patterns that aren't clear, connect ideas from different things you must have read or seen, put down lingering thoughts to give space for more ideas, make sense of things that has happened and make space to plan for things that will happen.
 

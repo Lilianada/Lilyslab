@@ -22,19 +22,12 @@ We are immediately bombarded with streams of information the moment we turn on o
 
 To curb this overload and the effects it has on us, we need to take a step back to filter what we allow to be presented to us. We mustn't be on every social platform or engage in every conversation/argument that spins up every now and then.
 
+> The quality of your output depends on the quality of your input.
+
 We need to become more intentional about the information we choose to consume. New trends spring up each day, emails are proliferating by the hour, arguments are ensuing in different threads, groups and forums. All these are happening with or without our involvement.
 
-Choose the type of content that comes your way...
-Just as we feed our bodies with food and only the good type, it's our duty and responsibility to select only the good kind of information to consume.
-
-**Quotes**
-- Your mind is for having ideas, not holding them. - David Allen.
-- The quality of your output depends on the quality of your input.
+Pick your [[information diet]] wisely. Just as we feed our bodies with food and only the good type, it's our duty and responsibility to select only the good kind of information to consume.
 
 
-**Food for thoughts**
-- How do you know good information from bad information?
-- How do you know what information you should be devouring or saving and the one you should ignore? https://perell.com/essay/choose-reading https://perell.com/essay/swimming
-
-**References** \
-[1] Building a Second Brain by Tiago Forte
+**References** 
+1. Building a Second Brain by Tiago Forte

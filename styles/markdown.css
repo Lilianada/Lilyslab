@@ -27,7 +27,7 @@
 }
 
 .markdown-content blockquote {
-  @apply text-sm font-normal mt-6 border-l-2 pl-6 italic text-muted-foreground;
+  @apply text-sm font-normal mt-6 px-3 italic text-muted-foreground/70 bg-extra-steelBlue/20 rounded-[2px] py-1;
 }
 
 /* Code block styling */
@@ -78,7 +78,7 @@
 }
 
 .markdown-content li {
-  @apply mt-2;
+  @apply mt-1;
 }
 
 /* Links styling */
