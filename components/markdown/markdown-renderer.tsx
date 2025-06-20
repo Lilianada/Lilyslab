@@ -1,11 +1,13 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
+import { toast } from "@/components/ui/use-toast"; // Import toast for showing errors
 
 
 export const MarkdownSkeleton = () => (
@@ -38,6 +40,9 @@ const MarkdownRenderer = ({
   customComponents = {},
   allowHtml = true,
 }: MarkdownRendererProps) => {
+  const router = useRouter();
+  const [isProcessingBacklink, setIsProcessingBacklink] = useState(false);
+  
   // Create the components object with default styles and overrides
   const components = {
     h1: ({ node, className, ...props }: any) => (
@@ -310,9 +315,22 @@ const MarkdownRenderer = ({
                     window.location.href = `/garden/notes/${caseInsensitiveNote.title}`;
                   } else if (caseInsensitiveWriting) {
                     window.location.href = `/garden/writings/${caseInsensitiveWriting.slug}`;
-                  } 
+                  } else {
+                    // Show error toast if no match is found
+                    toast({
+                      title: "Backlink not found",
+                      description: `No matching note or writing found for "${linkText}".`,
+                      variant: "destructive",
+                    });
+                  }
                 } catch (error) {
                   console.error('Error handling backlink:', error);
+                  // Show error toast on exception
+                  toast({
+                    title: "Error",
+                    description: "An error occurred while processing the backlink.",
+                    variant: "destructive",
+                  });
                 }
               };
               
