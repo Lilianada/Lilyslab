@@ -5,7 +5,8 @@ lastUpdated: 2025-06-19
 type: budding
 published: true
 tags:
-  - 
+  - concepts
+  - psychology
 ---
 
 

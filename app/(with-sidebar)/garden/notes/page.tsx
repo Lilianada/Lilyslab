@@ -31,6 +31,8 @@ const NoteMetaSchema = z.object({
     )
   ]).optional(),
   type: z.string().optional(),
+  published: z.boolean().optional(),
+  tags: z.array(z.string()).optional()
 });
 
 interface NoteMeta {
@@ -72,6 +74,11 @@ export default function NotesPage() {
         // Try to parse and validate frontmatter, skip if ZodError or invalid date
         try {
           const result = read(filePath, NoteMetaSchema);
+          
+          // Skip unpublished notes - only include if published is true or undefined
+          if (result.data.published === false) {
+            return [];
+          }
           
           // Use our centralized date formatting utility
           // Determine the best date to use - prefer createdAt then fall back to date

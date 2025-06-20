@@ -6,7 +6,7 @@ tags:
   - projects
   - self-expression
   - creativity
-type: buddings
+type: budding
 published: true
 ---
 

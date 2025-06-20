@@ -1,7 +1,7 @@
 ---
 title: Birthday Anxiety
 published: true
-tags
+tags:
   - mental-health
   - personal-growth
   - adulthood
