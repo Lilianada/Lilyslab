@@ -109,8 +109,8 @@ export default function UsesPage() {
           <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-2 text-xl font-medium">Uses</h1>
         <div className="flex flex-col text-xs text-muted-foreground font-mono">
-          <div>Created: 2025-04-05</div>
-          <div>Last updated: 2025-06-13</div>
+          <div>Created: 2025-04-15</div>
+          <div>Last updated: 2025-06-20</div>
           <div>Inspired by: uses.tech</div>
         </div>
         <p className="text-sm text-muted-foreground mt-2">Tools, apps, and services I use daily.</p>
