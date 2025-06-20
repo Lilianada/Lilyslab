@@ -35,6 +35,7 @@ import {
   ShipWheel,
   Loader,
   CalendarArrowDown,
+  Quote,
 } from "lucide-react";
 import { ThemeToggle } from "../theme/theme-toggle";
 import { useEffect, useState } from "react";
@@ -469,6 +470,13 @@ export default function Sidebar({
 
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Collections" delay={1500} />
+            <NavItem
+              href="/quotes"
+              icon={<Quote size={16} />}
+              label="Quotes"
+              onClick={onNavClick}
+              delay={1525}
+            />
             <NavItem
               href="/archives"
               icon={<History size={16} />}

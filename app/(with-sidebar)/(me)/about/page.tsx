@@ -4,7 +4,6 @@ import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { WorkItemComponent } from "@/components/comps/homepage-items";
 
 export default function AboutPage() {
   const [isLoaded, setIsLoaded] = useState(false);
