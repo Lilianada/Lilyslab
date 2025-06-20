@@ -7,11 +7,16 @@ partOfSpeech: adjective
 
 **Meaning:** Increase rapidly in number; multiplying really quickly, spreading
 
-**Example:** 
+**Example:** "The internet has enabled misinformation to start proliferating at an unprecedented rate."
 
 **Similar:** 
-- Expand
-- Reproduce
-- Spawn
+- Expanding
+- Reproducing
+- Spawning
+- Multiplying
+- Spreading
+- Growing rapidly
+- Flourishing
+- Burgeoning
 
-**Context:** 
+**Context:** Often used in biological contexts to describe cell division, but also commonly applied to ideas, technologies, or social phenomena that spread quickly throughout populations.
