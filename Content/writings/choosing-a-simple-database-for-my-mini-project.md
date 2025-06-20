@@ -1,7 +1,7 @@
 ---
 title: Choosing a Simple Database for my Mini Project
 createdAt: 2025-05-29
-lastUpdated: 2025-06-19
+lastUpdated: 2025-06-20
 type: evergreen
 published: true
 tags:

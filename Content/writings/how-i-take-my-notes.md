@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-06-02
-lastUpdated: 2025-06-19
+lastUpdated: 2025-06-20
 title: How I Take My Notes
 tags:
   - pkm
