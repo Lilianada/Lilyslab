@@ -10,5 +10,11 @@ partOfSpeech: adjective
 **Example:** "this explanation sounds perversely counter-intuitive"
 
 **Similar:** 
+- Paradoxical
+- Illogical
+- Unexpected
+- Surprising
+- Contradictory
+- Against common sense
 
-**Context:** 
+**Context:** Frequently used in scientific discussions where research findings go against what people would naturally expect, such as "counterintuitive results" in psychology or physics experiments.

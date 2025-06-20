@@ -397,16 +397,23 @@ export default function Sidebar({
               onClick={onNavClick}
               delay={900}
             />
+            <NavItem
+              href="/garden/word-of-the-day"
+              icon={<ScrollText size={16} />}
+              label="Word of the Day"
+              onClick={onNavClick}
+              delay={950}
+            />
           </div>
 
           <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Workshop" delay={950} />
+            <SectionTitle title="Workshop" delay={1000} />
             <NavItem
               href="/projects"
               icon={<BriefcaseBusiness size={16} />}
               label="Projects"
               onClick={onNavClick}
-              delay={1000}
+              delay={1050}
             />
             {/* <NavItem href="/logs" icon={<Clock size={16} />} label="Logs" onClick={onNavClick} delay={950} />  */}
             <NavItem
@@ -414,7 +421,7 @@ export default function Sidebar({
               icon={<Wrench size={16} />}
               label="Tools"
               onClick={onNavClick}
-              delay={1050}
+              delay={1100}
             />
             <NavItem
               href="/todo"

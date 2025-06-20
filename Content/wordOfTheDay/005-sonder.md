@@ -1,7 +1,7 @@
 ---
 date: 2025-06-14
 word: Sonder
-pronunciation: 
+pronunciation: /ˈsɒndə/
 partOfSpeech: noun
 ---
 
@@ -10,5 +10,10 @@ partOfSpeech: noun
 **Example:** "In a state of sonder, each of us is at once a hero, a supporting cast member, and an extra in overlapping stories."
 
 **Similar:** 
+- Empathy
+- Awareness
+- Realization
+- Recognition
+- Understanding
 
-**Context:** 
+**Context:** A term coined by John Koenig for his Dictionary of Obscure Sorrows, describing a profound moment of human connection and understanding.

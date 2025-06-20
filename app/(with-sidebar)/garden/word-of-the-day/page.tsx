@@ -50,11 +50,10 @@ const WordOfTheDayPage: React.FC = () => {
   // Helper function to format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
   // Helper function to render loading skeleton
@@ -62,14 +61,49 @@ const WordOfTheDayPage: React.FC = () => {
     <div className="space-y-4">
       <div className="animate-pulse">
         <div className="h-6 bg-muted rounded w-1/4 mb-4"></div>
-        <div className="border rounded-lg overflow-hidden">
-          <div className="bg-muted h-12"></div>
-          {[1, 2, 3, 4, 5].map(i => (
-            <div key={i} className="border-t p-4 space-y-2">
-              <div className="h-4 bg-muted rounded w-3/4"></div>
-              <div className="h-3 bg-muted rounded w-1/2"></div>
-            </div>
-          ))}
+        <div className="overflow-x-auto rounded-lg border">
+          <table className="w-full">
+            <thead className="bg-muted/50">
+              <tr>
+                <th className="px-3 py-2 w-28 border-r border-border">
+                  <div className="h-4 bg-muted rounded"></div>
+                </th>
+                <th className="px-3 py-2 border-r border-border">
+                  <div className="h-4 bg-muted rounded"></div>
+                </th>
+                <th className="px-3 py-2 w-20 border-r border-border">
+                  <div className="h-4 bg-muted rounded"></div>
+                </th>
+                <th className="px-3 py-2">
+                  <div className="h-4 bg-muted rounded"></div>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {[1, 2, 3, 4, 5].map(i => (
+                <tr key={i} className="border-t">
+                  <td className="px-3 py-2.5 border-r border-border">
+                    <div className="h-4 bg-muted rounded w-20"></div>
+                  </td>
+                  <td className="px-3 py-2.5 border-r border-border">
+                    <div className="space-y-1">
+                      <div className="h-4 bg-muted rounded w-24"></div>
+                      <div className="h-3 bg-muted rounded w-20"></div>
+                    </div>
+                  </td>
+                  <td className="px-3 py-2.5 border-r border-border">
+                    <div className="h-6 bg-muted rounded w-16"></div>
+                  </td>
+                  <td className="px-3 py-2.5">
+                    <div className="space-y-2">
+                      <div className="h-4 bg-muted rounded w-full"></div>
+                      <div className="h-3 bg-muted rounded w-3/4"></div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -78,11 +112,9 @@ const WordOfTheDayPage: React.FC = () => {
   return (
     <>
       <ScrollProgress color="bg-extra-lavender" height={3} glow={true} />
-      <div
-        className={`max-w-4xl w-full mx-auto sm:px-4 pt-16 pb-8 ${
-          isLoaded ? "animate-fade-in" : "opacity-0"
-        }`}
-      >
+     
+    <div className="min-h-screen animate-fade-in">
+      <div className="container max-w-4xl mx-auto px-0 sm:px-4 pt-16 pb-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Word of the Day</h1>
@@ -109,69 +141,74 @@ const WordOfTheDayPage: React.FC = () => {
             <p className="text-muted-foreground text-sm">No words found.</p>
           </div>
         ) : (
-          <div className="border rounded-lg overflow-hidden bg-card">
-            <div className="bg-muted/50 px-4 py-3 border-b">
-              <div className="grid grid-cols-12 gap-4 text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                <div className="col-span-2">Date</div>
-                <div className="col-span-2">Word</div>
-                <div className="col-span-1">Type</div>
-                <div className="col-span-4">Meaning</div>
-                <div className="col-span-3">Example</div>
-              </div>
-            </div>
-            <div className="divide-y divide-border">
-              {words.map((word) => (
-                <div
-                  key={word.id}
-                  className="grid grid-cols-12 gap-4 p-4 hover:bg-muted/20 transition-colors"
-                >
-                  <div className="col-span-2 text-sm font-mono text-muted-foreground">
-                    {formatDate(word.date)}
-                  </div>
-                  <div className="col-span-2">
-                    <div className="font-medium text-sm">{word.word}</div>
-                    {word.pronunciation && (
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {word.pronunciation}
+          <div className="overflow-x-auto rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50">
+                <tr>
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground font-mono text-xs uppercase tracking-wide w-28 border-r border-border">
+                    Date
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground font-mono text-xs uppercase tracking-wide border-r border-border">
+                    Word
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground font-mono text-xs uppercase tracking-wide w-20 border-r border-border">
+                    Type
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground font-mono text-xs uppercase tracking-wide">
+                    Meaning & Example
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {words.map((word, index) => (
+                  <tr
+                    key={word.id}
+                    className="hover:bg-muted/50 transition-colors"
+                  >
+                    <td className="px-3 py-2.5 text-xs font-mono text-muted-foreground border-r border-border">
+                      {formatDate(word.date)}
+                    </td>
+                    <td className="px-3 py-2.5 border-r border-border">
+                      <div className="font-medium text-sm">{word.word}</div>
+                      {word.pronunciation && (
+                        <div className="text-xs text-muted-foreground mt-1 font-mono">
+                          {word.pronunciation}
+                        </div>
+                      )}
+                    </td>
+                    <td className="px-3 py-2.5 border-r border-border">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-accent/20 text-accent-foreground font-mono">
+                        {word.partOfSpeech}
+                      </span>
+                    </td>
+                    <td className="px-3 py-2.5">
+                      <div className="space-y-2">
+                        <div className="text-sm leading-relaxed">
+                          {word.meaning}
+                        </div>
+                        {(word.example || word.context) && (
+                          <div className="text-sm text-muted-foreground italic">
+                            "{word.example || word.context}"
+                          </div>
+                        )}
+                        {word.similar.length > 0 && (
+                          <div className="text-xs text-muted-foreground">
+                            <span className="font-medium">Similar: </span>
+                            {word.similar.slice(0, 4).join(', ')}
+                            {word.similar.length > 4 && '...'}
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <div className="col-span-1">
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-accent/20 text-accent-foreground">
-                      {word.partOfSpeech}
-                    </span>
-                  </div>
-                  <div className="col-span-4 text-sm leading-relaxed">
-                    {word.meaning}
-                    {word.similar.length > 0 && (
-                      <div className="mt-2">
-                        <span className="text-xs text-muted-foreground">Similar: </span>
-                        <span className="text-xs">
-                          {word.similar.slice(0, 3).join(', ')}
-                          {word.similar.length > 3 && '...'}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="col-span-3 text-sm text-muted-foreground">
-                    {word.example && (
-                      <span className="italic">"{word.example}"</span>
-                    )}
-                    {word.context && !word.example && (
-                      <span className="italic">"{word.context}"</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
         
-        <Footer 
-          inspirationName="Vocabulary building"
-          inspirationUrl="https://www.merriam-webster.com/word-of-the-day"
-          color='text-extra-lavender'
-        />
+        <Footer />
+      </div>
       </div>
     </>
   );

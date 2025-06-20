@@ -1,15 +1,21 @@
 ---
 date: 2025-06-20
 word: Voraciously
-pronunciation: 
+pronunciation: /vəˈreɪʃəsli/
 partOfSpeech: adverb
 ---
 
-**Meaning:** 1. wanting or devouring great quantities of food. 2. engaging in an activity with great eagerness or enthusiasm.
+**Meaning:** 1. wanting or devouring great quantities of food. \
+2. engaging in an activity with great eagerness or enthusiasm.
 
 **Example:** "she's a voracious reader / she reads voraciously."
 
 **Similar:** 
-- eagerness
+- Eagerly
+- Hungrily
+- Ravenously
+- Avidly
+- Enthusiastically
+- Insatiably
 
-**Context:** 
+**Context:** Commonly used to describe someone's approach to learning, reading, or consuming information, emphasizing an almost insatiable appetite for knowledge or content.

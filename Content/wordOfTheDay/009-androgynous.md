@@ -10,5 +10,11 @@ partOfSpeech: adjective
 **Example:** "a stunningly androgynous dancer"
 
 **Similar:** 
+- Unisex
+- Gender-neutral
+- Ambiguous
+- Hermaphroditic
+- Epicene
+- Non-binary
 
-**Context:** 
+**Context:** Often used in fashion, art, and gender studies to describe appearances or expressions that blend masculine and feminine characteristics.

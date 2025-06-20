@@ -17,4 +17,4 @@ partOfSpeech: noun
 - Surfeit
 - Profusion
 
-**Context:** 
+**Context:** Originally a medical term referring to an excess of blood in the body, now commonly used to describe any overwhelming abundance of choices, options, or items.
