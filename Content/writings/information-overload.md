@@ -25,7 +25,7 @@ To curb this overload and the effects it has on us, we need to take a step back 
 We need to become more intentional about the information we choose to consume. New trends spring up each day, emails are proliferating by the hour, arguments are ensuing in different threads, groups and forums. All these are happening with or without our involvement.
 
 Choose the type of content that comes your way...
-
+Just as we feed our bodies with food and only the good type, it's our duty and responsibility to select only the good kind of information to consume.
 
 **Quotes**
 - Your mind is for having ideas, not holding them. - David Allen.

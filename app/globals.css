@@ -30,7 +30,7 @@
   .backlink {
     @apply text-primary px-1 py-0.5 relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--extra-steelBlue))];
     text-decoration: underline;
-    text-decoration-color: hsl(218deg 100% 76.91% / 54%);
+    text-decoration-color: hsla(218, 100%, 80%, 0.54);
     text-decoration-style: solid;
     text-decoration-skip-ink: none;
     text-decoration-thickness: 0.5em;

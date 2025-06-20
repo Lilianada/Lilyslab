@@ -6,7 +6,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
-  Home,
   BookOpen,
   MessageSquare,
   Layers,
@@ -27,14 +26,15 @@ import {
   Shield,
   MessageCircleHeart,
   Heart,
-  Network,
   Calendar,
   Smile,
   Flower,
   ListCheck,
   ScrollText,
   MessageCircleCodeIcon,
-  Sparkles,
+  ShipWheel,
+  Loader,
+  CalendarArrowDown,
 } from "lucide-react";
 import { ThemeToggle } from "../theme/theme-toggle";
 import { useEffect, useState } from "react";
@@ -281,7 +281,7 @@ export default function Sidebar({
             />
             <NavItem
               href="/hello"
-              icon={<Sparkles size={16} />}
+              icon={<Loader size={16} />}
               label="Hello"
               onClick={onNavClick}
               delay={120}
@@ -443,48 +443,48 @@ export default function Sidebar({
           </div>
 
           <div className="space-y-1.5 mb-2">
-            <SectionTitle title="Collections" delay={1300} />
-            <NavItem
-              href="/archives"
-              icon={<History size={16} />}
-              label="Archives"
-              onClick={onNavClick}
-              delay={1350}
-            />
-            <NavItem
-              href="/then"
-              icon={<History size={16} />}
-              label="Then"
-              onClick={onNavClick}
-              delay={1400}
-            />
-            {/* <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={1400} />
-            <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1450} /> */}
-          </div>
-
-          <div className="space-y-1.5 mb-2">
-            <SectionTitle title="IndieWeb" delay={1500} />
+            <SectionTitle title="IndieWeb" delay={1300} />
             <NavItem
               href="/manifesto"
               icon={<Shield size={16} />}
               label="Manifesto"
               onClick={onNavClick}
-              delay={1550}
+              delay={1350}
             />
             <NavItem
               href="/webroll"
               icon={<ScrollText size={16} />}
               label="Webroll"
               onClick={onNavClick}
-              delay={1600}
+              delay={1400}
             />
             <NavItem
               href="/webrings"
-              icon={<Network size={16} />}
+              icon={<ShipWheel size={16} />}
               label="Webrings"
               onClick={onNavClick}
-              delay={1650}
+              delay={1450}
             />
+          </div>
+
+          <div className="space-y-1.5 mb-2">
+            <SectionTitle title="Collections" delay={1500} />
+            <NavItem
+              href="/archives"
+              icon={<History size={16} />}
+              label="Archives"
+              onClick={onNavClick}
+              delay={1550}
+            />
+            <NavItem
+              href="/then"
+              icon={<CalendarArrowDown size={16} />}
+              label="Then"
+              onClick={onNavClick}
+              delay={1600}
+            />
+            {/* <NavItem href="/100pics" icon={<ImageIcon size={16} />} label="100Pics" onClick={onNavClick} delay={1650} />
+            <NavItem href="/365days" icon={<CalendarDaysIcon size={16} />} label="365days" onClick={onNavClick} delay={1700} /> */}
           </div>
 
           {isAdmin && (
