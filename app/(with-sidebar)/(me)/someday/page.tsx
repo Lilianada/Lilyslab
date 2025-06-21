@@ -1,9 +1,18 @@
 import { Footer } from "@/components/layout/footer";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import Link from "next/link";
 import React from "react";
 
 export default function SomedayPage() {
   return (
+    <>
+     <ScrollProgress
+            color="bg-lavender"
+            height={3}
+            glow={true}
+            glowColor="rgba(var(--lavender), 0.6)"
+            glowIntensity="12px"
+          />
     <div className="max-w-2xl mx-auto sm:px-4 pt-16 pb-8 ">
       <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
@@ -128,5 +137,6 @@ export default function SomedayPage() {
 
       <Footer/>
     </div>
+    </>
   );
 }

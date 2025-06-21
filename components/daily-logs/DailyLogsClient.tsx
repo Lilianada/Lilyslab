@@ -149,23 +149,23 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
         <div className="flex items-center gap-3">
           <button
             onClick={() => window.history.back()}
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Go back"
           >
             <ArrowLeft size={18} />
-          </button>
           <h1 className="text-lg font-semibold tracking-wide">DAILY LOGS</h1>
+          </button>
         </div>
         <div className="flex gap-2">
           <Link
             href="/ask-me-anything"
-            className="px-3 py-1 rounded border border-yellow-500 dark:border-yellow-300 text-yellow-500 dark:text-yellow-300 font-mono text-sm hover:bg-yellow-500/10 transition"
+            className="px-3 py-1 rounded border border-yellow-500 dark:border-yellow-300 text-yellow-500 dark:text-yellow-300 font-nitti text-sm hover:bg-yellow-500/10 transition"
           >
             Ask me anything
           </Link>
           <button
             onClick={() => setShowWhyModal(true)}
-            className="px-3 py-1 rounded border border-muted text-muted-foreground font-mono text-sm hover:bg-muted/50 transition"
+            className="px-3 py-1 rounded border border-muted text-muted-foreground font-nitti text-sm hover:bg-muted/50 transition"
           >
             Why keep daily logs?
           </button>
@@ -181,7 +181,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
           return (
             <div
               key={idx}
-              className="flex flex-col justify-between border-2 border-dashed border-border bg-card p-5 min-h-[270px] max-h-[340px] transition-shadow hover:shadow-md rounded-sm font-mono"
+              className="flex flex-col justify-between border-2 border-dashed border-border bg-card p-5 min-h-[270px] max-h-[340px] transition-shadow hover:shadow-md rounded-sm font-nitti"
             >
               {/* Heading row */}
               <div className="flex justify-between items-center mb-3">
@@ -220,7 +220,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
                 {isOverflowing && (
                   <button
                     onClick={() => setModalLog(log)}
-                    className="ml-4 text-yellow-400 hover:text-yellow-200 dark:text-yellow-400 dark:hover:text-yellow-200 font-semibold transition"
+                    className="ml-4 text-codeRed hover:text-codeRed/70 dark:text-codeRed dark:hover:text-codeRed/70 font-semibold transition"
                   >
                     Read more
                   </button>
@@ -258,7 +258,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
 
             {/* Modal Content - Scrollable */}
             <div className="flex-1 overflow-y-auto p-6 pt-4">
-              <div className="prose prose-sm dark:prose-invert max-w-none font-mono text-sm">
+              <div className="prose prose-sm dark:prose-invert max-w-none font-nitti text-sm">
                 <MarkdownWithColoredLinks>
                   {modalLog.body}
                 </MarkdownWithColoredLinks>
@@ -289,7 +289,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
 
             {/* Modal Content - Scrollable */}
             <div className="flex-1 overflow-y-auto p-6 pt-4">
-              <div className="prose prose-sm dark:prose-invert max-w-none font-mono text-sm space-y-4">
+              <div className="prose prose-sm dark:prose-invert max-w-none font-nitti text-sm space-y-4">
                 <p>
                   Keeping daily notes is like having a conversation with your
                   future self. It's a practice that transforms fleeting thoughts

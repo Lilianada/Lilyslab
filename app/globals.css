@@ -28,9 +28,9 @@
 /* Backlinks styling */
 @layer components {
   .backlink {
-    @apply dark:text-lightBlue relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--steelBlue))];
+    @apply relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--steelBlue))];
     text-decoration: underline;
-    text-decoration-color: hsla(218, 93%, 83%, 0.54);
+    text-decoration-color: hsl(var(--lightBlue) / 0.8);
     text-decoration-style: solid;
     text-decoration-skip-ink: none;
     text-decoration-thickness: 0.5em;

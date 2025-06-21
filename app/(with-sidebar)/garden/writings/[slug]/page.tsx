@@ -96,7 +96,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
         glowIntensity="12px"
       />
       <div className="max-w-2xl w-full mx-auto animate-fade-in">
-        <div className="mt-6 sm:mt-12 mb-8 flex items-center ">
+        <div className="mt-6 sm:mt-12 mb-4 flex items-center ">
           <Link
             href="/garden/writings"
             className="flex items-center gap-1 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
