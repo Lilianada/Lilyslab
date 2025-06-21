@@ -9,10 +9,10 @@ export default function Colophon() {
   return (
     <>
       <ScrollProgress 
-        color="bg-extra-peach" 
+        color="bg-peach" 
         height={3} 
         glow={true}
-        glowColor="rgba(var(--extra-peach), 0.6)"
+        glowColor="rgba(var(--peach), 0.6)"
         glowIntensity="12px"
       />
       <div className="max-w-3xl mx-auto py-12 px-4 animate-fade-in">
@@ -46,7 +46,7 @@ export default function Colophon() {
               <div className="font-medium flex items-center justify-between">
                 <span>{tech.name}</span>
                 <span className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-extra-peach" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-peach" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 12L12 4M12 4H5.6M12 4V10.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </span>
@@ -85,9 +85,9 @@ export default function Colophon() {
               href={site.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 underline underline-offset-2 text-sm font-normal hover:text-extra-peach transition-colors"
+              className="flex items-center gap-1 underline underline-offset-2 text-sm font-normal hover:text-peach transition-colors"
             >
-              <svg width="8" height="8" viewBox="0 0 16 16" fill="none" className="text-extra-peach mr-1" style={{ minWidth: 8, minHeight: 8 }} xmlns="http://www.w3.org/2000/svg">
+              <svg width="8" height="8" viewBox="0 0 16 16" fill="none" className="text-peach mr-1" style={{ minWidth: 8, minHeight: 8 }} xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 8L6.5 12.5L14 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               {site.name}
@@ -132,17 +132,17 @@ export default function Colophon() {
         {/* Bookshelf palette */}
         <div className="flex flex-wrap gap-4 items-end mb-2 mt-3">
           {[
-            { name: 'Cream', var: 'var(--extra-cream)' },
-            { name: 'PaleYellow', var: 'var(--extra-paleYellow)' },
-            { name: 'Yellow', var: 'var(--extra-yellow)' },
-            { name: 'Blue', var: 'var(--extra-blue)' },
-            { name: 'SteelBlue', var: 'var(--extra-steelBlue)' },
-            { name: 'Lavender', var: 'var(--extra-lavender)' },
+            { name: 'Cream', var: 'var(--cream)' },
+            { name: 'PaleYellow', var: 'var(--paleYellow)' },
+            { name: 'Yellow', var: 'var(--yellow)' },
+            { name: 'Blue', var: 'var(--blue)' },
+            { name: 'SteelBlue', var: 'var(--steelBlue)' },
+            { name: 'Lavender', var: 'var(--lavender)' },
             { name: 'Primary', var: 'var(--primary)' },
-            { name: 'Lilac', var: 'var(--extra-lilac)' },
-            { name: 'Pink', var: 'var(--extra-pink)' },
-            { name: 'Peach', var: 'var(--extra-peach)' },
-            { name: 'Green', var: 'var(--extra-green)' },
+            { name: 'Lilac', var: 'var(--lilac)' },
+            { name: 'Pink', var: 'var(--pink)' },
+            { name: 'Peach', var: 'var(--peach)' },
+            { name: 'Green', var: 'var(--green)' },
           ].map((color) => (
             <div key={`extra-${color.name}`} className="flex flex-col items-center">
               <div

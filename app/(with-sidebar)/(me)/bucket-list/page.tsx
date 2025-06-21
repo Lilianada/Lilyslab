@@ -45,37 +45,37 @@ const lookingForItems = [
     title: "A Place to Learn and Grow",
     description:
       "I'm prioritizing learning in my next role. I haven't had the opportunity to receive consistent feedback or mentorship, so I'm looking for a team where I can learn from people more experienced than me — through direct feedback, shadowing, and honest conversations.",
-    icon: <Sprout className="text-extra-green" size={16} />,
+    icon: <Sprout className="text-green" size={16} />,
   },
   {
     title: "Mentorship and Leadership",
     description:
       "I've often found myself in leadership roles, and while I'm grateful for those experiences, I'd love to be in a space where I'm led — where I can be guided, challenged, and supported to grow stronger in my craft and career path.",
-    icon: <ArrowUpNarrowWide className="text-extra-peach" size={16} />,
+    icon: <ArrowUpNarrowWide className="text-peach" size={16} />,
   },
   {
     title: "Structure and Stability",
     description:
       "I'm looking for a company with clear systems and structures in place — especially around onboarding, performance management, and team collaboration. I thrive better when there's direction, expectations, and rhythm.",
-    icon: <Blocks className="text-extra-steelBlue" size={16} />,
+    icon: <Blocks className="text-steelBlue" size={16} />,
   },
   {
     title: "A Healthy, Supportive Work Culture",
     description:
       "I want to work in an environment where people are kind, collaborative, and open. A place that values both individuality and teamwork. Somewhere I can belong, not just fit in.",
-    icon: <HeartHandshake className="text-extra-pink" size={16} />,
+    icon: <HeartHandshake className="text-pink" size={16} />,
   },
   {
     title: "A Product I Can Be Proud Of",
     description:
       "I'd love to contribute to building or supporting a product that solves real problems or inspires people — something innovative, meaningful, or simply delightful.",
-    icon: <Sparkles className="text-extra-lavender" size={16} />,
+    icon: <Sparkles className="text-lavender" size={16} />,
   },
   {
     title: "Great Compensation and Benefits",
     description:
       "While a competitive salary is important, I also value holistic benefits like: Health insurance, Paid leave and mental health days, Work-from-home support (laptop, desk setup, internet), Learning stipends or development budgets.",
-    icon: <CreditCard className="text-extra-paleYellow" size={16} />,
+    icon: <CreditCard className="text-paleYellow" size={16} />,
   },
 ];
 
@@ -153,7 +153,7 @@ export default function BucketListPage() {
           </div>
         </header>
 
-        <div className="w-full h-40 bg-extra-yellow/50 rounded-lg border border-extra-peach/50 mb-8"></div>
+        <div className="w-full h-40 bg-yellow/50 rounded-lg border border-peach/50 mb-8"></div>
 
         <section className="mb-16">
           <span className="text-xl mb-2">✳︎</span>

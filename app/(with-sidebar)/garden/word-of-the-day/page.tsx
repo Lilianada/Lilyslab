@@ -111,7 +111,7 @@ const WordOfTheDayPage: React.FC = () => {
 
   return (
     <>
-      <ScrollProgress color="bg-extra-lavender" height={3} glow={true} />
+      <ScrollProgress color="bg-lavender" height={3} glow={true} />
      
     <div className="min-h-screen animate-fade-in">
       <div className="container max-w-4xl mx-auto px-0 sm:px-4 pt-16 pb-8">

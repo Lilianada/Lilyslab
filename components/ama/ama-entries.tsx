@@ -47,7 +47,7 @@ export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEn
               <div className="flex justify-between items-start font-mono">
                 <div className="flex items-center space-x-2">
                   
-                  <span className="text-xs font-medium text-extra-peach">{q.name}</span>
+                  <span className="text-xs font-medium text-peach">{q.name}</span>
                 </div>
                 <span className="text-xs text-muted-foreground">
                   {formatDate(q.date || q.dateSubmitted || "")}
@@ -82,8 +82,8 @@ export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEn
                 <div className="mt-2 pt-2 border-t">
                   <div className="p-3 bg-card rounded-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
                     <div className="flex items-center mb-1 font-mono">
-                      <Crown size={12} className="mr-1 text-extra-peach" />
-                      <span className="text-xs font-medium text-extra-peach">Lily's response</span>
+                      <Crown size={12} className="mr-1 text-peach" />
+                      <span className="text-xs font-medium text-peach">Lily's response</span>
                     </div>
                     <p className="text-sm">{q.response}</p>
                   </div>
@@ -162,7 +162,7 @@ function AdminReplyForm({ questionId, onSubmit, onCancel }: AdminReplyFormProps)
           type="submit"
           size="sm"
           disabled={isSubmitting}
-          className="text-[10px] h-7 bg-primary hover:bg-extra-lavender transition-all duration-300 hover:shadow-md"
+          className="text-[10px] h-7 bg-primary hover:bg-lavender transition-all duration-300 hover:shadow-md"
         >
           {isSubmitting ? (
             <span className="flex items-center">

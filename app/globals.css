@@ -28,8 +28,7 @@
 /* Backlinks styling */
 @layer components {
   .backlink {
-    @apply dark:text-primary relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--extra-steelBlue))];
-    /* color: hsl(var(--extra-lavender)); */
+    @apply dark:text-lightBlue relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--steelBlue))];
     text-decoration: underline;
     text-decoration-color: hsla(218, 93%, 83%, 0.54);
     text-decoration-style: solid;
@@ -39,7 +38,7 @@
     transition: all 0.3s;
   }
   .backlink:hover {
-    text-decoration-color: hsl(var(--extra-blue));
+    text-decoration-color: hsl(var(--blue));
     text-decoration-thickness: 0.6em;
   }
   .backlink:focus-visible {
@@ -88,18 +87,19 @@
     --radius: 0.5rem;
     --mellow: 38 100% 55%; /* #ffc04d */
     --codeRed: 0 100% 52%;
-
-    /* Extra palette for bg-extra-... */
-    --extra-lavender: 234 91% 80%; /* #9EAAFA */
-    --extra-yellow: 48 95% 76%; /* #FAE680 */
-    --extra-green: 148 28% 72%; /* #A2CBAF */
-    --extra-pink: 350 54% 80%; /* #E8ADB1 */
-    --extra-blue: 213 61% 80%; /* #A6C2EB */
-    --extra-cream: 43 68% 89%; /* #F4E8C8 */
-    --extra-lilac: 270 64% 80%; /* #CCA7ED */
-    --extra-peach: 18 86% 71%; /* #F29874 */
-    --extra-paleYellow: 45 82% 80%; /* #F4DAA0 */
-    --extra-steelBlue: 218 47% 61%; /* #6C95CF */
+    
+    /* Extra palette for bg-... */
+    --lightBlue: 218 93% 83%; 
+    --lavender: 234 91% 80%; /* #9EAAFA */
+    --yellow: 48 95% 76%; /* #FAE680 */
+    --green: 148 28% 72%; /* #A2CBAF */
+    --pink: 350 54% 80%; /* #E8ADB1 */
+    --blue: 213 61% 80%; /* #A6C2EB */
+    --cream: 43 68% 89%; /* #F4E8C8 */
+    --lilac: 270 64% 80%; /* #CCA7ED */
+    --peach: 18 86% 71%; /* #F29874 */
+    --paleYellow: 45 82% 80%; /* #F4DAA0 */
+    --steelBlue: 218 47% 61%; /* #6C95CF */
   }
 
   .dark {
@@ -126,17 +126,18 @@
     --mellow: 38 90% 45%; /* #b3821b */
     --codeRed: 0 62% 57%;
 
-    /* Extra palette for bg-extra-... (dark mode) */
-    --extra-lavender: 234 91% 35%; /* #4c529b */
-    --extra-yellow: 48 95% 30%; /* #7a6e2b */
-    --extra-green: 148 28% 32%; /* #4e695b */
-    --extra-pink: 350 54% 38%; /* #8d5b60 */
-    --extra-blue: 213 61% 38%; /* #546d8c */
-    --extra-cream: 43 68% 24%; /* #6b6246 */
-    --extra-lilac: 270 64% 37%; /* #7a5b8f */
-    --extra-peach: 18 86% 36%; /* #a15c3d */
-    --extra-paleYellow: 45 82% 32%; /* #85743a */
-    --extra-steelBlue: 218 47% 32%; /* #354c6b */
+    /* Extra palette for bg-... */
+    --lightBlue: 218 93% 83%; 
+    --lavender: 234 91% 80%; /* #9EAAFA */
+    --yellow: 48 95% 76%; /* #FAE680 */
+    --green: 148 28% 72%; /* #A2CBAF */
+    --pink: 350 54% 80%; /* #E8ADB1 */
+    --blue: 213 61% 80%; /* #A6C2EB */
+    --cream: 43 68% 89%; /* #F4E8C8 */
+    --lilac: 270 64% 80%; /* #CCA7ED */
+    --peach: 18 86% 71%; /* #F29874 */
+    --paleYellow: 45 82% 80%; /* #F4DAA0 */
+    --steelBlue: 218 47% 61%; /* #6C95CF */
   }
 }
 
@@ -290,16 +291,16 @@
   top: 0.25rem;
   width: 1rem;
   height: 1rem;
-  border: 1px solid hsl(var(--extra-steelBlue) / 0.5);
+  border: 1px solid hsl(var(--steelBlue) / 0.5);
   border-radius: 0.2rem;
-  background-color: hsl(var(--extra-steelBlue) / 0.1);
+  background-color: hsl(var(--steelBlue) / 0.1);
   transition: all 0.2s ease;
 }
 
 /* Style for checked state - using the :has pseudo-class for modern browsers */
 .task-list-container ul li:has(input[type="checkbox"]:checked):before {
-  background-color: hsl(var(--extra-green) / 0.2);
-  border-color: hsl(var(--extra-green) / 0.7);
+  background-color: hsl(var(--green) / 0.2);
+  border-color: hsl(var(--green) / 0.7);
 }
 
 /* Create the checkmark */
@@ -310,7 +311,7 @@
   top: 0.3rem;
   width: 0.4rem;
   height: 0.7rem;
-  border: solid hsl(var(--extra-green));
+  border: solid hsl(var(--green));
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   transition: all 0.2s ease;
@@ -320,7 +321,7 @@
 .task-list-container ul li input[type="checkbox"]:checked ~ p {
   text-decoration: none;
   opacity: 0.8;
-  color: hsl(var(--extra-green));
+  color: hsl(var(--green));
 }
 
 .page-transition-exit-active {

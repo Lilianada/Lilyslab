@@ -192,7 +192,7 @@ export default function WebrollClient({ initialLinks }: WebrollClientProps) {
                     My latest obsession of late has been{" "}
                     <span className="text-[#fe3902]">spreading</span> the word about the
                     indie-web movement, exploring the internet, going down{" "}
-                    <span className="text-[#fe3902]">rabbitholes</span> to find websites that
+                    <span className="text-[#fe3902]">rabbit holes</span> to find websites that
                     genuinely <span className="text-[#fe3902]">interest</span> me.
                     <br />
                     This is a collection of links to digital gardens, personal wikis,

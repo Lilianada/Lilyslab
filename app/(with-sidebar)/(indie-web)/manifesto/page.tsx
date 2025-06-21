@@ -3,11 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { Metadata } from 'next';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
 import { Footer } from '@/components/layout/footer';
 import { formatDate } from '@/lib/utils';
+import MarkdownRenderer from '@/components/markdown/markdown-renderer';
 
 // Load manifesto content from markdown file
 async function getManifestoContent() {
@@ -61,24 +59,19 @@ export default async function WebManifestoPage() {
             <div>Created: {formatDate(manifesto.createdAt)}</div>
             <div>Last updated: {formatDate(manifesto.lastUpdated)}</div>
             <div>Inspired by: IndieWeb principles</div>
-            <div className="">Tags: {manifesto.tags?.map((tag: string) => (
-              <span 
-                key={tag} 
-                className="inline-flex "
-              >
-                #{tag}
-              </span>
-            ))}</div>
+            {manifesto.tags && typeof manifesto.tags === 'string' && (
+              <div className="flex flex-wrap gap-1">
+                <span>Tags: {manifesto.tags}</span>
+              </div>
+            )}
           </div>
         </header>
         
         <article className="prose dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:text-[14px] max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight]}
-          >
-            {manifesto.content}
-          </ReactMarkdown>
+          <MarkdownRenderer 
+            content={manifesto.content}
+            className="max-w-none"
+          />
         </article>
       </div>
       

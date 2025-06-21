@@ -1413,3 +1413,29 @@ tags:
 type: article
 publish: true
 ---
+
+---
+id: article-117
+title: Why We All Need to Make the Internet Fun Again
+url: https://www.vox.com/2015/7/17/11614788/why-we-all-need-to-make-the-internet-fun-again
+createdAt: 2025-06-21
+tags:
+  - internet
+  - web-culture
+  - indieweb
+type: article
+publish: true
+---
+
+---
+id: article-118
+title: IndieWeb- How to Make the Internet Fun Again
+url: https://qmunicatemagazine.co.uk/2025/04/12/indieweb-how-to-make-the-internet-fun-again/
+createdAt: 2025-06-21
+tags:
+  - indieweb
+  - internet-culture
+  - web-culture
+type: article
+publish: true
+---

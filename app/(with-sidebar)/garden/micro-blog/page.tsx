@@ -229,7 +229,7 @@ export default function MicroblogPage() {
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: 2025-04-15</div>
             <div>Last updated: 2025-06-13</div>
-            <div>Inspired by: <a href="https://fromemily.com/feedbackless-feed/" className="text-extra-paleYellow hover:underline">FromEmily</a></div>
+            <div>Inspired by: <a href="https://fromemily.com/feedbackless-feed/" className="text-paleYellow hover:underline">FromEmily</a></div>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
             Short-form thoughts and musings that don't warrant a full essay.

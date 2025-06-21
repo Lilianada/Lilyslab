@@ -10,15 +10,15 @@ import { ClientOnly } from "@/components/hydration/client-only";
 const AUDIO_FILE = "/audio/wherehaveallthecowboysgone.mp3";
 const LOCAL_STORAGE_KEY = "music_player_paused";
 const COLOR_VARS = [
-  "--extra-lavender",
-  "--extra-yellow",
-  "--extra-green",
-  "--extra-pink",
-  "--extra-cream",
-  "--extra-lilac",
-  "--extra-peach",
-  "--extra-paleYellow",
-  "--extra-steelBlue"
+  "--lavender",
+  "--yellow",
+  "--green",
+  "--pink",
+  "--cream",
+  "--lilac",
+  "--peach",
+  "--paleYellow",
+  "--steelBlue"
 ];
 
 function FloatingMusicPlayerContent() {

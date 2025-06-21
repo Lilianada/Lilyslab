@@ -66,7 +66,7 @@ export default async function WritingPage() {
                 >
                   {/* Left: Dot and Title */}
                   <div className="flex items-center gap-2 min-w-0">
-                    <div className="h-2 w-2 rounded-full bg-extra-steelBlue" />
+                    <div className="h-2 w-2 rounded-full bg-steelBlue" />
                     <p className="truncate text-sm">{post.title}</p>
                   </div>
                   {/* Middle: Connecting line */}
@@ -82,7 +82,7 @@ export default async function WritingPage() {
                   </div>
                 </Link>
                 {/* <div className="pointer-events-none absolute left-[-20px] top-[50%] transform translate-y-[-50%] z-10 hidden md:group-hover:block">
-                  <div className="h-full w-2 rounded-full bg-extra-steelBlue animate-pulse shadow-md" style={{ height: '24px' }} />
+                  <div className="h-full w-2 rounded-full bg-steelBlue animate-pulse shadow-md" style={{ height: '24px' }} />
                 </div> */}
               </li>
             ))}

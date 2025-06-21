@@ -89,10 +89,10 @@ export default async function WritingSlugPage({ params }: PageProps) {
   return (
     <>
       <ScrollProgress
-        color="bg-extra-steelBlue"
+        color="bg-steelBlue"
         height={3}
         glow={true}
-        glowColor="rgba(var(--extra-steelBlue), 0.6)"
+        glowColor="rgba(var(--steelBlue), 0.6)"
         glowIntensity="12px"
       />
       <div className="max-w-2xl w-full mx-auto animate-fade-in">

@@ -92,7 +92,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                   }`}
                   onClick={() => setSelectedCategory(null)}
                 >
-                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-mint border border-gray-300"></span>
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-mint border border-gray-300"></span>
                   All <span className="ml-1 text-muted-foreground">({bookmarks.length})</span>
                 </button>
                 
@@ -102,7 +102,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                   }`}
                   onClick={() => setSelectedCategory("article")}
                 >
-                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-lavender border border-gray-300"></span>
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-lavender border border-gray-300"></span>
                   Article <span className="ml-1 text-muted-foreground">({categoryCounts.article})</span>
                 </button>
                 
@@ -112,7 +112,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                   }`}
                   onClick={() => setSelectedCategory("website")}
                 >
-                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-peach border border-gray-300"></span>
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-peach border border-gray-300"></span>
                   Website <span className="ml-1 text-muted-foreground">({categoryCounts.website})</span>
                 </button>
                 
@@ -122,7 +122,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                   }`}
                   onClick={() => setSelectedCategory("video")}
                 >
-                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-steelBlue border border-gray-300"></span>
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-steelBlue border border-gray-300"></span>
                   Video <span className="ml-1 text-muted-foreground">({categoryCounts.video})</span>
                 </button>
                 
@@ -132,7 +132,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                   }`}
                   onClick={() => setSelectedCategory("misc")}
                 >
-                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-extra-yellow border border-gray-300"></span>
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-yellow border border-gray-300"></span>
                   Misc <span className="ml-1 text-muted-foreground">({categoryCounts.misc})</span>
                 </button>
               </div>

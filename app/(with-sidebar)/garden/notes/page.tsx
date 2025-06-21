@@ -205,7 +205,7 @@ export default function NotesPage() {
       <Footer 
           inspirationName="Linus Rogge"
           inspirationUrl="https://linusrogge.com/log/concerts"
-          color='text-extra-steelBlue'
+          color='text-steelBlue'
         />
       </div>
 

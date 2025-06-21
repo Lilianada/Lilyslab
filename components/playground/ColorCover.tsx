@@ -6,16 +6,16 @@ import { cn } from "@/lib/utils"
 
 // Define the available extra colors from the theme
 const extraColors = [
-  "bg-extra-lavender",
-  "bg-extra-yellow",
-  "bg-extra-green",
-  "bg-extra-pink",
-  "bg-extra-Blue",
-  "bg-extra-cream",
-  "bg-extra-lilac",
-  "bg-extra-peach",
-  "bg-extra-paleYellow",
-  "bg-extra-steelBlue"
+  "bg-lavender",
+  "bg-yellow",
+  "bg-green",
+  "bg-pink",
+  "bg-Blue",
+  "bg-cream",
+  "bg-lilac",
+  "bg-peach",
+  "bg-paleYellow",
+  "bg-steelBlue"
 ]
 
 interface ColorCoverProps {

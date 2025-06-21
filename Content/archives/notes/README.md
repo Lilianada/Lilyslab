@@ -9,7 +9,7 @@ These files have been moved here as part of the content cleanup process to start
 notes/
 1. content-creation-and-anxiety
 2. commonplace-book
-3. rabbitholes
+3. rabbit holes
 4. having-fun-on-the-web
 5. how-i-take-my-notes
 6. personal-knowledge-management

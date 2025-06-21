@@ -27,7 +27,7 @@
 }
 
 .markdown-content blockquote {
-  @apply text-sm font-normal mt-6 px-3 italic text-muted-foreground/70 bg-extra-steelBlue/20 rounded-[2px] py-1;
+  @apply text-sm font-normal mt-6 px-3 italic text-muted-foreground/70 bg-steelBlue/20 rounded-[2px] py-1;
 }
 
 /* Code block styling */
@@ -83,7 +83,7 @@
 
 /* Links styling */
 .markdown-content a {
-  @apply text-extra-steelBlue no-underline hover:text-extra-steelBlue/80 transition-colors;
+  @apply text-steelBlue dark:text-lightBlue no-underline hover:text-steelBlue/80 transition-colors;
 }
 
 /* Image styling */

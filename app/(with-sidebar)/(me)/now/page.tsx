@@ -66,10 +66,10 @@ export default function NowPage() {
   return (
     <>
       <ScrollProgress
-        color="bg-extra-lavender"
+        color="bg-lavender"
         height={3}
         glow={true}
-        glowColor="rgba(var(--extra-lavender), 0.6)"
+        glowColor="rgba(var(--lavender), 0.6)"
         glowIntensity="12px"
       />
       <div
@@ -94,7 +94,7 @@ export default function NowPage() {
                   href="https://nownownow.com/about"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-extra-lavender hover:underline"
+                  className="text-lavender hover:underline"
                 >
                   nownownow.com
                 </a>
@@ -112,7 +112,7 @@ export default function NowPage() {
             <div className="max-w-none text-justify">
               <MarkdownRenderer
                 content={nowData.content}
-                className="[&_p]:my-0 [&_p]:mb-2 [&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h4]:text-[16px] [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mb-2 [&_h4]:text-foreground [&_a]:text-extra-lavender [&_a]:hover:underline"
+                className="[&_p]:my-0 [&_p]:mb-2 [&_p]:text-[14px] [&_p]:leading-normal [&_li]:text-[14px] [&_li]:leading-normal [&_h4]:text-[16px] [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mb-2 [&_h4]:text-foreground [&_a]:text-lavender [&_a]:hover:underline"
                 allowHtml={true}
               />
             </div>

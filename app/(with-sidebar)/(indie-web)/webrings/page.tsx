@@ -161,7 +161,7 @@ export default function WebringsPage() {
   return (
     <>
       <ScrollProgress
-        color="bg-extra-lavender"
+        color="bg-lavender"
         height={3}
         glow={true}
         glowColor="rgba(var(--primary), 0.6)"

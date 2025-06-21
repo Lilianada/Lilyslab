@@ -7,10 +7,10 @@ export default function HelloPage() {
   return (
     <>
       <ScrollProgress
-        color="bg-extra-peach"
+        color="bg-peach"
         height={3}
         glow={true}
-        glowColor="rgba(var(--extra-peach), 0.6)"
+        glowColor="rgba(var(--peach), 0.6)"
         glowIntensity="12px"
       />
       <div className="max-w-2xl mx-auto sm:px-4 pt-16 pb-8 ">
@@ -35,11 +35,11 @@ export default function HelloPage() {
           </p>
           <p>
             The fastest way to reach me is via my website{" "}
-            <a href="/guestbook" className="text-extra-peach">
+            <a href="/guestbook" className="text-peach">
               /guestbook
             </a>
             ,{" "}
-            <a href="/guestbook" className="text-extra-peach">
+            <a href="/guestbook" className="text-peach">
               /ask-me-anything
             </a>{" "}
             or webmentions. I get usually excited when someone finds me via my
@@ -49,7 +49,7 @@ export default function HelloPage() {
             My preferred means of communication is emails so you can drop me an{" "}
             <a
               href="mail:hello.lilysgarden@gmail.com"
-              className="text-extra-peach"
+              className="text-peach"
             >
               email
             </a>
@@ -60,7 +60,7 @@ export default function HelloPage() {
             I use{" "}
             <a
               href="https://linkedin.com/in/lilianada"
-              className="text-extra-peach"
+              className="text-peach"
             >
               LinkedIn
             </a>{" "}
@@ -69,7 +69,7 @@ export default function HelloPage() {
           </p>
           <p>
             I have a{" "}
-            <a href="https://x.com/lilian_ada_" className="text-extra-peach">
+            <a href="https://x.com/lilian_ada_" className="text-peach">
               Twitter
             </a>{" "}
             account and occassionally interact there. If you're trying to reach
@@ -80,7 +80,7 @@ export default function HelloPage() {
             I have an{" "}
             <a
               href="https://instagram.com/defitcreative"
-              className="text-extra-peach"
+              className="text-peach"
             >
               Instagram
             </a>{" "}
@@ -105,7 +105,7 @@ export default function HelloPage() {
             see my content - @defitcreative.
           </p>
             <p className="text-muted-foreground">
-            This page inspired is by <a href="https://alastairjohnston.com/introducing-hello-pages/" className="text-extra-peach">Alastair Johnston</a>.
+            This page inspired is by <a href="https://alastairjohnston.com/introducing-hello-pages/" className="text-peach">Alastair Johnston</a>.
             </p>
         </div>
 
@@ -113,7 +113,7 @@ export default function HelloPage() {
           inspirationName="Alexander Sandberg"
           inspirationUrl="https://alexandersandberg.com/someday/"
           pageName="my someday page"
-          color="text-extra-peach"
+          color="text-peach"
         />
       </div>
     </>

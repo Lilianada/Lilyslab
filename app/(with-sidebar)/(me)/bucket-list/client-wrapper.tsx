@@ -11,10 +11,10 @@ export function BucketListClientWrapper({ children }: BucketListClientWrapperPro
   return (
     <>
       <ScrollProgress 
-        color="bg-extra-lavender" 
+        color="bg-lavender" 
         height={3} 
         glow={true}
-        glowColor="rgba(var(--extra-lavender), 0.6)"
+        glowColor="rgba(var(--lavender), 0.6)"
         glowIntensity="12px"
       />
       {children}

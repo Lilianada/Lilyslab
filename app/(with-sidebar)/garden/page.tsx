@@ -62,7 +62,7 @@ export default function DigitalGardenHome() {
                         <p className="text-sm text-muted-foreground">
                         My Digital Garden is a growing collection of thoughts, ideas, and knowledge I’ve gathered from various topics that spark my curiosity.
                         {" "}
-                        <a href="/digital-garden/writings/digital-garden" className="text-extra-steelBlue underline hover:text-extra-peach">What is a digital garden?</a>
+                        <a href="/digital-garden/writings/digital-garden" className="text-steelBlue underline hover:text-peach">What is a digital garden?</a>
                         </p>
                     </div>
                 </header> 

@@ -98,10 +98,10 @@ export default function UsesPage() {
   return (
     <>
      <ScrollProgress
-            color="bg-extra-peach"
+            color="bg-peach"
             height={3}
             glow={true}
-            glowColor="rgba(var(--extra-peach), 0.6)"
+            glowColor="rgba(var(--peach), 0.6)"
             glowIntensity="12px"
           />
     <div className={`max-w-2xl w-full mx-auto sm:px-4 pt-16 pb-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
@@ -146,17 +146,17 @@ export default function UsesPage() {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group block rounded-lg border p-4 transition-colors duration-200 hover:border-extra-peach/50 hover:bg-card" // Adjusted hover bg/border
+                    className="group block rounded-lg border p-4 transition-colors duration-200 hover:border-peach/50 hover:bg-card" // Adjusted hover bg/border
                   >
                     <div className="flex items-center justify-between">
-                      <h3 className="font-medium group-hover:text-extra-peach text-sm transition-colors duration-200">{item.name}</h3>
+                      <h3 className="font-medium group-hover:text-peach text-sm transition-colors duration-200">{item.name}</h3>
                       {/* Updated ExternalLink styling */}
                       <ExternalLink
                         size={16}
-                        className="text-muted-foreground transition-colors duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-extra-peach"
+                        className="text-muted-foreground transition-colors duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-peach"
                       />
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground group-hover:text-extra-peach">{item.description}</p>
+                    <p className="mt-1 text-xs text-muted-foreground group-hover:text-peach">{item.description}</p>
                   </a>
                 ))}
               </div>

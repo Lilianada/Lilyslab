@@ -30,10 +30,10 @@ export function BookmarkItem({ bookmark }: Props) {
 
   // Color dots
   const colorMap = {
-    article: "bg-extra-lavender",
-    website: "bg-extra-peach",
-    video: "bg-extra-steelBlue",
-    misc: "bg-extra-yellow",
+    article: "bg-lavender",
+    website: "bg-peach",
+    video: "bg-steelBlue",
+    misc: "bg-yellow",
   } as const;
 
   return (
@@ -98,7 +98,7 @@ export function BookmarkItem({ bookmark }: Props) {
             </div>
             <div className="flex shrink-0 items-center gap-2 text-neutral-400">
               <p className="text-xs">{domain}</p>
-              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="transition-transform duration-200 group-hover:rotate-24 group-hover:text-extra-steelBlue group-hover:scale-150"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="transition-transform duration-200 group-hover:rotate-24 group-hover:text-steelBlue group-hover:scale-150"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
           </div>
         </a>

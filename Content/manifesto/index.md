@@ -3,7 +3,7 @@ title: Let's Make The Internet Fun Again
 description: My personal web manifesto.
 createdAt: 2025-06-07
 lastUpdated: 2025-06-13
-tags: [manifesto, web memoir]
+tags: [manifesto, web-memoir]
 ---
 
 The internet used to be a space for exploration, discovery, self-expression, and creativity. People had the freedom to express themselves, an opportunity to learn while doing so. It was fun, it was weird, most of all, it was personal, because it wasn't cluttered with optimised content playing to algorithms. 
@@ -40,7 +40,7 @@ Everyone should be able to enjoy the internet without all the [[pressure, optimi
 
 The choice to have fun again on the internet led me back to the internet itself. Not the algorithmic feeds, but the open web built by curious people who still care about ideas, creativity, individuality and connections.
 
-I started going down [[rabbitholes]], exploring unwalled gardens hand made with care, personality, and zero SEO hacks. I made my own [playground](https://www.lilyslab.xyz), a space to think, write, and experiment. No likes. No pressure. Just expression.
+I started going down [[rabbit holes]], exploring unwalled gardens hand made with care, personality, and zero SEO hacks. I made my own [playground](https://www.lilyslab.xyz), a space to think, write, and experiment. No likes. No pressure. Just expression.
 
 And I found others doing the same. \
 ✳︎ Small internet spaces. \
@@ -63,4 +63,4 @@ You can also read how I am [[having fun on the web]] to learn a thing or two.
 [4] [Blog Neocities](https://blog.neocities.org/blog/2013/05/28/making-the-web-fun-again.html) \
 [5] [Vox](https://www.vox.com/2015/7/17/11614788/why-we-all-need-to-make-the-internet-fun-again) \
 [6] [Qmunicatemagazine](https://qmunicatemagazine.co.uk/2025/04/12/indieweb-how-to-make-the-internet-fun-again/) \
-[6] [Internet is fun](https://kwon.nyc/notes/internet-is-fun/)
+[7] [Internet is fun](https://kwon.nyc/notes/internet-is-fun/)

@@ -18,13 +18,13 @@ export default function SomedayPage() {
       <div className="space-y-6">
            <p className="text-sm text-muted-foreground">
           This is a{" "}
-          <a href="https://someday.page/" className="text-extra-lavender">
+          <a href="https://someday.page/" className="text-lavender">
             Someday page
           </a>
           , a movement started by
           <a
             href="https://alexandersandberg.com/someday/"
-            className="text-extra-lavender"
+            className="text-lavender"
             target="_blank"
           >
             {" "}
@@ -121,7 +121,7 @@ export default function SomedayPage() {
         </div>
         
         <div className="text-left mt-10">
-          <p className="text-sm text-muted-foreground">To add a <span className="text-extra-lavender">/someday</span> page to your website or join the movement, visit this <a href="https://someday.page/" className="text-extra-lavender">page</a> and be sure to leave a link to your own page when you sign my <Link href="/guestbook" className="">guestbook</Link>.
+          <p className="text-sm text-muted-foreground">To add a <span className="text-lavender">/someday</span> page to your website or join the movement, visit this <a href="https://someday.page/" className="text-lavender">page</a> and be sure to leave a link to your own page when you sign my <Link href="/guestbook" className="">guestbook</Link>.
           </p>
         </div>
       </div>
@@ -130,7 +130,7 @@ export default function SomedayPage() {
         inspirationName="Alexander Sandberg"
         inspirationUrl="https://alexandersandberg.com/someday/"
         pageName="my someday page"
-        color="text-extra-peach"
+        color="text-peach"
       />
     </div>
   );

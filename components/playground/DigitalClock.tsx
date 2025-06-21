@@ -44,14 +44,14 @@ const DigitalClock: React.FC = () => {
   const colorThemes = [
     { text: "text-foreground", accent: "bg-foreground", border: "border-foreground" },
     { text: "text-primary", accent: "bg-primary", border: "border-primary" },
-    { text: "text-extra-steelBlue", accent: "bg-extra-steelBlue", border: "border-extra-steelBlue" },
-    { text: "text-extra-peach", accent: "bg-extra-peach", border: "border-extra-peach" },
-    { text: "text-extra-lavender", accent: "bg-extra-lavender", border: "border-extra-lavender" },
-    { text: "text-extra-yellow", accent: "bg-extra-yellow", border: "border-extra-yellow" },
-    { text: "text-extra-pink", accent: "bg-extra-pink", border: "border-extra-pink" },
-    { text: "text-extra-cream", accent: "bg-extra-cream", border: "border-extra-cream" },
-    { text: "text-extra-lilac", accent: "bg-extra-lilac", border: "border-extra-lilac" },
-    { text: "text-extra-paleYellow", accent: "bg-extra-paleYellow", border: "border-extra-paleYellow" },
+    { text: "text-steelBlue", accent: "bg-steelBlue", border: "border-steelBlue" },
+    { text: "text-peach", accent: "bg-peach", border: "border-peach" },
+    { text: "text-lavender", accent: "bg-lavender", border: "border-lavender" },
+    { text: "text-yellow", accent: "bg-yellow", border: "border-yellow" },
+    { text: "text-pink", accent: "bg-pink", border: "border-pink" },
+    { text: "text-cream", accent: "bg-cream", border: "border-cream" },
+    { text: "text-lilac", accent: "bg-lilac", border: "border-lilac" },
+    { text: "text-paleYellow", accent: "bg-paleYellow", border: "border-paleYellow" },
   ];
   
   // Current theme

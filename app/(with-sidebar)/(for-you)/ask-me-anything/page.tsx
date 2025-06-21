@@ -134,7 +134,7 @@ export default function AMAPage() {
         <Button 
           variant="link"
           size="sm"
-          className="p-0 text-xs font-mono text-extra-peach hover:underline"
+          className="p-0 text-xs font-mono text-peach hover:underline"
           onClick={() => setShowForm(true)}
           disabled={isSubmitting}
         >

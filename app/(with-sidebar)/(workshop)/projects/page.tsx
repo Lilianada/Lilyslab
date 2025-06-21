@@ -86,7 +86,7 @@ export default function WorkshopLogPage() {
                   <span className="font-medium flex items-center text-foreground" style={{ minWidth: '120px' }}>
                     {item.title}
                     {item.new && (
-                      <span className="ml-2 px-2 leading-normal bg-orange-500/10 text-extra-peach border border-orange-800 text-[8px] rounded font-semibold tracking-wider">NEW</span>
+                      <span className="ml-2 px-2 leading-normal bg-orange-500/10 text-peach border border-orange-800 text-[8px] rounded font-semibold tracking-wider">NEW</span>
                     )}
                   </span>
                 </div>
@@ -148,7 +148,7 @@ export default function WorkshopLogPage() {
                       <span className="text-xs font-mono text-muted-foreground select-none">{item.number}</span>
                       <span className="font-medium text-foreground text-sm">{item.title}</span>
                       {item.new && (
-                        <span className="ml-2 px-2 py-0.5 bg-orange-500/10 text-extra-peach text-[10px] rounded font-bold tracking-wider">NEW</span>
+                        <span className="ml-2 px-2 py-0.5 bg-orange-500/10 text-peach text-[10px] rounded font-bold tracking-wider">NEW</span>
                       )}
                     </div>
                     <div className="flex items-center">

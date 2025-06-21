@@ -64,7 +64,7 @@ export function TopicsList() {
       completed: true,
       url: "/garden/writings/projects-as-seedlings",
     },
-    { title: "Rabbitholes", completed: true, url: "/garden/notes/rabbitholes" },
+    { title: "Rabbitholes", completed: true, url: "/garden/notes/rabbit-holes" },
     {
       title: "Relationship between Digital Garden and Zettelkasten",
       completed: false,

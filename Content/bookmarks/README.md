@@ -96,7 +96,7 @@ The bookmarks page allows filtering by both category and tag:
 
 Bookmarks are color-coded by category for easy visual identification:
 
-- Article: Lavender (`bg-extra-lavender`)
-- Website: Peach (`bg-extra-peach`)
-- Video: Steel Blue (`bg-extra-steelBlue`)
-- Misc: Yellow (`bg-extra-yellow`)
+- Article: Lavender (`bg-lavender`)
+- Website: Peach (`bg-peach`)
+- Video: Steel Blue (`bg-steelBlue`)
+- Misc: Yellow (`bg-yellow`)

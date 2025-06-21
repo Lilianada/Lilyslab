@@ -100,10 +100,10 @@ export default function Sitemap() {
   return (
     <>
       <ScrollProgress
-        color="bg-extra-steelBlue"
+        color="bg-steelBlue"
         height={3}
         glow={true}
-        glowColor="rgba(var(--extra-steelBlue), 0.6)"
+        glowColor="rgba(var(--steelBlue), 0.6)"
         glowIntensity="12px"
       />
       
@@ -122,11 +122,11 @@ export default function Sitemap() {
             This is my website's sitemap, a list of all the pages I have so far and their sections. I have organised my pages this way for the sake of hireachy and ease of navigation. You can use this page to find what you're looking for, or just to explore my website.
             <br />
             <br />
-            If you have any questions, feel free to <a href="/ask-me-anything" className="text-extra-steelBlue hover:underline">ask me anything</a> and in the absence of no questions, you can leave me a footprint by signing my <a href="/guestbook" className="text-extra-steelBlue hover:underline">guestbook</a> to let me know that you were here.
+            If you have any questions, feel free to <a href="/ask-me-anything" className="text-steelBlue hover:underline">ask me anything</a> and in the absence of no questions, you can leave me a footprint by signing my <a href="/guestbook" className="text-steelBlue hover:underline">guestbook</a> to let me know that you were here.
           </p>
           {sitemapData.map((section, index) => (
             <div key={index} className="pb-6 last:border-0">
-              <h2 className="font-medium text-extra-steelBlue w-full mb-4 border border-extra-steelBlue/50  rounded-md px-4 py-2">{section.title}</h2>
+              <h2 className="font-medium text-steelBlue w-full mb-4 border border-steelBlue/50  rounded-md px-4 py-2">{section.title}</h2>
               <ul className="ml-4 space-y-2.5">
                 {section.pages.map((page, pageIndex) => (
                   <li key={pageIndex}>
