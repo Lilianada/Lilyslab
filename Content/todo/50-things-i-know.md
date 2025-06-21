@@ -9,7 +9,7 @@ lastUpdated: 2025-06-21
 3. Fitness is one place where, as long as you put in the work, you'll definitely see the results.
 4. God's time is 100% different from man's time.
 5. Existing situations that do not favour you will save you so much time and prevent embarrassment.
-6.
+6. I'm just a girl.
 7.
 8.
 9.

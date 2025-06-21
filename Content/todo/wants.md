@@ -1,7 +1,7 @@
 ---
 title: Wants
 createdAt: 2025-06-12
-lastUpdated: 2025-06-20
+lastUpdated: 2025-06-21
 ---
 
 1. I want to learn to ride a bike.
@@ -32,6 +32,16 @@ lastUpdated: 2025-06-20
 26. I want to go on a trip to Ghana.
 27. I want to go on a trip to Tokyo.
 28. I want to design and self-publish a small cute art book.
-29. I want to
-30. I want to
+29. I want to fall in love.
+30. I want to buy a car.
+31.
+32.
+33.
+34.
+35.
+36.
+37.
+38.
+39.
+40.
 
