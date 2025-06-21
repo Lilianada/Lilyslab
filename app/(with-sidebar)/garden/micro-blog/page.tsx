@@ -117,12 +117,9 @@ export default function MicroblogPage() {
     };
   }, [loading, hasMore]);
 
-  // Load more microblogs (we don't have pagination yet in the API, this is a placeholder)
   const loadMoreMicroblogs = () => {
-    // Currently the API doesn't support pagination, so we're not loading more microblogs
-    // This is left as a placeholder for when pagination is added
     setPage(prevPage => prevPage + 1);
-    setHasMore(false); // For now, we'll always set this to false since we load all microblogs at once
+    setHasMore(false); 
   };
 
   // Format date for display

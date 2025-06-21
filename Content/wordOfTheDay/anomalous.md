@@ -5,7 +5,8 @@ pronunciation: /əˈnɒmələs/
 partOfSpeech: adjective
 ---
 
-**Meaning:** Inconsistent with or deviating from what is usual, normal, or expected.
+**Meaning:** 
+1. Inconsistent with or deviating from what is usual, normal, or expected.
 
 **Example:** "The scientist noted several anomalous readings in the data that didn't fit the expected pattern."
 

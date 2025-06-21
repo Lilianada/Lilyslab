@@ -5,7 +5,8 @@ pronunciation: /prəˈlɪfəreɪt/
 partOfSpeech: adjective
 ---
 
-**Meaning:** Increase rapidly in number; multiplying really quickly, spreading
+**Meaning:** 
+1. Increase rapidly in number; multiplying really quickly, spreading
 
 **Example:** "The internet has enabled misinformation to start proliferating at an unprecedented rate."
 

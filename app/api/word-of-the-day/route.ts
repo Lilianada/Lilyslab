@@ -3,13 +3,18 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 
+interface WordMeaning {
+  definition: string;
+  examples?: string[];
+}
+
 interface WordOfTheDay {
   id: string;
   date: string;
   word: string;
   pronunciation: string;
   partOfSpeech: string;
-  meaning: string;
+  meanings: WordMeaning[];
   example: string;
   similar: string[];
   context: string;
@@ -43,6 +48,29 @@ export async function GET() {
           .filter(word => word.length > 0);
       }
 
+      // Parse meanings - handle numbered meanings
+      let meanings: WordMeaning[] = [];
+      if (meaningMatch && meaningMatch[1]) {
+        const meaningText = meaningMatch[1].trim();
+        // Check if it has numbered meanings
+        const numberedMeanings = meaningText.match(/^\d+\.\s+(.+?)(?=\n\d+\.|$)/gm);
+        if (numberedMeanings) {
+          meanings = numberedMeanings.map(meaning => {
+            const cleanMeaning = meaning.replace(/^\d+\.\s+/, '').trim();
+            return { definition: cleanMeaning };
+          });
+        } else {
+          // Single meaning
+          meanings = [{ definition: meaningText }];
+        }
+      }
+
+      // Parse examples - handle numbered examples
+      let exampleText = '';
+      if (exampleMatch && exampleMatch[1]) {
+        exampleText = exampleMatch[1].trim().replace(/^"|"$/g, '');
+      }
+
       if (data.word && data.date) {
         words.push({
           id: file.replace(/\.md$/, ''),
@@ -50,8 +78,8 @@ export async function GET() {
           word: data.word,
           pronunciation: data.pronunciation || '',
           partOfSpeech: data.partOfSpeech || '',
-          meaning: meaningMatch ? meaningMatch[1].trim() : '',
-          example: exampleMatch ? exampleMatch[1].trim().replace(/^"|"$/g, '') : '',
+          meanings: meanings,
+          example: exampleText,
           similar: similarWords,
           context: contextMatch ? contextMatch[1].trim().replace(/^"|"$/g, '') : '',
         });

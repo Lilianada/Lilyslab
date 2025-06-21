@@ -5,7 +5,8 @@ pronunciation: /ˌkaʊntərɪnˈtuɪtɪv/
 partOfSpeech: adjective
 ---
 
-**Meaning:** Contrary to intuition or to common-sense expectation.
+**Meaning:** 
+1. Contrary to intuition or to common-sense expectation.
 
 **Example:** "this explanation sounds perversely counter-intuitive"
 
@@ -18,3 +19,5 @@ partOfSpeech: adjective
 - Against common sense
 
 **Context:** Frequently used in scientific discussions where research findings go against what people would naturally expect, such as "counterintuitive results" in psychology or physics experiments.
+
+

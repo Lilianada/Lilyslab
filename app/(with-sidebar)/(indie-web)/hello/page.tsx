@@ -109,12 +109,7 @@ export default function HelloPage() {
             </p>
         </div>
 
-        <Footer
-          inspirationName="Alexander Sandberg"
-          inspirationUrl="https://alexandersandberg.com/someday/"
-          pageName="my someday page"
-          color="text-peach"
-        />
+        <Footer/>
       </div>
     </>
   );

@@ -18,7 +18,7 @@ export default function TodoPage() {
     },
     { text: "Project 365 Days & 100 Days of Pics", completed: false },
     { text: "Add services section to /uses", completed: true },
-    { text: "Redesign /notes list", completed: false },
+    { text: "Redesign /notes list", completed: true },
     {
       text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.",
       completed: false,

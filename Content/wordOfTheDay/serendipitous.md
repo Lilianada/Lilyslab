@@ -5,7 +5,8 @@ pronunciation: /ˌsɛrənˈdɪpɪtəs/
 partOfSpeech: adjective
 ---
 
-**Meaning:** occurring or discovered by chance in a happy or beneficial way.
+**Meaning:** 
+1. Occurring or discovered by chance in a happy or beneficial way.
 
 **Example:** "a serendipitous encounter"
 

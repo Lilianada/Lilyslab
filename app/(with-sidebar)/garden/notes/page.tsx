@@ -214,7 +214,7 @@ export default function NotesPage() {
         {/* Topics List Section */}
         <div className="mt-16 pt-8 border-t border-border/50">
           <div className="mb-6">
-            <h3 className="text-sm font-medium mb-2">Future Notes</h3>
+            <h3 className="text-sm font-medium mb-2">Future Topics</h3>
             <p className="text-xs text-muted-foreground">
               Topics I'm planning to explore and write about.
             </p>
@@ -251,9 +251,6 @@ export default function NotesPage() {
         </div>
 
         <Footer 
-          inspirationName="Linus Rogge"
-          inspirationUrl="https://linusrogge.com/log/concerts"
-          color='text-steelBlue'
         />
       </div>
     </div>

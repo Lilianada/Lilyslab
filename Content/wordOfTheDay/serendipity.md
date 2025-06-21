@@ -5,7 +5,8 @@ pronunciation: /ˌsɛrənˈdɪpɪti/
 partOfSpeech: noun
 ---
 
-**Meaning:** the occurrence and development of events by chance in a happy or beneficial way.
+**Meaning:** 
+1. The occurrence and development of events by chance in a happy or beneficial way.
 
 **Example:** "a fortunate stroke of serendipity"
 

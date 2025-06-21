@@ -5,8 +5,9 @@ pronunciation: /vəˈreɪʃəsli/
 partOfSpeech: adverb
 ---
 
-**Meaning:** 1. wanting or devouring great quantities of food. \
-2. engaging in an activity with great eagerness or enthusiasm.
+**Meaning:** 
+1. Wanting or devouring great quantities of food. 
+2. Engaging in an activity with great eagerness or enthusiasm.
 
 **Example:** "she's a voracious reader / she reads voraciously."
 

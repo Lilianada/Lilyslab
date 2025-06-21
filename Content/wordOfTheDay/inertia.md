@@ -5,7 +5,8 @@ pronunciation: /ɪˈnəːʃə/
 partOfSpeech: noun
 ---
 
-**Meaning:** a tendency to do nothing or to remain unchanged.
+**Meaning:** 
+1. A tendency to do nothing or to remain unchanged.
 
 **Example:** "the problem runs deeper than bureaucratic inertia"
 

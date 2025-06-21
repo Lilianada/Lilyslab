@@ -5,7 +5,8 @@ pronunciation: /ˈplɛθ(ə)rə/
 partOfSpeech: noun
 ---
 
-**Meaning:** A large or excessive amount of something.
+**Meaning:** 
+1. A large or excessive amount of something.
 
 **Example:** "consumers are confused by the plethora of choices on the market"
 
