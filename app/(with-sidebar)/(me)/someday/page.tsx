@@ -126,12 +126,7 @@ export default function SomedayPage() {
         </div>
       </div>
 
-      <Footer
-        inspirationName="Alexander Sandberg"
-        inspirationUrl="https://alexandersandberg.com/someday/"
-        pageName="my someday page"
-        color="text-peach"
-      />
+      <Footer/>
     </div>
   );
 }

@@ -39,7 +39,7 @@ export default function AboutPage() {
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: May 8, 2025</div>
             <div>Last updated: June 16, 2025</div>
-            <div>Inspired by: ✳︎✳︎✳︎</div>
+            <div>Inspired by: <a href="https://nicolevanderhoeven.com/about">Nicole Vander Hoeven</a></div>
           </div>
         </header>
 
@@ -208,11 +208,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <Footer
-              inspirationName="Nicole"
-              inspirationUrl="https://nicolevanderhoeven.com/about"
-              color="text-green"
-            />
+            <Footer/>
           </>
         )}
       </div>
