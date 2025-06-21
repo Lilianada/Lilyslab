@@ -17,7 +17,7 @@ export function TopicsList() {
     {
       title: "Commonplace book",
       completed: true,
-      url: "/garden/notes/commonplace-book",
+      url: "/garden/writings/commonplace-book",
     },
     { title: "Content curation", completed: false },
     {
@@ -64,7 +64,7 @@ export function TopicsList() {
       completed: true,
       url: "/garden/writings/projects-as-seedlings",
     },
-    { title: "Rabbitholes", completed: true, url: "/garden/notes/rabbit-holes" },
+    { title: "Rabbitholes", completed: true, url: "/garden/writings/rabbit-holes" },
     {
       title: "Relationship between Digital Garden and Zettelkasten",
       completed: false,

@@ -6,7 +6,7 @@ tags:
   - digital-garden
   - web-discovery
 createdAt: 2025-06-02
-type: budding
+type: evergreen
 lastUpdated: 2025-06-21
 ---
 
