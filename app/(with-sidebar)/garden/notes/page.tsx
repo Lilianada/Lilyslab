@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { read } from 'zod-matter';
 import { Footer } from '@/components/layout/footer';
 import { safeFormatDate } from '@/lib/utils';
+import { ArrowRight } from 'lucide-react';
 
 // Define schema for front matter validation
 const NoteMetaSchema = z.object({
@@ -116,7 +117,7 @@ export default function NotesPage() {
       if (!year || !month || !day) return acc; // Skip invalid dates
 
       // Format date as MM-DD
-      const formattedDate = `${month}-${day}`;
+      const formattedDate = `${year}-${month}-${day}`;
       
       // Create year-month key for grouping (e.g. "2025-05")
       const yearMonthKey = `${year}-${month}`;
@@ -143,8 +144,8 @@ export default function NotesPage() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-2xl mx-auto px-0 sm:px-4 pt-16 pb-8">
-        <header className="mb-8">
+      <div className="container max-w-3xl mx-auto px-0 sm:px-4 pt-16 pb-8">
+        <header className="mb-12">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="mb-2 text-xl font-medium">Notes</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
@@ -156,59 +157,105 @@ export default function NotesPage() {
             A collection of thoughts, quotes, and reflections.
           </p>
         </header>
-        {/* Sort years in descending order (newest first) */}
-        {Object.entries(grouped)
-          .sort(([yearA], [yearB]) => parseInt(yearB) - parseInt(yearA))
-          .map(([year, monthGroups]) => (
-          <div key={year} className="mb-10">
-            <p className='text-neutral-400 text-sm mb-3'>{year}</p>
-            
-            {/* Sort months in descending order (newest first) */}
-            {Object.entries(monthGroups)
-              .sort(([monthA], [monthB]) => parseInt(monthB) - parseInt(monthA))
-              .map(([month, notes]) => {
-              const monthIndex = parseInt(month, 10) - 1;
-              const monthName = MONTHS[monthIndex];
-              const totalNotes = notes.length;
+
+        {/* Notes Grid Layout */}
+        <div className="space-y-8">
+          {/* Sort years in descending order (newest first) */}
+          {Object.entries(grouped)
+            .sort(([yearA], [yearB]) => parseInt(yearB) - parseInt(yearA))
+            .map(([year, monthGroups]) => {
+              // Flatten all notes from all months in this year
+              const yearNotes = Object.values(monthGroups).flat();
               
               return (
-                <div key={`${year}-${month}`} className="mb-6">
-                  <div className="font-semibold text-sm mb-3 font-mono flex items-center justify-between">
-                    <p>{totalNotes}</p>
-                    <span className='h-[1px] w-full bg-border mx-3'></span>
-                    <p className=''>{monthName}</p>
+                <div key={year} className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-lg font-medium text-foreground">{year}</h2>
+                    <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent"></div>
+                    <span className="text-xs text-muted-foreground font-mono">
+                      {yearNotes.length} notes
+                    </span>
                   </div>
                   
-                  <div className="">
-                    {notes.map((note) => (
-                      <div
+                  {/* Modern Card Grid - All notes for the year */}
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {yearNotes
+                      .sort((a, b) => b.fullDate.localeCompare(a.fullDate))
+                      .map((note) => (
+                      <a
                         key={note.slug}
-                        className="group flex items-center py-2 transition-transform duration-150 hover:scale-[1.02]"
+                        href={`/garden/notes/${note.slug}`}
+                        className="group block"
                       >
-                        <a
-                          href={`/garden/notes//${note.slug}`}
-                          className="text-sm hover:underline flex-1 flex items-center justify-between"
-                        >
-                          <span>{note.title}</span>
-                        </a>
-                        <span className="text-neutral-400 font-mono text-sm">
-                          {note.displayDate}
-                        </span>
-                      </div>
+                        <div className="p-4 rounded-lg border border-dashed border-border/50 bg-card/30 backdrop-blur-sm transition-all duration-200 hover:border-border hover:bg-card/50 hover:shadow-sm hover:-translate-y-0.5">
+                          <div className="space-y-1">
+                            <p className="font-medium text-xs leading-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                              {note.title}
+                            </p>
+                            
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-muted-foreground font-nitti">
+                                {note.displayDate}
+                              </span>
+                              <div className="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors">
+                                <ArrowRight className="w-3 h-3" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
                     ))}
                   </div>
                 </div>
               );
             })}
+        </div>
+
+        {/* Topics List Section */}
+        <div className="mt-16 pt-8 border-t border-border/50">
+          <div className="mb-6">
+            <h3 className="text-sm font-medium mb-2">Future Notes</h3>
+            <p className="text-xs text-muted-foreground">
+              Topics I'm planning to explore and write about.
+            </p>
           </div>
-        ))}
-      <Footer 
+          
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              "50 things I know",
+              "Atomic notes", 
+              "Budding notes",
+              "Content curation",
+              "Digital Library",
+              "Evergreen notes",
+              "How to create your digital garden",
+              "Journaling",
+              "Map of Content",
+              "Minimalism",
+              "Personal wiki",
+              "Seedlings",
+              "Social Media performance",
+              "Why I Read",
+              "Why Start a Digital Garden?"
+            ].map((topic, index) => (
+              <div
+                key={index}
+                className="p-3 rounded-md bg-muted/20 border border-dashed border-muted-foreground/20"
+              >
+                <span className="text-xs text-muted-foreground">
+                  {topic}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Footer 
           inspirationName="Linus Rogge"
           inspirationUrl="https://linusrogge.com/log/concerts"
           color='text-steelBlue'
         />
       </div>
-
     </div>
   );
 }
