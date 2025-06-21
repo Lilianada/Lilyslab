@@ -76,16 +76,16 @@ const QuotesPage: React.FC = () => {
             <div key={index} className="flex gap-8">
               {/* Author name on the left */}
               <div className="w-32 flex-shrink-0">
-                <h3 className="text-sm font-semibold text-gray-600">
+                <h3 className="text-sm font-medium">
                   {quote.author}
                 </h3>
               </div>
 
               {/* Quote text on the right */}
               <div className="flex-1">
-                <blockquote className="text-sm text-justify text-gray-800 leading-relaxed">
+                <p className="text-sm text-justify text-muted-foreground leading-relaxed">
                   "{quote.text}"
-                </blockquote>
+                </p>
               </div>
             </div>
           ))}
