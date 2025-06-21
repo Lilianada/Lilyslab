@@ -1,3 +1,7 @@
+---
+createdAt: 2025-06-21
+lastUpdated: 2025-06-21
+---
 # Notes Archive
 
 This directory contains archived notes from before June 2025.

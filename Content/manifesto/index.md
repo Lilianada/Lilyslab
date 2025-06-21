@@ -2,8 +2,10 @@
 title: Let's Make The Internet Fun Again
 description: My personal web manifesto.
 createdAt: 2025-06-07
-lastUpdated: 2025-06-13
-tags: [manifesto, web-memoir]
+lastUpdated: 2025-06-21
+tags:
+  - manifesto
+  - web-memoir
 ---
 
 The internet used to be a space for exploration, discovery, self-expression, and creativity. People had the freedom to express themselves, an opportunity to learn while doing so. It was fun, it was weird, most of all, it was personal, because it wasn't cluttered with optimised content playing to algorithms. 
