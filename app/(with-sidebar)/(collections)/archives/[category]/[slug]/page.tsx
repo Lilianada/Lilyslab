@@ -8,15 +8,26 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { MarkdownRenderer, MarkdownSkeleton } from "@/components/markdown";
 import { formatDate } from "@/lib/utils";
 
+// Function to process WordPress post images - convert relative paths to absolute
+function processWordPressImages(content: string, slug: string): string {
+  // Replace relative image paths with absolute paths
+  return content.replace(
+    /!\[([^\]]*)\]\(images\/([^)]+)\)/g,
+    `![$1](/archives/wordpress-posts/${slug}/images/$2)`
+  );
+}
+
 interface ArchiveItemData {
   frontmatter: {
     title?: string;
     createdAt?: string;
+    date?: string;
     tags?: string[];
+    categories?: string[];
     [key: string]: any;
   };
   content: string;
-  category: "writings" | "notes";
+  category: "writings" | "notes" | "wordpress-posts";
 }
 
 export default function ArchiveItemPage() {
@@ -71,11 +82,13 @@ export default function ArchiveItemPage() {
   );
   
   const getCategoryIcon = () => {
-    return category === "writings" ? (
-      <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-    ) : (
-      <BookOpen className="h-4 w-4 text-green-600 dark:text-green-400" />
-    );
+    if (category === "writings") {
+      return <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />;
+    } else if (category === "wordpress-posts") {
+      return <FileText className="h-4 w-4 text-purple-600 dark:text-purple-400" />;
+    } else {
+      return <BookOpen className="h-4 w-4 text-green-600 dark:text-green-400" />;
+    }
   };
 
   return (
@@ -105,10 +118,10 @@ export default function ArchiveItemPage() {
           <span className="text-2xl animate-spin">✳︎</span>
               <h1 className="text-xl font-medium mb-3">{itemData.frontmatter.title || "Untitled"}</h1>
               <div className="flex flex-col text-xs text-muted-foreground ">
-                {itemData.frontmatter.createdAt && (
-                  <span>Created: {formatDate(itemData.frontmatter.createdAt)}</span>
+                {(itemData.frontmatter.createdAt || itemData.frontmatter.date) && (
+                  <span>Created: {formatDate(itemData.frontmatter.createdAt || itemData.frontmatter.date)}</span>
                 )}
-                <span className="capitalize">Category: {category}</span>
+                <span className="capitalize">Category: {category === "wordpress-posts" ? "WordPress Post" : category}</span>
                 {itemData.frontmatter.tags && itemData.frontmatter.tags.length > 0 && (
                     <div className="flex gap-1 flex-wrap">
                       Tags:
@@ -127,7 +140,7 @@ export default function ArchiveItemPage() {
 
             <div className="max-w-none">
               <MarkdownRenderer
-                content={itemData.content}
+                content={category === "wordpress-posts" ? processWordPressImages(itemData.content, slug) : itemData.content}
                 className="prose prose-sm dark:prose-invert max-w-none"
                 allowHtml={false}
               />

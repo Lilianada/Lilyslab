@@ -7,7 +7,7 @@ import matter from 'gray-matter';
 interface ArchiveItem {
   slug: string;
   title: string;
-  category: "writings" | "notes";
+  category: "writings" | "notes" | "wordpress-posts";
   createdAt?: string;
 }
 
@@ -16,6 +16,7 @@ export async function GET() {
     // Paths to the archives directories
     const notesArchivesDirectory = join(process.cwd(), 'Content', 'archives', 'notes');
     const writingsArchivesDirectory = join(process.cwd(), 'Content', 'archives', 'writings');
+    const wordpressArchivesDirectory = join(process.cwd(), 'Content', 'archives', 'wordpress-posts');
     
     const items: ArchiveItem[] = [];
 
@@ -60,6 +61,31 @@ export async function GET() {
           category: "writings",
           createdAt: data.createdAt || data.date || '',
         });
+      }
+    }
+
+    // Process WordPress posts
+    if (fs.existsSync(wordpressArchivesDirectory)) {
+      const wordpressDirectories = fs.readdirSync(wordpressArchivesDirectory)
+        .filter(item => {
+          const itemPath = join(wordpressArchivesDirectory, item);
+          return fs.statSync(itemPath).isDirectory() && !item.startsWith('.');
+        });
+      
+      for (const dirName of wordpressDirectories) {
+        const indexPath = join(wordpressArchivesDirectory, dirName, 'index.md');
+        
+        if (fs.existsSync(indexPath)) {
+          const fileContents = fs.readFileSync(indexPath, 'utf8');
+          const { data } = matter(fileContents);
+          
+          items.push({
+            slug: dirName,
+            title: data.title || dirName.replace(/-/g, ' '),
+            category: "wordpress-posts",
+            createdAt: data.date || data.createdAt || '',
+          });
+        }
       }
     }
 

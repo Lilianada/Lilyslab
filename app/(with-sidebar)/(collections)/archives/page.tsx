@@ -29,7 +29,7 @@ const formatArchiveDate = (dateString?: string) => {
 interface ArchiveItem {
   slug: string;
   title: string;
-  category: "writings" | "notes";
+  category: "writings" | "notes" | "wordpress-posts";
   createdAt?: string;
 }
 
@@ -37,7 +37,7 @@ export default function ArchivesPage() {
   const [archiveItems, setArchiveItems] = useState<ArchiveItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filter, setFilter] = useState<"all" | "writings" | "notes">("all");
+  const [filter, setFilter] = useState<"all" | "writings" | "notes" | "wordpress-posts">("all");
 
   useEffect(() => {
     async function loadArchiveItems() {
@@ -124,6 +124,14 @@ export default function ArchivesPage() {
             className="text-xs font-mono h-8"
           >
             Notes
+          </Button>
+          <Button
+            size="sm"
+            variant={filter === "wordpress-posts" ? "default" : "outline"}
+            onClick={() => setFilter("wordpress-posts")}
+            className="text-xs font-mono h-8"
+          >
+            WordPress
           </Button>
         </div>
       </div>

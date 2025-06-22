@@ -8,11 +8,13 @@ interface ArchiveItemData {
   frontmatter: {
     title?: string;
     createdAt?: string;
+    date?: string;
     tags?: string[];
+    categories?: string[];
     [key: string]: any;
   };
   content: string;
-  category: "writings" | "notes";
+  category: "writings" | "notes" | "wordpress-posts";
 }
 
 export async function GET(
@@ -26,13 +28,21 @@ export async function GET(
       return NextResponse.json({ error: 'Category and slug parameters are required' }, { status: 400 });
     }
     
-    // Validate category is either "notes" or "writings"
-    if (category !== "notes" && category !== "writings") {
-      return NextResponse.json({ error: 'Invalid category. Must be either "notes" or "writings"' }, { status: 400 });
+    // Validate category is either "notes", "writings", or "wordpress-posts"
+    if (category !== "notes" && category !== "writings" && category !== "wordpress-posts") {
+      return NextResponse.json({ error: 'Invalid category. Must be either "notes", "writings", or "wordpress-posts"' }, { status: 400 });
     }
 
-    // Path to the specific markdown file in the archives
-    const filePath = join(process.cwd(), 'Content', 'archives', category, `${slug}.md`);
+    let filePath: string;
+    
+    // Handle different file structures for different categories
+    if (category === "wordpress-posts") {
+      // WordPress posts are stored in directories with index.md files
+      filePath = join(process.cwd(), 'Content', 'archives', category, slug, 'index.md');
+    } else {
+      // Notes and writings are stored as individual .md files
+      filePath = join(process.cwd(), 'Content', 'archives', category, `${slug}.md`);
+    }
 
     // Check if file exists
     if (!fs.existsSync(filePath)) {
@@ -44,14 +54,24 @@ export async function GET(
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    // Process tags if they exist as comma-separated string
+    // Process tags and categories (for WordPress posts, convert categories to tags)
     let tags: string[] = [];
+    
+    // Handle existing tags
     if (data.tags) {
       if (typeof data.tags === 'string') {
         tags = data.tags.split(',').map((tag: string) => tag.trim());
       } else if (Array.isArray(data.tags)) {
         tags = data.tags;
       }
+    }
+    
+    // For WordPress posts, convert categories to tags
+    if (category === "wordpress-posts" && data.categories) {
+      const categoryTags = Array.isArray(data.categories) 
+        ? data.categories 
+        : [data.categories];
+      tags = [...tags, ...categoryTags];
     }
 
     const responseData: ArchiveItemData = {
@@ -62,7 +82,7 @@ export async function GET(
         tags: tags
       },
       content: content,
-      category: category as "writings" | "notes"
+      category: category as "writings" | "notes" | "wordpress-posts"
     };
 
     return NextResponse.json(responseData);
