@@ -148,3 +148,146 @@ tags:
 type: website
 id: website-013
 ---
+
+---
+publish: true
+title: Marie Assenat
+url: http://www.marieassenat.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-014
+---
+
+---
+publish: true
+title: Marie Assenat Tumblr
+url: https://marieassenat.tumblr.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-015
+---
+
+---
+publish: true
+title: Clara Kirkpatrick
+url: https://clarakirkpatrick.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-016
+---
+
+---
+publish: true
+title: People Look at Art
+url: https://space.repponen.com/peoplelookatart/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-017
+---
+
+---
+publish: true
+title: Alix Coco Sculptural Furnitures
+url: https://alixcoco.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-018
+---
+
+---
+publish: true
+title: Coffee Receipt Stories
+url: https://coffeereceiptstories.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-019
+---
+
+---
+publish: true
+title: Lisa Glonti Drawing
+url: https://lisaglonti.com/drawing/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-020
+---
+
+---
+publish: true
+title: Martina Wunderlin Photography
+url: https://martinawunderlin.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-021
+---
+
+---
+publish: true
+title: Tanner Jamieson
+url: https://tannerjamieson.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-022
+---
+
+---
+publish: true
+title: Lusi Lblek
+url: https://lusilblek.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-023
+---
+
+---
+publish: true
+title: Kokum Kohla Indian Artist
+url: https://kokumkohla.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-024
+---

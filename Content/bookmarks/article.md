@@ -1109,8 +1109,8 @@ publish: true
 
 ---
 id: article-091
-title: 
-URL:
+title: Every site needs a Links Page / Why linking matters
+URL: https://thoughts.melonking.net/thoughts/every-site-needs-a-links-page-why-linking-matters
 createdAt: 2025-06-02
 tags:
   - web-design
@@ -1444,9 +1444,35 @@ publish: true
 
 ---
 id: article-119
+title: I Deleted My Second Brain
+url: https://www.joanwestenberg.com/p/i-deleted-my-second-brain
+createdAt: 2025-06-22
+tags:
+  - pkm
+  - knowledge
+  - productivity
+type: article
+publish: true
+---
+
+---
+id: article-120
+title: Why Have a Blog?
+url: https://guzey.com/personal/why-have-a-blog/
+createdAt: 2025-06-22
+tags:
+  - self-expression
+  - writing
+  - blogging
+type: article
+publish: true
+---
+
+---
+id: article-121
 title: Write, Briefly
 url: https://www.paulgraham.com/writing44.html
-createdAt: 2025-06-22
+createdAt: 2025-06-20
 tags:
   - writing
   - self-expression
@@ -1456,10 +1482,10 @@ publish: true
 ---
 
 ---
-id: article-120
+id: article-122
 title: Writing for Self-actualization vs Communication
-ur: https://lili.bearblog.dev/writing-for-self-actualization-vs-communication/
-createdAt: 2025-06-22
+url: https://lili.bearblog.dev/writing-for-self-actualization-vs-communication/
+createdAt: 2025-06-20
 tags:
   - writing
   - self-expression

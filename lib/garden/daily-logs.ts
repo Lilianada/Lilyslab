@@ -31,6 +31,28 @@ export async function getAllDailyLogs(): Promise<DailyLog[]> {
         const dateString = data.date || data.createdAt;
         const date = new Date(dateString);
         
+        // Validate the date - if invalid, try to parse filename as date
+        if (isNaN(date.getTime())) {
+          // Try to extract date from filename (YYYY-MM-DD.md)
+          const filenameDate = slug.match(/^\d{4}-\d{2}-\d{2}$/);
+          if (filenameDate) {
+            const fallbackDate = new Date(slug);
+            if (!isNaN(fallbackDate.getTime())) {
+              console.warn(`Invalid date in ${fileName}, using filename date: ${slug}`);
+              return {
+                id: slug,
+                slug,
+                date: fallbackDate,
+                content,
+                mood: data.mood,
+                createdAt: slug
+              } as DailyLog;
+            }
+          }
+          console.error(`Invalid date in ${fileName}: ${dateString}`);
+          return null;
+        }
+        
         return {
           id: slug,
           slug,
@@ -38,10 +60,12 @@ export async function getAllDailyLogs(): Promise<DailyLog[]> {
           content,
           mood: data.mood,
           createdAt: dateString
-        };
+        } as DailyLog;
       })
   );
 
-  // Sort logs by date (newest first)
-  return allLogs.sort((a, b) => b.date.getTime() - a.date.getTime());
+  // Sort logs by date (newest first) and filter out null entries
+  return allLogs
+    .filter((log): log is DailyLog => log !== null)
+    .sort((a, b) => b.date.getTime() - a.date.getTime());
 }
