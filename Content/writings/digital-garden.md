@@ -9,11 +9,13 @@ published: true
 type: evergreen
 ---
 
-I came across the concept of a Digital Garden a few months back and I absolutely love it. I had just started building my **digital lab and workshop**, gotten my domain **Lilyslab** which I now want to change to **Lilysgarden**.
+I came across the concept of a Digital Garden a few months back and I absolutely loved it. I had just started building my **digital lab and workshop**, gotten my domain **Lilyslab** which I now want to change to **Lilysgarden**.
 
 I was so intrigued by **digital gardening** that I started researching it, reading essays and blogs, going down [[rabbit holes]], learning, updating, unlearning and relearning. I have consumed so much information on this concept that I sought to write about it for my future self who might have forgotten about it.
 
-A Digital Garden is a personal online space used by people (mind/knowledge gardeners) to cultivate, keep track of and manage all their knowledge, ideas, thoughts, learnings and writings in public. Unlike traditional blogs where finished works are forgotten as soon as they're published, a digital garden stays evergreen because all work is continually tended to whether or not it is published.
+A Digital Garden is a personal online space used by people (mind/knowledge gardeners) to cultivate, keep track of and manage all their knowledge, ideas, thoughts, learnings and writings in public. It is a concept that allows you to cultivate your own ideas, nuture them by rewriting and revisiting them.
+
+Unlike traditional blogs where finished works are forgotten as soon as they're published, a digital garden stays evergreen because all work is continually tended to whether or not it is published.
 
 You can choose to build your digital garden from scratch or build it using tools such as Obsidian, Notion, Tiddywiki, Wordpress, Bearblog, Hugo, Fomadocs, Jekyll  etc.
 
@@ -36,5 +38,4 @@ A digital garden helps to [[reduce the friction]] that comes with writing and pu
 **References**
 1. https://www.youtube.com/watch?v=en56OKg5hyc
 2. [Digital Garden Setup](https://nesslabs.com/digital-garden-set-up)
-
-The digital gardening metaphor emphasizes the slow growth of ideas through writing, rewriting, editing, and revisiting thoughts in a public space. Instead of fixed opinions that never change, this approach allows ideas to develop over time. The goal of digital gardening is to use the collective intelligence of your network to create constructive feedback loops.
+3. [What is a Digital Garden](https://hackernoon.com/what-is-a-digital-garden)

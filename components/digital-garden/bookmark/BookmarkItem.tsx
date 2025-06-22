@@ -22,8 +22,38 @@ export function BookmarkItem({ bookmark }: Props) {
   
   // Extract domain from link
   let domain = "";
+  let websiteName = "";
   try {
-    domain = new URL(bookmark.link).hostname;
+    const url = new URL(bookmark.link);
+    domain = url.hostname;
+    
+    // Extract clean website name (remove www. and get main domain)
+    let cleanDomain = domain.replace(/^www\./, '');
+    
+    // Handle special cases for better readability
+    const specialCases: Record<string, string> = {
+      'paulgraham.com': 'Paul Graham',
+      'maggieappleton.com': 'Maggie Appleton',
+      'tracydurnell.com': 'Tracy Durnell',
+      'fs.blog': 'Farnam Street',
+      'justinjackson.ca': 'Justin Jackson',
+      'kevquirk.com': 'Kev Quirk',
+      'sive.rs': 'Derek Sivers',
+      'julian.com': 'Julian',
+      'guzey.com': 'Alexey Guzey',
+      'benkuhn.net': 'Ben Kuhn',
+      'tomcritchlow.com': 'Tom Critchlow',
+      'swyx.io': 'Swyx',
+      'perell.com': 'David Perell'
+    };
+    
+    if (specialCases[cleanDomain]) {
+      websiteName = specialCases[cleanDomain];
+    } else {
+      // For regular domains, extract the main part and capitalize
+      websiteName = cleanDomain.split('.')[0];
+      websiteName = websiteName.charAt(0).toUpperCase() + websiteName.slice(1);
+    }
   } catch (error) {
     console.warn(`Invalid URL in bookmark: ${bookmark.link}`);
   } 
@@ -44,14 +74,10 @@ export function BookmarkItem({ bookmark }: Props) {
           <div className="flex max-w-[80%] shrink-0 items-center gap-2">
             <div className={`h-2 w-2 rounded-full ${colorMap[bookmark.type]}`} />
             <p className="mr-2 truncate text-sm">{bookmark.title}</p>
-            {bookmark.tags.length > 0 && (
-              <div className="flex gap-1 ">
-                {bookmark.tags.map((tag) => (
-                  <span key={tag} className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+            {websiteName && (
+              <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                {websiteName}
+              </span>
             )}
           </div>
           <div className="hidden h-[1px] w-full grow bg-border md:block"></div>
@@ -79,23 +105,17 @@ export function BookmarkItem({ bookmark }: Props) {
             <div className="flex shrink items-center gap-2 overflow-x-auto">
               <div className={`h-2 w-2 shrink-0 rounded-full ${colorMap[bookmark.type]}`} />
               <p className="mr-2 truncate font-mono text-xs md:text-sm">{bookmark.title}</p>
+              {websiteName && (
+                <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                  {websiteName}
+                </span>
+              )}
             </div>
             <p className="shrink-0 text-right font-mono text-xs text-neutral-500">
               {formattedDate}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <div>
-              {bookmark.tags.length > 0 && (
-                <div className="flex gap-1 ">
-                  {bookmark.tags.map((tag) => (
-                    <span key={tag} className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
             <div className="flex shrink-0 items-center gap-2 text-neutral-400">
               <p className="text-xs">{domain}</p>
               <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="transition-transform duration-200 group-hover:rotate-24 group-hover:text-steelBlue group-hover:scale-150"><path d="M7 17L17 7M17 7H7m10 0v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
