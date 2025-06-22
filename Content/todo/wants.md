@@ -1,7 +1,7 @@
 ---
 title: Wants
 createdAt: 2025-06-12
-lastUpdated: 2025-06-21
+lastUpdated: 2025-06-22
 ---
 
 1. I want to learn to ride a bike.

@@ -1,7 +1,7 @@
 ---
 title: 50 Things I Know
 createdAt: 2025-06-15
-lastUpdated: 2025-06-21
+lastUpdated: 2025-06-22
 ---
 
 1. Working out makes you look good.

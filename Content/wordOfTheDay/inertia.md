@@ -8,7 +8,7 @@ partOfSpeech: noun
 **Meaning:** 
 1. A tendency to do nothing or to remain unchanged.
 
-**Example:** "the problem runs deeper than bureaucratic inertia"
+**Example:** "The problem runs deeper than bureaucratic inertia"
 
 **Similar:** 
 - inactivity

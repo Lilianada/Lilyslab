@@ -1,13 +1,13 @@
 ---
 publish: true
 title: Strategic Digital Gardening
-url: >-
-  https://docs.google.com/presentation/d/1eK9yJdkwxwV_HcdPh4xNxNl4o0knIAIm8otZ3AibJZU/edit#slide=id.g75541625a4_0_226
+url: https://docs.google.com/presentation/d/1eK9yJdkwxwV_HcdPh4xNxNl4o0knIAIm8otZ3AibJZU/edit#slide=id.g75541625a4_0_226
 createdAt: 2025-04-30
 tags:
   - digital-garden
 type: misc
 id: misc-001
+lastUpdated: 2025-06-22
 ---
 
 ---
@@ -33,7 +33,6 @@ type: misc
 id: misc-003
 ---
 
-
 ---
 publish: true
 title: Networked Knowledge Strategies
@@ -43,5 +42,16 @@ tags:
   - pkm
 type: misc
 id: misc-004
+---
+
+---
+publish: true
+title: Typewriter Project
+url: https://selimslab.github.io/typewriter/
+createdAt: 2025-06-22
+tags:
+  - fun-project
+type: misc
+id: misc-005
 ---
 

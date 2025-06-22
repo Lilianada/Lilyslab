@@ -3,6 +3,8 @@ date: 2025-06-14
 word: Circumlocution
 pronunciation: /səkəmləʊˈkjuʃɪn/
 partOfSpeech: noun
+createdAt: 2025-06-21
+lastUpdated: 2025-06-21
 ---
 
 **Meaning:** 

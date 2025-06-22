@@ -9,7 +9,7 @@ tags:
   - pkm
 type: article
 id: article-001
-lastUpdated: 2025-06-21
+lastUpdated: 2025-06-22
 ---
 
 ---
@@ -623,7 +623,7 @@ createdAt: 2025-06-05
 tags:
   - writing
   - guides
-  - creativity
+  - self-expression
 type: article
 id: article-051
 ---
@@ -661,7 +661,7 @@ url: https://www.benkuhn.net/writing/
 createdAt: 2025-06-05
 tags:
   - writing
-  - web-culture
+  - self-expression
   - guides
 type: article
 id: article-054
@@ -686,7 +686,7 @@ url: https://www.paulgraham.com/simply.html
 createdAt: 2025-06-02
 tags:
   - writing
-  - clarity
+  - self-expression
   - communication
 type: article
 id: article-056
@@ -700,6 +700,7 @@ createdAt: 2025-05-29
 tags:
   - writing
   - thinking
+  - self-expression
 type: article
 id: article-057
 ---
@@ -712,7 +713,7 @@ createdAt: 2025-05-19
 tags:
   - writing
   - productivity
-  - technique
+  - self-expression
 type: article
 id: article-058
 ---
@@ -872,7 +873,8 @@ title: Every site needs a Links Page / Why linking matters
 url: https://thoughts.melonking.net/thoughts/every-site-needs-a-links-page-why-linking-matters
 createdAt: 2025-05-21
 tags:
-  - web-design
+  - web-culture
+  - internet
   - community
 type: article
 id: article-072
@@ -1107,8 +1109,8 @@ publish: true
 
 ---
 id: article-091
-title: Every site needs a Links Page / Why linking matters
-URL: https://thoughts.melonking.net/thoughts/every-site-needs-a-links-page-why-linking-matters
+title: 
+URL:
 createdAt: 2025-06-02
 tags:
   - web-design
@@ -1436,6 +1438,32 @@ tags:
   - indieweb
   - internet-culture
   - web-culture
+type: article
+publish: true
+---
+
+---
+id: article-119
+title: Write, Briefly
+url: https://www.paulgraham.com/writing44.html
+createdAt: 2025-06-22
+tags:
+  - writing
+  - self-expression
+  - communication
+type: article
+publish: true
+---
+
+---
+id: article-120
+title: Writing for Self-actualization vs Communication
+ur: https://lili.bearblog.dev/writing-for-self-actualization-vs-communication/
+createdAt: 2025-06-22
+tags:
+  - writing
+  - self-expression
+  - communication
 type: article
 publish: true
 ---
