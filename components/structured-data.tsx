@@ -7,7 +7,7 @@ export const PersonStructuredData = () => {
   "@type": "Person",
   "name": "Lilian Ada",
   "alternateName": "Lily",
-  "description": "Software engineer, product manager, and digital creator",
+  "description": "Lily's digital garden, workshop and lab.",
   "image": "https://lilyslab.xyz/12.png",
   "url": "https://lilyslab.xyz",
   "sameAs": [
@@ -46,7 +46,7 @@ export const WebsiteStructuredData = () => {
   "name": "Lily's Garden",
   "alternateName": "Lilyslab",
   "url": "https://lilyslab.xyz",
-  "description": "Software engineer, product manager, and digital creator",
+  "description": "Lily's digital garden, workshop and lab.",
   "potentialAction": {
     "@type": "SearchAction",
     "target": {

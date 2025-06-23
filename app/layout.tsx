@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     default: "Lily's Lab",
     template: "%s | Lily's Lab",
   },
-  description: "Software engineer, product manager, and digital creator",
+  description: "Lily's digital garden, workshop and lab.",
   keywords: ["design", "development", "product management", "portfolio", "Lilian Ada", "Lilyslab", "Lily's Lab", "artificial intelligence", "machine learning", "software engineer", "product manager", "digital creator"],
   authors: [{ name: "Lilian Ada", url: "https://lilianada.com" }],
   creator: "Lilian Ada",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://lilyslab.xyz",
     title: "Lily's Lab",
-    description: "Software engineer, product manager, and digital creator",
+    description: "Lily's digital garden, workshop and lab.",
     siteName: "Lily's Lab",
     images: [
       {
