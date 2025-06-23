@@ -291,3 +291,111 @@ tags:
 type: website
 id: website-024
 ---
+
+---
+publish: true
+title: Monet's Grotto
+url: https://www.monetsgrotto.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - artistic-sites
+  - art-inspo
+type: website
+id: website-025
+---
+
+---
+publish: true
+title: Illustrations by Zutto
+url: https://www.zutto.com/
+createdAt: 2025-06-22
+tags:
+  - illustration
+  - art
+  - artistic-sites
+type: website
+id: website-026
+---
+
+---
+publish: true
+title: Behance
+url: https://www.behance.net/
+createdAt: 2025-06-22
+tags:
+  - art
+  - portfolio
+  - design-showcase
+  - creative-community
+type: website
+id: website-027
+---
+
+---
+publish: true
+title: Dribbble
+url: https://dribbble.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - design
+  - portfolio
+  - creative-community
+type: website
+id: website-028
+---
+
+---
+publish: true
+title: ArtStation
+url: https://www.artstation.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - digital-art
+  - portfolio
+  - game-art
+type: website
+id: website-029
+---
+
+---
+publish: true
+title: DeviantArt
+url: https://www.deviantart.com/
+createdAt: 2025-06-22
+tags:
+  - art
+  - digital-art
+  - community
+  - fan-art
+type: website
+id: website-030
+---
+
+---
+publish: true
+title: Illustration Chronicles
+url: https://illustrationchronicles.com/
+createdAt: 2025-06-22
+tags:
+  - illustration
+  - art-history
+  - artistic-sites
+type: website
+id: website-031
+---
+
+---
+publish: true
+title: Society of Illustrators
+url: https://www.societyillustrators.org/
+createdAt: 2025-06-22
+tags:
+  - illustration
+  - professional-org
+  - art-community
+type: website
+id: website-032
+---

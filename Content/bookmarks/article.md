@@ -1493,3 +1493,109 @@ tags:
 type: article
 publish: true
 ---
+
+---
+publish: true
+title: The Evolution of Digital Art
+url: https://www.artforum.com/features/digital-art-evolution
+createdAt: 2025-06-22
+tags:
+  - digital-art
+  - art-history
+  - technology
+type: article
+id: article-123
+---
+
+---
+publish: true
+title: Understanding Color Theory in Illustration
+url: https://www.creativebloq.com/art/color-theory-illustration
+createdAt: 2025-06-22
+tags:
+  - illustration
+  - color-theory
+  - art-technique
+type: article
+id: article-124
+---
+
+---
+publish: true
+title: The Business of Freelance Illustration
+url: https://www.illustrationbusiness.com/freelance-guide
+createdAt: 2025-06-22
+tags:
+  - illustration
+  - freelance
+  - business
+  - career
+type: article
+id: article-125
+---
+
+---
+publish: true
+title: Contemporary Art Movements
+url: https://www.tate.org.uk/art/art-terms/contemporary-art
+createdAt: 2025-06-22
+tags:
+  - art-history
+  - contemporary-art
+  - art-movements
+type: article
+id: article-126
+---
+
+---
+publish: true
+title: Digital vs Traditional Art Mediums
+url: https://www.artistnetwork.com/medium/digital-vs-traditional-art
+createdAt: 2025-06-22
+tags:
+  - digital-art
+  - traditional-art
+  - art-technique
+  - comparison
+type: article
+id: article-127
+---
+
+---
+publish: true
+title: Building an Art Portfolio
+url: https://www.artsy.net/article/artsy-editorial-build-art-portfolio
+createdAt: 2025-06-22
+tags:
+  - portfolio
+  - career
+  - art-business
+type: article
+id: article-128
+---
+
+---
+publish: true
+title: The Psychology of Color in Art
+url: https://www.boredpanda.com/psychology-color-art/
+createdAt: 2025-06-22
+tags:
+  - color-theory
+  - psychology
+  - art-technique
+type: article
+id: article-129
+---
+
+---
+publish: true
+title: Art Critique and Analysis Methods
+url: https://www.khan.edu.org/humanities/art-critique-methods
+createdAt: 2025-06-22
+tags:
+  - art-critique
+  - art-analysis
+  - art-education
+type: article
+id: article-130
+---
