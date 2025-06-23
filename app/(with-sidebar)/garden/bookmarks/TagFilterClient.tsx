@@ -132,7 +132,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
                   }`}
                   onClick={() => setSelectedCategory("misc")}
                 >
-                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-yellow border border-gray-300"></span>
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-siteYellow border border-gray-300"></span>
                   Misc <span className="ml-1 text-muted-foreground">({categoryCounts.misc})</span>
                 </button>
               </div>

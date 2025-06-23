@@ -102,7 +102,7 @@ export default function DailyLogPage() {
             {[...Array(3)].map((_, i) => (
               <div key={i} className="mb-6">
                 <div className="flex items-center mb-3">
-                  <Skeleton className="mr-2 h-3 w-3 rounded-full bg-yellow" />
+                  <Skeleton className="mr-2 h-3 w-3 rounded-full bg-siteYellow" />
                   <Skeleton className="h-5 w-32" />
                 </div>
                 <ul className="ml-2 border-l border-border pl-6">
@@ -120,7 +120,7 @@ export default function DailyLogPage() {
           dailyLogData.sections.map((section, sectionIndex) => (
             <div key={sectionIndex} className="mb-6">
               <h3 className="text-base font-semibold text-primary mb-3 flex items-center">
-                <span className="mr-2 h-3 w-3 rounded-full bg-yellow"></span> {/* Bullet for section title */}
+                <span className="mr-2 h-3 w-3 rounded-full bg-siteYellow"></span> {/* Bullet for section title */}
                 {section.title}
               </h3>
               <ul className="ml-1  border-l border-border pl-8"> {/* Indentation for section items */}

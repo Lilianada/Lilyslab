@@ -22,10 +22,10 @@ export default function AboutPage() {
   return (
     <>
       <ScrollProgress
-        color="bg-green"
+        color="bg-siteGreen"
         height={3}
         glow={true}
-        glowColor="rgba(var(--green), 0.6)"
+        glowColor="rgba(var(--siteGreen), 0.6)"
         glowIntensity="12px"
       />
       <div
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 </figcaption>
               </figure>
               
-                <h2 className="text-sm font-semibold tracking-tight text-green">
+                <h2 className="text-sm font-semibold tracking-tight text-siteGreen">
                   ✳︎✳︎whoami✳︎✳︎
                 </h2>
                 <p className="mb-3 text-sm opacity-0 leading-normal animate-slide-up pl-2">
@@ -106,27 +106,27 @@ export default function AboutPage() {
                   ⎯ Frontent developer <br />
                   ⎯ Lifestyle connoisseur <br />
                   ⎯ This is what I'm doing{" "}
-                  <Link href="/now" className="text-green underline">
+                  <Link href="/now" className="text-siteGreen underline">
                     Now{" "}
                   </Link>{" "}
                   <br />
                   ⎯ This is what I hope to do{" "}
-                  <Link href="/someday" className="text-green underline">
+                  <Link href="/someday" className="text-siteGreen underline">
                     Someday{" "}
                   </Link>{" "}
                   <br />
                   ⎯ My not so detailed career/job{" "}
-                  <Link href="/bucket-list" className="text-green underline">
+                  <Link href="/bucket-list" className="text-siteGreen underline">
                     bucket list{" "}
                   </Link>{" "}
                   <br />
                   ⎯ I love to code, go to the gym, read and{" "}
-                  <Link href="/garden/writings" className="text-green underline">
+                  <Link href="/garden/writings" className="text-siteGreen underline">
                     write
                   </Link>{" "}
                   <br />
                   ⎯ I like to collect things digitally so check my{" "}
-                  <Link href="/bookmarks" className="text-green underline">
+                  <Link href="/bookmarks" className="text-siteGreen underline">
                     bookmarks{" "}
                   </Link>{" "}
                   <br />
@@ -140,7 +140,7 @@ export default function AboutPage() {
                   inspiration.
                 </p>
                 <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
-                  By day, I <a href="https://www.lilianada.com/" className="text-green underline" >build and manage digital products </a> — blending a
+                  By day, I <a href="https://www.lilianada.com/" className="text-siteGreen underline" >build and manage digital products </a> — blending a
                   background in software engineering with product thinking to
                   turn creative ideas into real, user-focused solutions.
                 </p>
@@ -159,7 +159,7 @@ export default function AboutPage() {
 
 
               <div className="mt-4">
-                <h2 className="text-sm font-semibold tracking-tight text-green">
+                <h2 className="text-sm font-semibold tracking-tight text-siteGreen">
                   ✳︎✳︎my mantra:✳︎✳︎
                   </h2>
                 <p className="mb-3 text-sm leading-normal opacity-0 animate-slide-up">
@@ -168,7 +168,7 @@ export default function AboutPage() {
             </div>
 
               <div className="mt-4">
-                <h2 className="text-sm font-semibold tracking-tight text-green">
+                <h2 className="text-sm font-semibold tracking-tight text-siteGreen">
                   ✳︎✳︎what's next✳︎✳︎
                   </h2>
                 <p className="mb-3 text-sm leading-normal opacity-0 animate-slide-up">
@@ -182,21 +182,21 @@ export default function AboutPage() {
             </div>
             </div>
             <div className=" mt-6 mb-3">
-              <h2 className="text-sm font-semibold tracking-tight text-green">
+              <h2 className="text-sm font-semibold tracking-tight text-siteGreen">
                   ✳︎✳︎time to explore✳︎✳︎
               </h2>
              
               <p className="text-sm leading-normal mb-6">
                 Other interesting pages that I have put together for you are all
-                listed on the  <Link href="/sitemap" className="text-green underline">
+                listed on the  <Link href="/sitemap" className="text-siteGreen underline">
                     sitemap
                   </Link>{" "}, be sure to scroll to the bottom in order
                 not to miss anything.  And if you have any questions for me, you can either email me or use the{" "}
-                <Link href="/ask-me-anything" className="text-green underline">
+                <Link href="/ask-me-anything" className="text-siteGreen underline">
                   Ask Me Anything (AMA)
                 </Link>{" "}
                 page and most importantly I'd love if you leave me a note in my{" "}
-                <a href="/guestbook" className="text-green underline">
+                <a href="/guestbook" className="text-siteGreen underline">
                   Guestbook
                 </a>{" "}
                 so I'd know you stopped by.

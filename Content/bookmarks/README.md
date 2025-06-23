@@ -103,4 +103,4 @@ Bookmarks are color-coded by category for easy visual identification:
 - Article: Lavender (`bg-lavender`)
 - Website: Peach (`bg-peach`)
 - Video: Steel Blue (`bg-steelBlue`)
-- Misc: Yellow (`bg-yellow`)
+- Misc: Yellow (`bg-siteYellow`)

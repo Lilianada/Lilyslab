@@ -45,7 +45,7 @@ const lookingForItems = [
     title: "A Place to Learn and Grow",
     description:
       "I'm prioritizing learning in my next role. I haven't had the opportunity to receive consistent feedback or mentorship, so I'm looking for a team where I can learn from people more experienced than me — through direct feedback, shadowing, and honest conversations.",
-    icon: <Sprout className="text-green" size={16} />,
+    icon: <Sprout className="text-siteGreen" size={16} />,
   },
   {
     title: "Mentorship and Leadership",
@@ -63,7 +63,7 @@ const lookingForItems = [
     title: "A Healthy, Supportive Work Culture",
     description:
       "I want to work in an environment where people are kind, collaborative, and open. A place that values both individuality and teamwork. Somewhere I can belong, not just fit in.",
-    icon: <HeartHandshake className="text-pink" size={16} />,
+    icon: <HeartHandshake className="text-sitePink" size={16} />,
   },
   {
     title: "A Product I Can Be Proud Of",
@@ -153,7 +153,7 @@ export default function BucketListPage() {
           </div>
         </header>
 
-        <div className="w-full h-40 bg-yellow/50 rounded-lg border border-peach/50 mb-8"></div>
+        <div className="w-full h-40 bg-siteYellow/50 rounded-lg border border-peach/50 mb-8"></div>
 
         <section className="mb-16">
           <span className="text-xl mb-2">✳︎</span>

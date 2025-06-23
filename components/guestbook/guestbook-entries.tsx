@@ -52,7 +52,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
       "from-pink-200 to-purple-500",
       "from-blue-200 to-cyan-500", 
       "from-green-200 to-emerald-500",
-      "from-yellow-200 to-orange-500",
+      "from-siteYellow-200 to-orange-500",
       "from-indigo-200 to-violet-500",
       "from-rose-200 to-red-500",
     ];
@@ -105,7 +105,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
           <div className="flex justify-between items-center mb-2">
             <div className="text-xs font-mono text-muted-foreground">guestbook.html</div>
             <div className="flex space-x-1.5">
-              <div className="h-3 w-3 rounded-full bg-yellow-400"></div>
+              <div className="h-3 w-3 rounded-full bg-siteYellow-400"></div>
               <div className="h-3 w-3 rounded-full bg-green-400"></div>
               <div className="h-3 w-3 rounded-full bg-red-400"></div>
             </div>
@@ -144,7 +144,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
               <div className="flex justify-between items-center mb-2">
                 <div className="text-xs font-mono text-muted-foreground">{entry.name}.html</div>
                 <div className="flex space-x-1.5">
-                  <div className="h-3 w-3 rounded-full bg-yellow-400 hover:bg-yellow-500 transition-colors cursor-pointer" title="Minimize">
+                  <div className="h-3 w-3 rounded-full bg-siteYellow-400 hover:bg-siteYellow-500 transition-colors cursor-pointer" title="Minimize">
                     <Minimize2 className="h-3 w-3 opacity-0 hover:opacity-100 transition-opacity" />
                   </div>
                   <div className="h-3 w-3 rounded-full bg-green-400 hover:bg-green-500 transition-colors cursor-pointer" title="Maximize">

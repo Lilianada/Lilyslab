@@ -52,10 +52,10 @@ export default function Days365Page() {
           {days.map((day, idx) => (
             <div
               key={day}
-              className="bg-white rounded shadow-sm border border-neutral-200 flex items-center justify-center text-xs font-mono cursor-pointer hover:bg-yellow-100 hover:border-yellow-400 transition group"
+              className="bg-white rounded shadow-sm border border-neutral-200 flex items-center justify-center text-xs font-mono cursor-pointer hover:bg-siteYellow-100 hover:border-siteYellow-400 transition group"
               title={`Day ${day}: ${getSuggestion(day - 1)}`}
             >
-              <span className="text-neutral-400 group-hover:text-yellow-700 select-none">{day}</span>
+              <span className="text-neutral-400 group-hover:text-siteYellow-700 select-none">{day}</span>
             </div>
           ))}
           {/* Fill any remaining boxes to complete the grid layout */}

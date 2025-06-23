@@ -107,7 +107,7 @@ const BookCard: React.FC<BookCardProps> = ({
                     </li>
                     {/* Add rating if available */}
                     {book.rating !== undefined && book.rating !== null && (
-                         <li className="inline-block rounded-full border px-2 border-black bg-yellow-300/70 py-[2px] text-[11px] text-black">
+                         <li className="inline-block rounded-full border px-2 border-black bg-siteYellow-300/70 py-[2px] text-[11px] text-black">
                             Rating: {book.rating}/5
                          </li>
                     )}

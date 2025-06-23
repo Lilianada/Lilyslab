@@ -134,15 +134,15 @@ export default function Colophon() {
           {[
             { name: 'Cream', var: 'var(--cream)' },
             { name: 'PaleYellow', var: 'var(--paleYellow)' },
-            { name: 'Yellow', var: 'var(--yellow)' },
-            { name: 'Blue', var: 'var(--blue)' },
+            { name: 'Yellow', var: 'var(--siteYellow)' },
+            { name: 'Blue', var: 'var(--siteBlue)' },
             { name: 'SteelBlue', var: 'var(--steelBlue)' },
             { name: 'Lavender', var: 'var(--lavender)' },
             { name: 'Primary', var: 'var(--primary)' },
             { name: 'Lilac', var: 'var(--lilac)' },
-            { name: 'Pink', var: 'var(--pink)' },
+            { name: 'Pink', var: 'var(--sitePink)' },
             { name: 'Peach', var: 'var(--peach)' },
-            { name: 'Green', var: 'var(--green)' },
+            { name: 'Green', var: 'var(--siteGreen)' },
           ].map((color) => (
             <div key={`extra-${color.name}`} className="flex flex-col items-center">
               <div

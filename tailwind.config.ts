@@ -37,15 +37,17 @@ const config = {
         foreground: "hsl(var(--foreground))",
         codeRed: "hsl(var(--codeRed))",
         lavender: "hsl(var(--lavender))",
-        yellow: "hsl(var(--yellow))",
-        green: "hsl(var(--green))",
-        pink: "hsl(var(--pink))",
+
+        siteYellow: "hsl(var(--siteYellow))",
+        siteGreen: "hsl(var(--siteGreen))",
+        sitePink: "hsl(var(--sitePink))",
+        siteBlue: "hsl(var(--siteBlue))",
+
         cream: "hsl(var(--cream))",
         lilac: "hsl(var(--lilac))",
         peach: "hsl(var(--peach))",
         paleYellow: "hsl(var(--paleYellow))",
         steelBlue: "hsl(var(--steelBlue))",
-        blue: "hsl(var(--blue))",
         lightBlue: "hsl(var(--lightBlue))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

@@ -63,7 +63,7 @@ export function BookmarkItem({ bookmark }: Props) {
     article: "bg-lavender",
     website: "bg-peach",
     video: "bg-steelBlue",
-    misc: "bg-yellow",
+    misc: "bg-siteYellow",
   } as const;
 
   return (

@@ -11,10 +11,10 @@ export function NotesClientWrapper({ children }: NotesClientWrapperProps) {
   return (
     <>
       <ScrollProgress 
-        color="bg-green" 
+        color="bg-siteGreen" 
         height={3} 
         glow={true}
-        glowColor="rgba(var(--green), 0.6)"
+        glowColor="rgba(var(--siteGreen), 0.6)"
         glowIntensity="12px"
       />
       {children}

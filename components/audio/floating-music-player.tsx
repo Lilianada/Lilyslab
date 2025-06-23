@@ -12,8 +12,8 @@ const LOCAL_STORAGE_KEY = "music_player_paused";
 const COLOR_VARS = [
   "--lavender",
   "--yellow",
-  "--green",
-  "--pink",
+  "--siteGreen",
+  "--sitePink",
   "--cream",
   "--lilac",
   "--peach",

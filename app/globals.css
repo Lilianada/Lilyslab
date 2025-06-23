@@ -38,7 +38,7 @@
     transition: all 0.3s;
   }
   .backlink:hover {
-    text-decoration-color: hsl(var(--blue));
+    text-decoration-color: hsl(var(--siteBlue));
     text-decoration-thickness: 0.6em;
   }
   .backlink:focus-visible {
@@ -98,7 +98,7 @@
     --card-foreground: 0 0% 8%; /* #101010 */
     --popover: 0 0% 100%; /* #ffffff */
     --popover-foreground: 0 0% 4%; /* #0a0a0a */
-    --primary: 250 100% 83%; /* #e9c6f7 - soft lavender-pink */
+    --primary: 250 100% 83%; /* #e9c6f7 - soft lavender-sitePink */
     --primary-foreground: 0 0% 99%; /* #fcfcfc */
     --secondary: 210 10% 87%; /* #dbe1e8 - zinc light */
     --secondary-foreground: 0 0% 15%; /* #262626 */
@@ -118,10 +118,10 @@
     /* Extra palette for bg-... */
     --lightBlue: 218 93% 83%; 
     --lavender: 234 91% 80%; /* #9EAAFA */
-    --yellow: 48 95% 76%; /* #FAE680 */
-    --green: 148 28% 72%; /* #A2CBAF */
-    --pink: 350 54% 80%; /* #E8ADB1 */
-    --blue: 213 61% 80%; /* #A6C2EB */
+    --siteYellow: 48 95% 76%; /* #FAE680 */
+    --siteGreen: 148 28% 72%; /* #A2CBAF */
+    --sitePink: 350 54% 80%; /* #E8ADB1 */
+    --siteBlue: 213 61% 80%; /* #A6C2EB */
     --cream: 43 68% 89%; /* #F4E8C8 */
     --lilac: 270 64% 80%; /* #CCA7ED */
     --peach: 18 86% 71%; /* #F29874 */
@@ -156,10 +156,10 @@
     /* Extra palette for bg-... */
     --lightBlue: 218 93% 83%; 
     --lavender: 234 91% 80%; /* #9EAAFA */
-    --yellow: 48 95% 76%; /* #FAE680 */
-    --green: 148 28% 72%; /* #A2CBAF */
-    --pink: 350 54% 80%; /* #E8ADB1 */
-    --blue: 213 61% 80%; /* #A6C2EB */
+    --siteYellow: 48 95% 76%; /* #FAE680 */
+    --siteGreen: 148 28% 72%; /* #A2CBAF */
+    --sitePink: 350 54% 80%; /* #E8ADB1 */
+    --siteBlue: 213 61% 80%; /* #A6C2EB */
     --cream: 43 68% 89%; /* #F4E8C8 */
     --lilac: 270 64% 80%; /* #CCA7ED */
     --peach: 18 86% 71%; /* #F29874 */
@@ -326,8 +326,8 @@
 
 /* Style for checked state - using the :has pseudo-class for modern browsers */
 .task-list-container ul li:has(input[type="checkbox"]:checked):before {
-  background-color: hsl(var(--green) / 0.2);
-  border-color: hsl(var(--green) / 0.7);
+  background-color: hsl(var(--siteGreen) / 0.2);
+  border-color: hsl(var(--siteGreen) / 0.7);
 }
 
 /* Create the checkmark */
@@ -338,7 +338,7 @@
   top: 0.3rem;
   width: 0.4rem;
   height: 0.7rem;
-  border: solid hsl(var(--green));
+  border: solid hsl(var(--siteGreen));
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   transition: all 0.2s ease;
@@ -348,7 +348,7 @@
 .task-list-container ul li input[type="checkbox"]:checked ~ p {
   text-decoration: none;
   opacity: 0.8;
-  color: hsl(var(--green));
+  color: hsl(var(--siteGreen));
 }
 
 .page-transition-exit-active {

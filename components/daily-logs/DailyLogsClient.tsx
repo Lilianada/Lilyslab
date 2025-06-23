@@ -26,7 +26,7 @@ const MarkdownRenderer = lazy(() =>
             a: ({ href = "", ...props }) => {
               const isExt = /^https?:\/\//.test(href);
               const yellowLink =
-                "text-yellow-500 dark:text-yellow-300 hover:underline transition-colors";
+                "text-siteYellow-500 dark:text-siteYellow-300 hover:underline transition-colors";
               const codeRedLink =
                 "text-red-400 dark:text-red-300 hover:underline transition-colors";
               return (
@@ -159,7 +159,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
         <div className="flex gap-2">
           <Link
             href="/ask-me-anything"
-            className="px-3 py-1 rounded border border-yellow-500 dark:border-yellow-300 text-yellow-500 dark:text-yellow-300 font-nitti text-sm hover:bg-yellow-500/10 transition"
+            className="px-3 py-1 rounded border border-siteYellow-500 dark:border-siteYellow-300 text-siteYellow-500 dark:text-siteYellow-300 font-nitti text-sm hover:bg-siteYellow-500/10 transition"
           >
             Ask me anything
           </Link>
@@ -311,7 +311,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
                   that I intend to keep up no matter how inconsistent I am.
                 </p>
 
-                <blockquote className="border-l-4 border-yellow-400 pl-4 italic">
+                <blockquote className="border-l-4 border-siteYellow-400 pl-4 italic">
                   "The palest ink is better than the best memory." — Chinese
                   Proverb
                 </blockquote>

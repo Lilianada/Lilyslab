@@ -128,10 +128,10 @@ export default async function NotesPage({ params }: NoteRouteParams) {
   return (
     <NotesClientWrapper>
       <ScrollProgress
-        color="bg-green"
+        color="bg-siteGreen"
         height={3}
         glow={true}
-        glowColor="rgba(var(--green), 0.6)"
+        glowColor="rgba(var(--siteGreen), 0.6)"
         glowIntensity="12px"
       />
       <div className="max-w-2xl w-full mx-auto animate-fade-in">

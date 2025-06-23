@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils"
 // Define the available extra colors from the theme
 const extraColors = [
   "bg-lavender",
-  "bg-yellow",
-  "bg-green",
-  "bg-pink",
+  "bg-siteYellow",
+  "bg-siteGreen",
+  "bg-sitePink",
   "bg-Blue",
   "bg-cream",
   "bg-lilac",
