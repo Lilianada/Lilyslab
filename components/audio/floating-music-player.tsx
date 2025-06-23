@@ -11,7 +11,7 @@ const AUDIO_FILE = "/audio/wherehaveallthecowboysgone.mp3";
 const LOCAL_STORAGE_KEY = "music_player_paused";
 const COLOR_VARS = [
   "--lavender",
-  "--yellow",
+  "--siteYellow",
   "--siteGreen",
   "--sitePink",
   "--cream",
@@ -54,7 +54,7 @@ function FloatingMusicPlayerContent() {
         clearInterval(intervalRef.current);
       }
     };
-  }, []);
+  }, [isPaused, setIsPaused, setCurrentColor]);
   
   // Handle play/pause state changes
   useEffect(() => {
