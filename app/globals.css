@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital,wght@0,400;1,400&display=swap');
 /* Import external CSS first */
 @import "prismjs/themes/prism-tomorrow.css";
 @import "../styles/card-animations.css";
 @import "../styles/markdown.css";
+
 
 /* Font declarations */
 @font-face {

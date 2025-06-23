@@ -52,7 +52,7 @@ export interface NoteData {
 }
 
 export async function GET(request: Request) {
-  const siteURL = 'https://lilyslab.com';
+  const siteURL = process.env.SITE_URL || 'https://lilyslab.xyz';
   const date = new Date();
   
   // Create a new feed
@@ -312,6 +312,226 @@ export async function GET(request: Request) {
     });
   });
 
+  // Server-side implementation of getAllDailyLogsData
+  async function getAllDailyLogsData(): Promise<LogData[]> {
+    const dailyLogsDirectory = path.join(process.cwd(), 'Content/dailyLogs');
+    
+    try {
+      const filenames = await fs.readdir(dailyLogsDirectory);
+      
+      const dailyLogsPromises = filenames
+        .filter((filename) => /\.mdx?$/.test(filename))
+        .map(async (filename) => {
+          const slug = filename.replace(/\.mdx?$/, '');
+          const fullPath = path.join(dailyLogsDirectory, filename);
+          
+          try {
+            const fileContents = await fs.readFile(fullPath, 'utf8');
+            const { data, content } = matter(fileContents);
+            
+            return {
+              slug,
+              frontmatter: {
+                title: `Daily Log - ${safeFormatDate(data.date)}`,
+                date: data.date,
+                published: true,
+                tags: ['daily-log'],
+                ...data
+              } as LogFrontmatter,
+              content
+            };
+          } catch (error) {
+            console.error(`Error processing daily log file ${filename}:`, error);
+            return null;
+          }
+        });
+        
+      const dailyLogs = (await Promise.all(dailyLogsPromises))
+        .filter((log): log is LogData => log !== null)
+        .sort((a, b) => {
+          const dateA = new Date(a.frontmatter.date);
+          const dateB = new Date(b.frontmatter.date);
+          return dateB.getTime() - dateA.getTime();
+        });
+        
+      return dailyLogs;
+    } catch (error) {
+      console.error("Error reading daily logs directory:", error);
+      return [];
+    }
+  }
+
+  // Server-side implementation of getAllMicroBlogData
+  async function getAllMicroBlogData(): Promise<LogData[]> {
+    const microBlogDirectory = path.join(process.cwd(), 'Content/microBlog');
+    
+    try {
+      const filenames = await fs.readdir(microBlogDirectory);
+      
+      const microBlogPromises = filenames
+        .filter((filename) => /\.mdx?$/.test(filename))
+        .map(async (filename) => {
+          const slug = filename.replace(/\.mdx?$/, '');
+          const fullPath = path.join(microBlogDirectory, filename);
+          
+          try {
+            const fileContents = await fs.readFile(fullPath, 'utf8');
+            const { data, content } = matter(fileContents);
+            
+            if (data.publish !== true) return null;
+            
+            return {
+              slug,
+              frontmatter: {
+                title: `Micro Blog #${data.id}`,
+                date: data.date,
+                published: true,
+                tags: ['micro-blog', data.type],
+                ...data
+              } as LogFrontmatter,
+              content
+            };
+          } catch (error) {
+            console.error(`Error processing micro blog file ${filename}:`, error);
+            return null;
+          }
+        });
+        
+      const microBlogs = (await Promise.all(microBlogPromises))
+        .filter((blog): blog is LogData => blog !== null)
+        .sort((a, b) => {
+          const dateA = new Date(a.frontmatter.date);
+          const dateB = new Date(b.frontmatter.date);
+          return dateB.getTime() - dateA.getTime();
+        });
+        
+      return microBlogs;
+    } catch (error) {
+      console.error("Error reading micro blog directory:", error);
+      return [];
+    }
+  }
+
+  // Server-side implementation of getAllWordOfTheDayData
+  async function getAllWordOfTheDayData(): Promise<LogData[]> {
+    const wordOfTheDayDirectory = path.join(process.cwd(), 'Content/wordOfTheDay');
+    
+    try {
+      const filenames = await fs.readdir(wordOfTheDayDirectory);
+      
+      const wordPromises = filenames
+        .filter((filename) => /\.mdx?$/.test(filename) && filename !== 'index.md')
+        .map(async (filename) => {
+          const slug = filename.replace(/\.mdx?$/, '');
+          const fullPath = path.join(wordOfTheDayDirectory, filename);
+          
+          try {
+            const fileContents = await fs.readFile(fullPath, 'utf8');
+            const { data, content } = matter(fileContents);
+            
+            if (!data.word || !data.date) return null;
+            
+            return {
+              slug,
+              frontmatter: {
+                title: `Word of the Day: ${data.word}`,
+                date: data.date,
+                published: true,
+                tags: ['word-of-the-day', data.partOfSpeech].filter(Boolean),
+                ...data
+              } as LogFrontmatter,
+              content
+            };
+          } catch (error) {
+            console.error(`Error processing word of the day file ${filename}:`, error);
+            return null;
+          }
+        });
+        
+      const words = (await Promise.all(wordPromises))
+        .filter((word): word is LogData => word !== null)
+        .sort((a, b) => {
+          const dateA = new Date(a.frontmatter.date);
+          const dateB = new Date(b.frontmatter.date);
+          return dateB.getTime() - dateA.getTime();
+        });
+        
+      return words;
+    } catch (error) {
+      console.error("Error reading word of the day directory:", error);
+      return [];
+    }
+  }
+
+  // Add daily logs to feed
+  const dailyLogs = await getAllDailyLogsData();
+  
+  dailyLogs.forEach((dailyLog: LogData) => {
+    const url = `${siteURL}/daily-logs/${dailyLog.slug}`;
+    
+    feed.addItem({
+      title: dailyLog.frontmatter.title,
+      id: url,
+      link: url,
+      description: dailyLog.content.substring(0, 150) + '...',
+      content: dailyLog.content,
+      author: [
+        {
+          name: "Lilian",
+          link: siteURL,
+        },
+      ],
+      date: new Date(safeFormatDate(dailyLog.frontmatter.date)),
+      ...(dailyLog.frontmatter.tags && dailyLog.frontmatter.tags.length > 0 && { category: dailyLog.frontmatter.tags.map(tag => ({ name: tag })) }),
+    });
+  });
+
+  // Add micro blog posts to feed
+  const microBlogs = await getAllMicroBlogData();
+  
+  microBlogs.forEach((microBlog: LogData) => {
+    const url = `${siteURL}/micro-blog/${microBlog.slug}`;
+    
+    feed.addItem({
+      title: microBlog.frontmatter.title,
+      id: url,
+      link: url,
+      description: microBlog.content.substring(0, 150) + '...',
+      content: microBlog.content,
+      author: [
+        {
+          name: "Lilian",
+          link: siteURL,
+        },
+      ],
+      date: new Date(safeFormatDate(microBlog.frontmatter.date)),
+      ...(microBlog.frontmatter.tags && microBlog.frontmatter.tags.length > 0 && { category: microBlog.frontmatter.tags.map(tag => ({ name: tag })) }),
+    });
+  });
+
+  // Add word of the day entries to feed
+  const wordOfTheDay = await getAllWordOfTheDayData();
+  
+  wordOfTheDay.forEach((word: LogData) => {
+    const url = `${siteURL}/word-of-the-day/${word.slug}`;
+    
+    feed.addItem({
+      title: word.frontmatter.title,
+      id: url,
+      link: url,
+      description: word.content.substring(0, 150) + '...',
+      content: word.content,
+      author: [
+        {
+          name: "Lilian",
+          link: siteURL,
+        },
+      ],
+      date: new Date(safeFormatDate(word.frontmatter.date)),
+      ...(word.frontmatter.tags && word.frontmatter.tags.length > 0 && { category: word.frontmatter.tags.map(tag => ({ name: tag })) }),
+    });
+  });
+
   // Determine the format based on query parameter
   const url = new URL(request.url);
   const format = url.searchParams.get('format');
@@ -325,6 +545,24 @@ export async function GET(request: Request) {
   } else if (format === 'json') {
     contentType = 'application/json; charset=utf-8';
     output = feed.json1();
+  }
+
+  // Add custom styling to RSS/Atom feeds
+  if (format !== 'json') {
+    const styleUrl = `${siteURL}/feed-styles.css`;
+    const xslUrl = `${siteURL}/feed-transform.xsl`;
+    
+    // Add CSS and XSL processing instructions
+    const processingInstructions = [
+      `<?xml-stylesheet type="text/css" href="${styleUrl}" ?>`,
+      `<?xml-stylesheet type="text/xsl" href="${xslUrl}" ?>`
+    ].join('\n');
+    
+    // Insert processing instructions after the XML declaration
+    output = output.replace(
+      /(<\?xml[^>]*\?>)/,
+      `$1\n${processingInstructions}`
+    );
   }
 
   // Return the feed with appropriate content type

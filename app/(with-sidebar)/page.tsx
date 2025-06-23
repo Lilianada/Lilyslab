@@ -84,9 +84,12 @@ export default function Home() {
             <Link href="/now" className="text-codeRed">
               now
             </Link>{" "}
-            page. If you don't have a now page on your mini space already,
-            consider adding one and leave me a link to the page when you sign
-            the guestbook.
+            page. You can also check to see what I'll like to do  <Link href="/someday" className="text-codeRed">
+              someday
+            </Link>, and also my career <Link href="/bucket-list" className="text-codeRed">
+              bucket list
+            </Link>.{" "}
+image
           </p>
 
           <p>

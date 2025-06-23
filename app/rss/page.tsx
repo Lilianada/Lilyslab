@@ -26,7 +26,8 @@ export default function RssPage() {
       <div className="prose dark:prose-invert max-w-none">
         <p>
           Lilyslab offers RSS feeds to help you stay updated with the latest content. 
-          The feeds include writings, notes, and logs from the digital garden and workshop.
+          The feeds include writings, notes, daily logs, micro blog posts, word of the day entries, 
+          and logs from the digital garden and workshop.
         </p>
 
         <h2 className="text-lg font-medium mt-8">Available Feed Formats</h2>
@@ -41,15 +42,17 @@ export default function RssPage() {
               <p className="text-sm text-muted-foreground mb-2">
                 Standard RSS 2.0 format, compatible with most feed readers.
               </p>
-              <a 
-                href="/feed" 
-                className="text-sm flex items-center gap-1 text-primary hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>View RSS Feed</span>
-                <ExternalLink className="h-3 w-3" />
-              </a>
+              <div className="flex gap-2">
+                <a 
+                  href="/feed" 
+                  className="text-sm flex items-center gap-1 text-primary hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>View RSS Feed</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
             </div>
           </div>
 

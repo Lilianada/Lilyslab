@@ -28,6 +28,7 @@ const config = {
         nitti: ["Nitti", "monospace"],
         sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
+        serif: ['Sorts Mill Goudy', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
