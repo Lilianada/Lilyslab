@@ -1,7 +1,7 @@
 ---
 title: Information Overload
 createdAt: 2025-06-16
-lastUpdated: 2025-06-20
+lastUpdated: 2025-06-23
 tags:
   - information
   - internet

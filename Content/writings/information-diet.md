@@ -1,7 +1,7 @@
 ---
 title: Information Diet
 createdAt: 2025-06-20
-lastUpdated: 2025-06-22
+lastUpdated: 2025-06-23
 tags:
   - information
   - internet

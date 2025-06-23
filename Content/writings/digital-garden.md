@@ -1,7 +1,7 @@
 ---
 title: Digital Garden
 createdAt: 2025-05-02
-lastUpdated: 2025-06-21
+lastUpdated: 2025-06-23
 tags:
   - digital-garden
   - personal-websites

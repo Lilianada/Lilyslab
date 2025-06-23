@@ -1,13 +1,14 @@
 ---
 publish: true
 title: Cosmos
-url: 'https://cosmos.so'
+url: https://cosmos.so
 createdAt: 2025-04-26
 tags:
   - web-design
   - design-showcase
 type: website
 id: website-001
+lastUpdated: 2025-06-23
 ---
 
 ---
