@@ -6,7 +6,7 @@ tags:
   - information
   - internet
 type: evergreen
-published: false
+published: true
 ---
 
 You can agree with me that two truths can co-exist. There is an [overload of information](/garden/writings/information-overload) and there's also poor information diet. It is true that we have an endless stream of content being pushed out on a daily basis but we have to be weary about how we engage or consume those content.

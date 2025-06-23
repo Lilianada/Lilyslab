@@ -16,7 +16,7 @@ We spend hours consuming short form content on social media that will be forgott
 We save links to articles to read later, take screenshots of designs or things we'd like to recreate or get and forget about them. Only time we remember them is when we need to clear our device storage space due to low memory storage warnings.
 We have several drafted notes of recipes we'd like to try, things we want to remember and even to-do lists, but these get abandoned as soon as they are created or just rarely visited.
 
-Information consumes the attention of it's recipient so that the more information consumed, the lesser the attention span. The internet was meant to bring information to our reach but it has done not just that, but has also immersed us with so much information that our attention span is now in the pits. 
+Information consumes the attention of it's recipient so that the more information consumed, the lesser the attention span. The internet was meant to bring information to our reach but it has done not just that, it has also immersed us with so much information that our attention span is now in the pits. 
 
 We are immediately bombarded with streams of information the moment we turn on our screens. We try to consume every bit of the information that comes our way, which is why we're constantly exhausted and overwhelmed.
 
@@ -28,6 +28,14 @@ We need to become more intentional about the information we choose to consume. N
 
 Pick your [[information diet]] wisely. Just as we feed our bodies with food and only the good type, it's our duty and responsibility to select only the good kind of information to consume.
 
+One has to be intentional about doing this. Here are a few tips to help you filter from the overload:
+1. Choose only a few platforms to frequent.
+2. Give yourself time limit to avoid over-indulging
+3. Have a list of open-ended questions you need answers to. Basically about things you're interested in so that your reason for being online would be to find answers, solutions and inspiration to these questions.
+4. Avoid content that adds no value to you.
+
+
 
 **References** 
-1. Building a Second Brain by Tiago Forte
+1. "Building a Second Brain" by Tiago Forte
+2. [What is Information Diet](https://annadkornick.com/what-is-an-information-diet/ )
