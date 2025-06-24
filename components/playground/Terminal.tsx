@@ -84,13 +84,7 @@ const Terminal: React.FC = () => {
   };
 
   return (
-    <div className="mt-16 h-full flex flex-col bg-background">
-      {/* Header */}
-      <div className="flex items-center justify-end p-4 border-b border-border">
-        <div className="flex items-center gap-2">
-          {/* Status indicator or future controls can go here */}
-        </div>
-      </div>
+    <div className="w-full max-w-2xl mx-auto h-full flex flex-col bg-muted">
 
       {/* Text Area */}
       <div className="flex-1 p-4">
@@ -114,12 +108,6 @@ Auto-saves every 15 seconds or save manually with Ctrl/Cmd + S."
             minHeight: "100%",
           }}
         />
-      </div>
-
-      {/* Footer Info */}
-      <div className="px-4 py-2 text-xs text-muted-foreground border-t border-border flex justify-between">
-        <span>Characters: {content.length}</span>
-        <span>Lines: {content.split("\n").length}</span>
       </div>
     </div>
   );
