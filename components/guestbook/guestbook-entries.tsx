@@ -149,15 +149,17 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
 
   return (
     <div className="space-y-8">
-      {entries.map((entry) => {
+      {entries.map((entry, index) => {
         const personColor = generateColor(entry.name);
+        // Calculate visitor number based on chronological order (newest first, so reverse the index)
+        const visitorNumber = entries.length - index;
         
         return (
           <Card
             key={entry.id}
             className="border-2 border-border rounded-md overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
           >
-            {/* Browser Chrome Bar */}
+            {/* ...existing code... */}
             <div className="bg-gradient-to-r from-blue-100/50 to-purple-100/50 dark:from-blue-900/30 dark:to-purple-900/30 p-2">
               <div className="flex justify-between items-center mb-2">
                 <div className="text-xs font-mono text-muted-foreground">{entry.name}.html</div>
@@ -234,7 +236,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
                 <div className="flex justify-between items-center mb-4">
                   <div className="px-2 py-1 bg-background/50 border border-border/50 rounded text-xs flex items-center gap-1">
                     <MessageSquare className="h-3 w-3 text-muted-foreground" />
-                    <span className="text-muted-foreground">visitor #{entry.id.toString().padStart(3, '0')}</span>
+                    <span className="text-muted-foreground">visitor #{visitorNumber.toString().padStart(3, '0')}</span>
                   </div>
                   <div className="text-xs text-muted-foreground/70 font-mono">
                     {formatDate(entry.date)}

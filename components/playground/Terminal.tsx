@@ -102,7 +102,8 @@ Auto-saves every 15 seconds or save manually with Ctrl/Cmd + S."
           className={cn(
             "w-full h-full resize-none border-none outline-none bg-transparent",
             "text-foreground placeholder:text-muted-foreground",
-            "font-mono text-sm leading-relaxed"
+            "font-mono text-sm leading-relaxed",
+            "scrollbar-hide overflow-auto"
           )}
           style={{
             minHeight: "100%",
