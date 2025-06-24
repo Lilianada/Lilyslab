@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-06-11
-lastUpdated: 2025-06-20
+lastUpdated: 2025-06-24
 title: Minispace
 tags:
   - digital-garden
@@ -17,17 +17,11 @@ Create the world you want, in your own little corner of the internet — your _M
 A place for:
 
 - Rabbit holes, Links, and Backlinks
-    
 - Templates and Inspiration
-    
-- Tutorials
-    
+- Tutorials   
 - Posts, Essays, and Articles
-    
-- Community
-    
-- Simplicity and Joy
-    
+- Community 
+- Simplicity and Joy 
 
 ---
 
@@ -51,13 +45,9 @@ A space that reflects you: your stories, ideas, hobbies, half-baked thoughts, on
 You can use Minispace to:
 
 - Share essays, zines, notes, or blog posts.
-    
 - Save links, bookmarks, and digital ephemera.
-    
 - Build simple sites, subdomains, and mini apps.
-    
 - Discover others doing the same.
-    
 
 And if you’re not sure where to begin — that’s what Minispace is for.  
 To help you start. To help you _stay curious_.
@@ -73,11 +63,8 @@ It’s encouraged. In fact, it’s part of the culture.
 We share templates and encourage the community to:
 
 - Modify font families, sizes, and colors.
-    
-- Add or remove pages or sections.
-    
-- Rename pages or restructure the layout.
-    
+- Add or remove pages or sections.  
+- Rename pages or restructure the layout. 
 
 When you adapt a design, write a short reflection about what inspired you. Link back to the original and — if you feel like it — email the original creator with a link to your version. It’s a great way to start conversations.
 
@@ -86,9 +73,7 @@ When you adapt a design, write a short reflection about what inspired you. Link 
 #### **Projects & Subdomains**
 
 - **write.minispace.dev** — A minimalist space to publish essays or notes. Contribute and your work could appear on our Discover page.
-    
-- **cluster.minispace.dev** — A digital morgue / inspiration file. Save things you love, weird links, references — like your own personal wipe file.
-    
+- **cluster.minispace.dev** — A digital morgue / inspiration file. Save things you love, weird links, references — like your own personal wipe file. 
 
 ---
 
@@ -103,11 +88,8 @@ That’s what we want to recreate.
 Minispace is here to help you:
 
 - Learn by exploring.
-    
 - Build without pressure.
-    
 - Create without constraint.
-    
 - Share without optimizing for performance.
     
 

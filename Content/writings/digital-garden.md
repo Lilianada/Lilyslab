@@ -1,7 +1,7 @@
 ---
 title: Digital Garden
 createdAt: 2025-05-02
-lastUpdated: 2025-06-23
+lastUpdated: 2025-06-24
 tags:
   - digital-garden
   - personal-websites
@@ -11,15 +11,13 @@ type: evergreen
 
 I came across the concept of a Digital Garden a few months back and I absolutely loved it. I had just started building my **digital lab and workshop**, gotten my domain **Lilyslab** which I now want to change to **Lilysgarden**.
 
-I was so intrigued by **digital gardening** that I started researching it, reading essays and blogs, going down [[rabbit holes]], learning, updating, unlearning and relearning. I have consumed so much information on this concept that I sought to write about it for my future self who might have forgotten about it.
+I was so intrigued by **digital gardening** that I started researching on it, reading essays and blogs, going down [[rabbit holes]], learning, updating, unlearning and relearning. I have consumed so much information on this concept that I sought to write about it for my future self who might have forgotten all about it.
 
-A Digital Garden is a personal online space used by people (mind/knowledge gardeners) to cultivate, keep track of and manage all their knowledge, ideas, thoughts, learnings and writings in public. It is a concept that allows you to cultivate your own ideas, nuture them by rewriting and revisiting them.
+A Digital Garden is a personal online space used by anyone (mind/knowledge gardeners) to cultivate, keep track of and manage all their knowledge, ideas, thoughts, learnings and writings in public. It is a concept that allows you to cultivate your own ideas, nurture them by rewriting and revisiting them.
 
 Unlike traditional blogs where finished works are forgotten as soon as they're published, a digital garden stays evergreen because all work is continually tended to whether or not it is published.
 
-You can choose to build your digital garden from scratch or build it using tools such as Obsidian, Notion, Tiddywiki, Wordpress, Bearblog, Hugo, Fomadocs, Jekyll  etc.
-
-Like a physical home garden, a digital garden is ever evolving. The seeds you plant grow, and this all happens because you tend to them. A garden is only as good as the seeds planted. 
+Just like the idea you have of a real garden[^1], a digital garden is also a place where things are planted, tended to and growth is encouraged. A digital garden is ever evolving. The seeds you plant grow, and this all happens because you tend to them. A garden is only as good as the seeds planted. 
 - You plant a seed (an idea, a thought) -> Seedling 
 - You revisit and update that idea with new findings, opinions, quotes etc -> Budding
 - When that idea matures into a full plant which is most times a finished essay that you publish -> Evergreen
@@ -33,9 +31,14 @@ The beauty of keeping a digital garden is that:
 - You have full ownership of what is in your garden. With a digital garden, it is encouraged to self-host, so that you have independent ownership and your work stays alive and stands the test of time.
 
 
-A digital garden helps to [[reduce the friction]] that comes with writing and publishing because you do not have to focus so much on publishing but rather on writing. Your notes evolve with you so there's no pressure to have the most polished work out there. You should [[build your own digital garden]] too.
+A digital garden helps to [[reduce the friction]] that comes with writing and publishing because you do not have to focus so much on publishing but rather on writing. Your notes evolve with you so there's no pressure to have the most polished work out there. You should build your own digital garden too.
+
+You can choose to build your digital garden from scratch or build it using tools such as Obsidian, Notion, Tiddywiki, Wordpress, Bearblog, Hugo, Fomadocs, Jekyll  etc. Research on these tools what they have to offer and pick the one that aligns with your goals.
 
 **References**
 1. https://www.youtube.com/watch?v=en56OKg5hyc
 2. [Digital Garden Setup](https://nesslabs.com/digital-garden-set-up)
 3. [What is a Digital Garden](https://hackernoon.com/what-is-a-digital-garden)
+4. [Digital Garden](https://joelhooks.com/digital-garden)
+
+[^1]: https://joelhooks.com/digital-garden

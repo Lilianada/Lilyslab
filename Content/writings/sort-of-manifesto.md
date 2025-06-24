@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-06-23
-lastUpdated: 2025-06-23
+lastUpdated: 2025-06-24
 title: Sort Of Manifesto
 tags:
   - manifesto

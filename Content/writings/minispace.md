@@ -7,6 +7,7 @@ tags:
 title: Minispace
 createdAt: 2025-06-23
 type: evergreen
+lastUpdated: 2025-06-24
 ---
 
 
