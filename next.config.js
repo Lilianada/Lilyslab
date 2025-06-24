@@ -13,19 +13,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false, // Set to true if you want to ignore TS errors too
   },
-  // Analytics is handled by Vercel platform automatically
-  // Remove the custom analytics property as it's not supported
-  // For more information: https://vercel.com/docs/analytics
-  analytics: {
-    debug: false,
-    exclude: [
-      // Exclude all localhost traffic
-      { path: '*', hostname: 'localhost' },
-      { path: '*', hostname: '127.0.0.1' },
-      // Also exclude development domains that use .local TLD
-      { path: '*', hostname: '*.local' },
-    ],
-  },
   async headers() {
     return [
       {
