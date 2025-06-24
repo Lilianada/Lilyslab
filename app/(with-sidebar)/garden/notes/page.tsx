@@ -6,6 +6,7 @@ import { read } from 'zod-matter';
 import { Footer } from '@/components/layout/footer';
 import { safeFormatDate } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
+import NotesTagFilterClient from './NotesTagFilterClient';
 
 // Define schema for front matter validation
 const NoteMetaSchema = z.object({
@@ -42,6 +43,7 @@ interface NoteMeta {
   lastUpdated: string;
   type: string;
   slug: string;
+  tags?: string[];
 }
 
 const MONTHS = [
@@ -97,6 +99,7 @@ export default function NotesPage() {
             lastUpdated: lastUpdatedStr,
             type: result.data.type || 'seedling',
             slug: filename.replace(/\.md$/, ''),
+            tags: result.data.tags || [],
           };
           return [validated];
         } catch (zodErr) {
@@ -142,6 +145,13 @@ export default function NotesPage() {
       return acc;
     }, {} as Record<string, Record<string, (NoteMeta & { displayDate: string; fullDate: string })[]>>);
 
+  // Create flat array of all notes with display date for the client component
+  const allNotesWithDisplayDate = notes.map(note => ({
+    ...note,
+    displayDate: note.createdAt,
+    fullDate: note.createdAt
+  }));
+
   return (
     <div className="min-h-screen animate-fade-in">
       <div className="container max-w-3xl mx-auto px-0 sm:px-4 pt-16 pb-8">
@@ -158,58 +168,8 @@ export default function NotesPage() {
           </p>
         </header>
 
-        {/* Notes Grid Layout */}
-        <div className="space-y-8">
-          {/* Sort years in descending order (newest first) */}
-          {Object.entries(grouped)
-            .sort(([yearA], [yearB]) => parseInt(yearB) - parseInt(yearA))
-            .map(([year, monthGroups]) => {
-              // Flatten all notes from all months in this year
-              const yearNotes = Object.values(monthGroups).flat();
-              
-              return (
-                <div key={year} className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <h2 className="text-lg font-medium text-foreground">{year}</h2>
-                    <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent"></div>
-                    <span className="text-xs text-muted-foreground font-mono">
-                      {yearNotes.length} notes
-                    </span>
-                  </div>
-                  
-                  {/* Modern Card Grid - All notes for the year */}
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {yearNotes
-                      .sort((a, b) => b.fullDate.localeCompare(a.fullDate))
-                      .map((note) => (
-                      <a
-                        key={note.slug}
-                        href={`/garden/notes/${note.slug}`}
-                        className="group block"
-                      >
-                        <div className="p-4 rounded-lg border border-dashed border-border/50 bg-card/30 backdrop-blur-sm transition-all duration-200 hover:border-border hover:bg-card/50 hover:shadow-sm hover:-translate-y-0.5">
-                          <div className="space-y-1">
-                            <p className="font-medium text-xs leading-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                              {note.title}
-                            </p>
-                            
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-muted-foreground font-nitti">
-                                {note.displayDate}
-                              </span>
-                              <div className="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors">
-                                <ArrowRight className="w-3 h-3" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-        </div>
+        {/* Notes Grid Layout with Tag Filtering */}
+        <NotesTagFilterClient grouped={grouped} allNotes={allNotesWithDisplayDate} />
 
         {/* Topics List Section */}
         <div className="mt-16 pt-8 border-t border-border/50">

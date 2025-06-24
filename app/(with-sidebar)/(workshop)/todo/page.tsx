@@ -10,7 +10,7 @@ export default function TodoPage() {
   // Simple array of todo items with completed status
   const todoItems = [
     { text: "Redesign home page, make it more personal", completed: false },
-    { text: "Update bookshelf page with books I've read.", completed: false },
+    { text: "Update bookshelf page with books I've read.", completed: true },
     { text: "Update Misc page", completed: false },
     {
       text: "Create a /Wants page - under (with-sidebar) with 100 things I want to do in my lifetime.",
@@ -19,10 +19,6 @@ export default function TodoPage() {
     { text: "Project 365 Days & 100 Days of Pics", completed: false },
     { text: "Add services section to /uses", completed: true },
     { text: "Redesign /notes list", completed: true },
-    {
-      text: "Write a script that updates changelog folder based on our commit message, only use messages with 'feat:', 'improv:', 'fix:'.",
-      completed: false,
-    },
     {
       text: "Create y2k browser style card for guestbook entries.",
       completed: true,

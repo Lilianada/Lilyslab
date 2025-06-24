@@ -102,7 +102,7 @@ const WordOfTheDayPage: React.FC = () => {
       <ScrollProgress color="bg-lavender" height={3} glow={true} />
 
       <div className="min-h-screen animate-fade-in">
-        <div className="container max-w-4xl mx-auto px-0 sm:px-4 pt-16 pb-8">
+        <div className="container max-w-2xl mx-auto px-0 sm:px-4 pt-16 pb-8">
           <header className="mb-8">
             <span className="text-2xl animate-spin">✳︎</span>
             <h1 className="mb-2 text-xl font-medium">Word of the Day</h1>
@@ -146,11 +146,11 @@ const WordOfTheDayPage: React.FC = () => {
                             {word.pronunciation}
                           </span>
                         )}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-accent/20 text-accent-foreground font-mono">
-                          {word.partOfSpeech}
-                        </span>
+                        {word.partOfSpeech && (
+                          <span className="text-xs text-muted-foreground font-mono">
+                            ({word.partOfSpeech})
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="flex items-center gap-3 text-xs text-muted-foreground font-mono">
