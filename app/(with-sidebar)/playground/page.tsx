@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Sparkles, Flame, Timer } from "lucide-react";
+import { Calculator, Sparkles, Flame, Timer, Terminal } from "lucide-react";
 
 export const metadata = {
   title: "Playground | Lilyslab",
@@ -51,8 +51,24 @@ export default function PlaygroundPage() {
             </Link>
           </div>
 
-          {/* Coming Soon: Animation Playground */}
+          {/* Terminal Notes */}
           <div className="opacity-0 animate-slide-up" style={{ animationDelay: "200ms" }}>
+            <Link
+              href="/playground/terminal"
+              className="flex items-center gap-3 rounded-md border p-4 transition-colors hover:bg-accent"
+            >
+              <Terminal size={20} className="text-primary" />
+              <div>
+                <h2 className="font-medium text-sm">Terminal Notes</h2>
+                <p className="text-xs text-muted-foreground">
+                  A simple note-taking terminal with font switching
+                </p>
+              </div>
+            </Link>
+          </div>
+
+          {/* Coming Soon: Animation Playground */}
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
             <div className="flex items-center gap-3 rounded-md border p-4 bg-muted/50">
               <Sparkles size={20} className="text-muted-foreground" />
               <div>
@@ -68,7 +84,7 @@ export default function PlaygroundPage() {
           </div>
 
           {/* Coming Soon: Color Theory */}
-          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
+          <div className="opacity-0 animate-slide-up" style={{ animationDelay: "400ms" }}>
             <div className="flex items-center gap-3 rounded-md border p-4 bg-muted/50">
               <Flame size={20} className="text-muted-foreground" />
               <div>

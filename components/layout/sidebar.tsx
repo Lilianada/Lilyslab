@@ -23,6 +23,7 @@ import {
   BookHeart as BookHeartIcon,
   Calculator,
   Timer,
+  Terminal,
   Shield,
   MessageCircleHeart,
   Heart,
@@ -448,16 +449,23 @@ export default function Sidebar({
               onClick={onNavClick}
               delay={1250}
             />
+            <NavItem
+              href="/playground/terminal"
+              icon={<Terminal size={16} />}
+              label="Terminal"
+              onClick={onNavClick}
+              delay={1300}
+            />
           </div>
 
           <div className="space-y-1.5 mb-2">
-            <SectionTitle title="IndieWeb" delay={1300} />
+            <SectionTitle title="IndieWeb" delay={1350} />
             <NavItem
               href="/manifesto"
               icon={<Shield size={16} />}
               label="Manifesto"
               onClick={onNavClick}
-              delay={1350}
+              delay={1400}
             />
             <NavItem
               href="/webroll"
