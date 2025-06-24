@@ -1,70 +1,27 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
-
-const AMA_DIR = path.join(process.cwd(), "Content", "amaQuestions");
+import { db } from '@/lib/firebase/firebase-config';
+import { collection, addDoc, getDocs, query, orderBy, serverTimestamp, doc, updateDoc } from 'firebase/firestore';
 
 export async function GET() {
   try {
-    // Read all questions as objects
-    await fs.mkdir(AMA_DIR, { recursive: true });
-    const files = await fs.readdir(AMA_DIR);
-    const questions = await Promise.all(
-      files
-        .filter((file) => file.endsWith(".md"))
-        .map(async (file) => {
-          const filePath = path.join(AMA_DIR, file);
-          const content = await fs.readFile(filePath, "utf-8");
-          
-          // Extract frontmatter and content - more permissive pattern
-          const match = content.match(/^---([\s\S]*?)---([\s\S]*)$/);
-          
-          if (!match) {
-            console.log(`Invalid format for file: ${file}`);
-            return null;
-          }
-          
-          console.log("Match found:", !!match);
-          
-          const frontmatter = match[1];
-          const responseContent = match[2].trim();
-          
-          // Parse frontmatter
-          const meta: Record<string, string> = {};
-          frontmatter.split("\n").forEach(line => {
-            const [key, ...rest] = line.split(":");
-            if (key && rest.length > 0) {
-              const value = rest.join(":").trim();
-              meta[key.trim()] = value.replace(/^"|"$/g, "");
-            }
-          });
-          
-          return {
-            id: file.replace(/\.md$/, ""),
-            name: meta.name || "Anonymous",
-            email: meta.email || "",
-            date: meta.date || "",
-            question: meta.question || "",
-            response: responseContent || "",
-            filename: file
-          };
-        })
-    );
+    // Fetch AMA questions from Firestore
+    const q = query(collection(db, 'ama-questions'), orderBy('createdAt', 'desc'));
+    const querySnapshot = await getDocs(q);
     
-    // Filter out null values and sort by date (most recent first)
-    const validQuestions = questions.filter(q => q !== null);
-    
-    if (validQuestions.length > 0) {
-      console.log("Sample question:", JSON.stringify(validQuestions[0], null, 2));
-    } 
-    
-    validQuestions.sort((a, b) => {
-      const dateA = a?.date ? new Date(a.date).getTime() : 0;
-      const dateB = b?.date ? new Date(b.date).getTime() : 0;
-      return dateB - dateA;
+    const questions = querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        name: data.name || 'Anonymous',
+        email: data.email || '',
+        date: data.date,
+        question: data.question || '',
+        response: data.response || '',
+        photoURL: data.photoURL || null
+      };
     });
-    
-    return NextResponse.json({ questions: validQuestions });
+
+    return NextResponse.json({ questions });
   } catch (error: unknown) {
     console.error("API: Error fetching AMA questions:", error);
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
@@ -82,43 +39,12 @@ export async function POST(request: Request) {
       console.log("Processing admin reply for question ID:", questionId);
       
       try {
-        // Find the correct file by filename
-        const files = await fs.readdir(AMA_DIR);
-        console.log("Available files:", files);
-        
-        // Handle both cases: if questionId already includes .md extension or not
-        const targetFile = files.find(file => 
-          file === questionId || 
-          file === `${questionId}.md` ||
-          file.replace(/\.md$/, "") === questionId
-        );
-        
-        if (!targetFile) {
-          console.error(`File not found for question ID: ${questionId}`);
-          return NextResponse.json({ error: `Question file not found: ${questionId}` }, { status: 404 });
-        }
-        
-        const filePath = path.join(AMA_DIR, targetFile);
-        console.log("Found question file at path:", filePath);
-        
-        // Read the existing file
-        const content = await fs.readFile(filePath, "utf-8");
-        
-        // Extract frontmatter
-        const match = content.match(/^---(\s\S*?)---/);
-        if (!match) {
-          console.error("Failed to match frontmatter pattern");
-          return NextResponse.json({ error: "Invalid question format" }, { status: 400 });
-        }
-        
-        // Simply write the admin response as the content body
-        const frontmatter = match[1];
-        const updatedContent = `---${frontmatter}---\n${adminResponse}`;
-        
-        console.log("Writing updated content to file:", filePath);
-        
-        // Write the updated content back to the file
-        await fs.writeFile(filePath, updatedContent, "utf-8");
+        // Update the document in Firestore
+        const questionRef = doc(db, 'ama-questions', questionId);
+        await updateDoc(questionRef, {
+          response: adminResponse,
+          responseDate: serverTimestamp()
+        });
         
         return NextResponse.json({ success: true, questionId });
       } catch (error: unknown) {
@@ -135,21 +61,21 @@ export async function POST(request: Request) {
     if (!question) {
       return NextResponse.json({ error: "Question is required" }, { status: 400 });
     }
+
+    // Save new question to Firestore
+    const docData = {
+      name: name || 'Anonymous',
+      email: email || '',
+      photoURL: photoURL || null,
+      question,
+      response: '', // Empty initially
+      createdAt: serverTimestamp(),
+      date: new Date().toISOString()
+    };
+
+    const docRef = await addDoc(collection(db, 'ama-questions'), docData);
     
-    await fs.mkdir(AMA_DIR, { recursive: true });
-    const files = await fs.readdir(AMA_DIR);
-    const nums = files
-      .map(f => parseInt(f.replace(/\.md$/, ""), 10))
-      .filter(n => !isNaN(n));
-    const nextNum = (nums.length > 0 ? Math.max(...nums) : 0) + 1;
-    const filename = String(nextNum).padStart(3, "0") + ".md";
-    const now = new Date().toISOString();
-    
-    // Store question in frontmatter, leave content empty for admin response
-    const md = `---\nname: "${name || "Anonymous"}"\nemail: "${email || ""}"\ndate: "${now}"\nquestion: "${question.replace(/"/g, '\\"')}"\n---\n`;
-    
-    await fs.writeFile(path.join(AMA_DIR, filename), md, "utf-8");
-    return NextResponse.json({ success: true, filename });
+    return NextResponse.json({ success: true, questionId: docRef.id });
   } catch (error: unknown) {
     console.error("API: Error submitting AMA question:", error);
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";

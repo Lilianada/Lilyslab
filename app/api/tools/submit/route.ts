@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
 import { z } from 'zod';
+import { db } from '@/lib/firebase/firebase-config';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 // Allowed categories and platforms (adjust if needed)
 const ALLOWED_CATEGORIES = ['Development', 'Design', 'Productivity', 'AI & ML', 'Other'] as const;
@@ -43,14 +43,20 @@ export async function POST(req: Request) {
     throw err;
   }
 
-  // Write submission to Content/tools/submissions
-  const submissionsDir = path.join(process.cwd(), 'Content', 'tools', 'submissions');
-  await fs.mkdir(submissionsDir, { recursive: true });
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const safeName = submission.name.replace(/\W+/g, '-').toLowerCase();
-  const fileName = `${timestamp}-${safeName}.json`;
-  const filePath = path.join(submissionsDir, fileName);
-  await fs.writeFile(filePath, JSON.stringify(submission, null, 2), 'utf-8');
+  // Save submission to Firestore
+  try {
+    const docData = {
+      ...submission,
+      createdAt: serverTimestamp(),
+      submittedAt: new Date().toISOString(),
+      published: submission.published || false
+    };
 
-  return NextResponse.json({ success: true, file: fileName }, { status: 201 });
+    const docRef = await addDoc(collection(db, 'tool-submissions'), docData);
+    
+    return NextResponse.json({ success: true, id: docRef.id }, { status: 201 });
+  } catch (error) {
+    console.error('Error saving tool submission:', error);
+    return NextResponse.json({ error: 'Failed to save submission' }, { status: 500 });
+  }
 }

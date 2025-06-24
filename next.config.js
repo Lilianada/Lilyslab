@@ -33,16 +33,16 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: `
-              default-src 'self';
-              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://accounts.google.com https://*.googleapis.com https://*.gstatic.com https://va.vercel-scripts.com;
-              style-src 'self' 'unsafe-inline';
-              img-src 'self' data: https: blob:;
-              font-src 'self' data:;
-              connect-src 'self' https: blob:;
-              media-src 'self' https://firebasestorage.googleapis.com https://res.cloudinary.com https://*.cloudinary.com data: blob:;
-              frame-src 'self' https://*.firebaseapp.com https://*.firebaseio.com https://*.google.com https://accounts.google.com;
-            `.replace(/\s{2,}/g, ' ').trim(),
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://accounts.google.com https://*.googleapis.com https://*.gstatic.com https://va.vercel-scripts.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.googleapis.com",
+              "img-src 'self' data: https: blob:",
+              "font-src 'self' data: https://fonts.gstatic.com https://*.gstatic.com",
+              "connect-src 'self' https: blob:",
+              "media-src 'self' https://firebasestorage.googleapis.com https://res.cloudinary.com https://*.cloudinary.com data: blob:",
+              "frame-src 'self' https://*.firebaseapp.com https://*.firebaseio.com https://*.google.com https://accounts.google.com"
+            ].join('; ') + ';',
           },
         ],
       },
