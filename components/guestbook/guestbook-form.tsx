@@ -17,12 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 // Validation schema
 const formSchema = z.object({
@@ -36,31 +30,6 @@ const formSchema = z.object({
       (val) => !val || /^https?:\/\/.+\..+/.test(val),
       "Please enter a valid URL starting with http:// or https://"
     ),
-  intro: z
-    .string()
-    .max(150, "Bio should be at most 150 characters")
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  location: z
-    .string()
-    .max(50, "Location should be at most 50 characters")
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  mood: z
-    .string()
-    .max(30, "Mood should be at most 30 characters")
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  song: z
-    .string()
-    .max(80, "Song name should be at most 80 characters")
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  favorite: z
-    .string()
-    .max(50, "Favorite thing should be at most 50 characters")
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
   spam_check: z.string().refine((val) => val.toLowerCase() === "guestbook", {
     message: "Please type 'guestbook' to verify you're human",
   }),
@@ -76,11 +45,6 @@ interface GuestbookFormProps {
     name: string;
     url?: string;
     email: string;
-    intro?: string;
-    location?: string;
-    mood?: string;
-    song?: string;
-    favorite?: string;
     message: string;
     created_at: string;
   }) => void;
@@ -96,11 +60,6 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
       name: "",
       email: "",
       url: "",
-      intro: "",
-      location: "",
-      mood: "",
-      song: "",
-      favorite: "",
       spam_check: "",
       message: "",
     },
@@ -201,7 +160,7 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
+                  <FormDescription className="text-xs ">
                     Your email won't be displayed publicly
                   </FormDescription>
                   <FormMessage />
@@ -230,27 +189,6 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
 
           <FormField
             control={form.control}
-            name="intro"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Short Intro (optional)</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="A brief introduction about yourself"
-                    className="bg-background"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  This will appear as your "about me" section (max 150 chars)
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="message"
             render={({ field }) => (
               <FormItem>
@@ -262,7 +200,7 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
+                <FormDescription className="text-xs">
                   You can use Markdown formatting (links, **bold**, *italic*, etc.)
                 </FormDescription>
                 <FormMessage />
@@ -271,90 +209,6 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
           />
         </div>
 
-        {/* Optional Fields - Collapsible */}
-        <Accordion type="single" collapsible className="border px-4 py-2 rounded-md">
-          <AccordionItem value="optional-fields" className="border-none">
-            <AccordionTrigger className="text-sm py-2">
-              More Y2K Profile Details (Optional)
-            </AccordionTrigger>
-            <AccordionContent className="pt-2">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="location"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Location</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Where are you from?"
-                          className="bg-background"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="mood"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Current Mood</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="How are you feeling today?"
-                          className="bg-background"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="song"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Currently Listening To</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="What song/artist are you enjoying?"
-                          className="bg-background"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="favorite"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Favorite Thing</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="What's something you love?"
-                          className="bg-background"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-
         {/* Bot Protection */}
         <FormField
           control={form.control}
@@ -362,7 +216,7 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Bot Protection: Type "guestbook" below *
+                Are you human? Type "guestbook" to verify.
               </FormLabel>
               <FormControl>
                 <Input
@@ -371,10 +225,6 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                To help keep this space genuine and spam-free, please type "guestbook" below.
-                It's a simple way to confirm you're a real person wanting to share something meaningful!
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

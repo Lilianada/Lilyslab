@@ -243,104 +243,71 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
                   </div>
                 </div>
 
-                {/* Main Layout - 2 Column */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Left Column - Profile */}
+                {/* Main Layout - Simplified */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {/* Left Column - Profile Avatar */}
                   <div className="md:col-span-1">
                     {/* Profile Box */}
-                    <div className="border border-dashed border-muted-foreground/30 rounded-md p-3 bg-background/50">
+                    <div className="border border-dashed border-muted-foreground/30 rounded-md p-4 bg-background/50">
                       {/* Profile Icon - Generated from name */}
-                      <div className={`h-16 w-16 rounded-full ${personColor.brGradient} mx-auto flex items-center justify-center text-white font-bold text-xl`}>
+                      <div className={`h-16 w-16 rounded-full ${personColor.brGradient} mx-auto flex items-center justify-center text-white font-semibold text-xl shadow-lg`}>
                         {entry.name.charAt(0).toUpperCase()}
                       </div>
                       
-                      <div className="text-center mt-2">
+                      <div className="text-center mt-3">
                         <div className="text-lg font-semibold bg-gradient-to-r from-primary to-pink-500 dark:from-primary dark:to-purple-500 bg-clip-text text-transparent">
                           {entry.name}
                         </div>
                         
-                        {/* Intro displayed here in profile section */}
-                        {entry.intro && (
-                          <div className="mt-2 text-xs italic text-muted-foreground/80">
-                            "{entry.intro}"
+                        {entry.url && (
+                          <div className="">
+                            <a
+                              href={entry.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-primary hover:underline font-mono flex items-center justify-center gap-1"
+                            >
+                              visit site <ExternalLink className="h-3 w-3" />
+                            </a>
                           </div>
                         )}
                         
-                        <div className="border-t border-dashed border-muted-foreground/30 my-3"></div>
-                        
-                        {/* Profile Stats - Optional Fields */}
-                        <div className="space-y-2 text-xs text-left">
-                          {entry.location && (
-                            <div className="flex items-center gap-1.5">
-                              <MapPin className="h-3 w-3 text-muted-foreground" /> 
-                              <span>{entry.location}</span>
-                            </div>
-                          )}
-                          
-                          {entry.mood && (
-                            <div className="flex items-center gap-1.5">
-                              <Heart className="h-3 w-3 text-muted-foreground" /> 
-                              <span>feeling: {entry.mood}</span>
-                            </div>
-                          )}
-                          
-                          {entry.song && (
-                            <div className="flex items-center gap-1.5">
-                              <Music className="h-3 w-3 text-muted-foreground" /> 
-                              <span>listening to: {entry.song}</span>
-                            </div>
-                          )}
-                          
-                          {entry.favorite && (
-                            <div className="flex items-center gap-1.5">
-                              <Star className="h-3 w-3 text-muted-foreground" /> 
-                              <span>fave: {entry.favorite}</span>
-                            </div>
-                          )}
-                          
-                          {entry.email && (
-                            <div className="flex items-center gap-1.5">
-                              <Mail className="h-3 w-3 text-muted-foreground" /> 
-                              <span className="truncate">{entry.email.replace(/@/g, ' [at] ')}</span>
-                            </div>
-                          )}
-                          
-                          {/* If none of these fields exist, show default info */}
-                          {!entry.location && !entry.mood && !entry.song && !entry.favorite && !entry.email && !entry.intro && (
-                            <div className="text-center text-muted-foreground/50 py-1">
-                              <div className="mb-1">★ mysterious visitor ★</div>
-                              <div className="text-[10px]">no details shared</div>
-                            </div>
-                          )}
-                        </div>
+                       
                       </div>
                     </div>
                     
-                   {/* Y2K Style Elements */}
-                    <div className="mt-3 flex flex-col items-center">
-                      {/* Pixel Divider */}
-                      <div className="w-full h-[5px] my-2 bg-repeat-x" 
-                          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='10' height='5' viewBox='0 0 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h5v5H0zM5 0h5v5H5z' fill='%23999999' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E\")" }}>
+                    {/* Y2K Decoration */}
+                    <div className="mt-3 text-center">
+                      <div className="text-xs font-mono text-muted-foreground/60">
+                        ★ ☆ ★ ☆ ★
                       </div>
-                           {/* Online Now */}
-                      <div className="text-xs text-center mt-1 font-mono">
-                        <span className="inline-block w-2 h-2 rounded-full bg-green-400 mr-1 animate-pulse"></span>
-                        online now
-                      </div>
-                     
                     </div>
                   </div>
                   
-                  {/* Right Column - Content */}
-                  <div className="md:col-span-2">
-                    {/* Message Content */}
-                    <div>
-                      <div className="flex items-center mb-1">
-                        <div className="text-sm font-semibold">Message for Lily</div>
-                        <div className="ml-2 h-[1px] flex-grow bg-gradient-to-r from-muted-foreground/40 to-transparent"></div>
+                  {/* Right Column - Message Content */}
+                  <div className="md:col-span-3">
+                    {/* Message Header */}
+                    <div className="mb-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <MessageSquare className="h-4 w-4 text-primary" />
+                        <div className="text-base font-semibold">Message for Lily</div>
+                        <div className="flex-grow h-px bg-gradient-to-r from-primary/40 to-transparent"></div>
+                      </div>
+                    </div>
+                    
+                    {/* Message Content Box */}
+                    <div className="bg-background/60 border border-dashed border-muted-foreground/30 rounded-lg p-4 relative overflow-hidden">
+                      {/* Y2K Background Pattern */}
+                      <div className="absolute inset-0 opacity-5">
+                        <div className="grid grid-cols-12 gap-1 h-full">
+                          {Array.from({ length: 48 }).map((_, i) => (
+                            <div key={i} className="bg-primary/20 rounded-sm"></div>
+                          ))}
+                        </div>
                       </div>
                       
-                      <div className="bg-background/50 border border-border/50 rounded-md p-3">
+                      {/* Message Text */}
+                      <div className="relative z-10">
                         <div className="prose dark:prose-invert prose-sm max-w-none">
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}
@@ -352,38 +319,19 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
                                     href={href}
                                     target={isExternal ? '_blank' : undefined}
                                     rel={isExternal ? 'noopener noreferrer' : undefined}
-                                    className="text-primary hover:underline"
+                                    className="text-primary hover:underline font-semibold"
                                     {...props}
                                   >
                                     {children}
                                   </a>
                                 );
                               },
-                              p: ({ children }) => <p style={{ whiteSpace: "pre-wrap" }}>{children}</p>
+                              p: ({ children }) => <p className="mb-3 leading-relaxed" style={{ whiteSpace: "pre-wrap" }}>{children}</p>
                             }}
                           >
                             {entry.message}
                           </ReactMarkdown>
                         </div>
-                      </div>
-                    </div>
-                    
-                    {/* Y2K Hit Counter and Stats */}
-                    <div className="flex justify-between items-center mt-3">
-                      <div className="bg-background/60 border border-border/40 rounded px-2 py-1 text-[10px] font-mono flex items-center">
-                        <span className="mr-1">hits:</span>
-                        {/* Retro hit counter */}
-                        <div className="flex">
-                          {String(Math.floor(Math.random() * 10000) + 100).split('').map((digit, i) => (
-                            <div key={i} className="w-3 bg-black/5 dark:bg-white/10 mx-px font-mono text-center">
-                              {digit}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div className="text-[10px] text-muted-foreground/60 font-mono">
-                        signed on {formatDate(entry.date)}
                       </div>
                     </div>
                   </div>

@@ -18,12 +18,6 @@ const GuestbookEntrySchema = z.object({
     const now = new Date();
     return now.toISOString().split('T')[0]; // Returns YYYY-MM-DD format
   })),
-  // Y2K profile fields with strict character limits
-  intro: z.string().max(150, "Bio must be 150 characters or less").optional().or(z.string().length(0).transform(() => undefined)),
-  location: z.string().max(50, "Location must be 50 characters or less").optional().or(z.string().length(0).transform(() => undefined)),
-  mood: z.string().max(30, "Mood must be 30 characters or less").optional().or(z.string().length(0).transform(() => undefined)),
-  song: z.string().max(80, "Song name must be 80 characters or less").optional().or(z.string().length(0).transform(() => undefined)),
-  favorite: z.string().max(50, "Favorite thing must be 50 characters or less").optional().or(z.string().length(0).transform(() => undefined)),
 });
 
 type GuestbookEntry = z.infer<typeof GuestbookEntrySchema>;
@@ -42,13 +36,7 @@ export async function GET() {
         url: data.url || undefined,
         date: data.date,
         email: data.email || undefined,
-        message: data.message,
-        // Y2K profile fields
-        intro: data.intro || undefined,
-        location: data.location || undefined,
-        mood: data.mood || undefined,
-        song: data.song || undefined,
-        favorite: data.favorite || undefined
+        message: data.message
       };
     });
 
@@ -76,12 +64,6 @@ export async function POST(req: Request) {
       email: entryData.email || null,
       url: entryData.url || null,
       message: entryData.message,
-      // Y2K profile fields
-      intro: entryData.intro || null,
-      location: entryData.location || null,
-      mood: entryData.mood || null,
-      song: entryData.song || null,
-      favorite: entryData.favorite || null,
       // Firestore timestamp
       createdAt: serverTimestamp(),
       // Date string for compatibility
@@ -100,13 +82,7 @@ export async function POST(req: Request) {
         url: entryData.url,
         date: docData.date,
         message: entryData.message,
-        // Include all Y2K profile fields in the response, even if undefined
         email: entryData.email,
-        intro: entryData.intro,
-        location: entryData.location,
-        mood: entryData.mood,
-        song: entryData.song,
-        favorite: entryData.favorite,
         // Add created_at for compatibility with form component's onEntryAdded function
         created_at: docData.date
       }
