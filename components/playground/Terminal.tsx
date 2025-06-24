@@ -14,13 +14,11 @@ const Terminal: React.FC = () => {
     loadNotes();
   }, []);
 
-  // Auto-save every 15 seconds if there are changes
+  // Auto-save every 15 seconds (including empty content to preserve deletions)
   useEffect(() => {
     const interval = setInterval(() => {
-      if (content.trim()) {
-        saveNotes();
-      }
-    }, 15000);
+      saveNotes();
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [content]);

@@ -148,14 +148,6 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
               </div>
             </div>
           )}
-          
-          {/* Results count */}
-          <div className="mb-6">
-            <p className="text-sm text-muted-foreground">
-              Showing {filteredNotesCount} of {allNotes.length} notes
-              {selectedTag && ` with tag #${selectedTag}`}
-            </p>
-          </div>
 
           {/* Notes Grid Layout */}
           <div className="space-y-8">
