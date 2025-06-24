@@ -1,21 +1,8 @@
-import Link from "next/link"
-import { formatDate, formatDateForDisplay } from "@/lib/utils"
 import { Annoyed } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
 import { getAllWritings } from "@/lib/garden/writings"
 import type { Writing } from "@/lib/garden/writings"
-
-// Helper function to count words in a string
-function countWords(text: string): number {
-  return text.split(/\s+/).filter(Boolean).length;
-}
-
-// Helper function to calculate reading time based on words
-function calculateReadingTime(text: string): number {
-  const wordsPerMinute = 200; // Average reading speed
-  const words = countWords(text);
-  return Math.max(1, Math.ceil(words / wordsPerMinute));
-}
+import TagFilterClient from "./TagFilterClient"
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -56,37 +43,7 @@ export default async function WritingPage() {
             <p className="text-muted-foreground mb-4 text-sm">{error}</p>
           </div>
         ) : posts.length > 0 ? (
-          <ul className="mt-6 space-y-2">
-            {posts.map((post) => (
-              <li key={post.slug} className="group relative">
-                <Link
-                  href={`/garden/writings/${post.slug}`}
-                  className="flex items-center gap-4 py-2 hover:scale-[1.025] transition-all duration-300 group"
-                  prefetch
-                >
-                  {/* Left: Dot and Title */}
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="h-2 w-2 rounded-full bg-steelBlue" />
-                    <p className="truncate text-sm">{post.title}</p>
-                  </div>
-                  {/* Middle: Connecting line */}
-                  <div className="flex-1 h-px bg-muted-foreground/30 mx-2 hidden md:block" />
-                  {/* Right: Date or Hover Details */}
-                  <div className="flex items-center gap-2  justify-end">
-                    <span className="hidden group-hover:inline text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
-                      {countWords(post.content)} words • {calculateReadingTime(post.content)} min
-                    </span>
-                    <time className="group-hover:hidden font-mono text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
-                      {formatDateForDisplay(post.createdAt)}
-                    </time>
-                  </div>
-                </Link>
-                {/* <div className="pointer-events-none absolute left-[-20px] top-[50%] transform translate-y-[-50%] z-10 hidden md:group-hover:block">
-                  <div className="h-full w-2 rounded-full bg-steelBlue animate-pulse shadow-md" style={{ height: '24px' }} />
-                </div> */}
-              </li>
-            ))}
-          </ul>
+          <TagFilterClient writings={posts} />
         ) : (
           <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">
             <Annoyed size={16} />

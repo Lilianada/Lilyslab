@@ -13,32 +13,32 @@ type: evergreen
 
 Welcome to Minispace.
 
-Experience the quiet and calm of the internet again. \
-Focus fully on what you love most: \
+Experience the quiet and calm of the internet again.
+Focus fully on what you love most:
 Reading. Writing. Building. Connecting.
 
 
-Get inspired by your neighbours. \
+Get inspired by your neighbours.
 Discover and explore their small worlds.
 
 
-Build a presence, an identity, a space. \
+Build a presence, an identity, a space.
 Design it. Refine it. Make it yours.
 
 
-Create something unique. \
-Something that inspires. \
+Create something unique.
+Something that inspires.
 Something small — just for you.
 
-A space for serendipitous encounters. \
-A space for your learnings. \
+A space for serendipitous encounters.
+A space for your learnings.
 A space for your musings and ideas.
 
 
-Write to think better. \
-Build to learn better. \
+Write to think better.
+Build to learn better.
 Connect to feel more.
  
 
-Explore, and learn to create your own experiences. \
+Explore, and learn to create your own experiences.
 This is your minispace. Make it matter.
