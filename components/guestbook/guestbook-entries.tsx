@@ -48,13 +48,31 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
   };
   
   const generateColor = (name: string) => {
-    const colors = [
-      "from-pink-200 to-purple-500",
-      "from-blue-200 to-cyan-500", 
-      "from-green-200 to-emerald-500",
-      "from-siteYellow-200 to-orange-500",
-      "from-indigo-200 to-violet-500",
-      "from-rose-200 to-red-500",
+    const colorSets = [
+      {
+        gradient: "bg-gradient-to-r from-pink-200 to-purple-500",
+        brGradient: "bg-gradient-to-br from-pink-200 to-purple-500"
+      },
+      {
+        gradient: "bg-gradient-to-r from-blue-200 to-cyan-500",
+        brGradient: "bg-gradient-to-br from-blue-200 to-cyan-500"
+      },
+      {
+        gradient: "bg-gradient-to-r from-green-200 to-emerald-500",
+        brGradient: "bg-gradient-to-br from-green-200 to-emerald-500"
+      },
+      {
+        gradient: "bg-gradient-to-r from-yellow-200 to-orange-500",
+        brGradient: "bg-gradient-to-br from-yellow-200 to-orange-500"
+      },
+      {
+        gradient: "bg-gradient-to-r from-indigo-200 to-violet-500",
+        brGradient: "bg-gradient-to-br from-indigo-200 to-violet-500"
+      },
+      {
+        gradient: "bg-gradient-to-r from-rose-200 to-red-500",
+        brGradient: "bg-gradient-to-br from-rose-200 to-red-500"
+      }
     ];
     
     let hash = 0;
@@ -62,7 +80,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
       hash = name.charCodeAt(i) + ((hash << 5) - hash);
     }
     
-    return colors[Math.abs(hash) % colors.length];
+    return colorSets[Math.abs(hash) % colorSets.length];
   };
 
   if (isLoading) {
@@ -188,7 +206,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
             {/* Website Content */}
             <div className="bg-gradient-to-b from-background to-muted/10">
               {/* Y2K Style Header/Banner - FIXED */}
-              <div className={`bg-gradient-to-r ${personColor} h-16 flex items-center justify-center p-3 overflow-hidden relative`}>
+              <div className={`${personColor.gradient} h-16 flex items-center justify-center p-3 overflow-hidden relative`}>
                 {/* Decorative elements with higher opacity */}
                 <div className="absolute inset-0">
                   {Array.from({ length: 10 }).map((_, i) => (
@@ -230,7 +248,7 @@ export default function GuestbookEntries({ entries, isLoading }: GuestbookEntrie
                     {/* Profile Box */}
                     <div className="border border-dashed border-muted-foreground/30 rounded-md p-3 bg-background/50">
                       {/* Profile Icon - Generated from name */}
-                      <div className={`h-16 w-16 rounded-full bg-gradient-to-br ${personColor} mx-auto flex items-center justify-center text-white font-bold text-xl`}>
+                      <div className={`h-16 w-16 rounded-full ${personColor.brGradient} mx-auto flex items-center justify-center text-white font-bold text-xl`}>
                         {entry.name.charAt(0).toUpperCase()}
                       </div>
                       

@@ -17,7 +17,7 @@ export default function Page() {
 
   return (
     <>
-      <ScrollProgress color="bg-blue" height={3} glow={true} />
+      <ScrollProgress color="bg-blue-300" height={3} glow={true} />
 
       <div className="min-h-screen animate-fade-in">
         <div className="container max-w-3xl mx-auto px-0 sm:px-4 pt-16 pb-8">

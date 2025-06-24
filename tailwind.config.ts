@@ -11,6 +11,23 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    // Gradient classes for guestbook color generation
+    'bg-gradient-to-r',
+    'bg-gradient-to-br',
+    'from-pink-200',
+    'to-purple-500',
+    'from-blue-200', 
+    'to-cyan-500',
+    'from-green-200',
+    'to-emerald-500',
+    'from-yellow-200',
+    'to-orange-500',
+    'from-indigo-200',
+    'to-violet-500',
+    'from-rose-200',
+    'to-red-500',
+  ],
   prefix: "",
   future: {
     hoverOnlyWhenSupported: true,
