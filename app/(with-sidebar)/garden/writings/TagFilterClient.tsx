@@ -86,7 +86,7 @@ export default function TagFilterClient({ writings }: Props) {
                   {allTags.length > topTags.length && (
                     <button 
                       onClick={() => setShowAllTags(!showAllTags)} 
-                      className="text-xs flex items-center gap-1 text-primary hover:opacity-80 transition-all font-mono"
+                      className="text-xs flex items-center gap-1 text-steelBlue hover:opacity-80 transition-all font-mono"
                     >
                       {showAllTags ? (
                         <>
@@ -105,7 +105,7 @@ export default function TagFilterClient({ writings }: Props) {
                 <div className="flex flex-wrap gap-2 transition-all duration-300">
                   <button
                     className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTag === null
-                        ? "bg-primary text-primary-foreground border-primary"
+                        ? "bg-steelBlue text-primary-foreground border-steelBlue"
                         : "bg-muted border-border text-muted-foreground hover:bg-accent"
                       }`}
                     onClick={() => setSelectedTag(null)}
