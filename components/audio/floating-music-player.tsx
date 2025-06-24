@@ -14,7 +14,7 @@ const COLOR_VARS = [
   "--siteYellow",
   "--siteGreen",
   "--sitePink",
-  "--cream",
+  "--codeRed",
   "--lilac",
   "--peach",
   "--paleYellow",
@@ -54,7 +54,7 @@ function FloatingMusicPlayerContent() {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isPaused, setIsPaused, setCurrentColor]);
+  }, []);
   
   // Handle play/pause state changes
   useEffect(() => {

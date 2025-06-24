@@ -3,7 +3,7 @@ import Calculator from '@/components/playground/Calculator';
 
 const CalculatorPage: React.FC = () => {
   return (
-    <div className="overflow-y-auto">
+    <div className="max-h-screen  h-screen flex items-center justify-center p-4">
       <Calculator />
     </div>
   );
