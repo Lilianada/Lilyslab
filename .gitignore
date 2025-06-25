@@ -31,9 +31,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# content db
-.obsidian
-.trash
-.windsurf
-conflict-files-obsidian-git.md

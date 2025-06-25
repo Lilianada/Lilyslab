@@ -1,2 +1,0 @@
-
-"Bungee Shade", cursive

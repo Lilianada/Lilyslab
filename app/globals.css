@@ -1,172 +1,84 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital,wght@0,400;1,400&display=swap'); */
-/* Import external CSS first */
-@import "prismjs/themes/prism-tomorrow.css";
-@import "../styles/card-animations.css";
-@import "../styles/markdown.css";
-
-
-/* Font declarations */
-@font-face {
-  font-family: "Nitti";
-  src: url("/fonts/Nitti-Normal.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nitti";
-  src: url("/fonts/Nitti-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Then include Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Backlinks styling */
-@layer components {
-  .backlink {
-    @apply relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--steelBlue))];
-    text-decoration: underline;
-    text-decoration-color: hsl(var(--lightBlue) / 0.8);
-    text-decoration-style: solid;
-    text-decoration-skip-ink: none;
-    text-decoration-thickness: 0.5em;
-    text-underline-offset: -0.25em;
-    transition: all 0.3s;
-  }
-  .backlink:hover {
-    text-decoration-color: hsl(var(--siteBlue));
-    text-decoration-thickness: 0.6em;
-  }
-  .backlink:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background rounded-sm;
-  }
-  .backlink[aria-disabled="true"] {
-    @apply opacity-50 cursor-not-allowed;
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0% {
-      opacity: 0.6;
-    }
-    50% {
-      opacity: 0.9;
-    }
-    100% {
-      opacity: 0.6;
-    }
-  }
-}
-
-/* Line clamp utilities */
-@layer utilities {
-  .line-clamp-1 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-  }
-  
-  .line-clamp-2 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-  }
-  
-  .line-clamp-3 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-  }
-}
+/* Import Prism.js theme for code highlighting */
+@import "prismjs/themes/prism-tomorrow.css";
+/* Fix the import syntax - add semicolon */
+@import "./notion.css";
+/* Remove the import to the deleted styles.css file */
+/* @import "@/components/notion/styles.css"; */
 
 @layer base {
   :root {
-    /* Light mode */
-    --background: 0 0% 100%; /* #ffffff */
-    --foreground: 0 0% 4%; /* #0a0a0a */
-    --card: 210 1% 98%; /* #ebedef - light zinc */
-    --card-foreground: 0 0% 8%; /* #101010 */
-    --popover: 0 0% 100%; /* #ffffff */
-    --popover-foreground: 0 0% 4%; /* #0a0a0a */
-    --primary: 250 100% 83%; /* #e9c6f7 - soft lavender-sitePink */
-    --primary-foreground: 0 0% 99%; /* #fcfcfc */
-    --secondary: 210 10% 87%; /* #dbe1e8 - zinc light */
-    --secondary-foreground: 0 0% 15%; /* #262626 */
-    --muted: 210 7% 90%; /* #a9aeb5 - muted zinc */
-    --muted-foreground: 210 7% 40%; /* #5f6368 */
-    --accent: 210 0% 94%; /* #d6dbdf - zinc accent */
-    --accent-foreground: 0 0% 15%; /* #262626 */
-    --destructive: 0 84% 60%; /* #f03d3d */
-    --destructive-foreground: 0 0% 99%; /* #fcfcfc */
-    --border: 210 10% 88%; /* #d7dde3 */
-    --input: 210 10% 88%; /* #d7dde3 */
-    --ring: 0 0% 15%; /* #262626 */
+    --background: 60 6% 95%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 280 75% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 280 75% 60%;
     --radius: 0.5rem;
-    --mellow: 38 100% 55%; /* #ffc04d */
-    --codeRed: 0 100% 52%;
-    
-    /* Extra palette for bg-... */
-    --lightBlue: 218 93% 83%; 
-    --lavender: 234 91% 80%; /* #9EAAFA */
-    --siteYellow: 48 95% 76%; /* #FAE680 */
-    --siteGreen: 148 28% 72%; /* #A2CBAF */
-    --sitePink: 350 54% 80%; /* #E8ADB1 */
-    --siteBlue: 213 61% 80%; /* #A6C2EB */
-    --cream: 43 68% 89%; /* #F4E8C8 */
-    --lilac: 270 64% 80%; /* #CCA7ED */
-    --peach: 18 86% 71%; /* #F29874 */
-    --paleYellow: 45 82% 80%; /* #F4DAA0 */
-    --steelBlue: 218 47% 61%; /* #6C95CF */
+
+    /* Notion-specific colors for light mode */
+    --notion-text: 0 0% 9%;
+    --notion-bg-gray: 0 0% 97%;
+    --notion-bg-brown: 19 80% 97%;
+    --notion-bg-orange: 30 80% 97%;
+    --notion-bg-yellow: 50 80% 97%;
+    --notion-bg-green: 120 80% 97%;
+    --notion-bg-blue: 210 80% 97%;
+    --notion-bg-purple: 270 80% 97%;
+    --notion-bg-pink: 330 80% 97%;
+    --notion-bg-red: 0 80% 97%;
+    --notion-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --notion-max-width: 720px;
   }
 
   .dark {
-    /* Dark mode with #161616 background */
-    --background: 0 0% 5%; /* #161616 */
-    --foreground: 0 0% 95%; /* #f2f2f2 */
-    --card: 0 0% 8%; /* #2a2e33 - slightly lighter zinc */
-    --card-foreground: 0 0% 95%; /* #f2f2f2 */
-    --popover: 210 10% 12%; /* #212529 - dark zinc */
-    --popover-foreground: 0 0% 95%; /* #f2f2f2 */
-    --primary: 295 60% 85%; /* #e9c6f7 - same accent */
-    --primary-foreground: 0 0% 15%; /* #262626 */
-    --secondary: 210 10% 20%; /* #343a40 - zinc medium-dark */
-    --secondary-foreground: 0 0% 95%; /* #f2f2f2 */
-    --muted: 210 5% 10%; /* #40464d - muted zinc */
-    --muted-foreground: 0 0% 60%; /* #999999 */
-    --accent: 210 5% 15%; /* #3b424a - zinc accent */
-    --accent-foreground: 0 0% 95%; /* #f2f2f2 */
-    --destructive: 0 70% 40%; /* #a94444 */
-    --destructive-foreground: 0 0% 95%; /* #f2f2f2 */
-    --border: 210 6% 18%; /* #2f343a */
-    --input: 210 10% 12%; /* #2f343a */
-    --ring: 210 8% 50%; /* #7a828b */
-    --mellow: 38 90% 45%; /* #b3821b */
-    --codeRed: 0 62% 57%;
+    --background: 0 0% 6.7%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 6.7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 280 70% 70%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 280 70% 70%;
 
-    /* Extra palette for bg-... */
-    --lightBlue: 218 93% 83%; 
-    --lavender: 234 91% 80%; /* #9EAAFA */
-    --siteYellow: 48 95% 76%; /* #FAE680 */
-    --siteGreen: 148 28% 72%; /* #A2CBAF */
-    --sitePink: 350 54% 80%; /* #E8ADB1 */
-    --siteBlue: 213 61% 80%; /* #A6C2EB */
-    --cream: 43 68% 89%; /* #F4E8C8 */
-    --lilac: 270 64% 80%; /* #CCA7ED */
-    --peach: 18 86% 71%; /* #F29874 */
-    --paleYellow: 45 82% 80%; /* #F4DAA0 */
-    --steelBlue: 218 47% 61%; /* #6C95CF */
+    /* Notion-specific colors for dark mode */
+    --notion-text: 0 0% 98%;
+    --notion-bg-gray: 0 0% 20%;
+    --notion-bg-brown: 19 30% 20%;
+    --notion-bg-orange: 30 30% 20%;
+    --notion-bg-yellow: 50 30% 20%;
+    --notion-bg-green: 120 30% 20%;
+    --notion-bg-blue: 210 30% 20%;
+    --notion-bg-purple: 270 30% 20%;
+    --notion-bg-pink: 330 30% 20%;
+    --notion-bg-red: 0 30% 20%;
   }
 }
 
@@ -181,26 +93,13 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   a,
   button {
     @apply transition-colors duration-200;
   }
-
-  p {
-    @apply leading-relaxed text-sm;
-  }
-}
-
-.nav_bar {
-  background: linear-gradient(hsl(var(--background)), 80%, transparent);
-  position: fixed;
-  user-select: none;
-  z-index: 40;
 }
 
 /* Loading animation */
@@ -264,6 +163,29 @@
   animation-delay: 1s;
 }
 
+/* Notion-specific styles */
+.prose .notion-content {
+  max-width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif,
+    "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* Notion-like spacing */
+.notion-content > * {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.notion-content > * + * {
+  margin-top: 4px;
+}
+
+/* Notion-like paragraph spacing */
+.notion-content p {
+  margin: 2px 0;
+  min-height: 1.5em;
+}
+
 /* Page transition */
 .page-transition-enter {
   opacity: 0;
@@ -273,9 +195,7 @@
 .page-transition-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity 300ms,
-    transform 300ms;
+  transition: opacity 300ms, transform 300ms;
 }
 
 .page-transition-exit {
@@ -283,80 +203,12 @@
   transform: translateY(0);
 }
 
-/* Task list styling */
-.task-list-container ul {
-  list-style-type: none;
-  padding-left: 1.5rem;
-}
-
-.task-list-container ul li {
-  position: relative;
-  margin-bottom: 0.5rem;
-  padding-left: 0.5rem;
-}
-
-/* Hide the default checkbox */
-.task-list-container ul li input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox container */
-.task-list-container ul li {
-  position: relative;
-  padding-left: 1.75rem;
-  cursor: pointer;
-  display: block;
-}
-
-/* Create a custom checkbox */
-.task-list-container ul li:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.25rem;
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid hsl(var(--steelBlue) / 0.5);
-  border-radius: 0.2rem;
-  background-color: hsl(var(--steelBlue) / 0.1);
-  transition: all 0.2s ease;
-}
-
-/* Style for checked state - using the :has pseudo-class for modern browsers */
-.task-list-container ul li:has(input[type="checkbox"]:checked):before {
-  background-color: hsl(var(--siteGreen) / 0.2);
-  border-color: hsl(var(--siteGreen) / 0.7);
-}
-
-/* Create the checkmark */
-.task-list-container ul li:has(input[type="checkbox"]:checked):after {
-  content: "";
-  position: absolute;
-  left: 0.3rem;
-  top: 0.3rem;
-  width: 0.4rem;
-  height: 0.7rem;
-  border: solid hsl(var(--siteGreen));
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  transition: all 0.2s ease;
-}
-
-/* For browsers that don't support :has, fallback */
-.task-list-container ul li input[type="checkbox"]:checked ~ p {
-  text-decoration: none;
-  opacity: 0.8;
-  color: hsl(var(--siteGreen));
-}
-
 .page-transition-exit-active {
   opacity: 0;
   transform: translateY(-8px);
-  transition:
-    opacity 300ms,
-    transform 300ms;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.sidebar {
+  background: rgba(23, 23, 23, 0.1);
 }

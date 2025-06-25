@@ -1,9 +1,8 @@
 import type { Config } from "tailwindcss"
-import defaultTheme from "tailwindcss/defaultTheme";
-import type { PluginAPI } from 'tailwindcss/types/config';
+import { fontFamily } from "tailwindcss/defaultTheme"
 
 const config = {
-  darkMode: "class",
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -11,27 +10,7 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: [
-    // Gradient classes for guestbook color generation
-    'bg-gradient-to-r',
-    'bg-gradient-to-br',
-    'from-pink-200',
-    'to-purple-500',
-    'from-blue-200', 
-    'to-cyan-500',
-    'from-green-200',
-    'to-emerald-500',
-    'from-yellow-200',
-    'to-orange-500',
-    'from-indigo-200',
-    'to-violet-500',
-    'from-rose-200',
-    'to-red-500',
-  ],
   prefix: "",
-  future: {
-    hoverOnlyWhenSupported: true,
-  },
   theme: {
     container: {
       center: true,
@@ -41,32 +20,12 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        nitti: ["Nitti", "monospace"],
-        sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
-        mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
-        sorts: ["Sorts", "serif"],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        codeRed: "hsl(var(--codeRed))",
-        lavender: "hsl(var(--lavender))",
-
-        siteYellow: "hsl(var(--siteYellow))",
-        siteGreen: "hsl(var(--siteGreen))",
-        sitePink: "hsl(var(--sitePink))",
-        siteBlue: "hsl(var(--siteBlue))",
-
-        cream: "hsl(var(--cream))",
-        lilac: "hsl(var(--lilac))",
-        peach: "hsl(var(--peach))",
-        paleYellow: "hsl(var(--paleYellow))",
-        steelBlue: "hsl(var(--steelBlue))",
-        lightBlue: "hsl(var(--lightBlue))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -95,15 +54,15 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        mellow: {
-          DEFAULT: "hsl(var(--mellow))",
-          foreground: "hsl(var(--mellow-foreground))",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        mono: ["var(--font-mono)", ...fontFamily.mono],
       },
       typography: {
         DEFAULT: {
@@ -119,69 +78,9 @@ const config = {
           },
         },
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        progress: {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(100%)" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "progress": "progress 1s ease-in-out infinite",
-        "spin-slow": "spin 12s linear infinite",
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      },
-      backgroundImage: {
-        'noise': "url('/images/Noise.png')",
-      },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"), 
-    require("@tailwindcss/typography"),
-    // Add plugin to purge unused CSS
-    function({ addBase, addComponents, addUtilities }: PluginAPI) {
-      addBase({
-        'html': {
-          scrollBehavior: 'smooth',
-        },
-        '::selection': {
-          backgroundColor: 'hsl(var(--primary) / 0.2)',
-        },
-        'img': {
-          display: 'block',
-          maxWidth: '100%',
-        },
-      });
-      
-      addUtilities({
-        '.scrollbar-hide': {
-          /* IE and Edge */
-          '-ms-overflow-style': 'none',
-          /* Firefox */
-          'scrollbar-width': 'none',
-          /* Safari and Chrome */
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        },
-      });
-    },
-  ],
-  corePlugins: {
-    // Disable plugins that might not be needed
-    touchAction: false,
-    container: true,
-  },
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config
 
 export default config

@@ -2,14 +2,13 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import { type User, signOut as firebaseSignOut, onAuthStateChanged } from "firebase/auth"
-import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "@/lib/garden/firebase"
+import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "@/lib/firebase"
 import { checkUserIsAdmin, setUserIsLoggedIn } from "@/lib/admin-service"
 
 interface AuthContextType {
   user: User | null
   loading: boolean
   isAdmin: boolean
-  userRoles: string[]
   signInWithGoogle: () => Promise<User | null>
   signOut: () => Promise<void>
 }
@@ -18,7 +17,6 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
   isAdmin: false,
-  userRoles: [],
   signInWithGoogle: async () => null,
   signOut: async () => {},
 })
@@ -26,16 +24,9 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
-  const [userRoles, setUserRoles] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Make sure auth is not null before using it
-    if (!auth) {
-      setLoading(false);
-      return () => {};
-    }
-    
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user)
 
@@ -44,16 +35,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // Check if user is in admins collection
         const adminStatus = await checkUserIsAdmin(user.email)
         setIsAdmin(adminStatus)
-        
-        // Set user roles - in a real app, you would fetch this from Firestore
-        if (adminStatus) {
-          setUserRoles(['admin', 'user'])
-        } else {
-          setUserRoles(['user'])
-        }
       } else {
         setIsAdmin(false)
-        setUserRoles([])
       }
 
       setLoading(false)
@@ -73,9 +56,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (adminStatus) {
           // Update isLoggedIn flag to true for the admin
           await setUserIsLoggedIn(user.email, true)
-          setUserRoles(['admin', 'user'])
-        } else {
-          setUserRoles(['user'])
         }
 
         setIsAdmin(adminStatus)
@@ -95,12 +75,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await setUserIsLoggedIn(user.email, false)
       }
 
-      // Make sure auth is not null before signing out
-      if (auth) {
-        await firebaseSignOut(auth)
-      }
+      await firebaseSignOut(auth)
       setIsAdmin(false)
-      setUserRoles([])
     } catch (error) {
       console.error("Error signing out:", error)
       throw error
@@ -108,7 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, isAdmin, userRoles, signInWithGoogle, signOut }}>
+    <AuthContext.Provider value={{ user, loading, isAdmin, signInWithGoogle, signOut }}>
       {children}
     </AuthContext.Provider>
   )

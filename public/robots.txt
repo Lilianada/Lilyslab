@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://lilyslab.xyz
-
-# Sitemaps
-Sitemap: https://lilyslab.xyz/sitemap.xml
