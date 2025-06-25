@@ -2,3 +2,6 @@
 - gurgitate
 - ingurgitate
 - regurgitate
+- cacophony
+- corporeal
+- virulence
