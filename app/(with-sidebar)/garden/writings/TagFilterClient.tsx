@@ -22,6 +22,7 @@ function calculateReadingTime(text: string): number {
 
 export default function TagFilterClient({ writings }: Props) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<Writing['type'] | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
   
@@ -43,6 +44,21 @@ export default function TagFilterClient({ writings }: Props) {
   
   // All tags sorted alphabetically for expanded view
   const allTags = Object.keys(tagCounts).sort();
+  
+  // Count writings per type
+  const typeCounts: Record<string, number> = {
+    evergreen: 0,
+    seedling: 0,
+    budding: 0
+  };
+  writings.forEach((writing) => {
+    typeCounts[writing.type] = (typeCounts[writing.type] || 0) + 1;
+  });
+  
+  // Available types (only show types that have writings)
+  const types = Object.keys(typeCounts).filter(
+    type => typeCounts[type] > 0
+  ) as Writing['type'][];
 
   React.useEffect(() => {
     const timeout = setTimeout(() => setIsLoaded(true), 400);
@@ -62,7 +78,8 @@ export default function TagFilterClient({ writings }: Props) {
   // Apply tag and type filtering
   const filteredWritings = sortedWritings.filter(writing => {
     const matchesTag = !selectedTag || (writing.tags || []).includes(selectedTag);
-    return matchesTag;
+    const matchesType = !selectedType || writing.type === selectedType;
+    return matchesTag && matchesType;
   });
 
   return (
@@ -74,6 +91,41 @@ export default function TagFilterClient({ writings }: Props) {
       ) : (
         <>
           <div className="my-8">
+            {/* Type filter */}
+            <div className="mb-4">
+              <h3 className="mb-2 text-sm font-medium flex items-center gap-2">
+                Types
+                <span className="text-xs text-muted-foreground font-normal">(click to filter)</span>
+              </h3>
+              <div className="flex flex-wrap gap-4 font-mono text-xs">
+                <button
+                  className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
+                    selectedType === null ? "font-medium text-primary" : ""
+                  }`}
+                  onClick={() => setSelectedType(null)}
+                >
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-mint border border-gray-300"></span>
+                  All <span className="ml-1 text-muted-foreground">({writings.length})</span>
+                </button>
+                
+                {types.map((type) => (
+                  <button
+                    key={type}
+                    className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
+                      selectedType === type ? "font-medium text-primary" : ""
+                    }`}
+                    onClick={() => setSelectedType(type)}
+                  >
+                    <span className={`mr-1.5 inline-block h-2 w-2 rounded-full border border-gray-300 ${
+                      type === 'evergreen' ? 'bg-lavender' : 
+                      type === 'seedling' ? 'bg-peach' : 
+                      'bg-steelBlue'
+                    }`}></span>
+                    {type.charAt(0).toUpperCase() + type.slice(1)} <span className="ml-1 text-muted-foreground">({typeCounts[type]})</span>
+                  </button>
+                ))}
+              </div>
+            </div>
             
             {/* Tag filter */}
             {allTags.length > 0 && (
@@ -86,7 +138,7 @@ export default function TagFilterClient({ writings }: Props) {
                   {allTags.length > topTags.length && (
                     <button 
                       onClick={() => setShowAllTags(!showAllTags)} 
-                      className="text-xs flex items-center gap-1 text-steelBlue hover:opacity-80 transition-all font-mono"
+                      className="text-xs flex items-center gap-1 text-primary hover:opacity-80 transition-all font-mono"
                     >
                       {showAllTags ? (
                         <>
@@ -105,7 +157,7 @@ export default function TagFilterClient({ writings }: Props) {
                 <div className="flex flex-wrap gap-2 transition-all duration-300">
                   <button
                     className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTag === null
-                        ? "bg-steelBlue text-primary-foreground border-steelBlue"
+                        ? "bg-primary text-primary-foreground border-primary"
                         : "bg-muted border-border text-muted-foreground hover:bg-accent"
                       }`}
                     onClick={() => setSelectedTag(null)}
@@ -142,6 +194,7 @@ export default function TagFilterClient({ writings }: Props) {
           <div className="mb-6">
             <p className="text-sm text-muted-foreground">
               Showing {filteredWritings.length} of {writings.length} writings
+              {selectedType && ` of type ${selectedType}`}
               {selectedTag && ` with tag #${selectedTag}`}
             </p>
           </div>
