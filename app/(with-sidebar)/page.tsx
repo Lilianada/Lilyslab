@@ -34,16 +34,11 @@ export default function Home() {
           <p>Hello there friend,</p>
 
           <p>
-            Greetings to you and happy to have you here. You've probably landed
-            here from your many web explorations and I am super excited to take
-            you on a field trip. Buckle up and join the ride!
+            Greetings to you and happy to have you here. You've probably landed here from your many web explorations and I am super excited to house you for the time you'll be here. 
           </p>
 
           <p>
-            Welcome to my mini space on the internet, a space where I'm free to
-            express myself in whatever medium I choose. Could be through code,
-            images, sounds, writings, there's literally no limit to what I can
-            do here.
+            Welcome to my digital home and mini space on the internet. My name is Lily and I'll be your tour guide for the day. This is a space where I'm free to express myself in whatever medium I choose. Could be through code, images, sounds, and words. There's literally no limit to what I can do here.
           </p>
 
           <p className="font-medium">TL;DR</p>
@@ -64,10 +59,7 @@ export default function Home() {
           </div>
 
           <p>
-            I've put in a lot of thoughts and efforts into building everything
-            you see and interact with here. I try to make this website a living
-            representation of my personal space so see it as my virtual home. So
-            after you go round, be sure to leave your footprint by signing my{" "}
+            I've put in a lot of thoughts and efforts into building everything you see and interact with in this space. I try to make this website a living representation of my personal space; small, cozy and with lots of depth. Be sure to leave your footprint by signing my{" "}
             <Link href="/guestbook" className="text-codeRed">
               guestbook
             </Link>

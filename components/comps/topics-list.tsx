@@ -33,7 +33,7 @@ export function TopicsList() {
     },
     {
       title: "Digital Zettelkasten",
-      completed: false,
+      completed: true,
       url: "/garden/writings/digital-zettelkasten",
     },
     { title: "Evergreen notes", completed: false },
@@ -79,28 +79,28 @@ export function TopicsList() {
   return (
     <div className="py-2">
       <h3 className="text-sm font-medium mb-3">
-        As a form of accountability, here's a list of topics I wish to write on:
+      A list of a few of my most recent writings:
       </h3>
 
       <ol className="space-y-1.5 list-decimal pl-6">
-        {topics.map((topic, index) => (
-          <li key={index} className="pl-1 relative">
-            {topic.completed && topic.url ? (
-              <div className="flex items-center gap-2">
-                <Link href={topic.url} className="text-codeRed hover:underline">
-                  {topic.title}
-                </Link>
-                <div className="mx-2 flex-grow border-b border-dashed border-muted-foreground/30"></div>
-                <span className="text-xs text-muted-foreground">Read</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <span className="text-muted-foreground">{topic.title}</span>
-                <div className="mx-2 flex-grow border-b border-dashed border-muted-foreground/30"></div>
-                <span className="text-xs text-muted-foreground">Read</span>
-              </div>
-            )}
-          </li>
+      {topics
+        .filter((topic) => topic.completed === true || topic.url)
+        .map((topic, index) => (
+        <li key={index} className="pl-1 relative">
+          <div className="flex items-center gap-2">
+          {topic.completed && topic.url ? (
+            <>
+            <Link href={topic.url} className="text-codeRed hover:underline">
+              {topic.title}
+            </Link>
+            <div className="mx-2 flex-grow border-b border-dashed border-muted-foreground/30"></div>
+            <span className="text-xs text-muted-foreground">Read</span>
+            </>
+          ) : (
+            <span className="text-muted-foreground">{topic.title}</span>
+          )}
+          </div>
+        </li>
         ))}
       </ol>
     </div>
