@@ -18,68 +18,10 @@ interface CommonplaceItem {
   image?: string;
 }
 
-// Mock data - in a real app, this would come from an API
-const mockData: CommonplaceItem[] = [
-  {
-    id: '1',
-    title: 'The Nature & Aesthetics of Design',
-    type: 'book',
-    author: 'David Pye',
-    source: 'books.google.com',
-    url: 'https://books.google.com',
-    content: 'Any imaginable shape / Useless work on useful things / Presentable / The principle of arrangement / The minimum condition / More real than living man / That which requires caring / The informing idea of functionalism / The Mathematical Basis of the Arts',
-    tags: ['DESIGN', 'AESTHETICS', 'MAKING', 'STYLE', 'CRAFT', 'BEAUTY'],
-    date: '2024-03-15',
-  },
-  {
-    id: '2',
-    title: 'Why does everything online look the same?',
-    type: 'article',
-    author: 'Caitlin Dewey',
-    source: 'thinkingdirectly.substack.com',
-    url: 'https://thinkingdirectly.substack.com',
-    content: 'An exploration of visual homogenization in digital design and the forces that drive convergence in online aesthetics.',
-    tags: ['WEB', 'DESIGN', 'CULTURE'],
-    date: '2024-03-10',
-  },
-  {
-    id: '3',
-    title: 'Websites as gardens of the Internet ecosystem',
-    type: 'response',
-    author: 'Tracy Durnell',
-    source: 'tracydurnell.com',
-    url: 'https://tracydurnell.com',
-    content: 'Internet gardening evokes thoughts of the other side of the web: where you are on your own land, cultivating the thoughts on your mind. Letting ideas grow.',
-    tags: ['INTERNET', 'GARDENS', 'MICROSITES', 'PERSONALITY', 'AESTHETICS', 'WEB', 'INDIEWEB'],
-    date: '2024-03-05',
-  },
-  {
-    id: '4',
-    title: 'Teenage Engineering TP–7',
-    type: 'device',
-    author: 'Teenage Engineering',
-    source: 'teenage.engineering',
-    url: 'https://teenage.engineering',
-    content: 'Google\'s Product Sans (in black) laid on top of Airbnb\'s Cereal (in green). Companies including TikTok, Google, Netflix and Airbnb have trumpeted "new," bespoke fonts that are essentially Proxima Nova.',
-    tags: ['DESIGN', 'TYPOGRAPHY', 'BRANDING'],
-    date: '2024-02-28',
-    image: '/images/tp7.jpg',
-  },
-  {
-    id: '5',
-    title: 'On Tools and the Aesthetics of Work',
-    type: 'article',
-    author: 'Cal Newport',
-    source: 'calnewport.com',
-    url: 'https://calnewport.com',
-    content: 'The modern computer, with its generic styling and overloaded activity, creates a working environment defined by urgent, bland, Sisyphean widget cranking — work as endless Slack and email and Zoom.',
-    tags: ['WORK', 'TOOLS', 'AESTHETICS', 'PRODUCTIVITY'],
-    date: '2024-02-20',
-  },
-];
+// Mock data removed - now using API data only
 
 const categories = [
-  { name: 'Index', count: mockData.length, active: false },
+  { name: 'Index', count: 0, active: false },
   { name: 'Extracts', count: 12, active: false },
   { name: 'Creators', count: 8, active: false },
   { name: 'Spaces', count: 24, active: true },
@@ -115,8 +57,8 @@ export default function CommonplaceBookClient() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [allItems, setAllItems] = useState<CommonplaceItem[]>(mockData);
-  const [filteredItems, setFilteredItems] = useState<CommonplaceItem[]>(mockData);
+  const [allItems, setAllItems] = useState<CommonplaceItem[]>([]);
+  const [filteredItems, setFilteredItems] = useState<CommonplaceItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [columnCount, setColumnCount] = useState(3); // Start with 3 instead of 4
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -160,15 +102,11 @@ useEffect(() => {
         const response = await fetch('/api/commonplace-book');
         if (response.ok) {
           const data = await response.json();
-          const combinedItems = [...mockData, ...data.items];
-          setAllItems(combinedItems);
-          setFilteredItems(combinedItems);
+          setAllItems(data.items);
+          setFilteredItems(data.items);
         }
       } catch (error) {
         console.error('Failed to fetch commonplace book data:', error);
-        // Fall back to mock data
-        setAllItems(mockData);
-        setFilteredItems(mockData);
       } finally {
         setLoading(false);
       }

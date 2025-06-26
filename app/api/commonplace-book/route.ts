@@ -37,19 +37,22 @@ export async function GET(request: NextRequest) {
       const quotesFiles = fs.readdirSync(quotesPath);
       
       for (const file of quotesFiles) {
-        if (file.endsWith('.md')) {
+        if (file.endsWith('.md') && file !== 'index.md') {
           const filePath = path.join(quotesPath, file);
           const fileContent = fs.readFileSync(filePath, 'utf8');
           const { data, content } = matter(fileContent);
           
+          // Skip unpublished quotes
+          if (data.published === false) continue;
+          
           commonplaceItems.push({
             id: `quote-${file.replace('.md', '')}`,
-            title: data.title || content.split('\n')[0].substring(0, 50) + '...',
+            title: content.replace(/"/g, '').trim().substring(0, 80) + '...',
             type: 'quote',
             author: data.author,
-            content: content,
+            content: content.replace(/"/g, '').trim(),
             tags: data.tags || ['QUOTES'],
-            date: data.createdAt || data.date || '2024-01-01',
+            date: data.date || data.createdAt || '2024-01-01',
             source: data.source || 'quotes',
           });
         }

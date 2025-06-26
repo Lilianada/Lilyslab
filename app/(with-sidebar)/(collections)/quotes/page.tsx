@@ -5,49 +5,36 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import React, { useEffect, useState } from "react";
 
 interface Quote {
+  id: string;
   author: string;
   text: string;
+  source?: string;
+  tags: string[];
+  date: string;
 }
-
-const quotes: Quote[] = [
-  {
-    author: "Albert Einstein",
-    text: "Imagination is more important than knowledge. For knowledge is limited, whereas imagination embraces the entire world, stimulating progress, giving birth to evolution.",
-  },
-  {
-    author: "Steve Jobs",
-    text: "Innovation distinguishes between a leader and a follower. Stay hungry, stay foolish, and never lose the beginner's mind that sees possibilities everywhere.",
-  },
-  {
-    author: "Maya Angelou",
-    text: "I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.",
-  },
-  {
-    author: "Nelson Mandela",
-    text: "Education is the most powerful weapon which you can use to change the world. It is through education that the daughter of a peasant can become a doctor.",
-  },
-  {
-    author: "Marie Curie",
-    text: "Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less and achieve more.",
-  },
-  {
-    author: "Winston Churchill",
-    text: "Success is not final, failure is not fatal: it is the courage to continue that counts. We make a living by what we get, but we make a life by what we give.",
-  },
-];
 
 const QuotesPage: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [quotes, setQuotes] = useState<Quote[]>([]);
 
   useEffect(() => {
-    setIsLoaded(true);
-    // Simulate data loading
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    const fetchQuotes = async () => {
+      try {
+        const response = await fetch('/api/quotes');
+        if (response.ok) {
+          const data = await response.json();
+          setQuotes(data.quotes);
+        }
+      } catch (error) {
+        console.error('Failed to fetch quotes:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    fetchQuotes();
+    setIsLoaded(true);
   }, []);
 
   return (
@@ -72,23 +59,46 @@ const QuotesPage: React.FC = () => {
         </header>
 
         <div className="space-y-8 mt-8">
-          {quotes.map((quote, index) => (
-            <div key={index} className="flex gap-8">
-              {/* Author name on the left */}
-              <div className="w-32 flex-shrink-0">
-                <h3 className="text-sm font-medium">
-                  {quote.author}
-                </h3>
-              </div>
-
-              {/* Quote text on the right */}
-              <div className="flex-1">
-                <p className="text-sm text-justify text-muted-foreground leading-relaxed">
-                  "{quote.text}"
-                </p>
-              </div>
+          {isLoading ? (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-muted-foreground" />
             </div>
-          ))}
+          ) : (
+            quotes.map((quote) => (
+              <div key={quote.id} className="flex gap-8">
+                {/* Author name on the left */}
+                <div className="w-32 flex-shrink-0">
+                  <h3 className="text-sm font-medium">
+                    {quote.author}
+                  </h3>
+                  {quote.source && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {quote.source}
+                    </p>
+                  )}
+                </div>
+
+                {/* Quote text on the right */}
+                <div className="flex-1">
+                  <p className="text-sm text-justify text-muted-foreground leading-relaxed">
+                    "{quote.text}"
+                  </p>
+                  {quote.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {quote.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs px-2 py-0.5 bg-muted/50 text-muted-foreground rounded"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))
+          )}
         </div>
         <Footer />
       </div>
