@@ -9,6 +9,7 @@ published: true
 type: evergreen
 ---
 
+![Flower by Tom Macwright](https://images.macwright.com/2025-03-23-buttercups_2880.webp)
 
 >"A digital garden is an online space at the intersection of a notebook and a blog, where digital gardeners share their interests, knowledge and personalities." — Maggie Appleton
 

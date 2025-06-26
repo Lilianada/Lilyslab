@@ -8,7 +8,7 @@ import MarkdownRenderer from '@/components/markdown/markdown-renderer';
 interface CommonplaceItem {
   id: string;
   title: string;
-  type: 'article' | 'book' | 'quote' | 'thought' | 'device' | 'response' | 'webclip';
+  type: 'article' | 'book' | 'quote' | 'thought' | 'device' | 'response' | 'webclip' | 'word';
   author?: string;
   source?: string;
   url?: string;
@@ -20,7 +20,7 @@ interface CommonplaceItem {
 
 interface Category {
   name: string;
-  type: 'all' | 'quote' | 'webclip' | 'thought';
+  type: 'all' | 'quote' | 'webclip' | 'thought' | 'word';
 }
 
 // Categories based on content types
@@ -29,6 +29,7 @@ const categories: Category[] = [
   { name: 'Quotes', type: 'quote' },
   { name: 'Clips', type: 'webclip' },
   { name: 'Micro', type: 'thought' },
+  { name: 'Words', type: 'word' },
 ];
 
 export default function CommonplaceBookClient() {
@@ -108,6 +109,7 @@ useEffect(() => {
       if (currentCategory.type === 'quote') return item.type === 'quote';
       if (currentCategory.type === 'webclip') return item.type === 'webclip';
       if (currentCategory.type === 'thought') return item.type === 'thought';
+      if (currentCategory.type === 'word') return item.type === 'word';
       return false;
     });
 
@@ -138,6 +140,7 @@ useEffect(() => {
         if (currentCategory.type === 'quote') return item.type === 'quote';
         if (currentCategory.type === 'webclip') return item.type === 'webclip';
         if (currentCategory.type === 'thought') return item.type === 'thought';
+        if (currentCategory.type === 'word') return item.type === 'word';
         return false;
       });
     }
@@ -183,6 +186,8 @@ useEffect(() => {
         return 'A thought';
       case 'webclip':
         return 'A web clip';
+      case 'word':
+        return 'Word of the day';
       default:
         return item.author ? `By ${item.author}` : '';
     }
@@ -330,14 +335,25 @@ useEffect(() => {
                   <header className="mb-3">
                     <h2 className="text-sm font-medium text-foreground mb-1 leading-tight">
                       {item.url ? (
-                        <a 
-                          href={item.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="hover:underline"
-                        >
-                          {item.title}
-                        </a>
+                        <>
+                          {item.url.startsWith('/') ? (
+                            <Link 
+                              href={item.url} 
+                              className="hover:underline"
+                            >
+                              {item.title}
+                            </Link>
+                          ) : (
+                            <a 
+                              href={item.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="hover:underline"
+                            >
+                              {item.title}
+                            </a>
+                          )}
+                        </>
                       ) : (
                         item.title
                       )}
@@ -354,7 +370,7 @@ useEffect(() => {
                           >
                             {item.source} <ArrowUpRightIcon className='h-3 w-3' />
                           </Link>
-                        ) : (
+                        ) : item.source && item.source !== '' ? (
                           <a
                             href={item.url || `https://${item.source}`}
                             target="_blank"
@@ -363,7 +379,7 @@ useEffect(() => {
                           >
                             {item.source} <ArrowUpRightIcon className='h-3 w-3' />
                           </a>
-                        )}
+                        ) : null}
                       </>
                     )}
                   </header>

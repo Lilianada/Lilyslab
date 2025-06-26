@@ -23,8 +23,8 @@ export async function GET(request: NextRequest) {
             title: data.title || content.split('\n')[0].substring(0, 50) + '...',
             type: 'thought',
             content: content,
-            tags: data.tags || ['THOUGHTS'],
-            date: data.createdAt || data.date || '2024-01-01',
+            tags: data.tags || ['micro-blog'],
+            date: data.createdAt || data.date || '2025-06-20',
             source: 'micro-blog',
             url: '/garden/micro-blog',
           });
@@ -48,12 +48,11 @@ export async function GET(request: NextRequest) {
           
           commonplaceItems.push({
             id: `quote-${file.replace('.md', '')}`,
-            title: content.replace(/"/g, '').trim().substring(0, 80) + '...',
             type: 'quote',
             author: data.author,
             content: content.replace(/"/g, '').trim(),
             tags: data.tags || ['QUOTES'],
-            date: data.date || data.createdAt || '2024-01-01',
+            date: data.date || data.createdAt || '2025-06-20',
             source: data.source || '',
           });
         }
@@ -76,10 +75,33 @@ export async function GET(request: NextRequest) {
             title: data.title || content.split('\n')[0].substring(0, 50) + '...',
             type: 'webclip',
             content: content,
-            tags: data.tags || ['WEBCLIPS'],
-            date: data.date || data.createdAt || '2024-01-01',
-            source: 'webclips',
+            tags: data.tags || ['web clips'],
+            date: data.date || data.createdAt || '2025-06-20',
             url: data.source || '',
+          });
+        }
+      }
+    }
+
+    // Fetch word-of-the-day
+    const wordOfTheDayPath = path.join(process.cwd(), 'Content/wordOfTheDay');
+    if (fs.existsSync(wordOfTheDayPath)) {
+      const wordFiles = fs.readdirSync(wordOfTheDayPath);
+      
+      for (const file of wordFiles) {
+        if (file.endsWith('.md')) {
+          const filePath = path.join(wordOfTheDayPath, file);
+          const fileContent = fs.readFileSync(filePath, 'utf8');
+          const { data, content } = matter(fileContent);
+          
+          commonplaceItems.push({
+            id: `word-${file.replace('.md', '')}`,
+            title: data.word || file.replace('.md', ''),
+            type: 'word',
+            content: content,
+            tags: data.tags || ['words', 'vocalbulary'],
+            date: data.date || '2025-06-20',
+            url: '/garden/word-of-the-day',
           });
         }
       }

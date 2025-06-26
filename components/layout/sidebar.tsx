@@ -486,6 +486,13 @@ export default function Sidebar({
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Collections" delay={1500} />
             <NavItem
+              href="/commonplace-book"
+              icon={<BookOpen size={16} />}
+              label="Commonplace Book"
+              onClick={onNavClick}
+              delay={1510}
+            />
+            <NavItem
               href="/quotes"
               icon={<Quote size={16} />}
               label="Quotes"
