@@ -8,7 +8,7 @@ import MarkdownRenderer from '@/components/markdown/markdown-renderer';
 interface CommonplaceItem {
   id: string;
   title: string;
-  type: 'article' | 'book' | 'quote' | 'thought' | 'device' | 'response';
+  type: 'article' | 'book' | 'quote' | 'thought' | 'device' | 'response' | 'webclip';
   author?: string;
   source?: string;
   url?: string;
@@ -18,42 +18,21 @@ interface CommonplaceItem {
   image?: string;
 }
 
-// Mock data removed - now using API data only
+interface Category {
+  name: string;
+  type: 'all' | 'quote' | 'webclip' | 'thought';
+}
 
-const categories = [
-  { name: 'Index', count: 0, active: false },
-  { name: 'Extracts', count: 12, active: false },
-  { name: 'Creators', count: 8, active: false },
-  { name: 'Spaces', count: 24, active: true },
-];
-
-const topics = [
-  { name: 'art', count: 216 },
-  { name: 'Austin Kleon', count: 46 },
-  { name: 'beauty', count: 109 },
-  { name: 'Bill Mollison', count: 31 },
-  { name: 'Boris Müller', count: 5 },
-  { name: 'Paul Victor', count: 67 },
-  { name: 'Brian Eno', count: 13 },
-  { name: 'Brian Hayes', count: 7 },
-  { name: 'business', count: 91 },
-  { name: 'C. Wright Mills', count: 9 },
-  { name: 'Charles Broskoski', count: 4 },
-  { name: 'Christopher Alexander', count: 147 },
-  { name: 'cities', count: 98 },
-  { name: 'code', count: 142 },
-  { name: 'collections', count: 61 },
-  { name: 'color', count: 89 },
-  { name: 'commonplace', count: 26 },
-  { name: 'composition', count: 53 },
-  { name: 'connection', count: 62 },
-  { name: 'construction', count: 23 },
-  { name: 'cosmos', count: 12 },
-  { name: 'craft', count: 139 },
+// Categories based on content types
+const categories: Category[] = [
+  { name: 'Index', type: 'all' },
+  { name: 'Quotes', type: 'quote' },
+  { name: 'Clips', type: 'webclip' },
+  { name: 'Micro', type: 'thought' },
 ];
 
 export default function CommonplaceBookClient() {
-  const [selectedCategory, setSelectedCategory] = useState('Spaces');
+  const [selectedCategory, setSelectedCategory] = useState('Index');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -62,6 +41,7 @@ export default function CommonplaceBookClient() {
   const [loading, setLoading] = useState(true);
   const [columnCount, setColumnCount] = useState(3); // Start with 3 instead of 4
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [topics, setTopics] = useState<{ name: string; count: number }[]>([]);
 
   // Handle responsive column count and sidebar
 useEffect(() => {
@@ -115,8 +95,52 @@ useEffect(() => {
     fetchData();
   }, []);
 
+  // Update topics based on selected category and all items
+  useEffect(() => {
+    if (allItems.length === 0) return;
+
+    const currentCategory = categories.find(cat => cat.name === selectedCategory);
+    if (!currentCategory) return;
+
+    // Filter items by category type
+    const categoryItems = allItems.filter(item => {
+      if (currentCategory.type === 'all') return true; // Show all items for Index
+      if (currentCategory.type === 'quote') return item.type === 'quote';
+      if (currentCategory.type === 'webclip') return item.type === 'webclip';
+      if (currentCategory.type === 'thought') return item.type === 'thought';
+      return false;
+    });
+
+    // Count tags
+    const tagCounts: { [key: string]: number } = {};
+    categoryItems.forEach(item => {
+      item.tags.forEach(tag => {
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    });
+
+    // Convert to topics array and sort by count
+    const newTopics = Object.entries(tagCounts)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count);
+
+    setTopics(newTopics);
+  }, [selectedCategory, allItems]);
+
   useEffect(() => {
     let filtered = allItems;
+    
+    // Filter by category first
+    const currentCategory = categories.find(cat => cat.name === selectedCategory);
+    if (currentCategory) {
+      filtered = filtered.filter(item => {
+        if (currentCategory.type === 'all') return true; // Show all items for Index
+        if (currentCategory.type === 'quote') return item.type === 'quote';
+        if (currentCategory.type === 'webclip') return item.type === 'webclip';
+        if (currentCategory.type === 'thought') return item.type === 'thought';
+        return false;
+      });
+    }
     
     if (selectedTags.length > 0) {
       filtered = filtered.filter(item =>
@@ -133,7 +157,7 @@ useEffect(() => {
     }
     
     setFilteredItems(filtered);
-  }, [selectedTags, searchQuery, allItems]);
+  }, [selectedTags, searchQuery, allItems, selectedCategory]);
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
@@ -157,6 +181,8 @@ useEffect(() => {
         return `A quote by ${item.author}`;
       case 'thought':
         return 'A thought';
+      case 'webclip':
+        return 'A web clip';
       default:
         return item.author ? `By ${item.author}` : '';
     }
@@ -172,9 +198,10 @@ useEffect(() => {
             onClick={() => setSidebarOpen(false)}
           />
         )}
+
         
         {/* Left Sidebar - Fixed Full Height */}
-        <div className={`w-64 fixed left-0 top-0 h-screen bg-muted/10 border-r border-dashed border-muted-foreground/20 overflow-y-auto z-50 transform transition-transform md:translate-x-0 ${
+        <div className={`w-64 fixed left-0 top-0 h-screen bg-muted sm:bg-muted/10 border-r border-dashed border-muted-foreground/20 overflow-y-auto z-50 transform transition-transform md:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}>
           <div className="p-4">
@@ -204,7 +231,7 @@ useEffect(() => {
                     <button
                       onClick={() => setSelectedCategory(category.name)}
                       className={`w-full text-left px-2 py-1 text-xs font-medium transition-colors ${
-                        category.active || selectedCategory === category.name
+                        selectedCategory === category.name
                           ? 'bg-foreground text-background'
                           : 'text-muted-foreground hover:text-foreground'
                       }`}
@@ -278,7 +305,7 @@ useEffect(() => {
             {/* Section Title */}
             <div className="mb-8">
               <h1 className="text-2xl font-medium text-foreground mb-1">
-                {selectedCategory === 'Spaces' ? 'Aesthetics' : selectedCategory}
+                {selectedCategory}
               </h1>
             </div>
 
@@ -319,14 +346,25 @@ useEffect(() => {
                       {getTypeLabel(item)}
                     </p>
                     {item.source && (
-                      <a
-                        href={item.url || `https://${item.source}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center w-fit px-2 py-0.5 bg-muted/50 text-muted-foreground text-xs border border-dashed border-muted-foreground/30 hover:text-foreground hover:bg-muted/70 transition-colors"
-                      >
-                        {item.source} <ArrowUpRightIcon className='h-3 w-3' />
-                      </a>
+                      <>
+                        {item.source === 'micro-blog' && item.url ? (
+                          <Link
+                            href={item.url}
+                            className="inline-flex items-center w-fit px-2 py-0.5 bg-muted/50 text-muted-foreground text-xs border border-dashed border-muted-foreground/30 hover:text-foreground hover:bg-muted/70 transition-colors"
+                          >
+                            {item.source} <ArrowUpRightIcon className='h-3 w-3' />
+                          </Link>
+                        ) : (
+                          <a
+                            href={item.url || `https://${item.source}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center w-fit px-2 py-0.5 bg-muted/50 text-muted-foreground text-xs border border-dashed border-muted-foreground/30 hover:text-foreground hover:bg-muted/70 transition-colors"
+                          >
+                            {item.source} <ArrowUpRightIcon className='h-3 w-3' />
+                          </a>
+                        )}
+                      </>
                     )}
                   </header>
 

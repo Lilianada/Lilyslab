@@ -1,20 +1,11 @@
-> [!info] Details
-> **Title:** How to blog
-> **URL:** https://macwright.com/2019/02/06/how-to-blog.html
-> **Tags:** #writing #self-expression #blogging
-
-> [!documentation] Comments
-
-
-> [!example] AI Summary
-
-```
-Content too long to summarize. Maximum token limit exceeded.
-```
-
-> [!abstract] Page Content
-
-
+---
+title: How to blog
+source: https://macwright.com/2019/02/06/how-to-blog.html
+tags:
+    - writing 
+    - self-expression 
+    - blogging
+---
 
 I’ve been continuously writing here for about 9 years. This will be the 300th or so thing posted to the internet on this domain. Here are some of the things I’ve learned about starting a blog and keeping it going.
 

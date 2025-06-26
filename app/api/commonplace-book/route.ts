@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
             tags: data.tags || ['THOUGHTS'],
             date: data.createdAt || data.date || '2024-01-01',
             source: 'micro-blog',
+            url: '/garden/micro-blog',
           });
         }
       }
@@ -53,7 +54,32 @@ export async function GET(request: NextRequest) {
             content: content.replace(/"/g, '').trim(),
             tags: data.tags || ['QUOTES'],
             date: data.date || data.createdAt || '2024-01-01',
-            source: data.source || 'quotes',
+            source: data.source || '',
+          });
+        }
+      }
+    }
+
+    // Fetch webclips
+    const webclipsPath = path.join(process.cwd(), 'Content/webclips');
+    if (fs.existsSync(webclipsPath)) {
+      const webclipsFiles = fs.readdirSync(webclipsPath);
+      
+      for (const file of webclipsFiles) {
+        if (file.endsWith('.md')) {
+          const filePath = path.join(webclipsPath, file);
+          const fileContent = fs.readFileSync(filePath, 'utf8');
+          const { data, content } = matter(fileContent);
+          
+          commonplaceItems.push({
+            id: `webclip-${file.replace('.md', '')}`,
+            title: data.title || content.split('\n')[0].substring(0, 50) + '...',
+            type: 'webclip',
+            content: content,
+            tags: data.tags || ['WEBCLIPS'],
+            date: data.date || data.createdAt || '2024-01-01',
+            source: 'webclips',
+            url: data.source || '',
           });
         }
       }
