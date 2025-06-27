@@ -2,9 +2,11 @@
 title: How to blog
 source: https://macwright.com/2019/02/06/how-to-blog.html
 tags:
-    - writing 
-    - self-expression 
-    - blogging
+  - writing
+  - self-expression
+  - blogging
+createdAt: 2025-06-27
+lastUpdated: 2025-06-27
 ---
 
 I’ve been continuously writing here for about 9 years. This will be the 300th or so thing posted to the internet on this domain. Here are some of the things I’ve learned about starting a blog and keeping it going.

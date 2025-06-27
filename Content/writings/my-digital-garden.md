@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-05-29
-lastUpdated: 2025-06-26
+lastUpdated: 2025-06-27
 title: My Digital Garden
 tags:
   - digital-garden
