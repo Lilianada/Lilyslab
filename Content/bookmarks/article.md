@@ -9,7 +9,7 @@ tags:
   - pkm
 type: article
 id: article-001
-lastUpdated: 2025-06-23
+lastUpdated: 2025-06-27
 ---
 
 ---
@@ -1599,3 +1599,16 @@ tags:
 type: article
 id: article-130
 ---
+
+---
+publish: true
+title: How to become the best programmer
+url: https://blog.royalsloth.eu/posts/how-to-become-the-best-programmer/
+createdAt: 2025-06-27
+tags:
+  - programming
+  - career
+type: article
+id: article-131
+---
+

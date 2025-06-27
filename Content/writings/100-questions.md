@@ -1,7 +1,7 @@
 ---
 title: 100 Questions
 createdAt: 2025-06-16
-lastUpdated: 2025-06-20
+lastUpdated: 2025-06-27
 ---
 
 1. What is your name?
