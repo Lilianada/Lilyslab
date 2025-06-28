@@ -1,7 +1,11 @@
 ---
 title: 50 Things I Know
 createdAt: 2025-06-15
-lastUpdated: 2025-06-22
+lastUpdated: 2025-06-28
+tags:
+  - knowledge
+published: 
+type: evergreen
 ---
 
 1. Working out makes you look good.
@@ -10,10 +14,10 @@ lastUpdated: 2025-06-22
 4. God's time is 100% different from man's time.
 5. Existing situations that do not favour you will save you so much time and prevent embarrassment.
 6. I'm just a girl.
-7.
-8.
-9.
-10.
+7. Life doesn't always go as planned.
+8. You can never be too careful.
+9. 'Could never be me' can very well one day be you.
+10. 
 11.
 12.
 13.

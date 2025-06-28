@@ -1,7 +1,12 @@
 ---
 title: 100 Questions
 createdAt: 2025-06-16
-lastUpdated: 2025-06-27
+lastUpdated: 2025-06-28
+type: evergreen
+tags:
+  - questions
+  - challenge
+published: 
 ---
 
 1. What is your name?
@@ -14,13 +19,14 @@ lastUpdated: 2025-06-27
 8. Why do you think you're that good or that bad?
 9. What are your hobbies?
 10. How did you come to find out you could do that one weird thing?
-11. 
-12.
-13.
-14.
-15.
-16.
-17.
-18.
-19.
-20.
+11. Favourite numbers?
+12. Favourite album?
+13. Favourite artiste?
+14. Celebrity crush?
+15. Best book you've read?
+16. Best restaurant you've been t
+17. Do you like the taste of alcohol?
+18. Countries you've visited?
+19. What's your star sign?
+20. Are you a gamer?
+21. 
