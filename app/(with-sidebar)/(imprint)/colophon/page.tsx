@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Globe, Code2, Paintbrush, BookOpen, ChevronLeft, TriangleAlert, Github } from "lucide-react";
+import { Footer } from "@/components/layout/footer";
 
 export default function Colophon() {
   return (
@@ -78,6 +79,7 @@ export default function Colophon() {
             { name: "Nicole van der Hoeven", url: "https://nicolevanderhoeven.com/about" },
             { name: "Alexander Sandberg", url: "https://alexandersandberg.com/" },
             { name: "Kenan ", url: "https://kenan.fyi/" },
+            { name: "Barnsworth Burning ", url: "https://barnsworthburning.net/" },
             
           ].map((site) => (
             <a
@@ -162,19 +164,19 @@ export default function Colophon() {
         <div className="grid gap-3 border rounded bg-background p-4">
           <div className="">
             <div className="font-semibold">Geist Sans (Head)</div>
-            <div className="text-3xl font-semibold" style={{ fontFamily: 'var(--font-geist-sans, sans-serif)' }}>
+            <div className="text-2xl font-medium" style={{ fontFamily: 'var(--font-geist-sans, sans-serif)' }}>
               The quick brown fox jumps over the lazy dog.
             </div>
           </div>
           <div className="">
             <div className="font-semibold">Geist Sans (Body)</div>
-            <div className="text-base" style={{ fontFamily: 'var(--font-geist-sans, sans-serif)' }}>
+            <div className="text-sm" style={{ fontFamily: 'var(--font-geist-sans, sans-serif)' }}>
               The quick brown fox jumps over the lazy dog.
             </div>
           </div>
           <div className="">
             <div className="font-semibold">Geist Mono (Code)</div>
-            <div className="text-base" style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}>
+            <div className="text-sm" style={{ fontFamily: 'var(--font-geist-mono, monospace)' }}>
               const example = "Hello World";
             </div>
           </div>
@@ -186,7 +188,7 @@ export default function Colophon() {
           <h2 className="font-mono text-base font-semibold">Personal Space</h2>
         </div>
         <div className="border rounded bg-background p-4 mb-2 text-sm">
-          This site is my creative lab—a place to build, tinker, and share ideas in progress. Everything here is shaped by personal curiosity and experimentation. The codebase is private, reflecting the evolving and individual nature of this space.
+          This site is my creative lab—a place to build, tinker, and share ideas in progress. Everything here is shaped by personal curiosity and experimentation. The codebase is now public, reflecting the evolving and individual nature of this space.
         </div>
       </section>
       <section className="mb-10">
@@ -209,13 +211,8 @@ export default function Colophon() {
           </div>
         </div>
       </section>
-      <section className="mb-10">
-        <blockquote className="border-l-4 border-muted pl-4 italic text-sm text-muted-foreground">
-          <span className="block mb-2">“Growth happens at the edge of comfort. This site is a record of my experiments, mistakes, and learning in public.”</span>
-          <span className="not-italic font-mono text-xs">— Lily</span>
-        </blockquote>
-      </section>
     </div>
+    <Footer />
     </>
   );
 }
