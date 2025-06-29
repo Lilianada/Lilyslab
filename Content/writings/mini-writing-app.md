@@ -7,6 +7,7 @@ tags:
 title: Mini Writing App
 createdAt: 2025-05-06
 type: evergreen
+lastUpdated: 2025-06-29
 ---
 
 If an app is free, you're the product.
