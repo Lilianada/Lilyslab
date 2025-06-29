@@ -55,3 +55,39 @@ type: misc
 id: misc-005
 ---
 
+---
+publish: true
+title: ReadyMag Examples
+url: http://readymag.com/examples
+createdAt: 2025-06-29
+tags:
+  - website-design
+  - inspiration
+type: misc
+id: misc-006
+---
+
+---
+publish: true
+title: Siezar CDMX Travel
+url: https://www.siezar.com/travel/cdmx
+createdAt: 2025-06-29
+tags:
+  - art
+  - web-design
+type: misc
+id: misc-007
+---
+
+---
+publish: true
+title: ReadyMag Art Project
+url: https://readymag.website/u42721093/2089962/
+createdAt: 2025-06-29
+tags:
+  - art
+  - web-design
+type: misc
+id: misc-008
+---
+

@@ -1620,3 +1620,27 @@ tags:
 type: article
 publish: true
 ---
+
+---
+id: article-133
+title: Learnable Programming
+url: https://worrydream.com/LearnableProgramming/
+createdAt: 2025-06-29
+tags:
+  - programming
+  - learning
+type: article
+publish: true
+---
+
+---
+id: article-134
+title: The Internet is Both a Blessing and a Curse
+url: https://dead.garden/blog/the-internet-is-both-a-blessing-and-a-curse.html
+createdAt: 2025-06-29
+tags:
+  - internet
+  - web-culture
+type: article
+publish: true
+---

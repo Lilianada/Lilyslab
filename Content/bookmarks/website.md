@@ -409,3 +409,16 @@ tags:
 type: website
 id: website-033
 ---
+
+---
+publish: true
+title: Evelyn Marina
+url: https://www.evelynmarina.com/
+createdAt: 2025-06-29
+tags:
+  - art
+  - drawing
+  - self-expression
+type: website
+id: website-034
+---
