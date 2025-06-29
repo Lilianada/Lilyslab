@@ -1495,113 +1495,7 @@ publish: true
 ---
 
 ---
-publish: true
-title: The Evolution of Digital Art
-url: https://www.artforum.com/features/digital-art-evolution
-createdAt: 2025-06-22
-tags:
-  - digital-art
-  - art-history
-  - technology
-type: article
 id: article-123
----
-
----
-publish: true
-title: Understanding Color Theory in Illustration
-url: https://www.creativebloq.com/art/color-theory-illustration
-createdAt: 2025-06-22
-tags:
-  - illustration
-  - color-theory
-  - art-technique
-type: article
-id: article-124
----
-
----
-publish: true
-title: The Business of Freelance Illustration
-url: https://www.illustrationbusiness.com/freelance-guide
-createdAt: 2025-06-22
-tags:
-  - illustration
-  - freelance
-  - business
-  - career
-type: article
-id: article-125
----
-
----
-publish: true
-title: Contemporary Art Movements
-url: https://www.tate.org.uk/art/art-terms/contemporary-art
-createdAt: 2025-06-22
-tags:
-  - art-history
-  - contemporary-art
-  - art-movements
-type: article
-id: article-126
----
-
----
-publish: true
-title: Digital vs Traditional Art Mediums
-url: https://www.artistnetwork.com/medium/digital-vs-traditional-art
-createdAt: 2025-06-22
-tags:
-  - digital-art
-  - traditional-art
-  - art-technique
-  - comparison
-type: article
-id: article-127
----
-
----
-publish: true
-title: Building an Art Portfolio
-url: https://www.artsy.net/article/artsy-editorial-build-art-portfolio
-createdAt: 2025-06-22
-tags:
-  - portfolio
-  - career
-  - art-business
-type: article
-id: article-128
----
-
----
-publish: true
-title: The Psychology of Color in Art
-url: https://www.boredpanda.com/psychology-color-art/
-createdAt: 2025-06-22
-tags:
-  - color-theory
-  - psychology
-  - art-technique
-type: article
-id: article-129
----
-
----
-publish: true
-title: Art Critique and Analysis Methods
-url: https://www.khan.edu.org/humanities/art-critique-methods
-createdAt: 2025-06-22
-tags:
-  - art-critique
-  - art-analysis
-  - art-education
-type: article
-id: article-130
----
-
----
-publish: true
 title: How to become the best programmer
 url: https://blog.royalsloth.eu/posts/how-to-become-the-best-programmer/
 createdAt: 2025-06-27
@@ -1609,6 +1503,120 @@ tags:
   - programming
   - career
 type: article
-id: article-131
+publish: true
 ---
 
+---
+id: article-124
+title: Creative Reminders
+url: https://incidentalcomics.substack.com/p/creative-reminders
+createdAt: 2025-06-29
+tags:
+  - creativity
+  - guide
+  - self-expression
+type: article
+publish: true
+---
+
+---
+id: article-125
+title: How to Make Poetry Comics
+url: https://incidentalcomics.substack.com/p/how-to-make-poetry-comics-cb1
+createdAt: 2025-06-29
+tags:
+  - art
+  - drawing
+  - self-expression
+  - guide
+type: article
+publish: true
+---
+
+---
+id: article-126
+title: What to Put in Your Notebook
+url: https://incidentalcomics.substack.com/p/what-to-put-in-your-notebook
+createdAt: 2025-06-29
+tags:
+  - art
+  - note-book
+  - self-expression
+type: article
+publish: true
+---
+
+---
+id: article-127
+title: How to Draw
+url: https://www.grantsnider.com/how-to
+createdAt: 2025-06-29
+tags:
+  - guide
+  - self-expression
+  - art
+  - drawing
+type: article
+publish: true
+---
+
+---
+id: article-128
+title: The End of the Good Internet
+url: https://www.theringer.com/2021/07/21/tech/google-reader-ode-end-of-the-good-internet
+createdAt: 2025-06-29
+tags:
+  - internet
+  - web-culture
+type: article
+publish: true
+---
+
+---
+id: article-129
+title: I Miss the Internet
+url: https://www.joanwestenberg.com/p/i-miss-the-internet
+createdAt: 2025-06-29
+tags:
+  - internet
+  - indieweb
+type: article
+publish: true
+---
+
+---
+id: article-130
+title: The Garden and the Stream
+url: https://hapgood.us/2015/10/17/the-garden-and-the-stream-a-technopastoral/
+createdAt: 2025-06-29
+tags:
+  - digital-garden
+  - web-theory
+type: article
+publish: true
+---
+
+---
+id: article-131
+title: What is a Digital Garden
+url: https://hackernoon.com/what-is-a-digital-garden
+createdAt: 2025-06-29
+tags:
+  - digital-garden
+  - knowledge-management
+type: article
+publish: true
+---
+
+---
+id: article-132
+title: What is an Information Diet?
+url: https://annadkornick.com/what-is-an-information-diet/
+createdAt: 2025-06-29
+tags:
+  - information
+  - knowledge-management
+  - consumption
+type: article
+publish: true
+---
