@@ -1,6 +1,13 @@
 ---
 createdAt: 2025-06-29
 lastUpdated: 2025-06-29
+title: A Substack Collection
+published: true
+type: evergreen
+tags:
+  - collection
+  - writing
+  - self-expression
 ---
 
 <div class="substack-post-embed"><p lang="en">I don’t think we’re bored because we lack things to do. I think we’re bored because we don’t let ourselves do things badly. Everything has to be content. Aesthetically pleasing or worth the scroll. We forgot how to just be bad at things and still enjoy them. We don’t write unless it’s deep. We don’t sing unless we sound good. And honestly, it’s exhausting. Not every hobby has to turn into a side hustle. I just miss being allowed to suck at something and still love it.</p><p> - hasif 💌</p><a data-comment-link href="https://substack.com/@hasifff/note/c-127123427">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>

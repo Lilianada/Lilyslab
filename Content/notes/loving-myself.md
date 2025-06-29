@@ -1,7 +1,14 @@
 ---
 createdAt: 2025-06-29
 lastUpdated: 2025-06-29
+title: A Substack Collection
+published: true
+type: budding
+tags:
+  - love
+  - self-expression
 ---
+
 An ongoing note.
 
 I have researched on how to love myself, what loving myself should feel like and what the expected outcome should be. All of which I found are practices that I intentionally engage in not for the sake of 'loving myself' but instead, for the sake of living a simple, good and colorful life.
