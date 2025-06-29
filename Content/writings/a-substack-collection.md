@@ -34,6 +34,8 @@ ko-mo-reh-bee
 
 Literally, "sunlight leaking through trees," this word describes the beauty and wonder of rays of light dappling through overhead leaves, casting dancing shadows. </p><p> - Solange’s Diary</p><a data-comment-link href="https://substack.com/@solangenk/note/c-122726675">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
 
+***
+
 <div class="substack-post-embed"><p lang="en">It's so stupid to be mad at a past version of yourself, because it's kinda like being mad at a baby for not knowing how to walk. Like you can't be mad at yourself for the things you didn't know at that time as you do now. If you knew everything back then, you wouldn't be who you are now.</p><p> - hasif 💌</p><a data-comment-link href="https://substack.com/@hasifff/note/c-124587885">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
 
 ***
