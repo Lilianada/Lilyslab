@@ -17,9 +17,9 @@ Your thoughts (algorithms)
 Your emotions (engagement)
 Your decisions (behavioral tracking)
 
-But you don't have to worry about MINI, it isn't one of those.
+But you don't have to worry about MINSPACE, it isn't one of those.
 
-MINI is a clean, lightweight web app where users can write, publish, and read articles without the distractions of traditional platforms. It's like Medium but lighter and distraction free. 
+MINSPACE is a clean, lightweight web app where users can write, publish, and read articles without the distractions of traditional platforms. It's like Medium but lighter and distraction free. 
 
 𝗙𝗲𝗮𝘁𝘂𝗿𝗲𝘀 →
 - Minimal homepage feed (latest articles)
@@ -39,7 +39,7 @@ MINI is a clean, lightweight web app where users can write, publish, and read ar
 I built this app after exploring a wide range of dead simple sites. It's simple, minimal, lightweight, ads free, distraction free and just refreshing.
 
 𝗘𝘅𝗽𝗹𝗼𝗿𝗲 → \
-[MINI app](https://mini.lilyslab.xyz/) \
+[MINSPACE](https://minispace.dev/) \
 [Github repo](https://github.com/Lilianada/mini-app)
 
 Let me know in the comments if you tried it out.

@@ -91,42 +91,6 @@ export default function TagFilterClient({ writings }: Props) {
       ) : (
         <>
           <div className="my-8">
-            {/* Type filter */}
-            <div className="mb-4">
-              <h3 className="mb-2 text-sm font-medium flex items-center gap-2">
-                Types
-                <span className="text-xs text-muted-foreground font-normal">(click to filter)</span>
-              </h3>
-              <div className="flex flex-wrap gap-4 font-mono text-xs">
-                <button
-                  className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
-                    selectedType === null ? "font-medium text-primary" : ""
-                  }`}
-                  onClick={() => setSelectedType(null)}
-                >
-                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-mint border border-gray-300"></span>
-                  All <span className="ml-1 text-muted-foreground">({writings.length})</span>
-                </button>
-                
-                {types.map((type) => (
-                  <button
-                    key={type}
-                    className={`flex items-center hover:opacity-80 hover:translate-x-0.5 transition-all cursor-pointer ${
-                      selectedType === type ? "font-medium text-primary" : ""
-                    }`}
-                    onClick={() => setSelectedType(type)}
-                  >
-                    <span className={`mr-1.5 inline-block h-2 w-2 rounded-full border border-gray-300 ${
-                      type === 'evergreen' ? 'bg-lavender' : 
-                      type === 'seedling' ? 'bg-peach' : 
-                      'bg-steelBlue'
-                    }`}></span>
-                    {type.charAt(0).toUpperCase() + type.slice(1)} <span className="ml-1 text-muted-foreground">({typeCounts[type]})</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-            
             {/* Tag filter */}
             {allTags.length > 0 && (
               <div className="mt-6">

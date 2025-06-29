@@ -31,10 +31,10 @@ export default async function WritingPage() {
           <h1 className="text-xl font-medium mb-2">Writings</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: 2025-04-10</div>
-            <div>Last updated: 2025-06-13</div>
-            <div>Inspired by: Essays and blogs</div>
+            <div>Last updated: 2025-06-29</div>
+            <div>Inspired by: The need to write more.</div>
           </div>
-          <p className="text-sm text-muted-foreground mt-2">There's no limitation to what I can and will write.</p>
+          <p className="text-sm text-muted-foreground mt-2">There's no limitation to what I write. I write for my future self.</p>
         </header>
 
         {error ? (

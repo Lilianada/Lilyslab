@@ -40,11 +40,20 @@ Literally, "sunlight leaking through trees," this word describes the beauty and 
 
 ***
 
-<div class="substack-post-embed"><p lang="en"></p><p> - Teodora</p><a data-comment-link href="https://substack.com/@teoocriss/note/c-124784359">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+<div class="substack-post-embed"><p lang="en"></p><p> 
+I'll be as picky as I want because marrying late never killed a woman - but marrying the wrong man did.
+- Teodora</p><a data-comment-link href="https://substack.com/@teoocriss/note/c-124784359">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
 
 ***
 
-<div class="substack-post-embed"><p lang="en">An amazing quote</p><p> - Jaime</p><a data-comment-link href="https://substack.com/@jaime4572/note/c-126087206">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+<div class="substack-post-embed"><p lang="en">An amazing quote
+
+Imagine reading a book with no way to turn back the page.
+
+How carefully would you read it?
+
+That's life.
+</p><p> - Jaime</p><a data-comment-link href="https://substack.com/@jaime4572/note/c-126087206">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
 
 ***
 
@@ -73,3 +82,7 @@ The clearer your thoughts, the better your decisions.
 The better your decisions, the faster your progress. 
 
 Your ability to put your thoughts into words matter. </p><p> - Diogo</p><a data-comment-link href="https://substack.com/@diogothestoic/note/c-125412934">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+
+***
+
+<div class="substack-post-embed"><p lang="en">To become harder to manipulate, slow down your responses. When something triggers you, don’t rush to speak. Wait. Count to ten. Reread the message. Breathe. Most traps are sprung by your first reaction. Practice this in small ways: delay your texts, finish listening, leave messages unread until you’ve cooled down. That space is where power and control are built.</p><p> - Stoic Philosophy</p><a data-comment-link href="https://substack.com/@thestoicmanual/note/c-126399087">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>

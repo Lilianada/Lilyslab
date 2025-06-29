@@ -308,95 +308,117 @@ id: website-025
 
 ---
 publish: true
-title: Illustrations by Zutto
-url: https://www.zutto.com/
-createdAt: 2025-06-22
+title: Jose Naranja Travel Notebooks
+url: https://www.thisiscolossal.com/2025/04/jose-naranja-travel-notebooks/
+createdAt: 2025-06-29
 tags:
-  - illustration
   - art
-  - artistic-sites
+  - illustration
+  - drawing
 type: website
 id: website-026
 ---
 
 ---
 publish: true
-title: Behance
-url: https://www.behance.net/
-createdAt: 2025-06-22
+title: Marion MMM - Nice Little Imperfect Drawings
+url: https://marion-mmm.blogspot.com/
+createdAt: 2025-06-29
 tags:
   - art
-  - portfolio
-  - design-showcase
-  - creative-community
+  - illustration
+  - drawing
 type: website
 id: website-027
 ---
 
 ---
 publish: true
-title: Dribbble
-url: https://dribbble.com/
-createdAt: 2025-06-22
+title: Joy Pepper Sketchbook
+url: https://www.joypepper.co/sketchbook
+createdAt: 2025-06-29
 tags:
   - art
-  - design
-  - portfolio
-  - creative-community
+  - illustration
+  - drawing
 type: website
 id: website-028
 ---
 
 ---
 publish: true
-title: ArtStation
-url: https://www.artstation.com/
-createdAt: 2025-06-22
+title: Mike Lowery Travel Sketchbooks
+url: https://www.mikelowery.com/travel-sketchbooks
+createdAt: 2025-06-29
 tags:
   - art
-  - digital-art
-  - portfolio
-  - game-art
+  - illustration
+  - drawing
 type: website
 id: website-029
 ---
 
 ---
 publish: true
-title: DeviantArt
-url: https://www.deviantart.com/
-createdAt: 2025-06-22
+title: Zoe Si Illustration
+url: https://www.zoe-si.com/illustration
+createdAt: 2025-06-29
 tags:
   - art
-  - digital-art
-  - community
-  - fan-art
+  - illustration
+  - drawing
 type: website
 id: website-030
 ---
 
 ---
 publish: true
-title: Illustration Chronicles
-url: https://illustrationchronicles.com/
-createdAt: 2025-06-22
+title: Hello Phia
+url: http://www.hellophia.com
+createdAt: 2025-06-29
 tags:
+  - art
   - illustration
-  - art-history
-  - artistic-sites
+  - drawing
 type: website
 id: website-031
 ---
 
 ---
 publish: true
-title: Society of Illustrators
-url: https://www.societyillustrators.org/
-createdAt: 2025-06-22
+title: You Are a Sacred Space Comic
+url: https://electricliterature.com/comic-you-are-a-sacred-space-by-yumi-sakugawa/
+createdAt: 2025-06-29
 tags:
+  - art
   - illustration
-  - professional-org
-  - art-community
+  - drawing
 type: website
 id: website-032
+---
+
+---
+publish: true
+title: Grant Snider
+url: https://www.grantsnider.com/
+createdAt: 2025-06-29
+tags:
+  - art
+  - illustration
+  - drawing
+type: website
+id: website-033
+---
+
+---
+publish: true
+title: Evelyn Marina
+url: https://www.evelynmarina.com/
+createdAt: 2025-06-29
+tags:
+  - art
+  - drawing
+  - self-expression
+type: website
+id: website-034
 ---
