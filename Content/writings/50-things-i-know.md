@@ -1,7 +1,7 @@
 ---
 title: 50 Things I Know
 createdAt: 2025-06-15
-lastUpdated: 2025-06-28
+lastUpdated: 2025-06-29
 tags:
   - knowledge
 published: 
@@ -28,3 +28,6 @@ type: evergreen
 18.
 19.
 20.
+
+**Reference**
+1. https://sashachapin.substack.com/p/50-things-i-know
