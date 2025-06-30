@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-06-29
-lastUpdated: 2025-06-29
+lastUpdated: 2025-06-30
 title: A Substack Collection
 published: true
 type: evergreen
@@ -86,3 +86,7 @@ Your ability to put your thoughts into words matter. </p><p> - Diogo</p><a data-
 ***
 
 <div class="substack-post-embed"><p lang="en">To become harder to manipulate, slow down your responses. When something triggers you, don’t rush to speak. Wait. Count to ten. Reread the message. Breathe. Most traps are sprung by your first reaction. Practice this in small ways: delay your texts, finish listening, leave messages unread until you’ve cooled down. That space is where power and control are built.</p><p> - Stoic Philosophy</p><a data-comment-link href="https://substack.com/@thestoicmanual/note/c-126399087">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+
+***
+
+<div class="substack-post-embed"><p lang="en">To live well, stop chasing someone else’s idea of a good life. Look around. What do you already have? Now imagine it gone. Imagine the people who have it worse than you. Feel that? That’s gratitude. Start there. Fix what’s within your control. Take care of what you own. Choose your path and commit to it. The most beautiful life isn’t the one you lost, or the one you’re still yearning for. It’s this one. The one you’re in. Right now. Don’t take it for granted.</p><p> - Stoic Philosophy</p><a data-comment-link href="https://substack.com/@thestoicmanual/note/c-130157892">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
