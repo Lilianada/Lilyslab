@@ -259,8 +259,8 @@ export const MusicPlayerWidget = ({
             alt={`${title} album art`}
             width={56} 
             height={56} 
-            className="rounded-md object-cover"
-            style={{ height: "auto" }} // Maintain aspect ratio
+            className="rounded-md object-cover height-14 w-14"
+            style={{ height: "56px" }}
           />
           
           {/* Play button overlay */}

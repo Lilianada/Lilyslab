@@ -30,18 +30,26 @@ export default function Home() {
           <div>Last updated: June 20, 2025</div>
         </div>
 
-        <div className="space-y-4 text-sm leading-relaxed">
-          <p>Hello there friend,</p>
+        <div className="space-y-4 text-sm leading-relaxed font-serif">
+          <div className="grid grid-cols-4 gap-4">
+            <div className="col-span-3 space-y-2">
+              <p>Hello there friend,</p>
+              <p>
+                Greetings to you and happy to have you here. You've probably landed here from your many web explorations and I am super excited to house you for the time you'll be here. 
+              </p>
 
-          <p>
-            Greetings to you and happy to have you here. You've probably landed here from your many web explorations and I am super excited to house you for the time you'll be here. 
-          </p>
+              <p>
+                Welcome to my digital home and mini space on the internet. My name is Lily and I'll be your tour guide for the day. This is a space where I'm free to express myself in whatever medium I choose. Could be through code, images, sounds, and words. There's literally no limit to what I can do here.
+              </p>
+            </div>
+            <span className="col-span-1 flex justify-center ">
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExajNseDRncnNxd3c3MnBza3d6dWhjandldm5yYjhmaGhkdTZ0Z2xjdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1tOuimUZbIeS4/giphy.gif" 
+            className="object-contain rounded-md"
+            alt="" />
+            </span>
+          </div>
 
-          <p>
-            Welcome to my digital home and mini space on the internet. My name is Lily and I'll be your tour guide for the day. This is a space where I'm free to express myself in whatever medium I choose. Could be through code, images, sounds, and words. There's literally no limit to what I can do here.
-          </p>
-
-          <p className="font-medium">TL;DR</p>
+          {/* <p className="font-medium">TL;DR</p> */}
 
           {/* Music Widget */}
           <div className="py-2">
@@ -51,7 +59,7 @@ export default function Home() {
               }
             >
               <MusicPlayerWidget
-                imageUrl="/images/Headshot1.png"
+                imageUrl="/images/lily_flower.jpeg"
                 title="Welcome to my digital garden & workshop!"
                 artist="Written by Lily, recorded with Play.ai"
               />

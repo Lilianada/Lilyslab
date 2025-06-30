@@ -1,11 +1,10 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital,wght@0,400;1,400&display=swap'); */
 /* Import external CSS first */
 @import "prismjs/themes/prism-tomorrow.css";
 @import "../styles/card-animations.css";
 @import "../styles/markdown.css";
 
 
-/* Font declarations */
+/* Font declarations for Nitti */
 @font-face {
   font-family: "Nitti";
   src: url("/fonts/Nitti-Normal.woff") format("woff");
@@ -17,6 +16,25 @@
 @font-face {
   font-family: "Nitti";
   src: url("/fonts/Nitti-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Font declarations for Sorts */
+@font-face {
+  font-family: "Sorts";
+  src: url("/fonts/Sorts-Medium.woff2") format("woff2"),
+       url("/fonts/Sorts-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sorts";
+  src: url("/fonts/Sorts-Bold.woff2") format("woff2"),
+       url("/fonts/Sorts-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

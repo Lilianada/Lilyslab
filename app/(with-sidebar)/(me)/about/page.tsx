@@ -84,7 +84,7 @@ export default function AboutPage() {
             <div className="text-justify">
               <figure className="space-y-2 mb-6 w-full">
                 <img
-                  src="/images/about2.jpeg"
+                  src="/images/lily_flower.jpeg"
                   alt="A beautiful arrangement of lilies"
                   className="rounded-lg shadow-md h-[450px] w-full object-cover"
                 />
