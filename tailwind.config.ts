@@ -11,23 +11,6 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: [
-    // Gradient classes for guestbook color generation
-    'bg-gradient-to-r',
-    'bg-gradient-to-br',
-    'from-pink-200',
-    'to-purple-500',
-    'from-blue-200', 
-    'to-cyan-500',
-    'from-green-200',
-    'to-emerald-500',
-    'from-yellow-200',
-    'to-orange-500',
-    'from-indigo-200',
-    'to-violet-500',
-    'from-rose-200',
-    'to-red-500',
-  ],
   prefix: "",
   future: {
     hoverOnlyWhenSupported: true,
@@ -45,7 +28,6 @@ const config = {
         nitti: ["Nitti", "monospace"],
         sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
-        sorts: ["Sorts", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -54,18 +36,15 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         codeRed: "hsl(var(--codeRed))",
-        lavender: "hsl(var(--lavender))",
-
-        siteYellow: "hsl(var(--siteYellow))",
-        siteGreen: "hsl(var(--siteGreen))",
-        sitePink: "hsl(var(--sitePink))",
-        siteBlue: "hsl(var(--siteBlue))",
-
-        cream: "hsl(var(--cream))",
-        lilac: "hsl(var(--lilac))",
-        peach: "hsl(var(--peach))",
-        paleYellow: "hsl(var(--paleYellow))",
-        steelBlue: "hsl(var(--steelBlue))",
+        lavender: '#9EAAFA', // lavender blue
+        yellow: '#FAE680', // pastel yellow
+        green: '#A2CBAF', // soft green
+        pink: '#E8ADB1', // soft pink
+        cream: '#F4E8C8', // cream
+        lilac: '#CCA7ED', // lilac
+        peach: '#F29874', // peach
+        paleYellow: '#F4DAA0', // pale yellow
+        steelBlue: '#6C95CF', 
         lightBlue: "hsl(var(--lightBlue))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -160,19 +139,6 @@ const config = {
         'img': {
           display: 'block',
           maxWidth: '100%',
-        },
-      });
-      
-      addUtilities({
-        '.scrollbar-hide': {
-          /* IE and Edge */
-          '-ms-overflow-style': 'none',
-          /* Firefox */
-          'scrollbar-width': 'none',
-          /* Safari and Chrome */
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
         },
       });
     },

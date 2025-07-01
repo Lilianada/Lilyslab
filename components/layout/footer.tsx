@@ -126,8 +126,8 @@ export function Footer({
       {(prevPost || nextPost) && <Separator className="my-6" />}
 
       {/* Footer Card */}
-      <div className="mt-12 bg-card border-border text-gray-800 dark:text-gray-200 py-6 px-6">
-        <div className="container mx-auto text-center">
+      <div className="mt-12 bg-card border-border text-gray-800 dark:text-gray-200 py-6 px-4 sm:px-6">
+        <div className="sm:container mx-auto text-center">
           <div className="space-y-2">
             {/* Navigation Links */}
             <div className="text-xs">

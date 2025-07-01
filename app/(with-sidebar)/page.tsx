@@ -31,21 +31,29 @@ export default function Home() {
         </div>
 
         <div className="space-y-4 text-sm leading-relaxed font-serif">
-          <div className="grid grid-cols-4 gap-4">
+          <div className="flex flex-col sm:grid grid-cols-4 gap-4 items-center">
             <div className="col-span-3 space-y-2">
               <p>Hello there friend,</p>
               <p>
-                Greetings to you and happy to have you here. You've probably landed here from your many web explorations and I am super excited to house you for the time you'll be here. 
+                Greetings to you and happy to have you here. You've probably
+                landed here from your many web explorations and I am super
+                excited to house you for the time you'll be here.
               </p>
 
               <p>
-                Welcome to my digital home and mini space on the internet. My name is Lily and I'll be your tour guide for the day. This is a space where I'm free to express myself in whatever medium I choose. Could be through code, images, sounds, and words. There's literally no limit to what I can do here.
+                Welcome to my digital home and mini space on the internet. My
+                name is Lily and I'll be your tour guide for the day. This is a
+                space where I'm free to express myself in whatever medium I
+                choose. Could be through code, images, sounds, and words.
+                There's literally no limit to what I can do here.
               </p>
             </div>
-            <span className="col-span-1 flex justify-center ">
-                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExajNseDRncnNxd3c3MnBza3d6dWhjandldm5yYjhmaGhkdTZ0Z2xjdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1tOuimUZbIeS4/giphy.gif" 
-            className="object-contain rounded-md"
-            alt="" />
+            <span className="col-span-1 flex justify-center w-fit h-fit rounded-md overflow-hidden">
+              <img
+                src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExajNseDRncnNxd3c3MnBza3d6dWhjandldm5yYjhmaGhkdTZ0Z2xjdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1tOuimUZbIeS4/giphy.gif"
+                className="object-contain rounded-md"
+                alt=""
+              />
             </span>
           </div>
 
@@ -67,7 +75,10 @@ export default function Home() {
           </div>
 
           <p>
-            I've put in a lot of thoughts and efforts into building everything you see and interact with in this space. I try to make this website a living representation of my personal space; small, cozy and with lots of depth. Be sure to leave your footprint by signing my{" "}
+            I've put in a lot of thoughts and efforts into building everything
+            you see and interact with in this space. I try to make this website
+            a living representation of my personal space; small, cozy and with
+            lots of depth. Be sure to leave your footprint by signing my{" "}
             <Link href="/guestbook" className="text-codeRed">
               guestbook
             </Link>
@@ -84,12 +95,15 @@ export default function Home() {
             <Link href="/now" className="text-codeRed">
               now
             </Link>{" "}
-            page. You can also check to see what I'll like to do  <Link href="/someday" className="text-codeRed">
+            page. You can also check to see what I'll like to do{" "}
+            <Link href="/someday" className="text-codeRed">
               someday
-            </Link>, and also my career <Link href="/bucket-list" className="text-codeRed">
+            </Link>
+            , and also my career{" "}
+            <Link href="/bucket-list" className="text-codeRed">
               bucket list
-            </Link>.{" "}
-image
+            </Link>
+            . image
           </p>
 
           <p>
@@ -116,25 +130,16 @@ image
               garden
             </Link>
             . I have both{" "}
-            <Link
-              href="/garden/writings"
-              className="text-codeRed"
-            >
+            <Link href="/garden/writings" className="text-codeRed">
               long form
             </Link>{" "}
             and{" "}
-            <Link
-              href="/garden/notes"
-              className="text-codeRed"
-            >
+            <Link href="/garden/notes" className="text-codeRed">
               short form
             </Link>{" "}
             content that I have recently planted and still tend to. I even have
             a{" "}
-            <Link
-              href="/garden/micro-blog"
-              className="text-codeRed"
-            >
+            <Link href="/garden/micro-blog" className="text-codeRed">
               micro-blog
             </Link>{" "}
             to share very random thoughts I have during the course of my day,
@@ -146,22 +151,19 @@ image
           </p>
 
           <TopicsList />
-            <p>
-            If you'd like to comment on any of my writings or notes, you can now do so using web mentions! Just mention my site in your own post or reply, and your comment will show up here. 
-            And if you prefer to{" "}
-            <Link
-              href="/ask-me-anything"
-              className="text-codeRed"
-            >
+          <p>
+            If you'd like to comment on any of my writings or notes, you can now
+            do so using web mentions! Just mention my site in your own post or
+            reply, and your comment will show up here. And if you prefer to{" "}
+            <Link href="/ask-me-anything" className="text-codeRed">
               ask me a question
             </Link>{" "}
             that deserves an answer, then don't hesitate to do so.
-            </p>
+          </p>
 
           <p>
             Asides from the many pages displayed on my sidebar, my footer has
             more links that you can explore. Thanks for stopping by.
-            
             {/* If you're still here at this point,
             then I need your help. I have this little idea that's still a
             seedling and I am a bit confused on what to do or where to go with
@@ -176,9 +178,7 @@ image
             little [[indie-web]] community. */}
           </p>
 
-          <p className="pt-4">
-            This page was hand-written by Lily ❤️.
-          </p>
+          <p className="pt-4">This page was hand-written by Lily ❤️.</p>
         </div>
       </section>
 
