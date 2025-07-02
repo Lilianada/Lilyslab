@@ -1,10 +1,14 @@
 ---
-title: "TFC 2K16"
-createdAt: "2016-12-05"
-lastUpdated: "2016-12-05"
+title: TFC 2K16
+createdAt: 2016-12-05
+lastUpdated: 2025-07-03
 published: true
-tags: ["fashion", "teen-area", "photography", "style"]
-type: "article"
+tags:
+  - fashion
+  - teen-area
+  - photography
+  - style
+type: article
 ---
 
 One thing about teenage girls is they possess so many clothing and accessories, and then when it's time to hang out with friends or go on a date, they suddenly have nothing to put on.
