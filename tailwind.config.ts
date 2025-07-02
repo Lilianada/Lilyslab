@@ -37,9 +37,9 @@ const config = {
         foreground: "hsl(var(--foreground))",
         codeRed: "hsl(var(--codeRed))",
         lavender: '#9EAAFA', // lavender blue
-        yellow: '#FAE680', // pastel yellow
-        green: '#A2CBAF', // soft green
-        pink: '#E8ADB1', // soft pink
+        siteYellow: '#FAE680', // pastel yellow
+        siteGreen: '#88BF94', // soft green
+        sitePink: '#E8ADB1', // soft pink
         cream: '#F4E8C8', // cream
         lilac: '#CCA7ED', // lilac
         peach: '#F29874', // peach

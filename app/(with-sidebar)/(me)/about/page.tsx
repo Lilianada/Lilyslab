@@ -38,8 +38,8 @@ export default function AboutPage() {
           <h1 className="mb-2 text-xl font-medium">About Me</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: May 8, 2025</div>
-            <div>Last updated: June 16, 2025</div>
-            <div>Inspired by: <a href="https://nicolevanderhoeven.com/about">Nicole Vander Hoeven</a></div>
+            <div>Last updated: July 02, 2025</div>
+            <div>Inspired by: <a href="https://nicolevanderhoeven.com/about" className="text-siteGreen">Nicole Vander Hoeven</a></div>
           </div>
         </header>
 
@@ -82,16 +82,13 @@ export default function AboutPage() {
         ) : (
           <>
             <div className="text-justify">
-              <figure className="space-y-2 mb-6 w-full">
+              <div className="space-y-2 mb-6 w-full">
                 <img
-                  src="/images/lily_flower.jpeg"
+                  src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJhdTA3NWcwZWptdDN6ejJqeDZ3cTQ1Z3U0Z3pnem8xaTJwdWFmNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ITWHqTA2TtOqA/giphy.gif"
                   alt="A beautiful arrangement of lilies"
                   className="rounded-lg shadow-md h-[450px] w-full object-cover"
                 />
-                <figcaption className="text-center text-sm text-muted-foreground mt-2">
-                  lilies
-                </figcaption>
-              </figure>
+              </div>
               
                 <h2 className="text-sm font-semibold tracking-tight text-siteGreen">
                   ✳︎✳︎whoami✳︎✳︎
