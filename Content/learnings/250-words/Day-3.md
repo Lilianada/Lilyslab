@@ -1,5 +1,5 @@
 ---
-createdAt: 2025-07-02
+createdAt: 2025-07-03
 lastUpdated: 2025-07-03
 ---
 Hobbies are meant to stay hobbies.
