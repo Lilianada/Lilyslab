@@ -157,7 +157,7 @@ export default function AboutPage() {
 
               <div className="mt-4">
                 <h2 className="text-sm font-semibold tracking-tight text-siteGreen">
-                  ✳︎✳︎my mantra:✳︎✳︎
+                  ✳︎✳︎my mantra✳︎✳︎
                   </h2>
                 <p className="mb-3 text-sm leading-normal opacity-0 animate-slide-up">
                   Steal an idea, refine it, tweak it until it becomes new, until it becomes yours.

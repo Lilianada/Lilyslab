@@ -208,12 +208,12 @@ export function Footer({
               >
                 <Linkedin className="h-3 w-3" />
               </a>
-              <a
+              {/* <a
                 href="https://www.instagram.com/defitcreative/"
                 className="hover:text-zinc-400"
               >
                 <Instagram className="h-3 w-3" />
-              </a>
+              </a> */}
               <a
                 href="https://twitter.com/lilian_ada_"
                 className="hover:text-zinc-400"
