@@ -85,6 +85,10 @@ export default function GuestbookPage() {
     {
       name: "Bechnokid's Guestbook",
       url: "https://bechnokid.neocities.org/guestbook/"
+    },
+    {
+      name: "Flowerinbinary's Guestbook",
+      url: "https://flowerinbinary.atabook.org/?page=1"
     }
   ];
 
@@ -140,7 +144,7 @@ export default function GuestbookPage() {
         <h1 className="mb-2 text-xl font-medium">Guestbook</h1>
         <div className="flex flex-col text-xs text-muted-foreground font-mono">
           <div>Created: April 10, 2025</div>
-          <div>Last updated: June 12, 2025</div>
+          <div>Last updated: July 04, 2025</div>
         </div>
       </header>
       <div>
