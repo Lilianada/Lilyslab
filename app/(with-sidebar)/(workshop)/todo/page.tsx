@@ -9,7 +9,7 @@ export default function TodoPage() {
 
   // Simple array of todo items with completed status
   const todoItems = [
-    { text: "Redesign home page, make it more personal", completed: false },
+    { text: "Redesign home page, make it more personal", completed: true },
     { text: "Update bookshelf page with books I've read.", completed: true },
     { text: "Update Misc page", completed: false },
     {
