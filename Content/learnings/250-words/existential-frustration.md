@@ -1,3 +1,10 @@
+---
+createdAt: 2025-07-04
+title: Existential Frustration
+---
+
+
+
 I was reading *Ikigai* today and came across this question, "why not commit suici**?". I'm going to answer the question.
 1. I can't cause yet another pain to my family
 2. I want to know how this story ends
