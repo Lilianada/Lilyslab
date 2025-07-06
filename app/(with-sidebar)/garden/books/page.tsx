@@ -11,6 +11,7 @@ interface Book {
   rating?: number;
   genre?: string;
   date?: number;
+  url?: string; // URL to essay or note review
 }
 
 export default function BookshelfPage() {

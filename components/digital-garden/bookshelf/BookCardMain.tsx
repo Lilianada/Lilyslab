@@ -173,15 +173,16 @@ const BookCard: React.FC<BookCardProps> = ({
                 <div className="scallop right1" />
                 <div className="scallop right2" />
                 <div className="scallop right3" />
-                {/* Use Link component with correct href */}
-                <Link
-                    href={bookHref}
-                    className="relative block p-2 transition-all hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" // Added focus styles
-                    style={backgroundColorStyle}
-                    aria-label={`View details for ${book.title}`} // Accessibility
-                >
-                    {content}
-                </Link>
+                {/* Use Link component for internal links, anchor for external */}
+                {isExternalLink ? (
+                    <a {...linkProps}>
+                        {content}
+                    </a>
+                ) : (
+                    <Link {...linkProps}>
+                        {content}
+                    </Link>
+                )}
             </div>
         </div>
     );

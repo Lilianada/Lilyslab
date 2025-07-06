@@ -12,6 +12,7 @@ interface Book {
   genre?: string;
   date?: number; // Added date field
   content: string; // Add field for full markdown content
+  url?: string; // URL to essay or note review
 }
 
 // Set the directory path to bookshelf
@@ -54,6 +55,7 @@ async function getBooksFromStatusDirectory(status: 'current-reads' | 'read' | 'w
       genre: data.genre || undefined, // Use genre from frontmatter, or undefined if not present
       date: data.date ? Number(data.date) : undefined, // Add date, ensure it's a number
       content: content, // Add the full markdown content
+      url: data.url || undefined, // Add URL to essay or note review
     };
     books.push(bookData);
   }
