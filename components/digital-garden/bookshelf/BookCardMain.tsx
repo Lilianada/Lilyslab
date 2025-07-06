@@ -8,12 +8,12 @@ const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'
 // Define the Book type locally (or move to a central types file later)
 interface Book {
   id: string;
-  slug: string;
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
   genre?: string;
   date?: number;
+  url?: string; // URL to essay or note review
 }
 
 // Update Props interface
@@ -140,8 +140,24 @@ const BookCard: React.FC<BookCardProps> = ({
         </div>
     );
 
-    // Construct the correct href using book.slug
-    const bookHref = `/digital-garden/bookshelf/${book.slug}`;
+    // Use book.url if available, otherwise link to main bookshelf
+    const bookHref = book.url || `/garden/bookshelf`;
+    const isExternalLink = book.url && (book.url.startsWith('http') || book.url.startsWith('https'));
+    
+    // Determine if this should be a Link or an anchor tag
+    const linkProps = isExternalLink ? {
+        href: bookHref,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        className: "relative block p-2 transition-all hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+        style: backgroundColorStyle,
+        "aria-label": `View review for ${book.title}${isExternalLink ? ' (opens in new tab)' : ''}`
+    } : {
+        href: bookHref,
+        className: "relative block p-2 transition-all hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+        style: backgroundColorStyle,
+        "aria-label": `View review for ${book.title}`
+    };
 
     return (
         <div className="group flex h-80 items-center">

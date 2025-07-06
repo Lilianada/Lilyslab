@@ -6,7 +6,6 @@ import matter from 'gray-matter';
 // Define the Book type matching the user's provided interface
 interface Book {
   id: string;
-  slug: string; // Slug will be unique: status-filename (e.g., read-001)
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
@@ -43,14 +42,12 @@ async function getBooksFromStatusDirectory(status: 'current-reads' | 'read' | 'w
         continue;
     }
 
-    // Generate a unique ID and Slug (e.g., read-001)
+    // Generate a unique ID (e.g., read-001)
     const baseSlug = fileName.replace(/\.md$/, '');
-    const uniqueSlug = `${status}-${baseSlug}`;
-    const id = uniqueSlug; // Use the same unique identifier for ID
+    const uniqueId = `${status}-${baseSlug}`;
 
     const bookData: Book = {
-      id: id,
-      slug: uniqueSlug, // Use the combined status and filename
+      id: uniqueId,
       title: data.title,
       status: status,
       rating: data.rating ? Number(data.rating) : undefined,
