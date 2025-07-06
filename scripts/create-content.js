@@ -89,7 +89,7 @@ if (!contentType || !title) {
 const contentTypeConfig = {
   log: { dir: 'Content/logs', ext: 'mdx' },
   note: { dir: 'Content/notes', ext: 'md' },
-  writing: { dir: 'Content/writings', ext: 'md' },
+  writing: { dir: 'Content/essays', ext: 'md' },
   bookmark: { dir: 'Content/bookmarks', ext: 'md' },
 };
 

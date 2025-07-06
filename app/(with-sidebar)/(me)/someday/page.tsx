@@ -125,7 +125,7 @@ export default function SomedayPage() {
           <p className="text-sm">
             I believe everyone should write a book, whether or not you publish it commercially is up to you, but leave something more valuable than money for your generation to come. 
             <br /><br />
-            I plan to achieve this by taking notes going forward, keeping <Link href="/daily-logs" className="">daily-logs</Link> of my personal life, <Link href="/garden/writings" className="">writing</Link> about things I'm learning, experiences etc, this will be a very good foundation for a Personal Memoir.
+            I plan to achieve this by taking notes going forward, keeping <Link href="/daily-logs" className="">daily-logs</Link> of my personal life, <Link href="/garden/essays" className="">writing</Link> about things I'm learning, experiences etc, this will be a very good foundation for a Personal Memoir.
           </p>
         </div>
         

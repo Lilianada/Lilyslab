@@ -17,7 +17,7 @@ interface FooterProps {
   // Navigation props (all optional)
   prevPost?: { title: string; slug: string };
   nextPost?: { title: string; slug: string };
-  contentType?: "garden/writings" | "garden/notes";
+  contentType?: "garden/essays" | "garden/notes";
 }
 
 export function Footer({

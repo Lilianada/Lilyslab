@@ -78,7 +78,7 @@ export async function GET(request: Request) {
 
   // Server-side implementation of getAllWritings
   async function getAllWritings(): Promise<Writing[]> {
-    const writingsPath = path.join(process.cwd(), "Content/writings");
+    const writingsPath = path.join(process.cwd(), "Content/essays");
     
     try {
       const files = await fs.readdir(writingsPath);

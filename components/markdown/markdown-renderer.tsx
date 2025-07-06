@@ -277,7 +277,7 @@ const MarkdownRenderer = ({
           cache: 'no-store',
           headers: { 'Content-Type': 'application/json' },
         }),
-        fetch('/api/writings', { 
+        fetch('/api/essays', { 
           cache: 'no-store',
           headers: { 'Content-Type': 'application/json' },
         })
@@ -341,7 +341,7 @@ const MarkdownRenderer = ({
         if (noteMatch) {
           router.push(`/garden/notes/${encodeURIComponent(noteMatch.title)}`);
         } else if (writingMatch) {
-          router.push(`/garden/writings/${encodeURIComponent(writingMatch.slug)}`);
+          router.push(`/garden/essays/${encodeURIComponent(writingMatch.slug)}`);
         } else {
           // Best-effort navigation - create a URL based on what's more likely
           // This prevents errors by making an assumption about where it should go

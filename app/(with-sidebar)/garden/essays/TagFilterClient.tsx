@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { formatDateForDisplay } from "@/lib/utils";
-import type { Writing } from "@/lib/garden/writings";
+import type { Essay } from "@/lib/garden/essays";
 
 interface Props {
-  writings: Writing[];
+  essays: Essay[];
 }
 
 // Helper function to count words in a string
@@ -20,16 +20,16 @@ function calculateReadingTime(text: string): number {
   return Math.max(1, Math.ceil(words / wordsPerMinute));
 }
 
-export default function TagFilterClient({ writings }: Props) {
+export default function TagFilterClient({ essays }: Props) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [selectedType, setSelectedType] = useState<Writing['type'] | null>(null);
+  const [selectedType, setSelectedType] = useState<Essay['type'] | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
   
-  // Count writings per tag
+  // Count essays per tag
   const tagCounts: Record<string, number> = {};
-  writings.forEach((writing) => {
-    (writing.tags || []).forEach((tag) => {
+  essays.forEach((essay) => {
+    (essay.tags || []).forEach((tag) => {
       tagCounts[tag] = (tagCounts[tag] || 0) + 1;
     });
   });
@@ -45,28 +45,28 @@ export default function TagFilterClient({ writings }: Props) {
   // All tags sorted alphabetically for expanded view
   const allTags = Object.keys(tagCounts).sort();
   
-  // Count writings per type
+  // Count essays per type
   const typeCounts: Record<string, number> = {
     evergreen: 0,
     seedling: 0,
     budding: 0
   };
-  writings.forEach((writing) => {
-    typeCounts[writing.type] = (typeCounts[writing.type] || 0) + 1;
+  essays.forEach((essay) => {
+    typeCounts[essay.type] = (typeCounts[essay.type] || 0) + 1;
   });
   
-  // Available types (only show types that have writings)
+  // Available types (only show types that have essays)
   const types = Object.keys(typeCounts).filter(
     type => typeCounts[type] > 0
-  ) as Writing['type'][];
+  ) as Essay['type'][];
 
   React.useEffect(() => {
     const timeout = setTimeout(() => setIsLoaded(true), 400);
     return () => clearTimeout(timeout);
   }, []);
 
-  // Sort writings by newest first
-  const sortedWritings = [...writings].sort((a, b) => {
+  // Sort essays by newest first
+  const sortedEssays = [...essays].sort((a, b) => {
     // Convert to Date objects for safe comparison
     const dateA = new Date(a.createdAt);
     const dateB = new Date(b.createdAt);
@@ -76,9 +76,9 @@ export default function TagFilterClient({ writings }: Props) {
   });
   
   // Apply tag and type filtering
-  const filteredWritings = sortedWritings.filter(writing => {
-    const matchesTag = !selectedTag || (writing.tags || []).includes(selectedTag);
-    const matchesType = !selectedType || writing.type === selectedType;
+  const filteredEssays = sortedEssays.filter(essay => {
+    const matchesTag = !selectedTag || (essay.tags || []).includes(selectedTag);
+    const matchesType = !selectedType || essay.type === selectedType;
     return matchesTag && matchesType;
   });
 
@@ -157,35 +157,35 @@ export default function TagFilterClient({ writings }: Props) {
           {/* Results count */}
           <div className="mb-6">
             <p className="text-sm text-muted-foreground">
-              Showing {filteredWritings.length} of {writings.length} writings
+              Showing {filteredEssays.length} of {essays.length} essays
               {selectedType && ` of type ${selectedType}`}
               {selectedTag && ` with tag #${selectedTag}`}
             </p>
           </div>
           
-          {/* Writings list */}
+          {/* Essays list */}
           <ul className="mt-6 space-y-2">
-            {filteredWritings.map((writing) => (
-              <li key={writing.slug} className="group relative">
+            {filteredEssays.map((essay) => (
+              <li key={essay.slug} className="group relative">
                 <Link
-                  href={`/garden/writings/${writing.slug}`}
+                  href={`/garden/essays/${essay.slug}`}
                   className="flex items-center gap-4 py-2 hover:scale-[1.025] transition-all duration-300 group"
                   prefetch
                 >
                   {/* Left: Dot and Title */}
                   <div className="flex items-center gap-2 min-w-0">
                     <div className="h-2 w-2 rounded-full bg-steelBlue" />
-                    <p className="truncate text-sm">{writing.title}</p>
+                    <p className="truncate text-sm">{essay.title}</p>
                   </div>
                   {/* Middle: Connecting line */}
                   <div className="flex-1 h-px bg-muted-foreground/30 mx-2 hidden md:block" />
                   {/* Right: Date or Hover Details */}
                   <div className="flex items-center gap-2 justify-end">
                     <span className="hidden group-hover:inline text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
-                      {countWords(writing.content)} words • {calculateReadingTime(writing.content)} min
+                      {countWords(essay.content)} words • {calculateReadingTime(essay.content)} min
                     </span>
                     <time className="group-hover:hidden font-mono text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
-                      {formatDateForDisplay(writing.createdAt)}
+                      {formatDateForDisplay(essay.createdAt)}
                     </time>
                   </div>
                 </Link>

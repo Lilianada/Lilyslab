@@ -18,7 +18,7 @@ lastUpdated: 2025-06-19
 
 Lilyslab is my personal space for growth, learning, and sharing. It's a mix of three main areas:
 
-- **Digital Garden**: Where I grow and share my ideas, writings, notes, and bookmarks. It's not a formal blog, but a living collection of thoughts that grow over time.
+- **Digital Garden**: Where I grow and share my ideas, essays, notes, and bookmarks. It's not a formal blog, but a living collection of thoughts that grow over time.
 
 - **Workshop**: Where I show my projects (like logs and shop items), track my progress, and share my building process.
 

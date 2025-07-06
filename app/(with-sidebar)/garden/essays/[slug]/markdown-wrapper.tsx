@@ -9,11 +9,11 @@ const MarkdownRenderer = dynamic(() => import("@/components/markdown"), {
   loading: () => <MarkdownSkeleton />,
 })
 
-interface WritingMarkdownWrapperProps {
+interface EssayMarkdownWrapperProps {
   content: string;
 }
 
-export function WritingMarkdownWrapper({ content }: WritingMarkdownWrapperProps) {
+export function EssayMarkdownWrapper({ content }: EssayMarkdownWrapperProps) {
   return (
     <Suspense fallback={<MarkdownSkeleton />}>
       <MarkdownRenderer content={content} />

@@ -71,4 +71,4 @@ Anyway, I have a lot of goody packages for this new year, and with time each pac
 
 From *Lilian*
 
-![New Year's Eve selfie](/images/writings/1483038984844.jpg)
+![New Year's Eve selfie](/images/essays/1483038984844.jpg)

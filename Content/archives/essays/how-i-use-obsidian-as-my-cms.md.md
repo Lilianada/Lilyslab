@@ -38,13 +38,13 @@ To set up Obsidian as my content management system, I followed a simple process 
 
 1. **Organizing Content in Obsidian**
     
-    - I created a folder called **Content** on my local machine to store all my writings. Inside the **Content** folder, I created a subfolder named **Writings** where I would place all my markdown files for blog posts and articles.
+    - I created a folder called **Content** on my local machine to store all my essays. Inside the **Content** folder, I created a subfolder named **Essays** where I would place all my markdown files for blog posts and articles.
         
     - Each writing is stored as a markdown file (e.g., `how-i-use-obsidian-as-my-cms.md`) and contains frontmatter (metadata) such as title, date, tags, and an excerpt.
         
 2. **Integrating Obsidian with My Website**
     
-    - I built a **Next.js** website that reads markdown files directly from my **Content/writings** folder.
+    - I built a **Next.js** website that reads markdown files directly from my **Content/essays** folder.
         
     - Using Node’s **fs** (file system) module, I read the markdown files from the folder and parsed the frontmatter using the **gray-matter** package.
         

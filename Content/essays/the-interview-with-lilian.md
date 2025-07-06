@@ -12,7 +12,7 @@ type: evergreen
 
 Hello guys, good day and welcome to Lilian's Blog, thank you for clicking on the link.
 
-![Interview Feature Image](/images/writings/w0itxigl.jpg)
+![Interview Feature Image](/images/essays/w0itxigl.jpg)
 
 This is an interview section I had with a Social Media Influencer **Madeleine Ugochi Enyi AKA 9jawitches** who is popular on **NaijaTwitter**. She is known for her participation in different topics on Twitter, her clapbacks that also go a long way as to appear on different pages on Instagram, the wonderful act of giving and the help she renders to her followers. She tells us a bit about herself, how the journey started and how it has been so far. So, let's read what she had to say.
 

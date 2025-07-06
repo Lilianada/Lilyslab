@@ -13,7 +13,7 @@ type: evergreen
 
 Hello lovely readers, hope y'all are _Gucci_ because I'm _Mane_.
 
-![DJ Tizzy Interview](/images/writings/whatsapp-image-2017-10-15-at-09-15-01.jpeg)
+![DJ Tizzy Interview](/images/essays/whatsapp-image-2017-10-15-at-09-15-01.jpeg)
 
 Today's Interview is with a DJ. Funny enough, I didn't know the full meaning of a DJ until today. So, let me start by saying, what is a party without a DJ? Exactly, jamless. He is someone who has gone places with his work and still looks forward to going places, I have with me DJ Tizzy, baddest DJ in the city of Lokoja, Kogi State.
 
@@ -89,11 +89,11 @@ Today's Interview is with a DJ. Funny enough, I didn't know the full meaning of 
 
 **Tizzy**: I really want to say a big thank you to my friends, fans and family for their love, prayers and support. I promise to keep up the good work. God bless you all.
 
-![DJ Tizzy](/images/writings/whatsapp-image-2017-10-15-at-09-15-16.jpeg)
+![DJ Tizzy](/images/essays/whatsapp-image-2017-10-15-at-09-15-16.jpeg)
 
-![DJ Tizzy Performance](/images/writings/whatsapp-image-2017-10-15-at-09-15-17.jpeg)
+![DJ Tizzy Performance](/images/essays/whatsapp-image-2017-10-15-at-09-15-17.jpeg)
 
-![DJ Tizzy Setup](/images/writings/whatsapp-image-2017-10-15-at-09-15-18.jpeg)
+![DJ Tizzy Setup](/images/essays/whatsapp-image-2017-10-15-at-09-15-18.jpeg)
 
 So guys you've heard it all from DJ Tizzy, you can contact him on the following numbers: 08139030336, 08111833611
 

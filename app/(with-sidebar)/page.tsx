@@ -125,12 +125,12 @@ export default function Home() {
           </p>
 
           <p>
-            If you like to read amature musings/writings, check my{" "}
+            If you like to read amature musings/essays, check my{" "}
             <Link href="/garden" className="text-codeRed">
               garden
             </Link>
             . I have both{" "}
-            <Link href="/garden/writings" className="text-codeRed">
+            <Link href="/garden/essays" className="text-codeRed">
               long form
             </Link>{" "}
             and{" "}

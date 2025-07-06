@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getWritingBySlug, getAllWritings } from "@/lib/garden/writings";
+import { getEssayBySlug, getAllEssays } from "@/lib/garden/essays";
 import { formatDate } from "@/lib/utils";
 import { Metadata } from "next/types";
 import fs from "fs";
@@ -10,7 +10,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { WritingMarkdownWrapper } from "./markdown-wrapper";
+import { EssayMarkdownWrapper } from "./markdown-wrapper";
 
 type PageProps = {
   params: Promise<{
@@ -23,26 +23,26 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const writing = await getWritingBySlug(resolvedParams.slug);
+  const essay = await getEssayBySlug(resolvedParams.slug);
 
-  if (!writing) {
+  if (!essay) {
     return {
-      title: "Writing Not Found",
+      title: "Essay Not Found",
     };
   }
 
   return {
-    title: writing.title,
-    description: writing.excerpt,
+    title: essay.title,
+    description: essay.excerpt,
   };
 }
 
-export default async function WritingSlugPage({ params }: PageProps) {
+export default async function EssaySlugPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { slug } = resolvedParams;
 
-  const writingsDir = path.join(process.cwd(), "Content/writings");
-  const filePath = path.join(writingsDir, `${slug}.md`);
+  const essaysDir = path.join(process.cwd(), "Content/essays");
+  const filePath = path.join(essaysDir, `${slug}.md`);
 
   // Check if the file exists
   if (!fs.existsSync(filePath)) {
@@ -55,34 +55,34 @@ export default async function WritingSlugPage({ params }: PageProps) {
 
   // Check if the post is published
   if (data.published !== true) {
-    console.log(`Writing with slug '${slug}' found but not published.`); // Optional logging
+    console.log(`Essay with slug '${slug}' found but not published.`); // Optional logging
     notFound(); // Return 404 if not explicitly published
   }
 
-  // Get all writings for prev/next navigation
-  const allWritings = getAllWritings();
+  // Get all essays for prev/next navigation
+  const allEssays = getAllEssays();
 
   // Find the current post index
-  const currentIndex = allWritings.findIndex(
-    (writing) => writing.slug === slug
+  const currentIndex = allEssays.findIndex(
+    (essay) => essay.slug === slug
   );
 
   // Get previous and next posts (previous = older, next = newer)
   const prevPost =
     currentIndex > 0
       ? {
-          title: allWritings[currentIndex - 1].title,
-          slug: allWritings[currentIndex - 1].slug,
-          path: "/garden/writings",
+          title: allEssays[currentIndex - 1].title,
+          slug: allEssays[currentIndex - 1].slug,
+          path: "/garden/essays",
         }
       : undefined;
 
   const nextPost =
-    currentIndex < allWritings.length - 1
+    currentIndex < allEssays.length - 1
       ? {
-          title: allWritings[currentIndex + 1].title,
-          slug: allWritings[currentIndex + 1].slug,
-          path: "/garden/writings",
+          title: allEssays[currentIndex + 1].title,
+          slug: allEssays[currentIndex + 1].slug,
+          path: "/garden/essays",
         }
       : undefined;
 
@@ -98,7 +98,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
       <div className="max-w-2xl w-full mx-auto animate-fade-in">
         <div className="mt-6 sm:mt-12 mb-4 flex items-center ">
           <Link
-            href="/garden/writings"
+            href="/garden/essays"
             className="flex items-center gap-1 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             <ArrowLeft
@@ -148,7 +148,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
               />
             </div>
           )}
-          <WritingMarkdownWrapper content={content} />
+          <EssayMarkdownWrapper content={content} />
         </div>
 
         <Footer
@@ -162,7 +162,7 @@ export default async function WritingSlugPage({ params }: PageProps) {
               ? { title: nextPost.title, slug: nextPost.slug }
               : undefined
           }
-          contentType="garden/writings"
+          contentType="garden/essays"
         />
       </div>
     </>

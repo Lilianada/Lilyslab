@@ -7,12 +7,12 @@ async function testArchives() {
     console.log('Testing archives API logic...');
     
     const notesArchivesDirectory = join(process.cwd(), 'Content', 'archives', 'notes');
-    const writingsArchivesDirectory = join(process.cwd(), 'Content', 'archives', 'writings');
+    const essaysArchivesDirectory = join(process.cwd(), 'Content', 'archives', 'essays');
     
     const items = [];
     
     console.log('Notes directory exists:', fs.existsSync(notesArchivesDirectory));
-    console.log('Writings directory exists:', fs.existsSync(writingsArchivesDirectory));
+    console.log('Essays directory exists:', fs.existsSync(essaysArchivesDirectory));
     
     // Process notes
     if (fs.existsSync(notesArchivesDirectory)) {
@@ -44,17 +44,17 @@ async function testArchives() {
       }
     }
     
-    // Process writings
-    if (fs.existsSync(writingsArchivesDirectory)) {
-      const writingsFiles = fs.readdirSync(writingsArchivesDirectory);
-      console.log('Writings files:', writingsFiles);
+    // Process essays
+    if (fs.existsSync(essaysArchivesDirectory)) {
+      const essaysFiles = fs.readdirSync(essaysArchivesDirectory);
+      console.log('Essays files:', essaysFiles);
       
-      for (const fileName of writingsFiles) {
+      for (const fileName of essaysFiles) {
         if (!fileName.endsWith('.md') || fileName === 'README.md') continue;
         
-        console.log(`Processing writings file: ${fileName}`);
+        console.log(`Processing essays file: ${fileName}`);
         const slug = fileName.replace(/\.md$/, '');
-        const filePath = join(writingsArchivesDirectory, fileName);
+        const filePath = join(essaysArchivesDirectory, fileName);
         const fileContents = fs.readFileSync(filePath, 'utf8');
         
         try {
@@ -64,7 +64,7 @@ async function testArchives() {
           items.push({
             slug,
             title: data.title || fileName.replace(/\.md$/, '').replace(/-/g, ' '),
-            category: "writings",
+            category: "essays",
             createdAt: data.createdAt || data.date || '',
           });
         } catch (parseError) {

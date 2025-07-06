@@ -364,7 +364,7 @@ export default function Sidebar({
           <div className="space-y-1.5 mb-2">
             <SectionTitle title="Garden" delay={650} />
             <NavItem
-              href="/garden/writings"
+              href="/garden/essays"
               icon={<FileText size={16} />}
               label="Essays"
               onClick={onNavClick}

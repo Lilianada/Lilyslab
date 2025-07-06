@@ -1,6 +1,6 @@
 ---
 author: Lilian
-cover: null
+coverLet me explain why I built it. On my website [lilyslab.xyz](lilyslab.xyz), I have a notes page, an essays page, and several other sections. Most of my content starts in **𝗠𝗮𝗿𝗸𝗱𝗼𝘄𝗻**, written on my Obsidian board. Occasionally, I update these pages directly through my IDE—it's quick and easy. null
 excerpt: Building tools for the web.
 published: true
 slug: day-3-of-20

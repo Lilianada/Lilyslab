@@ -43,7 +43,7 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Garden",
     pages: [
-      { name: "Essays", url: "/garden/writings", description: "My writings and essays" },
+      { name: "Essays", url: "/garden/essays", description: "My writings and essays" },
       { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
       { name: "Micro-blog", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },

@@ -17,13 +17,13 @@ export function TopicsList() {
     {
       title: "Commonplace book",
       completed: true,
-      url: "/garden/writings/commonplace-book",
+      url: "/garden/essays/commonplace-book",
     },
     { title: "Content curation", completed: false },
     {
       title: "Digital Garden",
       completed: true,
-      url: "/garden/writings/digital-garden",
+      url: "/garden/essays/digital-garden",
     },
     { title: "Digital Library", completed: false },
     {
@@ -34,7 +34,7 @@ export function TopicsList() {
     {
       title: "Digital Zettelkasten",
       completed: true,
-      url: "/garden/writings/digital-zettelkasten",
+      url: "/garden/essays/digital-zettelkasten",
     },
     { title: "Evergreen notes", completed: false },
     { title: "HTML and CSS", completed: false },
@@ -43,7 +43,7 @@ export function TopicsList() {
     {
       title: "How I Take My Notes",
       completed: true,
-      url: "/garden/writings/how-i-take-my-notes",
+      url: "/garden/essays/how-i-take-my-notes",
     },
     { title: "How to create your digital garden", completed: false },
     { title: "Indie developer", completed: false },
@@ -62,9 +62,9 @@ export function TopicsList() {
     {
       title: "Projects as Seedlings",
       completed: true,
-      url: "/garden/writings/projects-as-seedlings",
+      url: "/garden/essays/projects-as-seedlings",
     },
-    { title: "Rabbitholes", completed: true, url: "/garden/writings/rabbit-holes" },
+    { title: "Rabbitholes", completed: true, url: "/garden/essays/rabbit-holes" },
     {
       title: "Relationship between Digital Garden and Zettelkasten",
       completed: false,
@@ -72,14 +72,14 @@ export function TopicsList() {
     { title: "Seedlings", completed: false },
     { title: "Social Media peformance", completed: false },
     { title: "Why I Read", completed: false },
-    { title: "Why I Write", completed: true, url: "/garden/writings/why-i-write" },
+    { title: "Why I Write", completed: true, url: "/garden/essays/why-i-write" },
     { title: "Why Start a Digital Garden?", completed: false },
   ];
 
   return (
     <div className="py-2">
       <h3 className="text-sm font-medium mb-3">
-      A list of a few of my most recent writings:
+      A list of a few of my most recent essays:
       </h3>
 
       <ol className="space-y-1.5 list-decimal pl-6">

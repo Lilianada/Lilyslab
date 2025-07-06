@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { safeFormatDate } from '@/lib/utils';
 
-export type Writing = {
+export type Essay = {
   slug: string;
   title: string;
   createdAt: string;
@@ -16,22 +16,22 @@ export type Writing = {
   type: string;
 };
 
-const writingsDir = path.join(process.cwd(), 'Content/writings');
+const essaysDir = path.join(process.cwd(), 'Content/essays');
 
-export function getAllWritings(): Writing[] {
-  const writingsPath = path.join(process.cwd(), "Content/writings")
+export function getAllEssays(): Essay[] {
+  const essaysPath = path.join(process.cwd(), "Content/essays")
 
-  if (!fs.existsSync(writingsPath)) {
-    console.warn("Writings folder not found:", writingsPath)
+  if (!fs.existsSync(essaysPath)) {
+    console.warn("Essays folder not found:", essaysPath)
     return []
   }
 
-  const files = fs.readdirSync(writingsPath)
+  const files = fs.readdirSync(essaysPath)
 
   return files
     .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
     .map(file => {
-      const filePath = path.join(writingsPath, file);
+      const filePath = path.join(essaysPath, file);
       const raw = fs.readFileSync(filePath, 'utf-8');
       const { data, content } = matter(raw);
 
@@ -55,7 +55,7 @@ export function getAllWritings(): Writing[] {
         type: data.type || 'evergreen',
       };
     })
-    .filter(writing => writing.published === true)
+    .filter(essay => essay.published === true)
     .sort((a, b) => {
       // Convert to Date objects for safe comparison
       const dateA = new Date(a.createdAt);
@@ -66,8 +66,8 @@ export function getAllWritings(): Writing[] {
     });
 }
 
-export function getWritingBySlug(slug: string): Writing | null {
-  const filePath = path.join(writingsDir, `${slug}.md`);
+export function getEssayBySlug(slug: string): Essay | null {
+  const filePath = path.join(essaysDir, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
 
   const raw = fs.readFileSync(filePath, 'utf-8');

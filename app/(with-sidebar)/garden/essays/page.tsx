@@ -1,25 +1,25 @@
 import { Annoyed } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
-import { getAllWritings } from "@/lib/garden/writings"
-import type { Writing } from "@/lib/garden/writings"
+import { getAllEssays } from "@/lib/garden/essays"
+import type { Essay } from "@/lib/garden/essays"
 import TagFilterClient from "./TagFilterClient"
 
 export const revalidate = 3600 // Revalidate every hour
 
-export default async function WritingPage() {
-  let posts: Writing[] = []
+export default async function EssayPage() {
+  let posts: Essay[] = []
   let error: string | null = null
 
   try {
-    console.log("Fetching writings...")
-    posts = getAllWritings()
-    console.log(`Fetched ${posts.length} writings`)
+    console.log("Fetching essays...")
+    posts = getAllEssays()
+    console.log(`Fetched ${posts.length} essays`)
   } catch (err) {
-    console.error("Error in WritingPage:", err)
+    console.error("Error in EssayPage:", err)
     if (typeof err === "object" && err && "message" in err) {
-      error = (err as { message?: string }).message || "An error occurred while fetching writings"
+      error = (err as { message?: string }).message || "An error occurred while fetching essays"
     } else {
-      error = "An error occurred while fetching writings"
+      error = "An error occurred while fetching essays"
     }
   }
 
@@ -28,7 +28,7 @@ export default async function WritingPage() {
       <div className="container max-w-2xl mx-auto p-0 sm:px-4 pt-16 pb-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
-          <h1 className="text-xl font-medium mb-2">Writings</h1>
+          <h1 className="text-xl font-medium mb-2">Essays</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: 2025-04-10</div>
             <div>Last updated: 2025-06-29</div>
@@ -43,13 +43,13 @@ export default async function WritingPage() {
             <p className="text-muted-foreground mb-4 text-sm">{error}</p>
           </div>
         ) : posts.length > 0 ? (
-          <TagFilterClient writings={posts} />
+          <TagFilterClient essays={posts} />
         ) : (
           <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">
             <Annoyed size={16} />
-            <h2 className="mt-2 text-base font-medium mb-2">No Writings Found</h2>
+            <h2 className="mt-2 text-base font-medium mb-2">No Essays Found</h2>
             <p className="text-muted-foreground mb-4 text-sm">
-              There are no writings available yet.
+              There are no essays available yet.
             </p>
           </div>
         )}

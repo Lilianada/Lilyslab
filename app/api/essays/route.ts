@@ -4,8 +4,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import { safeFormatDate } from '@/lib/utils';
 
-// Directly using the Writing type
-export interface Writing {
+// Directly using the Essay type
+export interface Essay {
   slug: string;
   title: string;
   createdAt: string;
@@ -19,28 +19,28 @@ export interface Writing {
 }
 
 export async function GET() {
-  const writingsPath = path.join(process.cwd(), "Content/writings");
-  const writings: Writing[] = [];
+  const essaysPath = path.join(process.cwd(), "Content/essays");
+  const essays: Essay[] = [];
 
   try {
     let files;
     try {
-      files = await fs.readdir(writingsPath);
+      files = await fs.readdir(essaysPath);
     } catch (error) {
-      console.warn("Writings folder not found:", writingsPath);
+      console.warn("Essays folder not found:", essaysPath);
       return NextResponse.json([]);
     }
 
     for (const file of files) {
       if (!file.endsWith('.md') && !file.endsWith('.mdx')) continue;
 
-      const filePath = path.join(writingsPath, file);
+      const filePath = path.join(essaysPath, file);
       const raw = await fs.readFile(filePath, 'utf-8');
       const { data, content } = matter(raw);
 
       const published = data.published === true;
       
-      // Skip unpublished writings
+      // Skip unpublished essays
       if (!published) continue;
       
       // Handle dates safely
@@ -48,7 +48,7 @@ export async function GET() {
       const createdAt = safeFormatDate(createdAtValue);
       const lastUpdated = safeFormatDate(data.lastUpdated || createdAtValue);
 
-      writings.push({
+      essays.push({
         slug: file.replace(/\.mdx?$/, ''),
         title: data.title || 'Untitled',
         createdAt,
@@ -63,15 +63,15 @@ export async function GET() {
     }
 
     // Sort newest first
-    writings.sort((a, b) => {
+    essays.sort((a: Essay, b: Essay) => {
       const dateA = new Date(a.createdAt);
       const dateB = new Date(b.createdAt);
       return dateB.getTime() - dateA.getTime();
     });
 
-    return NextResponse.json(writings);
+    return NextResponse.json(essays);
   } catch (error) {
-    console.error("Error in writings API route:", error);
-    return NextResponse.json({ error: 'Failed to load writings data' }, { status: 500 });
+    console.error("Error in essays API route:", error);
+    return NextResponse.json({ error: 'Failed to load essays data' }, { status: 500 });
   }
 }

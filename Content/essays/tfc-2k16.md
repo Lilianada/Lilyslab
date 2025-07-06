@@ -23,100 +23,100 @@ So for those who have been asking what TFC is all about, this is it. [P.S. The i
 
 **These are the snapshots**⏬⏬
 
-![Black Girls Rock](/images/writings/dsc_95441.jpg)
+![Black Girls Rock](/images/essays/dsc_95441.jpg)
 
-![Melanin Queens](/images/writings/dsc_9751.jpg)
+![Melanin Queens](/images/essays/dsc_9751.jpg)
 
-![Ahrmeenarh](/images/writings/dsc_95132.jpg)
+![Ahrmeenarh](/images/essays/dsc_95132.jpg)
 
 Yellow off-shoulder top
 Black marled pencil skirt
 Black beaded choker and silver necklace
 Black buckle heel
 
-![Favour](/images/writings/dsc_95021.jpg)
+![Favour](/images/essays/dsc_95021.jpg)
 
 White off-shoulder top
 Ash marled-mock pencil skirt
 Nike sneakers
 White neck choker
 
-![Stephanie](/images/writings/dsc_9525.jpg)
+![Stephanie](/images/essays/dsc_9525.jpg)
 
 Red slitted body-con skirt and blouse
 Black pump zip-up heels
 
-![Lilian](/images/writings/dsc_95611.jpg)
+![Lilian](/images/essays/dsc_95611.jpg)
 
 Yellow off-shoulder top
 Black skirt
 Red furry heels
 Beautiful smile
 
-![Black marled-mock body-con dress](/images/writings/dsc_9723.jpg)
+![Black marled-mock body-con dress](/images/essays/dsc_9723.jpg)
 
 Black marled-mock body-con dress
 Black handbag
 Brown pump zip-up heels
 
-![Sky-blue marled-mock body-con dress](/images/writings/dsc_96931.jpg)
+![Sky-blue marled-mock body-con dress](/images/essays/dsc_96931.jpg)
 
 Sky-blue marled-mock body-con dress
 Red purse
 Red heels
 Silver bracelet
 
-![Red marled-mock body-con dress](/images/writings/img_20161205_175655.jpg)
+![Red marled-mock body-con dress](/images/essays/img_20161205_175655.jpg)
 
 Red marled-mock body-con dress
 White Chanel bag
 Black heels
 Necklace, wristwatch, bracelet and ring
 
-![Marled-mock body-con dress](/images/writings/dsc_9715.jpg)
+![Marled-mock body-con dress](/images/essays/dsc_9715.jpg)
 
 Marled-mock body-con dress
 Brown Chanel bag
 Brown furry heels
 
-![Multi-colored body-con dress](/images/writings/dsc_9570.jpg)
+![Multi-colored body-con dress](/images/essays/dsc_9570.jpg)
 Red pump-pump heels
 Necklace
 
-![Black body-con dress](/images/writings/dsc_9552.jpg)
+![Black body-con dress](/images/essays/dsc_9552.jpg)
 
 Black body-con dress
 Army-Green heels
 
-![Black leather dress](/images/writings/dsc_9556.jpg)
+![Black leather dress](/images/essays/dsc_9556.jpg)
 
 Black leather dress
 Nike canvas
 
-![Black button-down dress](/images/writings/dsc_9789.jpg)
+![Black button-down dress](/images/essays/dsc_9789.jpg)
 
 Black button-down dress
 Black trouser
 All-star wedge shoe
 
-![Washed denim jean button-down dress](/images/writings/dsc_98411.jpg)
+![Washed denim jean button-down dress](/images/essays/dsc_98411.jpg)
 
 Washed denim jean button-down dress
 Golden sandals
 Pink wristwatch
 
-![Oversized floral tee-shirt](/images/writings/dsc_97732.jpg)
+![Oversized floral tee-shirt](/images/essays/dsc_97732.jpg)
 
 Oversized floral tee-shirt
 Washed denim ripped jean
 Yeezy boots
 Beaded choker
 
-![Blue up & down trainers](/images/writings/dsc_98662.jpg)
+![Blue up & down trainers](/images/essays/dsc_98662.jpg)
 Black boots
 Some juice💧💧💧
 
-![Covenant](/images/writings/dsc_9909.jpg)
+![Covenant](/images/essays/dsc_9909.jpg)
 
 Blue suit jacket
 White tee
@@ -125,20 +125,20 @@ White boots
 
 Get me a man dressed this way😍😍
 
-![Sam](/images/writings/dsc_9888.jpg)
+![Sam](/images/essays/dsc_9888.jpg)
 
 - White tee
 - Black polo
 - Black trouser
 - Black boots
 
-![Black shirt](/images/writings/dsc_9862.jpg)
+![Black shirt](/images/essays/dsc_9862.jpg)
 
 Black shirt
 Denim ripped jean
 Golden boots
 
-![Chuba](/images/writings/dsc_9857.jpg)
+![Chuba](/images/essays/dsc_9857.jpg)
 
 😰😰😰😰
 

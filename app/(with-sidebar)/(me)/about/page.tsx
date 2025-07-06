@@ -118,7 +118,7 @@ export default function AboutPage() {
                   </Link>{" "}
                   <br />
                   ⎯ I love to code, go to the gym, read and{" "}
-                  <Link href="/garden/writings" className="text-siteGreen underline">
+                  <Link href="/garden/essays" className="text-siteGreen underline">
                     write
                   </Link>{" "}
                   <br />

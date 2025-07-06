@@ -9,7 +9,7 @@ type: evergreen
 published: true
 ---
 
-You can agree with me that two truths can co-exist. There is an [overload of information](/garden/writings/information-overload) and there's also poor information diet. It is true that we have an endless stream of content being pushed out on a daily basis but we have to be weary about how we engage or consume those content.
+You can agree with me that two truths can co-exist. There is an [overload of information](/garden/essays/information-overload) and there's also poor information diet. It is true that we have an endless stream of content being pushed out on a daily basis but we have to be weary about how we engage or consume those content.
 
 The same way there's a ton of food variety to pick from but you choose to eat only unprocessed food and farm grown food is the same way you can choose to curate the kind of content you consume or capture. Quantity is no longer a problem due to the overload, the issue is now about **quality**. 
 

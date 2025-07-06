@@ -35,7 +35,7 @@ This is my personal digital space where I share:
 - `/resources` - Useful Tools and Resources
 
  **Garden**
-- `/garden/writings` - Essays and Long-form Writing
+- `/garden/essays` - Essays and Long-form Writing
 - `/garden/notes` - Notes and Thoughts
 - `/garden/bookshelf` - Reading List
 - `/garden/micro-blog` - Short-form Thoughts
@@ -51,9 +51,9 @@ This is my personal digital space where I share:
 - Various interactive experiments and tools
 
 **Collections**
-- `/archives` - Previous Writings and Notes
+- `/archives` - Previous Essays and Notes
 📚 **Collections**
-- `/archives` - Previous Writings and Notes
+- `/archives` - Previous Essays and Notes
 - `/then` - Archive of past Now Page updates
 
 **IndieWeb**

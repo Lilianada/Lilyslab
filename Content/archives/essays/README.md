@@ -1,10 +1,10 @@
-# Writings Archive
+# Essays Archive
 
-This directory contains archived writings from before June 2025.
+This directory contains archived essays from before June 2025.
 
 These files have been moved here as part of the content cleanup process to start fresh with non-AI content.
 
-writings/
+essays/
 1. The Strength to Be Myself
 2. what-is-lilyslab
 3. q1-life-update
