@@ -68,7 +68,7 @@ export default function ToolsPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+    <div className="max-w-4xl w-full mx-auto px-4 sm:px-6 py-12">
       <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-1 text-xl font-medium">Tools</h1>
@@ -79,28 +79,42 @@ export default function ToolsPage() {
       </header>
 
       {/* Search and Filter UI */}
-      <div className="mb-8 space-y-4">
-        <Input
-          type="text"
-          placeholder="Search tools..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className="max-w-sm" // Limit search bar width
-        />
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleCategoryClick(category)}
-              className="text-xs py-0 leading-normal px-4"
-            >
-              {category}
-            </Button>
-          ))}
+      {!isLoading && (
+        <div className="mb-8 space-y-4">
+          <Input
+            type="text"
+            placeholder="Search tools..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="max-w-sm" // Limit search bar width
+          />
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                size="sm"
+                onClick={() => handleCategoryClick(category)}
+                className="text-xs py-0 leading-normal px-4"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Loading skeleton for search and filter */}
+      {isLoading && (
+        <div className="mb-8 space-y-4 animate-pulse">
+          <div className="h-10 w-64 bg-muted rounded-md"></div>
+          <div className="flex flex-wrap gap-2">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <div key={index} className="h-6 w-16 bg-muted rounded-md"></div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Tools Grid or Loading Skeleton */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
