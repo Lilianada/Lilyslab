@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-06-29
-lastUpdated: 2025-06-29
-title: A Substack Collection
+lastUpdated: 2025-07-06
+title: Am I Loving Myself Right?
 published: true
 type: budding
 tags:
