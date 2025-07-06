@@ -1,6 +1,6 @@
 /* Custom markdown styles */
 .markdown-content {
-  @apply text-foreground leading-relaxed prose prose-sm dark:prose-invert max-w-none text-justify mt-4;
+  @apply text-foreground leading-relaxed prose prose-sm dark:prose-invert max-w-none  mt-4;
   @apply [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4;
 }
 

@@ -95,7 +95,7 @@ const MarkdownRenderer = ({
     p: ({ node, className, ...props }: any) => (
       <p 
         className={cn(
-          "text-sm leading-tight mb-4 text-foreground/90",
+          "text-sm leading-tight mb-4 text-foreground/90 ",
           className
         )} 
         {...props} 
