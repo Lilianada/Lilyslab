@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-07-02
 lastUpdated: 2025-07-03
-title: slow-dopamine
+title: Slow Dopamine
 published: true
 tags:
   - dopamine

@@ -1,3 +1,13 @@
+---
+createdAt: 2025-07-05
+lastUpdated: 2025-07-06
+title: Going With the Flow
+published: true
+tags:
+  - productivity
+type: evergreen
+---
+
 Disclaimer: This isn't an essay on relationships. 
 
 Of late, going with the flow for me has been about productivity, creativity and everything in between.
