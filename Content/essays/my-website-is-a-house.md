@@ -27,4 +27,4 @@ My playground and the recreational materials/equipments it contains provides my 
 My website is a sea of endless possibilities built to grow with me.
 
 **References:**
-1. How do you use the internet mindfully by The Creative Independent
+1. [How do you use the internet mindfully](https://cdn.filestackcontent.com/uwoAYjEjQMaG6lIhZyjF) 

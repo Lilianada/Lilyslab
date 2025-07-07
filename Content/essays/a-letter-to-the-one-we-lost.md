@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-07-06
 lastUpdated: 2025-07-06
-title: A Letter to the Deceased
+title: A Letter to the One We Lost
 tags:
   - grief
   - death
@@ -48,3 +48,6 @@ I cried so much while writing this, I had procrastinated doing it but I had to.
 You were loved Ujunwa, and you'll forever be remembered. You were so imperfect but that's what makes us human isn't it? I miss you so much, that I try not to think of you is not because I don't, but rather because I do not need the constant reminder of what has been lost.
 
 **Naa-n'udo.**
+
+Yours Love.
+Nwa gi.

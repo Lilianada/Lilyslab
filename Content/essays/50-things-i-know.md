@@ -12,7 +12,7 @@ type: evergreen
 2. When you look good, you feel good.
 3. Fitness is one place where, as long as you put in the work, you'll definitely see the results.
 4. God's time is 100% different from man's time.
-5. Existing situations that do not favour you will save you so much time and prevent embarrassment.
+5. Exiting situations that do not favour you will save you so much time and prevent embarrassment.
 6. I'm just a girl.
 7. Life doesn't always go as planned.
 8. You can never be too careful.
