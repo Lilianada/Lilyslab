@@ -9,7 +9,6 @@ export interface Book {
   title: string;
   author: string;
   status: 'read' | 'reading' | 'to-read';
-  slug: string;
   date: string;
   rating?: number;
   genre?: string[];
@@ -53,7 +52,6 @@ export function getAllBooks(): Book[] {
         title: data.title,
         author: data.author,
         status: getFolderStatus(folder),
-        slug,
         date: data.date,
         rating: data.rating,
         genre: Array.isArray(data.genre) ? data.genre : data.genre ? [data.genre] : undefined,

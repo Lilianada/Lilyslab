@@ -9,7 +9,6 @@ import { formatTimestampToYYMMDD } from "@/lib/utils";
 
 interface Book {
   id: string;
-  slug: string;
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
@@ -47,7 +46,7 @@ export default function BookshelfDetailPage() {
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
         const allBooks: Book[] = await response.json();
-        const foundBook = allBooks.find(b => b.slug === currentSlug);
+        const foundBook = allBooks.find(b => b.id === currentSlug);
 
         if (foundBook) {
           setBook(foundBook);

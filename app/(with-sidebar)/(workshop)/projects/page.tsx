@@ -55,7 +55,7 @@ const projects = typeof window === "undefined" ? getPublishedProjects() : [];
 export default function WorkshopLogPage() {
   console.log(projects);
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-2xl w-full mx-auto px-4 py-16">
       <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
         <h1 className="mb-2 text-xl font-medium">Projects</h1>

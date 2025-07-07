@@ -6,12 +6,12 @@ import { BookCardSkeleton } from "@/components/digital-garden/bookshelf/BookCard
 // Define the Book type matching the API response (should match API and BookCardMain)
 interface Book {
   id: string;
-  slug: string;
   title: string;
   status: 'current-reads' | 'read' | 'will-read';
   rating?: number;
   genre?: string;
   date?: number;
+  url?: string; // URL to essay or note review
 }
 
 export default function BookshelfPage() {
