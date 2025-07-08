@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-07-06
-lastUpdated: 2025-07-06
+lastUpdated: 2025-07-07
 title: A Letter to the One We Lost
 tags:
   - grief
