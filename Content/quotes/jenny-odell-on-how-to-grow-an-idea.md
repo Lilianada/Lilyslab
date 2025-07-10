@@ -1,9 +1,6 @@
 ---
 date: 2025-06-26
 author: Jenny Odell
-tags:
-  - ideas
-  -
 published: true
 ---
 
