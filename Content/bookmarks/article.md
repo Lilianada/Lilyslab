@@ -1649,7 +1649,7 @@ publish: true
 publish: true
 title: Boring Ways to Become More Creative
 url: https://markmanson.net/boring-ways-to-become-more-creative
-createdAt: 2025-07-07
+createdAt: 2025-07-05
 tags:
   - creativity
   - self-expression
@@ -1661,7 +1661,7 @@ id: article-135
 publish: true
 title: How to Wage Philosophical Warfare
 url: https://markmanson.net/how-to-wage-philosophical-warfare
-createdAt: 2025-07-07
+createdAt: 2025-07-05
 tags:
   - philosophy
 type: article

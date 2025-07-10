@@ -45,3 +45,45 @@ category: personal
 id: personal-003
 notes: "Owner of barnsworthburning"
 ---
+
+---
+publish: true
+title: Flower in Binary
+url: https://flowerinbinary.neocities.org/home
+date: 2025-07-10
+tags:
+  - personal-website
+  - creative
+  - art
+type: webroll
+category: personal
+id: personal-004
+---
+
+---
+publish: true
+title: Plunch
+url: https://plunch.de/
+date: 2025-07-10
+tags:
+  - personal-website
+  - creative
+  - portfolio
+type: webroll
+category: personal
+id: personal-005
+---
+
+---
+publish: true
+title: Melvian Artist
+url: https://melvian.net/artist/
+date: 2025-07-10
+tags:
+  - personal-website
+  - art
+  - artist
+type: webroll
+category: personal
+id: personal-006
+---

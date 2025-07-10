@@ -427,7 +427,7 @@ id: website-034
 publish: true
 title: Productivity AI Prompt
 url: https://docsbot.ai/prompts/productivity/bookmarks-spa-with-crud
-createdAt: 2025-07-07
+createdAt: 2025-06-30
 tags:
   - ai
   - productivity
@@ -439,7 +439,7 @@ id: website-035
 publish: true
 title:  Doodles on Sticky Notes
 url: https://ribo.zone/sticky/note
-createdAt: 2025-07-07
+createdAt: 2025-07-02
 tags:
   - art
   - self-expression
