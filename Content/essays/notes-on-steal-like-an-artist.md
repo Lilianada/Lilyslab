@@ -56,3 +56,5 @@ What unifies all the work is that you made them.
 
 **Read:** Reverse Engineering.
 
+**Reference:**
+1. Steal Like An Arist by Austin Kleon
