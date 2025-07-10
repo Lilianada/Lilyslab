@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
 import { Footer } from "@/components/layout/footer";
-import { BookOpen, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const placeholderImage = "/images/book-placeholder.jpg"; // You'll need to add this image
@@ -13,7 +13,6 @@ export default function Page() {
   const books = getAllBooks();
   const readingBooks = books.filter((book) => book.status === "reading");
   const readBooks = books.filter((book) => book.status === "read");
-  const toReadBooks = books.filter((book) => book.status === "to-read");
 
   return (
     <>
@@ -30,14 +29,14 @@ export default function Page() {
               <div>Inspired by: Digital Gardens</div>
             </div>
             <p className="text-sm text-muted-foreground mt-2">
-              A collection of books I've read, am reading, or plan to read.
+              A collection of books I've read and am reading.
             </p>
           </header>
 
           {readingBooks.length > 0 && (
             <section className="mb-8">
               <div className="flex items-center gap-2 mb-3">
-                <BookOpen className="h-4 w-4 text-primary" />
+                <Star className="h-4 w-4 text-primary" />
                 <h2 className="text-base font-medium">Currently Reading</h2>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
@@ -56,20 +55,6 @@ export default function Page() {
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {readBooks.map((book) => (
-                  <BookCard key={book.id} book={book} />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {toReadBooks.length > 0 && (
-            <section>
-              <div className="flex items-center gap-2 mb-3">
-                <BookOpen className="h-4 w-4 text-muted-foreground" />
-                <h2 className="text-base font-medium">Want to Read</h2>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {toReadBooks.map((book) => (
                   <BookCard key={book.id} book={book} />
                 ))}
               </div>

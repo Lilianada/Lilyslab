@@ -21,14 +21,13 @@ export interface Book {
 function getFolderStatus(folder: string): Book['status'] {
   switch (folder) {
     case 'read': return 'read';
-    case 'reading': return 'reading';
-    case 'to-read': return 'to-read';
+    case 'current-reads': return 'reading';
     default: throw new Error(`Unknown folder status: ${folder}`);
   }
 }
 
 export function getAllBooks(): Book[] {
-  const folders = ['read', 'reading', 'to-read'];
+  const folders = ['read', 'current-reads'];
   const books: Book[] = [];
 
   for (const folder of folders) {
