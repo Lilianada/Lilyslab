@@ -1,5 +1,8 @@
 ---
 date: 2025-06-26
+author: Danny O'Brien
+published: true
+---e: 2025-06-26
 author: Danny O’Brien
 tags:
   - ideas

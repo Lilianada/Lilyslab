@@ -1644,3 +1644,38 @@ tags:
 type: article
 publish: true
 ---
+
+---
+publish: true
+title: Boring Ways to Become More Creative
+url: https://markmanson.net/boring-ways-to-become-more-creative
+createdAt: 2025-07-05
+tags:
+  - creativity
+  - self-expression
+type: article
+id: article-135
+---
+
+---
+publish: true
+title: How to Wage Philosophical Warfare
+url: https://markmanson.net/how-to-wage-philosophical-warfare
+createdAt: 2025-07-05
+tags:
+  - philosophy
+type: article
+id: article-136
+---
+
+---
+publish: true
+title: Fitness Learnings Opinions
+url: https://reeswrites.com/posts/fitness-learnings-opinions/
+createdAt: 2025-07-07
+tags:
+  - fitness
+  - health
+type: article
+id: article-137
+---

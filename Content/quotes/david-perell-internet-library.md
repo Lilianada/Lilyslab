@@ -1,10 +1,6 @@
 ---
 date: 2025-06-20
 author: David Perell
-tags:
-  - internet
-  - learning
-  - networking
 published: true
 ---
 

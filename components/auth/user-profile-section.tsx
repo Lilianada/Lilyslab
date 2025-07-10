@@ -66,11 +66,14 @@ export function UserProfileSection() {
     <div className="mt-auto animate-fade-in">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="w-full justify-start gap-2 text-xs">
+          <Button variant="ghost" size="sm" className="w-full justify-start gap-2 text-xs bg-purple-300 dark:bg-purple-900 text-purple-800 dark:text-purple-200 hover:bg-purple-400 dark:hover:bg-purple-800">
             {isAdmin ? (
-              <span className=" text-purple-100 dark:bg-purple-900 dark:text-purple-200 flex items-center ">
-                <Crown size={12} className="mr-1" /> Admin
-              </span>
+                <div className="flex items-center justify-center">
+                  <Crown size={14} className="text-purple-800 dark:text-purple-200" />
+                <div className="ml-2">
+                  <p className="text-xs font-medium">Admin</p>
+                </div>
+              </div>
             ) : (
               <>
                 {user.photoURL ? (
@@ -95,17 +98,6 @@ export function UserProfileSection() {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-background">
           <div className="flex items-center justify-start gap-2 p-2">
-            {isAdmin ? (
-              <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-                  <Crown size={16} className="text-purple-800 dark:text-purple-200" />
-                </div>
-                <div className="ml-2">
-                  <p className="text-xs font-medium">Admin</p>
-                  <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
-                </div>
-              </div>
-            ) : (
               <>
                 {user.photoURL ? (
                   <Image
@@ -125,7 +117,6 @@ export function UserProfileSection() {
                   <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
                 </div>
               </>
-            )}
           </div>
           <DropdownMenuSeparator />
           <DropdownMenuItem

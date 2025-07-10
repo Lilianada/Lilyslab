@@ -422,3 +422,106 @@ tags:
 type: website
 id: website-034
 ---
+
+---
+publish: true
+title: Productivity AI Prompt
+url: https://docsbot.ai/prompts/productivity/bookmarks-spa-with-crud
+createdAt: 2025-06-30
+tags:
+  - ai
+  - productivity
+type: website
+id: website-035
+---
+
+---
+publish: true
+title:  Doodles on Sticky Notes
+url: https://ribo.zone/sticky/note
+createdAt: 2025-07-02
+tags:
+  - art
+  - self-expression
+type: website
+id: website-036
+---
+
+---
+publish: true
+title: Line and Form Art Studio
+url: https://lineandform.studio/
+createdAt: 2025-01-07
+tags:
+  - art
+  - sketches
+  - drawing
+type: website
+id: website-037
+---
+
+---
+publish: true
+title: Sketch Daily
+url: https://sketchdaily.net/
+createdAt: 2025-01-07
+tags:
+  - art
+  - sketches
+  - daily-practice
+type: website
+id: website-038
+---
+
+---
+publish: true
+title: Drawing Reference Gallery
+url: https://drawingreference.com/
+createdAt: 2025-01-07
+tags:
+  - art
+  - drawing
+  - reference
+type: website
+id: website-039
+---
+
+---
+publish: true
+title: The Art Assignment
+url: https://theartassignment.org/
+createdAt: 2025-01-07
+tags:
+  - art
+  - creativity
+  - inspiration
+type: website
+id: website-040
+---
+
+---
+publish: true
+title: Sketch.io
+url: https://sketch.io/
+createdAt: 2025-01-07
+tags:
+  - art
+  - sketches
+  - digital-tools
+type: website
+id: website-041
+---
+
+---
+publish: true
+title: Proko Art Community
+url: https://www.proko.com/
+createdAt: 2025-01-07
+tags:
+  - art
+  - drawing
+  - education
+  - community
+type: website
+id: website-042
+---

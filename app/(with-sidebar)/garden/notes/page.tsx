@@ -182,19 +182,16 @@ export default function NotesPage() {
           
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              "50 things I know",
-              "Atomic notes", 
-              "Budding notes",
-              "Content curation",
+              "50 Things I Know",
+              "Atomic Notes", 
+              "Budding Notes",
+              "Content Curation",
               "Digital Library",
-              "Evergreen notes",
-              "How to create your digital garden",
+              "Evergreen Notes",
+              "How to Create Your Digital Garden",
               "Journaling",
-              "Map of Content",
               "Minimalism",
               "Personal wiki",
-              "Seedlings",
-              "Social Media performance",
               "Why I Read",
               "Why Start a Digital Garden?"
             ].map((topic, index) => (

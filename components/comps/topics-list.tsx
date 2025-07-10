@@ -10,22 +10,20 @@ interface Topic {
 
 export function TopicsList() {
   const topics: Topic[] = [
-    { title: "50 things I know", completed: false },
-    { title: "Atomic notes", completed: false },
-    { title: "Budding notes", completed: false },
-    { title: "Chi", completed: true, url: "/garden/notes/chi" },
-    {
-      title: "Commonplace book",
-      completed: true,
-      url: "/garden/essays/commonplace-book",
-    },
-    { title: "Content curation", completed: false },
     {
       title: "Digital Garden",
       completed: true,
       url: "/garden/essays/digital-garden",
     },
-    { title: "Digital Library", completed: false },
+    { title: "My Digital Garden", completed: true, url: "/garden/essays/my-digital-garden" },
+    { title: "My Website is a House", completed: true, url: "/garden/essays/my-website-is-a-house" },
+    { title: "Why I Write", completed: true, url: "/garden/essays/why-i-write" },
+    {
+      title: "Information Diet",
+      completed: true,
+      url: "/garden/essays/information-diet",
+    },
+    { title: "Rabbitholes", completed: true, url: "/garden/essays/rabbit-holes" },
     {
       title: "Digital Minimalism",
       completed: true,
@@ -36,72 +34,52 @@ export function TopicsList() {
       completed: true,
       url: "/garden/essays/digital-zettelkasten",
     },
-    { title: "Evergreen notes", completed: false },
-    { title: "HTML and CSS", completed: false },
-    { title: "HTML over Jekyll for static websites", completed: false },
-    { title: "How I Create My Wikis", completed: false },
+    {
+      title: "A Letter to the One We Lost",
+      completed: true,
+      url: "/garden/essays/a-letter-to-the-one-we-lost",
+    },
     {
       title: "How I Take My Notes",
       completed: true,
       url: "/garden/essays/how-i-take-my-notes",
     },
-    { title: "How to create your digital garden", completed: false },
-    { title: "Indie developer", completed: false },
-    { title: "IndieWeb", completed: false },
-    { title: "Javascript", completed: false },
-    { title: "Journaling", completed: false },
-    { title: "Map of Content", completed: false },
-    { title: "Minimalism", completed: false },
-    { title: "My Name", completed: false },
+    {
+      title: "Commonplace book",
+      completed: true,
+      url: "/garden/essays/commonplace-book",
+    },
     {
       title: "Personal knowledge management",
       completed: true,
       url: "/garden/notes/personal-knowledge-management",
     },
-    { title: "Personal wiki", completed: false },
-    {
-      title: "Projects as Seedlings",
-      completed: true,
-      url: "/garden/essays/projects-as-seedlings",
-    },
-    { title: "Rabbitholes", completed: true, url: "/garden/essays/rabbit-holes" },
-    {
-      title: "Relationship between Digital Garden and Zettelkasten",
-      completed: false,
-    },
-    { title: "Seedlings", completed: false },
-    { title: "Social Media peformance", completed: false },
-    { title: "Why I Read", completed: false },
-    { title: "Why I Write", completed: true, url: "/garden/essays/why-i-write" },
-    { title: "Why Start a Digital Garden?", completed: false },
+    { title: "IndieWeb Manifesto", completed: true, url: "/manifesto" },
   ];
 
   return (
     <div className="py-2">
       <h3 className="text-sm font-medium mb-3">
-      A list of a few of my most recent essays:
+        Some of my favorite essays and notes:
       </h3>
 
       <ol className="space-y-1.5 list-decimal pl-6">
-      {topics
-        .filter((topic) => topic.completed === true || topic.url)
-        .map((topic, index) => (
-        <li key={index} className="pl-1 relative">
-          <div className="flex items-center gap-2">
-          {topic.completed && topic.url ? (
-            <>
-            <Link href={topic.url} className="text-codeRed hover:underline">
-              {topic.title}
-            </Link>
-            <div className="mx-2 flex-grow border-b border-dashed border-muted-foreground/30"></div>
-            <span className="text-xs text-muted-foreground">Read</span>
-            </>
-          ) : (
-            <span className="text-muted-foreground">{topic.title}</span>
-          )}
-          </div>
-        </li>
-        ))}
+        {topics
+          .filter((topic) => topic.completed === true || topic.url)
+          .map((topic, index) => (
+            <li key={index} className="pl-1 relative">
+              {topic.completed && topic.url && (
+                <Link href={topic.url} className="text-codeRed hover:underline flex items-center gap-2">
+                  <>
+                    {topic.title}
+
+                    <div className="mx-2 flex-grow border-b border-dashed border-muted-foreground/30"></div>
+                    <span className="text-xs text-muted-foreground">Read</span>
+                  </>
+                </Link>
+              )}
+            </li>
+          ))}
       </ol>
     </div>
   );
