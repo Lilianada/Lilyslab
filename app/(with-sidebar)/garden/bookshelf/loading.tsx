@@ -42,19 +42,6 @@ export default function BookshelfLoading() {
             ))}
           </div>
         </section>
-
-        {/* Want to Read Section */}
-        <section>
-          <div className="flex items-center gap-2 mb-3">
-            <BookOpen className="h-4 w-4 text-muted-foreground" />
-            <h2 className="text-base font-medium">Want to Read</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <BookCardSkeleton key={`toread-${index}`} />
-            ))}
-          </div>
-        </section>
         
         <Footer />
       </div>

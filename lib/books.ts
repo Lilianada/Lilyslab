@@ -22,13 +22,12 @@ function getFolderStatus(folder: string): Book['status'] {
   switch (folder) {
     case 'read': return 'read';
     case 'current-reads': return 'reading';
-    case 'will-read': return 'to-read';
     default: throw new Error(`Unknown folder status: ${folder}`);
   }
 }
 
 export function getAllBooks(): Book[] {
-  const folders = ['read', 'current-reads', 'will-read'];
+  const folders = ['read', 'current-reads'];
   const books: Book[] = [];
 
   for (const folder of folders) {
