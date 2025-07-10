@@ -1,6 +1,13 @@
 ---
 createdAt: 2025-06-29
 lastUpdated: 2025-06-29
+title: Why I Let My Plants Die
+tags:
+  - Plants
+  - Love
+  - Self
+type: evergreen
+published: true
 ---
 
 I really want to understand why I let my plants die.
@@ -17,7 +24,7 @@ Not until my mental and physical health started deteriorating due to lack of lov
 It affected my output of love and care to my plants.
 I saw and watched them wilt one leaf at a time.
 The water in the bottles changed color from clear to yellow and some to green. The spirogyra had no mercy too as they made the water filthy.
-Not until writing this, I realised input matters. You can't give what you don't have or what you lack. When it became obvious that I lacked love was when my plants started to suffer. 
+Not until writing this, I realized input matters. You can't give what you don't have or what you lack. When it became obvious that I lacked love was when my plants started to suffer. 
 This isn't just about external love being received, it is also about internal love which is within.
 Do I love myself? 
 Do I show enough care to myself?
