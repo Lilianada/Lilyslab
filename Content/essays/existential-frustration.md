@@ -1,9 +1,12 @@
 ---
 createdAt: 2025-07-04
+lastUpdated: 2025-07-10
 title: Existential Frustration
 published: true
 tags:
-  - 
+  - self
+  - frustration
+  - existence
 type: evergreen
 ---
 
@@ -26,7 +29,7 @@ The other question "how do you feel with where you are currently in your life?"
 - I feel like I have no motivation to move unto the next stage of my life
 - I do not even know what that next stage is or should be
 
-I know that I am having existential frustration at the moment, but I have no idea what to do to stop the frustration, and find meaning to my life. I also know that the feeling of emptiness is as a result of the lack of a job. The inability to do certain basic things for myself, without relying on someone else, makes me feel inadequate. And this feeling of inadequacies doesn't help but make me feel small.
+I know that I am having existential frustration at the moment, but I have no idea what to do to stop the frustration and find meaning to my life. I also know that the feeling of emptiness is as a result of the lack of a job or do I say, the lack of passion for something. The inability to do certain basic things for myself, without relying on someone else, makes me feel inadequate. And this feeling of inadequacies doesn't help but make me feel small.
 
 As I get older, I realize that, the life I was rushing to grow up, and experience, is a lot more harder than I had thought it to be. Someone said something to me a few weeks back that not only brought me to face reality, it felt like, getting whipped with the canes used on cows. He said to me, "No one is coming to save you. I repeat, no one is coming to save you.". And that's the reality of adulthood, you have to take charge and save yourself, because, indeed, no one is coming to save you. Another truth is, while trying to save yourself, you can seek help when you can't do it alone. 
 
