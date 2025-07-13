@@ -1,6 +1,8 @@
 ---
 createdAt: 2025-06-26
 lastUpdated: 2025-06-26
+source: https://macwright.com/2019/02/06/how-to-blog.html
+title: How to blog
 ---
 
 **Write what you’d like to read, and embrace the edit**
