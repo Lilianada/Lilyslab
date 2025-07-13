@@ -1,0 +1,7 @@
+In his short but prolific career, Basquiat produced around 1,500 drawings, around 600 paintings, and many sculpture and mixed media works.
+
+Matilde instilled a love for art in her young son by taking him to local art museums and enrolling him as a junior member of the Brooklyn Museum of Art. Basquiat was a precocious child who learned to read and write by the age of four. His mother encouraged her son's artistic talent and he often tried to draw his favorite cartoons. In 1967, he started attending Saint Ann's School, a private school. There he met his friend Marc Prozzo and together they created a children's book, written by Basquiat at the age of seven and illustrated by Prozzo. 
+
+By the age of eleven, Basquiat was fluent in French, Spanish and English, and an avid reader of all three languages. In the 10th grade, he enrolled at City-As-School High School, an alternative high school in Manhattan, home to many artistic students who found conventional schooling difficult.
+
+Art critic Franklin Sirmans analyzed that Basquiat appropriated poetry, drawing, and painting, and married text and image, abstraction, figuration, and historical information mixed with contemporary critique. His social commentary was acutely political and direct in its criticism of colonialism and support for class struggle. He also explored artistic legacies from wide sources, including an interrogation of the classical tradition.
