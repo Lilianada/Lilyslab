@@ -462,7 +462,7 @@ id: website-037
 
 ---
 publish: true
-title: Jordan K Lancaster Art
+title: Jordan's Art Website
 url: https://www.jordanklancaster.com/art
 createdAt: 2025-07-13
 tags:
