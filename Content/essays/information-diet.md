@@ -9,9 +9,9 @@ type: evergreen
 published: true
 ---
 
-You can agree with me that two truths can co-exist. There is an [overload of information](/garden/essays/information-overload) and there's also poor information diet. It is true that we have an endless stream of content being pushed out on a daily basis but we have to be weary about how we engage or consume those content.
+You can agree with me that two truths can co-exist. There is an [overload of information](/garden/essays/information-overload) and there's also poor information diet. It is true that we have an endless stream of contents being pushed out on a daily basis but we have to be weary about how we engage or consume those contents.
 
-The same way there's a ton of food variety to pick from but you choose to eat only unprocessed food and farm grown food is the same way you can choose to curate the kind of content you consume or capture. Quantity is no longer a problem due to the overload, the issue is now about **quality**. 
+The same way there's a variety of food to choose from but you choose to eat only unprocessed food and farm grown food is the same way you can choose to curate the kind of content you consume or capture. Quantity is no longer a problem due to the overload, the issue is now about **quality**. 
 
 In order to be able to select quality content to capture, it is ideal to keep a list of things (I suggest open ended questions that you need answers to) that you are interested in or need answers to. This will help you filter what you should be consuming from what you shouldn't.
 
