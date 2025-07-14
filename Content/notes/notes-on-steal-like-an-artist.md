@@ -6,7 +6,7 @@ tags:
   - productivity
   - creativity
 published: true
-type: evergreen
+type: budding
 ---
 
 Steal like an artist is a book that isn't just for artists alone. 
