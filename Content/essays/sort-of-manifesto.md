@@ -9,6 +9,7 @@ tags:
 type: evergreen
 published: true
 ---
+
 LinkedIn is a professional platform, indeed it is. But it now lacks originality, adventure and style. We might all be trying to position ourselves as an individual with unique skills, experiences and value. But how can we do that properly when we all write the same, design and talk the same?
 
 Personally, I write for the following reasons:
