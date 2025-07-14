@@ -18,7 +18,7 @@ I had found his website almost a year ago and was completely intrigued by it. It
 This website started as a **Copy**, a patchwork of several other websites. Overtime, with iteration and intention, it evolved into a unique and original masterpiece. 
 
 
-## The Myth 
+### The Myth 
 
 Ideas do not come from a vaccum, they come as a result of seredipitous encounters and collaboration between a person and an experience, a thing, or another person. We often times think that being creative means coming up with and manufacturing new ideas from *within* our head but that is very much incorrect. 
 
@@ -31,7 +31,7 @@ For your work to standout as **"creative"**, it must posses the three elements o
 2. **Transform** 
 3. **Combine**
 
-## Copy, Better Still, Steal
+### Copy, Better Still, Steal
 
 The networked approach of connecting existing things together in creative ways is how new ideas are formed and this is what brings about new things. 
 
@@ -54,7 +54,7 @@ In content creation, many content creators advice new creators to remix viral co
 To steal, you need to figure out what to steal, then steal from several persons. This means that your work can start off as an imitation and when you imitate a person's work, you don't just copy their work or style, copy the thinking behind the work. 
 
 
-## Transform and Combine
+### Transform and Combine
 
 Identify what makes your imitation weak, and just like I did with my website, iterate the imitation until it becomes original. Take from others, put it in your own voice until you find your voice. Copying someone’s work might be a bad idea but don’t worry it’s merely a starting point.
 
@@ -62,7 +62,7 @@ You might be waiting for that light bulb moment, but it takes hard work to get t
 
 This site, like all good work, is a remix. It's not magic, it's simply magical.
 
->“Everything that needs to be said has already been said. But since no one was listening, everything must be said again.”
+>Everything that needs to be said has already been said. But since no one was listening, everything must be said again.
 ― André Gide
 
 
