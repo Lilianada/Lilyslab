@@ -1,7 +1,7 @@
 ---
 title: Selfcare and Wellbeing
 createdAt: 2025-06-21
-lastUpdated: 2025-06-2
+lastUpdated: 2025-06-21
 tags:
   - wellbeing
   - self-care

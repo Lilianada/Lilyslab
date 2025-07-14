@@ -1,3 +1,15 @@
+---
+title: An Orchestra of Minorities
+tags:
+  - fiction
+createdAt: 2025-06-22
+lastUpdated: 2025-07-14
+type: evergreen
+published: true
+--- 
+
+https://i.pinimg.com/736x/7d/04/4c/7d044cd5cf8263d4efa0db83deaa39b4.jpg
+
 This isn't necessarily a review of the book, it's my notes and reflection on what I read.
 An Orchestra of Minorities is a well written work. I don't know what the meter used in measuring good literature is like, but I do know that I personally liked this book.
 I picked it up when I found out that, the same author who had written *Fishermen* had written this too. I enjoyed the plot and storyline for *Fishermen* that giving this a read felt like a good deal.
