@@ -449,79 +449,52 @@ id: website-036
 
 ---
 publish: true
-title: Line and Form Art Studio
-url: https://lineandform.studio/
-createdAt: 2025-01-07
+title: Mari Andrew Archive
+url: https://mariandrew.substack.com/archive
+createdAt: 2025-07-13
 tags:
   - art
   - sketches
-  - drawing
+  - drawings
 type: website
 id: website-037
 ---
 
 ---
 publish: true
-title: Sketch Daily
-url: https://sketchdaily.net/
-createdAt: 2025-01-07
+title: Jordan K Lancaster Art
+url: https://www.jordanklancaster.com/art
+createdAt: 2025-07-13
 tags:
   - art
   - sketches
-  - daily-practice
+  - drawings
 type: website
 id: website-038
 ---
 
 ---
 publish: true
-title: Drawing Reference Gallery
-url: https://drawingreference.com/
-createdAt: 2025-01-07
+title: How to Start a Sketchbook
+url: https://www.milenamilak.com/blog/how-to-start-a-sketchbook
+createdAt: 2025-07-13
 tags:
   - art
-  - drawing
-  - reference
+  - sketches
+  - drawings
 type: website
 id: website-039
 ---
 
 ---
 publish: true
-title: The Art Assignment
-url: https://theartassignment.org/
-createdAt: 2025-01-07
-tags:
-  - art
-  - creativity
-  - inspiration
-type: website
-id: website-040
----
-
----
-publish: true
-title: Sketch.io
-url: https://sketch.io/
-createdAt: 2025-01-07
+title: Wyle Sol Sketchbook
+url: http://wylesol.com/#/sketchbook/
+createdAt: 2025-07-13
 tags:
   - art
   - sketches
-  - digital-tools
+  - drawings
 type: website
-id: website-041
----
-
----
-publish: true
-title: Proko Art Community
-url: https://www.proko.com/
-createdAt: 2025-01-07
-tags:
-  - art
-  - drawing
-  - education
-  - community
-type: website
-id: website-042
+id: website-040
 ---

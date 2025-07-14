@@ -7,7 +7,7 @@ import { useLocalStorage } from "@/hooks/use-local-storage";
 import { ClientOnly } from "@/components/hydration/client-only";
 
 // Simple configuration
-const AUDIO_FILE = "/audio/wherehaveallthecowboysgone.mp3";
+const AUDIO_FILE = "/audio/track8.mp3";
 const LOCAL_STORAGE_KEY = "music_player_paused";
 const COLOR_VARS = [
   "--lavender",
