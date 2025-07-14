@@ -1,7 +1,7 @@
 ---
 title: How I Write Well
 createdAt: 2025-07-13
-lastUpdated: 2025-07-13
+lastUpdated: 2025-07-14
 type: evergreen
 tags: 
   - self-expression
