@@ -9,12 +9,12 @@ tags:
   - personal-website
 ---
 
-Building a [[digital garden]] is all fun and games until you have no idea what to add to your website to make it alive, fun and a site fr exploration.
+Building a [[digital garden]] is all fun and games until you have no idea what to add to your website to make it fun and a site for exploration.
 The checklist I provided below contains **approximately 157** distinct items and ideas for your website.
    
 This count includes all essential pages, social/community features, content creation ideas, interactive elements, technical improvements, accessibility, design/art, slash page ideas, and miscellaneous suggestions.
  
-It is a **comprehensive, categorized, and de-duplicated checklist of things you can do on your website**, combining the 82 ideas from James G’s blog, 32 bit Cafe and the additional ideas from my own diary. Feel free to check off what you’ve done or want to do. This list is designed to inspire and help you build a truly unique, personal, and feature-rich website!
+It is a **comprehensive, categorized, and de-duplicated checklist of things you can do on your website**, combining the 82 ideas from [James G’s blog](https://jamesg.blog), [32 bit Cafe] and the additional ideas from my own diary. Feel free to check off what you’ve done or want to do. This list is designed to inspire and help you build a truly unique, personal, and feature-rich website!
   
 
 #### Essential Pages & Site Structure
