@@ -124,6 +124,12 @@
   font-size: 12px;
   line-height: 1rem;
   color: hsl(var(--muted-foreground) / 0.5);
+  scroll-margin-top: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.markdown-content .footnotes li:target {
+  @apply bg-primary/5 rounded-sm px-2 py-1;
 }
 
 .markdown-content .footnotes li::marker {
@@ -132,14 +138,14 @@
 }
 
 .markdown-content .footnotes a {
-  @apply text-primary/70 hover:text-primary;
+  @apply text-primary/70 hover:text-primary transition-colors duration-200;
 }
 
 .markdown-content .footnote-ref a {
   font-size: 12px;
   color: hsl(var(--muted-foreground) / 0.5);
   text-decoration: none;
-  @apply hover:text-primary;
+  @apply hover:text-primary transition-colors duration-200;
 }
 
 .markdown-content .footnote-backref {
@@ -147,5 +153,17 @@
   margin-left: 0.25rem;
   color: hsl(var(--muted-foreground) / 0.5);
   text-decoration: none;
-  @apply hover:text-primary;
+  @apply hover:text-primary transition-colors duration-200;
+}
+
+/* Footnote highlight animation */
+.footnote-highlight {
+  @apply bg-primary/10 rounded-sm px-2 py-1;
+  animation: footnote-pulse 2s ease-in-out;
+}
+
+@keyframes footnote-pulse {
+  0% { background-color: hsl(var(--primary) / 0.2); }
+  50% { background-color: hsl(var(--primary) / 0.1); }
+  100% { background-color: transparent; }
 }

@@ -375,7 +375,7 @@ const MarkdownRenderer = ({
         rehypePlugins={rehypePlugins}
         components={{
           ...components,
-          // Override the 'a' component to handle backlinks specially
+          // Override the 'a' component to handle backlinks and footnotes
           a: ({ node, href, className, ...props }: any) => {
             // Check if this is a backlink (starts with /__backlink/)
             if (href && href.startsWith('/__backlink/')) {
@@ -402,7 +402,46 @@ const MarkdownRenderer = ({
               );
             }
             
-            // Default link behavior for non-backlinks
+            // Check if this is a footnote link (starts with # and contains footnote patterns)
+            if (href && href.startsWith('#')) {
+              const handleFootnoteClick = (e: React.MouseEvent) => {
+                e.preventDefault();
+                const targetId = href.slice(1); // Remove the # prefix
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                  targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                  
+                  // Add a temporary highlight effect to the target element
+                  targetElement.classList.add('footnote-highlight');
+                  setTimeout(() => {
+                    targetElement.classList.remove('footnote-highlight');
+                  }, 2000);
+                  
+                  // Update URL without triggering page refresh
+                  const url = new URL(window.location.href);
+                  url.hash = href;
+                  window.history.pushState({}, '', url);
+                }
+              };
+
+              return (
+                <a 
+                  className={cn(
+                    "text-primary underline underline-offset-4 hover:text-primary/80 transition-colors cursor-pointer",
+                    className
+                  )} 
+                  href={href}
+                  onClick={handleFootnoteClick}
+                  {...props} 
+                />
+              );
+            }
+            
+            // Default link behavior for external links
             return (
               <a 
                 className={cn(
