@@ -1,0 +1,2 @@
+
+Before writing _I Know Why the Caged Bird Sings_ at the age of forty, Maya Angelou had a long and varied career, holding jobs such as a composer, singer, actor, civil rights worker, journalist, and educator.
