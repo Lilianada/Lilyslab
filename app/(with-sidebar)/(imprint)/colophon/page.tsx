@@ -211,8 +211,8 @@ export default function Colophon() {
           </div>
         </div>
       </section>
-    </div>
     <Footer />
+    </div>
     </>
   );
 }
