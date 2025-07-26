@@ -19,5 +19,4 @@ partOfSpeech: noun, adjective
 - aide-memoire
 - memory trick
 
-**Etymology:** 
-From Greek "mnēmonikos" meaning "of or relating to memory," from "mnēmōn" meaning "mindful"
+**Context:**

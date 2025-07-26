@@ -20,6 +20,3 @@ partOfSpeech: noun, adverb
 - cooperatively
 - side by side
 - in collaboration
-
-**Etymology:** 
-From Latin "tandem" meaning "at length" or "finally"
