@@ -1679,3 +1679,55 @@ tags:
 type: article
 id: article-137
 ---
+
+---
+publish: true
+title: Creativity in Art - The Ultimate Overview
+url: https://www.thepointlessartist.com/post/creativity-in-art-the-ultimate-overview
+createdAt: 2025-07-22
+tags:
+  - art
+  - self-expression
+  - creativity
+type: article
+id: article-138
+---
+
+---
+publish: true
+title: How to Doodle Paint - A Daily Practice in 3 Steps
+url: https://www.thepointlessartist.com/post/how-to-doodle-paint-a-daily-practice-in-3-steps
+createdAt: 2025-07-22
+tags:
+  - art
+  - self-expression
+  - creativity
+type: article
+id: article-139
+---
+
+---
+publish: true
+title: Creativity is All About Dots
+url: https://medium.com/100-naked-words/creativity-is-all-about-dots-12406c4b5cc4
+createdAt: 2025-07-22
+tags:
+  - art
+  - self-expression
+  - creativity
+type: article
+id: article-140
+---
+
+---
+publish: true
+title: Unlocking Creativity - Strategies to Develop Your Potential
+url: https://aguayo.co/en/blog-aguayo-user-experience/unlocking-creativity-strategies-to-develop-your-potential/
+createdAt: 2025-07-22
+tags:
+  - art
+  - self-expression
+  - creativity
+type: article
+id: article-141
+---

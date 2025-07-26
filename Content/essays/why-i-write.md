@@ -22,14 +22,17 @@ My objectives for writing are:
 - I write to make reference to things for future use.
 
 
-My motivation for writing is simply for documentation. 
-I read a few things I wrote back in 2017 and 2021 and it made me realise that I write well when I'm not under pressure. I enjoyed reading those writings because it allowed me to re-live whatever I was feeling in the moment. It's like I captured a moment using words and it felt good to read and understand what that moment was like. 
+My motivation for writing is simply for documentation. I read a few things I wrote back in 2017 and 2021 and it made me realise that I write well when I'm not under pressure. I enjoyed reading those writings because it allowed me to re-live whatever I was feeling in the moment. 
 
-With documentation, you are able to relive experiences and emotions, you notice growth and change. You can see how your writing evolved, and for your writing to evolve and become better, it means you started reading and understanding better. Only words and actions can tell how mature a man is or if a man is maturing and the best way to capture[^1] these maturity for the future you is either by constantly recording yourself or writing. And as we all know, writing is the easiest to do.
+It seemdd like I captured a moment using words and it felt good to read and understand what that moment was like. 
+
+With documentation, you are able to relive experiences and emotions, you notice growth and change. You can see how your writing evolved, and for your writing to evolve and become better, it means you started reading and understanding better. 
+
+Only words and actions can tell how mature a man is or if a man is maturing and the best way to capture[^1] these maturity for the future you is either by constantly recording yourself or writing. And as we all know, writing is the easiest to do.
 
 I write for myself but I do it in public because it helps me to stay accountable and stay consistent...
 
-> Re-writing is re-thinking. It’s the best single best way to sharpen your ideas. - David Perell
+> Re-writing is re-thinking. It’s the best single way to sharpen your ideas. - David Perell
 
 **References**
 1. [Guide on writing](https://www.julian.com/guide/write/ideas) 
