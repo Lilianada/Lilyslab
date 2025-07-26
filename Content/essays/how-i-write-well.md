@@ -1,7 +1,7 @@
 ---
 title: How I Write Well
 createdAt: 2025-07-13
-lastUpdated: 2025-07-20
+lastUpdated: 2025-07-21
 type: evergreen
 tags: 
   - self-expression
@@ -10,42 +10,36 @@ tags:
 published: true
 ---
 
-I've always wondered how people write and speak well. I used to think writing was reserved for geniuses who had high IQ. Surely, one who writes well must also speak well, and speaking well was one of my goals. So I made it my personal objective to learn to write well because I knew this will also help me learn to speak well, hold intelligent conversations, be intellectually sound, and of course, call myself an "intellect".
+I've always wondered how people manage to write and speak well. I used to think writing was reserved for geniuses with a high IQ. I figured that anyone who writes well must also speak well — and speaking well was one of my goals. So, I made it a personal objective to learn how to write effectively, because I believed it would also help me speak better, hold intelligent conversations, sound articulate, and, of course, see myself as a true intellectual.
 
-This led to my discovery, that writing well wasn't reserved for a select group of people. Infact, only those who put in the effort to learn to write well, actually got good at it. 
-
-Writing helps me to understand what I read, remember what I learn, make sense of what I feel, share what I'm curious about and create serendipitous discoveries. I aspire to become an intellect, to cultivate both knowledge and artistic expression. This is why I take my time to research topics, take notes, collect quotes, make visual sketches, write essays, and keep a daily log. 
+This led to my discovery that writing well wasn't reserved for a select group of people. Infact, I confirmed that only those who put in the effort to learn how to write well, actually got good at it. 
 
 In this essay, I have written about;
-- How I find the best ideas to write about
-- My four steps to writing essays
+- Why I write
+- How I learned to write well
+- My writing process
 
 **Note:** There are many ways to write. I'm sharing approaches that I have found most reliable in my experience. There is no right or wrong way—only what works best for **you**.
 
 
 ### Why I Write 
 
-To be a good writer, I believe you should have a reason, an objective or motivation for writing. I know [[why I write]] and these reasons guide my writing. I don't write to "publish", neither do I write to "impress". I write for myself. 
+Writing helps me to understand what I read, remember what I learn, make sense of what I feel, share what I'm curious about and create serendipitous discoveries. I aspire to become an intellectual, one who blends both knowledge and artistic expression. This is why I take my time to research topics, take notes, collect quotes, make visual sketches, write essays, and keep a daily log. 
 
-While the goal of a lot of people with writing is to "publish" at a given frequency consistently, I aim to simply write consistently. This is because "publishing" puts a lot of pressure on you and your outcome. 
+To be a good writer, I believe you should have a reason, an objective or motivation for writing. I know [[why I write]], and these reasons guide my work. I don't write to "publish", neither do I write to "impress". I write for myself. 
+
+While the goal of a lot of people with writing is to "publish" at a given frequency consistently, I aim to simply write consistently. This is because "publishing" puts a lot of pressure on me and my outcome. 
 
 I write when I find new ideas that spark my curiosity which is almost everyday since I read daily. And I publish whenever I like because I know, no work is truly finished. 
 
 In my experience, you should only write about ideas that intrigue you and publish at a later date. If it interests you enough, then there's possibility that it'll interest your readers as well. 
 
 
-### Writing for Resonance
+### How I Learned to Write Well
 
-When writing, it behooves me to write in a way that resonates with future me, and of course, my potential readers. I aim to make my writing evoke a meaningful, emotional, or intellectual response in my readers. This creates a connection that goes beyond simple understanding. It's about making my readers feel something, think deeply, or be inspired by my writing, as if the text is resonating with their own experiences or beliefs. I do this successfully by adding stories, analogies, and examples to my work. 
+The best way to learn to do a thing is to do the thing and to do it consistently. If learning to write essays is your goal, then like me, you must be trying to write everyday and to read the works of other people, especially those that address "Writing Non-fiction". 
 
-Take for instance, my work on [[everything is a remix]], I began that essay describing my personal experience on the topic. Another good example is this essay, I explained [[why I write]] and what my end goal is. This is to give you a view into my own world and how I think, and to use myself and my experiences as an example. So that if your goal matches mine, you feel some type of connection which helps you understand my essay better.
-
-
-### How to Write Well
-
-The best way to learn to do a thing is to do the thing and to do it consistently. If learning to write essays is your goal, then like me, you must be trying to write everyday and to read the works of other people especially those that address "Writing well". 
-
-To be a good (non-fiction) writer, your work needs to be able to do these few things listed by Julian Shapiro in his essay ["Writing Better"](https://www.julian.com/guide/write/intro). He identified these five categories as categories that makes non-fiction good:
+To be a good (non-fiction) writer, your work needs to be able to do these few things listed by Julian Shapiro in his essay ["Writing Better"](https://www.julian.com/guide/write/intro). He identified these five categories as categories that make non-fiction good:
 
 - **Counter-intuitive** — "Oh, I never realized the world worked that way."
 - **Counter-narrative** — "Wow, that's not how I was told the world worked!"
@@ -53,7 +47,10 @@ To be a good (non-fiction) writer, your work needs to be able to do these few th
 - **Elegant articulations** — "Beautiful. I couldn't have said it better myself."
 - **Make someone feel seen** — "Yes! That's exactly how I feel!"
 
-My works fall under the last two categories. I like to write to make someone feel seen or heard, for elegant articlulations as well. And I hope that by the time you're done reading this work, you think "wow, this piece was thoughtfully written and the writer articulated herself and her processes in such a genuine way" or something close to that at least.
+My writing usually falls under the last two categories, for elegant articulations and to make the readers feel seen or heard. And I hope that by the time you're done reading this work, you think "wow, this piece was thoughtfully written and the writer articulated herself and her processes in such a genuine way" or something close to that at least.
+
+
+### My Writing Process
 
 While I'm not a master at writing, the first step for me is usually to choose a topic.
 
@@ -107,3 +104,12 @@ I have read quite a number of articles and books on writing and I honestly belie
 
 
 [^1]: https://paulgraham.com/talk.html
+
+
+
+
+### Writing for Resonance
+
+When I write, it behoves me to write in a way that resonates with both my future self and my potential readers. I aim to make my writing evoke a meaningful, emotional, or intellectual response in my readers. This creates a connection that goes beyond simple understanding. It's about making my readers feel something, think deeply, or be inspired by my writing, as if the text is resonating with their own experiences or beliefs. I do this successfully by adding stories, analogies, and examples to my work. 
+
+Take for instance, my work on [[everything is a remix]], I began that essay describing my personal experience on the topic. Another good example is this essay, I explained [[why I write]] and what my end goal is. This is to give you a view into my own world and how I think, and to use myself and my experiences as an example. So that if your goal matches mine, you feel some type of connection which helps you understand my essay better.
