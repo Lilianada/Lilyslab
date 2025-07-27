@@ -1731,3 +1731,48 @@ tags:
 type: article
 id: article-141
 ---
+
+---
+publish: true
+title: The Creative Process
+url: https://www.colourlivingblog.co.uk/category/creativity-corner/the-creative-process/
+createdAt: 2025-07-27
+tags:
+  - creativity
+type: article
+id: article-142
+---
+
+---
+publish: true
+title: The Creative Process - Meet Mercedes Leon
+url: https://www.colourlivingblog.co.uk/the-creative-process-meet-mercedes-leon/
+createdAt: 2025-07-27
+tags:
+  - creativity
+type: article
+id: article-143
+---
+
+---
+publish: true
+title: The Creative Process - Meet Mark Seabright
+url: https://www.colourlivingblog.co.uk/the-creative-process-meet-mark-seabright/
+createdAt: 2025-07-27
+tags:
+  - creativity
+type: article
+id: article-144
+---
+
+---
+publish: true
+title: Derek Sivers - Don't Fight It
+url: https://sive.rs/dont-fight-it
+createdAt: 2025-07-27
+tags:
+  - self-sexpression
+  - flow
+type: article
+id: article-145
+---
