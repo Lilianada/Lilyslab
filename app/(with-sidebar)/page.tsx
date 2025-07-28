@@ -30,7 +30,7 @@ export default function Home() {
           <div>Last updated: July 10, 2025</div>
         </div>
 
-        <div className="space-y-4 text-sm leading-relaxed font-serif">
+        <div className="space-y-4 text-sm leading-relaxed">
           <div className="flex flex-col sm:grid grid-cols-4 gap-4 items-center">
             <div className="col-span-3 space-y-2">
               <p>Hello there friend,</p>
@@ -112,7 +112,7 @@ export default function Home() {
             <Link href="/playground" className="text-codeRed">
               playground
             </Link>
-            . I also build random projects that I call [[seedlings]] which are
+            . I also build random projects that I call seedlings which are
             all linked in my{" "}
             <Link href="/projects" className="text-codeRed">
               projects

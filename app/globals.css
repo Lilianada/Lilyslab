@@ -211,6 +211,7 @@
 
   p {
     @apply leading-relaxed text-sm;
+    word-spacing: 0.1em;
   }
 }
 
