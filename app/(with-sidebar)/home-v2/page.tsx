@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import HomeV2Client from './HomeV2Client';
+import HomeV2Client from '../page';
 
 export const metadata: Metadata = {
   title: 'Lily\'s Lab',
