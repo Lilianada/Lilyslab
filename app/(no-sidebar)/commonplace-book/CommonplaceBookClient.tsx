@@ -56,7 +56,7 @@ useEffect(() => {
       columns = 2;
     } else if (width >= 640) {
       columns = 2;
-    } // else columns = 1
+    }  else columns = 1
 
     setColumnCount(columns);
 

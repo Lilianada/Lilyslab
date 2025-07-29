@@ -164,7 +164,7 @@ export default function NotesPage() {
             <div>Inspired by: Digital gardens</div>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            A collection of thoughts, quotes, and reflections.
+            A collection of budding thoughts, musings, and reflections.
           </p>
         </header>
 

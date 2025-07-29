@@ -2,7 +2,7 @@
 date: 2025-07-14
 author: Derek Sivers
 published: true
-source: "https://sive.rs/walkways#:~:text=A%20new%20college,pave%20those%20paths."
+source: "https://sive.rs/walkways"
 ---
 
 "A new college campus was built, but one thing was still debated:

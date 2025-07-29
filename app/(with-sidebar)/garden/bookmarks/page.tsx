@@ -22,7 +22,7 @@ export default async function BookmarkPage() {
                   </div>
                 </header>
             <p className="text-sm text-muted-foreground">
-              I collect and organize my favorite reads, tools, and discoveries here—curated from my daily explorations across the web. Each bookmark is handpicked and tagged for inspiration, learning, or just plain delight.
+              I collect and organize my favorite articles, sites, and discoveries here—curated from my daily explorations across the web. Each bookmark is handpicked and tagged for inspiration, learning, or just plain delight.
             </p>
 
           {/* Filters and Bookmarks List */}
