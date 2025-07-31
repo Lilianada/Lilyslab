@@ -24,7 +24,7 @@ export default function HelloPage() {
           </div>
         </header>
 
-        <div className="space-y-4 text-sm leading-relaxed font-nitti">
+        <div className="space-y-4 leading-relaxed font-mono">
           <p>Hello there friend,</p>
           <p>
             I'm Lily, a software engineer, product manager and personal trainer.
