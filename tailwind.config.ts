@@ -134,6 +134,9 @@ const config = {
         'html': {
           scrollBehavior: 'smooth',
         },
+        'p': {
+          fontFamily: ['PP Mori', 'sans-serif'].join(', '),
+        },
         '::selection': {
           backgroundColor: 'hsl(var(--primary) / 0.2)',
         },
