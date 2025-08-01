@@ -1,9 +1,7 @@
-import { SparkleIcon } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
 import { getAllPoems } from "@/lib/garden/poems"
 import type { Poem } from "@/lib/garden/poems"
 import PoemLayoutClient from "./PoemLayoutClient"
-import "../.././../../styles/poems.css"
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -29,15 +27,14 @@ export default async function PoemsPage() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-6xl mx-auto p-0 sm:px-4 pt-16 pb-8">
-        <header className="mb-8 relative">
-          <h1 className="text-2xlmb-2">Poetry</h1>
+      <div className="container max-w-4xl mx-auto p-0 sm:px-4 pt-16 pb-8">
+        {/* <header className="mb-8 relative">
+          <h1 className="text-xl semibold mb-2">Poetry</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: 2025-08-01</div>
             <div>Last updated: 2025-08-01</div>
-            <div>Collection of poetic verses and emotions.</div>
           </div>
-        </header>
+        </header> */}
 
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -69,16 +66,8 @@ export default async function PoemsPage() {
               </div>
             </div>
           </div>
-        ) : poems.length > 0 ? (
+        ) :  (
           <PoemLayoutClient poems={poems} />
-        ) : (
-          <div className="text-center py-8 border rounded-lg p-8 grid place-items-center">
-            <SparkleIcon size={16} />
-            <h2 className="mt-2 text-base font-medium mb-2">No Poems Found</h2>
-            <p className="text-muted-foreground mb-4 text-sm">
-              There are no poems available yet.
-            </p>
-          </div>
         )}
         
         <Footer />

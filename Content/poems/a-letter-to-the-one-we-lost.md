@@ -9,8 +9,6 @@ type: evergreen
 published: true
 ---
 
-  
-
 *Onwu di njo, eziokwu!*
 
 Death is inevitable, we are all aware, but what makes it evil is how it comes like a thief in the night. You can be talking and laughing with a loved one and the next minute, they're gone and gone for good. All you are left with are memories and after years and years have gone by, your memory starts to fail you. When you try to remember something and can't seem to get the details right, in this moment, you realize that the only thing you're left with, of your loved one, starts to leave you too. It hurts when you get to this point. When you can no longer recall events, details and conversations. Everything becomes so blurry, the voice you were once too familiar with starts to fade. In that moment, you get heartbroken all over again, the intensity of the grieve doubles. You feel a certain type of guilt that eats at you and makes you apologize to the one that's long gone. You feel sorry, you try to explain how it wasn't your intention, but they're not here, and I doubt very much that they are even angry. 

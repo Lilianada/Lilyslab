@@ -19,7 +19,9 @@ How do I know it is even love I feel?
 Is it because fifty percent of the thoughts I have a day are of this person?
 Is it because they are the first person I think of when I wake up in the morning 
 and the last person I think of before I retire for the night?
-What if I don't want to love again because my feelings are never being reciprocated?
+
+What if I don't want to love again 
+because my feelings are never being reciprocated?
 What if I'm not loving this person the way they want to be loved 
 but how I want to be loved?
 What if I actually don't know how to love?

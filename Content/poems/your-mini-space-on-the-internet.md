@@ -41,6 +41,6 @@ Build something you might never have in real life,
 or just create something good enough 
 to share with the world. 
 Tell stories, 
-share tales, e
-xpress your thoughts, 
+share tales,
+express your thoughts, 
 connect with new like minded people.
