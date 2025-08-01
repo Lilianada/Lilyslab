@@ -27,6 +27,7 @@ const config = {
       fontFamily: {
         nitti: ["Nitti", "monospace"],
         ppmori: ["PP Mori", "sans-serif"],
+        heart: ["Rainy Hearts", "cursive"],
         sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
       },
