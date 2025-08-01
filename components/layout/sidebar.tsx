@@ -399,6 +399,13 @@ export default function Sidebar({
               delay={900}
             />
             <NavItem
+              href="/garden/poems"
+              icon={<Flower size={16} />}
+              label="Poems"
+              onClick={onNavClick}
+              delay={950}
+            />
+            <NavItem
               href="/garden/word-of-the-day"
               icon={<ScrollText size={16} />}
               label="Word of the Day"
