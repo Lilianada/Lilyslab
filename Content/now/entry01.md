@@ -5,32 +5,30 @@ lastUpdated: "2025-06-12"
 
 You can find my previous now entries in my [/then](/then) page.
 
-#### ✳︎ What I'm working on
-I started a new role as Technical Product Manager on the 21st of July. It has been a lot as I joined the team at a critical phase.
+#### What I'm working on
+I started a new role as Technical Product Manager on the 21st of July. It has been a lot as I joined the team at a critical phase. But I'm getting a hang of it.
 
 
-#### ✳︎ What I'm learning
-I'm learning to read better, manage my knowledge better and write more.
+#### What I'm learning
+I'm learning to read and write more, and manage my knowledge better.
 
 
-#### ✳︎ What I'm reading
+#### What I'm reading
 You won't belive it if I told you... 
-I still haven't completed these three books:
+I still haven't completed these two books:
 *   **Atomic Habits** by James Clear — An easy and proven way to build good habits that lasts.
-*   **Ikigai** by Francesc Miralles and Hector Garcia — The Japanese secret to a long and happy life.
 *   **Feel-Good Productivity Book** by Ali Abdaal — The three fundamental energizers that make us feel good and lead to true productivity.
 
-But, I plan on finishing Ikigai this weekend, surely. 
+But, I did finish Ikigai as planned. 
 
-I have completed these ones during that time:
-* **Who Moved My Cheese?** by Spencer Johnson - The book is written as a parable about two mice and two "Littlepeople" during their hunt for cheese.
-* **Steal Like an Artist** by Austin Kleon - An inspiring guide to creativity in the digital age.
+And I'm currently reading a number of books, I do not plan to finish all as I only wanted to learn specific things from those books:
+* **Building a Second Brain** by Tiago Forte
+* **How to Take Smart Notes** by Sonke Ahrens
+* **On Writing** by Stephen Kings
+* **Things Are What You Make of Them** by Adam Kurtz
 
-And I'm now also reading this one:
-* **An Orchestra of Minorities** by Chigozie Obioma - The book is narrated by the chi, or spirit of a young poultry farmer named Chinonso.
 
-
-#### ✳︎ What I'm excited about
-Still very much excited about the intersection of AI and creativity. I've been using AI to build whatever I need right now. Take my NoteIt-Down for example, even the website which you are reading this essay on is built with the asistance of AI. I lead and it assists, as it should be.
+#### What I'm excited about
+Still very much excited about the intersection of AI and creativity. I've been using AI to build whatever I wanted. Take my NoteIt-Down for example, even the website which you are reading this essay on is built with the asistance of AI. I lead and it assists, as it should be.
 
 Happy about how my focus on achieveing [[digital minimalism]] has been proving fruitful as I am very intentional about it.

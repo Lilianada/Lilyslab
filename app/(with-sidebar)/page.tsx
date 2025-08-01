@@ -317,25 +317,6 @@ const HomeV2Client = () => {
                     />
                   </Suspense>
                 </div>
-
-                {/* <p className="text-xs">
-                  I love to create and this site is my digital playground, you
-                  can see that by exploring the tiny projects I've added to my{" "}
-                  <Link href="/playground" className="text-codeRed">
-                    playground
-                  </Link>
-                  . I also build random projects that I call seedlings which are
-                  all linked in my{" "}
-                  <Link href="/projects" className="text-codeRed">
-                    projects
-                  </Link>{" "}
-                  page. I try to keep{" "}
-                  <Link href="/logs" className="text-codeRed">
-                    logs
-                  </Link>{" "}
-                  on them, emphasis on 'try'.
-                </p> */}
-
                 <p className="text-xs">
                   If you like to read amature musings/essays/poems, check my{" "}
                   <Link href="/garden" className="text-codeRed">

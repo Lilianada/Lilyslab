@@ -9,9 +9,9 @@ published: true
 type: evergreen
 ---
 
-I poured a lot of work into the design and layout of this website, from the choice of colors, to the fonts, imagery and even sound. It will interest you to know that the very first design for this website was a complete replica of [Brian Lovin's](https://brianlovin.com/) website. 
-
 ![bird flowers](https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmdjdDMxdXg4a2M3bnp6OTB2cDQwZHJjOHh5cTgwbGVmcXhlaWtheCZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/l41lYVFUqWKWKRSMg/giphy.gif)
+
+I poured a lot of work into the design and layout of this website, from the choice of colors, to the fonts, imagery and even sound. It will interest you to know that the very first design for this website was a complete replica of [Brian Lovin's](https://brianlovin.com/) website. 
 
 I had found his website almost a year ago and was completely intrigued by it. It's been 4 months since my first iteration and what I want you to do is take a look around this website, check the [Colophon page](/colophon), you'd see Brian's website and some others listed there. Those were the websites that gave me the needed inspiration and ideas to create what you now see as [LilysGarden](/). 
 

@@ -21,6 +21,39 @@
   font-display: swap;
 }
 
+/* Font declarations for PP Mori */
+@font-face {
+  font-family: "PP Mori";
+  src: url("/fonts/PPMori-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Mori";
+  src: url("/fonts/PPMori-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Mori";
+  src: url("/fonts/PPMori-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Mori";
+  src: url("/fonts/PPMori-SemiBoldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* Font declarations for Sorts */
 @font-face {
   font-family: "Sorts";
@@ -48,7 +81,7 @@
 /* Backlinks styling */
 @layer components {
   .backlink {
-    @apply relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--steelBlue))];
+    @apply relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--steelBlue))] dark:hover:decoration-[hsl(var(--lightBlue))];
     text-decoration: underline;
     text-decoration-color: hsl(var(--lightBlue) / 0.8);
     text-decoration-style: solid;

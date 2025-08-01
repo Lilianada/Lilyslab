@@ -10,7 +10,7 @@ tags:
 published: true
 ---
 
-I've always wondered how people manage to write and speak well. I used to think writing was reserved for geniuses with a high IQ. I figured that anyone who writes well must also speak well — and speaking well was one of my goals. So, I made it a personal objective to learn how to write effectively, because I believed it would also help me speak better, hold intelligent conversations, sound articulate, and, of course, see myself as a true intellectual.
+I've always wondered how people manage to write and speak well. I used to think writing was reserved for geniuses with a high IQ. I figured that anyone who writes well must also speak well — and speaking well was one of my goals. So, I made it a personal objective to learn how to write effectively because I believed it would also help me speak better, hold intelligent conversations, sound articulate, and, of course, see myself as a true intellectual.
 
 This led to my discovery that writing well wasn't reserved for a select group of people. Infact, I confirmed that only those who put in the effort to learn how to write well, actually got good at it. 
 
@@ -87,9 +87,9 @@ I use [Paul Graham's](https://paulgraham.com/simply.html) guide and write simply
 
 I try to write like I talk[^1] this way, my writing is clear, concise, straight to the point and isn't an attempt at circumlocution. Sometimes, I read out the words I have written to make sure it sounds like an unforced conversation. This helps me cut out words or phrasings that add no value to the work.
 
-Another thing that helps me write well is "not writing for the goal of publishing". I have stated this earlier but I'll like to hit on it again. Having this in mind helps to remove the pressure of writing a perfect essay. I have no timeline for completing my essays so when I am not feeling a draft, I let it be and come back to it at a much later time which can take as long as 2 weeks. 
+Another thing that helps me write well is **"not writing for the goal of publishing"**. I have stated this earlier but I'll like to hit on it again. Having this in mind helps to remove the pressure of writing a perfect essay. I have no timeline for completing my essays so when I am not feeling a draft, I let it be and come back to it at a much later time which can take as long as 2 weeks. 
 
-I've noticed that I come back with fresh insights and new ideas. I see mistakes and errors that I might have missed initially, I remove unnecessary words, and rephrase what remains to be succinct. I am learning to employ the (1) word removal and (2) rephrasing from scratch process for every paragraph as taught by [Julian Shapiro](https://www.julian.com/guide/write/rewriting#:~:text=Repeat%20the%20(1)%20word%20removal%20and%20(2)%20rephrasing%20from%20scratch%20process%20for%20every%20paragraph.%20When%20you%E2%80%99re%20done%2C%20your%20article%20will%20be%20less%20long%20and%20boring.). 
+I've noticed that I come back with fresh insights and new ideas. I see mistakes and errors that I might have missed initially. I remove unnecessary words, and rephrase what remains to be succinct. I am learning to employ the (1) word removal and (2) rephrasing from scratch process for every paragraph as taught by [Julian Shapiro](https://www.julian.com/guide/write/rewriting#:~:text=Repeat%20the%20(1)%20word%20removal%20and%20(2)%20rephrasing%20from%20scratch%20process%20for%20every%20paragraph.%20When%20you%E2%80%99re%20done%2C%20your%20article%20will%20be%20less%20long%20and%20boring.). 
 
 ### Last Step: Continuous Tending
 
@@ -107,9 +107,3 @@ I have read quite a number of articles and books on writing and I honestly belie
 
 
 
-
-### Writing for Resonance
-
-When I write, it behoves me to write in a way that resonates with both my future self and my potential readers. I aim to make my writing evoke a meaningful, emotional, or intellectual response in my readers. This creates a connection that goes beyond simple understanding. It's about making my readers feel something, think deeply, or be inspired by my writing, as if the text is resonating with their own experiences or beliefs. I do this successfully by adding stories, analogies, and examples to my work. 
-
-Take for instance, my work on [[everything is a remix]], I began that essay describing my personal experience on the topic. Another good example is this essay, I explained [[why I write]] and what my end goal is. This is to give you a view into my own world and how I think, and to use myself and my experiences as an example. So that if your goal matches mine, you feel some type of connection which helps you understand my essay better.

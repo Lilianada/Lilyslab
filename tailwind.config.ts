@@ -26,6 +26,7 @@ const config = {
     extend: {
       fontFamily: {
         nitti: ["Nitti", "monospace"],
+        ppmori: ["PP Mori", "sans-serif"],
         sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
       },

@@ -81,7 +81,7 @@ export default function AboutPage() {
           </div>
         ) : (
           <>
-            <div className="text-justify">
+            <div className="text-justify font-ppmori">
               <div className="space-y-2 mb-6 w-full">
                 <img
                   src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJhdTA3NWcwZWptdDN6ejJqeDZ3cTQ1Z3U0Z3pnem8xaTJwdWFmNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ITWHqTA2TtOqA/giphy.gif"
