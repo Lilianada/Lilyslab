@@ -359,12 +359,12 @@ const HomeV2Client = () => {
           </div>
 
           {/* Doodle */}
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <h2 className="font-medium mb-6">Leave a Doodle...</h2>
             <div className="">
               <DoodleCanvas />
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Right side - Recent Activity */}
