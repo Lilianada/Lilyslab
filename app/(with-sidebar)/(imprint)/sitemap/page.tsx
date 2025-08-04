@@ -45,8 +45,10 @@ const sitemapData: SitemapSection[] = [
     pages: [
       { name: "Essays", url: "/garden/essays", description: "My writings and essays" },
       { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
+      { name: "Poems", url: "/garden/poems", description: "A collection of my poetry" },
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
       { name: "Micro-blog", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },
+      { name: "Word of the Day", url: "/garden/word-of-the-day", description: "Daily word explorations" },
       { name: "Bookmarks", url: "/bookmarks", description: "Articles I've read and bookmarked for later" },
     ]
   },
@@ -69,6 +71,8 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Collections",
     pages: [
+      { name: "Commonplace Book", url: "/commonplace-book", description: "Collection of ideas, quotes, and information" },
+      { name: "Quotes", url: "/quotes", description: "Memorable quotes I've collected" },
       { name: "Archives", url: "/archives", description: "Archive of previous writings and notes" },
       { name: "Then", url: "/then", description: "Archive of previous now pages" },
       // { name: "100Pics", url: "/100pics", description: "A collection of 100 pictures in 100 days" },
