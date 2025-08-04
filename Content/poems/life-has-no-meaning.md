@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-08-01
 lastUpdated: 2025-08-01
-title: No Meaning to Life
+title: Life
 tags:
   - poetry
   - existential

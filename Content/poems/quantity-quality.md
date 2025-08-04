@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-07-31
 lastUpdated: 2025-07-31
-title: Quantity -> Quality
+title: Quantity / Quality
 tags:
   - poetry
   - creativity

@@ -65,7 +65,8 @@ const sitemapData: SitemapSection[] = [
     title: "Playground",
     pages: [
       { name: "Digital Clock", url: "/playground/digital-clock", description: "A digital clock experiment" },
-      { name: "Calculator", url: "/playground/calculator", description: "A calculator experiment" }
+      { name: "Calculator", url: "/playground/calculator", description: "A calculator experiment" },
+      { name: "Terminal", url: "/playground/terminal", description: "A terminal experiment" }
     ]
   },
   {

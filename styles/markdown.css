@@ -23,7 +23,7 @@
 
 /* Paragraphs and text */
 .markdown-content p {
-  @apply my-2 leading-6 text-foreground/90;
+  @apply my-3 leading-6 text-foreground/90;
 }
 
 .markdown-content blockquote {

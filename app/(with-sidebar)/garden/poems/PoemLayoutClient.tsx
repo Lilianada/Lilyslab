@@ -35,7 +35,7 @@ export default function PoemLayoutClient({ poems }: PoemLayoutClientProps) {
       {/* Left column - Poem List */}
       <div className="md:col-span-1 pr-4">
         <div className="sticky top-24">
-          <p className="text-sm font-semibold mb-3">All Poems ({filteredPoems.length})</p>
+          <p className="text-sm font-semibold mb-3">Poems</p>
           
           <div className="space-y-2 max-h-[70vh] overflow-y-auto pr-2 pb-8">
             {filteredPoems.length > 0 && (
@@ -49,7 +49,7 @@ export default function PoemLayoutClient({ poems }: PoemLayoutClientProps) {
                       : 'hover:'
                   }`}
                 >
-                  <p className={`text-sm mb-1 ${selectedPoemSlug === poem.slug ? 'text-primary' : ''}`}>
+                  <p className={`text-xs mb-1 ${selectedPoemSlug === poem.slug ? 'text-primary' : ''}`}>
                     {poem.title}
                   </p>
                 </div>
