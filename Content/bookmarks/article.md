@@ -1776,3 +1776,166 @@ tags:
 type: article
 id: article-145
 ---
+
+---
+publish: true
+title: Learning
+url: https://kelvinamp.me/writing/learning
+createdAt: 2025-07-31
+tags:
+  - writing
+  - self-expression
+  - learning
+type: article
+id: article-146
+---
+
+---
+publish: true
+title: Go Lift Some Heavy Sh*t (and 6 other things I'd tell my 20-year-old self to do)
+url: https://www.dominikachoroszko.com/go-lift-some-heavy-sht-and-6-other-things-id-tell-my-20-year-old-self-to-do/
+createdAt: 2025-07-31
+tags:
+  - fitness
+  - health
+type: article
+id: article-147
+---
+
+---
+publish: true
+title: I Failed at Everything I Did So Far (and I'm Willing to Keep Failing)
+url: https://www.dominikachoroszko.com/i-failed-at-everything-i-did-so-far-and-im-willing-to-keep-failing/
+createdAt: 2025-07-31
+tags:
+  - learning
+  - progress
+  - failure
+type: article
+id: article-148
+---
+
+---
+publish: true
+title: How to Be More Creative
+url: https://herbertlui.net/how-to-be-more-creative/
+createdAt: 2025-07-31
+tags:
+  - creativity
+  - self-expression
+  - art
+type: article
+id: article-149
+---
+
+---
+publish: true
+title: Daily Creative Challenges Creativity Activity
+url: https://herbertlui.net/daily-creative-challenges-creativity-activity/
+createdAt: 2025-07-31
+tags:
+  - creativity
+  - self-expression
+type: article
+id: article-150
+---
+
+---
+publish: true
+title: Four Step Creative Process
+url: https://herbertlui.net/four-step-creative-process/
+createdAt: 2025-07-31
+tags:
+  - creativity
+  - self-expression
+type: article
+id: article-151
+---
+
+---
+publish: true
+title: How to Finish the First Draft of Anything
+url: https://goinswriter.com/episode/how-to-finish-the-first-draft-of-anything/
+createdAt: 2025-07-31
+tags:
+  - writing
+  - self-expression
+  - draft
+type: article
+id: article-152
+---
+
+---
+publish: true
+title: Creative Doing
+url: https://www.holloway.com/g/creative-doing/preview
+createdAt: 2025-08-11
+tags:
+  - creativity
+  - self-expression
+  - art
+type: article
+id: article-153
+---
+
+---
+publish: true
+title: Creative Business
+url: https://www.ellalama.com/journal/tag/creative+business
+createdAt: 2025-08-11
+tags:
+  - creativity
+  - self-expression
+  - art
+type: article
+id: article-154
+---
+
+---
+publish: true
+title: Why Quantity Should Be Your Priority
+url: https://herbertlui.net/why-quantity-should-be-your-priority/
+createdAt: 2025-08-11
+tags:
+  - creativity
+  - self-expression
+  - art
+type: article
+id: article-155
+---
+
+---
+publish: true
+title: Literally Just Do Things
+url: https://erifili.substack.com/p/literally-just-do-things
+createdAt: 2025-08-15
+tags:
+  - self-expression
+  - create
+type: article
+id: article-156
+---
+
+---
+publish: true
+title: How to Brilliantly Articulate Your Thoughts
+url: https://mindcraft1.substack.com/p/how-to-brilliantly-articulate-your
+createdAt: 2025-08-15
+tags:
+  - articulation
+  - self-expression
+  - writing
+type: article
+id: article-157
+---
+
+---
+publish: true
+title: How to Instantly Be Better at Anything
+url: https://usefulfictions.substack.com/p/how-to-instantly-be-better-at-anything
+createdAt: 2025-08-15
+tags:
+  - creativity
+type: article
+id: article-158
+---
