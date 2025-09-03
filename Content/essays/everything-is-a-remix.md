@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-07-04
 lastUpdated: 2025-08-11
-title: Creativity: Everything is a remix
+title: "Creativity for Non-Creative Folks: Everything is a remix"
 tags:
   - creativity
   - self-expression

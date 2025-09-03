@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-07-17
 lastUpdated: 2025-08-11
-title: Why You Are Already a Creative
+title: "Creativity for Non-Creative Folks: Why You Are Already a Creative"
 tags:
   - creativity
   - self-expression
