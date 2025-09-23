@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-08-11
 lastUpdated: 2025-08-11
-title: "Creativity for Non-Creative Folks: What Is (and Isn’t) Creativity?"
+title: "Creativity for Non-Creative Folks: What Is Creativity?"
 tags:
   - creativity
   - self-expression
