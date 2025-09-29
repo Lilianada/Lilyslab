@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-07-11
 lastUpdated: 2025-09-03
-title: "Creativity for Non-Creative Folks: A Note to the “Non-Creative
+title: "Creativity for Non-Creative Folks: A Note to the Non-Creative"
 tags:
   - creativity
   - self-expression
