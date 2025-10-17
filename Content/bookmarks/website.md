@@ -498,3 +498,16 @@ tags:
 type: website
 id: website-040
 ---
+
+---
+publish: true
+title: Helen C Stark - Art Portfolio
+url: https://www.helencstark.com/
+createdAt: 2025-10-09
+tags:
+  - art
+  - painting
+  - self-expression
+type: website
+id: website-041
+---

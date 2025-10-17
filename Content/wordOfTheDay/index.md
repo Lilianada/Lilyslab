@@ -1,4 +1,5 @@
 25
+- synchronicity
 - gurgitate
 - ingurgitate
 - regurgitate
