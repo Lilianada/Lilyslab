@@ -38,7 +38,7 @@ export default function AboutPage() {
           <h1 className="mb-2 text-xl font-medium">About Me</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: May 8, 2025</div>
-            <div>Last updated: Aug 01, 2025</div>
+            <div>Last updated: Jan 17, 2025</div>
             <div>Inspired by: <a href="https://nicolevanderhoeven.com/about" className="text-lavender">Nicole Vander Hoeven</a></div>
           </div>
         </header>
@@ -95,13 +95,21 @@ export default function AboutPage() {
                 </h2>
                 <p className="mb-3 text-sm opacity-0 leading-normal animate-slide-up pl-2">
                   ⎯ Lily <br />
-                  ⎯ 24 yrs <br />
+                  ⎯ 25 yrs <br />
                   ⎯ Female <br />
                   ⎯ Feminist <br />
                   ⎯ Fitness athelete <br />
                   ⎯ Product manager <br />
                   ⎯ Frontent developer <br />
                   ⎯ Lifestyle connoisseur <br />
+                  ⎯ Hobbyist <br />
+                  ⎯ Business owner <br />
+                  ⎯ Avid reader <br />
+                  ⎯ Writer <br />
+                  ⎯ Digital gardener <br />
+                  ⎯ Creator <br />
+                  ⎯ AI enthusiast <br />
+                  ⎯ Lifelong learner <br />
                   ⎯ This is what I'm doing{" "}
                   <Link href="/now" className="text-lavender underline">
                     Now{" "}
