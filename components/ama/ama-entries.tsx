@@ -43,7 +43,7 @@ export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEn
       ) : questions.length > 0 ? (
         <div className="space-y-4">
           {questions.map((q, id) => (
-            <div key={id} className="p-4 border rounded-lg space-y-2 animate-in fade-in slide-in-from-bottom-3 duration-300" data-question-id={q.filename}>
+            <div key={id} className="p-4 border rounded-lg space-y-2 animate-in fade-in slide-in-from-bottom-3 duration-300" data-question-id={q.id}>
               <div className="flex justify-between items-start font-mono">
                 <div className="flex items-center space-x-2">
                   
@@ -66,7 +66,7 @@ export default function AMAEntries({ questions, isLoading, onAdminReply }: AMAEn
                         <DisclosurePanel className="mt-2 p-2 bg-purple-50 dark:bg-purple-900/20 rounded-md">
                           <div className="animate-in fade-in slide-in-from-bottom-5 duration-300">
                             <AdminReplyForm 
-                              questionId={q.filename || ''} 
+                              questionId={q.id} 
                               onSubmit={onAdminReply} 
                               onCancel={() => close()}
                             />
