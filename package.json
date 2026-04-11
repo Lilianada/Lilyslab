@@ -68,7 +68,7 @@
     "input-otp": "1.4.1",
     "katex": "latest",
     "lucide-react": "^0.454.0",
-    "next": "15.2.4",
+    "next": "15.2.8",
     "next-cloudinary": "^6.16.0",
     "next-sitemap": "^4.2.3",
     "next-themes": "latest",
