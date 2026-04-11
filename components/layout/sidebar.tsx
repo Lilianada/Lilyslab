@@ -321,11 +321,18 @@ export default function Sidebar({
               delay={300}
             />
             <NavItem
-              href="/bucket-list"
+              href="/wants-to-do"
               icon={<ListCheck size={16} />}
-              label="Bucket List"
+              label="100 Wants"
               onClick={onNavClick}
               delay={350}
+            />
+            <NavItem
+              href="/bucket-list"
+              icon={<ListCheck size={16} />}
+              label="Career Bucket List"
+              onClick={onNavClick}
+              delay={400}
             />
           </div>
 
