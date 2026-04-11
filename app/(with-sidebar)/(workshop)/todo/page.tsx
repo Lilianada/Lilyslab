@@ -14,7 +14,7 @@ export default function TodoPage() {
     { text: "Update Misc page", completed: false },
     {
       text: "Create a /Wants page - under (with-sidebar) with 100 things I want to do in my lifetime.",
-      completed: false,
+      completed: true,
     },
     { text: "Project 365 Days & 100 Days of Pics", completed: false },
     { text: "Add services section to /uses", completed: true },
