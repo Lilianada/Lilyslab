@@ -62,11 +62,12 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
       {/* Timeline */}
       <ol className="relative border-l border-gray-200 dark:border-gray-700">
         {filtered.map((entry, idx) => {
-          const isOpen = expanded === entry.version;
+          const id = `${entry.version}-${entry.date}-${idx}`;
+          const isOpen = expanded === id;
           // Fallback color if type not in mapping
           const colorString = typeColors[entry.type] ?? '';
           return (
-            <li key={entry.version} className="mb-12 ml-4">
+            <li key={id} className="mb-12 ml-4">
               {/* Dot */}
               <span className={`absolute -left-1.5 mt-2 flex items-center justify-center w-3 h-3 rounded-full ring-8 ring-background ${colorString.split(" ")[0]}`}></span>
               <div className="relative flex items-center gap-2 mb-1">
@@ -76,7 +77,7 @@ export default function ChangelogTimeline({ entries }: { entries: ChangelogEntry
               </div>
               <button
                 className="text-left w-full"
-                onClick={() => setExpanded(isOpen ? null : entry.version)}
+                onClick={() => setExpanded(isOpen ? null : id)}
                 aria-expanded={isOpen}
               >
                 <h3 className="text-base font-semibold mb-1 mt-3">{entry.title}</h3>
