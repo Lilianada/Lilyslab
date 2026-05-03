@@ -1,6 +1,6 @@
 ---
-createdAt: 2026-04-04
-lastUpdated: 2026-04-04
+createdAt: 2026-04-01
+lastUpdated: 2026-04-01
 title: To be disappointed, To fail
 tags:
   - personal

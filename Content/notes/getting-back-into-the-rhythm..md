@@ -3,7 +3,8 @@ title: Getting back into the ryhthm.
 published: true
 tags:
   - self-expression
-createdAt: 2026-05-04
+createdAt: 2026-05-01
+lastUpdated: 2026-05-01
 type: budding
 ---
 Have you ever felt like you had your life figured out?

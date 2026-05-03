@@ -3,7 +3,8 @@ title: Do the Type of Work That Makes You Happy
 published: true
 tags:
   - self-expression
-createdAt: 2026-05-04
+createdAt: 2026-05-01
+lastUpdated: 2026-05-01
 type: budding
 ---
 Am I doing the type of work that makes me happy?
