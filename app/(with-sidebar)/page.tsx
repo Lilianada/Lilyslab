@@ -457,7 +457,7 @@ const HomeV2Client = () => {
                   >
                     <MusicPlayerWidget
                       imageUrl="/images/lily_flower.jpeg"
-                      title="Welcome to my digital garden & workshop!"
+                      title="Welcome to my digital garden and personal playground!"
                       artist="Written by Lily, recorded with Play.ai"
                     />
                   </Suspense>
