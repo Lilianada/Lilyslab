@@ -1,18 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight, Smile } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import AnimatedLogo from "@/components/comps/AnimatedLogo";
 import { MusicPlayerWidget } from "@/components/audio/music-player-widget";
 import { Footer } from "@/components/layout/footer";
-import DoodleCanvas from "@/components/comps/DoodleCanvas";
+import { SearchBar } from "@/components/search-bar";
 
 interface Post {
   slug: string;
   title: string;
   createdAt: string;
+  excerpt?: string;
+  content?: string;
+  tags?: string[];
 }
 
 interface Bookmark {
@@ -31,12 +34,66 @@ interface MicroBlog {
   likeCount: number;
 }
 
-interface RecentActivityProps {
-  essayPosts: Post[];
-  notePosts: Post[];
-  bookmarks: Bookmark[];
-  microBlogs: MicroBlog[];
+interface ArchiveItem {
+  slug: string;
+  title: string;
+  category: string;
+  createdAt?: string;
 }
+
+interface SearchResult {
+  id: string;
+  title: string;
+  path: string;
+  type: string;
+  snippet?: string;
+  external?: boolean;
+}
+
+const staticPageSearchItems: SearchResult[] = [
+  {
+    id: "page-essays",
+    title: "Essays",
+    path: "/garden/essays",
+    type: "Page",
+    snippet: "Browse essays and long-form writing.",
+  },
+  {
+    id: "page-notes",
+    title: "Notes",
+    path: "/garden/notes",
+    type: "Page",
+    snippet: "Explore notes, drafts, and short thoughts.",
+  },
+  {
+    id: "page-poems",
+    title: "Poems",
+    path: "/garden/poems",
+    type: "Page",
+    snippet: "Discover poetry and verse.",
+  },
+  {
+    id: "page-bookmarks",
+    title: "Bookmarks",
+    path: "/garden/bookmarks",
+    type: "Page",
+    snippet: "Find saved links and curated bookmarks.",
+  },
+  {
+    id: "page-archives",
+    title: "Archives",
+    path: "/archives",
+    type: "Page",
+    snippet: "Search older archived writings and notes.",
+  },
+  {
+    id: "page-quotes",
+    title: "Quotes",
+    path: "/quotes",
+    type: "Page",
+    snippet: "Read collections of favorite quotes.",
+  },
+];
 
 // Collection item component for the left side of the page
 const CollectionItem = ({
@@ -83,19 +140,13 @@ const HomeV2Client = () => {
   const [notePosts, setNotePosts] = useState<Post[]>([]);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [microBlogs, setMicroBlogs] = useState<MicroBlog[]>([]);
+  const [allEssays, setAllEssays] = useState<Post[]>([]);
+  const [allNotes, setAllNotes] = useState<Post[]>([]);
+  const [allBookmarks, setAllBookmarks] = useState<Bookmark[]>([]);
+  const [allMicroBlogs, setAllMicroBlogs] = useState<MicroBlog[]>([]);
+  const [archiveItems, setArchiveItems] = useState<ArchiveItem[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [columns, setColumns] = useState(2);
-
-  // Handle window resize to adjust layout
-  const handleResize = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 768) {
-        setColumns(1);
-      } else {
-        setColumns(2);
-      }
-    }
-  };
 
   // Fetch data on component mount
   useEffect(() => {
@@ -103,37 +154,31 @@ const HomeV2Client = () => {
       try {
         // Fetch essay posts
         const essayResponse = await fetch("/api/essays");
-        let essayData = await essayResponse.json();
+        const essayData = await essayResponse.json();
 
-        // Filter published essays and limit to 5
-        essayData = essayData
+        const publishedEssayData = essayData
           .filter((essay: any) => essay.published === true)
           .sort(
             (a: any, b: any) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          )
-          .slice(0, 5);
+          );
 
         // Fetch note posts
         const noteResponse = await fetch("/api/notes");
-        let noteData = await noteResponse.json();
+        const noteData = await noteResponse.json();
 
-        // Filter published notes and limit to 5
-        noteData = noteData
+        const publishedNoteData = noteData
           .filter((note: any) => note.published === true)
           .sort(
             (a: any, b: any) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          )
-          .slice(0, 5);
+          );
 
         // Fetch bookmark posts from the dedicated bookmarks API
         const bookmarkResponse = await fetch("/api/bookmarks");
-        let bookmarkData = await bookmarkResponse.json();
+        const bookmarkData = await bookmarkResponse.json();
 
-        // Process and sort bookmarks
         const processedBookmarks = bookmarkData
-          .slice(0, 5)
           .map((bookmark: any) => ({
             id: bookmark.id,
             title: bookmark.title,
@@ -141,33 +186,43 @@ const HomeV2Client = () => {
             created: bookmark.createdAt,
             tags: bookmark.tags || [],
             type: bookmark.type,
-          })); // Fetch microblog posts (only actual microblogs, not bookmarks)
-        const microblogResponse = await fetch("/api/micro-blog");
-        let microblogData = await microblogResponse.json();
+          }))
+          .sort(
+            (a: Bookmark, b: Bookmark) =>
+              new Date(b.created).getTime() - new Date(a.created).getTime()
+          );
 
-        // Simply use the microblogs directly without complex filtering
+        // Fetch microblog posts
+        const microblogResponse = await fetch("/api/micro-blog");
+        const microblogData = await microblogResponse.json();
+
         const processedMicroblogs = microblogData
-          .slice(0, 5)
           .map((item: any) => ({
             id: item.id || item.slug,
             content: item.content || "",
             date: item.date || item.createdAt,
             likeCount: item.likeCount || 0,
-          }));
+          }))
+          .sort(
+            (a: MicroBlog, b: MicroBlog) =>
+              new Date(b.date).getTime() - new Date(a.date).getTime()
+          );
 
-        console.log("Bookmarks:", processedBookmarks);
-        console.log("MicroBlogs:", processedMicroblogs);
+        // Fetch archive items for search
+        const archiveResponse = await fetch("/api/archives");
+        const archiveData = await archiveResponse.json();
+        const archives = archiveData.items || [];
 
-        setEssayPosts(essayData);
-        setNotePosts(noteData);
-        setBookmarks(processedBookmarks);
-        setMicroBlogs(processedMicroblogs);
+        setAllEssays(publishedEssayData);
+        setEssayPosts(publishedEssayData.slice(0, 5));
+        setAllNotes(publishedNoteData);
+        setNotePosts(publishedNoteData.slice(0, 5));
+        setAllBookmarks(processedBookmarks);
+        setBookmarks(processedBookmarks.slice(0, 5));
+        setAllMicroBlogs(processedMicroblogs);
+        setMicroBlogs(processedMicroblogs.slice(0, 5));
+        setArchiveItems(archives);
         setIsLoading(false);
-
-        console.log("Essays:", essayData.length);
-        console.log("Notes:", noteData.length);
-        console.log("Bookmarks:", processedBookmarks.length);
-        console.log("MicroBlogs:", processedMicroblogs.length);
       } catch (error) {
         console.error("Error fetching posts:", error);
         setIsLoading(false);
@@ -176,17 +231,107 @@ const HomeV2Client = () => {
 
     fetchPosts();
 
-    // Initialize columns based on window width
-    handleResize();
-
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => {};
   }, []);
+
+  const searchResults = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return [];
+
+    const results: SearchResult[] = [];
+    const addResult = (item: SearchResult) => {
+      if (results.find((result) => result.path === item.path)) return;
+      results.push(item);
+    };
+
+    const matches = (value?: string) =>
+      !!value && value.toLowerCase().includes(query);
+
+    const matchesTags = (tags?: string[]) =>
+      Array.isArray(tags) && tags.some((tag) => tag.toLowerCase().includes(query));
+
+    allEssays.forEach((essay) => {
+      if (
+        matches(essay.title) ||
+        matches(essay.excerpt) ||
+        matches(essay.content) ||
+        matchesTags(essay.tags)
+      ) {
+        addResult({
+          id: `essay-${essay.slug}`,
+          title: essay.title,
+          path: `/garden/essays/${essay.slug}`,
+          type: "Essay",
+          snippet: essay.excerpt || essay.content?.slice(0, 120) || "",
+        });
+      }
+    });
+
+    allNotes.forEach((note) => {
+      if (
+        matches(note.title) ||
+        matches(note.content) ||
+        matchesTags(note.tags)
+      ) {
+        addResult({
+          id: `note-${note.slug}`,
+          title: note.title,
+          path: `/garden/notes/${note.slug}`,
+          type: "Note",
+          snippet: note.content?.slice(0, 120) || "",
+        });
+      }
+    });
+
+    allBookmarks.forEach((bookmark) => {
+      if (matches(bookmark.title) || matchesTags(bookmark.tags)) {
+        addResult({
+          id: `bookmark-${bookmark.id}`,
+          title: bookmark.title,
+          path: bookmark.link,
+          type: "Bookmark",
+          snippet: `Bookmark link: ${bookmark.link}`,
+          external: true,
+        });
+      }
+    });
+
+    allMicroBlogs.forEach((blog) => {
+      if (matches(blog.content)) {
+        addResult({
+          id: `microblog-${blog.id}`,
+          title: blog.content.slice(0, 60) || "MicroBlog post",
+          path: `/garden/micro-blog/${blog.id}`,
+          type: "MicroBlog",
+          snippet: blog.content.slice(0, 120),
+        });
+      }
+    });
+
+    archiveItems.forEach((archive) => {
+      if (matches(archive.title) || matches(archive.category)) {
+        addResult({
+          id: `archive-${archive.category}-${archive.slug}`,
+          title: archive.title,
+          path: `/archives/${archive.category}/${archive.slug}`,
+          type: "Archive",
+          snippet: archive.category,
+        });
+      }
+    });
+
+    staticPageSearchItems.forEach((page) => {
+      if (
+        matches(page.title) ||
+        matches(page.snippet) ||
+        page.path.toLowerCase().includes(query)
+      ) {
+        addResult(page);
+      }
+    });
+
+    return results.slice(0, 20);
+  }, [searchQuery, allEssays, allNotes, allBookmarks, allMicroBlogs, archiveItems]);
 
   // Collections data
   const collections = [
@@ -370,6 +515,59 @@ const HomeV2Client = () => {
         {/* Right side - Recent Activity */}
         <div className="md:col-span-2">
           <h2 className="font-medium mb-6">Recently Published</h2>
+          <div className="mb-6 max-w-xl">
+            <SearchBar
+              placeholder="Search essays, notes, poems, bookmarks, archives..."
+              onSearch={setSearchQuery}
+              className="max-w-xl"
+            />
+            {searchQuery ? (
+              <div className="mt-4 rounded-md border border-muted p-4 bg-surface">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+                  <span>Search results for "{searchQuery}"</span>
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="text-xs text-codeRed hover:underline"
+                  >
+                    Clear
+                  </button>
+                </div>
+                {searchResults.length > 0 ? (
+                  <div className="mt-4 space-y-3">
+                    {searchResults.map((result) => (
+                      <div key={result.id} className="rounded-md border border-muted p-3">
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <Link
+                              href={result.path}
+                              target={result.external ? "_blank" : undefined}
+                              rel={result.external ? "noopener noreferrer" : undefined}
+                              className="font-medium text-sm text-codeRed hover:underline"
+                            >
+                              {result.title}
+                            </Link>
+                            <p className="text-[11px] text-muted-foreground uppercase tracking-[0.18em] mt-1">
+                              {result.type}
+                            </p>
+                          </div>
+                        </div>
+                        {result.snippet ? (
+                          <p className="mt-2 text-xs text-muted-foreground line-clamp-3">
+                            {result.snippet}...
+                          </p>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    No matching content found. Try a broader term or browse the sections below.
+                  </p>
+                )}
+              </div>
+            ) : null}
+          </div>
 
           {isLoading ? (
             <div className="space-y-8">
