@@ -1939,3 +1939,99 @@ tags:
 type: article
 id: article-158
 ---
+
+---
+publish: true
+title: What it actually looks like to enjoy your everyday life
+url: https://evermuse.substack.com/p/what-it-actually-looks-like-to-enjoy
+createdAt: 2026-05-12
+tags:
+  - romanticizing-life
+type: article
+id: article-159
+---
+
+---
+publish: true
+title: How to be someone who actually does things
+url: https://evermuse.substack.com/p/how-to-be-someone-who-actually-does
+createdAt: 2026-05-12
+tags:
+  - self-expression
+  - create
+type: article
+id: article-160
+---
+
+---
+publish: true
+title: You need to be making 10 monthly lists
+url: https://juliannasalguero.substack.com/p/you-need-to-be-making-monthly-10
+createdAt: 2026-05-12
+tags:
+  - self-expression
+  - create
+  - guide
+type: article
+id: article-161
+---
+
+---
+publish: true
+title: How I make reading part of my daily life
+url: https://ayushithakkar.substack.com/p/how-i-make-reading-part-of-my-daily
+createdAt: 2026-05-12
+tags:
+  - self-expression
+  - reading
+  - guide
+type: article
+id: article-162
+---
+
+---
+publish: true
+title: Why you should start a commonplace book
+url: https://www.coffeeswithangel.com/p/why-you-should-start-a-commonplace
+createdAt: 2026-05-12
+tags:
+  - commonplace
+type: article
+id: article-163
+---
+
+---
+publish: true
+title: Websites that made me want to write
+url: https://offlinecrush.substack.com/p/websites-that-made-me-want-to-write
+createdAt: 2026-05-12
+tags:
+  - writing
+  - self-expression
+type: article
+id: article-164
+---
+
+
+---
+publish: true
+title: Stop taking journaling so seriously
+url: https://www.coffeeswithangel.com/p/stop-taking-journaling-so-seriously
+createdAt: 2026-05-12
+tags:
+  - journaling
+  - self-expression
+type: article
+id: article-165
+---
+
+---
+publish: true
+title: The Dark Side of Stationery Culture
+url: https://thatjournalingguy.substack.com/p/the-dark-side-of-stationery-culture
+createdAt: 2026-05-12
+tags:
+  - stationery
+type: article
+id: article-166
+---

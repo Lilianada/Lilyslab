@@ -25,8 +25,8 @@ where are women?
 Add a mini IDE or code editor
 Add flip cards
 Catalog for everything mundane
-Audio blog
-
+******Audio blog / a radio
+*****A search bar to help me find essays and notes
 
 ## TO-DO List
 A list of pages to add to lilyslab to make it more fun, personal and a site of exploration for my visitors.
