@@ -11,7 +11,7 @@ export default function WantsPage() {
   const wantsItems = [
     { text: "I want to learn to ride a bike", completed: false },
     { text: "I want to learn to swim", completed: false },
-    { text: "I want to go back to sewing but for fun/myself", completed: false },
+    { text: "I want to go back to sewing but for fun/myself", completed: true },
     { text: "I want to learn to play paddle", completed: true },
     { text: "I want to read 100 books in a year", completed: false },
     { text: "I want to ride myself to the gym and back home (in a car)", completed: true },
@@ -29,6 +29,9 @@ export default function WantsPage() {
     { text: "I want to visit Ghana", completed: true },
     { text: "I want to visit South Africa", completed: false },
     { text: "I want to visit Japan, Tokyo, Osaka", completed: false },
+    { text: "I want to visit Europe", completed: false },
+    { text: "I want to start an audioblog or podcast or something of such", completed: false },
+    { text: "I want to learn to code again...", completed: false }
   ];
 
   useEffect(() => {
