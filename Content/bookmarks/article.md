@@ -2035,3 +2035,129 @@ tags:
 type: article
 id: article-166
 ---
+
+---
+publish: true
+title: You don't get to hate the girl that got you here
+url: https://theenatoshaj.substack.com/p/you-dont-get-to-hate-the-girl-that
+createdAt: 2026-05-25
+tags:
+- self-image
+- self-love
+- memoir
+- identity
+type: article
+id: article-167
+---
+
+---
+publish: true
+title: On being enough
+url: https://substack.com/@theenaoshaj/note/p-193138527?utm_source=notes-share-action&r=hikqe
+createdAt: 2026-05-25
+tags:
+- self-worth
+- inner-child
+- journaling
+- reflection
+type: article
+id: article-168
+---
+
+---
+publish: true
+title: How to stop hating your body
+url: https://substack.com/@notyourpolitenewsletter/note/p-197219271?utm_source=notes-share-action&r=hikqe
+createdAt: 2026-05-25
+tags:
+- body-image
+- self-acceptance
+- mental-health
+- essay
+type: article
+id: article-169
+---
+
+---
+publish: true
+title: How to start having original thoughts
+url: https://feifeiwrites.substack.com/p/how-to-start-having-original-thoughts
+createdAt: 2026-05-25
+tags:
+- thinking
+- creativity
+- originality
+- writing
+type: article
+id: article-170
+---
+
+---
+publish: true
+title: Creative curriculum vol. 01
+url: https://brandhouse.substack.com/p/creative-curriculum-vol-01
+createdAt: 2026-05-25
+tags:
+- curriculum
+- learning
+- creative-practice
+- teaching
+type: article
+id: article-171
+---
+
+---
+publish: true
+title: Your research practice is your creative practice
+url: https://artdirection.substack.com/p/your-research-practice-is-your-creative
+createdAt: 2026-05-25
+tags:
+- research
+- art-direction
+- thinking-methods
+- creative-process
+type: article
+id: article-172
+---
+
+---
+publish: true
+title: How to do the shit you say you’re going to do
+url: https://mirandadoesbrands.substack.com/p/how-to-do-the-shit-you-say-youre
+createdAt: 2026-05-25
+tags:
+- productivity
+- habits
+- action
+- personal-development
+type: article
+id: article-173
+---
+
+---
+publish: true
+title: On softness and self-care
+url: https://substack.com/@theselfcarequeen/note/p-192450880?utm_source=notes-share-action&r=hikqe
+createdAt: 2026-05-25
+tags:
+- self-care
+- boundaries
+- rest
+- emotional-well-being
+type: article
+id: article-174
+---
+
+---
+publish: true
+title: Making the mundane marvelous
+url: https://earthgratitudestudio.substack.com/p/making-the-mundane-marvelous
+createdAt: 2026-05-25
+tags:
+- gratitude
+- mindfulness
+- everyday life
+- reflective practice
+type: article
+id: article-175
+--- 
