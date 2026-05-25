@@ -113,6 +113,16 @@ const CollectionItem = ({
   </div>
 );
 
+// Helper that formats dates as DD/MM/YYYY for mobile
+const formatShortDate = (dateString: string) => {
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString;
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 // Post list item component for the right side of the page
 const ListItem = ({
   title,
@@ -128,7 +138,8 @@ const ListItem = ({
       {title}
     </Link>
     <span className="text-[10px] text-muted-foreground">
-      {formatDate(date)}
+      <span className="inline sm:hidden">{formatShortDate(date)}</span>
+      <span className="hidden sm:inline">{formatDate(date)}</span>
     </span>
   </div>
 );
@@ -368,7 +379,7 @@ const HomeV2Client = () => {
   ];
 
   return (
-    <div className="container py-10 max-w-6xl">
+    <div className="md:container py-10 max-w-6xl">
       {/* Main heading section */}
       <div className="flex flex-col text-xs text-muted-foreground font-mono max-w-xl mb-6">
         <div className="w-20 h-20 mb-6 object-contain">
@@ -737,7 +748,12 @@ const HomeV2Client = () => {
                           {bookmark.title}
                         </a>
                         <span className="text-[10px] text-muted-foreground">
-                          {formatDate(bookmark.created)}
+                          <span className="inline sm:hidden">
+                            {formatShortDate(bookmark.created)}
+                          </span>
+                          <span className="hidden sm:inline">
+                            {formatDate(bookmark.created)}
+                          </span>
                         </span>
                       </div>
                     ))

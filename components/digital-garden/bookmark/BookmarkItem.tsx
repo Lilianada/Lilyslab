@@ -2,6 +2,15 @@
 import React from "react";
 import { formatDateForDisplay } from "@/lib/utils";
 
+const formatShortDate = (dateString: string) => {
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString;
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 export type Bookmark = {
   id?: string;
   link: string;
@@ -105,14 +114,14 @@ export function BookmarkItem({ bookmark }: Props) {
             <div className="flex shrink items-center gap-2 overflow-x-auto">
               <div className={`h-2 w-2 shrink-0 rounded-full ${colorMap[bookmark.type]}`} />
               <p className="mr-2 truncate font-mono text-xs md:text-sm">{bookmark.title}</p>
-              {websiteName && (
+              {/* {websiteName && (
                 <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
                   {websiteName}
                 </span>
-              )}
+              )} */}
             </div>
             <p className="shrink-0 text-right font-mono text-xs text-neutral-500">
-              {formattedDate}
+              {formatShortDate(bookmark.created)}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import type { Bookmark } from "@/lib/garden/bookmarks";
 import { BookmarkItem } from "@/components/digital-garden/bookmark/BookmarkItem";
-import { safeFormatDate } from "@/lib/utils";
+import { ArrowUpDown } from "lucide-react";
 
 interface Props {
   bookmarks: Bookmark[];
@@ -13,6 +13,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<Bookmark['type'] | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
   
   // Count bookmarks per tag
   const tagCounts: Record<string, number> = {};
@@ -45,22 +46,22 @@ export default function TagFilterClient({ bookmarks }: Props) {
   });
   
   // Available categories (only show categories that have bookmarks)
-  const categories = Object.keys(categoryCounts).filter(
-    cat => categoryCounts[cat] > 0
-  ) as Bookmark['type'][];
+  // const categories = Object.keys(categoryCounts).filter(
+  //   cat => categoryCounts[cat] > 0
+  // ) as Bookmark['type'][];
 
   React.useEffect(() => {
     const timeout = setTimeout(() => setIsLoaded(true), 400);
     return () => clearTimeout(timeout);
   }, []);
-  // Sort bookmarks by newest first
+  // Sort bookmarks based on selected order
   const sortedBookmarks = [...bookmarks].sort((a, b) => {
     // Convert to Date objects for safe comparison
     const dateA = new Date(a.created);
     const dateB = new Date(b.created);
     
-    // Sort newest first
-    return dateB.getTime() - dateA.getTime();
+    // Sort based on selected order
+    return sortOrder === 'newest' ? dateB.getTime() - dateA.getTime() : dateA.getTime() - dateB.getTime();
   });
   
   // Apply tag and category filtering
@@ -198,12 +199,20 @@ export default function TagFilterClient({ bookmarks }: Props) {
           </div>
           
           {/* Results count */}
-          <div className="mb-6">
+          <div className="mb-6 flex items-center justify-between">
             <p className="text-sm text-muted-foreground">
               Showing {filteredBookmarks.length} of {bookmarks.length} bookmarks
               {selectedCategory && ` in category ${selectedCategory}`}
               {selectedTag && ` with tag #${selectedTag}`}
             </p>
+            <button
+              onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
+              className="flex items-center gap-2 px-3 py-1 text-xs font-mono bg-muted border border-border rounded-full hover:bg-accent transition-all"
+              title={`Sort by ${sortOrder === 'newest' ? 'oldest' : 'newest'} first`}
+            >
+              <ArrowUpDown size={12} />
+              {sortOrder === 'newest' ? 'Newest' : 'Oldest'}
+            </button>
           </div>
           
           {/* Bookmark list */}
