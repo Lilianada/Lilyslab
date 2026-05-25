@@ -2052,13 +2052,12 @@ id: article-167
 
 ---
 publish: true
-title: On being enough
-url: https://substack.com/@theenaoshaj/note/p-193138527?utm_source=notes-share-action&r=hikqe
+title: I could’ve waited for you… and that’s exactly why i didn’t
+url: https://theenatoshaj.substack.com/p/i-couldve-waited-for-you-and-thats
 createdAt: 2026-05-25
 tags:
 - self-worth
 - inner-child
-- journaling
 - reflection
 type: article
 id: article-168
@@ -2066,14 +2065,13 @@ id: article-168
 
 ---
 publish: true
-title: How to stop hating your body
-url: https://substack.com/@notyourpolitenewsletter/note/p-197219271?utm_source=notes-share-action&r=hikqe
+title: WTF is a thought daughter?
+url: https://aftertheclouds.substack.com/p/wtf-is-a-thought-daughter
 createdAt: 2026-05-25
 tags:
-- body-image
-- self-acceptance
-- mental-health
-- essay
+- knowledge
+- intelligence
+- consumerism
 type: article
 id: article-169
 ---
@@ -2136,14 +2134,14 @@ id: article-173
 
 ---
 publish: true
-title: On softness and self-care
-url: https://substack.com/@theselfcarequeen/note/p-192450880?utm_source=notes-share-action&r=hikqe
+title: A funded woman is an ungovernable woman
+url: https://theselfcarequeen.substack.com/p/a-funded-woman-is-an-ungovernable
 createdAt: 2026-05-25
 tags:
-- self-care
-- boundaries
-- rest
-- emotional-well-being
+- money
+- self-sufficiency
+- feminism
+- power
 type: article
 id: article-174
 ---
