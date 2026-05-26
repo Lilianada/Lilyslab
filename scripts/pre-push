@@ -17,7 +17,7 @@ if git diff --cached --quiet -- "$(git rev-parse --show-toplevel)/last-updated.j
   echo "No changes to last-updated.json needed."
 else
   # Commit the changes
-  git commit -m "Update last-updated.json timestamp [skip ci]" -- "$(git rev-parse --show-toplevel)/last-updated.json"
+  git commit -m "Update last-updated.json timestamp" -- "$(git rev-parse --show-toplevel)/last-updated.json"
   echo "Committed updated timestamp to last-updated.json"
 fi
 
