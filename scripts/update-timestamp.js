@@ -2,7 +2,7 @@
 
 /**
  * Script to update the last-updated.json file with the current date and time
- * This is designed to be used as a Git pre-push hook
+ * This should be run as part of your deployment process (not on every git push)
  */
 
 const fs = require('fs');
@@ -27,7 +27,7 @@ try {
   
   // Update the timestamp with the current date and time
   data.lastUpdated = new Date().toISOString();
-  data.source = "git-push"; // Update the source to indicate it was updated by a git push
+  data.source = "deploy"; // Updated by deployment process
   
   // Write back to the file with pretty formatting and a single comment
   const updatedContent = `// filepath: ${lastUpdatedPath}\n${JSON.stringify(data, null, 2)}`;
