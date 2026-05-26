@@ -17,7 +17,7 @@ export default async function BookmarkPage() {
                   <h1 className="mb-2 text-xl font-medium">Bookmarks</h1>
                   <div className="flex flex-col text-xs text-muted-foreground font-mono">
                     <div>Created: April 24, 2025</div>
-                    <div>Last updated: June 13, 2025</div>
+                    <div>Last updated: May 12, 2026</div>
                     <div>Inspired by: ✳︎✳︎✳︎</div>
                   </div>
                 </header>

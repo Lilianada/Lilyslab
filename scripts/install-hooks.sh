@@ -16,4 +16,3 @@ chmod +x "$REPO_ROOT/scripts/pre-push"
 chmod +x "$REPO_ROOT/scripts/update-timestamp.js"
 
 echo "✅ Git pre-push hook installed successfully!"
-echo "Last-updated.json will be automatically updated with each push."
