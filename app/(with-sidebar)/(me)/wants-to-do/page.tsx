@@ -18,10 +18,10 @@ export default function WantsPage() {
     { text: "I want to learn to play tennis", completed: false },
     { text: "I want to go jet skiing", completed: false },
     { text: "I want to learn to install my own weave", completed: false },
-    { text: "I want to buy a new phone", completed: false },
-    { text: "I want to an iPad", completed: true },
-    { text: "I want to a new macbook", completed: false },
-    { text: "I want to a mad ass work station", completed: false },
+    { text: "I want to buy a new phone", completed: true },
+    { text: "I want an iPad", completed: true },
+    { text: "I want a new macbook", completed: false },
+    { text: "I want a mad ass work station", completed: false },
     { text: "I want to own a collection of gym shoes ", completed: false },
     { text: "I want to learn french", completed: false },
     { text: "I want to give a ted talk on a stage", completed: false },
@@ -31,7 +31,10 @@ export default function WantsPage() {
     { text: "I want to visit Japan, Tokyo, Osaka", completed: false },
     { text: "I want to visit Europe", completed: false },
     { text: "I want to start an audioblog or podcast or something of such", completed: false },
-    { text: "I want to learn to code again...", completed: false }
+    { text: "I want to learn to code again...", completed: false },
+    { text: "I want to start my fashion business afresh", completed: false },
+    { text: "I want to grow my stationery brand into a successful venture and along side a print studio", completed: false },
+
   ];
 
   useEffect(() => {
@@ -59,7 +62,7 @@ export default function WantsPage() {
           </h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: April 11, 2026</div>
-            <div>Last updated: April 11, 2026</div>
+            <div>Last updated: May 25, 2026</div>
           </div>
         </header>
 
