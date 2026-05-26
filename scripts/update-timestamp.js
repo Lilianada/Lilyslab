@@ -30,8 +30,8 @@ try {
   data.source = "deploy"; // Updated by deployment process
   
   // Write back to the file with pretty formatting and a single comment
-  const updatedContent = `// filepath: ${lastUpdatedPath}\n${JSON.stringify(data, null, 2)}`;
-  fs.writeFileSync(lastUpdatedPath, updatedContent);
+  // const updatedContent = `// filepath: ${lastUpdatedPath}\n${JSON.stringify(data, null, 2)}`;
+  // fs.writeFileSync(lastUpdatedPath, updatedContent);
   
   console.log('✅ Successfully updated last-updated.json with current timestamp');
 } catch (error) {

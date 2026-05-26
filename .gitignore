@@ -38,3 +38,4 @@ next-env.d.ts
 .windsurf
 conflict-files-obsidian-git.md
 last-updated.json
+pre-push
