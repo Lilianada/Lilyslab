@@ -2159,3 +2159,17 @@ tags:
 type: article
 id: article-175
 --- 
+
+---
+publish: true
+title: I want money to be the 
+url: https://open.substack.com/pub/marthastewish/p/i-want-money-to-be-the-quietest-thing?r=hikqe&utm_medium=ios
+createdAt: 2026-05-28
+tags:
+- gratitude
+- mindfulness
+- everyday life
+- reflective practice
+type: article
+id: article-176
+---
