@@ -2175,7 +2175,7 @@ id: article-176
 ---
 publish: true
 title: It didn’t work out because you would’ve hated it
-url: https://open.substack.com/pub/theebookclubx/p/it-didnt-work-out-because-you-wouldve?r=hikqe&utm_medium=ios
+url: https://theebookclubx.substack.com/p/it-didnt-work-out-because-you-wouldve?r=hikqe&utm_medium=ios&triedRedirect=true
 createdAt: 2026-05-30
 tags:
 type: article
@@ -2185,7 +2185,7 @@ id: article-177
 ---
 publish: true
 title: Privacy is sexy
-url: https://open.substack.com/pub/thecouture/p/privacy-is-sexy?r=hikqe&utm_medium=ios
+url: https://thecouture.substack.com/p/privacy-is-sexy?r=hikqe&utm_medium=ios&triedRedirect=true
 createdAt: 2026-05-30
 tags: 
 - privacy 
@@ -2207,7 +2207,7 @@ id: article-179
 ---
 publish: true
 title: We are entertaining ourselves to death
-url: https://substack.com/@thevoguediaries/note/p-190286845?r=hikqe&utm_medium=ios&utm_source=notes-share-action
+url: https://nitikapasiyt.substack.com/p/we-are-entertaining-ourselves-to
 createdAt: 2026-05-31
 tags: 
 - 
@@ -2218,7 +2218,7 @@ id: article-180
 ---
 publish: true
 title: You are jealous of me
-url: https://substack.com/@thevoguediaries/note/p-196822482?r=hikqe&utm_medium=ios&utm_source=notes-share-action
+url: https://nitikapasiyt.substack.com/p/youre-jealous-of-me
 createdAt: 2026-05-31
 tags: 
 - 
@@ -2229,10 +2229,21 @@ id: article-181
 ---
 publish: true
 title: Instagram is unchic 
-url: https://open.substack.com/pub/giuliaspadoniriva/p/instagram-is-unchic?r=hikqe&utm_medium=ios
+url: https://giuliaspadoniriva.substack.com/p/instagram-is-unchic?r=hikqe&utm_medium=ios&triedRedirect=true
 createdAt: 2026-06-01
 tags: 
 - 
 type: article
 id: article-182
+---
+
+---
+publish: true
+title: In order to love who you are, you must not hate the experience that shaped you. 
+url: https://lynwritess.substack.com/p/in-order-to-love-who-you-are-you?r=hikqe&utm_medium=ios&triedRedirect=true
+createdAt: 2026-06-01
+tags: 
+- 
+type: article
+id: article-183
 ---
