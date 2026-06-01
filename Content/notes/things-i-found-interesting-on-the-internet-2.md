@@ -1,7 +1,7 @@
 ---
 title: Things I Found Interesting on the Internet Today Part-Two
 createdAt: 2026-05-14
-lastUpdated: 2026-06-11
+lastUpdated: 2026-06-01
 tags:
   - internet-interests
   - psychology
@@ -15,7 +15,7 @@ published: true
 
 Today I learned that Polycystic Ovarian Syndrome (PCOS) has been renamed Polyendocrine Metabolic Ovarian Syndrome (PMOS). The new name reflects a broader understanding of the condition and how it affects not just the ovaries, but also hormones, metabolism, and the endocrine system as a whole.
 
----
+***
 
 #### Brain Rot
 

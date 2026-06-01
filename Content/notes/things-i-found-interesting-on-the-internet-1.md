@@ -1,7 +1,7 @@
 ---
 title: Things I Found Interesting on the Internet Today Part-One
 createdAt: 2026-05-11
-lastUpdated: 2026-06-11
+lastUpdated: 2026-06-01
 tags:
   - internet-interests
   - commonplace-notes
