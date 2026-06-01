@@ -2162,14 +2162,77 @@ id: article-175
 
 ---
 publish: true
-title: I want money to be the 
+title: I want money to be the quietest thing
 url: https://open.substack.com/pub/marthastewish/p/i-want-money-to-be-the-quietest-thing?r=hikqe&utm_medium=ios
 createdAt: 2026-05-28
 tags:
-- gratitude
-- mindfulness
-- everyday life
+- finances
 - reflective practice
 type: article
 id: article-176
+---
+
+---
+publish: true
+title: It didn’t work out because you would’ve hated it
+url: https://open.substack.com/pub/theebookclubx/p/it-didnt-work-out-because-you-wouldve?r=hikqe&utm_medium=ios
+createdAt: 2026-05-30
+tags:
+type: article
+id: article-177
+---
+
+---
+publish: true
+title: Privacy is sexy
+url: https://open.substack.com/pub/thecouture/p/privacy-is-sexy?r=hikqe&utm_medium=ios
+createdAt: 2026-05-30
+tags: 
+- privacy 
+type: article
+id: article-178
+---
+
+---
+publish: true
+title: Syrup recipes 
+url: https://substack.com/@thelivingstandard/note/c-266639713?r=hikqe&utm_medium=ios&utm_source=notes-share-action
+createdAt: 2026-05-30
+tags: 
+- diy 
+type: article
+id: article-179
+---
+
+---
+publish: true
+title: We are entertaining ourselves to death
+url: https://substack.com/@thevoguediaries/note/p-190286845?r=hikqe&utm_medium=ios&utm_source=notes-share-action
+createdAt: 2026-05-31
+tags: 
+- 
+type: article
+id: article-180
+---
+
+---
+publish: true
+title: You are jealous of me
+url: https://substack.com/@thevoguediaries/note/p-196822482?r=hikqe&utm_medium=ios&utm_source=notes-share-action
+createdAt: 2026-05-31
+tags: 
+- 
+type: article
+id: article-181
+---
+
+---
+publish: true
+title: Instagram is unchic 
+url: https://open.substack.com/pub/giuliaspadoniriva/p/instagram-is-unchic?r=hikqe&utm_medium=ios
+createdAt: 2026-06-01
+tags: 
+- 
+type: article
+id: article-182
 ---
