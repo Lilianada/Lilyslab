@@ -2207,6 +2207,38 @@ id: article-179
 ---
 publish: true
 title: We are entertaining ourselves to death
+url: https://substack.com/@thevoguediaries/note/p-190286845?r=hikqe&utm_medium=ios&utm_source=notes-share-action
+createdAt: 2026-05-31
+tags: 
+- 
+type: article
+id: article-180
+---
+
+---
+publish: true
+title: You are jealous of me
+url: https://substack.com/@thevoguediaries/note/p-196822482?r=hikqe&utm_medium=ios&utm_source=notes-share-action
+createdAt: 2026-05-31
+tags: 
+- 
+type: article
+id: article-181
+---
+
+---
+publish: true
+title: Instagram is unchic 
+url: https://open.substack.com/pub/giuliaspadoniriva/p/instagram-is-unchic?r=hikqe&utm_medium=ios
+createdAt: 2026-06-01
+tags: 
+- 
+type: article
+id: article-182
+---
+---
+publish: true
+title: We are entertaining ourselves to death
 url: https://nitikapasiyt.substack.com/p/we-are-entertaining-ourselves-to
 createdAt: 2026-05-31
 tags: 
