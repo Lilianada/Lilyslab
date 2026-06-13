@@ -1,7 +1,7 @@
 ---
 title: Things I Found Interesting on the Internet Today Part-Four
 createdAt: 2026-05-24
-lastUpdated: 2026-06-11
+lastUpdated: 2026-06-01
 tags:
   - internet-interests
   - design
@@ -11,15 +11,15 @@ type: evergreen
 published: true
 ---
 
-## Biomimicry
+#### Biomimicry
 
 Biomimicry is the practice of solving human problems by imitating nature’s time-tested systems, designs, and processes. Scientists, artists, architects, and inventors study the natural world to inspire more elegant and sustainable ways of living.
 
 I love the idea that nature already contains solutions humans are still trying to figure out.
 
----
+***
 
-## Dark Horse Era
+#### Dark Horse Era
 
 A “dark horse” is someone underestimated who later surprises everyone through unexpected success or talent.
 
