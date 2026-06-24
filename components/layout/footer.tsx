@@ -1,5 +1,4 @@
 import { Separator } from "@/components/ui/separator";
-import { format } from "date-fns";
 import Link from "next/link";
 import { Github, Linkedin, Mail, Rss, Twitter } from "lucide-react";
 
@@ -9,12 +8,26 @@ interface FooterProps {
   contentType?: "garden/essays" | "garden/notes";
 }
 
+function formatBuildTimeUTC(buildTime: string) {
+  const date = new Date(buildTime);
+  if (Number.isNaN(date.getTime())) return buildTime;
+
+  const month = date.toLocaleString("en-US", {
+    month: "long",
+    timeZone: "UTC",
+  });
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
+  const hours = String(date.getUTCHours()).padStart(2, "0");
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+
+  return `${month} ${day}, ${year} at ${hours}:${minutes} UTC`;
+}
+
 export function Footer({ prevPost, nextPost, contentType }: FooterProps = {}) {
   const buildTime = process.env.NEXT_PUBLIC_BUILD_TIME;
 
-  const formattedDate = buildTime
-    ? format(new Date(buildTime), "MMMM d, yyyy 'at' HH:mm")
-    : null;
+  const formattedDate = buildTime ? formatBuildTimeUTC(buildTime) : null;
 
   return (
     <footer className="mt-auto w-full font-nitti">
