@@ -36,7 +36,7 @@ I don't even see you in my dreams anymore, why? Why don't you come to say hi to 
 Do you know big mummy cries whenever she speaks of you? I want to blame her for keeping you away during your lasts days, but I know she suffered seeing you in pains. I know she was in constant hurt seeing her only baby girl in so much pain. I know that's why she sort help from wherever was possible. I can't blame her because I know you'd have done the same for me.
 When she cries, I can't cry, who would tell who sorry?
 
-Do you know we were asked not to cry during your burial. We didn't cry, none of did. But big mummy wailed, oh, she cried so much that she left before you were laid.
+Do you know we were asked not to cry during your burial. We didn't cry, none of us did. But big mummy wailed, oh, she cried so much that she left before you were laid.
 
 **Nnem oma**
 I hate to think of my wedding day, I try not to think of it because how can I? How can I be happy on that very joyous day when you won't be there? I don't even think about all those ceremonies, igba-nkwu, child birth, omugwo... whom am I going to call when I take in? Who would advice me on what to do and what not to do? Who would pamper me and rub my back ehn mummy? Who would make ofe-nsala for me like big mummy made for you? onye ga-akuzirim ka esi asụ ji?
