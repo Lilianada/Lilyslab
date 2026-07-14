@@ -19,7 +19,7 @@ export default function page() {
 
         <p className="text-lg pl-2 border-border border-l-4 text-zinc-100">
           Our aim is to fuel your imagination. We have handpicked the best
-          things that can speak to your imagination and creativity to create
+          things that can speak to your imagination and creativity, to create
           things that will make you authentic.
         </p>
         <p className="italic text-base text-zinc-500 font-serif">
