@@ -7,7 +7,7 @@ import matter from 'gray-matter';
 interface Book {
   id: string;
   title: string;
-  status: 'current-reads' | 'read' | 'will-read';
+  status: 'current-reads' | 'read' | 'to-be-read';
   rating?: number;
   genre?: string;
   date?: number; // Added date field
@@ -18,7 +18,7 @@ interface Book {
 // Set the directory path to bookshelf
 const booksDirectory = join(process.cwd(), 'Content', 'bookshelf');
 
-async function getBooksFromStatusDirectory(status: 'current-reads' | 'read' | 'will-read'): Promise<Book[]> {
+async function getBooksFromStatusDirectory(status: 'current-reads' | 'read' | 'to-be-read'): Promise<Book[]> {
   const statusDirectory = join(booksDirectory, status);
   let fileNames: string[];
   try {
@@ -66,9 +66,10 @@ export async function GET() {
   try {
     const currentReads = await getBooksFromStatusDirectory('current-reads');
     const read = await getBooksFromStatusDirectory('read');
-    const willRead = await getBooksFromStatusDirectory('will-read');
+    const toBeRead = await getBooksFromStatusDirectory('to-be-read');
 
-    const allBooks = [...currentReads, ...read, ...willRead];
+    // Place TBR items before current reads, then read items
+    const allBooks = [...toBeRead, ...currentReads, ...read];
 
     // Sort books by date descending, putting books without date last
     allBooks.sort((a, b) => {

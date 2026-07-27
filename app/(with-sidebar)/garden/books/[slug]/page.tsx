@@ -10,7 +10,7 @@ import { formatTimestampToYYMMDD } from "@/lib/utils";
 interface Book {
   id: string;
   title: string;
-  status: 'current-reads' | 'read' | 'will-read';
+  status: 'current-reads' | 'read' | 'to-be-read';
   rating?: number;
   genre?: string;
   date?: number;
@@ -20,7 +20,7 @@ interface Book {
 const statusColors: Record<Book['status'], string> = {
   'read': '#A2CBAF',
   'current-reads': '#A6C2EB',
-  'will-read': '#FAE680'
+  'to-be-read': '#FAE680'
 };
 
 export default function BookshelfDetailPage() {
