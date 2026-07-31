@@ -70,10 +70,21 @@ const BookCard: React.FC<BookCardProps> = ({
     // Get background color based on status
     const backgroundColor = statusColors[book.status] || '#E0E0E0'; // Default gray
 
-    // Keep distortion logic
-    const randomMarginBottom = Math.floor(Math.random() * 8);
-    const randomMarginRight = Math.floor(Math.random() * 8);
-    const randomRotation = Math.floor(Math.random() * 4 - 2);
+    // Keep distortion logic but deterministically derived from book.id
+    const seededHash = (input: string | undefined) => {
+        const s = input || '';
+        let h = 2166136261 >>> 0;
+        for (let i = 0; i < s.length; i++) {
+            h ^= s.charCodeAt(i);
+            h = Math.imul(h, 16777619) >>> 0;
+        }
+        return h >>> 0;
+    };
+
+    const seed = seededHash(book.id || book.title);
+    const randomMarginBottom = seed % 8;
+    const randomMarginRight = (Math.floor(seed / 8) % 8);
+    const randomRotation = (seed % 5) - 2; // -2..2
     // Removed type-specific random margins
 
     const transformStyles = distorted

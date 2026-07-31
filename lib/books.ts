@@ -11,6 +11,7 @@ export interface Book {
   status: 'read' | 'reading' | 'to-read';
   date: string;
   rating?: number;
+  pages?: string | number;
   genre?: string[];
   tags?: string[];
   publish: boolean;
@@ -22,12 +23,13 @@ function getFolderStatus(folder: string): Book['status'] {
   switch (folder) {
     case 'read': return 'read';
     case 'current-reads': return 'reading';
+    case 'to-be-read': return 'to-read';
     default: throw new Error(`Unknown folder status: ${folder}`);
   }
 }
 
 export function getAllBooks(): Book[] {
-  const folders = ['read', 'current-reads'];
+  const folders = ['read', 'current-reads', 'to-be-read'];
   const books: Book[] = [];
 
   for (const folder of folders) {
@@ -53,6 +55,7 @@ export function getAllBooks(): Book[] {
         status: getFolderStatus(folder),
         date: data.date,
         rating: data.rating,
+        pages: data.pages,
         genre: Array.isArray(data.genre) ? data.genre : data.genre ? [data.genre] : undefined,
         tags: Array.isArray(data.tags) ? data.tags : data.tags ? [data.tags] : undefined,
         publish: true,

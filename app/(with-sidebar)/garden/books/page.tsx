@@ -19,13 +19,13 @@ export default function BookshelfPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [selectedTab, setSelectedTab] = useState<'all' | 'to-be-read' | 'current-reads' | 'read'>('all');
+  const [selectedTab, setSelectedTab] = useState<'all' | 'current-reads' | 'read' | 'to-be-read'>('all');
 
   const tabLabels = [
     { key: 'all', label: 'All' },
-    { key: 'to-be-read', label: 'To Be Read' },
     { key: 'current-reads', label: 'Reading' },
     { key: 'read', label: 'Read' },
+    { key: 'to-be-read', label: 'TBR List' },
   ];
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function BookshelfPage() {
                 ? "bg-primary text-primary-foreground border-primary"
                 : "bg-muted border-border text-muted-foreground hover:bg-accent"
               }`}
-              onClick={() => setSelectedTab(tab.key as 'all' | 'to-be-read' | 'current-reads' | 'read')}
+              onClick={() => setSelectedTab(tab.key as 'all' | 'current-reads' | 'read' | 'to-be-read')}
             >
               {tab.label}
             </button>

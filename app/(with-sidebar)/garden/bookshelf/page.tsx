@@ -13,6 +13,7 @@ export default function Page() {
   const books = getAllBooks();
   const readingBooks = books.filter((book) => book.status === "reading");
   const readBooks = books.filter((book) => book.status === "read");
+  const toBeReadBooks = books.filter((book) => book.status === "to-read");
 
   return (
     <>
@@ -57,6 +58,45 @@ export default function Page() {
                 {readBooks.map((book) => (
                   <BookCard key={book.id} book={book} />
                 ))}
+              </div>
+            </section>
+          )}
+
+          {toBeReadBooks.length > 0 && (
+            <section className="mb-8">
+              <div className="flex items-center gap-2 mb-3">
+                <Star className="h-4 w-4 text-primary" />
+                <h2 className="text-base font-medium">TBR List</h2>
+              </div>
+              <div className="overflow-x-auto rounded-lg border border-border/60 bg-card/50">
+                <table className="min-w-full text-sm">
+                  <thead className="bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
+                    <tr>
+                      <th className="px-3 py-2 text-left font-medium">Title</th>
+                      <th className="px-3 py-2 text-left font-medium">Author</th>
+                      <th className="px-3 py-2 text-left font-medium">Pages</th>
+                      <th className="px-3 py-2 text-left font-medium">Themes / Tags</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {toBeReadBooks.map((book) => (
+                      <tr key={book.id} className="border-t border-border/60 align-top">
+                        <td className="px-3 py-3 font-medium">{book.title}</td>
+                        <td className="px-3 py-3 text-muted-foreground">{book.author}</td>
+                        <td className="px-3 py-3 text-muted-foreground">{book.pages ?? "—"}</td>
+                        <td className="px-3 py-3 text-muted-foreground">
+                          {book.genre || book.tags ? (
+                            <span>
+                              {(book.genre || []).concat(book.tags || []).join(" • ")}
+                            </span>
+                          ) : (
+                            <span className="text-muted-foreground/70">No tags yet</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </section>
           )}

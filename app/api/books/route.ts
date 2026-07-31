@@ -68,8 +68,8 @@ export async function GET() {
     const read = await getBooksFromStatusDirectory('read');
     const toBeRead = await getBooksFromStatusDirectory('to-be-read');
 
-    // Place TBR items before current reads, then read items
-    const allBooks = [...toBeRead, ...currentReads, ...read];
+    // Place TBR items after read items for page ordering
+    const allBooks = [...currentReads, ...read, ...toBeRead];
 
     // Sort books by date descending, putting books without date last
     allBooks.sort((a, b) => {
