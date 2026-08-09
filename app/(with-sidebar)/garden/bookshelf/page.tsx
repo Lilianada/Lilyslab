@@ -9,6 +9,27 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const placeholderImage = "/images/book-placeholder.jpg"; // You'll need to add this image
 
+function formatMonthYear(date?: string) {
+  if (!date) return null;
+
+  const normalized = String(date).trim();
+  const match = normalized.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const fallbackMatch = normalized.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+
+  const parsed = match
+    ? new Date(`${match[1]}-${match[2]}-${match[3]}T00:00:00`)
+    : fallbackMatch
+    ? new Date(`${fallbackMatch[3]}-${fallbackMatch[1]}-${fallbackMatch[2]}T00:00:00`)
+    : new Date(normalized);
+
+  if (Number.isNaN(parsed.getTime())) return null;
+
+  return parsed.toLocaleDateString("en", {
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export default function Page() {
   const books = getAllBooks();
   const readingBooks = books.filter((book) => book.status === "reading");
@@ -148,7 +169,12 @@ function BookCard({ book }: { book: Book }) {
         <h3 className="text-xs font-medium leading-tight mb-1" title={title}>
           {title.length > 20 ? `${title.substring(0, 18)}...` : title}
         </h3>
-        <p className="text-[10px] text-muted-foreground mb-2">{author}</p>
+        <p className="text-[10px] text-muted-foreground mb-1">{author}</p>
+        {book.status === "read" && (
+          <p className="text-[10px] text-muted-foreground/80 mb-2 text-right">
+            {formatMonthYear(book.date) || "Read recently"}
+          </p>
+        )}
 
         <div className="mt-auto flex items-center justify-between">
           {book.rating ? (
