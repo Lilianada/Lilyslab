@@ -395,6 +395,49 @@ id: web-directories-028
 
 ---
 publish: true
+title: Cool4 School
+url: https://cool4.school/
+date: 2026-10-07
+tags:
+  - education
+  - resources
+  - schools
+notes: curated resources for school / learning
+type: webroll
+category: web-directories
+id: web-directories-029
+---
+
+---
+publish: true
+title: The People I Know
+url: https://thepeopleiknow.site/
+date: 2026-10-07
+tags:
+  - personal-sites
+  - directory
+  - community
+type: webroll
+category: web-directories
+id: web-directories-030
+---
+
+---
+publish: true
+title: Site of Sites
+url: https://www.siteofsites.co/?p=1
+date: 2026-10-07
+tags:
+  - directory
+  - discovery
+  - links
+type: webroll
+category: web-directories
+id: web-directories-031
+---
+
+---
+publish: true
 title: Wow-web-co.uk
 url: https://wow-web.co.uk/
 date: 2025-06-08

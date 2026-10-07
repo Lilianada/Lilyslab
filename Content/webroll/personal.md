@@ -87,3 +87,19 @@ type: webroll
 category: personal
 id: personal-006
 ---
+
+---
+publish: true
+title: Clara Kirkpatrick
+url: https://clarakirkpatrick.com/2/
+date: 2026-10-07
+tags:
+  - personal-website
+  - art
+  - creative
+notes: personal site / project page
+type: webroll
+category: personal
+id: personal-007
+---
+

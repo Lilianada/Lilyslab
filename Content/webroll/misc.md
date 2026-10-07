@@ -384,3 +384,58 @@ type: webroll
 category: misc
 id: misc-028
 ---
+---
+publish: true
+title: American Diary Project
+url: https://americandiaryproject.com/
+date: 2026-10-07
+tags:
+  - archives
+  - diaries
+  - culture
+type: webroll
+category: misc
+id: misc-029
+---
+
+---
+publish: true
+title: Geokash
+url: https://geokash.com/
+date: 2026-10-07
+tags:
+  - maps
+  - geolocation
+  - travel
+type: webroll
+category: misc
+id: misc-030
+---
+
+---
+publish: true
+title: Outsiders Store
+url: https://www.outsidersstore.com/
+date: 2026-10-07
+tags:
+  - shop
+  - retail
+  - products
+type: webroll
+category: misc
+id: misc-031
+---
+
+---
+publish: true
+title: Lagos Life
+url: https://lagoslife.eliysites.com/
+date: 2026-10-07
+tags:
+  - local-blog
+  - personal-website
+  - culture
+type: webroll
+category: personal
+id: misc-032
+---
