@@ -52,7 +52,7 @@ export interface NoteData {
 }
 
 export async function GET(request: Request) {
-  const siteURL = process.env.SITE_URL || 'https://lilyslab.xyz';
+  const siteURL = process.env.SITE_URL;
   const date = new Date();
   
   // Create a new feed
