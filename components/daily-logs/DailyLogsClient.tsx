@@ -3,6 +3,7 @@
 import React, { useState, lazy } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Footer } from "@/components/layout/footer";
 import type { DisplayLog } from "../../app/(no-sidebar)/daily-logs/page";
 import { Suspense } from "react";
 
@@ -147,14 +148,14 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
       {/* Header */}
       <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => window.history.back()}
+          <Link
+            href="/"
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Go back"
+            aria-label="Back to home"
           >
             <ArrowLeft size={18} />
+          </Link>
           <h1 className="text-lg font-semibold tracking-wide">DAILY LOGS</h1>
-          </button>
         </div>
         <div className="flex gap-2">
           <Link
@@ -320,6 +321,7 @@ export default function DailyLogsClient({ logs }: { logs: DisplayLog[] }) {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

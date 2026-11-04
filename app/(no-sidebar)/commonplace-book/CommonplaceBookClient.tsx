@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, X, ArrowLeft, ArrowUpRightIcon } from 'lucide-react';
 import Link from 'next/link';
+import { Footer } from "@/components/layout/footer";
 import MarkdownRenderer from '@/components/markdown/markdown-renderer';
 
 interface CommonplaceItem {
@@ -226,6 +227,7 @@ useEffect(() => {
                 <li className="mb-3">
                   <Link 
                     href="/"
+                    aria-label="Back to home"
                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <ArrowLeft className="w-3 h-3" />
@@ -419,6 +421,7 @@ useEffect(() => {
               </div>
             )}
           </div>
+          <Footer />
         </div>
       </div>
 

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { Footer } from "@/components/layout/footer";
 
 export default function TodoPage() {
   const [mounted, setMounted] = useState(false);
@@ -124,7 +123,6 @@ export default function TodoPage() {
           ))}
         </section>
 
-        <Footer />
       </div>
     </>
   );

@@ -6,9 +6,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { Footer } from "@/components/layout/footer";
+import { PrevNext } from "@/components/layout/prev-next";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { EssayMarkdownWrapper } from "./markdown-wrapper";
 
@@ -18,6 +16,11 @@ type PageProps = {
   }>;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+// Pre-render every essay at build time so they're served from the CDN.
+export function generateStaticParams() {
+  return getAllEssays().map((essay) => ({ slug: essay.slug }));
+}
 
 export async function generateMetadata({
   params,
@@ -72,8 +75,7 @@ export default async function EssaySlugPage({ params }: PageProps) {
     currentIndex > 0
       ? {
           title: allEssays[currentIndex - 1].title,
-          slug: allEssays[currentIndex - 1].slug,
-          path: "/garden/essays",
+          href: `/garden/essays/${allEssays[currentIndex - 1].slug}`,
         }
       : undefined;
 
@@ -81,8 +83,7 @@ export default async function EssaySlugPage({ params }: PageProps) {
     currentIndex < allEssays.length - 1
       ? {
           title: allEssays[currentIndex + 1].title,
-          slug: allEssays[currentIndex + 1].slug,
-          path: "/garden/essays",
+          href: `/garden/essays/${allEssays[currentIndex + 1].slug}`,
         }
       : undefined;
 
@@ -95,20 +96,7 @@ export default async function EssaySlugPage({ params }: PageProps) {
         glowColor="rgba(var(--steelBlue), 0.6)"
         glowIntensity="12px"
       />
-      <div className="max-w-2xl w-full mx-auto animate-fade-in">
-        <div className="mt-6 sm:mt-12 mb-4 flex items-center ">
-          <Link
-            href="/garden/essays"
-            className="flex items-center gap-1 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
-          >
-            <ArrowLeft
-              size={14}
-              className="transition-transform duration-300 group-hover:-translate-x-1"
-            />
-            <span>Return</span>
-          </Link>
-        </div>
-
+      <div className="max-w-2xl w-full mx-auto animate-fade-in pt-10 sm:pt-16">
         <div>
           <header className="mt-4">
             <div className="flex flex-col gap-2 mb-8">
@@ -151,19 +139,7 @@ export default async function EssaySlugPage({ params }: PageProps) {
           <EssayMarkdownWrapper content={content} />
         </div>
 
-        <Footer
-          prevPost={
-            prevPost
-              ? { title: prevPost.title, slug: prevPost.slug }
-              : undefined
-          }
-          nextPost={
-            nextPost
-              ? { title: nextPost.title, slug: nextPost.slug }
-              : undefined
-          }
-          contentType="garden/essays"
-        />
+        <PrevNext prev={prevPost} next={nextPost} />
       </div>
     </>
   );

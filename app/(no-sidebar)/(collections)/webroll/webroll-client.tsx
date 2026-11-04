@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Footer } from "@/components/layout/footer";
 import { WebrollLink } from '@/lib/garden/webroll';
 import {
   Accordion,
@@ -287,6 +288,7 @@ export default function WebrollClient({ initialLinks }: WebrollClientProps) {
             </div>
           </div>
         </section>
+        <Footer />
       </main>
     </div>
   );

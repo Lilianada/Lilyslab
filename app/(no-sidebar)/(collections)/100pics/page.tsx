@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { X, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react"
 
 interface PictureData {
@@ -201,8 +201,6 @@ export default function HundredPicsPage() {
     dayNumber: i + 1,
     blurDataURL: getColoredBlurDataURL(i),
   }))
-
-  const router = useRouter()
   const [pictures] = useState<PictureData[]>(mockPictures)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -275,13 +273,13 @@ export default function HundredPicsPage() {
         style={{minHeight: 0}}
       >
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => router.back()}
+          <Link
+            href="/"
             className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-            aria-label="Go back"
+            aria-label="Back to home"
           >
             <ArrowLeft className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-          </button>
+          </Link>
           <h1 className="text-sm font-medium">100 pics in 100 days</h1>
         </div>
       </div>

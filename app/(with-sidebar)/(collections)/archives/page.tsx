@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FileText, BookOpen, Filter } from "lucide-react";
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Button } from "@/components/ui/button";
 
@@ -193,7 +192,6 @@ export default function ArchivesPage() {
         </div>
       )}
       
-      <Footer />
     </div>
   );
 }

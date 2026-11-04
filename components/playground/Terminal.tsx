@@ -14,13 +14,15 @@ const Terminal: React.FC = () => {
     loadNotes();
   }, []);
 
-  // Auto-save every 15 seconds (including empty content to preserve deletions)
+  // Save shortly after typing stops (including empty content to preserve deletions)
+  const hasLoaded = useRef(false);
   useEffect(() => {
-    const interval = setInterval(() => {
-      saveNotes();
-    }, 3000);
-
-    return () => clearInterval(interval);
+    if (!hasLoaded.current) {
+      hasLoaded.current = true;
+      return;
+    }
+    const timer = setTimeout(saveNotes, 800);
+    return () => clearTimeout(timer);
   }, [content]);
 
   const loadNotes = async () => {
@@ -94,7 +96,7 @@ const Terminal: React.FC = () => {
           placeholder="Start typing your notes or drafts here...
 
 Your notes are stored locally in your browser and persist between sessions.
-Auto-saves every 15 seconds or save manually with Ctrl/Cmd + S."
+Saves itself as you type, or manually with Ctrl/Cmd + S."
           autoFocus
           spellCheck={false}
           className={cn(

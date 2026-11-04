@@ -1,7 +1,6 @@
 // Import Firebase modules directly from the package root to avoid path issues
 import { initializeApp, getApps, getApp } from "firebase/app"
-// Use dynamic imports for auth to avoid the file not found error
-import { GoogleAuthProvider } from "firebase/auth"
+import { GoogleAuthProvider, getAuth, signInWithPopup, browserPopupRedirectResolver } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
 
@@ -40,14 +39,8 @@ if (isConfigValid && app) {
   // Initialize Firestore
   db = getFirestore(app);
   
-  // Initialize Auth using dynamic import
-  import('firebase/auth')
-    .then(({ getAuth }) => {
-      auth = getAuth(app!);
-    })
-    .catch(err => {
-      console.error('Error initializing Firebase auth:', err);
-    });
+  // This module is itself loaded lazily, so auth can initialise synchronously.
+  auth = getAuth(app);
 }
 
 // Create Google provider and configure it to always prompt for account selection
@@ -59,25 +52,12 @@ googleProvider.setCustomParameters({
 
 // Helper function for Google sign-in with better error handling
 export const signInWithGoogle = async () => {
-  // Add a small delay to ensure auth has time to initialize
   if (!auth) {
-    // Wait for auth to initialize (max 2 seconds)
-    let attempts = 0;
-    while (!auth && attempts < 20) {
-      await new Promise(resolve => setTimeout(resolve, 100));
-      attempts++;
-    }
-    
-    if (!auth) {
-      console.error("Firebase auth is not initialized due to missing configuration")
-      throw new Error("Firebase authentication is not properly configured")
-    }
+    console.error("Firebase auth is not initialized due to missing configuration")
+    throw new Error("Firebase authentication is not properly configured")
   }
 
   try {
-    // Dynamically import the required functions
-    const { signInWithPopup, browserPopupRedirectResolver } = await import('firebase/auth');
-    
     // Force account selection by setting custom parameters again right before sign-in
     googleProvider.setCustomParameters({
       prompt: 'select_account'

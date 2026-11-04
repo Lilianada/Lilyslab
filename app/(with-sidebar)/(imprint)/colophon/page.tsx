@@ -3,8 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { Globe, Code2, Paintbrush, BookOpen, ChevronLeft, TriangleAlert, Github } from "lucide-react";
-import { Footer } from "@/components/layout/footer";
+import { Globe, Code2, Paintbrush, BookOpen, TriangleAlert, Github } from "lucide-react";
 
 export default function Colophon() {
   return (
@@ -211,7 +210,6 @@ export default function Colophon() {
           </div>
         </div>
       </section>
-    <Footer />
     </div>
     </>
   );

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { formatDate } from "@/lib/utils";
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { MarkdownRenderer, MarkdownSkeleton } from "@/components/markdown";
 
@@ -116,7 +115,6 @@ export default function NowPage() {
                 allowHtml={true}
               />
             </div>
-            <Footer />
           </>
         ) : (
           <div className="text-center py-10 text-muted-foreground">

@@ -12,7 +12,6 @@ import {
   Sparkles,
   CreditCard,
 } from "lucide-react";
-import { Footer } from "@/components/layout/footer";
 
 // Interface for the bucket list item data (should match API)
 interface BucketListItem {
@@ -287,7 +286,6 @@ export default function BucketListPage() {
             </Link>
           </div>
         </section>
-        <Footer />
       </div>
     </div>
   );

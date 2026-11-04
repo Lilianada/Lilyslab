@@ -1,6 +1,5 @@
 "use client";
 
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 // Simple interface for sitemap entries
@@ -49,7 +48,7 @@ const sitemapData: SitemapSection[] = [
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
       { name: "Micro-blog", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },
       { name: "Word of the Day", url: "/garden/word-of-the-day", description: "Daily word explorations" },
-      { name: "Bookmarks", url: "/bookmarks", description: "Articles I've read and bookmarked for later" },
+      { name: "Bookmarks", url: "/garden/bookmarks", description: "Articles I've read and bookmarked for later" },
     ]
   },
   {
@@ -64,6 +63,10 @@ const sitemapData: SitemapSection[] = [
   {
     title: "Playground",
     pages: [
+      { name: "Petal Catch", url: "/playground/petal-catch", description: "A small game about catching things and avoiding bees" },
+      { name: "Doodle Pad", url: "/playground/doodle", description: "Draw something, stick it on your fridge" },
+      { name: "Color Theory", url: "/playground/color-theory", description: "Color harmonies and contrast checking" },
+      { name: "Animation Lab", url: "/playground/animation-lab", description: "Play with easing curves" },
       { name: "Digital Clock", url: "/playground/digital-clock", description: "A digital clock experiment" },
       { name: "Calculator", url: "/playground/calculator", description: "A calculator experiment" },
       { name: "Terminal", url: "/playground/terminal", description: "A terminal experiment" }
@@ -153,7 +156,6 @@ export default function Sitemap() {
             </div>
           ))}
         </div>
-        <Footer />
       </div>
     </>
   );

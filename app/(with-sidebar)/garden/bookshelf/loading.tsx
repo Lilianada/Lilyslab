@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Footer } from "@/components/layout/footer";
 import { BookOpen, Star } from "lucide-react";
 
 export default function BookshelfLoading() {
@@ -43,7 +42,6 @@ export default function BookshelfLoading() {
           </div>
         </section>
         
-        <Footer />
       </div>
     </div>
   );

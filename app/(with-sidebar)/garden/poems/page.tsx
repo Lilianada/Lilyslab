@@ -1,4 +1,3 @@
-import { Footer } from "@/components/layout/footer"
 import { getAllPoems } from "@/lib/garden/poems"
 import type { Poem } from "@/lib/garden/poems"
 import PoemLayoutClient from "./PoemLayoutClient"
@@ -70,7 +69,6 @@ export default async function PoemsPage() {
           <PoemLayoutClient poems={poems} />
         )}
         
-        <Footer />
       </div>
     </div>
   )

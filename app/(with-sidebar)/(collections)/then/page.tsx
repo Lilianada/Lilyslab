@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { Footer } from "@/components/layout/footer";
 import { motion } from "framer-motion";
 
 interface ThenEntry {
@@ -115,7 +114,6 @@ export default function ThenPage() {
           </motion.div>
         )}
         
-        <Footer />
       </div>
     </>
   );

@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Loader2 } from "lucide-react";
 import { formatTimestampToYYMMDD } from "@/lib/utils";
@@ -25,7 +24,6 @@ const statusColors: Record<Book['status'], string> = {
 
 export default function BookshelfDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const currentSlug = params?.slug as string || '';
 
   const [book, setBook] = useState<Book | null>(null);
@@ -85,9 +83,6 @@ export default function BookshelfDetailPage() {
   if (error) {
     return (
       <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10">
-        <button onClick={() => router.back()} className="mb-6 px-4 py-2 hover:text-gray-300 flex items-center">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Bookshelf
-        </button>
         <div className="text-center py-10 text-red-500 border border-destructive/50 bg-destructive/10 rounded-lg p-4">
           {error}
         </div>
@@ -98,9 +93,6 @@ export default function BookshelfDetailPage() {
   if (!book) {
     return (
       <div className="min-h-screen container max-w-3xl mx-auto px-2 py-10">
-        <button onClick={() => router.back()} className="mb-6 px-4 py-2 hover:text-gray-300 flex items-center">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Bookshelf
-        </button>
         <div className="text-center py-10 text-muted-foreground">Book not found.</div>
       </div>
     );
@@ -112,9 +104,6 @@ export default function BookshelfDetailPage() {
   return (
     <div className="min-h-screen">
       <div className="container max-w-3xl mx-auto px-2 py-10">
-        <button onClick={() => router.back()} className="mb-6 px-4 py-2 text-muted-foreground hover:text-foreground flex items-center">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Bookshelf
-        </button>
         <div
           className="relative w-full mx-auto p-8 rounded-xl shadow-xl "
           style={{

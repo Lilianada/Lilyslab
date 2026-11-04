@@ -168,3 +168,7 @@ export async function GET() {
   sections.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   return NextResponse.json({ sections });
 }
+
+// Reads markdown from the repo, which only changes on deploy, so it can be
+// served from the CDN instead of running a function on every request.
+export const dynamic = "force-static";

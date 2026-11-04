@@ -1,6 +1,5 @@
 'use client';
 
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import React, { useEffect, useState } from "react";
 
@@ -100,7 +99,6 @@ const QuotesPage: React.FC = () => {
             ))
           )}
         </div>
-        <Footer />
       </div>
     </>
   );

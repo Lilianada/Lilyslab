@@ -81,10 +81,12 @@ export default function AMAPage() {
     try {
       setIsSubmitting(true);
       
+      const idToken = await user.getIdToken();
       const response = await fetch("/api/ask-me-anything/admin-reply", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
         },
         body: JSON.stringify({
           questionId: questionId,
@@ -98,13 +100,61 @@ export default function AMAPage() {
         throw new Error(data.error || "Failed to submit reply");
       }
 
-      setSubmitMessage({ type: "success", text: "Your response has been submitted successfully!" });
+      setSubmitMessage({
+        type: "success",
+        text: data.emailSent
+          ? "Your response has been submitted and the asker was emailed!"
+          : "Your response has been submitted successfully!",
+      });
       
       // Refresh questions after submission
       fetchQuestions();
     } catch (error: any) {
       console.error("Error submitting admin reply:", error);
       setSubmitMessage({ type: "error", text: error.message || "Failed to submit reply" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleNotifyBacklog = async () => {
+    if (!user || !isAdmin) return;
+
+    const call = async (dryRun: boolean) => {
+      const idToken = await user.getIdToken();
+      const res = await fetch("/api/ask-me-anything/notify-backlog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
+        body: JSON.stringify({ dryRun }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Request failed");
+      return data;
+    };
+
+    try {
+      setIsSubmitting(true);
+      const preview = await call(true);
+      if (preview.remaining === 0) {
+        setSubmitMessage({ type: "success", text: "No past responders left to email." });
+        return;
+      }
+      if (!window.confirm(`Email ${preview.remaining} past responder(s) about your earlier answers?`)) return;
+
+      let totalSent = 0;
+      let totalFailed = 0;
+      while (true) {
+        const result = await call(false);
+        totalSent += result.sent;
+        totalFailed += result.failed;
+        if (result.done) break;
+      }
+      setSubmitMessage({
+        type: totalFailed ? "error" : "success",
+        text: `Sent ${totalSent} email(s)${totalFailed ? `, ${totalFailed} failed (run again to retry)` : ""}.`,
+      });
+    } catch (error: any) {
+      setSubmitMessage({ type: "error", text: error.message || "Failed to notify past responders" });
     } finally {
       setIsSubmitting(false);
     }
@@ -140,6 +190,17 @@ export default function AMAPage() {
         >
           → Ask a Question
           </Button>
+        {isAdmin && (
+          <Button
+            variant="link"
+            size="sm"
+            className="p-0 ml-4 text-xs font-mono text-muted-foreground hover:underline"
+            onClick={handleNotifyBacklog}
+            disabled={isSubmitting}
+          >
+            ✉ Email past responders
+          </Button>
+        )}
       </header>
 
       {showForm && (

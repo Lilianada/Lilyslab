@@ -1,4 +1,3 @@
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import Link from "next/link";
 import React from "react";
@@ -135,7 +134,6 @@ export default function SomedayPage() {
         </div>
       </div>
 
-      <Footer/>
     </div>
     </>
   );

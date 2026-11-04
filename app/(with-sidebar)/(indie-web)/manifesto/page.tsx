@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { Metadata } from 'next';
-import { Footer } from '@/components/layout/footer';
 import { formatDate } from '@/lib/utils';
 import MarkdownRenderer from '@/components/markdown/markdown-renderer';
 
@@ -75,7 +74,6 @@ export default async function WebManifestoPage() {
         </article>
       </div>
       
-      <Footer />
     </div>
   );
 }

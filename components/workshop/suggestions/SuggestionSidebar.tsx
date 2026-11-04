@@ -44,8 +44,6 @@ export function SuggestionSidebar({ isOpen, onClose }: SuggestionSidebarProps) {
     setIsSubmitting(true);
 
     try {
-       // TODO: Replace with your actual API endpoint
-      console.log("Submitting suggestion:", formData); 
       const response = await fetch("/api/suggestions/submit", {
         method: "POST",
         headers: {
@@ -58,9 +56,6 @@ export function SuggestionSidebar({ isOpen, onClose }: SuggestionSidebarProps) {
         const error = await response.json();
         throw new Error(error.error || "Failed to submit suggestion");
       }
-
-       // Simulate successful submission for now
-      await new Promise(resolve => setTimeout(resolve, 1000)); 
 
       toast({
         title: "Suggestion Received!",

@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Footer } from "@/components/layout/footer";
 import { useToast } from "@/hooks/use-toast";
 
 // Lazy load form-related components and validation
@@ -241,7 +240,6 @@ export default function GuestbookPage() {
         </div>
       </div>
 
-      <Footer />
     </div>
   );
 }

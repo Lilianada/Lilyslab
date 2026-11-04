@@ -54,3 +54,6 @@ export async function GET() {
   // Return the structured tools data
   return NextResponse.json(tools);
 } 
+// Reads markdown from the repo, which only changes on deploy, so it can be
+// served from the CDN instead of running a function on every request.
+export const dynamic = "force-static";

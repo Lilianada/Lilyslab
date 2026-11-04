@@ -1,6 +1,5 @@
 "use client";
 
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -95,12 +94,12 @@ export default function AboutPage() {
                 </h2>
                 <p className="mb-3 text-sm opacity-0 leading-normal animate-slide-up pl-2">
                   ⎯ Lily <br />
-                  ⎯ 25 yrs <br />
+                  ⎯ 26 yrs <br />
                   ⎯ Female <br />
                   ⎯ Feminist <br />
                   ⎯ Fitness athelete <br />
                   ⎯ Product manager <br />
-                  ⎯ Frontent developer <br />
+                  ⎯ Frontend developer <br />
                   ⎯ Lifestyle connoisseur <br />
                   ⎯ Hobbyist <br />
                   ⎯ Business owner <br />
@@ -213,7 +212,6 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <Footer/>
           </>
         )}
       </div>

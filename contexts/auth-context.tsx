@@ -1,9 +1,7 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
-import { type User, signOut as firebaseSignOut, onAuthStateChanged } from "firebase/auth"
-import { auth, signInWithGoogle as firebaseSignInWithGoogle } from "@/lib/garden/firebase"
-import { checkUserIsAdmin, setUserIsLoggedIn } from "@/lib/admin-service"
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import type { User } from "firebase/auth"
 
 interface AuthContextType {
   user: User | null
@@ -23,65 +21,94 @@ const AuthContext = createContext<AuthContextType>({
   signOut: async () => {},
 })
 
+// Firebase is several hundred KB, so it is only downloaded for visitors who
+// might be signed in. Everyone else never pays for it.
+async function mightHaveSession(): Promise<boolean> {
+  try {
+    if (!indexedDB.databases) return true
+    const databases = await indexedDB.databases()
+    return databases.some((database) => database.name === "firebaseLocalStorageDb")
+  } catch {
+    return true
+  }
+}
+
+const loadFirebase = () =>
+  Promise.all([import("firebase/auth"), import("@/lib/garden/firebase"), import("@/lib/admin-service")])
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [userRoles, setUserRoles] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
+  const unsubscribeRef = useRef<(() => void) | null>(null)
 
-  useEffect(() => {
-    // Make sure auth is not null before using it
-    if (!auth) {
-      setLoading(false);
-      return () => {};
+  const applyRoles = useCallback((adminStatus: boolean) => {
+    setIsAdmin(adminStatus)
+    setUserRoles(adminStatus ? ["admin", "user"] : ["user"])
+  }, [])
+
+  const subscribe = useCallback(async () => {
+    if (unsubscribeRef.current) return
+    const [{ onAuthStateChanged }, { auth }, { checkUserIsAdmin }] = await loadFirebase()
+    if (!auth || unsubscribeRef.current) {
+      setLoading(false)
+      return
     }
-    
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user)
 
-      // Check if user is admin
-      if (user && user.email) {
-        // Check if user is in admins collection
-        const adminStatus = await checkUserIsAdmin(user.email)
-        setIsAdmin(adminStatus)
-        
-        // Set user roles - in a real app, you would fetch this from Firestore
-        if (adminStatus) {
-          setUserRoles(['admin', 'user'])
-        } else {
-          setUserRoles(['user'])
-        }
+    unsubscribeRef.current = onAuthStateChanged(auth, async (nextUser) => {
+      setUser(nextUser)
+      if (nextUser?.email) {
+        applyRoles(await checkUserIsAdmin(nextUser.email))
       } else {
         setIsAdmin(false)
         setUserRoles([])
       }
-
       setLoading(false)
     })
+  }, [applyRoles])
 
-    return () => unsubscribe()
-  }, [])
+  useEffect(() => {
+    let cancelled = false
+
+    const start = async () => {
+      if (await mightHaveSession()) {
+        if (!cancelled) await subscribe()
+      } else if (!cancelled) {
+        setLoading(false)
+      }
+    }
+
+    const hasIdleCallback = typeof window.requestIdleCallback === "function"
+    const handle = hasIdleCallback
+      ? window.requestIdleCallback(start, { timeout: 2000 })
+      : window.setTimeout(start, 500)
+
+    return () => {
+      cancelled = true
+      if (hasIdleCallback) window.cancelIdleCallback(handle)
+      else window.clearTimeout(handle)
+      unsubscribeRef.current?.()
+      unsubscribeRef.current = null
+    }
+  }, [subscribe])
 
   const signInWithGoogle = async (): Promise<User | null> => {
     try {
-      const user = await firebaseSignInWithGoogle()
+      const [, { signInWithGoogle: firebaseSignInWithGoogle }, { checkUserIsAdmin, setUserIsLoggedIn }] =
+        await loadFirebase()
+      // Visitors who skipped Firebase on load still need live auth updates now.
+      await subscribe()
+      const signedInUser = await firebaseSignInWithGoogle()
 
-      // Check if the new user is an admin and update isLoggedIn flag
-      if (user && user.email) {
-        const adminStatus = await checkUserIsAdmin(user.email)
-
-        if (adminStatus) {
-          // Update isLoggedIn flag to true for the admin
-          await setUserIsLoggedIn(user.email, true)
-          setUserRoles(['admin', 'user'])
-        } else {
-          setUserRoles(['user'])
-        }
-
-        setIsAdmin(adminStatus)
+      if (signedInUser?.email) {
+        const adminStatus = await checkUserIsAdmin(signedInUser.email)
+        if (adminStatus) await setUserIsLoggedIn(signedInUser.email, true)
+        applyRoles(adminStatus)
       }
 
-      return user
+      setUser(signedInUser)
+      return signedInUser
     } catch (error) {
       console.error("Error signing in with Google:", error)
       return null
@@ -90,15 +117,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async (): Promise<void> => {
     try {
-      // If user is admin, update isLoggedIn flag to false
-      if (user && user.email && isAdmin) {
-        await setUserIsLoggedIn(user.email, false)
-      }
-
-      // Make sure auth is not null before signing out
-      if (auth) {
-        await firebaseSignOut(auth)
-      }
+      const [{ signOut: firebaseSignOut }, { auth }, { setUserIsLoggedIn }] = await loadFirebase()
+      if (user?.email && isAdmin) await setUserIsLoggedIn(user.email, false)
+      if (auth) await firebaseSignOut(auth)
+      setUser(null)
       setIsAdmin(false)
       setUserRoles([])
     } catch (error) {

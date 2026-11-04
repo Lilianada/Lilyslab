@@ -89,12 +89,6 @@ export default function CtrlRoomPage() {
           </div>
         </TabsContent>
 
-        <TabsContent value="content">
-          <div className="flex items-center justify-center h-64 border rounded-lg bg-muted/30">
-            <p className="text-muted-foreground">Content management coming soon</p>
-          </div>
-        </TabsContent>
-
         <TabsContent value="users" className="space-y-6">
           <div className="text-center p-8 border border-dashed rounded-lg">
             <User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />

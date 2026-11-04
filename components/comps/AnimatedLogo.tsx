@@ -1,93 +1,81 @@
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+"use client";
 
-// Define image paths and constants
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { burstPetals } from "@/components/fun/FunLayer";
+
 const IMAGES = ["/images/12.png", "/images/13.png"];
-const IMAGE_SIZE = 80; // 5rem in px (tailwind w-20/h-20)
+const IMAGE_SIZE = 80; // tailwind w-20/h-20
 const PAUSE_DURATION = 2000; // ms each image is fully visible
 const TRANSITION_DURATION = 1200; // ms for blur-down
 
+const frameStyle = {
+  objectFit: "contain",
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+} as const;
+
 /**
- * AnimatedLogo cycles through images with a vertical blur-down reveal effect.
+ * Cycles through the logo images with a vertical fade-down reveal. It also
+ * happens to be full of petals, if you click it.
  */
 export default function AnimatedLogo() {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [next, setNext] = useState(1);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const next = (current + 1) % IMAGES.length;
 
   useEffect(() => {
-    if (!isTransitioning) {
-      timeoutRef.current = setTimeout(() => {
-        setIsTransitioning(true);
-      }, PAUSE_DURATION);
-    } else {
-      timeoutRef.current = setTimeout(() => {
-        setCurrent((prev) => (prev + 1) % IMAGES.length);
-        setNext((prev) => (prev + 1) % IMAGES.length);
-        setIsTransitioning(false);
-      }, TRANSITION_DURATION);
-    }
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [isTransitioning, current]);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timer = setTimeout(
+      () => {
+        if (isTransitioning) setCurrent((frame) => (frame + 1) % IMAGES.length);
+        setIsTransitioning((transitioning) => !transitioning);
+      },
+      isTransitioning ? TRANSITION_DURATION : PAUSE_DURATION
+    );
+    return () => clearTimeout(timer);
+  }, [isTransitioning]);
+
+  const mask = isTransitioning ? "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%)" : "none";
 
   return (
-    <div
-      className="w-20 h-20 mb-6 object-contain relative overflow-hidden"
+    <button
+      type="button"
+      onClick={burstPetals}
+      aria-label="Lily's Lab logo. Shake it for petals"
+      className="hover-wiggle block relative overflow-hidden cursor-pointer"
       style={{ width: IMAGE_SIZE, height: IMAGE_SIZE }}
     >
-      {/* Next image underneath */}
       <Image
         src={IMAGES[next]}
-        alt="Next Animated Logo Frame"
+        alt=""
         width={IMAGE_SIZE}
         height={IMAGE_SIZE}
-        style={{
-          objectFit: "contain",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 1,
-          pointerEvents: "none",
-          transition: "none",
-        }}
+        style={{ ...frameStyle, zIndex: 1 }}
         className="select-none pointer-events-none"
         draggable={false}
-        priority
       />
-
-      {/* Current image on top, animating out with blur+fade */}
       <Image
         src={IMAGES[current]}
-        alt="Current Animated Logo Frame"
+        alt=""
         width={IMAGE_SIZE}
         height={IMAGE_SIZE}
         style={{
-          objectFit: "contain",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
+          ...frameStyle,
           zIndex: 2,
-          pointerEvents: "none",
-          transition: `filter ${TRANSITION_DURATION}ms linear, opacity ${TRANSITION_DURATION}ms linear`,
+          transition: isTransitioning ? `opacity ${TRANSITION_DURATION}ms linear` : "none",
           opacity: isTransitioning ? 0 : 1,
-          maskImage: isTransitioning
-            ? "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%)"
-            : "none",
-          WebkitMaskImage: isTransitioning
-            ? "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%)"
-            : "none",
+          maskImage: mask,
+          WebkitMaskImage: mask,
         }}
         className="select-none pointer-events-none"
         draggable={false}
         priority
       />
-    </div>
+    </button>
   );
 }

@@ -3,7 +3,6 @@ import path from 'path';
 import matter from 'gray-matter';
 import { z } from 'zod';
 import { read } from 'zod-matter';
-import { Footer } from '@/components/layout/footer';
 import { safeFormatDate } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 import NotesTagFilterClient from './NotesTagFilterClient';
@@ -207,8 +206,6 @@ export default function NotesPage() {
           </div>
         </div>
 
-        <Footer 
-        />
       </div>
     </div>
   );

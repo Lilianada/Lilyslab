@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { formatDate } from "@/lib/utils";
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { MarkdownRenderer, MarkdownSkeleton } from "@/components/markdown";
-import { ArrowLeft } from "lucide-react";
 
 interface ThenEntryData {
   frontmatter: {
@@ -20,7 +18,6 @@ interface ThenEntryData {
 
 export default function ThenEntryPage() {
   const params = useParams();
-  const router = useRouter();
   const slug = params?.slug as string;
   
   const [entryData, setEntryData] = useState<ThenEntryData | null>(null);
@@ -72,15 +69,7 @@ export default function ThenEntryPage() {
   return (
     <>
       <ScrollProgress color="bg-primary" height={3} glow={true} />
-      <div className="container max-w-2xl mx-auto px-4 py-8">
-        <button 
-          onClick={() => router.push('/then')}
-          className="flex items-center text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to all entries
-        </button>
-        
+      <div className="container max-w-2xl mx-auto px-4 pt-16 pb-8">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           {isLoading ? (
@@ -114,7 +103,6 @@ export default function ThenEntryPage() {
                 allowHtml={true}
               />
             </div>
-            <Footer />
           </>
         ) : (
           <div className="text-center py-10 text-muted-foreground">

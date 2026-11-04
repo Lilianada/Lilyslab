@@ -4,13 +4,12 @@ import type { Metadata, Viewport } from "next"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { AuthProvider } from "@/contexts/auth-context"
 import { Toaster } from "@/components/ui/sonner"
-import "prismjs/themes/prism-tomorrow.css"
-import "katex/dist/katex.min.css"
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { Analytics } from "@vercel/analytics/next"
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
 import FloatingMusicPlayer from '@/components/audio/floating-music-player';
+import { FunLayer } from '@/components/fun/FunLayer';
 
 export const viewport: Viewport = {
   themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#000000' }, { media: '(prefers-color-scheme: light)', color: '#ffffff' }],
@@ -69,18 +68,11 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en-US',
-    },
     types: {
       'application/rss+xml': '/feed',
       'application/atom+xml': '/feed?format=atom',
       'application/json': '/feed?format=json',
     },
-  },
-  verification: {
-    google: 'google-site-verification-code',
   },
 }
 
@@ -100,13 +92,7 @@ export default function RootLayout({
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="me" href="https://github.com/lilianada" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-        
+
         {/* Structured Data for SEO */}
         <PersonStructuredData />
         <WebsiteStructuredData />
@@ -132,6 +118,7 @@ export default function RootLayout({
               </main>
               <Toaster />
               <FloatingMusicPlayer />
+              <FunLayer />
               <Analytics />
           </AuthProvider>
         </ThemeProvider>

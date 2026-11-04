@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { Footer } from "@/components/layout/footer";
 
 export default function WantsPage() {
   const [mounted, setMounted] = useState(false);
@@ -104,7 +103,6 @@ export default function WantsPage() {
           ))}
         </section>
 
-        <Footer />
       </div>
     </>
   );

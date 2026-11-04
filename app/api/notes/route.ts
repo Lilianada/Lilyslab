@@ -62,3 +62,6 @@ export async function GET() {
 
   return NextResponse.json(notes);
 }
+// Reads markdown from the repo, which only changes on deploy, so it can be
+// served from the CDN instead of running a function on every request.
+export const dynamic = "force-static";

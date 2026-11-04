@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
-import { Footer } from "@/components/layout/footer";
 import { Star } from "lucide-react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
@@ -122,7 +121,6 @@ export default function Page() {
             </section>
           )}
 
-          <Footer />
         </div>
       </div>
     </>

@@ -11,7 +11,6 @@ import {
   Globe,
   Link2,
 } from "lucide-react";
-import { Footer } from "@/components/layout/footer";
 
 export default function WebringsPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -294,7 +293,6 @@ export default function WebringsPage() {
           })}
         </motion.div>
 
-        <Footer />
       </div>
     </>
   );

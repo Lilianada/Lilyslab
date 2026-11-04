@@ -1,12 +1,5 @@
-import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Github, Linkedin, Mail, Rss, Twitter } from "lucide-react";
-
-interface FooterProps {
-  prevPost?: { title: string; slug: string };
-  nextPost?: { title: string; slug: string };
-  contentType?: "garden/essays" | "garden/notes";
-}
 
 function formatBuildTimeUTC(buildTime: string) {
   const date = new Date(buildTime);
@@ -24,41 +17,13 @@ function formatBuildTimeUTC(buildTime: string) {
   return `${month} ${day}, ${year} at ${hours}:${minutes} UTC`;
 }
 
-export function Footer({ prevPost, nextPost, contentType }: FooterProps = {}) {
+export function Footer() {
   const buildTime = process.env.NEXT_PUBLIC_BUILD_TIME;
 
   const formattedDate = buildTime ? formatBuildTimeUTC(buildTime) : null;
 
   return (
     <footer className="mt-auto w-full font-nitti">
-      {(prevPost || nextPost) && (
-        <div className="flex flex-row justify-between items-center gap-4 mb-8 w-full">
-          {prevPost ? (
-            <Link
-              href={`/${contentType}/${prevPost.slug}`}
-              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-start"
-            >
-              <span className="mr-2">←</span>
-              <span className="truncate">Prev</span>
-            </Link>
-          ) : (
-            <div className="w-full sm:w-auto"></div>
-          )}
-
-          {nextPost && (
-            <Link
-              href={`/${contentType}/${nextPost.slug}`}
-              className="flex items-center text-sm hover:text-primary transition-colors p-2 w-auto justify-end"
-            >
-              <span className="truncate">Next</span>
-              <span className="ml-2">→</span>
-            </Link>
-          )}
-        </div>
-      )}
-
-      {(prevPost || nextPost) && <Separator className="my-6" />}
-
       <div className="mt-12 bg-card border-border text-gray-800 dark:text-gray-200 py-6 px-4 sm:px-6">
         <div className="sm:container mx-auto text-center">
           <div className="space-y-2">
@@ -91,7 +56,7 @@ export function Footer({ prevPost, nextPost, contentType }: FooterProps = {}) {
             )}
 
             <div className="text-xs">
-              © 2025{" "}
+              © 2025–{new Date().getFullYear()}{" "}
               <a
                 href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
                 className="hover:text-primary"
@@ -101,12 +66,13 @@ export function Footer({ prevPost, nextPost, contentType }: FooterProps = {}) {
             </div>
 
             <div className="flex justify-center space-x-4">
-              <a href="/feed.xml" className="hover:text-zinc-400">
+              <a href="/feed" aria-label="RSS feed" className="hover:text-zinc-400">
                 <Rss className="h-3 w-3" />
               </a>
 
               <a
                 href="mailto:hello.lilysgarden@gmail.com"
+                aria-label="Email"
                 className="hover:text-zinc-400"
               >
                 <Mail className="h-3 w-3" />
@@ -114,6 +80,7 @@ export function Footer({ prevPost, nextPost, contentType }: FooterProps = {}) {
 
               <a
                 href="https://github.com/lilianada"
+                aria-label="GitHub"
                 className="hover:text-zinc-400"
               >
                 <Github className="h-3 w-3" />
@@ -121,6 +88,7 @@ export function Footer({ prevPost, nextPost, contentType }: FooterProps = {}) {
 
               <a
                 href="https://www.linkedin.com/in/lilianada/"
+                aria-label="LinkedIn"
                 className="hover:text-zinc-400"
               >
                 <Linkedin className="h-3 w-3" />
@@ -128,6 +96,7 @@ export function Footer({ prevPost, nextPost, contentType }: FooterProps = {}) {
 
               <a
                 href="https://twitter.com/lilian_ada_"
+                aria-label="Twitter"
                 className="hover:text-zinc-400"
               >
                 <Twitter className="h-3 w-3" />

@@ -7,7 +7,7 @@
 /* Font declarations for Nitti */
 @font-face {
   font-family: "Nitti";
-  src: url("/fonts/Nitti-Normal.woff") format("woff");
+  src: url("/fonts/Nitti-Normal.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: "Nitti";
-  src: url("/fonts/Nitti-Bold.woff") format("woff");
+  src: url("/fonts/Nitti-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 /* Font declarations for PP Mori */
 @font-face {
   font-family: "PP Mori";
-  src: url("/fonts/PPMori-Regular.otf") format("opentype");
+  src: url("/fonts/PPMori-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: "PP Mori";
-  src: url("/fonts/PPMori-RegularItalic.otf") format("opentype");
+  src: url("/fonts/PPMori-RegularItalic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: "PP Mori";
-  src: url("/fonts/PPMori-SemiBold.otf") format("opentype");
+  src: url("/fonts/PPMori-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -48,35 +48,16 @@
 
 @font-face {
   font-family: "PP Mori";
-  src: url("/fonts/PPMori-SemiBoldItalic.otf") format("opentype");
+  src: url("/fonts/PPMori-SemiBoldItalic.woff2") format("woff2");
   font-weight: 600;
   font-style: italic;
-  font-display: swap;
-}
-
-/* Font declarations for Sorts */
-@font-face {
-  font-family: "Sorts";
-  src: url("/fonts/Sorts-Medium.woff2") format("woff2"),
-       url("/fonts/Sorts-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Sorts";
-  src: url("/fonts/Sorts-Bold.woff2") format("woff2"),
-       url("/fonts/Sorts-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
   font-display: swap;
 }
 
 /* Font declaration for Rainy Hearts */
 @font-face {
   font-family: "Rainy Hearts";
-  src: url("/fonts/rainyhearts.ttf") format("truetype");
+  src: url("/fonts/rainyhearts.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -420,4 +401,60 @@
   transition:
     opacity 300ms,
     transform 300ms;
+}
+
+/* The floating music button drifts through the garden's palette. Pure CSS, so
+   it costs nothing on the main thread. */
+@keyframes musicOrbColors {
+  0%, 100% { background-color: hsl(var(--lavender)); }
+  17% { background-color: hsl(var(--sitePink)); }
+  34% { background-color: hsl(var(--peach)); }
+  50% { background-color: hsl(var(--siteYellow)); }
+  67% { background-color: hsl(var(--siteGreen)); }
+  84% { background-color: hsl(var(--lilac)); }
+}
+
+.music-orb {
+  animation: musicOrbColors 12s ease-in-out infinite;
+}
+
+/* A little wobble for things that want to be clicked */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+
+.hover-wiggle:hover {
+  animation: wiggle 0.4s ease-in-out;
+}
+
+@keyframes waterDrop {
+  0% { transform: translateY(-14px); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(46px); opacity: 0; }
+}
+
+@keyframes flowerSway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+
+.flower-sway {
+  animation: flowerSway 5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-orb,
+  .hover-wiggle:hover,
+  .flower-sway,
+  .animate-spin-slow {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }

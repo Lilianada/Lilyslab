@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from '@/lib/firebase/firebase-config';
-import { collection, addDoc, getDocs, query, orderBy, serverTimestamp, doc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
 
 export async function GET() {
   try {
@@ -13,7 +13,6 @@ export async function GET() {
       return {
         id: doc.id,
         name: data.name || 'Anonymous',
-        email: data.email || '',
         date: data.date,
         question: data.question || '',
         response: data.response || '',
@@ -32,30 +31,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, photoURL, question, questionId, adminResponse } = body;
-    
-    // Handle admin response to an existing question
-    if (questionId && adminResponse) {
-      console.log("Processing admin reply for question ID:", questionId);
-      
-      try {
-        // Update the document in Firestore
-        const questionRef = doc(db, 'ama-questions', questionId);
-        await updateDoc(questionRef, {
-          response: adminResponse,
-          responseDate: serverTimestamp()
-        });
-        
-        return NextResponse.json({ success: true, questionId });
-      } catch (error: unknown) {
-        console.error("API: Error updating question with admin response:", error);
-        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-        return NextResponse.json(
-          { error: "Failed to update question with admin response", details: errorMessage },
-          { status: 500 }
-        );
-      }
-    }
+    const { name, email, photoURL, question } = body;
     
     // Handle new question submission
     if (!question) {

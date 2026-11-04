@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Calendar, Tag, FileText, BookOpen } from "lucide-react";
-import { Footer } from "@/components/layout/footer";
+import { useParams } from "next/navigation";
+import { Calendar, Tag, FileText, BookOpen } from "lucide-react";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { MarkdownRenderer, MarkdownSkeleton } from "@/components/markdown";
 import { formatDate } from "@/lib/utils";
@@ -32,7 +31,6 @@ interface ArchiveItemData {
 
 export default function ArchiveItemPage() {
   const params = useParams();
-  const router = useRouter();
   const { category, slug } = params as { category: string; slug: string };
   
   const [itemData, setItemData] = useState<ArchiveItemData | null>(null);
@@ -94,15 +92,7 @@ export default function ArchiveItemPage() {
   return (
     <>
       <ScrollProgress color="bg-primary" height={3} glow={true} />
-      <div className="container max-w-2xl mx-auto px-4 py-8">
-        <button
-          onClick={() => router.push("/archives")}
-          className="flex items-center text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Return
-        </button>
-
+      <div className="container max-w-2xl mx-auto px-4 pt-16 pb-8">
         {isLoading ? (
           <div className="animate-pulse space-y-3">
             <div className="h-8 bg-muted rounded w-2/3"></div>
@@ -152,7 +142,6 @@ export default function ArchiveItemPage() {
           </div>
         )}
         
-        <Footer />
       </div>
     </>
   );

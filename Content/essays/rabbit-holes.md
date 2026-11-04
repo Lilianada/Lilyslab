@@ -12,7 +12,7 @@ lastUpdated: 2025-06-21
 
 
 
-Rabbit hole is a metaphor for simply becoming deeply absorbed in a topic or concept by following links or threads that sometimes seem like an endless exploration. Just like how it is when I discovered indie web, digital garden, and zettelkasten. I believe I am still deep in that rabbit hole and my exploration hasn't ended. I have bookmarked links to websites that I aim to explore soon and you can also join me by checking out my [/bookmarks](/bookmarks) page.
+Rabbit hole is a metaphor for simply becoming deeply absorbed in a topic or concept by following links or threads that sometimes seem like an endless exploration. Just like how it is when I discovered indie web, digital garden, and zettelkasten. I believe I am still deep in that rabbit hole and my exploration hasn't ended. I have bookmarked links to websites that I aim to explore soon and you can also join me by checking out my [/bookmarks](/garden/bookmarks) page.
 
 > When it comes to things of the web/internet, I am Alice and the internet is my wonderland. 
 > -- Lily(me)
