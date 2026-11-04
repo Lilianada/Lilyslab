@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { db } from '@/lib/firebase/firebase-config';
-import { collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { adminDb } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 
 // Define schema for guestbook entry validation
 const GuestbookEntrySchema = z.object({
@@ -25,8 +25,7 @@ type GuestbookEntry = z.infer<typeof GuestbookEntrySchema>;
 export async function GET() {
   try {
     // Fetch entries from Firestore
-    const q = query(collection(db, 'guestbook'), orderBy('createdAt', 'desc'));
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await adminDb().collection('guestbook').orderBy('createdAt', 'desc').get();
     
     const entries = querySnapshot.docs.map(doc => {
       const data = doc.data();
@@ -64,12 +63,12 @@ export async function POST(req: Request) {
       url: entryData.url || null,
       message: entryData.message,
       // Firestore timestamp
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       // Date string for compatibility
       date: new Date().toISOString().split('T')[0]
     };
 
-    const docRef = await addDoc(collection(db, 'guestbook'), docData);
+    const docRef = await adminDb().collection('guestbook').add(docData);
     
     // Prepare response with all fields for immediate display
     return NextResponse.json({ 

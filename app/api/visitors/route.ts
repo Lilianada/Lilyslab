@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { doc, increment, writeBatch } from "firebase/firestore";
-import { db } from "@/lib/firebase/firebase-config";
+import { FieldValue } from "firebase-admin/firestore";
+import { adminDb } from "@/lib/firebase/admin";
 
 const BOT_PATTERN =
   /bot|crawl|spider|slurp|preview|headless|lighthouse|pingdom|monitor|facebookexternalhit|embedly|curl|wget|python|node-fetch/i;
@@ -50,15 +50,16 @@ export async function POST(request: Request) {
   const country = request.headers.get("x-vercel-ip-country") ?? "";
 
   try {
-    const batch = writeBatch(db);
-    batch.set(doc(db, "visitorStats", "all-time"), { visitors: increment(1) }, { merge: true });
+    const stats = adminDb().collection("visitorStats");
+    const batch = adminDb().batch();
+    batch.set(stats.doc("all-time"), { visitors: FieldValue.increment(1) }, { merge: true });
     batch.set(
-      doc(db, "visitorStats", new Date().toISOString().slice(0, 10)),
+      stats.doc(new Date().toISOString().slice(0, 10)),
       {
-        visitors: increment(1),
-        referrers: { [getSource(visit.referrer, ownHost)]: increment(1) },
-        landings: { [visit.path]: increment(1) },
-        ...(/^[A-Z]{2}$/.test(country) ? { countries: { [country]: increment(1) } } : {}),
+        visitors: FieldValue.increment(1),
+        referrers: { [getSource(visit.referrer, ownHost)]: FieldValue.increment(1) },
+        landings: { [visit.path]: FieldValue.increment(1) },
+        ...(/^[A-Z]{2}$/.test(country) ? { countries: { [country]: FieldValue.increment(1) } } : {}),
       },
       { merge: true }
     );

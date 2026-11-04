@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { db } from '@/lib/firebase/firebase-config';
-import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { adminDb } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 import { verifyAdminRequest } from '@/lib/ama-auth';
 import { sendReplyEmail } from '@/lib/ama-email';
 
@@ -20,16 +20,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const questionRef = doc(db, 'ama-questions', questionId);
-    const snapshot = await getDoc(questionRef);
-    if (!snapshot.exists()) {
+    const questionRef = adminDb().collection('ama-questions').doc(questionId);
+    const snapshot = await questionRef.get();
+    const data = snapshot.data();
+    if (!data) {
       return NextResponse.json({ error: "Question not found" }, { status: 404 });
     }
-    const data = snapshot.data();
 
-    await updateDoc(questionRef, {
+    await questionRef.update({
       response: adminResponse,
-      responseDate: serverTimestamp()
+      responseDate: FieldValue.serverTimestamp()
     });
 
     // Email only on the first reply, and never fail the reply because of email problems
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
           response: adminResponse,
           questionId,
         });
-        await updateDoc(questionRef, { notifiedAt: serverTimestamp() });
+        await questionRef.update({ notifiedAt: FieldValue.serverTimestamp() });
         emailSent = true;
       } catch (emailError) {
         console.error("API: Error sending reply notification email:", emailError);

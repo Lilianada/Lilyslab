@@ -1,4 +1,4 @@
-import { checkUserIsAdmin } from "@/lib/admin-service"
+import { adminAuth, adminDb } from "@/lib/firebase/admin"
 
 // Verifies the Firebase ID token in the Authorization header and checks the admins collection.
 export async function verifyAdminRequest(request: Request): Promise<boolean> {
@@ -7,21 +7,11 @@ export async function verifyAdminRequest(request: Request): Promise<boolean> {
   if (!idToken) return false
 
   try {
-    const res = await fetch(
-      `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken }),
-      }
-    )
-    if (!res.ok) return false
+    const { email, email_verified: emailVerified } = await adminAuth().verifyIdToken(idToken)
+    if (!email || !emailVerified) return false
 
-    const data = await res.json()
-    const account = data.users?.[0]
-    if (!account?.email || !account.emailVerified) return false
-
-    return await checkUserIsAdmin(account.email)
+    const admin = await adminDb().collection("admins").doc(email.toLowerCase()).get()
+    return admin.data()?.isAdmin === true
   } catch (error) {
     console.error("Error verifying admin token:", error)
     return false

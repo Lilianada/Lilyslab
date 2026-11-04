@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
-import { db } from '@/lib/firebase/firebase-config';
-import { collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { adminDb } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 
 export async function GET() {
   try {
     // Fetch AMA questions from Firestore
-    const q = query(collection(db, 'ama-questions'), orderBy('createdAt', 'desc'));
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await adminDb().collection('ama-questions').orderBy('createdAt', 'desc').get();
     
     const questions = querySnapshot.docs.map(doc => {
       const data = doc.data();
@@ -45,11 +44,11 @@ export async function POST(request: Request) {
       photoURL: photoURL || null,
       question,
       response: '', // Empty initially
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       date: new Date().toISOString()
     };
 
-    const docRef = await addDoc(collection(db, 'ama-questions'), docData);
+    const docRef = await adminDb().collection('ama-questions').add(docData);
     
     return NextResponse.json({ success: true, questionId: docRef.id });
   } catch (error: unknown) {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { db } from '@/lib/firebase/firebase-config';
-import { collection, getDocs, doc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { adminDb } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 import { verifyAdminRequest } from '@/lib/ama-auth';
 import { sendReplyEmail } from '@/lib/ama-email';
 
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     const { dryRun = true } = await request.json().catch(() => ({}));
 
-    const snapshot = await getDocs(collection(db, 'ama-questions'));
+    const snapshot = await adminDb().collection('ama-questions').get();
     const pending = snapshot.docs.filter((d) => {
       const data = d.data();
       return (
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
           questionId: d.id,
           late: true,
         });
-        await updateDoc(doc(db, 'ama-questions', d.id), { notifiedAt: serverTimestamp() });
+        await d.ref.update({ notifiedAt: FieldValue.serverTimestamp() });
         sent++;
       } catch (error) {
         console.error("API: Backlog email failed for", d.id, error);

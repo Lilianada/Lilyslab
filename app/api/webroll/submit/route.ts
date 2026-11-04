@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase/firebase-config";
+import { adminDb } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 
 const SubmissionSchema = z.object({
   title: z.string().trim().min(1).max(200),
@@ -19,9 +19,9 @@ export async function POST(request: Request) {
   }
 
   try {
-    await addDoc(collection(db, "webroll-submissions"), {
+    await adminDb().collection("webroll-submissions").add({
       ...submission,
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       reviewed: false,
     });
     return NextResponse.json({ message: "Submission saved successfully" });

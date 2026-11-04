@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { db } from '@/lib/firebase/firebase-config';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { adminDb } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 
 // Allowed categories and platforms (adjust if needed)
 const ALLOWED_CATEGORIES = ['Development', 'Design', 'Productivity', 'AI & ML', 'Other'] as const;
@@ -47,12 +47,12 @@ export async function POST(req: Request) {
   try {
     const docData = {
       ...submission,
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       submittedAt: new Date().toISOString(),
       published: submission.published || false
     };
 
-    const docRef = await addDoc(collection(db, 'tool-submissions'), docData);
+    const docRef = await adminDb().collection('tool-submissions').add(docData);
     
     return NextResponse.json({ success: true, id: docRef.id }, { status: 201 });
   } catch (error) {

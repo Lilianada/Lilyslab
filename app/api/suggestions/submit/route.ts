@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { db } from '@/lib/firebase/firebase-config';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { adminDb } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 
 const SuggestionSchema = z.object({
   type: z.enum(['Book', 'Movie/Show', 'Article', 'Tool', 'Resource', 'Idea', 'Other']),
@@ -25,9 +25,9 @@ export async function POST(req: Request) {
   }
 
   try {
-    const docRef = await addDoc(collection(db, 'suggestions'), {
+    const docRef = await adminDb().collection('suggestions').add({
       ...suggestion,
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
       reviewed: false,
     });
     return NextResponse.json({ success: true, id: docRef.id }, { status: 201 });
