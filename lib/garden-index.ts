@@ -63,7 +63,7 @@ const WANDER_PAGES = [
   "/then",
 ];
 
-function getMicroBlogs(): MicroBlogItem[] {
+export function getMicroBlogs(): MicroBlogItem[] {
   const directory = path.join(process.cwd(), "Content/microBlog");
   if (!fs.existsSync(directory)) return [];
 
@@ -72,10 +72,10 @@ function getMicroBlogs(): MicroBlogItem[] {
     .filter((file) => /\.mdx?$/.test(file))
     .map((file) => {
       const { data, content } = matter(fs.readFileSync(path.join(directory, file), "utf-8"));
-      if (data.published === false) return null;
+      if (data.published === false || data.publish === false) return null;
       return {
         id: file.replace(/\.mdx?$/, ""),
-        content,
+        content: content.trim(),
         date: safeFormatDate(data.createdAt || data.date),
       };
     })
@@ -164,7 +164,7 @@ export async function getSearchIndex(): Promise<SearchItem[]> {
     ...getMicroBlogs().map((blog) => ({
       id: `microblog-${blog.id}`,
       title: blog.content.slice(0, 60) || "MicroBlog post",
-      path: "/garden/micro-blog",
+      path: `/garden/micro-blog#${blog.id}`,
       type: "MicroBlog",
       snippet: blog.content.slice(0, 120),
       tags: [],

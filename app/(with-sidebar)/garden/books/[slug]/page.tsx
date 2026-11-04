@@ -108,7 +108,7 @@ export default function BookshelfDetailPage() {
           className="relative w-full mx-auto p-8 rounded-xl shadow-xl "
           style={{
             backgroundColor: backgroundColor,
-            backgroundImage: 'url("/noise.svg")',
+            backgroundImage: 'url("/images/noise.svg")',
             backgroundRepeat: 'repeat',
             backgroundSize: '350px 350px',
             backgroundBlendMode: 'multiply',

@@ -64,9 +64,9 @@ const QuotesPage: React.FC = () => {
             </div>
           ) : (
             quotes.map((quote) => (
-              <div key={quote.id} className="flex gap-8">
-                {/* Author name on the left */}
-                <div className="w-32 flex-shrink-0">
+              <div key={quote.id} className="flex flex-col gap-2 sm:flex-row sm:gap-8">
+                {/* Author name on the left, or above the quote on phones */}
+                <div className="sm:w-32 sm:flex-shrink-0">
                   <h3 className="text-sm font-medium">
                     {quote.author}
                   </h3>
@@ -78,8 +78,8 @@ const QuotesPage: React.FC = () => {
                 </div>
 
                 {/* Quote text on the right */}
-                <div className="flex-1">
-                  <p className="text-sm text-justify text-muted-foreground leading-relaxed">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm sm:text-justify text-muted-foreground leading-relaxed break-words">
                     "{quote.text}"
                   </p>
                   {quote.tags.length > 0 && (

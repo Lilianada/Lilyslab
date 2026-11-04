@@ -104,7 +104,7 @@ const BookCard: React.FC<BookCardProps> = ({
         <div
             className="flex flex-col justify-between h-full w-full px-6 py-4 font-mono text-black border border-black rounded-md bg-white/80 relative paper-texture"
             style={{
-                backgroundImage: 'url("/noise.svg")',
+                backgroundImage: 'url("/images/noise.svg")',
                 backgroundRepeat: 'repeat',
                 backgroundSize: '350px 350px',
                 backgroundBlendMode: 'multiply',

@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { Analytics } from "@vercel/analytics/next"
+import { VisitorBeacon } from "@/components/analytics/VisitorBeacon"
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
 import FloatingMusicPlayer from '@/components/audio/floating-music-player';
 import { FunLayer } from '@/components/fun/FunLayer';
@@ -45,21 +46,12 @@ export const metadata: Metadata = {
     title: "Lily's Lab",
     description: "Lily's digital garden, workshop and lab.",
     siteName: "Lily's Lab",
-    images: [
-      {
-        url: "/images/logo.png",
-        width: 512,
-        height: 512,
-        alt: "Lily's Lab",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lily's Lab",
     description: "Designer, software engineer, product manager, and digital creator",
     creator: "@lilian_ada_",
-    images: ["/images/logo.png"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -120,6 +112,7 @@ export default function RootLayout({
               <FloatingMusicPlayer />
               <FunLayer />
               <Analytics />
+              <VisitorBeacon />
           </AuthProvider>
         </ThemeProvider>
       </body>

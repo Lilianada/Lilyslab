@@ -35,7 +35,6 @@ export async function GET() {
         name: data.name || 'Anonymous',
         url: data.url || undefined,
         date: data.date,
-        email: data.email || undefined,
         message: data.message
       };
     });

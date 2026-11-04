@@ -88,24 +88,3 @@ function getCategoryDisplayName(category: string): string {
   
   return categoryMap[category] || category;
 }
-
-// Function to append a new submission to submissions.md
-export async function addWebrollSubmission(submission: {
-  title: string;
-  url: string;
-  category: string;
-}) {
-  const submissionsPath = path.join(WEBROLL_DIR, 'submissions.md');
-  const today = new Date().toISOString().split('T')[0];
-  
-  const submissionEntry = `- [${submission.title}](${submission.url}) - Category: ${submission.category} - Submitted: ${today}\n`;
-  
-  try {
-    // Append to submissions file
-    fs.appendFileSync(submissionsPath, submissionEntry);
-    return true;
-  } catch (error) {
-    console.error('Error saving webroll submission:', error);
-    return false;
-  }
-}

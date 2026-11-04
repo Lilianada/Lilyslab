@@ -133,12 +133,12 @@ const WordOfTheDayPage: React.FC = () => {
               {words.map((word, index) => (
                 <div
                   key={word.id}
-                  className="border rounded-lg p-6 bg-card hover:bg-accent/5 transition-colors"
+                  className="border rounded-lg p-4 sm:p-6 bg-card hover:bg-accent/5 transition-colors"
                 >
                   {/* Header */}
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex-1">
-                      <div className="flex items-baseline gap-3 mb-1">
+                  <div className="flex justify-between items-start gap-3 mb-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-baseline gap-x-3 mb-1">
                         <h2 className="text-base font-semibold">{word.word}</h2>
                         {word.pronunciation && (
                           <span className="text-xs text-muted-foreground font-mono">
@@ -152,7 +152,7 @@ const WordOfTheDayPage: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground font-mono">
+                    <div className="flex flex-shrink-0 items-center gap-3 text-xs text-muted-foreground font-mono">
                       <span>{formatDate(word.date)}</span>
                     </div>
                   </div>

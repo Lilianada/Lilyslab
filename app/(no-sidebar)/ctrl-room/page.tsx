@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Settings, User, FileText } from "lucide-react"
+import { Sprout, User } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
+import { markVisitCounted } from "@/components/analytics/VisitorBeacon"
+import { TodayPanel } from "@/components/ctrl-room/TodayPanel"
 
 export default function CtrlRoomPage() {
   const { user, userRoles, loading } = useAuth()
@@ -39,6 +41,16 @@ export default function CtrlRoomPage() {
     }
   }, [isAdmin, isLoading, router, user, loading])
 
+  // My own browsers shouldn't count as new visitors.
+  useEffect(() => {
+    if (isAdmin) markVisitCounted()
+  }, [isAdmin])
+
+  const getToken = useCallback(async () => {
+    if (!user) throw new Error("Not signed in")
+    return user.getIdToken()
+  }, [user])
+
   if (isLoading) {
     return (
       <div className="container max-w-4xl mx-auto py-8 animate-fade-in">
@@ -54,39 +66,26 @@ export default function CtrlRoomPage() {
   }
 
   return (
-    <div className="sm:container max-w-6xl mx-auto py-8 animate-fade-in">
-      <header className="mb-8 flex items-center gap-3">
-        {/* <Shield className="h-8 w-8 text-primary" /> */}
-        <div>
-          <h1 className="text-2xl font-bold mb-1">CTRL Room</h1>
-          <p className="text-sm text-muted-foreground">
-            Admin control panel for managing site content and settings
-          </p>
-        </div>
+    <div className="sm:container max-w-5xl mx-auto px-4 py-8 animate-fade-in">
+      <header className="mb-8">
+        <h1 className="text-2xl font-bold mb-1">CTRL Room</h1>
+        <p className="text-sm text-muted-foreground">What needs you today.</p>
       </header>
 
-      <Tabs defaultValue="content" className="mb-8">
+      <Tabs defaultValue="today" className="mb-8">
         <TabsList className="mb-4">
-          <TabsTrigger value="content" className="flex items-center gap-2">
-            <FileText className="h-4 w-4" />
-            <span>Content</span>
+          <TabsTrigger value="today" className="flex items-center gap-2">
+            <Sprout className="h-4 w-4" />
+            <span>Today</span>
           </TabsTrigger>
           <TabsTrigger value="users" className="flex items-center gap-2">
             <User className="h-4 w-4" />
             <span>Users</span>
           </TabsTrigger>
-          <TabsTrigger value="settings" className="flex items-center gap-2">
-            <Settings className="h-4 w-4" />
-            <span>Settings</span>
-          </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="content" className="space-y-6">
-          <div className="text-center p-8 border border-dashed rounded-lg">
-            <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-lg font-medium mb-2">Content Management</h3>
-            <p className="text-muted-foreground">Content management features coming soon...</p>
-          </div>
+        <TabsContent value="today">
+          <TodayPanel getToken={getToken} />
         </TabsContent>
 
         <TabsContent value="users" className="space-y-6">
@@ -94,14 +93,6 @@ export default function CtrlRoomPage() {
             <User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-lg font-medium mb-2">User Management</h3>
             <p className="text-muted-foreground">User management features coming soon...</p>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="settings" className="space-y-6">
-          <div className="text-center p-8 border border-dashed rounded-lg">
-            <Settings className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-lg font-medium mb-2">Settings</h3>
-            <p className="text-muted-foreground">Settings management features coming soon...</p>
           </div>
         </TabsContent>
       </Tabs>
