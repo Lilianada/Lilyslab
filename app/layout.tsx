@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lilyslab.xyz'),
   title: {
     default: "Lily's Lab",
     template: "%s | Lily's Lab",
