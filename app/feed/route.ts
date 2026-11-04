@@ -52,7 +52,7 @@ export interface NoteData {
 }
 
 export async function GET(request: Request) {
-  const siteURL = process.env.NEXT_PUBLIC_SITE_URL;
+  const siteURL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://lilyslab.xyz";
   const date = new Date();
   
   // Create a new feed
