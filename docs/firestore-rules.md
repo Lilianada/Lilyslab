@@ -12,7 +12,7 @@ The site's server uses the Firebase Admin SDK, which ignores Firestore rules. Th
 
 Keep this file out of the repo and never share it. It gives full access to your Firebase project.
 
-## 2. Add it to Vercel and your computer
+## 2. Add it to Netlify and your computer
 
 Turn the key into one line and copy it (use your file's real name):
 
@@ -20,7 +20,7 @@ Turn the key into one line and copy it (use your file's real name):
 base64 -i ~/Downloads/your-key-file.json | pbcopy
 ```
 
-- **Vercel:** go to **Settings > Environment Variables** and add `FIREBASE_SERVICE_ACCOUNT_BASE64`, pasting the value.
+- **Netlify:** go to **Site configuration > Environment variables** and add `FIREBASE_SERVICE_ACCOUNT_BASE64`, pasting the value. Mark it as containing a secret and limit its scope to **Functions**.
 - **Your computer:** add `FIREBASE_SERVICE_ACCOUNT_BASE64=<paste>` to `.env.local`.
 
 Then delete the downloaded file. If the key ever leaks, delete it under **Service accounts** in Google Cloud and create a new one.

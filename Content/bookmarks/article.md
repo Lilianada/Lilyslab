@@ -2262,3 +2262,30 @@ tags:
 type: article
 id: article-183
 ---
+
+---
+publish: true
+title: r/WebsitesThatFeelLike
+url: https://offlinecrush.substack.com/p/rwebsitesthatfeellike
+createdAt: 2026-11-05
+tags:
+- internet
+- personal-websites
+- creativity
+type: article
+id: article-184
+---
+
+---
+publish: true
+title: "How to use the internet again: a curriculum"
+url: https://offlinecrush.substack.com/p/how-to-use-the-internet-again-a-curriculum
+createdAt: 2026-11-05
+tags:
+- internet
+- digital-wellbeing
+- curriculum
+- learning
+type: article
+id: article-185
+---

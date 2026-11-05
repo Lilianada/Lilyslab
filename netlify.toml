@@ -1,0 +1,3 @@
+[build.environment]
+  # The site's public address, not a secret. Every other variable is still scanned.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL"

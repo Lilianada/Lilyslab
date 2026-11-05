@@ -6,7 +6,6 @@ import { AuthProvider } from "@/contexts/auth-context"
 import { Toaster } from "@/components/ui/sonner"
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
-import { Analytics } from "@vercel/analytics/next"
 import { VisitorBeacon } from "@/components/analytics/VisitorBeacon"
 import { PersonStructuredData, WebsiteStructuredData } from '@/components/structured-data';
 import FloatingMusicPlayer from '@/components/audio/floating-music-player';
@@ -21,13 +20,26 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lilyslab.xyz'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://lilyslab.xyz"),
   title: {
     default: "Lily's Lab",
     template: "%s | Lily's Lab",
   },
   description: "Lily's digital garden, workshop and lab.",
-  keywords: ["design", "development", "product management", "portfolio", "Lilian Ada", "Lilyslab", "Lily's Lab", "artificial intelligence", "machine learning", "software engineer", "product manager", "digital creator"],
+  keywords: [
+    "design",
+    "development",
+    "product management",
+    "portfolio",
+    "Lilian Ada",
+    "Lilyslab",
+    "Lily's Lab",
+    "artificial intelligence",
+    "machine learning",
+    "software engineer",
+    "product manager",
+    "digital creator",
+  ],
   authors: [{ name: "Lilian Ada", url: "https://lilianada.com" }],
   creator: "Lilian Ada",
   publisher: "Lilian Ada",
@@ -50,7 +62,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Lily's Lab",
-    description: "Designer, software engineer, product manager, and digital creator",
+    description:
+      "Designer, software engineer, product manager, and digital creator",
     creator: "@lilian_ada_",
   },
   icons: {
@@ -61,12 +74,12 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   alternates: {
     types: {
-      'application/rss+xml': '/feed',
-      'application/atom+xml': '/feed?format=atom',
-      'application/json': '/feed?format=json',
+      "application/rss+xml": "/feed",
+      "application/atom+xml": "/feed?format=atom",
+      "application/json": "/feed?format=json",
     },
   },
-}
+};
 
 export default function RootLayout({
   children,
@@ -111,7 +124,6 @@ export default function RootLayout({
               <Toaster />
               <FloatingMusicPlayer />
               <FunLayer />
-              <Analytics />
               <VisitorBeacon />
           </AuthProvider>
         </ThemeProvider>

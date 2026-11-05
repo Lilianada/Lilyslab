@@ -194,10 +194,10 @@ export default function Colophon() {
         <div className="flex items-center gap-2 mb-2">
           <TriangleAlert size={16} className="text-muted-foreground" />
           <h2 className="font-mono text-base font-semibold">Deployment</h2>
-          <span className="ml-2 px-2 py-0.5 rounded bg-muted text-xs">Vercel</span>
+          <span className="ml-2 px-2 py-0.5 rounded bg-muted text-xs">Netlify</span>
         </div>
         <div className="text-sm text-muted-foreground mb-4">
-          Deployments are powered by <a href="https://vercel.com/" className="underline" target="_blank" rel="noopener noreferrer">Vercel</a>, making updates seamless and fast. Every push creates a fresh version, so improvements and fixes reach visitors quickly.
+          Deployments are powered by <a href="https://www.netlify.com/" className="underline" target="_blank" rel="noopener noreferrer">Netlify</a>, making updates seamless and fast. Every push creates a fresh version, so improvements and fixes reach visitors quickly.
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div className="border rounded bg-background p-4">

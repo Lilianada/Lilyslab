@@ -28,15 +28,18 @@ function getSource(referrer: string | undefined, ownHost: string) {
  * nothing that could tell one visitor from another.
  */
 export async function POST(request: Request) {
-  const ownHost = stripWww(new URL(request.url).hostname);
+  const host =
+    request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? new URL(request.url).host;
+  const ownHost = stripWww(host.split(":")[0].toLowerCase());
 
   const origin = request.headers.get("origin");
   if (origin && stripWww(new URL(origin).hostname) !== ownHost) {
     return new NextResponse(null, { status: 403 });
   }
 
-  // Bots and preview deployments shouldn't move the real numbers.
-  if (BOT_PATTERN.test(request.headers.get("user-agent") ?? "") || process.env.VERCEL_ENV === "preview") {
+  // Bots and Netlify previews (deploy-preview-1--site.netlify.app) shouldn't move the real numbers.
+  const isPreview = ownHost.endsWith(".netlify.app") && ownHost.includes("--");
+  if (BOT_PATTERN.test(request.headers.get("user-agent") ?? "") || isPreview) {
     return new NextResponse(null, { status: 204 });
   }
 
@@ -47,7 +50,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid visit" }, { status: 400 });
   }
 
-  const country = request.headers.get("x-vercel-ip-country") ?? "";
+  const country = request.headers.get("x-country") ?? "";
 
   try {
     const stats = adminDb().collection("visitorStats");
