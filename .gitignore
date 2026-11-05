@@ -40,3 +40,5 @@ next-env.d.ts
 .trash
 .windsurf
 conflict-files-obsidian-git.md
+# Local Netlify folder
+.netlify
