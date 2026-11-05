@@ -1,3 +1,7 @@
+# Serves the Next.js pages and API routes. Without it, every URL returns 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build.environment]
   # The site's address and the email shown in the footer are public, not secrets.
   # Every other variable is still scanned.
