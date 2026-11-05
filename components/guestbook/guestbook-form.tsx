@@ -125,8 +125,6 @@ export default function GuestbookForm({ onEntryAdded }: GuestbookFormProps) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {/* Required Fields Section */}
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Sign My Guestbook</h3>
-          
           {/* Required Fields (Name, Email, Website) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField

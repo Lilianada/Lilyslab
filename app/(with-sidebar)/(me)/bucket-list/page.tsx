@@ -152,8 +152,6 @@ export default function BucketListPage() {
           </div>
         </header>
 
-        <div className="w-full h-40 bg-siteYellow/50 rounded-lg border border-peach/50 mb-8"></div>
-
         <section className="mb-16">
           <span className="text-xl mb-2">✳︎</span>
           <h2 className="text-base font-medium tracking-tight mb-2 pb-3 text-foreground">
