@@ -3,9 +3,18 @@ import React, { useState } from "react";
 import type { Bookmark } from "@/lib/garden/bookmarks";
 import { BookmarkItem } from "@/components/digital-garden/bookmark/BookmarkItem";
 import { ArrowUpDown } from "lucide-react";
+import { BookmarkSearch } from "./BookmarkSearch";
 
 interface Props {
   bookmarks: Bookmark[];
+}
+
+/** Every word has to appear somewhere in the title, address or tags. */
+function matchesSearch(bookmark: Bookmark, query: string) {
+  const words = query.toLowerCase().replace(/#/g, " ").split(/\s+/).filter(Boolean);
+  const address = bookmark.link.replace(/^https?:\/\/(www\.)?/, "");
+  const searchable = `${bookmark.title} ${address} ${bookmark.tags.join(" ")}`.toLowerCase();
+  return words.every((word) => searchable.includes(word));
 }
 
 export default function TagFilterClient({ bookmarks }: Props) {
@@ -14,7 +23,8 @@ export default function TagFilterClient({ bookmarks }: Props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
-  
+  const [searchQuery, setSearchQuery] = useState("");
+
   // Count bookmarks per tag
   const tagCounts: Record<string, number> = {};
   bookmarks.forEach((b) => {
@@ -64,11 +74,11 @@ export default function TagFilterClient({ bookmarks }: Props) {
     return sortOrder === 'newest' ? dateB.getTime() - dateA.getTime() : dateA.getTime() - dateB.getTime();
   });
   
-  // Apply tag and category filtering
+  // Apply tag, category and search filtering
   const filteredBookmarks = sortedBookmarks.filter(bookmark => {
     const matchesTag = !selectedTag || bookmark.tags.includes(selectedTag);
     const matchesCategory = !selectedCategory || bookmark.type === selectedCategory;
-    return matchesTag && matchesCategory;
+    return matchesTag && matchesCategory && matchesSearch(bookmark, searchQuery);
   });
 
   return (
@@ -199,30 +209,38 @@ export default function TagFilterClient({ bookmarks }: Props) {
           </div>
           
           {/* Results count */}
-          <div className="mb-6 flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+            <p className="min-w-0 break-words text-sm text-muted-foreground" aria-live="polite">
               Showing {filteredBookmarks.length} of {bookmarks.length} bookmarks
               {selectedCategory && ` in category ${selectedCategory}`}
               {selectedTag && ` with tag #${selectedTag}`}
+              {searchQuery.trim() && ` matching "${searchQuery.trim()}"`}
             </p>
-            <button
-              onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
-              className="flex items-center gap-2 px-3 py-1 text-xs font-mono bg-muted border border-border rounded-full hover:bg-accent transition-all"
-              title={`Sort by ${sortOrder === 'newest' ? 'oldest' : 'newest'} first`}
-            >
-              <ArrowUpDown size={12} />
-              {sortOrder === 'newest' ? 'Newest' : 'Oldest'}
-            </button>
+            <div className="ml-auto flex items-center gap-2">
+              <BookmarkSearch value={searchQuery} onChange={setSearchQuery} />
+              <button
+                onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
+                className="flex items-center gap-2 px-3 py-1 text-xs font-mono bg-muted border border-border rounded-full hover:bg-accent transition-all"
+                title={`Sort by ${sortOrder === 'newest' ? 'oldest' : 'newest'} first`}
+              >
+                <ArrowUpDown size={12} />
+                {sortOrder === 'newest' ? 'Newest' : 'Oldest'}
+              </button>
+            </div>
           </div>
-          
+
           {/* Bookmark list */}
-          <ul className="mt-6 space-y-2">
-            {filteredBookmarks.map((bookmark) => (
-              <li key={bookmark.id || bookmark.link}>
-                <BookmarkItem bookmark={bookmark} />
-              </li>
-            ))}
-          </ul>
+          {filteredBookmarks.length > 0 ? (
+            <ul className="mt-6 space-y-2">
+              {filteredBookmarks.map((bookmark) => (
+                <li key={bookmark.id || bookmark.link}>
+                  <BookmarkItem bookmark={bookmark} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-6 text-sm text-muted-foreground">No bookmarks found. Try a different word or filter.</p>
+          )}
         </>
       )}
     </div>
