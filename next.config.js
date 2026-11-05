@@ -51,8 +51,9 @@ const nextConfig = {
 
   // Content/ holds 70MB of archive photos that are served from /public (see
   // scripts/sync-archive-images.js). Server functions only read the markdown.
+  // Build output and caches never belong in a function: Netlify rejects one that's too big.
   outputFileTracingExcludes: {
-    '*': ['Content/**/*.{jpg,jpeg,png,gif,webp}', 'public/archives/**'],
+    '*': ['Content/**/*.{jpg,jpeg,png,gif,webp}', 'public/archives/**', '.netlify/**', '.next/cache/**'],
   },
 
   images: {

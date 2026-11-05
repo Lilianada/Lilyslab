@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Rss, Twitter } from "lucide-react";
+import { Github, Instagram, Linkedin, Mail, Rss, Twitter } from "lucide-react";
 
 function formatBuildTimeUTC(buildTime: string) {
   const date = new Date(buildTime);
@@ -100,6 +100,14 @@ export function Footer() {
                 className="hover:text-zinc-400"
               >
                 <Twitter className="h-3 w-3" />
+              </a>
+
+              <a
+                href="https://www.instagram.com/withluv.lily/"
+                aria-label="Instagram"
+                className="hover:text-zinc-400"
+              >
+                <Instagram className="h-3 w-3" />
               </a>
             </div>
 

@@ -11,9 +11,11 @@ export interface GardenHealth {
   drafts: { title: string; section: string }[];
 }
 
+// These paths are written out in full so only these folders get packaged with the
+// server. A variable here makes Next.js package the whole project.
 const SECTIONS = [
-  { label: "Essays", directory: "Content/essays", route: "/garden/essays" },
-  { label: "Notes", directory: "Content/notes", route: "/garden/notes" },
+  { label: "Essays", root: path.join(process.cwd(), "Content/essays"), route: "/garden/essays" },
+  { label: "Notes", root: path.join(process.cwd(), "Content/notes"), route: "/garden/notes" },
 ];
 
 /** What in the garden needs tending. Reads drafts, so it must stay behind the admin check. */
@@ -28,8 +30,7 @@ export function getGardenHealth(): GardenHealth {
     drafts: [],
   };
 
-  for (const { label, directory, route } of SECTIONS) {
-    const root = path.join(process.cwd(), directory);
+  for (const { label, root, route } of SECTIONS) {
     for (const file of fs.readdirSync(root)) {
       if (!/\.mdx?$/.test(file) || file === "README.md") continue;
 
