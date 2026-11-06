@@ -25,6 +25,7 @@ const config = {
         nitti: ["Nitti", "monospace"],
         ppmori: ["PP Mori", "sans-serif"],
         heart: ["Rainy Hearts", "cursive"],
+        poem: ["Sorts Mill Goudy", "serif"],
         sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
       },

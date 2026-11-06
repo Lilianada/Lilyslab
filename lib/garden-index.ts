@@ -44,6 +44,7 @@ const WANDER_PAGES = [
   "/uses",
   "/resources",
   "/garden/bookshelf",
+  "/garden/media-digest",
   "/garden/poems",
   "/garden/micro-blog",
   "/garden/word-of-the-day",

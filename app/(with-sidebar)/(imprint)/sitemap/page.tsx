@@ -46,6 +46,7 @@ const sitemapData: SitemapSection[] = [
       { name: "Notes", url: "/garden/notes", description: "My notes and thoughts" },
       { name: "Poems", url: "/garden/poems", description: "A collection of my poetry" },
       { name: "Bookshelf", url: "/garden/bookshelf", description: "Books I've read, am reading or plan on reading" },
+      { name: "Media Digest", url: "/garden/media-digest", description: "What I've been watching, hearing and reading each month" },
       { name: "Micro-blog", url: "/garden/micro-blog", description: "Short-form thoughts and musings" },
       { name: "Word of the Day", url: "/garden/word-of-the-day", description: "Daily word explorations" },
       { name: "Bookmarks", url: "/garden/bookmarks", description: "Articles I've read and bookmarked for later" },

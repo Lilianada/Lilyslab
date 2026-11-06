@@ -9,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowUpRight, Book, ListCheckIcon, Lightbulb, NotepadText, Bookmark, PenBox } from "lucide-react"
+import { ArrowUpRight, Book, Headphones, ListCheckIcon, Lightbulb, NotepadText, Bookmark, PenBox } from "lucide-react"
 import { SuggestionSidebar } from "@/components/workshop/suggestions/SuggestionSidebar"
 
 export default function DigitalGardenHome() {
@@ -44,6 +44,12 @@ export default function DigitalGardenHome() {
             description: "A collection of my favorite reads, tools, and discoveries.",
             href: "/garden/bookmarks",
             icon: Bookmark
+        },
+        {
+            title: "Media Digest",
+            description: "What I've been watching, hearing and reading each month.",
+            href: "/garden/media-digest",
+            icon: Headphones
         },
         {
             title: "Microblog",

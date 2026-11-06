@@ -26,6 +26,7 @@ const PAGES = [
   "/garden/notes",
   "/garden/bookmarks",
   "/garden/bookshelf",
+  "/garden/media-digest",
   "/garden/micro-blog",
   "/garden/poems",
   "/garden/word-of-the-day",

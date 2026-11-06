@@ -38,6 +38,7 @@ import {
   Pencil,
   Gamepad2,
   Shapes,
+  Headphones,
 } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
 
@@ -81,6 +82,7 @@ const NAV_SECTIONS: { title?: string; items: NavEntry[] }[] = [
       { href: "/garden/notes", icon: <BookHeartIcon size={16} />, label: "Notes" },
       { href: "/garden/bookmarks", icon: <Bookmark size={16} />, label: "Bookmarks" },
       { href: "/garden/bookshelf", icon: <BookOpen size={16} />, label: "Bookshelf" },
+      { href: "/garden/media-digest", icon: <Headphones size={16} />, label: "Media Digest" },
       { href: "/garden/micro-blog", icon: <MessageCircleCodeIcon size={16} />, label: "Micro-blog" },
       { href: "/garden/poems", icon: <Flower size={16} />, label: "Poems" },
       { href: "/garden/word-of-the-day", icon: <ScrollText size={16} />, label: "Word of the Day" },

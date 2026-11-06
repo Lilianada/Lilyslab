@@ -15,6 +15,7 @@ const STATIC_PAGES: SearchItem[] = [
   { title: "Essays", path: "/garden/essays", snippet: "Browse essays and long-form writing." },
   { title: "Notes", path: "/garden/notes", snippet: "Explore notes, drafts, and short thoughts." },
   { title: "Poems", path: "/garden/poems", snippet: "Discover poetry and verse." },
+  { title: "Media Digest", path: "/garden/media-digest", snippet: "Songs, films, shows, podcasts, books and articles, month by month." },
   { title: "Bookmarks", path: "/garden/bookmarks", snippet: "Find saved links and curated bookmarks." },
   { title: "Archives", path: "/archives", snippet: "Search older archived writings and notes." },
   { title: "Quotes", path: "/quotes", snippet: "Read collections of favorite quotes." },
