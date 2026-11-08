@@ -1,10 +1,10 @@
 # Media Digest
 
-Each month is one file named `YYYY-MM.md`, like `2026-11.md`. The newest file shows at `/garden/media-digest`, and older ones stay available under "Past digests".
+Each month is one file named `YYYY-MM.md`, like `2026-11.md`. Every month shows at `/garden/media-digest`, newest first, and each one can be linked to directly, like `/garden/media-digest#2026-11`.
 
 Copy this template and delete what you don't need. Empty sections don't appear on the page.
 
-An entry can be one plain line (`- Girl from Nowhere`) or include any of these details: `by`, `url`, `rating` (out of 5, halves are fine), `note` and `cover` (an image link).
+An entry can be one plain line (`- Girl from Nowhere`) or include any of these details: `by`, `url`, `rating` (out of 5, halves are fine) and `note`.
 
 ```yaml
 ---
@@ -17,7 +17,6 @@ movies:
   - title: Film name
     rating: 4.5
     note: What I thought of it.
-    cover: https://example.com/poster.jpg
 shows:
   - Show name
 books:

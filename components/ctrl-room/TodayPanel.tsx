@@ -15,6 +15,8 @@ import {
 
 const LIST_LIMIT = 5;
 
+const LINK = "text-xs underline decoration-primary decoration-2 underline-offset-2 hover:opacity-70";
+
 const formatDay = (date: string) =>
   new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 
@@ -46,8 +48,8 @@ function useLoad<T>(load: () => Promise<T>) {
 
 function Panel({ title, error, loaded, children }: { title: string; error: string | null; loaded: boolean; children: ReactNode }) {
   return (
-    <section className="rounded-md border border-dashed p-4">
-      <h2 className="mb-3 font-mono text-xs uppercase tracking-wide text-muted-foreground">{title}</h2>
+    <section className="rounded-lg border bg-card/60 p-5">
+      <h2 className="mb-4 font-mono text-xs uppercase tracking-wide text-muted-foreground">{title}</h2>
       {error ? (
         <p className="text-xs text-codeRed">{error}</p>
       ) : loaded ? (
@@ -61,8 +63,8 @@ function Panel({ title, error, loaded, children }: { title: string; error: strin
 
 const Stat = ({ label, value }: { label: string; value: number }) => (
   <div>
-    <div className="text-2xl font-medium tabular-nums">{value.toLocaleString("en-US")}</div>
-    <div className="text-xs text-muted-foreground">{label}</div>
+    <div className="text-3xl font-medium tabular-nums">{value.toLocaleString("en-US")}</div>
+    <div className="mt-0.5 font-mono text-[11px] text-muted-foreground">{label}</div>
   </div>
 );
 
@@ -106,7 +108,7 @@ function DayBars({ days }: { days: VisitorSummary["days"] }) {
           >
             {day.count > 0 && (
               <div
-                className={`w-full rounded-t bg-codeRed transition-opacity ${active === index ? "" : "opacity-80"}`}
+                className={`w-full rounded-t bg-primary transition-opacity ${active === index ? "" : "opacity-80"}`}
                 style={{ height: `${Math.max(6, (day.count / max) * 100)}%` }}
               />
             )}
@@ -173,7 +175,7 @@ function AmaPanel() {
               </li>
             ))}
           </ul>
-          <Link href="/ask-me-anything" className="mt-3 inline-block text-xs text-codeRed hover:italic">
+          <Link href="/ask-me-anything" className={`mt-3 inline-block ${LINK}`}>
             Go reply →
           </Link>
         </>
@@ -207,7 +209,7 @@ function InboxPanel() {
               <div className="min-w-0 break-words">
                 <span className="text-muted-foreground">{item.kind}: </span>
                 {item.url ? (
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-codeRed hover:italic">
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" className={LINK}>
                     {item.title}
                   </a>
                 ) : (
@@ -258,7 +260,7 @@ function HealthPanel({ getToken }: { getToken: () => Promise<string> }) {
               <ul className="space-y-0.5">
                 {data.empty.map(({ title, href }) => (
                   <li key={href}>
-                    <Link href={href} className="text-codeRed hover:italic">{title}</Link>
+                    <Link href={href} className={LINK}>{title}</Link>
                   </li>
                 ))}
               </ul>
@@ -285,7 +287,7 @@ function HealthPanel({ getToken }: { getToken: () => Promise<string> }) {
 /** What needs attention today. Each panel loads and fails on its own. */
 export function TodayPanel({ getToken }: { getToken: () => Promise<string> }) {
   return (
-    <div className="grid gap-4 font-mono lg:grid-cols-2 [&_p]:text-xs">
+    <div className="grid gap-4 lg:grid-cols-2 [&_p]:text-xs">
       <div className="lg:col-span-2">
         <VisitorsPanel />
       </div>

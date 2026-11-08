@@ -18,7 +18,7 @@ export default function HelloPage() {
           <h1 className="mb-2 text-xl font-medium">Hello</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: June 16, 2025</div>
-            <div>Last updated: June 19, 2025</div>
+            <div>Last updated: November 8, 2026</div>
             <div>Inspired by: Alastair Johnston</div>
           </div>
         </header>
@@ -38,16 +38,16 @@ export default function HelloPage() {
               /guestbook
             </a>
             ,{" "}
-            <a href="/guestbook" className="text-peach">
+            <a href="/ask-me-anything" className="text-peach">
               /ask-me-anything
             </a>{" "}
-            or webmentions. I get usually excited when someone finds me via my
+            or webmentions. I usually get excited when someone finds me via my
             website.
           </p>
           <p>
             My preferred means of communication is emails so you can drop me an{" "}
             <a
-              href="mail:hello.lilysgarden@gmail.com"
+              href="mailto:hello.lilysgarden@gmail.com"
               className="text-peach"
             >
               email
@@ -71,14 +71,14 @@ export default function HelloPage() {
             <a href="https://x.com/lilian_ada_" className="text-peach">
               Twitter
             </a>{" "}
-            account and occassionally interact there. If you're trying to reach
+            account and occasionally interact there. If you're trying to reach
             me urgently then using this is a bad idea because I go days without
             checking it.
           </p>
           <p>
             I have an{" "}
             <a
-              href="https://instagram.com/defitcreative"
+              href="https://instagram.com/withluv.lily"
               className="text-peach"
             >
               Instagram
@@ -104,7 +104,7 @@ export default function HelloPage() {
             see my content - @defitcreative.
           </p>
             <p className="text-muted-foreground">
-            This page inspired is by <a href="https://alastairjohnston.com/introducing-hello-pages/" className="text-peach">Alastair Johnston</a>.
+            This page is inspired by <a href="https://alastairjohnston.com/introducing-hello-pages/" className="text-peach">Alastair Johnston</a>.
             </p>
         </div>
 

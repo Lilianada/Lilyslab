@@ -9,7 +9,6 @@ export interface DigestItem {
   /** Out of 5. Halves are fine. */
   rating?: number;
   note?: string;
-  cover?: string;
 }
 
 export interface Digest {
@@ -32,9 +31,9 @@ const DIGEST_DIR = path.join(process.cwd(), "Content", "mediaDigest");
 
 const optionalText = (value: unknown) => (value == null || value === "" ? undefined : String(value));
 
-function optionalUrl(value: unknown, pattern: RegExp) {
+function optionalUrl(value: unknown) {
   const text = optionalText(value);
-  return text && pattern.test(text) ? text : undefined;
+  return text && /^https?:\/\//i.test(text) ? text : undefined;
 }
 
 function toItems(value: unknown): DigestItem[] {
@@ -56,10 +55,9 @@ function toItems(value: unknown): DigestItem[] {
       {
         title,
         by: optionalText(fields.by),
-        url: optionalUrl(fields.url, /^https?:\/\//i),
+        url: optionalUrl(fields.url),
         rating: Number.isFinite(rating) && rating > 0 ? Math.min(Math.round(rating * 2) / 2, 5) : undefined,
         note: optionalText(fields.note),
-        cover: optionalUrl(fields.cover, /^(https?:\/\/|\/)/i),
       },
     ];
   });

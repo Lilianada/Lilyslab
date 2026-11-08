@@ -37,7 +37,7 @@ export default function AboutPage() {
           <h1 className="mb-2 text-xl font-medium">About Me</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: May 8, 2025</div>
-            <div>Last updated: Jan 17, 2025</div>
+            <div>Last updated: Nov 8, 2026</div>
             <div>Inspired by: <a href="https://nicolevanderhoeven.com/about" className="text-lavender">Nicole Vander Hoeven</a></div>
           </div>
         </header>
@@ -97,7 +97,7 @@ export default function AboutPage() {
                   ⎯ 26 yrs <br />
                   ⎯ Female <br />
                   ⎯ Feminist <br />
-                  ⎯ Fitness athelete <br />
+                  ⎯ Fitness athlete <br />
                   ⎯ Product manager <br />
                   ⎯ Frontend developer <br />
                   ⎯ Lifestyle connoisseur <br />
@@ -130,7 +130,7 @@ export default function AboutPage() {
                   </Link>{" "}
                   <br />
                   ⎯ I like to collect things digitally so check my{" "}
-                  <Link href="/bookmarks" className="text-lavender underline">
+                  <Link href="/garden/bookmarks" className="text-lavender underline">
                     bookmarks{" "}
                   </Link>{" "}
                   <br />
