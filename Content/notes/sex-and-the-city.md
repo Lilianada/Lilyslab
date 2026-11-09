@@ -1,3 +1,13 @@
+---
+title: Sex and the city
+createdAt: 2026-10-27
+lastUpdated: 2026-10-27
+tags:
+  - movie-review
+type: budding
+published: true
+---
+
 No one might share my opinions on the movie "Sex and the city" but I don't care.
 Let's talk about Carrie and the female obessesions with her because she's a writer.
 To be honest, I find her to be the worse female character in the show.

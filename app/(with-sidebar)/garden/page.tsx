@@ -22,7 +22,7 @@ export default function DigitalGardenHome() {
 
     const sections = [
         {
-            title: "Writings",
+            title: "Essays",
             description: "",
             href: "/garden/essays",
             icon: ListCheckIcon
