@@ -1,29 +1,39 @@
 /* Custom markdown styles */
 .markdown-content {
-  @apply text-foreground leading-relaxed prose prose-sm dark:prose-invert max-w-none mt-4;
+  @apply text-foreground prose dark:prose-invert max-w-none mt-4 text-[14px] leading-7 sm:text-[15px] sm:leading-[1.8] sm:tracking-wide ;
   @apply [&_img]:rounded-lg [&_blockquote]:border-l [&_blockquote]:border-muted/50 [&_blockquote]:pl-4;
 }
 
-/* Headings */
+/* Headings: one clear step down per level, more room above than below
+   so each heading sits with the text it introduces. */
 .markdown-content h1 {
-  @apply text-2xl md:text-4xl mb-6 mt-10 font-bold scroll-m-20;
+  @apply text-2xl sm:text-3xl leading-tight tracking-tight mt-12 mb-4 font-bold scroll-m-20;
 }
 
 .markdown-content h2 {
-  @apply text-xl md:text-3xl mb-5 mt-8 font-semibold scroll-m-20;
+  @apply text-xl sm:text-2xl leading-tight tracking-tight mt-10 mb-4 font-semibold scroll-m-20;
 }
 
 .markdown-content h3 {
-  @apply text-lg font-semibold mt-6 mb-3 scroll-m-20;
+  @apply text-lg sm:text-xl leading-snug mt-8 mb-3 font-semibold scroll-m-20;
 }
 
 .markdown-content h4 {
-  @apply text-base font-medium mt-4 mb-2 scroll-m-20;
+  @apply text-base sm:text-lg leading-snug mt-6 mb-2 font-semibold scroll-m-20;
+}
+
+.markdown-content > :first-child {
+  @apply mt-0;
 }
 
 /* Paragraphs and text */
+/* The site's base styles make every p small; Markdown text uses the reading size instead. */
 .markdown-content p {
-  @apply my-3 leading-6 text-foreground/90;
+  @apply my-4 text-[length:inherit] leading-[inherit] text-foreground/90;
+}
+
+.markdown-content strong {
+  @apply font-semibold text-foreground;
 }
 
 .markdown-content blockquote {
@@ -85,15 +95,25 @@
 
 /* Lists styling */
 .markdown-content ul {
-  @apply my-2 ml-2 list-disc text-foreground/90;
+  @apply my-5 pl-6 list-disc text-foreground/90;
 }
 
 .markdown-content ol {
-  @apply my-2 ml-2 list-decimal text-foreground/90;
+  @apply my-5 pl-6 list-decimal text-foreground/90;
 }
 
 .markdown-content li {
-  @apply mt-1;
+  @apply my-2 pl-1 marker:text-muted-foreground;
+}
+
+/* Paragraphs inside list items shouldn't add a second gap. */
+.markdown-content li > p {
+  @apply my-0;
+}
+
+.markdown-content li > ul,
+.markdown-content li > ol {
+  @apply my-2;
 }
 
 /* Links styling */

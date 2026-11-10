@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 export default function CoursePage() {
   const tracks = getTracks();
   const lessonCount = getAllLessons().length;
-  const firstLesson = tracks.find((track) => track.lessons.length > 0)?.lessons[0];
 
   return (
     <div className="mx-auto w-full max-w-2xl animate-fade-in pb-8 pt-16">
@@ -29,14 +28,12 @@ export default function CoursePage() {
           website easier than ever, and these lessons walk you through the basics, one step at a time. Start at the beginning, or
           jump to the part you need. Every lesson can be downloaded to read later.
         </p>
-        {firstLesson && (
-          <Link
-            href={firstLesson.href}
-            className="mt-4 inline-block text-sm underline decoration-primary decoration-2 underline-offset-2 hover:opacity-70"
-          >
-            Start with the first lesson →
-          </Link>
-        )}
+        <Link
+          href="/garden/essays/why-you-should-own-a-website"
+          className="mt-4 inline-block text-sm underline decoration-primary decoration-2 underline-offset-2 hover:opacity-70"
+        >
+          Start with: Why you should own your own website →
+        </Link>
       </header>
 
       <h2 className="mb-1 font-mono text-xs uppercase tracking-wide text-muted-foreground">The tracks</h2>

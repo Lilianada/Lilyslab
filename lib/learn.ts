@@ -17,6 +17,8 @@ export interface LessonSummary {
   /** Position within its track, starting at 1. */
   number: number;
   href: string;
+  /** Optional group heading on the track page, like "HTML Introduction". */
+  section?: string;
 }
 
 export interface Lesson extends LessonSummary {
@@ -64,6 +66,7 @@ function readLessons(trackSlug: string, trackTitle: string) {
         trackTitle,
         number: index + 1,
         href: `${COURSE.href}/${trackSlug}/${slug}`,
+        section: text(data.section),
         content,
         updated: dateText(data.lastUpdated ?? data.createdAt),
       };

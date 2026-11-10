@@ -38,35 +38,46 @@ export default async function LessonPage({ params }: Props) {
       <ScrollProgress color="bg-primary" height={3} glow={true} />
       <div className="mx-auto w-full max-w-2xl animate-fade-in pb-8 pt-16">
         <header className="mb-8">
-          <Link href={track.href} className="font-mono text-xs text-muted-foreground hover:text-foreground">
+          <Link
+            href={track.href}
+            className="font-mono text-xs text-muted-foreground hover:text-foreground"
+          >
             ← {track.title}
           </Link>
           <h1 className="mb-2 mt-3 text-xl font-semibold">{lesson.title}</h1>
           <div className="flex flex-col font-mono text-xs text-muted-foreground">
+            <div>{track.title} </div>
             <div>
-              {COURSE.title} · {track.title}, lesson {lesson.number} of {track.lessons.length}
+              Lesson {lesson.number} of {track.lessons.length}
             </div>
-            {lesson.updated && <div>Updated: {lesson.updated.slice(0, 10)}</div>}
-          </div>
-          {lesson.description && <p className="mt-2 text-sm text-muted-foreground">{lesson.description}</p>}
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="font-mono text-xs text-muted-foreground">Download:</span>
-            {(["md", "txt"] as const).map((format) => (
-              <a
-                key={format}
-                href={download(format)}
-                download
-                className="inline-flex items-center gap-1.5 rounded-full border border-primary/60 px-3 py-1 font-mono text-xs transition-colors hover:bg-primary/20"
-              >
-                <Download size={12} aria-hidden="true" />.{format}
-              </a>
-            ))}
+            {lesson.updated && (
+              <div>Updated: {lesson.updated.slice(0, 10)}</div>
+            )}
           </div>
         </header>
 
         <LessonMarkdown content={lesson.content} />
 
-        <PrevNext prev={neighbour(all[position - 1])} next={neighbour(all[position + 1])} />
+        <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-dashed border-border pt-6">
+          <span className="font-mono text-xs text-muted-foreground">
+            Download this lesson:
+          </span>
+          {(["md", "txt"] as const).map((format) => (
+            <a
+              key={format}
+              href={download(format)}
+              download
+              className="inline-flex items-center gap-1.5 rounded-full border border-primary/60 px-3 py-1 font-mono text-xs transition-colors hover:bg-primary/20"
+            >
+              <Download size={12} aria-hidden="true" />.{format}
+            </a>
+          ))}
+        </div>
+
+        <PrevNext
+          prev={neighbour(all[position - 1])}
+          next={neighbour(all[position + 1])}
+        />
       </div>
     </>
   );

@@ -17,7 +17,9 @@ published: true
 The lesson itself, in Markdown.
 ```
 
-A lesson only appears once it has `published: true`, so you can keep drafts here. Every published lesson gets a page and downloadable `.md` and `.txt` copies.
+A lesson only appears once it has `published: true`, so you can keep drafts here.
+
+To group lessons under a heading on the track's page, give them the same `section`, like `section: HTML Introduction`. Keep a section's lessons next to each other in number order. Numbering carries on across sections, and lessons without a section are listed without a heading. Every published lesson gets a page and downloadable `.md` and `.txt` copies.
 
 ## Add or change a track
 
