@@ -8,6 +8,7 @@ import { NoteRouteParams, SlugParams } from "@/lib/types/route-params";
 import { NotesClientWrapper } from "./client-wrapper";
 import { NotesMarkdownWrapper } from "./markdown-wrapper";
 import { PrevNext } from "@/components/layout/prev-next";
+import { Replies } from "@/components/comments/Replies";
 import { getAllNotesData } from "@/lib/notes";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
@@ -160,6 +161,7 @@ export default async function NotesPage({ params }: NoteRouteParams) {
 
           <NotesMarkdownWrapper content={note.content} />
         </div>
+        <Replies page={`notes/${slug}`} title={note.title} />
         <PrevNext prev={previousPost} next={nextPost} />
       </div>
     </NotesClientWrapper>

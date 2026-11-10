@@ -7,6 +7,7 @@ import path from "path";
 import matter from "gray-matter";
 import Image from "next/image";
 import { PrevNext } from "@/components/layout/prev-next";
+import { Replies } from "@/components/comments/Replies";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { EssayMarkdownWrapper } from "./markdown-wrapper";
 
@@ -139,6 +140,7 @@ export default async function EssaySlugPage({ params }: PageProps) {
           <EssayMarkdownWrapper content={content} />
         </div>
 
+        <Replies page={`essays/${slug}`} title={data.title || slug} />
         <PrevNext prev={prevPost} next={nextPost} />
       </div>
     </>
