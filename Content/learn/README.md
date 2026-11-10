@@ -1,6 +1,6 @@
 # Build Your Own Website
 
-The free course at `/resources/build-your-own-website`. Each folder is a track, and each Markdown file inside it is a lesson.
+The free course listed on `/resources`. Each folder is a track, and each Markdown file inside it is a lesson. Tracks live at `/resources/build-your-own-website/<track>`.
 
 ## Add a lesson
 

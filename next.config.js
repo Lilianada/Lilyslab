@@ -28,6 +28,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  async redirects() {
+    // The course has no overview page; its tracks are listed on Resources.
+    return [{ source: '/resources/build-your-own-website', destination: '/resources', permanent: false }];
+  },
   async headers() {
     return [
       {

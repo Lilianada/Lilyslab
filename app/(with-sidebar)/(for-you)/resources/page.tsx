@@ -32,7 +32,7 @@ export default function ResourcesPage() {
         </p>
       </header>
 
-      <ResourceHub items={getHubItems()} tracks={tracks} courseTitle={COURSE.title} courseHref={COURSE.href} />
+      <ResourceHub items={getHubItems()} tracks={tracks} courseTitle={COURSE.title} />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LessonMarkdown } from "@/components/learn/LessonMarkdown";
+import { LIST_CLASS, NUMBER_CLASS, ROW_CLASS, number } from "@/components/learn/TrackList";
 import { PrevNext } from "@/components/layout/prev-next";
 import { COURSE, getTracks, type LessonSummary } from "@/lib/learn";
 
@@ -42,8 +43,8 @@ export default async function TrackPage({ params }: Props) {
   return (
     <div className="mx-auto w-full max-w-2xl animate-fade-in pb-8 pt-16">
       <header className="mb-8">
-        <Link href={COURSE.href} className="font-mono text-xs text-muted-foreground hover:text-foreground">
-          ← {COURSE.title}
+        <Link href="/resources" className="font-mono text-xs text-muted-foreground hover:text-foreground">
+          ← Resources
         </Link>
         <h1 className="mb-2 mt-3 text-xl font-medium">{track.title}</h1>
         <div className="flex flex-col font-mono text-xs text-muted-foreground">
@@ -53,6 +54,14 @@ export default async function TrackPage({ params }: Props) {
           <div>Lessons: {track.lessons.length}</div>
         </div>
         {track.description && <p className="mt-2 text-sm text-muted-foreground">{track.description}</p>}
+        {position === 0 && (
+          <Link
+            href="/garden/essays/why-you-should-own-a-website"
+            className="mt-4 inline-block text-sm underline decoration-primary decoration-2 underline-offset-2 hover:opacity-70"
+          >
+            Start with: Why you should own your own website →
+          </Link>
+        )}
       </header>
 
       {track.intro && (
@@ -70,17 +79,13 @@ export default async function TrackPage({ params }: Props) {
               {group.section && (
                 <h2 className="mb-1 font-mono text-xs uppercase tracking-wide text-muted-foreground">{group.section}</h2>
               )}
-              <ol start={group.lessons[0].number} className="divide-y divide-dashed">
+              <ol start={group.lessons[0].number} className={LIST_CLASS}>
                 {group.lessons.map((lesson) => (
                   <li key={lesson.slug}>
-                    <Link href={lesson.href} className="group flex items-start gap-4 py-3">
-                      <span className="w-6 shrink-0 pt-0.5 font-mono text-xs text-muted-foreground">
-                        {String(lesson.number).padStart(2, "0")}
-                      </span>
+                    <Link href={lesson.href} className={ROW_CLASS}>
+                      <span className={NUMBER_CLASS}>{number(lesson.number)}</span>
                       <span className="min-w-0 flex-1">
-                        <span className="block text-sm font-medium underline decoration-transparent decoration-2 underline-offset-2 transition-colors group-hover:decoration-primary">
-                          {lesson.title}
-                        </span>
+                        <span className="block text-sm font-medium">{lesson.title}</span>
                         {lesson.description && <span className="mt-0.5 block text-xs text-muted-foreground">{lesson.description}</span>}
                       </span>
                     </Link>

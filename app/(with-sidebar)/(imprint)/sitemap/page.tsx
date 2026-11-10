@@ -55,7 +55,6 @@ function buildMap(): SiteNode {
             children: [
               {
                 name: COURSE.title,
-                href: COURSE.href,
                 description: "Free lessons for non-tech people",
                 children: getTracks().map((track) => ({
                   name: track.title,

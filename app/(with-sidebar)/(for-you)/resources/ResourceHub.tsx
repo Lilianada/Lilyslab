@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, ArrowUpRight, Search, X } from "lucide-react";
 import type { HubItem } from "@/lib/resource-hub";
+import { LIST_CLASS, NUMBER_CLASS, ROW_CLASS, TrackList, number } from "@/components/learn/TrackList";
 
 export interface HubTrack {
   slug: string;
@@ -31,13 +32,14 @@ function matchesSearch(entry: Entry, query: string) {
   return words.every((word) => searchable.includes(word));
 }
 
-function EntryRow({ entry }: { entry: Entry }) {
+function EntryRow({ entry, position }: { entry: Entry; position: number }) {
   const where = entry.isLesson ? `Lesson · ${entry.topic}` : entry.href.replace(/^https?:\/\/(www\.)?/, "").split("/")[0];
   const Arrow = entry.isLesson ? ArrowRight : ArrowUpRight;
   const body = (
     <>
+      <span className={NUMBER_CLASS}>{number(position)}</span>
       <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
-        <span className="block text-sm">{entry.title}</span>
+        <span className="block text-sm font-medium">{entry.title}</span>
         {entry.description && <span className="mt-0.5 line-clamp-2 block text-xs text-muted-foreground">{entry.description}</span>}
         <span className="mt-1 block font-mono text-xs text-muted-foreground">{where}</span>
       </span>
@@ -48,16 +50,14 @@ function EntryRow({ entry }: { entry: Entry }) {
       />
     </>
   );
-  const className = "group flex items-start gap-3 border-b border-dashed border-border py-3 transition-colors hover:bg-muted/50";
-
   return (
     <li>
       {entry.isLesson ? (
-        <Link href={entry.href} className={className}>
+        <Link href={entry.href} className={ROW_CLASS}>
           {body}
         </Link>
       ) : (
-        <a href={entry.href} target="_blank" rel="noopener noreferrer" className={className}>
+        <a href={entry.href} target="_blank" rel="noopener noreferrer" className={ROW_CLASS}>
           {body}
         </a>
       )}
@@ -69,9 +69,7 @@ const SectionHeading = ({ children }: { children: React.ReactNode }) => (
   <h2 className="mb-2 font-mono text-xs uppercase tracking-wide text-muted-foreground">{children}</h2>
 );
 
-const lessonCount = (count: number) => (count === 0 ? "coming soon" : `${count} ${count === 1 ? "lesson" : "lessons"}`);
-
-export function ResourceHub({ items, tracks, courseTitle, courseHref }: { items: HubItem[]; tracks: HubTrack[]; courseTitle: string; courseHref: string }) {
+export function ResourceHub({ items, tracks, courseTitle }: { items: HubItem[]; tracks: HubTrack[]; courseTitle: string }) {
   const [query, setQuery] = useState("");
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
 
@@ -159,35 +157,20 @@ export function ResourceHub({ items, tracks, courseTitle, courseHref }: { items:
       {isBrowsing ? (
         <div className="mt-10 space-y-10">
           <section>
-            <div className="mb-2 flex items-baseline justify-between gap-4">
-              <SectionHeading>{courseTitle}</SectionHeading>
-              <Link href={courseHref} className="shrink-0 font-mono text-xs text-muted-foreground hover:text-foreground">
-                About the course →
-              </Link>
-            </div>
-            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {tracks.map((track) => (
-                <li key={track.slug}>
-                  <Link href={track.href} className="flex h-full flex-col rounded-lg border border-border bg-card p-3 transition-colors hover:bg-muted">
-                    <span className="block text-sm font-medium">{track.title}</span>
-                    {track.description && <span className="mt-0.5 block text-xs text-muted-foreground">{track.description}</span>}
-                    <span className="mt-auto block pt-2 font-mono text-[11px] text-muted-foreground">{lessonCount(track.lessons.length)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <SectionHeading>{courseTitle}</SectionHeading>
+            <TrackList tracks={tracks} />
           </section>
 
           {linkTopics.map((topic) => (
             <section key={topic}>
               <SectionHeading>{topic}</SectionHeading>
-              <ul>
+              <ol className={LIST_CLASS}>
                 {entries
                   .filter((entry) => !entry.isLesson && entry.topic === topic)
-                  .map((entry) => (
-                    <EntryRow key={entry.id} entry={entry} />
+                  .map((entry, index) => (
+                    <EntryRow key={entry.id} entry={entry} position={index + 1} />
                   ))}
-              </ul>
+              </ol>
             </section>
           ))}
         </div>
@@ -204,11 +187,11 @@ export function ResourceHub({ items, tracks, courseTitle, courseHref }: { items:
             )}
           </div>
           {results.length > 0 ? (
-            <ul>
-              {results.map((entry) => (
-                <EntryRow key={entry.id} entry={entry} />
+            <ol className={LIST_CLASS}>
+              {results.map((entry, index) => (
+                <EntryRow key={entry.id} entry={entry} position={index + 1} />
               ))}
-            </ul>
+            </ol>
           ) : (
             <p className="py-6 text-sm text-muted-foreground">
               {activeTrack && !query.trim() ? "The lessons for this track are on their way." : "Nothing here yet. Try a different word."}

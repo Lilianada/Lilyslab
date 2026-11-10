@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 /** Parent paths that are only URL segments and have no page to link to. */
-const hasNoPage = (href: string) => /^\/archives\/[^/]+$/.test(href);
+const hasNoPage = (href: string) => /^\/archives\/[^/]+$/.test(href) || href === "/resources/build-your-own-website";
 
 /** Names that plain capitalizing would get wrong, like "Html". */
 const SPECIAL_LABELS: Record<string, string> = {
