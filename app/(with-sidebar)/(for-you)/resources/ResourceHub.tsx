@@ -2,98 +2,119 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowUpRight, Search, X } from "lucide-react";
-import type { HubItem, HubSource } from "@/lib/resource-hub";
+import { ArrowRight, ArrowUpRight, Search, X } from "lucide-react";
+import type { HubItem } from "@/lib/resource-hub";
 
-const SOURCES: { source: HubSource; label: string; dot: string }[] = [
-  { source: "Resource", label: "Resources", dot: "bg-sitePink" },
-  { source: "Bookmark", label: "Bookmarks", dot: "bg-lavender" },
-  { source: "Tool", label: "Tools", dot: "bg-siteGreen" },
-  { source: "Webroll", label: "Webroll", dot: "bg-peach" },
-];
+export interface HubTrack {
+  slug: string;
+  title: string;
+  description?: string;
+  href: string;
+  lessons: { title: string; description?: string; href: string }[];
+}
 
-const SHELVES = [
-  { href: "/garden/bookmarks", label: "Bookmarks", note: "Things worth rereading", source: "Bookmark" },
-  { href: "/tools", label: "Tools", note: "Apps I reach for", source: "Tool" },
-  { href: "/webroll", label: "Webroll", note: "Corners of the web I love", source: "Webroll" },
-  { href: "/uses", label: "Uses", note: "My everyday setup" },
-  { href: "/garden/bookshelf", label: "Bookshelf", note: "What I'm reading" },
-] as const;
+/** One searchable row: a lesson on this site, or a link elsewhere. */
+interface Entry {
+  id: string;
+  title: string;
+  description: string;
+  topic: string;
+  href: string;
+  tags: string[];
+  isLesson: boolean;
+}
 
-const RECENT_BOOKMARKS = 5;
-
-function matchesSearch(item: HubItem, query: string) {
+function matchesSearch(entry: Entry, query: string) {
   const words = query.toLowerCase().replace(/#/g, " ").split(/\s+/).filter(Boolean);
-  const address = item.url.replace(/^https?:\/\/(www\.)?/, "");
-  const searchable = `${item.title} ${item.description} ${item.category} ${item.tags.join(" ")} ${address}`.toLowerCase();
+  const address = entry.href.replace(/^https?:\/\/(www\.)?/, "");
+  const searchable = `${entry.title} ${entry.description} ${entry.topic} ${entry.tags.join(" ")} ${address}`.toLowerCase();
   return words.every((word) => searchable.includes(word));
 }
 
-function HubRow({ item }: { item: HubItem }) {
-  const dot = SOURCES.find(({ source }) => source === item.source)?.dot;
-  const domain = item.url.replace(/^https?:\/\/(www\.)?/, "").split("/")[0];
+function EntryRow({ entry }: { entry: Entry }) {
+  const where = entry.isLesson ? `Lesson · ${entry.topic}` : entry.href.replace(/^https?:\/\/(www\.)?/, "").split("/")[0];
+  const Arrow = entry.isLesson ? ArrowRight : ArrowUpRight;
+  const body = (
+    <>
+      <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
+        <span className="block text-sm">{entry.title}</span>
+        {entry.description && <span className="mt-0.5 line-clamp-2 block text-xs text-muted-foreground">{entry.description}</span>}
+        <span className="mt-1 block font-mono text-xs text-muted-foreground">{where}</span>
+      </span>
+      <Arrow
+        size={14}
+        className="mt-1 shrink-0 text-muted-foreground transition-transform motion-safe:group-hover:translate-x-0.5"
+        aria-hidden="true"
+      />
+    </>
+  );
+  const className = "group flex items-start gap-3 border-b border-dashed border-border py-3 transition-colors hover:bg-muted/50";
 
   return (
     <li>
-      <a
-        href={item.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex items-start gap-3 border-b border-dashed border-border py-3 transition-colors hover:bg-muted/50"
-      >
-        <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${dot}`} aria-hidden="true" />
-        <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
-          <span className="block text-sm">{item.title}</span>
-          {item.description && (
-            <span className="mt-0.5 line-clamp-2 block text-xs text-muted-foreground">{item.description}</span>
-          )}
-          <span className="mt-1 block font-mono text-xs text-muted-foreground">
-            {item.source} · {domain}
-          </span>
-        </span>
-        <ArrowUpRight
-          size={14}
-          className="mt-1 shrink-0 text-muted-foreground transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
-          aria-hidden="true"
-        />
-      </a>
+      {entry.isLesson ? (
+        <Link href={entry.href} className={className}>
+          {body}
+        </Link>
+      ) : (
+        <a href={entry.href} target="_blank" rel="noopener noreferrer" className={className}>
+          {body}
+        </a>
+      )}
     </li>
   );
 }
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return <h2 className="mb-2 font-mono text-xs uppercase tracking-wide text-muted-foreground">{children}</h2>;
-}
+const SectionHeading = ({ children }: { children: React.ReactNode }) => (
+  <h2 className="mb-2 font-mono text-xs uppercase tracking-wide text-muted-foreground">{children}</h2>
+);
 
-export function ResourceHub({ items }: { items: HubItem[] }) {
+const lessonCount = (count: number) => (count === 0 ? "coming soon" : `${count} ${count === 1 ? "lesson" : "lessons"}`);
+
+export function ResourceHub({ items, tracks, courseTitle, courseHref }: { items: HubItem[]; tracks: HubTrack[]; courseTitle: string; courseHref: string }) {
   const [query, setQuery] = useState("");
-  const [activeSource, setActiveSource] = useState<HubSource | null>(null);
+  const [activeTopic, setActiveTopic] = useState<string | null>(null);
 
-  const countOf = (source: HubSource) => items.filter((item) => item.source === source).length;
-  const isBrowsing = !query.trim() && !activeSource;
-  const results = items.filter(
-    (item) => (!activeSource || item.source === activeSource) && matchesSearch(item, query)
-  );
+  const entries: Entry[] = [
+    ...tracks.flatMap((track) =>
+      track.lessons.map((lesson) => ({
+        id: lesson.href,
+        title: lesson.title,
+        description: lesson.description ?? "",
+        topic: track.title,
+        href: lesson.href,
+        tags: [],
+        isLesson: true,
+      }))
+    ),
+    ...items.map((item) => ({
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      topic: item.category || "Everything else",
+      href: item.url,
+      tags: item.tags,
+      isLesson: false,
+    })),
+  ];
 
-  const resources = items.filter((item) => item.source === "Resource");
-  const categories = Array.from(new Set(resources.map((item) => item.category || "Everything else"))).sort();
-  const recentBookmarks = items.filter((item) => item.source === "Bookmark").slice(0, RECENT_BOOKMARKS);
+  // Tracks first, in course order, then the topics my links are filed under.
+  const linkTopics = Array.from(new Set(items.map((item) => item.category || "Everything else"))).sort();
+  const topics = [...tracks.map((track) => track.title), ...linkTopics.filter((topic) => !tracks.some((track) => track.title === topic))];
+
+  const isBrowsing = !query.trim() && !activeTopic;
+  const results = entries.filter((entry) => (!activeTopic || entry.topic === activeTopic) && matchesSearch(entry, query));
+  const activeTrack = tracks.find((track) => track.title === activeTopic);
 
   const pillClass = (isActive: boolean) =>
     `rounded-full border px-3 py-1 font-mono text-xs transition-colors ${
-      isActive
-        ? "border-primary bg-primary text-primary-foreground"
-        : "border-border bg-muted text-muted-foreground hover:bg-accent"
+      isActive ? "border-primary bg-primary text-primary-foreground" : "border-border bg-muted text-muted-foreground hover:bg-accent"
     }`;
 
   return (
     <>
       <div className="relative">
-        <Search
-          size={16}
-          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-          aria-hidden="true"
-        />
+        <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
         <input
           type="search"
           value={query}
@@ -101,8 +122,8 @@ export function ResourceHub({ items }: { items: HubItem[] }) {
           onKeyDown={(event) => {
             if (event.key === "Escape") setQuery("");
           }}
-          placeholder={`Search all ${items.length} saved things`}
-          aria-label="Search everything saved"
+          placeholder="Search lessons and links"
+          aria-label="Search lessons and links"
           enterKeyHint="search"
           className="h-11 w-full rounded-lg border border-border bg-card pl-9 pr-10 text-base outline-none transition-colors placeholder:text-muted-foreground focus:border-primary sm:text-sm [&::-webkit-search-cancel-button]:hidden"
         />
@@ -119,17 +140,18 @@ export function ResourceHub({ items }: { items: HubItem[] }) {
       </div>
 
       <div className="mt-3 flex flex-wrap gap-2">
-        <button type="button" onClick={() => setActiveSource(null)} className={pillClass(activeSource === null)}>
-          All ({items.length})
+        <button type="button" onClick={() => setActiveTopic(null)} className={pillClass(activeTopic === null)}>
+          All
         </button>
-        {SOURCES.map(({ source, label }) => (
+        {topics.map((topic) => (
           <button
-            key={source}
+            key={topic}
             type="button"
-            onClick={() => setActiveSource(source)}
-            className={pillClass(activeSource === source)}
+            onClick={() => setActiveTopic(activeTopic === topic ? null : topic)}
+            aria-pressed={activeTopic === topic}
+            className={pillClass(activeTopic === topic)}
           >
-            {label} ({countOf(source)})
+            {topic}
           </button>
         ))}
       </div>
@@ -137,66 +159,60 @@ export function ResourceHub({ items }: { items: HubItem[] }) {
       {isBrowsing ? (
         <div className="mt-10 space-y-10">
           <section>
-            <SectionHeading>Shelves</SectionHeading>
+            <div className="mb-2 flex items-baseline justify-between gap-4">
+              <SectionHeading>{courseTitle}</SectionHeading>
+              <Link href={courseHref} className="shrink-0 font-mono text-xs text-muted-foreground hover:text-foreground">
+                About the course →
+              </Link>
+            </div>
             <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {SHELVES.map((shelf) => (
-                <li key={shelf.href}>
-                  <Link
-                    href={shelf.href}
-                    className="flex h-full items-center justify-between gap-3 rounded-lg border border-border bg-card p-3 transition-colors hover:bg-muted"
-                  >
-                    <span className="min-w-0">
-                      <span className="block text-sm font-medium">
-                        {shelf.label}
-                        {"source" in shelf && (
-                          <span className="ml-1.5 font-mono text-xs font-normal text-muted-foreground">
-                            {countOf(shelf.source)}
-                          </span>
-                        )}
-                      </span>
-                      <span className="block text-xs text-muted-foreground">{shelf.note}</span>
-                    </span>
+              {tracks.map((track) => (
+                <li key={track.slug}>
+                  <Link href={track.href} className="flex h-full flex-col rounded-lg border border-border bg-card p-3 transition-colors hover:bg-muted">
+                    <span className="block text-sm font-medium">{track.title}</span>
+                    {track.description && <span className="mt-0.5 block text-xs text-muted-foreground">{track.description}</span>}
+                    <span className="mt-auto block pt-2 font-mono text-[11px] text-muted-foreground">{lessonCount(track.lessons.length)}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </section>
 
-          {categories.map((category) => (
-            <section key={category}>
-              <SectionHeading>{category}</SectionHeading>
+          {linkTopics.map((topic) => (
+            <section key={topic}>
+              <SectionHeading>{topic}</SectionHeading>
               <ul>
-                {resources
-                  .filter((item) => (item.category || "Everything else") === category)
-                  .map((item) => (
-                    <HubRow key={item.id} item={item} />
+                {entries
+                  .filter((entry) => !entry.isLesson && entry.topic === topic)
+                  .map((entry) => (
+                    <EntryRow key={entry.id} entry={entry} />
                   ))}
               </ul>
             </section>
           ))}
-
-          <section>
-            <SectionHeading>Recently bookmarked</SectionHeading>
-            <ul>
-              {recentBookmarks.map((item) => (
-                <HubRow key={item.id} item={item} />
-              ))}
-            </ul>
-          </section>
         </div>
       ) : (
         <section className="mt-8">
-          <p className="mb-2 font-mono text-xs text-muted-foreground" aria-live="polite">
-            {results.length} {results.length === 1 ? "result" : "results"}
-          </p>
+          <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <p className="font-mono text-xs text-muted-foreground" aria-live="polite">
+              {results.length} {results.length === 1 ? "result" : "results"}
+            </p>
+            {activeTrack && (
+              <Link href={activeTrack.href} className="font-mono text-xs text-muted-foreground hover:text-foreground">
+                Open the {activeTrack.title} track →
+              </Link>
+            )}
+          </div>
           {results.length > 0 ? (
             <ul>
-              {results.map((item) => (
-                <HubRow key={item.id} item={item} />
+              {results.map((entry) => (
+                <EntryRow key={entry.id} entry={entry} />
               ))}
             </ul>
           ) : (
-            <p className="py-6 text-sm text-muted-foreground">Nothing saved under that yet. Try a different word.</p>
+            <p className="py-6 text-sm text-muted-foreground">
+              {activeTrack && !query.trim() ? "The lessons for this track are on their way." : "Nothing here yet. Try a different word."}
+            </p>
           )}
         </section>
       )}

@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import type { MetadataRoute } from "next";
 import { getAllEssays } from "@/lib/garden/essays";
 import { getAllNotesData } from "@/lib/notes";
+import { COURSE, getAllLessons, getTracks } from "@/lib/learn";
 import { PLAYGROUND_TOYS } from "@/lib/playground-toys";
 
 const SITE_URL = (process.env.SITE_URL || "https://lilyslab.xyz").replace(/\/$/, "");
@@ -70,6 +71,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...PAGES.map((route) => entry(route)),
     ...PLAYGROUND_TOYS.map((toy) => entry(toy.href)),
     ...getThenPaths().map((route) => entry(route)),
+    entry(COURSE.href),
+    ...getTracks().map((track) => entry(track.href)),
+    ...getAllLessons().map((lesson) => entry(lesson.href)),
     ...getAllEssays()
       .filter((essay) => essay.content.trim())
       .map((essay) => entry(`/garden/essays/${essay.slug}`, essay.lastUpdated)),

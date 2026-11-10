@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { getAllEssays } from "@/lib/garden/essays";
 import { getAllNotesData } from "@/lib/notes";
+import { COURSE, getTracks } from "@/lib/learn";
 
 export const metadata: Metadata = {
   title: "Sitemap",
@@ -47,7 +48,25 @@ function buildMap(): SiteNode {
           { name: "Guestbook", href: "/guestbook", description: "Sign it so I know you stopped by" },
           { name: "Ask Me Anything", href: "/ask-me-anything", description: "Ask me a question" },
           { name: "Uses", href: "/uses", description: "Hardware and software I use" },
-          { name: "Resources", href: "/resources", description: "Useful things I've collected" },
+          {
+            name: "Resources",
+            href: "/resources",
+            description: "My free course and the links I recommend",
+            children: [
+              {
+                name: COURSE.title,
+                href: COURSE.href,
+                description: "Free lessons for non-tech people",
+                children: getTracks().map((track) => ({
+                  name: track.title,
+                  href: track.href,
+                  folded: track.lessons.length
+                    ? { label: plural(track.lessons.length, "lesson"), pages: track.lessons.map(({ title, href }) => ({ name: title, href })) }
+                    : undefined,
+                })),
+              },
+            ],
+          },
         ],
       },
       {
@@ -205,8 +224,7 @@ export default function SitemapPage() {
             <div>Pages on the map: {countPages(map)}</div>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">
-            Every page in the garden, laid out like a map. Follow a branch to find what you&apos;re looking for, or open the essays
-            and notes to see every piece. If you have a question, you can{" "}
+            Every page in the garden, laid out like a map. Follow a branch to find what you&apos;re looking for. If you have a question, you can{" "}
             <Link href="/ask-me-anything" className="text-foreground underline decoration-primary decoration-2 underline-offset-2">
               ask me anything
             </Link>

@@ -6,8 +6,16 @@ import { usePathname } from "next/navigation";
 /** Parent paths that are only URL segments and have no page to link to. */
 const hasNoPage = (href: string) => /^\/archives\/[^/]+$/.test(href);
 
+/** Names that plain capitalizing would get wrong, like "Html". */
+const SPECIAL_LABELS: Record<string, string> = {
+  html: "HTML",
+  css: "CSS",
+  javascript: "JavaScript",
+  "ai-prompting": "AI prompting",
+};
+
 const toLabel = (segment: string) =>
-  segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " ");
+  SPECIAL_LABELS[segment] ?? segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " ");
 
 /**
  * The trail of parent pages, shown after the site title in the top bar.

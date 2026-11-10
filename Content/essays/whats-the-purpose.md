@@ -1,7 +1,7 @@
 ---
 createdAt: 2025-10-17
 lastUpdated: 2025-10-17
-title: "What's the purpose"
+title: "What's the purpose?"
 published: true
 type: evergreen
 tags:

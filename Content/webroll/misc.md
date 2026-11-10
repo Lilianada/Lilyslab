@@ -432,10 +432,21 @@ title: Lagos Life
 url: https://lagoslife.eliysites.com/
 date: 2026-10-07
 tags:
-  - local-blog
-  - personal-website
-  - culture
+  - sims-game
 type: webroll
-category: personal
+category: misc
 id: misc-032
+---
+
+
+---
+publish: true
+title: floor796
+url: https://floor796.com/
+date: 2026-10-07
+tags:
+  - creative
+type: webroll
+category: misc
+id: misc-033
 ---

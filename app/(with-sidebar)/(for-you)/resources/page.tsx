@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
+import { COURSE, getTracks } from "@/lib/learn";
 import { getHubItems } from "@/lib/resource-hub";
-import { ResourceHub } from "./ResourceHub";
+import { ResourceHub, type HubTrack } from "./ResourceHub";
 
 export const metadata: Metadata = {
   title: "Resources",
-  description: "Everything I've saved around the garden, in one place: resources, bookmarks, tools and sites I love.",
+  description: "Build Your Own Website, my free lessons for non-tech people, plus the courses, videos and tools I recommend.",
 };
 
-export default async function ResourcesPage() {
-  const items = await getHubItems();
+export default function ResourcesPage() {
+  // Only what the page needs, so lesson text stays out of the browser bundle.
+  const tracks: HubTrack[] = getTracks().map(({ slug, title, description, href, lessons }) => ({
+    slug,
+    title,
+    description,
+    href,
+    lessons: lessons.map(({ title, description, href }) => ({ title, description, href })),
+  }));
 
   return (
     <div className="mx-auto w-full max-w-3xl animate-fade-in pb-8 pt-16 sm:px-4">
@@ -17,14 +25,14 @@ export default async function ResourcesPage() {
         <h1 className="mb-2 text-xl font-medium">Resources</h1>
         <div className="flex flex-col font-mono text-xs text-muted-foreground">
           <div>Created: May 1, 2025</div>
-          <div>Last updated: November 5, 2026</div>
+          <div>Last updated: November 10, 2026</div>
         </div>
         <p className="mt-4 text-sm text-muted-foreground">
-          My hub for everything worth finding again. Search it all at once, or wander along the shelves.
+          Things to help you learn, including my free lessons on building your own website. Search it all at once, or pick a topic.
         </p>
       </header>
 
-      <ResourceHub items={items} />
+      <ResourceHub items={getHubItems()} tracks={tracks} courseTitle={COURSE.title} courseHref={COURSE.href} />
     </div>
   );
 }
