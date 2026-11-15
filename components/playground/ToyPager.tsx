@@ -4,9 +4,13 @@ import { usePathname } from "next/navigation";
 import { PrevNext } from "@/components/layout/prev-next";
 import { PLAYGROUND_TOYS } from "@/lib/playground-toys";
 
+/** Toys that fill the page, where Prev/Next would only clutter it (the breadcrumb leads back instead). */
+const NO_PAGER = ["/playground/write"];
+
 /** Prev/Next between toys. It loops, so there's always another one to try. */
 export function ToyPager() {
   const pathname = usePathname();
+  if (NO_PAGER.includes(pathname)) return null;
   const index = PLAYGROUND_TOYS.findIndex((toy) => toy.href === pathname);
   if (index === -1) return null;
 

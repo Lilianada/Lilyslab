@@ -378,7 +378,7 @@ export default function Write() {
       <button
         type="button"
         onClick={() => setDrawerOpen(true)}
-        className={`${barButton} absolute left-0 top-0 z-10 ${fullscreen ? "left-4 top-4" : ""}`}
+        className={`${barButton} fixed z-30 bg-background/80 ${fullscreen ? "left-4 top-4" : "left-4 top-16 lg:left-8"}`}
         aria-label="Open notes"
         title="Notes"
       >
@@ -514,8 +514,8 @@ export default function Write() {
         </div>
       )}
 
-      {/* Bottom bar: quiet until hovered */}
-      <div className="sticky bottom-0 z-20 flex items-center justify-between gap-2 bg-background/90 py-2 pr-16 opacity-30 backdrop-blur transition-opacity duration-300 hover:opacity-100 focus-within:opacity-100 max-sm:opacity-100">
+      {/* Bottom bar: pinned to the screen so it stays put while long notes scroll; quiet until hovered */}
+      <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-2 bg-background/90 py-2 pl-4 pr-16 lg:pl-8 opacity-30 backdrop-blur transition-opacity duration-300 hover:opacity-100 focus-within:opacity-100 max-sm:opacity-100">
         <span className="hidden font-mono text-[11px] text-muted-foreground sm:block">
           {current ? formatStamp(current.updatedAt) : ""}
         </span>

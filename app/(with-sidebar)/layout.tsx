@@ -1,4 +1,5 @@
 import { Footer } from "@/components/layout/footer";
+import { HideOn } from "@/components/layout/hide-on";
 import MobileNav from "@/components/layout/mobile-nav";
 
 export default function WithSidebarLayout({
@@ -15,7 +16,9 @@ export default function WithSidebarLayout({
         <div className="flex-1 flex flex-col">
           {children}
         </div>
-        <Footer />
+        <HideOn paths={["/playground/write"]}>
+          <Footer />
+        </HideOn>
       </div>
     </div>
   );

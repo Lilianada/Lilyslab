@@ -798,3 +798,31 @@ type: webroll
 category: misc
 id: misc-058
 ---
+
+---
+publish: true
+title: "The Useless Web"
+url: https://theuselessweb.com/
+notes: "One button that takes you to a random useless website."
+date: 2026-11-15
+tags:
+  - fun
+  - random
+type: webroll
+category: misc
+id: misc-059
+---
+
+---
+publish: true
+title: "FrankMoji"
+url: https://frankmoji.com/
+notes: "Hand-drawn pixel emoji set, free to download as a font."
+date: 2026-11-15
+tags:
+  - emoji
+  - pixel-art
+type: webroll
+category: misc
+id: misc-060
+---

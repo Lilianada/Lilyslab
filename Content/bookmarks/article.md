@@ -2339,3 +2339,15 @@ tags:
 type: article
 id: article-189
 ---
+
+---
+publish: true
+title: "95 reasons for having your own website in 2026"
+url: https://bellkiosk.website/blog/reasons-to-website.html
+createdAt: 2026-11-15
+tags:
+- personal-website
+- indie-web
+type: article
+id: article-190
+---

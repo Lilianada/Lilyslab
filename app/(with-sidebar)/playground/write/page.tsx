@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function WritePage() {
   return (
-    <div className="flex min-h-[calc(100vh-5rem)] flex-col pt-12">
+    <div className="flex min-h-[calc(100vh-5rem)] flex-col pt-6">
       <Write />
     </div>
   );
