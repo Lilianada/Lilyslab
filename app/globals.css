@@ -477,7 +477,9 @@
   }
 }
 /* Write (playground): the editor's text. Sizes are in em so the font-size button scales everything. */
-.write-body { line-height: 1.75; }
+.write-body { line-height: 1.8; }
+/* The site makes every <p> small and sets its own font; in Write they follow the chosen font and size. */
+.write-body p, .write-body li { font-family: inherit; font-size: inherit; line-height: inherit; word-spacing: normal; }
 .write-body > * + * { margin-top: 0.9em; }
 .write-body h1 { font-size: 2em; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
 .write-body h2 { font-size: 1.5em; font-weight: 600; line-height: 1.3; }

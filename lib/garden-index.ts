@@ -54,7 +54,7 @@ const WANDER_PAGES = [
   "/playground/petal-catch",
   "/playground/doodle",
   "/playground/transcribe",
-  "/playground/animation-lab",
+  "/playground/burn-cd",
   "/manifesto",
   "/webroll",
   "/webrings",

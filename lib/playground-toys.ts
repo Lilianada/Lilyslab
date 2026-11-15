@@ -1,4 +1,4 @@
-import { AudioLines, Calculator, Gamepad2, Pencil, Sparkles, Timer, Type } from "lucide-react";
+import { AudioLines, Calculator, Disc3, Gamepad2, Pencil, Timer, Type } from "lucide-react";
 
 /** Every playground toy, in the order the index page and the Prev/Next links use. */
 export const PLAYGROUND_TOYS = [
@@ -21,10 +21,10 @@ export const PLAYGROUND_TOYS = [
     description: "Turn a video link into text (just for me, for now)",
   },
   {
-    href: "/playground/animation-lab",
-    icon: Sparkles,
-    title: "Animation Lab",
-    description: "Play with easing curves and steal the CSS",
+    href: "/playground/burn-cd",
+    icon: Disc3,
+    title: "Burn CD",
+    description: "Plan a mix CD: tracklist, covers and a folder ready to burn",
   },
   {
     href: "/playground/digital-clock",
@@ -41,7 +41,7 @@ export const PLAYGROUND_TOYS = [
   {
     href: "/playground/write",
     icon: Type,
-    title: "Write",
+    title: "Write Online",
     description: "A quiet place to write. Notes stay in your browser.",
   },
 ];

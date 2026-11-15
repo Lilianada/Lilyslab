@@ -110,10 +110,10 @@ function buildMap(): SiteNode {
           { name: "Petal Catch", href: "/playground/petal-catch", description: "Catch petals, dodge bees" },
           { name: "Doodle Pad", href: "/playground/doodle", description: "Draw something for the fridge" },
           { name: "Transcriber", href: "/playground/transcribe", description: "Video links to text" },
-          { name: "Animation Lab", href: "/playground/animation-lab", description: "Play with easing curves" },
+          { name: "Burn CD", href: "/playground/burn-cd", description: "Plan a mix CD and get a folder ready to burn" },
           { name: "Digital Clock", href: "/playground/digital-clock" },
           { name: "Calculator", href: "/playground/calculator" },
-          { name: "Write", href: "/playground/write" },
+          { name: "Write Online", href: "/playground/write" },
         ],
       },
       {

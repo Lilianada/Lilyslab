@@ -372,7 +372,7 @@ export default function Write() {
   return (
     <div
       ref={shellRef}
-      className={`relative flex flex-1 flex-col bg-background ${fullscreen ? "overflow-y-auto" : ""}`}
+      className={`relative flex flex-1 flex-col bg-background ${font.className} ${fullscreen ? "overflow-y-auto" : ""}`}
     >
       {/* Drawer button */}
       <button
@@ -397,7 +397,7 @@ export default function Write() {
               />
             )}
             <aside
-              className={`fixed inset-y-0 left-0 z-[61] flex w-72 max-w-[85vw] flex-col border-r border-border bg-background shadow-xl transition-transform duration-200 ${
+              className={`${font.className} fixed inset-y-0 left-0 z-[61] flex w-72 max-w-[85vw] flex-col border-r border-border bg-background shadow-xl transition-transform duration-200 ${
                 drawerOpen ? "translate-x-0" : "-translate-x-full"
               }`}
               aria-label="Notes"
@@ -435,7 +435,7 @@ export default function Write() {
                       <div className="truncate text-sm">
                         {note.title.trim() || "Untitled"}
                       </div>
-                      <div className="font-mono text-[11px] text-muted-foreground">
+                      <div className="text-[11px] text-muted-foreground">
                         {formatStamp(note.updatedAt)}
                       </div>
                     </button>
@@ -461,7 +461,7 @@ export default function Write() {
 
       {/* Page */}
       <div
-        className={`mx-auto w-full max-w-2xl flex-1 px-2 pb-24 pt-14 ${font.className} ${fullscreen ? "px-6" : ""}`}
+        className={`mx-auto w-full max-w-2xl flex-1 px-2 pb-24 pt-14 ${fullscreen ? "px-6" : ""}`}
         style={{ fontSize: `${settings.size}px` }}
       >
         {ready && settings.showTitle && (
@@ -504,7 +504,7 @@ export default function Write() {
             {SHORTCUTS.map(([name, keys]) => (
               <div key={name} className="flex justify-between gap-4">
                 <dt className="text-muted-foreground">{name}</dt>
-                <dd className="font-mono">{keys}</dd>
+                <dd>{keys}</dd>
               </div>
             ))}
           </dl>
@@ -515,10 +515,7 @@ export default function Write() {
       )}
 
       {/* Bottom bar: pinned to the screen so it stays put while long notes scroll; quiet until hovered */}
-      <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between gap-2 bg-background/90 py-2 pl-4 pr-16 lg:pl-8 opacity-30 backdrop-blur transition-opacity duration-300 hover:opacity-100 focus-within:opacity-100 max-sm:opacity-100">
-        <span className="hidden font-mono text-[11px] text-muted-foreground sm:block">
-          {current ? formatStamp(current.updatedAt) : ""}
-        </span>
+      <div className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-end gap-2 bg-background/90 py-2 pl-4 pr-16 lg:pl-8 opacity-30 backdrop-blur transition-opacity duration-300 hover:opacity-100 focus-within:opacity-100 max-sm:opacity-100">
         <div className="flex flex-wrap items-center justify-end gap-0.5">
           <button
             type="button"
@@ -561,7 +558,7 @@ export default function Write() {
                 size: SIZES[(SIZES.indexOf(s.size) + 1) % SIZES.length],
               }))
             }
-            className={`${barButton} font-mono`}
+            className={barButton}
             title="Font size"
             aria-label={`Font size ${settings.size}`}
           >
@@ -613,7 +610,7 @@ export default function Write() {
               if (timeLeft === 0) setTimeLeft(TIMER_SECONDS);
               setTimerRunning((r) => !r);
             }}
-            className={`${barButton} font-mono ${timerRunning ? "text-foreground" : ""} ${timeLeft === 0 ? "text-primary" : ""}`}
+            className={`${barButton} tabular-nums ${timerRunning ? "text-foreground" : ""} ${timeLeft === 0 ? "text-primary" : ""}`}
             title={timerRunning ? "Pause timer" : "Start a 15 minute timer"}
           >
             <Timer className="h-3.5 w-3.5" />
@@ -643,7 +640,7 @@ export default function Write() {
             <Trash2 className="h-3.5 w-3.5" />
           </button>
           <span
-            className="px-2 font-mono text-xs text-muted-foreground"
+            className="px-2 text-xs tabular-nums text-muted-foreground"
             title="Words"
           >
             {words}

@@ -34,6 +34,7 @@ const nextConfig = {
       { source: '/resources/build-your-own-website', destination: '/resources', permanent: false },
       { source: '/playground/color-theory', destination: '/playground', permanent: true },
       { source: '/playground/terminal', destination: '/playground/write', permanent: true },
+      { source: '/playground/animation-lab', destination: '/playground/burn-cd', permanent: true },
       { source: '/ctrl-room/transcribe', destination: '/playground/transcribe', permanent: true },
     ];
   },
