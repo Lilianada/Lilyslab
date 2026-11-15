@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ArrowUp, Lock, Search, X } from "lucide-react";
+import { ArrowRight, ArrowUp, ArrowUpDown, Lock } from "lucide-react";
+import { ExpandingSearch } from "@/components/ExpandingSearch";
 import { formatDateForDisplay } from "@/lib/utils";
 import { LIST_CLASS, NUMBER_CLASS, ROW_CLASS, number } from "@/components/learn/TrackList";
 
@@ -80,6 +81,7 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [showAllTags, setShowAllTags] = useState(false);
   const [showAllEssays, setShowAllEssays] = useState(false);
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   // Count essays per tag
   const tagCounts: Record<string, number> = {};
@@ -98,41 +100,16 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
   // Keep a selected tag visible even when it isn't a popular one
   const shownTags = showAllTags ? allTags : selectedTag && !topTags.includes(selectedTag) ? [...topTags, selectedTag] : topTags;
 
-  const results = essays.filter((essay) => (!selectedTag || essay.tags.includes(selectedTag)) && matchesSearch(essay, query));
-  const isFiltering = Boolean(query.trim() || selectedTag);
+  // Essays arrive newest first; flip them for "Oldest".
+  const sorted = sortOrder === "newest" ? essays : [...essays].reverse();
+  const results = sorted.filter((essay) => (!selectedTag || essay.tags.includes(selectedTag)) && matchesSearch(essay, query));
   const visible = showAllEssays ? results : results.slice(0, PAGE_SIZE);
   const hiddenCount = results.length - visible.length;
 
   return (
     <>
-      <div className="relative">
-        <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-        <input
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          onKeyDown={(event) => {
-            if (event.key === "Escape") setQuery("");
-          }}
-          placeholder="Search essays"
-          aria-label="Search essays"
-          enterKeyHint="search"
-          className="h-11 w-full rounded-lg border border-border bg-card pl-9 pr-10 text-base outline-none transition-colors placeholder:text-muted-foreground focus:border-primary sm:text-sm [&::-webkit-search-cancel-button]:hidden"
-        />
-        {query && (
-          <button
-            type="button"
-            onClick={() => setQuery("")}
-            aria-label="Clear search"
-            className="absolute right-1 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-muted-foreground hover:text-foreground"
-          >
-            <X size={14} />
-          </button>
-        )}
-      </div>
-
       {allTags.length > 0 && (
-        <section className="mt-6">
+        <section className="mt-2">
           <div className="mb-2 flex items-baseline justify-between gap-4">
             <h2 className="font-mono text-xs uppercase tracking-wide text-muted-foreground">Tags</h2>
             {allTags.length > topTags.length && (
@@ -161,11 +138,25 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
       )}
 
       <section className="mt-8">
-        <p className="mb-2 font-mono text-xs text-muted-foreground" aria-live="polite">
-          {isFiltering
-            ? `${results.length} ${results.length === 1 ? "essay" : "essays"}${selectedTag ? ` tagged #${selectedTag}` : ""}`
-            : `${essays.length} essays, newest first`}
-        </p>
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <p className="min-w-0 break-words text-sm text-muted-foreground" aria-live="polite">
+            Showing {results.length} of {essays.length} essays
+            {selectedTag && ` with tag #${selectedTag}`}
+            {query.trim() && ` matching "${query.trim()}"`}
+          </p>
+          <div className="ml-auto flex items-center gap-2">
+            <ExpandingSearch value={query} onChange={setQuery} label="Search essays" />
+            <button
+              type="button"
+              onClick={() => setSortOrder(sortOrder === "newest" ? "oldest" : "newest")}
+              className="flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 font-mono text-xs transition-all hover:bg-accent"
+              title={`Sort by ${sortOrder === "newest" ? "oldest" : "newest"} first`}
+            >
+              <ArrowUpDown size={12} />
+              {sortOrder === "newest" ? "Newest" : "Oldest"}
+            </button>
+          </div>
+        </div>
 
         {results.length > 0 ? (
           <ol className={LIST_CLASS}>

@@ -43,6 +43,7 @@ interface NoteMeta {
   type: string;
   slug: string;
   tags?: string[];
+  locked: boolean;
 }
 
 const MONTHS = [
@@ -77,11 +78,9 @@ export default function NotesPage() {
         try {
           const result = read(filePath, NoteMetaSchema);
           
-          // Skip unpublished notes - only include if published is true or undefined
-          if (result.data.published === false) {
-            return [];
-          }
-          
+          // published: false notes are listed with a lock, but can't be opened
+          const locked = result.data.published === false;
+
           // Use our centralized date formatting utility
           // Determine the best date to use - prefer createdAt then fall back to date
           const dateValue = result.data.createdAt || result.data.date;
@@ -99,6 +98,7 @@ export default function NotesPage() {
             type: result.data.type || 'seedling',
             slug: filename.replace(/\.md$/, ''),
             tags: result.data.tags || [],
+            locked,
           };
           return [validated];
         } catch (zodErr) {

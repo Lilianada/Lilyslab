@@ -5,9 +5,12 @@ import { Search, X } from "lucide-react";
 interface Props {
   value: string;
   onChange: (value: string) => void;
+  /** What's being searched, e.g. "Search essays". Used as placeholder and label. */
+  label: string;
 }
 
-export function BookmarkSearch({ value, onChange }: Props) {
+/** A search icon that opens into a small search field. Used on Bookmarks and Essays. */
+export function ExpandingSearch({ value, onChange, label }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,8 +44,8 @@ export function BookmarkSearch({ value, onChange }: Props) {
             onBlur={() => {
               if (!value) setIsOpen(false);
             }}
-            placeholder="Search bookmarks"
-            aria-label="Search bookmarks"
+            placeholder={label}
+            aria-label={label}
             enterKeyHint="search"
             className="h-full min-w-0 flex-1 bg-transparent px-2 font-mono text-base outline-none placeholder:text-muted-foreground sm:text-xs [&::-webkit-search-cancel-button]:hidden"
           />
@@ -59,8 +62,8 @@ export function BookmarkSearch({ value, onChange }: Props) {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          aria-label="Search bookmarks"
-          title="Search bookmarks"
+          aria-label={label}
+          title={label}
           className="flex h-full w-full items-center justify-center"
         >
           <Search size={12} />

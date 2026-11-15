@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import type { Bookmark } from "@/lib/garden/bookmarks";
 import { BookmarkItem } from "@/components/digital-garden/bookmark/BookmarkItem";
 import { ArrowUpDown } from "lucide-react";
-import { BookmarkSearch } from "./BookmarkSearch";
+import { ExpandingSearch } from "@/components/ExpandingSearch";
 
 interface Props {
   bookmarks: Bookmark[];
@@ -217,7 +217,7 @@ export default function TagFilterClient({ bookmarks }: Props) {
               {searchQuery.trim() && ` matching "${searchQuery.trim()}"`}
             </p>
             <div className="ml-auto flex items-center gap-2">
-              <BookmarkSearch value={searchQuery} onChange={setSearchQuery} />
+              <ExpandingSearch value={searchQuery} onChange={setSearchQuery} label="Search bookmarks" />
               <button
                 onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
                 className="flex items-center gap-2 px-3 py-1 text-xs font-mono bg-muted border border-border rounded-full hover:bg-accent transition-all"

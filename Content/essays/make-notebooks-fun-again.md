@@ -6,7 +6,7 @@ tags:
   - notebooks
   - stationery
 type: evergreen
-published: false
+published: true
 ---
 
 This is my personal essay written to make stationery fun again. I run a small stationery business and creative studio out of large living room.

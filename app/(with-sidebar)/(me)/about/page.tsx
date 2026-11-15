@@ -3,6 +3,58 @@
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import type { ReactNode } from "react";
+
+const INTERESTS: { title: string; body: ReactNode }[] = [
+  {
+    title: "Spending Time in My Own Company",
+    body: "This is something I started exploring after my breakup. I used to go out by myself as of 2 years ago but for some reason (monetary of course) I stopped. I started again and I took it a step further by going to parties by myself and although it felt boring, I think I felt so only because I was fresh out of a relationship.",
+  },
+  {
+    title: "Personal Websites",
+    body: "I love discovering people's websites and finding out more about them.",
+  },
+  {
+    title: "Movies",
+    body: "I have been watching more old movies that came out in the 90s and early 2000s and I actually love them.",
+  },
+  {
+    title: "Weight Lifting",
+    body: "I got into weight lifting in my early 20s and I'm really happy I did. It really helped to boost my self confidence. I have this sense of discipline because this is one area of my life that I've been very consistent in.",
+  },
+  {
+    title: "Sports",
+    body: (
+      <>
+        I started playing Padel because of one of my clients who spoke about playing the sport. I decided to try it
+        and absolutely fell in love with it. In the coming year, I do hope to get back into playing consistently. The
+        sport is just so expensive, hoping to find 3 new girl friends who&apos;d be up to playing weekly with me. If
+        you&apos;re in Abuja and would like to play Padel on the weekends, please send me a DM on Instagram{" "}
+        <a href="https://www.instagram.com/withluv.lily/" className="text-lavender underline" target="_blank" rel="noopener noreferrer">
+          @withluv.lily
+        </a>
+        .
+      </>
+    ),
+  },
+  {
+    title: "Writing",
+    body: "I've always loved the concept of writing, but I never really felt like I knew what I was doing. Recently, I've been writing more whether or not I know what I'm doing. While at it, I am watching videos that promise to help me write better.",
+  },
+  {
+    title: "Hobby-maxxing",
+    body: "Using my stationery business as a channel to hobby-max. I keep trying out new things in order to live a full life.",
+  },
+];
+
+const DISINTERESTS = [
+  "Children / Parenting",
+  "Politics",
+  "Pets",
+  "Friends with benefits / situationships",
+  "Video Games",
+  "TV",
+];
 
 export default function AboutPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -37,7 +89,7 @@ export default function AboutPage() {
           <h1 className="mb-2 text-xl font-medium">About Me</h1>
           <div className="flex flex-col text-xs text-muted-foreground font-mono">
             <div>Created: May 8, 2025</div>
-            <div>Last updated: Nov 8, 2026</div>
+            <div>Last updated: Nov 15, 2026</div>
             <div>Inspired by: <a href="https://nicolevanderhoeven.com/about" className="text-lavender">Nicole Vander Hoeven</a></div>
           </div>
         </header>
@@ -170,6 +222,37 @@ export default function AboutPage() {
                   Steal an idea, refine it, tweak it until it becomes new, until it becomes yours.
                 </p>
             </div>
+
+              <div className="mt-4">
+                <h2 className="text-base font-semibold tracking-tight text-lavender">
+                  Interests
+                </h2>
+                <p className="mb-3 text-sm leading-relaxed opacity-0 animate-slide-up">
+                  I have so many interests that I get overwhelmed sometimes when I want to do
+                  everything at the same time. I&apos;ve been learning to treat my interests as
+                  seasonal in order to be able to manage them. Every season I find myself in calls
+                  for a different type of fixation.
+                </p>
+
+                {INTERESTS.map(({ title, body }) => (
+                  <div key={title} className="mb-3 opacity-0 animate-slide-up">
+                    <h3 className="text-sm font-semibold">{title}</h3>
+                    <p className="text-sm leading-relaxed">{body}</p>
+                  </div>
+                ))}
+
+                <div className="mb-3 opacity-0 animate-slide-up">
+                  <h3 className="text-sm font-semibold">Disinterests</h3>
+                  <p className="text-sm leading-relaxed">
+                    Things I have no interest in at the moment or in the near future.
+                  </p>
+                  <ul className="mt-1 list-disc pl-6 text-left text-sm leading-relaxed">
+                    {DISINTERESTS.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
 
               <div className="mt-4">
                 <h2 className="text-base font-semibold tracking-tight text-lavender">

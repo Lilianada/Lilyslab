@@ -30,6 +30,11 @@ async function getNotesContent(slug: string) {
     const raw = fs.readFileSync(filePath, "utf-8");
     const { data, content } = matter(raw);
 
+    // Locked notes (published: false) are listed on the notes page but can't be opened.
+    if (data.published === false) {
+      return null;
+    }
+
     return {
       content,
       title: data.title || slug,
