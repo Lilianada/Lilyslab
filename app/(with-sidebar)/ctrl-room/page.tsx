@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { markVisitCounted } from "@/components/analytics/VisitorBeacon"
@@ -49,6 +50,14 @@ export default function CtrlRoomPage() {
           <div>Signed in as: {user?.email}</div>
         </div>
         <p className="mt-2 text-sm text-muted-foreground">What needs you today.</p>
+        <nav className="mt-3 flex flex-wrap gap-2" aria-label="Tools">
+          <Link
+            href="/playground/transcribe"
+            className="rounded-full border border-border bg-muted px-3 py-1 font-mono text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            Transcriber →
+          </Link>
+        </nav>
       </header>
 
       <TodayPanel getToken={getToken} />

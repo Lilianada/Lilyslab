@@ -2294,7 +2294,7 @@ id: article-185
 publish: true
 title: "what can you gain from the journaling practices of anaïs nin, virginia woolf, and joan didion?"
 url: https://chicgirlmoment.substack.com/p/what-can-you-gain-from-the-journaling
-createdAt: 2026-11-15
+createdAt: 2026-11-14
 tags:
 - journaling
 - writing
@@ -2306,10 +2306,36 @@ id: article-186
 publish: true
 title: "how to have a quieter brain"
 url: https://ayushithakkar.substack.com/p/how-to-have-a-quieter-brain
-createdAt: 2026-11-15
+createdAt: 2026-11-14
 tags:
 - mind
 - digital-wellbeing
 type: article
 id: article-187
+---
+
+---
+publish: true
+title: "On physical media"
+url: https://clairehassomethoughts.substack.com/p/on-physical-media
+createdAt: 2026-11-14
+tags:
+- physical-media
+- digital-wellbeing
+- offline
+type: article
+id: article-188
+---
+
+---
+publish: true
+title: "On self studying for your wellbeing"
+url: https://clairehassomethoughts.substack.com/p/on-self-studying-for-your-wellbeing
+createdAt: 2026-11-14
+tags:
+- self-study
+- learning
+- wellbeing
+type: article
+id: article-189
 ---

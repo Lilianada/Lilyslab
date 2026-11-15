@@ -30,7 +30,11 @@ const nextConfig = {
   },
   async redirects() {
     // The course has no overview page; its tracks are listed on Resources.
-    return [{ source: '/resources/build-your-own-website', destination: '/resources', permanent: false }];
+    return [
+      { source: '/resources/build-your-own-website', destination: '/resources', permanent: false },
+      { source: '/playground/color-theory', destination: '/playground', permanent: true },
+      { source: '/ctrl-room/transcribe', destination: '/playground/transcribe', permanent: true },
+    ];
   },
   async headers() {
     return [

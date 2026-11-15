@@ -109,7 +109,7 @@ function buildMap(): SiteNode {
         children: [
           { name: "Petal Catch", href: "/playground/petal-catch", description: "Catch petals, dodge bees" },
           { name: "Doodle Pad", href: "/playground/doodle", description: "Draw something for the fridge" },
-          { name: "Color Theory", href: "/playground/color-theory", description: "Color harmonies and contrast" },
+          { name: "Transcriber", href: "/playground/transcribe", description: "Video links to text" },
           { name: "Animation Lab", href: "/playground/animation-lab", description: "Play with easing curves" },
           { name: "Digital Clock", href: "/playground/digital-clock" },
           { name: "Calculator", href: "/playground/calculator" },

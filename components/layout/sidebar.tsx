@@ -33,7 +33,7 @@ import {
   Loader,
   CalendarArrowDown,
   Quote,
-  Palette,
+  AudioLines,
   Sparkles,
   Pencil,
   Gamepad2,
@@ -101,7 +101,7 @@ const NAV_SECTIONS: { title?: string; items: NavEntry[] }[] = [
     items: [
       { href: "/playground/petal-catch", icon: <Gamepad2 size={16} />, label: "Petal Catch" },
       { href: "/playground/doodle", icon: <Pencil size={16} />, label: "Doodle Pad" },
-      { href: "/playground/color-theory", icon: <Palette size={16} />, label: "Color Theory" },
+      { href: "/playground/transcribe", icon: <AudioLines size={16} />, label: "Transcriber" },
       { href: "/playground/animation-lab", icon: <Sparkles size={16} />, label: "Animation Lab" },
       { href: "/playground/digital-clock", icon: <Timer size={16} />, label: "Digital Clock" },
       { href: "/playground/calculator", icon: <Calculator size={16} />, label: "Calculator" },

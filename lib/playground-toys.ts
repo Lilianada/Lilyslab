@@ -1,4 +1,4 @@
-import { Calculator, Gamepad2, Palette, Pencil, Sparkles, Terminal, Timer } from "lucide-react";
+import { AudioLines, Calculator, Gamepad2, Pencil, Sparkles, Terminal, Timer } from "lucide-react";
 
 /** Every playground toy, in the order the index page and the Prev/Next links use. */
 export const PLAYGROUND_TOYS = [
@@ -15,10 +15,10 @@ export const PLAYGROUND_TOYS = [
     description: "Draw something silly and stick it on your fridge",
   },
   {
-    href: "/playground/color-theory",
-    icon: Palette,
-    title: "Color Theory",
-    description: "Explore color relationships, palettes, and accessibility",
+    href: "/playground/transcribe",
+    icon: AudioLines,
+    title: "Transcriber",
+    description: "Turn a video link into text (just for me, for now)",
   },
   {
     href: "/playground/animation-lab",

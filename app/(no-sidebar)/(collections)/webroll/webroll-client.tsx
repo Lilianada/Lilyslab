@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Search, X } from "lucide-react";
 import { Footer } from "@/components/layout/footer";
 import { WebrollLink } from '@/lib/garden/webroll';
 import {
@@ -34,9 +34,15 @@ export default function WebrollClient({ initialLinks }: WebrollClientProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
-  const filteredLinks = selectedCategory === "all" 
-    ? initialLinks
-    : initialLinks.filter(link => link.category === selectedCategory);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Every word must appear somewhere in the title, note, address or tags.
+  const searchWords = searchQuery.toLowerCase().replace(/#/g, " ").split(/\s+/).filter(Boolean);
+  const filteredLinks = initialLinks.filter((link) => {
+    if (selectedCategory !== "all" && link.category !== selectedCategory) return false;
+    const searchable = `${link.title} ${link.notes ?? ""} ${link.url.replace(/^https?:\/\/(www\.)?/, "")} ${link.tags.join(" ")}`.toLowerCase();
+    return searchWords.every((word) => searchable.includes(word));
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,6 +101,41 @@ export default function WebrollClient({ initialLinks }: WebrollClientProps) {
         </div>
         
         <nav className="grid gap-6 lg:gap-8">
+          {/* Search */}
+          <div>
+            <label htmlFor="webroll-search" className="block text-white uppercase font-semibold mb-3 md:mb-4 text-sm">
+              Search
+            </label>
+            <div className="relative">
+              <Search size={14} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#69a4ff]" aria-hidden="true" />
+              <input
+                id="webroll-search"
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") setSearchQuery("");
+                }}
+                placeholder="Name, note or tag"
+                enterKeyHint="search"
+                className="peer w-full pl-9 pr-9 py-2 md:py-2.5 border-[1.5px] border-[#69a4ff] bg-transparent rounded text-white transition-all outline-none focus:border-[#fe3902] focus:bg-[#f5f5f5] focus:text-[#0f02d0] placeholder:text-[#69a4ff] text-base md:text-sm [&::-webkit-search-cancel-button]:hidden"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center text-[#69a4ff] hover:text-[#fe3902]"
+                >
+                  <X size={14} />
+                </button>
+              )}
+            </div>
+            <p className="mt-2 text-xs text-[#69a4ff]" aria-live="polite">
+              {searchWords.length > 0 && `${filteredLinks.length} ${filteredLinks.length === 1 ? "link" : "links"} found`}
+            </p>
+          </div>
+
           {/* Categories */}
           <div>
             <p className="text-white uppercase font-semibold mb-3 md:mb-4 text-sm">Categories</p>
@@ -250,7 +291,7 @@ export default function WebrollClient({ initialLinks }: WebrollClientProps) {
                   {filteredLinks.length === 0 && (
                     <tr>
                       <td colSpan={3} className="p-4 text-center text-gray-500">
-                        No links found for this category.
+                        {searchWords.length > 0 ? "No links match that search." : "No links found for this category."}
                       </td>
                     </tr>
                   )}
@@ -282,7 +323,7 @@ export default function WebrollClient({ initialLinks }: WebrollClientProps) {
               ))}
               {filteredLinks.length === 0 && (
                 <div className="border border-[#69a4ff] rounded bg-[#f5f5f5] p-4 text-center text-gray-500">
-                  No links found for this category.
+                  {searchWords.length > 0 ? "No links match that search." : "No links found for this category."}
                 </div>
               )}
             </div>
