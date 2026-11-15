@@ -8,7 +8,7 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const placeholderImage = "/images/book-placeholder.jpg"; // You'll need to add this image
 
-function formatMonthYear(date?: string) {
+function parseDate(date?: string) {
   if (!date) return null;
 
   const normalized = String(date).trim();
@@ -21,7 +21,12 @@ function formatMonthYear(date?: string) {
     ? new Date(`${fallbackMatch[3]}-${fallbackMatch[1]}-${fallbackMatch[2]}T00:00:00`)
     : new Date(normalized);
 
-  if (Number.isNaN(parsed.getTime())) return null;
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function formatMonthYear(date?: string) {
+  const parsed = parseDate(date);
+  if (!parsed) return null;
 
   return parsed.toLocaleDateString("en", {
     month: "short",
@@ -34,6 +39,15 @@ export default function Page() {
   const readingBooks = books.filter((book) => book.status === "reading");
   const readBooks = books.filter((book) => book.status === "read");
   const toBeReadBooks = books.filter((book) => book.status === "to-read");
+
+  // Read books grouped by the year I finished them, newest year first.
+  const readByYear = readBooks.reduce<{ year: string; books: Book[] }[]>((groups, book) => {
+    const year = String(parseDate(book.date)?.getFullYear() ?? "Undated");
+    const group = groups.find((g) => g.year === year);
+    if (group) group.books.push(book);
+    else groups.push({ year, books: [book] });
+    return groups;
+  }, []);
 
   return (
     <>
@@ -74,9 +88,20 @@ export default function Page() {
                 <Star className="h-4 w-4 text-primary" />
                 <h2 className="text-base font-medium">Read</h2>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {readBooks.map((book) => (
-                  <BookCard key={book.id} book={book} />
+              <div className="space-y-6">
+                {readByYear.map(({ year, books: yearBooks }) => (
+                  <div key={year}>
+                    <div className="mb-2 flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
+                      <span>{year}</span>
+                      <span className="h-px flex-1 bg-border" />
+                      <span>{yearBooks.length} {yearBooks.length === 1 ? "book" : "books"}</span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                      {yearBooks.map((book) => (
+                        <BookCard key={book.id} book={book} />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>
@@ -135,12 +160,12 @@ function BookCard({ book }: { book: Book }) {
   return (
     <Card className="flex flex-col border-border bg-card h-full overflow-hidden">
       {/* Book Cover with Aspect Ratio */}
-      <div className="relative aspect-[4/5] w-full mb-2">
+      <div className="relative aspect-[2/3] w-full mb-2 bg-muted/40">
         <Image
           src={book.image || placeholderImage}
           alt={`Cover of ${title}`}
           fill
-          className="object-cover"
+          className="object-contain"
           sizes="(max-width: 768px) 40vw, (max-width: 1200px) 25vw, 16vw"
         />
 

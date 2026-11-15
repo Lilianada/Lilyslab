@@ -113,7 +113,7 @@ function buildMap(): SiteNode {
           { name: "Animation Lab", href: "/playground/animation-lab", description: "Play with easing curves" },
           { name: "Digital Clock", href: "/playground/digital-clock" },
           { name: "Calculator", href: "/playground/calculator" },
-          { name: "Terminal", href: "/playground/terminal" },
+          { name: "Write", href: "/playground/write" },
         ],
       },
       {

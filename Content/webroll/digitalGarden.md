@@ -710,3 +710,29 @@ type: webroll
 category: digital-gardens
 id: digital-gardens-053
 ---
+
+---
+publish: true
+title: Ky Decker
+url: https://ky.fyi/
+date: 2025-06-09
+tags:
+- personal-site
+- design
+type: webroll
+category: digital-gardens
+id: digital-gardens-054
+---
+
+---
+publish: true
+title: David Umoru
+url: https://davidumoru.me/
+date: 2025-06-09
+tags:
+- personal-site
+- development
+type: webroll
+category: digital-gardens
+id: digital-gardens-055
+---

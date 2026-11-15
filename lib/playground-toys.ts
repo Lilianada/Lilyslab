@@ -1,4 +1,4 @@
-import { AudioLines, Calculator, Gamepad2, Pencil, Sparkles, Terminal, Timer } from "lucide-react";
+import { AudioLines, Calculator, Gamepad2, Pencil, Sparkles, Timer, Type } from "lucide-react";
 
 /** Every playground toy, in the order the index page and the Prev/Next links use. */
 export const PLAYGROUND_TOYS = [
@@ -39,9 +39,9 @@ export const PLAYGROUND_TOYS = [
     description: "A simple calculator with basic arithmetic operations",
   },
   {
-    href: "/playground/terminal",
-    icon: Terminal,
-    title: "Terminal Notes",
-    description: "A simple note-taking terminal that remembers what you wrote",
+    href: "/playground/write",
+    icon: Type,
+    title: "Write",
+    description: "A quiet place to write. Notes stay in your browser.",
   },
 ];

@@ -289,25 +289,6 @@ export default function TranscribePage() {
         </p>
       </form>
 
-      {isWorking && job && (
-        <p
-          className="mt-6 flex items-center gap-2 text-sm text-muted-foreground"
-          aria-live="polite"
-        >
-          <span className="h-3 w-3 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-          {STATUS_TEXT[job.status] ?? "Working…"}
-        </p>
-      )}
-      {isWorking && !job && (
-        <p
-          className="mt-6 flex items-center gap-2 text-sm text-muted-foreground"
-          aria-live="polite"
-        >
-          <span className="h-3 w-3 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-          Starting…
-        </p>
-      )}
-
       {error && (
         <p
           role="alert"
@@ -317,34 +298,48 @@ export default function TranscribePage() {
         </p>
       )}
 
-      {isDone && job && (
-        <section className="mt-8">
-          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <div className="min-w-0">
-              {job.title && (
-                <h2 className="text-sm font-medium [overflow-wrap:anywhere]">
-                  {job.title}
-                </h2>
-              )}
-              <p className="font-mono text-xs text-muted-foreground">
-                {[
-                  platform && PLATFORM_LABELS[platform],
-                  job.author,
-                  job.durationSeconds
-                    ? formatDuration(job.durationSeconds)
-                    : null,
-                  job.billedMinutes !== null
-                    ? `${job.billedMinutes} ${job.billedMinutes === 1 ? "minute" : "minutes"} used`
-                    : null,
-                ]
-                  .filter(Boolean)
-                  .join(" · ")}
-              </p>
-            </div>
+      {/* Always on the page, so the layout stays put before, during and after a transcription. */}
+      <section className="mt-8" aria-labelledby="transcript-heading">
+        <div className="mb-2 flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
+          <div className="min-w-0">
+            <h2
+              id="transcript-heading"
+              className="font-mono text-xs uppercase tracking-wide text-muted-foreground"
+            >
+              Transcript
+            </h2>
+            {isDone && job && (
+              <>
+                {job.title && (
+                  <p className="mt-1 text-sm font-medium [overflow-wrap:anywhere]">
+                    {job.title}
+                  </p>
+                )}
+                <p className="font-mono text-xs text-muted-foreground">
+                  {[
+                    platform && PLATFORM_LABELS[platform],
+                    job.author,
+                    job.durationSeconds
+                      ? formatDuration(job.durationSeconds)
+                      : null,
+                    job.billedMinutes !== null
+                      ? `${job.billedMinutes} ${job.billedMinutes === 1 ? "minute" : "minutes"} used`
+                      : null,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </p>
+              </>
+            )}
           </div>
 
-          <div className="mb-3 flex flex-wrap gap-2">
-            <button type="button" onClick={copy} className={BUTTON}>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={copy}
+              disabled={!isDone}
+              className={BUTTON}
+            >
               {copied ? (
                 <Check size={12} aria-hidden="true" />
               ) : (
@@ -355,6 +350,7 @@ export default function TranscribePage() {
             <button
               type="button"
               onClick={() => download("text")}
+              disabled={!isDone}
               className={BUTTON}
             >
               <Download size={12} aria-hidden="true" /> .txt
@@ -362,6 +358,7 @@ export default function TranscribePage() {
             <button
               type="button"
               onClick={() => download("text", true)}
+              disabled={!isDone}
               className={BUTTON}
             >
               <Download size={12} aria-hidden="true" /> .txt with timestamps
@@ -369,17 +366,37 @@ export default function TranscribePage() {
             <button
               type="button"
               onClick={() => download("srt")}
+              disabled={!isDone}
               className={BUTTON}
             >
-              <Download size={12} aria-hidden="true" /> .srt subtitles
+              <Download size={12} aria-hidden="true" /> .srt
             </button>
           </div>
+        </div>
 
-          <div className="max-h-[60vh] overflow-y-auto whitespace-pre-wrap rounded-lg border border-border bg-card p-4 text-sm leading-relaxed [overflow-wrap:anywhere]">
-            {job.text || "No words were found in this video."}
-          </div>
-        </section>
-      )}
+        <div
+          className="h-[50vh] min-h-[16rem] overflow-y-auto whitespace-pre-wrap rounded-lg border border-border bg-card p-4 text-sm leading-relaxed [overflow-wrap:anywhere]"
+          aria-live="polite"
+          tabIndex={0}
+        >
+          {isWorking ? (
+            <span className="flex items-center gap-2 text-muted-foreground">
+              <span className="h-3 w-3 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+              {job ? (STATUS_TEXT[job.status] ?? "Working…") : "Starting…"}
+            </span>
+          ) : isDone && job ? (
+            job.text || (
+              <span className="text-muted-foreground">
+                No words were found in this video.
+              </span>
+            )
+          ) : (
+            <span className="text-muted-foreground">
+              Your transcript will show up here.
+            </span>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

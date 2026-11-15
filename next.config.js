@@ -33,6 +33,7 @@ const nextConfig = {
     return [
       { source: '/resources/build-your-own-website', destination: '/resources', permanent: false },
       { source: '/playground/color-theory', destination: '/playground', permanent: true },
+      { source: '/playground/terminal', destination: '/playground/write', permanent: true },
       { source: '/ctrl-room/transcribe', destination: '/playground/transcribe', permanent: true },
     ];
   },
