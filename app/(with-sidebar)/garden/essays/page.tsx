@@ -1,5 +1,5 @@
 import { Annoyed } from "lucide-react"
-import { getAllEssays } from "@/lib/garden/essays"
+import { getAllEssays, getLockedEssays } from "@/lib/garden/essays"
 import type { Essay } from "@/lib/garden/essays"
 import TagFilterClient, { type EssayListItem } from "./TagFilterClient"
 
@@ -11,18 +11,24 @@ export default async function EssayPage() {
 
   try {
     // Only what the list needs, so essay text stays out of the browser bundle.
-    posts = getAllEssays().map((essay: Essay) => {
-      const wordCount = essay.content.split(/\s+/).filter(Boolean).length
+    // Locked essays (published: false) are listed but not readable, so none of their text is sent.
+    const toListItem = (essay: Essay, locked: boolean): EssayListItem => {
+      const wordCount = locked ? 0 : essay.content.split(/\s+/).filter(Boolean).length
       return {
         slug: essay.slug,
         title: essay.title,
         createdAt: essay.createdAt,
-        excerpt: essay.excerpt || "",
+        excerpt: locked ? "" : essay.excerpt || "",
         tags: essay.tags || [],
         wordCount,
         readingTime: Math.max(1, Math.ceil(wordCount / 200)),
+        locked,
       }
-    })
+    }
+    posts = [
+      ...getAllEssays().map((essay) => toListItem(essay, false)),
+      ...getLockedEssays().map((essay) => toListItem(essay, true)),
+    ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
   } catch (err) {
     console.error("Error in EssayPage:", err)
     error = "These essays wouldn't load. Give it a moment and try again."

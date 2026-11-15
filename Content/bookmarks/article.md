@@ -2289,3 +2289,27 @@ tags:
 type: article
 id: article-185
 ---
+
+---
+publish: true
+title: "what can you gain from the journaling practices of anaïs nin, virginia woolf, and joan didion?"
+url: https://chicgirlmoment.substack.com/p/what-can-you-gain-from-the-journaling
+createdAt: 2026-11-15
+tags:
+- journaling
+- writing
+type: article
+id: article-186
+---
+
+---
+publish: true
+title: "how to have a quieter brain"
+url: https://ayushithakkar.substack.com/p/how-to-have-a-quieter-brain
+createdAt: 2026-11-15
+tags:
+- mind
+- digital-wellbeing
+type: article
+id: article-187
+---

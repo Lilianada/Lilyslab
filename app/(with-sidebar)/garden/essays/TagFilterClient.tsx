@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ArrowUp, Search, X } from "lucide-react";
+import { ArrowRight, ArrowUp, Lock, Search, X } from "lucide-react";
 import { formatDateForDisplay } from "@/lib/utils";
 import { LIST_CLASS, NUMBER_CLASS, ROW_CLASS, number } from "@/components/learn/TrackList";
 
@@ -15,6 +15,8 @@ export interface EssayListItem {
   tags: string[];
   wordCount: number;
   readingTime: number;
+  /** Marked `published: false`: listed, but it can't be opened. */
+  locked: boolean;
 }
 
 /** How many essays show before the "View all" button. */
@@ -34,6 +36,23 @@ const pillClass = (isActive: boolean) =>
 const textButtonClass = "font-mono text-xs text-muted-foreground transition-colors hover:text-foreground";
 
 function EssayRow({ essay, position }: { essay: EssayListItem; position: number }) {
+  if (essay.locked) {
+    return (
+      <li>
+        <div className="flex cursor-not-allowed items-start gap-4 py-3 opacity-60" title="This essay is locked for now">
+          <span className={NUMBER_CLASS}>{number(position)}</span>
+          <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
+            <span className="block text-sm font-medium">{essay.title}</span>
+            <span className="mt-1 block font-mono text-xs text-muted-foreground">
+              {formatDateForDisplay(essay.createdAt)} · Locked
+            </span>
+          </span>
+          <Lock size={14} className="mt-1 shrink-0 text-muted-foreground" aria-label="Locked" />
+        </div>
+      </li>
+    );
+  }
+
   return (
     <li>
       <Link href={`/garden/essays/${essay.slug}`} className={ROW_CLASS}>

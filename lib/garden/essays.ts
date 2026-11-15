@@ -18,7 +18,8 @@ export type Essay = {
 
 const essaysDir = path.join(process.cwd(), 'Content/essays');
 
-export function getAllEssays(): Essay[] {
+/** Every essay file, whatever its `published` setting, plus that raw setting. */
+function readEssayFiles(): (Essay & { publishedSetting: unknown })[] {
   const essaysPath = path.join(process.cwd(), "Content/essays")
 
   if (!fs.existsSync(essaysPath)) {
@@ -53,9 +54,9 @@ export function getAllEssays(): Essay[] {
         published: published,
         content,
         type: data.type || 'evergreen',
+        publishedSetting: data.published,
       };
     })
-    .filter(essay => essay.published === true)
     .sort((a, b) => {
       // Convert to Date objects for safe comparison
       const dateA = new Date(a.createdAt);
@@ -64,6 +65,29 @@ export function getAllEssays(): Essay[] {
       // Sort newest first
       return dateB.getTime() - dateA.getTime();
     });
+}
+
+function withoutSetting(essay: Essay & { publishedSetting?: unknown }): Essay {
+  const copy = { ...essay };
+  delete copy.publishedSetting;
+  return copy;
+}
+
+/** Published essays, newest first. */
+export function getAllEssays(): Essay[] {
+  return readEssayFiles()
+    .filter((essay) => essay.published)
+    .map(withoutSetting);
+}
+
+/**
+ * Essays marked `published: false`: listed on the essays page behind a lock,
+ * but never given a page of their own. Essays with no `published` line stay hidden.
+ */
+export function getLockedEssays(): Essay[] {
+  return readEssayFiles()
+    .filter((essay) => essay.publishedSetting === false)
+    .map(withoutSetting);
 }
 
 export function getEssayBySlug(slug: string): Essay | null {

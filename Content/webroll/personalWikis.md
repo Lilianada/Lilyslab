@@ -2,6 +2,7 @@
 publish: true
 title: Hundred Rabbits' Wiki
 url: https://wiki.100r.co/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - sustainability
@@ -30,6 +31,7 @@ id: personal-wikis-002
 publish: true
 title: Allen Lee's Brains
 url: https://brains.allenleein.com/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - product-management
@@ -114,6 +116,7 @@ id: personal-wikis-008
 publish: true
 title: The Mindstone Digital Garden
 url: https://mindstone.cc/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - digital-garden
@@ -142,6 +145,7 @@ id: personal-wikis-010
 publish: true
 title: The Brain's Public Brains Directory
 url: https://webbrain.com/brainpage/brain/1D8A7B7A-3F99-4E0E-AE7E-0A2E7E7E7E7E#-1
+notes: "broken link"
 date: 2025-06-08
 tags:
   - mind-mapping

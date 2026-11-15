@@ -72,6 +72,7 @@ id: digital-gardens-005
 publish: true
 title: Colin Gorrie's Garden
 url: https://garden.colingorrie.com/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - data-science
@@ -86,6 +87,7 @@ id: digital-gardens-006
 publish: true
 title: Rishikesh Sreehari's Garden
 url: https://rishikeshsreehari.com/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - design
@@ -114,6 +116,7 @@ id: digital-gardens-008
 publish: true
 title: The Refined Mind (Mike Tannenbaum)
 url: https://www.therefinedmind.com/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - productivity
@@ -142,6 +145,7 @@ id: digital-gardens-010
 publish: true
 title: Ian Jones's Digital Garden
 url: https://ianjones.us/notes/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - development
@@ -198,6 +202,7 @@ id: digital-gardens-015
 publish: true
 title: Tom MacWright's Notes
 url: https://macwright.com/notes/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - development
@@ -282,6 +287,7 @@ id: digital-gardens-022
 publish: true
 title: Eleanor Konik's Digital Garden
 url: https://eleanorkonik.com/garden/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - writing
@@ -296,6 +302,7 @@ id: digital-gardens-023
 publish: true
 title: Max Böck's Notes
 url: https://notes.maxboeck.com/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - web-development
@@ -310,6 +317,7 @@ id: digital-gardens-024
 publish: true
 title: Tom Critchlow's Digital Garden
 url: https://tomcritchlow.com/garden/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - strategy
@@ -467,6 +475,7 @@ id: digital-gardens-035
 publish: true
 title: Alan Smith's Garden
 url: https://alansmith.io/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - development
@@ -581,6 +590,7 @@ id: digital-gardens-044
 publish: true
 title: Zinzy Waleson
 url: https://www.zinzy.website/
+notes: "broken link"
 date: 2025-06-14
 tags:
   - personal-site

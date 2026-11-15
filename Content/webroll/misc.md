@@ -115,6 +115,7 @@ id: misc-008
 publish: true
 title: softglossary.space
 url: https://softglossary.space/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - glossary
@@ -157,6 +158,7 @@ id: misc-011
 publish: true
 title: Terminal.pink
 url: https://terminal.pink/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - terminal
@@ -449,4 +451,350 @@ tags:
 type: webroll
 category: misc
 id: misc-033
+---
+
+---
+publish: true
+title: "Garden Letters"
+url: https://gardenletters.net/
+notes: "Write floral letters online with sealed envelopes and music."
+date: 2026-11-15
+tags:
+  - letters
+  - creative
+type: webroll
+category: misc
+id: misc-034
+---
+
+---
+publish: true
+title: "Dear You"
+url: https://dear-you.cards/
+notes: "Design and share personalised virtual cards."
+date: 2026-11-15
+tags:
+  - cards
+  - creative
+type: webroll
+category: misc
+id: misc-035
+---
+
+---
+publish: true
+title: "A Jar of Stars"
+url: https://www.alittlejarofstars.com/
+notes: "Tuck tiny happy moments into a jar of stars."
+date: 2026-11-15
+tags:
+  - wellbeing
+  - whimsical
+type: webroll
+category: misc
+id: misc-036
+---
+
+---
+publish: true
+title: "Pixel Thoughts"
+url: https://www.pixelthoughts.co/
+notes: "Watch a stressful thought shrink away in 60 seconds."
+date: 2026-11-15
+tags:
+  - wellbeing
+  - mindfulness
+type: webroll
+category: misc
+id: misc-037
+---
+
+---
+publish: true
+title: "Little Voice Note"
+url: https://littlevoicenote.com/
+notes: "Make a voice note keepsake for someone."
+date: 2026-11-15
+tags:
+  - gifts
+  - creative
+type: webroll
+category: misc
+id: misc-038
+---
+
+---
+publish: true
+title: "MySketchBooth"
+url: https://mysketchbooth.com/
+notes: "Take vintage photobooth strips with your camera."
+date: 2026-11-15
+tags:
+  - photobooth
+  - creative
+type: webroll
+category: misc
+id: misc-039
+---
+
+---
+publish: true
+title: "Screened"
+url: https://getscreened.vercel.app/
+notes: "Turn your Letterboxd films into a receipt."
+date: 2026-11-15
+tags:
+  - films
+  - tools
+type: webroll
+category: misc
+id: misc-040
+---
+
+---
+publish: true
+title: "your ai slop bores me"
+url: https://youraislopbores.me/
+notes: "Multiplayer game where humans pretend to be AI."
+date: 2026-11-15
+tags:
+  - games
+  - ai
+type: webroll
+category: misc
+id: misc-041
+---
+
+---
+publish: true
+title: "OpenWhen"
+url: https://openwhenletters.app/
+notes: "Send digital \"Open When\" letters to loved ones."
+date: 2026-11-15
+tags:
+  - letters
+  - gifts
+type: webroll
+category: misc
+id: misc-042
+---
+
+---
+publish: true
+title: "Nashallery's Booth"
+url: https://photobooth.nashallery.com/
+notes: "An online photobooth."
+date: 2026-11-15
+tags:
+  - photobooth
+  - creative
+type: webroll
+category: misc
+id: misc-043
+---
+
+---
+publish: true
+title: "WigglyPaint"
+url: https://wigglypaint.com/
+notes: "Draw animated, wiggly pictures and GIFs."
+date: 2026-11-15
+tags:
+  - drawing
+  - creative
+type: webroll
+category: misc
+id: misc-044
+---
+
+---
+publish: true
+title: "WindowSwap"
+url: https://www.window-swap.com/
+notes: "Look out of real people's windows around the world."
+date: 2026-11-15
+tags:
+  - travel
+  - calm
+type: webroll
+category: misc
+id: misc-045
+---
+
+---
+publish: true
+title: "Zooniverse"
+url: https://www.zooniverse.org/
+notes: "Volunteer to help real scientists with their research."
+date: 2026-11-15
+tags:
+  - science
+  - volunteering
+type: webroll
+category: misc
+id: misc-046
+---
+
+---
+publish: true
+title: "Google Arts & Culture"
+url: https://artsandculture.google.com/
+notes: "Art and treasures from over 2,000 museums."
+date: 2026-11-15
+tags:
+  - art
+  - culture
+type: webroll
+category: misc
+id: misc-047
+---
+
+---
+publish: true
+title: "Instructables"
+url: https://www.instructables.com/
+notes: "Step-by-step guides for making all kinds of things."
+date: 2026-11-15
+tags:
+  - diy
+  - learning
+type: webroll
+category: misc
+id: misc-048
+---
+
+---
+publish: true
+title: "A Little Box of Goodies"
+url: https://alittleboxofgoodies.com/
+notes: "Send someone a digital care package as a link."
+date: 2026-11-15
+tags:
+  - gifts
+  - whimsical
+type: webroll
+category: misc
+id: misc-049
+---
+
+---
+publish: true
+title: "Mixtape for You"
+url: https://mixtape-for-you.replit.app/
+notes: "Make someone a cassette mixtape."
+date: 2026-11-15
+tags:
+  - music
+  - gifts
+type: webroll
+category: misc
+id: misc-050
+---
+
+---
+publish: true
+title: "a little secret pasture"
+url: https://alittlesecretpasture.vercel.app/
+notes: "Draw a cow or alien for a shared pasture."
+date: 2026-11-15
+tags:
+  - drawing
+  - whimsical
+type: webroll
+category: misc
+id: misc-051
+---
+
+---
+publish: true
+title: "Digital Postcard"
+url: https://digitalpostcard.app/
+notes: "Make and send hand-drawn postcards from your photos."
+date: 2026-11-15
+tags:
+  - postcards
+  - creative
+type: webroll
+category: misc
+id: misc-052
+---
+
+---
+publish: true
+title: "Little Alchemy 2"
+url: https://littlealchemy2.com/
+notes: "Mix elements to create the whole world from scratch."
+date: 2026-11-15
+tags:
+  - games
+type: webroll
+category: misc
+id: misc-053
+---
+
+---
+publish: true
+title: "The Nicest Place on the Internet"
+url: https://thenicestplace.net/
+date: 2026-11-15
+tags:
+  - calm
+  - whimsical
+type: webroll
+category: misc
+id: misc-054
+---
+
+---
+publish: true
+title: "Murdle"
+url: https://murdle.com/
+notes: "Solve a new murder mystery puzzle every day."
+date: 2026-11-15
+tags:
+  - games
+  - puzzles
+type: webroll
+category: misc
+id: misc-055
+---
+
+---
+publish: true
+title: "Messenger"
+url: https://messenger.abeto.co/
+notes: "Make deliveries around a tiny planet."
+date: 2026-11-15
+tags:
+  - games
+  - whimsical
+type: webroll
+category: misc
+id: misc-056
+---
+
+---
+publish: true
+title: "I Miss My Cafe"
+url: https://imissmycafe.com/
+notes: "A virtual cafe with music and drinks."
+date: 2026-11-15
+tags:
+  - coffee
+  - calm
+type: webroll
+category: misc
+id: misc-057
+---
+
+---
+publish: true
+title: "burn cd"
+url: https://burn-cd.vercel.app/
+date: 2026-11-15
+tags:
+  - music
+type: webroll
+category: misc
+id: misc-058
 ---

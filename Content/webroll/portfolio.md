@@ -32,6 +32,7 @@ id: portfolios-002
 publish: true
 title: Junaid Anjum
 url: https://junaidanjum.com/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - development
@@ -102,6 +103,7 @@ id: portfolios-007
 publish: true
 title: MW Works
 url: https://mw.works/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - design
@@ -200,6 +202,7 @@ id: portfolios-014
 publish: true
 title: Max Böck
 url: https://maxboeck.com/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - development
@@ -316,7 +319,7 @@ date: 2025-06-14
 tags:
   - portfolio
   - simple
-notes: portfolio that's simple and clean
+notes: "broken link"
 type: webroll
 category: portfolios
 id: portfolios-023

@@ -45,6 +45,7 @@ id: web-directories-003
 publish: true
 title: The Whimsical Web
 url: https://thewhimsicalweb.site/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - whimsical
@@ -59,6 +60,7 @@ id: web-directories-004
 publish: true
 title: Blogroll.club
 url: https://webroll.club/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - webroll
@@ -101,6 +103,7 @@ id: web-directories-007
 publish: true
 title: Blog Surf
 url: https://blogsurf.io/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - blog-discovery
@@ -129,6 +132,7 @@ id: web-directories-009
 publish: true
 title: Small World
 url: https://smallworld.mmm.page/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - small-web
@@ -199,6 +203,7 @@ id: web-directories-014
 publish: true
 title: The Big List of Personal Websites
 url: https://biglist.online/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - personal-websites
@@ -325,6 +330,7 @@ id: web-directories-023
 publish: true
 title: 250kb.club
 url: https://250kb.club/crackle-dev/
+notes: "broken link"
 date: 2025-06-08
 tags:
   - lightweight-web
