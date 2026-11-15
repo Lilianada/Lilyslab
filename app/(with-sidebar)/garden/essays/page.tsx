@@ -1,16 +1,28 @@
 import { Annoyed } from "lucide-react"
 import { getAllEssays } from "@/lib/garden/essays"
 import type { Essay } from "@/lib/garden/essays"
-import TagFilterClient from "./TagFilterClient"
+import TagFilterClient, { type EssayListItem } from "./TagFilterClient"
 
 export const revalidate = 3600 // Revalidate every hour
 
 export default async function EssayPage() {
-  let posts: Essay[] = []
+  let posts: EssayListItem[] = []
   let error: string | null = null
 
   try {
-    posts = getAllEssays()
+    // Only what the list needs, so essay text stays out of the browser bundle.
+    posts = getAllEssays().map((essay: Essay) => {
+      const wordCount = essay.content.split(/\s+/).filter(Boolean).length
+      return {
+        slug: essay.slug,
+        title: essay.title,
+        createdAt: essay.createdAt,
+        excerpt: essay.excerpt || "",
+        tags: essay.tags || [],
+        wordCount,
+        readingTime: Math.max(1, Math.ceil(wordCount / 200)),
+      }
+    })
   } catch (err) {
     console.error("Error in EssayPage:", err)
     error = "These essays wouldn't load. Give it a moment and try again."
@@ -18,7 +30,7 @@ export default async function EssayPage() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="container max-w-2xl mx-auto p-0 sm:px-4 pt-16 pb-8">
+      <div className="mx-auto w-full max-w-3xl pb-8 pt-16 sm:px-4">
         <header className="mb-8">
           <span className="text-2xl animate-spin">✳︎</span>
           <h1 className="text-xl font-medium mb-2">Essays</h1>
@@ -27,7 +39,7 @@ export default async function EssayPage() {
             <div>Last updated: 2025-06-29</div>
             <div>Inspired by: The need to write more.</div>
           </div>
-          <p className="text-sm text-muted-foreground mt-2">There's no limitation to what I write. I write for my future self.</p>
+          <p className="text-sm text-muted-foreground mt-4">There's no limitation to what I write. I write for my future self.</p>
         </header>
 
         {error ? (

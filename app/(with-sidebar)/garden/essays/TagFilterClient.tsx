@@ -1,199 +1,186 @@
 "use client";
-import React, { useState } from "react";
+
 import Link from "next/link";
+import { useState } from "react";
+import { ArrowRight, ArrowUp, Search, X } from "lucide-react";
 import { formatDateForDisplay } from "@/lib/utils";
-import type { Essay } from "@/lib/garden/essays";
+import { LIST_CLASS, NUMBER_CLASS, ROW_CLASS, number } from "@/components/learn/TrackList";
 
-interface Props {
-  essays: Essay[];
+/** Just what the list needs, so essay text stays out of the browser bundle. */
+export interface EssayListItem {
+  slug: string;
+  title: string;
+  createdAt: string;
+  excerpt: string;
+  tags: string[];
+  wordCount: number;
+  readingTime: number;
 }
 
-// Helper function to count words in a string
-function countWords(text: string): number {
-  return text.split(/\s+/).filter(Boolean).length;
+/** How many essays show before the "View all" button. */
+const PAGE_SIZE = 50;
+
+function matchesSearch(essay: EssayListItem, query: string) {
+  const words = query.toLowerCase().replace(/#/g, " ").split(/\s+/).filter(Boolean);
+  const searchable = `${essay.title} ${essay.excerpt} ${essay.tags.join(" ")}`.toLowerCase();
+  return words.every((word) => searchable.includes(word));
 }
 
-// Helper function to calculate reading time based on words
-function calculateReadingTime(text: string): number {
-  const wordsPerMinute = 200; // Average reading speed
-  const words = countWords(text);
-  return Math.max(1, Math.ceil(words / wordsPerMinute));
+const pillClass = (isActive: boolean) =>
+  `rounded-full border px-3 py-1 font-mono text-xs transition-colors ${
+    isActive ? "border-primary bg-primary text-primary-foreground" : "border-border bg-muted text-muted-foreground hover:bg-accent"
+  }`;
+
+const textButtonClass = "font-mono text-xs text-muted-foreground transition-colors hover:text-foreground";
+
+function EssayRow({ essay, position }: { essay: EssayListItem; position: number }) {
+  return (
+    <li>
+      <Link href={`/garden/essays/${essay.slug}`} className={ROW_CLASS}>
+        <span className={NUMBER_CLASS}>{number(position)}</span>
+        <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
+          <span className="block text-sm font-medium">{essay.title}</span>
+          {essay.excerpt && <span className="mt-0.5 line-clamp-2 block text-xs text-muted-foreground">{essay.excerpt}</span>}
+          <span className="mt-1 block font-mono text-xs text-muted-foreground">
+            {formatDateForDisplay(essay.createdAt)} · {essay.readingTime} min read · {essay.wordCount.toLocaleString("en-US")}{" "}
+            {essay.wordCount === 1 ? "word" : "words"}
+          </span>
+        </span>
+        <ArrowRight
+          size={14}
+          className="mt-1 shrink-0 text-muted-foreground transition-transform motion-safe:group-hover:translate-x-0.5"
+          aria-hidden="true"
+        />
+      </Link>
+    </li>
+  );
 }
 
-export default function TagFilterClient({ essays }: Props) {
+export default function TagFilterClient({ essays }: { essays: EssayListItem[] }) {
+  const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [selectedType, setSelectedType] = useState<Essay['type'] | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
-  
+  const [showAllEssays, setShowAllEssays] = useState(false);
+
   // Count essays per tag
   const tagCounts: Record<string, number> = {};
   essays.forEach((essay) => {
-    (essay.tags || []).forEach((tag) => {
+    essay.tags.forEach((tag) => {
       tagCounts[tag] = (tagCounts[tag] || 0) + 1;
     });
   });
-  
-  // Sort tags by count (most used first)
-  const popularTags = Object.entries(tagCounts)
-    .sort(([, countA], [, countB]) => countB - countA)
-    .map(([tag]) => tag);
-  
-  // Get top tags (tags with at least 2 occurrences or the top 10, whichever is more)
-  const topTags = popularTags.filter(tag => tagCounts[tag] >= 2).slice(0, 12);
-  
-  // All tags sorted alphabetically for expanded view
+
+  // Popular tags: used at least twice, most used first, up to 12
+  const topTags = Object.keys(tagCounts)
+    .filter((tag) => tagCounts[tag] >= 2)
+    .sort((a, b) => tagCounts[b] - tagCounts[a])
+    .slice(0, 12);
   const allTags = Object.keys(tagCounts).sort();
-  
-  // Count essays per type
-  const typeCounts: Record<string, number> = {
-    evergreen: 0,
-    seedling: 0,
-    budding: 0
-  };
-  essays.forEach((essay) => {
-    typeCounts[essay.type] = (typeCounts[essay.type] || 0) + 1;
-  });
-  
-  // Available types (only show types that have essays)
-  const types = Object.keys(typeCounts).filter(
-    type => typeCounts[type] > 0
-  ) as Essay['type'][];
+  // Keep a selected tag visible even when it isn't a popular one
+  const shownTags = showAllTags ? allTags : selectedTag && !topTags.includes(selectedTag) ? [...topTags, selectedTag] : topTags;
 
-  React.useEffect(() => {
-    const timeout = setTimeout(() => setIsLoaded(true), 400);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  // Sort essays by newest first
-  const sortedEssays = [...essays].sort((a, b) => {
-    // Convert to Date objects for safe comparison
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
-    
-    // Sort newest first
-    return dateB.getTime() - dateA.getTime();
-  });
-  
-  // Apply tag and type filtering
-  const filteredEssays = sortedEssays.filter(essay => {
-    const matchesTag = !selectedTag || (essay.tags || []).includes(selectedTag);
-    const matchesType = !selectedType || essay.type === selectedType;
-    return matchesTag && matchesType;
-  });
+  const results = essays.filter((essay) => (!selectedTag || essay.tags.includes(selectedTag)) && matchesSearch(essay, query));
+  const isFiltering = Boolean(query.trim() || selectedTag);
+  const visible = showAllEssays ? results : results.slice(0, PAGE_SIZE);
+  const hiddenCount = results.length - visible.length;
 
   return (
-    <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-      {!isLoaded ? (
-        <div className="w-full min-h-[200px] flex items-center justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-muted-foreground" />
-        </div>
-      ) : (
-        <>
-          <div className="my-8">
-            {/* Tag filter */}
-            {allTags.length > 0 && (
-              <div className="mt-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-sm font-medium flex items-center gap-2">
-                    Tags
-                    <span className="text-xs text-muted-foreground font-normal">(click to filter)</span>
-                  </h3>
-                  {allTags.length > topTags.length && (
-                    <button 
-                      onClick={() => setShowAllTags(!showAllTags)} 
-                      className="text-xs flex items-center gap-1 text-primary hover:opacity-80 transition-all font-mono"
-                    >
-                      {showAllTags ? (
-                        <>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                          Show Popular Tags
-                        </>
-                      ) : (
-                        <>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                          View All Tags ({allTags.length})
-                        </>
-                      )}
-                    </button>
-                  )}
-                </div>
-                <div className="flex flex-wrap gap-2 transition-all duration-300">
-                  <button
-                    className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${selectedTag === null
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-muted border-border text-muted-foreground hover:bg-accent"
-                      }`}
-                    onClick={() => setSelectedTag(null)}
-                  >
-                    All Tags ({allTags.length})
-                  </button>
-                  
-                  {/* Show either popular tags or all tags based on state */}
-                  {(showAllTags ? allTags : topTags).map((tag) => (
-                    <button
-                      key={tag}
-                      className={`px-3 py-1 rounded-full font-mono text-xs border transition-all ${
-                        selectedTag === tag
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "bg-muted border-border text-muted-foreground hover:bg-accent"
-                      }`}
-                      onClick={() => setSelectedTag(tag)}
-                    >
-                      #{tag} <span className="opacity-80">({tagCounts[tag]})</span>
-                    </button>
-                  ))}
-                  
-                  {!showAllTags && allTags.length > topTags.length && (
-                    <div className="flex items-center">
-                      <span className="text-xs text-muted-foreground px-3 py-1 rounded-full bg-muted border border-border">+{allTags.length - topTags.length} more tags</span>
-                    </div>
-                  )}
-                </div>
-              </div>
+    <>
+      <div className="relative">
+        <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") setQuery("");
+          }}
+          placeholder="Search essays"
+          aria-label="Search essays"
+          enterKeyHint="search"
+          className="h-11 w-full rounded-lg border border-border bg-card pl-9 pr-10 text-base outline-none transition-colors placeholder:text-muted-foreground focus:border-primary sm:text-sm [&::-webkit-search-cancel-button]:hidden"
+        />
+        {query && (
+          <button
+            type="button"
+            onClick={() => setQuery("")}
+            aria-label="Clear search"
+            className="absolute right-1 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-muted-foreground hover:text-foreground"
+          >
+            <X size={14} />
+          </button>
+        )}
+      </div>
+
+      {allTags.length > 0 && (
+        <section className="mt-6">
+          <div className="mb-2 flex items-baseline justify-between gap-4">
+            <h2 className="font-mono text-xs uppercase tracking-wide text-muted-foreground">Tags</h2>
+            {allTags.length > topTags.length && (
+              <button type="button" onClick={() => setShowAllTags(!showAllTags)} className={textButtonClass}>
+                {showAllTags ? "Show popular tags" : `View all tags (${allTags.length})`}
+              </button>
             )}
           </div>
-          
-          {/* Results count */}
-          <div className="mb-6">
-            <p className="text-sm text-muted-foreground">
-              Showing {filteredEssays.length} of {essays.length} essays
-              {selectedType && ` of type ${selectedType}`}
-              {selectedTag && ` with tag #${selectedTag}`}
-            </p>
-          </div>
-          
-          {/* Essays list */}
-          <ul className="mt-6 space-y-2">
-            {filteredEssays.map((essay) => (
-              <li key={essay.slug} className="group relative">
-                <Link
-                  href={`/garden/essays/${essay.slug}`}
-                  className="flex items-center gap-4 py-2 hover:scale-[1.025] transition-all duration-300 group"
-                  prefetch
-                >
-                  {/* Left: Dot and Title */}
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="h-2 w-2 rounded-full bg-steelBlue" />
-                    <p className="truncate text-sm">{essay.title}</p>
-                  </div>
-                  {/* Middle: Connecting line */}
-                  <div className="flex-1 h-px bg-muted-foreground/30 mx-2 hidden md:block" />
-                  {/* Right: Date or Hover Details */}
-                  <div className="flex items-center gap-2 justify-end">
-                    <span className="hidden group-hover:inline text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
-                      {countWords(essay.content)} words • {calculateReadingTime(essay.content)} min
-                    </span>
-                    <time className="group-hover:hidden font-mono text-xs text-muted-foreground whitespace-nowrap transition-all duration-200">
-                      {formatDateForDisplay(essay.createdAt)}
-                    </time>
-                  </div>
-                </Link>
-              </li>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => setSelectedTag(null)} className={pillClass(selectedTag === null)}>
+              All
+            </button>
+            {shownTags.map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
+                aria-pressed={selectedTag === tag}
+                className={pillClass(selectedTag === tag)}
+              >
+                #{tag} <span className="opacity-70">{tagCounts[tag]}</span>
+              </button>
             ))}
-          </ul>
-        </>
+          </div>
+        </section>
       )}
-    </div>
+
+      <section className="mt-8">
+        <p className="mb-2 font-mono text-xs text-muted-foreground" aria-live="polite">
+          {isFiltering
+            ? `${results.length} ${results.length === 1 ? "essay" : "essays"}${selectedTag ? ` tagged #${selectedTag}` : ""}`
+            : `${essays.length} essays, newest first`}
+        </p>
+
+        {results.length > 0 ? (
+          <ol className={LIST_CLASS}>
+            {visible.map((essay, index) => (
+              <EssayRow key={essay.slug} essay={essay} position={index + 1} />
+            ))}
+          </ol>
+        ) : (
+          <p className="py-6 text-sm text-muted-foreground">Nothing here yet. Try a different word.</p>
+        )}
+
+        {hiddenCount > 0 && (
+          <div className="mt-6 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAllEssays(true)}
+              className="rounded-full border border-border bg-muted px-4 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              View all {results.length} essays
+            </button>
+          </div>
+        )}
+      </section>
+
+      <div className="mt-12 flex justify-center">
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })}
+          className={`inline-flex items-center gap-1 ${textButtonClass}`}
+        >
+          <ArrowUp size={12} aria-hidden="true" />
+          Back to top
+        </button>
+      </div>
+    </>
   );
 }

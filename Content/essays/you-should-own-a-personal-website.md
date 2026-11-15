@@ -1,7 +1,7 @@
 ---
-title: Why You Should Own a Website
+title: You Should Own a Personal Website
 createdAt: 2026-11-10
-lastUpdated: 2026-11-10
+lastUpdated: 2026-11-15
 tags: 
   - website
   - build-your-own-website
