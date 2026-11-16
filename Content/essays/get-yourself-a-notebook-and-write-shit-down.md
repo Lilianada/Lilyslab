@@ -1,5 +1,5 @@
 ---
-title: Get Yourself A Notebook
+title: Get Yourself A Notebook And Write Shit Down
 createdAt: 2026-11-13
 lastUpdated: 2026-11-13
 tags:
@@ -9,8 +9,6 @@ tags:
 type: evergreen
 published: false
 ---
-
-
 
 
 I think it’s worth mentioning that a lot of you have a phobia for notebooks. Secondary school and university wasn’t fun for a lot of adults; thereby causing them to have grown a fear for pen and paper. They hate the thought of reading or writing.
