@@ -45,7 +45,7 @@ export default async function EssayPage() {
             <div>Last updated: 2025-06-29</div>
             <div>Inspired by: The need to write more.</div>
           </div>
-          <p className="text-sm text-muted-foreground mt-4">There's no limitation to what I write. I write for my future self.</p>
+          <p className="text-sm text-muted-foreground mt-4">There's no limitation to what I write. I write for my future self. P.s locked notes are just drafts.</p>
         </header>
 
         {error ? (
