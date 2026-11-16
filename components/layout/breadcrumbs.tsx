@@ -6,12 +6,16 @@ import { usePathname } from "next/navigation";
 /** Parent paths that are only URL segments and have no page to link to. */
 const hasNoPage = (href: string) => /^\/archives\/[^/]+$/.test(href) || href === "/resources/build-your-own-website";
 
+/** Section names with no page of their own: shown as plain text, not links. */
+const NO_LINK = new Set(["/playground"]);
+
 /** Names that plain capitalizing would get wrong, like "Html". */
 const SPECIAL_LABELS: Record<string, string> = {
   html: "HTML",
   css: "CSS",
   javascript: "JavaScript",
   "ai-prompting": "AI prompting",
+  playground: "Lab",
 };
 
 const toLabel = (segment: string) =>
@@ -40,9 +44,13 @@ export function Breadcrumbs() {
         {parents.map(({ href, label }) => (
           <li key={href} className="flex items-center gap-2">
             <span aria-hidden="true">/</span>
-            <Link href={href} className="hover:text-codeRed hover:italic transition-colors">
-              {label}
-            </Link>
+            {NO_LINK.has(href) ? (
+              <span>{label}</span>
+            ) : (
+              <Link href={href} className="hover:text-codeRed hover:italic transition-colors">
+                {label}
+              </Link>
+            )}
           </li>
         ))}
       </ol>

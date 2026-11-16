@@ -1,19 +1,7 @@
-import { AudioLines, Calculator, Disc3, Gamepad2, Pencil, Timer, Type } from "lucide-react";
+import { AudioLines, Disc3, Timer, Type } from "lucide-react";
 
-/** Every playground toy, in the order the index page and the Prev/Next links use. */
+/** The little apps in the Lab (they live under /playground). */
 export const PLAYGROUND_TOYS = [
-  {
-    href: "/playground/petal-catch",
-    icon: Gamepad2,
-    title: "Petal Catch",
-    description: "Catch the falling petals, dodge the bees. Beat your best.",
-  },
-  {
-    href: "/playground/doodle",
-    icon: Pencil,
-    title: "Doodle Pad",
-    description: "Draw something silly and stick it on your fridge",
-  },
   {
     href: "/playground/transcribe",
     icon: AudioLines,
@@ -31,12 +19,6 @@ export const PLAYGROUND_TOYS = [
     icon: Timer,
     title: "Digital Clock",
     description: "A responsive digital clock with timer functionality",
-  },
-  {
-    href: "/playground/calculator",
-    icon: Calculator,
-    title: "Calculator",
-    description: "A simple calculator with basic arithmetic operations",
   },
   {
     href: "/playground/write",

@@ -6,6 +6,7 @@ import {
   ArrowDown,
   ArrowUp,
   Check,
+  Copy,
   Download,
   FileAudio,
   FolderDown,
@@ -16,6 +17,7 @@ import {
   Pause,
   Play,
   Plus,
+  Terminal,
   Trash2,
   Upload,
   Wand2,
@@ -285,7 +287,7 @@ function DiscMeter({
   const scale = Math.max(CD_SECONDS, total);
   return (
     <section
-      className="sticky top-16 z-20 rounded-lg border border-border bg-background/95 p-3 backdrop-blur"
+      className="rounded-lg border border-border bg-background/95 p-3"
       aria-label="CD time"
     >
       <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-xs">
@@ -774,6 +776,11 @@ function TracksStep({
         )}
       </section>
 
+      {/* Missing audio: a Terminal command that fetches it on my own Mac */}
+      {tracks.length > 0 && withAudio < tracks.length && (
+        <MissingAudio tracks={tracks} folder={`${safeName(design.title)} audio`} />
+      )}
+
       {/* Files that aren't on the disc */}
       {unusedFiles.length > 0 && (
         <section>
@@ -834,6 +841,113 @@ function TracksStep({
         </div>
       )}
     </div>
+  );
+}
+
+// ---------- Missing audio ----------
+
+/** Wraps text in single quotes for zsh/bash. */
+const shellQuote = (text: string) => `'${text.replace(/'/g, `'\\''`)}'`;
+
+/**
+ * Builds a yt-dlp command for the tracks without audio. It runs on my own computer
+ * (YouTube blocks servers, and the site never touches the audio). Each track gets the
+ * file name Burn CD expects, so dropping the files back in matches them straight away.
+ */
+function downloadCommand(tracks: Track[], folder: string) {
+  const lines = [`mkdir -p ~/Downloads/${shellQuote(folder)} && cd ~/Downloads/${shellQuote(folder)}`];
+  tracks.forEach((track, index) => {
+    if (track.fileId) return;
+    const number = String(index + 1).padStart(2, "0");
+    const name = safeName(`${number} - ${track.artist ? `${track.artist} - ` : ""}${track.title}`);
+    // Search with the main artist and the bare song name: "(feat. …)" and "- Remastered" extras hurt more than help.
+    const mainArtist = track.artist.split(/,|&| feat\.? | x /i)[0].trim();
+    const songName = track.title.replace(/\s*[([].*?[)\]]/g, "").replace(/\s+-\s+.*$/, "").trim() || track.title;
+    const query = `${mainArtist} ${songName} audio`.replace(/["\s]+/g, " ").trim();
+    // Prefer a result close to the playlist's length, so it skips long music-video intros and hour-long loops.
+    const filter = track.duration
+      ? `duration > ${Math.max(0, track.duration - 25)} & duration < ${track.duration + 25}`
+      : "duration < 900";
+    lines.push(
+      `yt-dlp -q --progress -x --audio-format mp3 --audio-quality 0 --max-downloads 1 --match-filter ${shellQuote(filter)} -o ${shellQuote(`${name}.%(ext)s`)} ${shellQuote(`ytsearch5:${query}`)}`
+    );
+  });
+  lines.push("open .");
+  return lines.join("\n");
+}
+
+function CopyBox({ text, label }: { text: string; label: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      // Clipboard blocked; the text is selectable.
+    }
+  };
+  return (
+    <div className="relative">
+      <pre className="max-h-48 overflow-auto rounded-md bg-muted p-3 pr-20 font-mono text-[11px] leading-relaxed" aria-label={label}>
+        {text}
+      </pre>
+      <button
+        type="button"
+        onClick={copy}
+        className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-md border border-border bg-background px-2 py-1 text-xs hover:bg-muted"
+      >
+        {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+        {copied ? "Copied" : "Copy"}
+      </button>
+    </div>
+  );
+}
+
+function MissingAudio({ tracks, folder }: { tracks: Track[]; folder: string }) {
+  const missing = tracks.filter((t) => !t.fileId).length;
+  return (
+    <details className="rounded-lg border border-border p-4 text-sm">
+      <summary className="flex cursor-pointer list-none items-center gap-2 font-medium">
+        <Terminal className="h-4 w-4" />
+        Get the missing audio
+        <span className="font-normal text-muted-foreground">
+          · {missing} {missing === 1 ? "track" : "tracks"}
+        </span>
+      </summary>
+      <div className="mt-3 space-y-4 text-xs text-muted-foreground">
+        <p>
+          The site doesn&apos;t download music itself (YouTube blocks servers). This runs on your own Mac instead: it finds
+          each track on YouTube and saves it as an MP3, already named so it matches here.
+        </p>
+        <div className="space-y-1.5">
+          <p>
+            <span className="font-medium text-foreground">1. Once:</span> install the tools (needs{" "}
+            <a href="https://brew.sh" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+              Homebrew
+            </a>
+            ).
+          </p>
+          <CopyBox text="brew install yt-dlp ffmpeg" label="Install command" />
+        </div>
+        <div className="space-y-1.5">
+          <p>
+            <span className="font-medium text-foreground">2.</span> Paste this into Terminal. The files land in{" "}
+            <span className="font-mono">Downloads/{folder}</span>, and the folder opens when it&apos;s done.
+          </p>
+          <CopyBox text={downloadCommand(tracks, folder)} label="Download command" />
+        </div>
+        <p>
+          <span className="font-medium text-foreground">3.</span> Drag those files into “From your computer” above. They
+          match up on their own.
+        </p>
+        <p className="text-[11px]">
+          For your own use. YouTube&apos;s audio is compressed, so it&apos;s fine for a mix CD but not CD-perfect; buy the
+          songs that matter (Bandcamp, iTunes) for the best sound. If a song is skipped, its YouTube versions were a
+          different length; find it by hand. Keep yt-dlp current with <span className="font-mono">brew upgrade yt-dlp</span>.
+        </p>
+      </div>
+    </details>
   );
 }
 

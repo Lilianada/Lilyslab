@@ -19,7 +19,7 @@ const STATIC_PAGES: SearchItem[] = [
   { title: "Bookmarks", path: "/garden/bookmarks", snippet: "Find saved links and curated bookmarks." },
   { title: "Archives", path: "/archives", snippet: "Search older archived writings and notes." },
   { title: "Quotes", path: "/quotes", snippet: "Read collections of favorite quotes." },
-  { title: "Playground", path: "/playground", snippet: "Games, toys and experiments." },
+  { title: "Lab", path: "/projects", snippet: "Projects, tools and little apps." },
 ].map((page) => ({ ...page, id: `page-${page.path}`, type: "Page", tags: [], text: "" }));
 
 export function HomeSearch() {

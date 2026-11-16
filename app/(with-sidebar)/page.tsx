@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const collections = [
   { title: "poems", description: "Poems I've written.", path: "/garden/poems" },
   { title: "bookshelf", description: "My reading list.", path: "/garden/bookshelf" },
-  { title: "playground", description: "Games, toys and experiments.", path: "/playground" },
+  { title: "lab", description: "Projects, tools and little apps.", path: "/projects" },
   { title: "projects", description: "Projects I worked on.", path: "/projects" },
   { title: "webroll", description: "Links to my fav websites.", path: "/webroll" },
   { title: "quotes", description: "Collection of quotes.", path: "/quotes" },

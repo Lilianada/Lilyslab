@@ -17,7 +17,6 @@ import {
   Wrench,
   BadgeCheck,
   BookHeart as BookHeartIcon,
-  Calculator,
   Timer,
   Type,
   Shield,
@@ -35,9 +34,6 @@ import {
   Quote,
   AudioLines,
   Disc3,
-  Pencil,
-  Gamepad2,
-  Shapes,
   Headphones,
 } from "lucide-react";
 import { useAuth } from "@/contexts/auth-context";
@@ -89,24 +85,15 @@ const NAV_SECTIONS: { title?: string; items: NavEntry[] }[] = [
     ],
   },
   {
-    title: "Workshop",
+    title: "Lab",
     items: [
       { href: "/projects", icon: <BriefcaseBusiness size={16} />, label: "Projects" },
       { href: "/tools", icon: <Wrench size={16} />, label: "Tools" },
       { href: "/todo", icon: <BadgeCheck size={16} />, label: "Todo" },
-    ],
-  },
-  {
-    title: "Playground",
-    items: [
-      { href: "/playground/petal-catch", icon: <Gamepad2 size={16} />, label: "Petal Catch" },
-      { href: "/playground/doodle", icon: <Pencil size={16} />, label: "Doodle Pad" },
       { href: "/playground/transcribe", icon: <AudioLines size={16} />, label: "Transcriber" },
       { href: "/playground/burn-cd", icon: <Disc3 size={16} />, label: "Burn CD" },
       { href: "/playground/digital-clock", icon: <Timer size={16} />, label: "Digital Clock" },
-      { href: "/playground/calculator", icon: <Calculator size={16} />, label: "Calculator" },
       { href: "/playground/write", icon: <Type size={16} />, label: "Write Online" },
-      { href: "/playground", icon: <Shapes size={16} />, label: "All experiments" },
     ],
   },
   {
@@ -130,7 +117,7 @@ const NAV_SECTIONS: { title?: string; items: NavEntry[] }[] = [
 
 const NavItem = ({ href, icon, label, onClick }: NavEntry & { onClick?: () => void }) => {
   const pathname = usePathname() || "";
-  const isActive = pathname === href || (href !== "/playground" && pathname.startsWith(`${href}/`));
+  const isActive = pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <Link

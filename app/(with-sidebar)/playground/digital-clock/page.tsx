@@ -2,7 +2,7 @@ import React from 'react';
 import DigitalClock from '@/components/playground/DigitalClock';
 
 export const metadata = {
-  title: "Digital Clock | Playground | Lilyslab",
+  title: "Digital Clock | Lab | Lilyslab",
   description: "A responsive digital clock with timer functionality and customizable settings.",
 };
 

@@ -35,7 +35,6 @@ const PAGES = [
   "/tools",
   "/todo",
   "/logs",
-  "/playground",
   "/manifesto",
   "/webroll",
   "/webrings",

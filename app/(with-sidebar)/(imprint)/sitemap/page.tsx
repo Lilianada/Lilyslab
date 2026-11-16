@@ -94,25 +94,15 @@ function buildMap(): SiteNode {
         ],
       },
       {
-        name: "Workshop",
+        name: "Lab",
         children: [
           { name: "Projects", href: "/projects", description: "Things I've built" },
           { name: "Logs", href: "/logs", description: "Project logs" },
           { name: "Tools", href: "/tools", description: "Tools I use or want to try" },
           { name: "Todo", href: "/todo", description: "My messy website todo list" },
-        ],
-      },
-      {
-        name: "Playground",
-        href: "/playground",
-        description: "Small toys and experiments",
-        children: [
-          { name: "Petal Catch", href: "/playground/petal-catch", description: "Catch petals, dodge bees" },
-          { name: "Doodle Pad", href: "/playground/doodle", description: "Draw something for the fridge" },
           { name: "Transcriber", href: "/playground/transcribe", description: "Video links to text" },
           { name: "Burn CD", href: "/playground/burn-cd", description: "Plan a mix CD and get a folder ready to burn" },
           { name: "Digital Clock", href: "/playground/digital-clock" },
-          { name: "Calculator", href: "/playground/calculator" },
           { name: "Write Online", href: "/playground/write" },
         ],
       },
