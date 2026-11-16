@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { Webmentions } from "@/components/garden/Webmentions";
+import { AiEditedBadge, isAiEdited } from "@/components/garden/AiEditedBadge";
 import { getEssayBySlug, getAllEssays } from "@/lib/garden/essays";
 import { formatDate } from "@/lib/utils";
 import { Metadata } from "next/types";
@@ -123,6 +125,7 @@ export default async function EssaySlugPage({ params }: PageProps) {
               </div>
             </div>
             <h1 className="text-xl font-semibold">{data.title}</h1>
+            {isAiEdited(data) && <AiEditedBadge className="mt-2" />}
           </header>
 
           {data.coverImage && (
@@ -140,6 +143,7 @@ export default async function EssaySlugPage({ params }: PageProps) {
           <EssayMarkdownWrapper content={content} />
         </div>
 
+        <Webmentions path={`/garden/essays/${slug}`} />
         <Replies page={`essays/${slug}`} title={data.title || slug} />
         <PrevNext prev={prevPost} next={nextPost} />
       </div>

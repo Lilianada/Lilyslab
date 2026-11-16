@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { isAiEdited } from "@/components/garden/AiEditedBadge";
 import path from 'path';
 import matter from 'gray-matter';
 import { z } from 'zod';
@@ -33,6 +34,8 @@ const NoteMetaSchema = z.object({
   ]).optional(),
   type: z.string().optional(),
   published: z.boolean().optional(),
+  aiEdited: z.boolean().optional(),
+  ai: z.string().optional(),
   tags: z.array(z.string()).optional()
 });
 
@@ -44,6 +47,7 @@ interface NoteMeta {
   slug: string;
   tags?: string[];
   locked: boolean;
+  aiEdited: boolean;
 }
 
 const MONTHS = [
@@ -99,6 +103,7 @@ export default function NotesPage() {
             slug: filename.replace(/\.md$/, ''),
             tags: result.data.tags || [],
             locked,
+            aiEdited: isAiEdited(result.data),
           };
           return [validated];
         } catch (zodErr) {

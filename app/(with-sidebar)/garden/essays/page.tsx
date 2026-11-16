@@ -23,6 +23,7 @@ export default async function EssayPage() {
         wordCount,
         readingTime: Math.max(1, Math.ceil(wordCount / 200)),
         locked,
+        aiEdited: essay.aiEdited,
       }
     }
     posts = [

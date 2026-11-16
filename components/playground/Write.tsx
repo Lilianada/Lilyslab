@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { useEditor, EditorContent, type JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
+import { NoEmptyListItems } from "./no-empty-list-items";
 import {
   Download,
   Heading,
@@ -218,6 +219,7 @@ export default function Write() {
     extensions: [
       StarterKit,
       Placeholder.configure({ placeholder: "Start writing…" }),
+      NoEmptyListItems,
     ],
     editorProps: {
       attributes: { class: "write-body focus:outline-none min-h-[50vh]" },

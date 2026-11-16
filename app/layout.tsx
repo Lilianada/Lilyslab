@@ -105,11 +105,11 @@ export default function RootLayout({
         {/* Webmention endpoints */}
         <link 
           rel="webmention" 
-          href="https://webmention.io/www.lilyslab.xyz/webmention" 
+          href="https://webmention.io/lilyslab.xyz/webmention" 
         />
         <link 
           rel="pingback" 
-          href="https://webmention.io/www.lilyslab.xyz/xmlrpc" 
+          href="https://webmention.io/lilyslab.xyz/xmlrpc" 
         />
       </head>
       <body className="font-sans">

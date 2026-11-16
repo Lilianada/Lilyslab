@@ -2351,3 +2351,41 @@ tags:
 type: article
 id: article-190
 ---
+
+---
+publish: true
+title: "How to Make a Damn Website"
+url: https://lmnt.me/blog/how-to-make-a-damn-website.html
+createdAt: 2026-11-16
+tags:
+- personal-website
+- html
+type: article
+id: article-191
+---
+
+---
+publish: true
+title: "Zero to internet: your first website"
+url: https://htmlforpeople.com/zero-to-internet-your-first-website/
+createdAt: 2026-11-16
+tags:
+- html
+- beginners
+- personal-website
+type: article
+id: article-192
+---
+
+---
+publish: true
+title: "Fun with the web"
+url: https://patrickbrosset.com/articles/2026-01-06-fun-with-the-web/
+createdAt: 2026-11-16
+tags:
+- web
+- creativity
+- learning
+type: article
+id: article-193
+---

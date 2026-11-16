@@ -1,5 +1,6 @@
 "use client";
 
+import { AiEditedBadge } from "@/components/garden/AiEditedBadge";
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, ArrowUp, ArrowUpDown, Lock } from "lucide-react";
@@ -18,6 +19,8 @@ export interface EssayListItem {
   readingTime: number;
   /** Marked `published: false`: listed, but it can't be opened. */
   locked: boolean;
+  /** Written by me, edited with AI. */
+  aiEdited: boolean;
 }
 
 /** How many essays show before the "View all" button. */
@@ -59,7 +62,10 @@ function EssayRow({ essay, position }: { essay: EssayListItem; position: number 
       <Link href={`/garden/essays/${essay.slug}`} className={ROW_CLASS}>
         <span className={NUMBER_CLASS}>{number(position)}</span>
         <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
-          <span className="block text-sm font-medium">{essay.title}</span>
+          <span className="block text-sm font-medium">
+            {essay.title}
+            {essay.aiEdited && <AiEditedBadge className="ml-2 align-middle" />}
+          </span>
           {essay.excerpt && <span className="mt-0.5 line-clamp-2 block text-xs text-muted-foreground">{essay.excerpt}</span>}
           <span className="mt-1 block font-mono text-xs text-muted-foreground">
             {formatDateForDisplay(essay.createdAt)} · {essay.readingTime} min read · {essay.wordCount.toLocaleString("en-US")}{" "}

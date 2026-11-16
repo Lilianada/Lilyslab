@@ -1,3 +1,4 @@
+import { isAiEdited } from "@/components/garden/AiEditedBadge";
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -14,6 +15,8 @@ export type Essay = {
   content: string;
   published: boolean;
   type: string;
+  /** I wrote it; AI only edited it. */
+  aiEdited: boolean;
 };
 
 const essaysDir = path.join(process.cwd(), 'Content/essays');
@@ -54,6 +57,7 @@ function readEssayFiles(): (Essay & { publishedSetting: unknown })[] {
         published: published,
         content,
         type: data.type || 'evergreen',
+        aiEdited: isAiEdited(data),
         publishedSetting: data.published,
       };
     })
@@ -113,5 +117,6 @@ export function getEssayBySlug(slug: string): Essay | null {
     content,
     published: data.published === true,
     type: data.type || 'evergreen',
+    aiEdited: isAiEdited(data),
   };
 }

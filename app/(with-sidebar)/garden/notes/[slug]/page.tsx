@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { Webmentions } from "@/components/garden/Webmentions";
+import { AiEditedBadge, isAiEdited } from "@/components/garden/AiEditedBadge";
 import { formatDate } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import fs from "fs";
@@ -43,6 +45,7 @@ async function getNotesContent(slug: string) {
       type: data.type || "seedling",
       tags: data.tags || [],
       excerpt: data.excerpt || null,
+      aiEdited: isAiEdited(data),
     };
   } catch (error) {
     console.error(`Error getting note content for ${slug}:`, error);
@@ -162,10 +165,12 @@ export default async function NotesPage({ params }: NoteRouteParams) {
               </div>
             </div>
             <h1 className="text-xl font-semibold">{note.title}</h1>
+            {note.aiEdited && <AiEditedBadge className="mt-2" />}
           </header>
 
           <NotesMarkdownWrapper content={note.content} />
         </div>
+        <Webmentions path={`/garden/notes/${slug}`} />
         <Replies page={`notes/${slug}`} title={note.title} />
         <PrevNext prev={previousPost} next={nextPost} />
       </div>

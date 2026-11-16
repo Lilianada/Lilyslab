@@ -103,3 +103,59 @@ category: personal
 id: personal-007
 ---
 
+
+---
+publish: true
+title: Advik's blog
+url: https://adviks.in/blog/
+date: 2026-11-16
+tags:
+  - blog
+  - writing
+notes: "Personal blog of reflections on ideas, tech and writing."
+type: webroll
+category: personal
+id: personal-008
+---
+
+---
+publish: true
+title: Manton Reece
+url: https://www.manton.org/
+date: 2026-11-16
+tags:
+  - blog
+  - indieweb
+notes: "Blog of Micro.blog's founder: photos, apps and indie web."
+type: webroll
+category: personal
+id: personal-009
+---
+
+---
+publish: true
+title: Steph Ango
+url: https://stephango.com/
+date: 2026-11-16
+tags:
+  - blog
+  - essays
+notes: "Essays and ideas from Obsidian's CEO."
+type: webroll
+category: personal
+id: personal-010
+---
+
+---
+publish: true
+title: yesterends
+url: https://yesterends.bearblog.dev/
+date: 2026-11-16
+tags:
+  - blog
+  - commonplace
+notes: "A messy commonplace: book fragments, clippings and musings."
+type: webroll
+category: personal
+id: personal-011
+---

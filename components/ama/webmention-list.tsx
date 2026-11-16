@@ -16,7 +16,7 @@ export function WebmentionList({ isLoading }: { isLoading: boolean }) {
       try {
         // Fetch all webmentions for the site
         const response = await fetch(
-          `https://webmention.io/api/mentions.jf2?token=${process.env.NEXT_PUBLIC_WEBMENTION_TOKEN}&per-page=100`,
+          '/api/webmentions',
           { 
             method: 'GET',
             headers: {

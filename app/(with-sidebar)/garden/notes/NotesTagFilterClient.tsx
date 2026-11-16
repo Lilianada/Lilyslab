@@ -1,4 +1,5 @@
 "use client";
+import { AiEditedBadge } from "@/components/garden/AiEditedBadge";
 import React, { useState } from "react";
 import { ArrowRight, Lock } from 'lucide-react';
 
@@ -13,6 +14,8 @@ interface NoteMeta {
   fullDate: string;
   /** Marked `published: false`: listed, but it can't be opened. */
   locked: boolean;
+  /** Written by me, edited with AI. */
+  aiEdited?: boolean;
 }
 
 interface Props {
@@ -198,6 +201,7 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
                               <p className="font-medium text-xs leading-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
                                 {note.title}
                               </p>
+                              {note.aiEdited && <AiEditedBadge />}
                               
                               <div className="flex items-center justify-between text-xs">
                                 <span className="text-muted-foreground font-nitti">
