@@ -21,4 +21,4 @@ The lack of free natural spaces in the F.C.T and how the current minister is doi
 
 I love to walk, so when I find out that parks are been sold off to private entities who have no plans of improving on the parks for the public, it makes me even more resentful towards the government and its lack of sheer care for its citizens and their affairs.
 
-BRING PARK FREE PARK!12
+BRING PARK FREE PARK!

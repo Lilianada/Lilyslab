@@ -4,8 +4,8 @@ createdAt: 2026-11-09
 lastUpdated: 2026-11-09
 tags:
   - political-issues
-type: evergreen
-published: false
+type: budding
+published: true
 ---
 
 It’s a disaster. The efforts you put into your dream job or business and you still aren’t able to afford basic things not to talk more of luxuries. 

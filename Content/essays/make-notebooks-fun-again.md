@@ -1,13 +1,15 @@
 ---
 title: Make notebooks fun again
 createdAt: 2026-11-13
-lastUpdated: 2026-11-13
+lastUpdated: 2026-11-17
 tags: 
   - notebooks
   - stationery
 type: evergreen
 published: true
 ---
+
+Every blank page in your notebook is a thought waiting to be captured, an idea longing to be born, an observation anticipating discovery, a conversation between who you are and who you're becoming. And because your notebook is an extension of your mind, it helps you keep a record of your life and draws you to make serendipitous connections between concepts and ideas.
 
 This is my personal essay written to make stationery fun again. I run a small stationery business and creative studio out of large living room.
 
