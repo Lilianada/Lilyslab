@@ -2389,3 +2389,41 @@ tags:
 type: article
 id: article-193
 ---
+
+---
+publish: true
+title: "Ideas on how to use your notebooks"
+url: https://herwhimsysoul.substack.com/p/ideas-on-how-to-use-your-notebooks
+createdAt: 2026-11-17
+tags:
+- notebooks
+- creativity
+- journaling
+type: article
+id: article-194
+---
+
+---
+publish: true
+title: "How to use notebooks as creative tools"
+url: https://medium.com/@elif_89386/how-to-use-notebooks-as-creative-tools-c8579231580c
+createdAt: 2026-11-17
+tags:
+- notebooks
+- creativity
+type: article
+id: article-195
+---
+
+---
+publish: true
+title: "The internet used to be* fun"
+url: https://kwon.nyc/internet/
+createdAt: 2026-11-17
+tags:
+- web
+- personal-website
+- fun
+type: article
+id: article-196
+---

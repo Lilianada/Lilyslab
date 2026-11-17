@@ -186,7 +186,6 @@ export default function NotesPage() {
           
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              "50 Things I Know",
               "Atomic Notes", 
               "Budding Notes",
               "Content Curation",
@@ -195,9 +194,7 @@ export default function NotesPage() {
               "How to Create Your Digital Garden",
               "Journaling",
               "Minimalism",
-              "Personal wiki",
-              "Why I Read",
-              "Why Start a Digital Garden?"
+              "Personal wiki"
             ].map((topic, index) => (
               <div
                 key={index}

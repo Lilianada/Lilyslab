@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowUpRight, Lock, Badge } from "lucide-react";
 import Link from "next/link";
+import { LockedFilter } from "@/components/garden/HideLocked";
 
 import fs from "fs";
 import path from "path";
@@ -52,7 +53,7 @@ function getPublishedProjects(): Project[] {
 const projects = typeof window === "undefined" ? getPublishedProjects() : [];
 
 export default function WorkshopLogPage() {
-  console.log(projects);
+  const lockedCount = projects.filter((p) => p.isConfidential || p.isArchived).length;
   return (
     <div className="max-w-2xl w-full mx-auto px-4 py-16">
       <header className="mb-8">
@@ -65,13 +66,14 @@ export default function WorkshopLogPage() {
         </div>
         <p className="text-sm text-muted-foreground mt-2">Too many ideas, not enough <span className="line-through">time </span>focus.</p>
       </header>
-      <div>
+      <LockedFilter count={lockedCount}>
         {projects.map((item, i) => {
           const isConfidential = item.isConfidential === true || item.isArchived === true;
           return (
             <React.Fragment key={item.number + item.title}>
               {/* Desktop/Tablet (md and up) */}
               <div
+                data-locked={isConfidential || undefined}
                 className={`group grid-cols-12 items-center min-h-[44px] text-sm border-0 border-b border-border last:border-0 px-2 py-2 transition-colors duration-150 hidden lg:grid hover:bg-muted ${isConfidential
                     ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed"
                     : "cursor-pointer bg-transparent"
@@ -137,6 +139,7 @@ export default function WorkshopLogPage() {
                   target={item.url.startsWith('http') ? "_blank" : "_self"}
                   rel={item.url.startsWith('http') ? "noopener noreferrer" : undefined}
                   aria-label={`Open ${item.title} ${item.url.startsWith('http') ? 'externally' : ''}`}
+                  data-locked={isConfidential || undefined}
                   className={`group flex flex-col items-start gap-y-1 border-0 border-b border-border last:border-0 px-2 py-3 transition-colors duration-150 lg:hidden hover:bg-muted ${isConfidential
                       ? "opacity-70 text-zinc-500 bg-transparent cursor-not-allowed"
                       : "cursor-pointer bg-transparent"
@@ -173,7 +176,7 @@ export default function WorkshopLogPage() {
 
           );
         })}
-      </div>
+      </LockedFilter>
     </div>
   );
 }

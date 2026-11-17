@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ArrowRight, ArrowUp, ArrowUpDown, Lock } from "lucide-react";
 import { ExpandingSearch } from "@/components/ExpandingSearch";
 import { formatDateForDisplay } from "@/lib/utils";
+import { HideLockedButton, useHideLocked } from "@/components/garden/HideLocked";
 import { LIST_CLASS, NUMBER_CLASS, ROW_CLASS, number } from "@/components/learn/TrackList";
 
 /** Just what the list needs, so essay text stays out of the browser bundle. */
@@ -88,6 +89,8 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
   const [showAllTags, setShowAllTags] = useState(false);
   const [showAllEssays, setShowAllEssays] = useState(false);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const [hideLocked, toggleHideLocked] = useHideLocked();
+  const lockedCount = essays.filter((essay) => essay.locked).length;
 
   // Count essays per tag
   const tagCounts: Record<string, number> = {};
@@ -108,7 +111,7 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
 
   // Essays arrive newest first; flip them for "Oldest".
   const sorted = sortOrder === "newest" ? essays : [...essays].reverse();
-  const results = sorted.filter((essay) => (!selectedTag || essay.tags.includes(selectedTag)) && matchesSearch(essay, query));
+  const results = sorted.filter((essay) => !(hideLocked && essay.locked) && (!selectedTag || essay.tags.includes(selectedTag)) && matchesSearch(essay, query));
   const visible = showAllEssays ? results : results.slice(0, PAGE_SIZE);
   const hiddenCount = results.length - visible.length;
 
@@ -151,6 +154,7 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
             {query.trim() && ` matching "${query.trim()}"`}
           </p>
           <div className="ml-auto flex items-center gap-2">
+            <HideLockedButton hide={hideLocked} onToggle={toggleHideLocked} count={lockedCount} />
             <ExpandingSearch value={query} onChange={setQuery} label="Search essays" />
             <button
               type="button"

@@ -826,3 +826,33 @@ type: webroll
 category: misc
 id: misc-060
 ---
+
+---
+publish: true
+title: "Fumadocs"
+url: https://www.fumadocs.dev/
+date: 2026-11-17
+tags:
+  - docs
+  - react
+  - tools
+notes: "A good-looking React framework for documentation sites."
+type: webroll
+category: misc
+id: misc-061
+---
+
+---
+publish: true
+title: "Present & Correct"
+url: https://www.presentandcorrect.com/
+date: 2026-11-17
+tags:
+  - stationery
+  - shop
+  - design
+notes: "New and vintage stationery and office sundries from a London shop."
+type: webroll
+category: misc
+id: misc-062
+---

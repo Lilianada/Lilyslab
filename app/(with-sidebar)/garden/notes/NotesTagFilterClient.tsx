@@ -2,6 +2,7 @@
 import { AiEditedBadge } from "@/components/garden/AiEditedBadge";
 import React, { useState } from "react";
 import { ArrowRight, Lock } from 'lucide-react';
+import { HideLockedButton, useHideLocked } from "@/components/garden/HideLocked";
 
 interface NoteMeta {
   title: string;
@@ -27,6 +28,8 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
+  const [hideLocked, toggleHideLocked] = useHideLocked();
+  const lockedCount = allNotes.filter((note) => note.locked).length;
   
   // Count notes per tag
   const tagCounts: Record<string, number> = {};
@@ -54,11 +57,11 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
 
   // Filter and regroup notes based on selected tag
   const filteredAndGrouped = React.useMemo(() => {
-    if (!selectedTag) return grouped;
+    if (!selectedTag && !hideLocked) return grouped;
     
-    // Filter all notes by tag
-    const filteredNotes = allNotes.filter(note => 
-      (note.tags || []).includes(selectedTag)
+    // Filter all notes by tag, and drop locked ones when they're hidden
+    const filteredNotes = allNotes.filter(note =>
+      (!selectedTag || (note.tags || []).includes(selectedTag)) && !(hideLocked && note.locked)
     );
     
     // Regroup filtered notes
@@ -78,7 +81,7 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
       
       return acc;
     }, {} as Record<string, Record<string, NoteMeta[]>>);
-  }, [selectedTag, grouped, allNotes]);
+  }, [selectedTag, hideLocked, grouped, allNotes]);
 
   const filteredNotesCount = selectedTag 
     ? allNotes.filter(note => (note.tags || []).includes(selectedTag)).length
@@ -153,6 +156,10 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
               </div>
             </div>
           )}
+
+          <div className="mb-3 flex justify-end">
+            <HideLockedButton hide={hideLocked} onToggle={toggleHideLocked} count={lockedCount} />
+          </div>
 
           {/* Notes Grid Layout */}
           <div className="space-y-8">
