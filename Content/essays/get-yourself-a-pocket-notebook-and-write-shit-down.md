@@ -10,6 +10,8 @@ type: evergreen
 published: true
 ---
 
+![Writing](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWgzbzZnYmN3Zzd1cmlybHh0dGUycDFkZmptZGtkbWVyMGtwanRwYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11ikeVaUfcXLWM/giphy.gif)
+
 Our brains were never designed to keep things stored for a long period of time. Your brain should have a backup the same way your computer does. That backup can be a notebook, the cloud or a hard drive. 
 
 For the sake of physical media and the trend of going analog in a digital world, that backup should be a notebook. A person who writes a lot is a person who thinks a lot. Writing requires you to think more, process events and form ideas. A 2014 study by Pam A. Mueller and Daniel M. Oppenheimer showed that writing your notes down by hand can improve "learning and retention".

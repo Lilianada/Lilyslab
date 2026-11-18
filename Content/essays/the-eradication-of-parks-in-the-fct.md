@@ -8,6 +8,7 @@ tags:
 type: evergreen
 published: true
 ---
+![Nature park](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2NzZjNqbW1uZDlkZTlncWkwOXJuMGgxNW5wYms2MnBxdjkwM3dsNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QH8meCXQeuzhXYeNuL/giphy.gif)
 
 I came across this [page](https://www.manton.org/texas-state-parks/) from Manton's website where he records all the parks he has visited in the city of Texas. It made me ponder a bit on what we call a park here in Abuja. Texas state has about 90 parks and from the looks of it, these parks are beautiful natural terrains that haven't been commercialised. He attached images to all [32 parks](https://www.manton.org/2024/07/08/lunch-at-lbj.html) that he has visited and from all the images, you can see how green, calming and relaxing these parks are.
 

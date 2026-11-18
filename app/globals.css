@@ -89,18 +89,15 @@
 /* Backlinks styling */
 @layer components {
   .backlink {
-    @apply relative cursor-pointer inline-flex items-center dark:decoration-[hsl(var(--steelBlue))] dark:hover:decoration-[hsl(var(--lightBlue))];
+    /* A plain coloured underline; the text keeps its own colour. */
+    cursor: pointer;
     text-decoration: underline;
-    text-decoration-color: hsl(var(--lightBlue) / 0.8);
-    text-decoration-style: solid;
-    text-decoration-skip-ink: none;
-    text-decoration-thickness: 0.5em;
-    text-underline-offset: -0.25em;
-    transition: all 0.3s;
+    text-decoration-color: hsl(var(--steelBlue));
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
   }
-  .backlink:hover {
-    text-decoration-color: hsl(var(--siteBlue));
-    text-decoration-thickness: 0.6em;
+  .dark .backlink {
+    text-decoration-color: hsl(var(--lightBlue));
   }
   .backlink:focus-visible {
     @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background rounded-sm;

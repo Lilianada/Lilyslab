@@ -9,12 +9,13 @@ type: evergreen
 published: true
 ---
 
-
 A while back I wrote a 500-word essay on [[why I write]], and I’ve been trying to improve my writing. I've tried to make my writing practice fun and interesting for the sake of consistency.
 
 If, like me, you have an interest in learning to write better, then you might be interested to know that having a clear structure that guides you helps to make writing easier. I have devised a roadmap, a structure to follow. This is what works for me, and if you’re lost, you can try it and see if it sticks.
 
 To write better, you must be willing to build a good writing habit. Those habits include writing every day, reading widely and being willing to have a bad first draft.
+
+![Write](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3dpeWZsbWU2d3Q3bDd3YmJtcmU4dXhvNmRnMjRiN20wb3FnbmV5dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YHpmahJgMjxL6S29Au/giphy.gif)
 
 ### Things I've learnt about writing
 
