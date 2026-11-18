@@ -1,6 +1,9 @@
 ---
 createdAt: 2025-06-24
 lastUpdated: 2025-06-25
+published: true
+type: budding
+tags:
 ---
 
 What do I understand by Muscle Memory?

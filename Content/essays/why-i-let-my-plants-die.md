@@ -28,15 +28,15 @@ I was happy.
 I looked after it. 
 I got several others immediately after. 
 I cared for them because how they looked 
-and faired was dependent 
+and faired were dependent 
 on the love and care 
 I showed them.
 
 Then I had to go on a rather long holiday. 
 I planned for it to last a week or less 
 but not more. 
-But unfortunately for me, 
-it lasted two weeks more.
+But with an unfortunately turn of events, 
+it lasted two more weeks.
 
 My first plant died.
 This plant came in a pot made of cement 
@@ -50,7 +50,7 @@ since I had 5 other water plants still thriving.
 Not until my mental and physical health 
 started deteriorating 
 due to lack of love, care and affection.
-It affected my output of love and care to my plants.
+It affected the output of love and care I showed to my plants.
 I saw and watched them wilt one leaf at a time.
 The water in the bottles changed from clear 
 to yellow and some to green. 
@@ -59,11 +59,11 @@ as they made the water filthy.
 
 Not until writing this, 
 I realized input matters. 
-You can't give what you don't have or what you lack. 
+You can't give what you don't have. 
 When it became obvious that I lacked love was when my plants started to suffer. 
 
-This isn't just about external love being received, 
-it is also about internal love which is within.
+This isn't just about external love we receive from others, 
+it is also about internal love which we have within.
 Do I love myself? 
 Do I show enough care to myself?
 My plants answered these questions when they started wilting.

@@ -3,6 +3,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { FootnoteRef } from "./footnote-ref";
 import remarkBreaks from "remark-breaks";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
@@ -287,40 +288,14 @@ const MarkdownRenderer = ({
               );
             }
 
-            // Check if this is a footnote link (starts with # and contains footnote patterns)
+            // Footnote markers preview their note on hover, like Wikipedia.
+            if (href && href.startsWith("#") && props["data-footnote-ref"] !== undefined) {
+              return <FootnoteRef href={href} {...props} />;
+            }
+
+            // Other in-page links (like a footnote's back arrow) stay on the page.
             if (href && href.startsWith("#")) {
-              const handleFootnoteClick = (e: React.MouseEvent) => {
-                e.preventDefault();
-                const targetId = href.slice(1); // Remove the # prefix
-                const targetElement = document.getElementById(targetId);
-
-                if (targetElement) {
-                  targetElement.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-
-                  // Add a temporary highlight effect to the target element
-                  targetElement.classList.add("footnote-highlight");
-                  setTimeout(() => {
-                    targetElement.classList.remove("footnote-highlight");
-                  }, 2000);
-
-                  // Update URL without triggering page refresh
-                  const url = new URL(window.location.href);
-                  url.hash = href;
-                  window.history.pushState({}, "", url);
-                }
-              };
-
-              return (
-                <a
-                  className="footnote-ref"
-                  href={href}
-                  onClick={handleFootnoteClick}
-                  {...props}
-                />
-              );
+              return <a className={cn(className)} href={href} {...props} />;
             }
 
             // Default link behavior for external links

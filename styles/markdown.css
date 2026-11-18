@@ -203,3 +203,32 @@
   50% { background-color: hsl(var(--primary) / 0.1); }
   100% { background-color: transparent; }
 }
+
+/* Footnote markers: tiny superscript numbers, like Wikipedia */
+.markdown-content sup:has(> .footnote-ref) {
+  font-size: 0.7em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.markdown-content a.footnote-ref {
+  @apply px-px text-steelBlue dark:text-lightBlue hover:underline;
+}
+
+.markdown-content a.footnote-ref::before { content: "["; }
+.markdown-content a.footnote-ref::after { content: "]"; }
+
+/* The note shown when hovering a footnote marker */
+.footnote-preview p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.footnote-preview p + p {
+  margin-top: 0.5rem;
+}
+
+.footnote-preview a {
+  @apply text-steelBlue dark:text-lightBlue underline-offset-2 hover:underline [overflow-wrap:anywhere];
+}
