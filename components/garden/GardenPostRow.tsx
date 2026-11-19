@@ -23,15 +23,22 @@ const shortDate = (day: string) =>
 export function GardenPostRow({
   post,
   showDate = true,
+  truncate = false,
 }: {
   post: { href: string; title: string; kind: "essay" | "note"; stage: Stage; lastUpdated: string };
   showDate?: boolean;
+  /** Keep the title to one line (the full title shows on hover). */
+  truncate?: boolean;
 }) {
   return (
     <li>
-      <Link href={post.href} className="group flex items-baseline gap-2.5 py-1.5 text-sm">
+      <Link href={post.href} title={truncate ? post.title : undefined} className="group flex items-baseline gap-2.5 py-1.5 text-sm">
         <StageIcon stage={post.stage} className="translate-y-0.5" />
-        <span className="min-w-0 flex-1 [overflow-wrap:anywhere] group-hover:text-primary group-hover:underline group-hover:underline-offset-4">
+        <span
+          className={`min-w-0 flex-1 group-hover:text-primary group-hover:underline group-hover:underline-offset-4 ${
+            truncate ? "truncate" : "[overflow-wrap:anywhere]"
+          }`}
+        >
           {post.title}
         </span>
         <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
@@ -46,7 +53,7 @@ export function GardenPostRow({
 /** The key to the stage icons. */
 export function StageLegend() {
   return (
-    <ul className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-muted-foreground">
+    <ul className="flex flex-col gap-x-4 gap-y-1 font-mono text-[11px] text-muted-foreground">
       {(Object.keys(STAGES) as Stage[]).map((stage) => (
         <li key={stage} className="inline-flex items-center gap-1.5">
           <StageIcon stage={stage} size={12} />

@@ -71,7 +71,7 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
     
     // Regroup filtered notes
     return filteredNotes.reduce((acc, note) => {
-      const [year, month] = note.createdAt.split('-');
+      const [year, month] = note.lastUpdated.split('-');
       if (!year || !month) return acc;
       
       if (!acc[year]) {
@@ -242,7 +242,7 @@ function NoteCard({ note }: { note: NoteMeta }) {
         <div className="space-y-1">
           <p className="font-medium text-xs leading-tight text-foreground line-clamp-2">{note.title}</p>
           <div className="flex items-center justify-between text-xs">
-            <span className="text-muted-foreground font-nitti">{note.displayDate} · Locked</span>
+            <span className="text-muted-foreground font-nitti">Tended {note.displayDate} · Locked</span>
             <Lock className="w-3 h-3 text-muted-foreground" aria-label="Locked" />
           </div>
         </div>
@@ -257,7 +257,7 @@ function NoteCard({ note }: { note: NoteMeta }) {
           </p>
           {note.aiEdited && <AiEditedBadge />}
           <div className="flex items-center justify-between text-xs">
-            <span className="text-muted-foreground font-nitti">{note.displayDate}</span>
+            <span className="text-muted-foreground font-nitti">Tended {note.displayDate}</span>
             <div className="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors">
               <ArrowRight className="w-3 h-3" />
             </div>

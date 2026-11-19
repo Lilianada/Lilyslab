@@ -22,6 +22,7 @@ export default async function EssayPage() {
         slug: essay.slug,
         title: essay.title,
         createdAt: essay.createdAt,
+        lastUpdated: essay.lastUpdated,
         excerpt: locked ? "" : essay.excerpt || "",
         tags: essay.tags || [],
         wordCount,
@@ -31,10 +32,11 @@ export default async function EssayPage() {
         topicId: topics.get(`/garden/essays/${essay.slug}`) ?? topicFor(essay.tags).id,
       }
     }
+    // Most recently tended first: a garden shows what's growing, not what's newest.
     posts = [
       ...getAllEssays().map((essay) => toListItem(essay, false)),
       ...getLockedEssays().map((essay) => toListItem(essay, true)),
-    ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    ].sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime())
   } catch (err) {
     console.error("Error in EssayPage:", err)
     error = "These essays wouldn't load. Give it a moment and try again."

@@ -120,10 +120,11 @@ export default function NotesPage() {
     });
 
   // Sort and group notes by year and month using createdAt
+  // Grouped by when each note was last tended, most recent first, not when it was written.
   const grouped = notes
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    .sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))
     .reduce((acc, note) => {
-      const [year, month, day] = note.createdAt.split('-');
+      const [year, month, day] = note.lastUpdated.split('-');
       if (!year || !month || !day) return acc; // Skip invalid dates
 
       // Format date as MM-DD
@@ -146,7 +147,7 @@ export default function NotesPage() {
       acc[year][month].push({
         ...note,
         displayDate: formattedDate,
-        fullDate: note.createdAt // Keep the original date for sorting if needed
+        fullDate: note.lastUpdated
       });
       
       return acc;
@@ -155,8 +156,8 @@ export default function NotesPage() {
   // Create flat array of all notes with display date for the client component
   const allNotesWithDisplayDate = notes.map(note => ({
     ...note,
-    displayDate: note.createdAt,
-    fullDate: note.createdAt
+    displayDate: note.lastUpdated,
+    fullDate: note.lastUpdated
   }));
 
   return (

@@ -1,4 +1,5 @@
 import fs from "fs";
+import { byLastTended, getGardenPosts, type GardenPost } from "@/lib/garden/posts";
 import path from "path";
 import matter from "gray-matter";
 import { getAllEssays } from "@/lib/garden/essays";
@@ -82,26 +83,22 @@ export function getMicroBlogs(): MicroBlogItem[] {
 }
 
 /** The newest few of everything, for the homepage. */
+/** The most recently updated essays or notes, dated by when they were last tended. */
+function tended(kind: GardenPost["kind"], limit: number): FeedItem[] {
+  return getGardenPosts()
+    .filter((post) => post.kind === kind)
+    .sort(byLastTended)
+    .slice(0, limit)
+    .map((post) => ({ id: post.slug, title: post.title, path: post.href, date: post.lastUpdated }));
+}
+
 export async function getHomeFeed(limit = 5) {
   const bookmarks = await getBookmarks();
 
   return {
-    essays: getAllEssays()
-      .slice(0, limit)
-      .map<FeedItem>((essay) => ({
-        id: essay.slug,
-        title: essay.title,
-        path: `/garden/essays/${essay.slug}`,
-        date: essay.createdAt,
-      })),
-    notes: getAllNotesData()
-      .slice(0, limit)
-      .map<FeedItem>((note) => ({
-        id: note.slug,
-        title: note.frontmatter.title,
-        path: `/garden/notes/${note.slug}`,
-        date: note.frontmatter.createdAt,
-      })),
+    // Essays and notes are garden posts: most recently tended first, not newest.
+    essays: tended("essay", limit),
+    notes: tended("note", limit),
     bookmarks: bookmarks
       .filter((bookmark) => bookmark.title && bookmark.link)
       .slice(0, limit)

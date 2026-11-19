@@ -41,7 +41,7 @@ export const TOPICS: Topic[] = [
   },
   {
     id: "gardening",
-    title: "Gardens & note-taking",
+    title: "Gardens & Note-taking",
     blurb: "Digital gardens, personal knowledge and how I keep notes.",
     intro:
       "Demo intro. The ideas this website is built on: digital gardens, personal knowledge management, and the habits of collecting and connecting notes. If you're new here, this is a good place to start.",
@@ -49,7 +49,7 @@ export const TOPICS: Topic[] = [
   },
   {
     id: "personal-web",
-    title: "The personal web",
+    title: "The Personal Web",
     blurb: "Owning a website, the indie web, and being online on purpose.",
     intro:
       "Demo intro. Why everyone should own a little corner of the internet, how to build one, and how to use the rest of the web without it using you.",
@@ -61,7 +61,7 @@ export const TOPICS: Topic[] = [
   },
   {
     id: "work",
-    title: "Work & projects",
+    title: "Work & Projects",
     blurb: "Building things, shipping them, and staying productive.",
     intro: "Demo intro. Notes on projects, products and work: shipping small, planning less, and what jobs have taught me.",
     tags: [
@@ -71,7 +71,7 @@ export const TOPICS: Topic[] = [
   },
   {
     id: "mind",
-    title: "Mind & self",
+    title: "Mind & Self",
     blurb: "Mental health, growth, purpose and the questions in between.",
     intro: "Demo intro. Thinking out loud about the mind: anxiety, purpose, grief, habits, and learning to be kind to myself.",
     tags: [
@@ -82,14 +82,14 @@ export const TOPICS: Topic[] = [
   },
   {
     id: "books",
-    title: "Books & stories",
+    title: "Book Reviews",
     blurb: "Reviews and notes on what I've read and watched.",
     intro: "Demo intro. Book and film reviews, and notes from the stories that stayed with me.",
     tags: ["book-review", "fiction", "non-fiction", "psychological-fiction", "movie-review", "self-help"],
   },
   {
     id: "life",
-    title: "Life & opinions",
+    title: "Life & Opinions",
     blurb: "Love, style, growing up, and things I have opinions about.",
     intro: "Demo intro. Everything else: relationships, fashion, growing up in Nigeria, old teen writing, and opinions I stand by.",
     tags: [],

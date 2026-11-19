@@ -16,6 +16,8 @@ export interface EssayListItem {
   slug: string;
   title: string;
   createdAt: string;
+  /** When it was last tended; the list is ordered by this. */
+  lastUpdated: string;
   excerpt: string;
   tags: string[];
   wordCount: number;
@@ -53,7 +55,7 @@ function EssayRow({ essay, position }: { essay: EssayListItem; position: number 
           <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
             <span className="block text-sm font-medium">{essay.title}</span>
             <span className="mt-1 block font-mono text-xs text-muted-foreground">
-              {formatDateForDisplay(essay.createdAt)} · Locked
+              Tended {formatDateForDisplay(essay.lastUpdated)} · Locked
             </span>
           </span>
           <Lock size={14} className="mt-1 shrink-0 text-muted-foreground" aria-label="Locked" />
@@ -73,7 +75,7 @@ function EssayRow({ essay, position }: { essay: EssayListItem; position: number 
           </span>
           {essay.excerpt && <span className="mt-0.5 line-clamp-2 block text-xs text-muted-foreground">{essay.excerpt}</span>}
           <span className="mt-1 block font-mono text-xs text-muted-foreground">
-            {formatDateForDisplay(essay.createdAt)} · {essay.readingTime} min read · {essay.wordCount.toLocaleString("en-US")}{" "}
+            Tended {formatDateForDisplay(essay.lastUpdated)} · {essay.readingTime} min read · {essay.wordCount.toLocaleString("en-US")}{" "}
             {essay.wordCount === 1 ? "word" : "words"}
           </span>
         </span>
@@ -114,7 +116,7 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
   // Keep a selected tag visible even when it isn't a popular one
   const shownTags = showAllTags ? allTags : selectedTag && !topTags.includes(selectedTag) ? [...topTags, selectedTag] : topTags;
 
-  // Essays arrive newest first; flip them for "Oldest".
+  // Essays arrive most recently tended first; flip them for "Oldest".
   const sorted = sortOrder === "newest" ? essays : [...essays].reverse();
   const results = sorted.filter((essay) => !(hideLocked && essay.locked) && (!selectedTag || essay.tags.includes(selectedTag)) && matchesSearch(essay, query));
   const visible = showAllEssays || view === "topic" ? results : results.slice(0, PAGE_SIZE);

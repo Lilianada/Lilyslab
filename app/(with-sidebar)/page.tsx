@@ -1,25 +1,66 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Smile } from "lucide-react";
+import { ArrowRight, BookOpen, Flower2, Hammer, Sprout, Smile, type LucideIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { getHomeFeed, type FeedItem } from "@/lib/garden-index";
 import AnimatedLogo from "@/components/comps/AnimatedLogo";
 import { MusicPlayerWidget } from "@/components/audio/music-player-widget";
 import { HomeSearch } from "@/components/home/HomeSearch";
-import { InteractiveFlower } from "@/components/interactive-flower";
 import { WanderButton } from "@/components/fun/WanderButton";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const collections = [
-  { title: "poems", description: "Poems I've written.", path: "/garden/poems" },
-  { title: "bookshelf", description: "My reading list.", path: "/garden/bookshelf" },
-  { title: "lab", description: "Projects, tools and little apps.", path: "/projects" },
-  { title: "projects", description: "Projects I worked on.", path: "/projects" },
-  { title: "webroll", description: "Links to my fav websites.", path: "/webroll" },
-  { title: "quotes", description: "Collection of quotes.", path: "/quotes" },
+/**
+ * Everything beyond the essays, notes and bookmarks on the right, planted in beds.
+ * Kept in step with the sidebar.
+ */
+const BEDS: { name: string; icon: LucideIcon; blurb: string; items: { title: string; description: string; path: string }[] }[] = [
+  {
+    name: "Reading",
+    icon: BookOpen,
+    blurb: "What I take in",
+    items: [
+      { title: "Bookshelf", description: "Books I've read, am reading, or plan to", path: "/garden/bookshelf" },
+      { title: "Media digest", description: "What I watched, heard and read each month", path: "/garden/media-digest" },
+      { title: "Quotes", description: "Lines worth keeping", path: "/quotes" },
+      { title: "Word of the day", description: "New words, one at a time", path: "/garden/word-of-the-day" },
+    ],
+  },
+  {
+    name: "Writing",
+    icon: Sprout,
+    blurb: "What I put out",
+    items: [
+      { title: "Poems", description: "Poems I've written", path: "/garden/poems" },
+      { title: "Commonplace book", description: "Clippings, fragments and notes", path: "/commonplace-book" },
+      { title: "Daily logs", description: "Small entries from ordinary days", path: "/daily-logs" },
+      { title: "Archives", description: "Old writing from earlier blogs", path: "/archives" },
+    ],
+  },
+  {
+    name: "Making",
+    icon: Hammer,
+    blurb: "What I build",
+    items: [
+      { title: "Projects", description: "Things I've built and am building", path: "/projects" },
+      { title: "Tools", description: "Tools I use to make things", path: "/tools" },
+      { title: "Write Online", description: "A quiet place to write", path: "/playground/write" },
+      { title: "Burn CD", description: "Plan and burn a mix CD", path: "/playground/burn-cd" },
+    ],
+  },
+  {
+    name: "Wandering",
+    icon: Flower2,
+    blurb: "Where I go on the web",
+    items: [
+      { title: "Webroll", description: "Personal websites I love", path: "/webroll" },
+      { title: "Webrings", description: "Rings this site belongs to", path: "/webrings" },
+      { title: "Manifesto", description: "What I believe about the web", path: "/manifesto" },
+      { title: "Uses", description: "My setup, apps and gear", path: "/uses" },
+    ],
+  },
 ];
 
 const formatShortDate = (dateString: string) => {
@@ -30,21 +71,25 @@ const formatShortDate = (dateString: string) => {
   return `${day}/${month}/${date.getUTCFullYear()}`;
 };
 
-const CollectionItem = ({
-  title,
-  description,
-  path,
-}: {
-  title: string;
-  description: string;
-  path: string;
-}) => (
-  <div className="border border-dashed border-codeRed rounded-md p-3 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 hover:-rotate-1">
-    <Link href={path} className="block h-full">
-      <h3 className="font-medium text-sm mb-1 capitalize">{title}</h3>
-      <p className="text-xs text-muted-foreground">{description}</p>
-    </Link>
-  </div>
+/** One bed of collections: a small header, then its pages. */
+const Bed = ({ bed }: { bed: (typeof BEDS)[number] }) => (
+  <section aria-label={bed.name}>
+    <h3 className="mb-1 flex items-center gap-2 text-sm">
+      <bed.icon size={14} strokeWidth={1.75} className="text-codeRed" aria-hidden="true" />
+      <span className="uppercase font-medium text-muted-foreground">{bed.name}</span>
+      <span className="text-[10px] text-muted-foreground/70">· {bed.blurb}</span>
+    </h3>
+    <ul className="border-l border-dashed border-codeRed/60 pl-4 py-1">
+      {bed.items.map((item) => (
+        <li key={item.path}>
+          <Link href={item.path} className="group flex items-baseline gap-3 py-1.5">
+            <span className="shrink-0 text-xs group-hover:italic group-hover:text-codeRed">{item.title}</span>
+            <span className="min-w-0 flex-1 truncate text-right text-[10px] text-muted-foreground">{item.description}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </section>
 );
 
 const FeedDate = ({ date }: { date: string }) => (
@@ -80,11 +125,11 @@ const FeedList = ({ items, empty, external }: { items: FeedItem[]; empty: string
       {items.map((item) => (
         <div key={item.id} className="flex justify-between items-center gap-3 py-1">
           {external ? (
-            <a href={item.path} target="_blank" rel="noopener noreferrer" className="hover:italic hover:text-codeRed text-sm">
+            <a href={item.path} target="_blank" rel="noopener noreferrer" title={item.title} className="min-w-0 truncate hover:italic hover:text-codeRed text-xs">
               {item.title}
             </a>
           ) : (
-            <Link href={item.path} className="hover:italic hover:text-codeRed text-xs">
+            <Link href={item.path} title={item.title} className="min-w-0 truncate hover:italic hover:text-codeRed text-xs">
               {item.title}
             </Link>
           )}
@@ -101,7 +146,7 @@ export default async function HomePage() {
   const lastUpdated = formatDate(process.env.NEXT_PUBLIC_BUILD_TIME || new Date());
 
   return (
-    <div className="md:container py-10 max-w-6xl">
+    <div className="md:container py-10 max-w-6xl font-mono">
       <div className="flex flex-col text-xs text-muted-foreground font-mono max-w-xl mb-6">
         <div className="w-20 h-20 mb-6">
           <AnimatedLogo />
@@ -112,47 +157,59 @@ export default async function HomePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 font-mono">
         <div className="md:col-span-2">
-          <h2 className="font-medium">Intro</h2>
+          <h2 className="font-medium">Lily's Garden</h2>
           <div className="flex flex-col text-sm text-muted-foreground lg:max-w-xl">
-            <div className="mt-3 space-y-2">
+            <div className="mt-3 space-y-2 ">
               <div className="flex items-center">
-                <p className="text-sm mr-2">Hiii there </p> <Smile size={14} className="inline-block" />
+                <p className="text-sm mr-2">Hi there, I'm Lily. </p>{" "}
+                <Smile size={14} className="inline-block" />
               </div>
               <p className="text-sm">
-                Welcome to my digital home and mini space on the internet. My name is Lily and I'm super excited to
-                house you for the time you'll be here. This is a space where I'm free to express myself in whatever
-                medium I choose. Could be through code, images, sounds, and words. There's literally no limit to what I
-                can do here.
+                Hi there wanderer, welcome to my{" "}
+                <Link href="/garden/digital-garden" className="text-codeRed">
+                  digital garden
+                </Link>{" "}
+                and{" "}
+                <Link href="/garden/minispace" className="text-codeRed">
+                  minispace
+                </Link>{" "}
+                on the internet where I talk about all my little interests,
+                hobbies and life work. I'm super excited to have had you wander
+                into my garden. I created this space for be able to express
+                myself through code, images, sounds, and words. There's
+                literally no limit to what I can do here.
               </p>
               <p className="text-sm">
-                I've put in a lot of thoughts and efforts into building everything you see and interact with in this
-                space. I try to make this website a living representation of my personal space; small, cozy and with
-                lots of depth. Be sure to leave your footprint by signing my{" "}
+                I'm currently looking for funding, contract work, or employment.{" "}
+                <Link href="/contact" className="text-codeRed">
+                  Reach out
+                </Link>{" "}
+                if you'd like to work together or know of something I'd be a
+                good fit for. Here's my career{" "}
+                <Link href="/bucket-list" className="text-codeRed">
+                  bucket list
+                </Link>{" "}
+                just to give you an idea of what I'm aiming for.
+              </p>
+              <p className="text-sm">
+                Before you go, you should first learn a little{" "}
+                <Link href="/about" className="text-codeRed">
+                  about me
+                </Link>
+                , and find out what I'm doing{" "}
+                <Link href="/now" className="text-codeRed">
+                  now
+                </Link>
+                . You can also check to see what I'll like to do{" "}
+                <Link href="/someday" className="text-codeRed">
+                  someday
+                </Link>
+                . Be sure to leave your footprint by signing my{" "}
                 <Link href="/guestbook" className="text-codeRed">
                   guestbook
                 </Link>
                 .
               </p>
-              <p className="text-sm">
-                You should first learn a little more{" "}
-                <Link href="/about" className="text-codeRed">
-                  about me
-                </Link>
-                , then find out what I'm currently up to at the moment by checking the{" "}
-                <Link href="/now" className="text-codeRed">
-                  now
-                </Link>{" "}
-                page. You can also check to see what I'll like to do{" "}
-                <Link href="/someday" className="text-codeRed">
-                  someday
-                </Link>
-                , and also my career{" "}
-                <Link href="/bucket-list" className="text-codeRed">
-                  bucket list
-                </Link>
-                .
-              </p>
-
               <div className="py-2">
                 <MusicPlayerWidget
                   imageUrl="/images/lily_flower.jpeg"
@@ -160,38 +217,25 @@ export default async function HomePage() {
                   artist="Written by Lily, recorded with Play.ai"
                 />
               </div>
-
-              <p className="text-sm">
-                If you like to read amateur musings/essays/poems, check my{" "}
-                <Link href="/garden" className="text-codeRed">
-                  garden
-                </Link>
-                . You can find my recently published on the right (for web) or below (for mobile). Or, if you're not
-                sure where to start, <WanderButton variant="link" />.
-              </p>
             </div>
           </div>
 
-          <div className="mt-4">
-            <h2 className="font-medium mb-6">Collections & Pages</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {collections.map((collection) => (
-                <CollectionItem key={collection.title} {...collection} />
+          {/* Four beds of four pages: sized to end about level with "Recently Tended" beside it. */}
+          <div className="mt-8">
+            <h2 className="font-medium mb-1">Collections & Pages</h2>
+            <p className="text-sm text-muted-foreground mb-6">
+              The rest of the garden, planted in beds.
+            </p>
+            <div className="space-y-8 lg:space-y-10">
+              {BEDS.map((bed) => (
+                <Bed key={bed.name} bed={bed} />
               ))}
             </div>
-          </div>
-
-          <div className="mt-8">
-            <h2 className="font-medium mb-1">Grow Something</h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              It's a garden, after all. Your flowers stay on this device, waiting for you to come back.
-            </p>
-            <InteractiveFlower />
           </div>
         </div>
 
         <div className="md:col-span-2">
-          <h2 className="font-medium mb-6">Recently Published</h2>
+          <h2 className="font-medium mb-6">Recently Tended</h2>
           <HomeSearch />
 
           <FeedSection heading="Essays" href="/garden/essays">
@@ -215,7 +259,9 @@ export default async function HomePage() {
                 </div>
               ))
             ) : (
-              <p className="py-2 text-sm text-muted-foreground">No microblogs found</p>
+              <p className="py-2 text-sm text-muted-foreground">
+                No microblogs found
+              </p>
             )}
           </FeedSection>
         </div>
