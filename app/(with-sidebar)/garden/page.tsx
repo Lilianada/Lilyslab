@@ -1,113 +1,120 @@
-"use client"
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { byLastTended, getGardenPosts, type GardenPost } from "@/lib/garden/posts";
+import { TOPICS, type Stage } from "@/lib/garden/topics";
+import { GardenPostRow, StageLegend } from "@/components/garden/GardenPostRow";
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import {
-    Card,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ArrowUpRight, Book, Headphones, ListCheckIcon, Lightbulb, NotepadText, Bookmark, PenBox } from "lucide-react"
-import { SuggestionSidebar } from "@/components/workshop/suggestions/SuggestionSidebar"
+export const metadata = {
+  title: "Digital Garden | Lilyslab",
+  description: "Essays and notes arranged by topic and connection, not by date.",
+};
 
-export default function DigitalGardenHome() {
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [isSuggestionSidebarOpen, setIsSuggestionSidebarOpen] = useState(false);
+/** How many posts each topic shows on the map before "more". */
+const PREVIEW = 4;
 
-    useEffect(() => {
-        setIsLoaded(true)
-    }, [])
+const STAGE_ORDER: Stage[] = ["evergreen", "budding", "seedling"];
+/** Most finished first, then most recently tended. */
+const gardenOrder = (a: GardenPost, b: GardenPost) =>
+  STAGE_ORDER.indexOf(a.stage) - STAGE_ORDER.indexOf(b.stage) || byLastTended(a, b);
 
-    const sections = [
-        {
-            title: "Essays",
-            description: "",
-            href: "/garden/essays",
-            icon: ListCheckIcon
-        },
-        {
-            title: "Notes",
-            description: "Fleeting thoughts, ideas, and learnings.",
-            href: "/garden/notes/",
-            icon: NotepadText
-        },
-        {
-            title: "Bookshelf",
-            description: "Books I've read, am reading, or plan to read.",
-            href: "/garden/bookshelf",
-            icon: Book
-        },
-        {
-            title: "Bookmarks",
-            description: "A collection of my favorite reads, tools, and discoveries.",
-            href: "/garden/bookmarks",
-            icon: Bookmark
-        },
-        {
-            title: "Media Digest",
-            description: "What I've been watching, hearing and reading each month.",
-            href: "/garden/media-digest",
-            icon: Headphones
-        },
-        {
-            title: "Microblog",
-            description: "Short thoughts, updates, and musings.",
-            href: "/garden/micro-blog",
-            icon: PenBox
-        }
-    ]
+const ELSEWHERE = [
+  { title: "All essays", href: "/garden/essays", description: "Longer, more finished pieces" },
+  { title: "All notes", href: "/garden/notes", description: "Short, loose thoughts" },
+  { title: "Bookshelf", href: "/garden/bookshelf", description: "Books I've read, am reading, or plan to" },
+  { title: "Bookmarks", href: "/garden/bookmarks", description: "Favourite reads, tools and finds" },
+  { title: "Media digest", href: "/garden/media-digest", description: "What I watched, heard and read each month" },
+  { title: "Microblog", href: "/garden/micro-blog", description: "Short updates and musings" },
+];
 
-    return (
-        <>
-            <div className={`max-w-3xl mx-auto sm:px-4 pt-16 pb-8 ${isLoaded ? "animate-fade-in" : "opacity-0"}`}>
-                <header className="flex items-center justify-between mb-8">
-                    <div>
-                        <h1 className="mb-1 text-lg md:text-2xl font-bold tracking-tight">Digital Garden</h1>
-                        <p className="text-sm text-muted-foreground">
-                        My Digital Garden is a growing collection of thoughts, ideas, and knowledge I’ve gathered from various topics that spark my curiosity.
-                        {" "}
-                        <a href="/garden/essays/digital-garden" className="text-steelBlue underline hover:text-peach">What is a digital garden?</a>
-                        </p>
-                    </div>
-                </header> 
-                {/* <div className="hidden sm:grid grid-cols-1 mb-8 w-1/2">
-                    <Button
-                        variant="outline"
-                        onClick={() => setIsSuggestionSidebarOpen(true)}
-                    >
-                        <Lightbulb size={16} className="mr-2" /> Suggest Something
-                    </Button>
-                </div> */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
-                    {sections.map((section, index) => (
-                        <Link key={section.title} href={section.href} className="block group">
-                            <Card
-                                className={`p-4 hover:border-primary/80 transition-colors duration-200 cursor-pointer rounded-lg opacity-0 animate-slide-up h-full flex flex-row items-end justify-between`}
-                                style={{ animationDelay: `${index * 100}ms` }}
-                            >
-                                <CardHeader className="p-0">
-                                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
-                                        <section.icon className="w-5 h-5 stroke-1 text-primary" />
-                                    </div>
-                                    <CardTitle className="text-base font-semibold">{section.title}</CardTitle>
-                                </CardHeader>
-                                <CardFooter className="p-0">
-                                    <span className="text-xs text-primary group-hover:underline flex items-center">
-                                        Explore <ArrowUpRight size={12} className="ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                                    </span>
-                                </CardFooter>
-                            </Card>
-                        </Link>
-                    ))}
-                </div>
-            </div>
+const count = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
-            <SuggestionSidebar
-                isOpen={isSuggestionSidebarOpen}
-                onClose={() => setIsSuggestionSidebarOpen(false)}
-            />
-        </>
-    )
-} 
+export default function GardenPage() {
+  const posts = getGardenPosts();
+  const recent = [...posts].sort(byLastTended).slice(0, 5);
+  const beds = TOPICS.map((topic) => ({
+    topic,
+    posts: posts.filter((post) => post.topicId === topic.id).sort(gardenOrder),
+  })).filter((bed) => bed.posts.length > 0);
+
+  return (
+    <div className="mx-auto max-w-3xl animate-fade-in pb-8 pt-16 sm:px-4">
+      <header className="mb-10">
+        <span className="text-2xl animate-spin">✳︎</span>
+        <h1 className="mb-2 text-xl font-medium">Digital Garden</h1>
+        <p className="max-w-prose text-sm text-muted-foreground">
+          A growing collection of thoughts and ideas, arranged by topic rather than by date. Some are finished, most are still
+          growing. Pick a topic and wander; every post links to its neighbours.{" "}
+          <Link href="/garden/essays/digital-garden" className="text-steelBlue underline underline-offset-4 hover:text-peach">
+            What is a digital garden?
+          </Link>
+        </p>
+        <div className="mt-4">
+          <StageLegend />
+        </div>
+      </header>
+
+      <section aria-labelledby="recent" className="mb-12">
+        <h2 id="recent" className="mb-2 font-mono text-xs uppercase tracking-wide text-muted-foreground">
+          Recently tended
+        </h2>
+        <ul className="divide-y divide-border/60">
+          {recent.map((post) => (
+            <GardenPostRow key={post.href} post={post} />
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="topics" className="mb-12">
+        <h2 id="topics" className="mb-4 font-mono text-xs uppercase tracking-wide text-muted-foreground">
+          Topics
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {beds.map(({ topic, posts: bed }) => {
+            const essays = bed.filter((post) => post.kind === "essay").length;
+            return (
+              <article key={topic.id} className="flex flex-col rounded-lg border border-dashed border-border p-4">
+                <h3 className="text-base font-medium">
+                  <Link href={`/garden/topics/${topic.id}`} className="hover:text-primary hover:underline hover:underline-offset-4">
+                    {topic.title}
+                  </Link>
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">{topic.blurb}</p>
+                <p className="mt-2 font-mono text-[11px] text-muted-foreground">
+                  {count(essays, "essay")} · {count(bed.length - essays, "note")}
+                </p>
+                <ul className="mt-2 flex-1">
+                  {bed.slice(0, PREVIEW).map((post) => (
+                    <GardenPostRow key={post.href} post={post} showDate={false} />
+                  ))}
+                </ul>
+                <Link
+                  href={`/garden/topics/${topic.id}`}
+                  className="mt-3 inline-flex items-center gap-1 self-start font-mono text-xs text-muted-foreground hover:text-foreground"
+                >
+                  {bed.length > PREVIEW ? `${bed.length - PREVIEW} more in ${topic.title}` : `Visit ${topic.title}`}
+                  <ArrowRight size={12} aria-hidden="true" />
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section aria-labelledby="elsewhere">
+        <h2 id="elsewhere" className="mb-2 font-mono text-xs uppercase tracking-wide text-muted-foreground">
+          Elsewhere in the garden
+        </h2>
+        <ul className="grid gap-x-6 sm:grid-cols-2">
+          {ELSEWHERE.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="group flex items-baseline justify-between gap-3 border-b border-border/60 py-2 text-sm">
+                <span className="group-hover:text-primary group-hover:underline group-hover:underline-offset-4">{item.title}</span>
+                <span className="truncate text-right text-xs text-muted-foreground">{item.description}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}

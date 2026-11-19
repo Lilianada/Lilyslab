@@ -7,6 +7,7 @@ import { read } from 'zod-matter';
 import { safeFormatDate } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 import NotesTagFilterClient from './NotesTagFilterClient';
+import { topicFor } from '@/lib/garden/topics';
 
 // Define schema for front matter validation
 const NoteMetaSchema = z.object({
@@ -48,6 +49,7 @@ interface NoteMeta {
   tags?: string[];
   locked: boolean;
   aiEdited: boolean;
+  topicId: string;
 }
 
 const MONTHS = [
@@ -104,6 +106,7 @@ export default function NotesPage() {
             tags: result.data.tags || [],
             locked,
             aiEdited: isAiEdited(result.data),
+            topicId: topicFor(result.data.tags || []).id,
           };
           return [validated];
         } catch (zodErr) {

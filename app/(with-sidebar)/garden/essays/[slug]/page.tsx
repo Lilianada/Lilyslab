@@ -8,7 +8,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Image from "next/image";
-import { PrevNext } from "@/components/layout/prev-next";
+import { PostConnections } from "@/components/garden/PostConnections";
 import { Replies } from "@/components/comments/Replies";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { EssayMarkdownWrapper } from "./markdown-wrapper";
@@ -65,31 +65,6 @@ export default async function EssaySlugPage({ params }: PageProps) {
     notFound(); // Return 404 if not explicitly published
   }
 
-  // Get all essays for prev/next navigation
-  const allEssays = getAllEssays();
-
-  // Find the current post index
-  const currentIndex = allEssays.findIndex(
-    (essay) => essay.slug === slug
-  );
-
-  // Get previous and next posts (previous = older, next = newer)
-  const prevPost =
-    currentIndex > 0
-      ? {
-          title: allEssays[currentIndex - 1].title,
-          href: `/garden/essays/${allEssays[currentIndex - 1].slug}`,
-        }
-      : undefined;
-
-  const nextPost =
-    currentIndex < allEssays.length - 1
-      ? {
-          title: allEssays[currentIndex + 1].title,
-          href: `/garden/essays/${allEssays[currentIndex + 1].slug}`,
-        }
-      : undefined;
-
   return (
     <>
       <ScrollProgress
@@ -143,9 +118,9 @@ export default async function EssaySlugPage({ params }: PageProps) {
           <EssayMarkdownWrapper content={content} />
         </div>
 
+        <PostConnections href={`/garden/essays/${slug}`} />
         <Webmentions path={`/garden/essays/${slug}`} />
         <Replies page={`essays/${slug}`} title={data.title || slug} />
-        <PrevNext prev={prevPost} next={nextPost} />
       </div>
     </>
   );

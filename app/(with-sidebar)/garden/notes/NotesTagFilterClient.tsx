@@ -3,6 +3,8 @@ import { AiEditedBadge } from "@/components/garden/AiEditedBadge";
 import React, { useState } from "react";
 import { ArrowRight, Lock } from 'lucide-react';
 import { HideLockedButton, useHideLocked } from "@/components/garden/HideLocked";
+import { GardenViewToggle, useGardenView } from "@/components/garden/GardenViewToggle";
+import { TOPICS } from "@/lib/garden/topics";
 
 interface NoteMeta {
   title: string;
@@ -17,6 +19,8 @@ interface NoteMeta {
   locked: boolean;
   /** Written by me, edited with AI. */
   aiEdited?: boolean;
+  /** The garden topic it's planted in. */
+  topicId: string;
 }
 
 interface Props {
@@ -29,6 +33,7 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
   const [hideLocked, toggleHideLocked] = useHideLocked();
+  const [view, setView] = useGardenView();
   const lockedCount = allNotes.filter((note) => note.locked).length;
   
   // Count notes per tag
@@ -83,9 +88,10 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
     }, {} as Record<string, Record<string, NoteMeta[]>>);
   }, [selectedTag, hideLocked, grouped, allNotes]);
 
-  const filteredNotesCount = selectedTag 
-    ? allNotes.filter(note => (note.tags || []).includes(selectedTag)).length
-    : allNotes.length;
+  // The same filters, as a flat list for the topic view.
+  const visibleNotes = allNotes.filter(
+    (note) => (!selectedTag || (note.tags || []).includes(selectedTag)) && !(hideLocked && note.locked)
+  );
 
   return (
     <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
@@ -157,11 +163,42 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
             </div>
           )}
 
-          <div className="mb-3 flex justify-end">
+          <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
+            <GardenViewToggle view={view} onChange={setView} />
             <HideLockedButton hide={hideLocked} onToggle={toggleHideLocked} count={lockedCount} />
           </div>
 
-          {/* Notes Grid Layout */}
+          {/* Notes grid: grouped by topic, or by year */}
+          {view === "topic" ? (
+            <div className="space-y-8">
+              {TOPICS.map((topic) => {
+                const topicNotes = visibleNotes.filter((note) => note.topicId === topic.id);
+                if (topicNotes.length === 0) return null;
+                return (
+                  <div key={topic.id} className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <h2 className="text-lg font-medium text-foreground">
+                        <a href={`/garden/topics/${topic.id}`} className="hover:text-primary hover:underline hover:underline-offset-4">
+                          {topic.title}
+                        </a>
+                      </h2>
+                      <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent"></div>
+                      <span className="text-xs text-muted-foreground font-mono">
+                        {topicNotes.length} {topicNotes.length === 1 ? "note" : "notes"}
+                      </span>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {[...topicNotes]
+                        .sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))
+                        .map((note) => (
+                          <NoteCard key={note.slug} note={note} />
+                        ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
           <div className="space-y-8">
             {/* Sort years in descending order (newest first) */}
             {Object.entries(filteredAndGrouped)
@@ -169,7 +206,7 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
               .map(([year, monthGroups]) => {
                 // Flatten all notes from all months in this year
                 const yearNotes = Object.values(monthGroups).flat();
-                
+
                 return (
                   <div key={year} className="space-y-6">
                     <div className="flex items-center gap-4">
@@ -179,57 +216,54 @@ export default function NotesTagFilterClient({ grouped, allNotes }: Props) {
                         {yearNotes.length} notes
                       </span>
                     </div>
-                    
-                    {/* Modern Card Grid - All notes for the year */}
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {yearNotes
                         .sort((a, b) => b.fullDate.localeCompare(a.fullDate))
-                        .map((note) =>
-                          note.locked ? (
-                            <div key={note.slug} className="block cursor-not-allowed opacity-60" title="This note is locked for now">
-                              <div className="p-4 rounded-lg border border-dashed border-border bg-card backdrop-blur-sm">
-                                <div className="space-y-1">
-                                  <p className="font-medium text-xs leading-tight text-foreground line-clamp-2">{note.title}</p>
-                                  <div className="flex items-center justify-between text-xs">
-                                    <span className="text-muted-foreground font-nitti">{note.displayDate} · Locked</span>
-                                    <Lock className="w-3 h-3 text-muted-foreground" aria-label="Locked" />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                        <a
-                          key={note.slug}
-                          href={`/garden/notes/${note.slug}`}
-                          className="group block"
-                        >
-                          <div className="p-4 rounded-lg border border-dashed border-border bg-card backdrop-blur-sm transition-all duration-200 hover:border-border hover:bg-card/50 hover:shadow-sm hover:-translate-y-0.5">
-                            <div className="space-y-1">
-                              <p className="font-medium text-xs leading-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                                {note.title}
-                              </p>
-                              {note.aiEdited && <AiEditedBadge />}
-                              
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-muted-foreground font-nitti">
-                                  {note.displayDate}
-                                </span>
-                                <div className="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors">
-                                  <ArrowRight className="w-3 h-3" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                          )
-                      )}
+                        .map((note) => (
+                          <NoteCard key={note.slug} note={note} />
+                        ))}
                     </div>
                   </div>
                 );
               })}
           </div>
+          )}
         </>
       )}
     </div>
+  );
+}
+
+/** One note in the grid; locked notes show but can't be opened. */
+function NoteCard({ note }: { note: NoteMeta }) {
+  return note.locked ? (
+    <div className="block cursor-not-allowed opacity-60" title="This note is locked for now">
+      <div className="p-4 rounded-lg border border-dashed border-border bg-card backdrop-blur-sm">
+        <div className="space-y-1">
+          <p className="font-medium text-xs leading-tight text-foreground line-clamp-2">{note.title}</p>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-muted-foreground font-nitti">{note.displayDate} · Locked</span>
+            <Lock className="w-3 h-3 text-muted-foreground" aria-label="Locked" />
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <a href={`/garden/notes/${note.slug}`} className="group block">
+      <div className="p-4 rounded-lg border border-dashed border-border bg-card backdrop-blur-sm transition-all duration-200 hover:border-border hover:bg-card/50 hover:shadow-sm hover:-translate-y-0.5">
+        <div className="space-y-1">
+          <p className="font-medium text-xs leading-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
+            {note.title}
+          </p>
+          {note.aiEdited && <AiEditedBadge />}
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-muted-foreground font-nitti">{note.displayDate}</span>
+            <div className="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors">
+              <ArrowRight className="w-3 h-3" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
   );
 }

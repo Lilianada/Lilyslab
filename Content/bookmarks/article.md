@@ -2427,3 +2427,16 @@ tags:
 type: article
 id: article-196
 ---
+
+---
+publish: true
+title: "build a world, not an audience"
+url: https://keningzhu.com/journal/build-a-world-not-an-audience
+createdAt: 2026-11-19
+tags:
+- creativity
+- personal-website
+- audience
+type: article
+id: article-197
+---

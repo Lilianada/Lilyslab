@@ -7,6 +7,8 @@ import { ArrowRight, ArrowUp, ArrowUpDown, Lock } from "lucide-react";
 import { ExpandingSearch } from "@/components/ExpandingSearch";
 import { formatDateForDisplay } from "@/lib/utils";
 import { HideLockedButton, useHideLocked } from "@/components/garden/HideLocked";
+import { TOPICS } from "@/lib/garden/topics";
+import { GardenViewToggle, useGardenView } from "@/components/garden/GardenViewToggle";
 import { LIST_CLASS, NUMBER_CLASS, ROW_CLASS, number } from "@/components/learn/TrackList";
 
 /** Just what the list needs, so essay text stays out of the browser bundle. */
@@ -22,6 +24,8 @@ export interface EssayListItem {
   locked: boolean;
   /** Written by me, edited with AI. */
   aiEdited: boolean;
+  /** The garden topic it's planted in. */
+  topicId: string;
 }
 
 /** How many essays show before the "View all" button. */
@@ -90,6 +94,7 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
   const [showAllEssays, setShowAllEssays] = useState(false);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
   const [hideLocked, toggleHideLocked] = useHideLocked();
+  const [view, setView] = useGardenView();
   const lockedCount = essays.filter((essay) => essay.locked).length;
 
   // Count essays per tag
@@ -112,7 +117,10 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
   // Essays arrive newest first; flip them for "Oldest".
   const sorted = sortOrder === "newest" ? essays : [...essays].reverse();
   const results = sorted.filter((essay) => !(hideLocked && essay.locked) && (!selectedTag || essay.tags.includes(selectedTag)) && matchesSearch(essay, query));
-  const visible = showAllEssays ? results : results.slice(0, PAGE_SIZE);
+  const visible = showAllEssays || view === "topic" ? results : results.slice(0, PAGE_SIZE);
+  const groups = TOPICS.map((topic) => ({ topic, essays: results.filter((essay) => essay.topicId === topic.id) })).filter(
+    (group) => group.essays.length > 0
+  );
   const hiddenCount = results.length - visible.length;
 
   return (
@@ -154,9 +162,10 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
             {query.trim() && ` matching "${query.trim()}"`}
           </p>
           <div className="ml-auto flex items-center gap-2">
+            <GardenViewToggle view={view} onChange={setView} />
             <HideLockedButton hide={hideLocked} onToggle={toggleHideLocked} count={lockedCount} />
             <ExpandingSearch value={query} onChange={setQuery} label="Search essays" />
-            <button
+            {view === "date" && <button
               type="button"
               onClick={() => setSortOrder(sortOrder === "newest" ? "oldest" : "newest")}
               className="flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 font-mono text-xs transition-all hover:bg-accent"
@@ -164,11 +173,31 @@ export default function TagFilterClient({ essays }: { essays: EssayListItem[] })
             >
               <ArrowUpDown size={12} />
               {sortOrder === "newest" ? "Newest" : "Oldest"}
-            </button>
+            </button>}
           </div>
         </div>
 
-        {results.length > 0 ? (
+        {results.length > 0 && view === "topic" ? (
+          <div className="space-y-10">
+            {groups.map(({ topic, essays: group }) => (
+              <section key={topic.id} aria-labelledby={`topic-${topic.id}`}>
+                <div className="mb-1 flex items-baseline justify-between gap-4 border-b border-border pb-1">
+                  <h3 id={`topic-${topic.id}`} className="text-sm font-medium">
+                    <Link href={`/garden/topics/${topic.id}`} className="hover:text-primary hover:underline hover:underline-offset-4">
+                      {topic.title}
+                    </Link>
+                  </h3>
+                  <span className="font-mono text-xs text-muted-foreground">{group.length}</span>
+                </div>
+                <ol className={LIST_CLASS}>
+                  {group.map((essay, index) => (
+                    <EssayRow key={essay.slug} essay={essay} position={index + 1} />
+                  ))}
+                </ol>
+              </section>
+            ))}
+          </div>
+        ) : results.length > 0 ? (
           <ol className={LIST_CLASS}>
             {visible.map((essay, index) => (
               <EssayRow key={essay.slug} essay={essay} position={index + 1} />

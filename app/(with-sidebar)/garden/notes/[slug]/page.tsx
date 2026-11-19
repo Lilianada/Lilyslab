@@ -9,9 +9,8 @@ import matter from "gray-matter";
 import { NoteRouteParams, SlugParams } from "@/lib/types/route-params";
 import { NotesClientWrapper } from "./client-wrapper";
 import { NotesMarkdownWrapper } from "./markdown-wrapper";
-import { PrevNext } from "@/components/layout/prev-next";
+import { PostConnections } from "@/components/garden/PostConnections";
 import { Replies } from "@/components/comments/Replies";
-import { getAllNotesData } from "@/lib/notes";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 /**
@@ -107,29 +106,6 @@ export default async function NotesPage({ params }: NoteRouteParams) {
     notFound();
   }
 
-  // Get all notes for navigation
-  const allNotes = getAllNotesData();
-
-  // Find current note index
-  const currentIndex = allNotes.findIndex((note) => note.slug === slug);
-
-  // Get previous and next notes for navigation
-  const previousPost =
-    currentIndex > 0
-      ? {
-          title: allNotes[currentIndex - 1].frontmatter.title,
-          href: `/garden/notes/${allNotes[currentIndex - 1].slug}`,
-        }
-      : undefined;
-
-  const nextPost =
-    currentIndex < allNotes.length - 1
-      ? {
-          title: allNotes[currentIndex + 1].frontmatter.title,
-          href: `/garden/notes/${allNotes[currentIndex + 1].slug}`,
-        }
-      : undefined;
-
   return (
     <NotesClientWrapper>
       <ScrollProgress
@@ -170,9 +146,9 @@ export default async function NotesPage({ params }: NoteRouteParams) {
 
           <NotesMarkdownWrapper content={note.content} />
         </div>
+        <PostConnections href={`/garden/notes/${slug}`} />
         <Webmentions path={`/garden/notes/${slug}`} />
         <Replies page={`notes/${slug}`} title={note.title} />
-        <PrevNext prev={previousPost} next={nextPost} />
       </div>
     </NotesClientWrapper>
   );

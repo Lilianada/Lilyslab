@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const hasNoPage = (href: string) => /^\/archives\/[^/]+$/.test(href) || href === "/resources/build-your-own-website";
 
 /** Section names with no page of their own: shown as plain text, not links. */
-const NO_LINK = new Set(["/playground"]);
+const NO_LINK = new Set(["/playground", "/garden/topics"]);
 
 /** Names that plain capitalizing would get wrong, like "Html". */
 const SPECIAL_LABELS: Record<string, string> = {

@@ -9,7 +9,7 @@ type: evergreen
 published: true
 ---
 
-I found this questionnaire during one of my many web explorations and decided to give it a go.
+I found this questionnaire during one of my many web explorations and decided to give it a go. I saw [Kenan](https://kenan.fyi/thoughts/100-webmaster-questions/) do this so I decided to hop on it.
 Questionnaire by [Mouseling.net](https://mouseling.net/100webmaster)
 
 1. Please introduce yourself.

@@ -10,21 +10,6 @@ import rehypeHighlight from "rehype-highlight";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-// Helper functions for backlink handling
-const normalizeText = (text: string): string => {
-  return (text || "").toLowerCase().trim();
-};
-
-const slugify = (text: string): string => {
-  return normalizeText(text)
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "");
-};
-
-// Global cache mechanism to avoid repeated API calls
-let notesCache: any[] | null = null;
-let writingsCache: any[] | null = null;
-
 export const MarkdownSkeleton = () => (
   <div className="animate-pulse space-y-4 mt-4">
     <div className="h-4 bg-muted rounded w-full"></div>
@@ -144,98 +129,14 @@ const MarkdownRenderer = ({
   }
 
   // Function to safely fetch content with error handling
-  const fetchContent = async () => {
-    // Use cache if available to avoid repeated API calls
-    if (notesCache !== null && writingsCache !== null) {
-      return { notes: notesCache, writings: writingsCache };
-    }
-
-    try {
-      // Fetch both resources in parallel with safe error handling
-      const [notesRes, writingsRes] = await Promise.allSettled([
-        fetch("/api/notes", {
-          cache: "no-store",
-          headers: { "Content-Type": "application/json" },
-        }),
-        fetch("/api/essays", {
-          cache: "no-store",
-          headers: { "Content-Type": "application/json" },
-        }),
-      ]);
-
-      // Process response for notes
-      let notes = [];
-      if (notesRes.status === "fulfilled" && notesRes.value.ok) {
-        try {
-          notes = await notesRes.value.json();
-        } catch {}
-      }
-
-      // Process response for writings
-      let writings = [];
-      if (writingsRes.status === "fulfilled" && writingsRes.value.ok) {
-        try {
-          writings = await writingsRes.value.json();
-        } catch {}
-      }
-
-      // Update cache
-      notesCache = notes;
-      writingsCache = writings;
-
-      return { notes, writings };
-    } catch (error) {
-      // Return empty arrays on error
-      return { notes: [], writings: [] };
-    }
-  };
-
-  // Helper function to find the best content match
-  const findBestMatch = (linkText: string, items: any[]): any | null => {
-    if (!items || !Array.isArray(items) || items.length === 0) return null;
-
-    const normalized = normalizeText(linkText);
-    const slugified = slugify(linkText);
-
-    // Try multiple matching strategies in decreasing order of strictness
-    return (
-      items.find((item) => item.title === linkText) || // Exact title match
-      items.find((item) => normalizeText(item.title) === normalized) || // Case-insensitive title
-      items.find((item) => item.slug === slugified) || // Exact slug match
-      items.find((item) => item.slug === normalized) || // Normalized as slug
-      items.find((item) => normalizeText(item.slug) === normalized) || // Case-insensitive slug
-      items.find((item) => slugify(item.title) === slugified) || // Slugified title match
-      items.find((item) => normalizeText(item.title).includes(normalized)) || // Title contains link
-      items.find((item) => normalized.includes(normalizeText(item.title))) || // Link contains title
-      null
-    );
-  };
-
-  // Handle backlink navigation with full error protection
   const handleBacklinkClick = (linkText: string) => {
-    // Use a promise without await to avoid blocking
-    fetchContent()
-      .then(({ notes, writings }) => {
-        // Find best match
-        const noteMatch = findBestMatch(linkText, notes);
-        const writingMatch = findBestMatch(linkText, writings);
-
-        if (noteMatch) {
-          router.push(`/garden/notes/${encodeURIComponent(noteMatch.title)}`);
-        } else if (writingMatch) {
-          router.push(
-            `/garden/essays/${encodeURIComponent(writingMatch.slug)}`
-          );
-        } else {
-          // Best-effort navigation - create a URL based on what's more likely
-          // This prevents errors by making an assumption about where it should go
-          router.push(`/garden/notes/${encodeURIComponent(linkText)}`);
-        }
+    fetch(`/api/garden/resolve?text=${encodeURIComponent(linkText)}`)
+      .then((res) => (res.ok ? res.json() : { href: null }))
+      .then(({ href }: { href: string | null }) => {
+        // No post by that name yet: go to the garden rather than a missing page.
+        router.push(href ?? "/garden");
       })
-      .catch(() => {
-        // If anything goes wrong, take a best guess
-        router.push(`/garden/notes/${encodeURIComponent(linkText)}`);
-      });
+      .catch(() => router.push("/garden"));
   };
 
   // Process backlinks in the content

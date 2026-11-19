@@ -258,3 +258,17 @@ type: webroll
 category: personal
 id: personal-018
 ---
+
+---
+publish: true
+title: "a11ce"
+url: https://a11ce.com/
+date: 2026-11-19
+tags:
+  - personal-site
+  - projects
+notes: "Sophia's personal site: odd projects, essays on computers, and a fictional world."
+type: webroll
+category: personal
+id: personal-019
+---

@@ -1,6 +1,8 @@
 import { Annoyed } from "lucide-react"
 import { getAllEssays, getLockedEssays } from "@/lib/garden/essays"
 import type { Essay } from "@/lib/garden/essays"
+import { getGardenPosts } from "@/lib/garden/posts"
+import { topicFor } from "@/lib/garden/topics"
 import TagFilterClient, { type EssayListItem } from "./TagFilterClient"
 
 export const revalidate = 3600 // Revalidate every hour
@@ -12,6 +14,8 @@ export default async function EssayPage() {
   try {
     // Only what the list needs, so essay text stays out of the browser bundle.
     // Locked essays (published: false) are listed but not readable, so none of their text is sent.
+    // Topics come from all of a post's tags (the essay list only keeps three).
+    const topics = new Map(getGardenPosts().map((post) => [post.href, post.topicId]))
     const toListItem = (essay: Essay, locked: boolean): EssayListItem => {
       const wordCount = locked ? 0 : essay.content.split(/\s+/).filter(Boolean).length
       return {
@@ -24,6 +28,7 @@ export default async function EssayPage() {
         readingTime: Math.max(1, Math.ceil(wordCount / 200)),
         locked,
         aiEdited: essay.aiEdited,
+        topicId: topics.get(`/garden/essays/${essay.slug}`) ?? topicFor(essay.tags).id,
       }
     }
     posts = [
