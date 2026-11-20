@@ -57,6 +57,18 @@ const WordOfTheDayPage: React.FC = () => {
     fetchData();
   }, []);
 
+  // A [[word]] link lands here as #word: scroll to that card once the words load.
+  useEffect(() => {
+    if (words.length === 0) return;
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    const card = id ? document.getElementById(id) : null;
+    if (!card) return;
+    card.scrollIntoView({ block: "start" });
+    card.classList.add("ring-2", "ring-steelBlue/60");
+    const timer = window.setTimeout(() => card.classList.remove("ring-2", "ring-steelBlue/60"), 2500);
+    return () => window.clearTimeout(timer);
+  }, [words]);
+
   // Helper function to format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -133,7 +145,8 @@ const WordOfTheDayPage: React.FC = () => {
               {words.map((word, index) => (
                 <div
                   key={word.id}
-                  className="border rounded-lg p-4 sm:p-6 bg-card hover:bg-accent/5 transition-colors"
+                  id={word.id}
+                  className="scroll-mt-24 border rounded-lg p-4 sm:p-6 bg-card hover:bg-accent/5 transition"
                 >
                   {/* Header */}
                   <div className="flex justify-between items-start gap-3 mb-4">

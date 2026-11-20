@@ -68,6 +68,13 @@ function getSafeData(raw: string): { title?: string; date?: string } {
 }
 
 
+export const metadata = {
+  title: "Notes",
+  description:
+    "Short, loose notes by Lilian Ada on writing, the indie web, creativity and whatever she's thinking about, tended over time.",
+  alternates: { canonical: "/garden/notes" },
+};
+
 export default function NotesPage() {
   const notesDir = path.join(process.cwd(), 'Content/notes');
   const files = fs.readdirSync(notesDir);

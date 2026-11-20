@@ -10,6 +10,9 @@ import { NoteRouteParams, SlugParams } from "@/lib/types/route-params";
 import { NotesClientWrapper } from "./client-wrapper";
 import { NotesMarkdownWrapper } from "./markdown-wrapper";
 import { PostConnections } from "@/components/garden/PostConnections";
+import { JsonLd } from "@/components/structured-data";
+import { postSeo } from "@/lib/garden/seo";
+import { articleJsonLd, postMetadata } from "@/lib/seo";
 import { Replies } from "@/components/comments/Replies";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 
@@ -67,10 +70,8 @@ export async function generateMetadata({ params }: NoteRouteParams) {
     };
   }
 
-  return {
-    title: note.title,
-    description: note.excerpt,
-  };
+  const seo = postSeo("note", slug);
+  return seo ? postMetadata(seo) : { title: note.title };
 }
 
 /**
@@ -147,6 +148,10 @@ export default async function NotesPage({ params }: NoteRouteParams) {
           <NotesMarkdownWrapper content={note.content} />
         </div>
         <PostConnections href={`/garden/notes/${slug}`} />
+        {(() => {
+          const seo = postSeo("note", slug);
+          return seo ? <JsonLd data={articleJsonLd(seo)} /> : null;
+        })()}
         <Webmentions path={`/garden/notes/${slug}`} />
         <Replies page={`notes/${slug}`} title={note.title} />
       </div>

@@ -120,6 +120,13 @@
 .markdown-content a {
   @apply text-steelBlue dark:text-lightBlue no-underline hover:text-steelBlue/80 transition-colors;
 }
+/* The site-wide link hover: a thin, faded underline. */
+.markdown-content a:not(.backlink):not(.footnote-ref):hover {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
 
 /* Image styling */
 .markdown-content img {
@@ -231,4 +238,16 @@
 
 .footnote-preview a {
   @apply text-steelBlue dark:text-lightBlue underline-offset-2 hover:underline [overflow-wrap:anywhere];
+}
+
+/* [[Backlinks]] are real links now, but keep their own look: the text's colour with a coloured underline. */
+.markdown-content a.backlink {
+  color: inherit;
+  text-decoration-line: underline;
+}
+.markdown-content a.backlink:hover {
+  color: hsl(var(--steelBlue));
+}
+.dark .markdown-content a.backlink:hover {
+  color: hsl(var(--lightBlue));
 }

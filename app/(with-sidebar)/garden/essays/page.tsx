@@ -5,6 +5,13 @@ import { getGardenPosts } from "@/lib/garden/posts"
 import { topicFor } from "@/lib/garden/topics"
 import TagFilterClient, { type EssayListItem } from "./TagFilterClient"
 
+export const metadata = {
+  title: "Essays",
+  description:
+    "Essays by Lilian Ada on writing, creativity, digital gardens, the personal web and life: the longer, more finished pieces in her garden.",
+  alternates: { canonical: "/garden/essays" },
+}
+
 export const revalidate = 3600 // Revalidate every hour
 
 export default async function EssayPage() {

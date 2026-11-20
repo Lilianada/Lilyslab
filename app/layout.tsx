@@ -19,31 +19,34 @@ export const viewport: Viewport = {
   userScalable: true,
 }
 
+const SITE_DESCRIPTION =
+  "The digital garden of Lilian Ada (Lily), a writer and software engineer: essays and notes on writing, creativity, digital gardens and the personal web, plus free little web apps like Burn CD and Write Online.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://lilyslab.xyz"),
   title: {
-    default: "Lily's Lab",
+    default: "Lily's Lab · Lilian Ada, writer and software engineer",
     template: "%s | Lily's Lab",
   },
-  description: "Lily's digital garden, workshop and lab.",
+  description: SITE_DESCRIPTION,
   keywords: [
-    "design",
-    "development",
-    "product management",
-    "portfolio",
     "Lilian Ada",
-    "Lilyslab",
     "Lily's Lab",
-    "artificial intelligence",
-    "machine learning",
+    "Lilyslab",
+    "writer",
+    "essays",
+    "digital garden",
+    "personal website",
+    "indie web",
+    "writing",
+    "creativity",
     "software engineer",
     "product manager",
-    "digital creator",
   ],
-  authors: [{ name: "Lilian Ada", url: "https://lilianada.com" }],
+  authors: [{ name: "Lilian Ada", url: "https://lilyslab.xyz" }],
   creator: "Lilian Ada",
   publisher: "Lilian Ada",
-  category: "Technology",
+  category: "Writing",
   applicationName: "Lily's Lab",
   referrer: "origin-when-cross-origin",
   formatDetection: {
@@ -51,19 +54,29 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+  },
+  // Paste the code from Google Search Console (and Bing Webmaster Tools) into
+  // these environment variables on Netlify to prove you own the site.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION } : undefined,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://lilyslab.xyz",
     title: "Lily's Lab",
-    description: "Lily's digital garden, workshop and lab.",
+    description: SITE_DESCRIPTION,
     siteName: "Lily's Lab",
   },
   twitter: {
     card: "summary_large_image",
     title: "Lily's Lab",
-    description:
-      "Designer, software engineer, product manager, and digital creator",
+    description: SITE_DESCRIPTION,
     creator: "@lilian_ada_",
   },
   icons: {

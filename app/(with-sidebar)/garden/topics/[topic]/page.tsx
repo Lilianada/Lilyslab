@@ -12,7 +12,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const topic = getTopic((await params).topic);
-  return topic ? { title: `${topic.title} | Garden | Lilyslab`, description: topic.blurb } : { title: "Topic not found" };
+  return topic ? { title: `${topic.title} · Garden`, description: topic.blurb } : { title: "Topic not found" };
 }
 
 const STAGE_ORDER: Stage[] = ["evergreen", "budding", "seedling"];

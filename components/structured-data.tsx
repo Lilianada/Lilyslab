@@ -1,148 +1,77 @@
-// Use Next.js Script component for structured data
-import Script from 'next/script';
+import { AUTHOR, SITE_URL } from "@/lib/seo";
 
-export const PersonStructuredData = () => {
-  const data = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Lilian Ada",
-  "alternateName": "Lily",
-  "description": "Lily's digital garden, workshop and lab.",
-  "image": "https://lilyslab.xyz/12.png",
-  "url": "https://lilyslab.xyz",
-  "sameAs": [
-    "https://twitter.com/lilian_ada_",
-    "https://github.com/lilianada",
-    "https://linkedin.com/in/lilianada"
-  ],
-  "jobTitle": "Software Engineer",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Lily's Garden"
-  },
-  "knowsAbout": [
-    "Web Development",
-    "User Interface Design",
-    "Product Management",
-    "Digital Content Creation"
-  ]
-};
-  
+/**
+ * schema.org data for search engines, written straight into the HTML (not added
+ * later by JavaScript) so crawlers see it on the first read.
+ */
+export function JsonLd({ data }: { data: object }) {
   return (
-    <Script 
-      id="person-schema"
+    <script
       type="application/ld+json"
-      strategy="afterInteractive"
-    >
-      {JSON.stringify(data)}
-    </Script>
+      // JSON.stringify output is safe here once "<" is escaped.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
   );
-};
-
-export const WebsiteStructuredData = () => {
-  const data = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Lily's Garden",
-  "alternateName": "Lilyslab",
-  "url": "https://lilyslab.xyz",
-  "description": "Lily's digital garden, workshop and lab.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://lilyslab.xyz/search?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
-};
-  
-  return (
-    <Script 
-      id="website-schema"
-      type="application/ld+json"
-      strategy="afterInteractive"
-    >
-      {JSON.stringify(data)}
-    </Script>
-  );
-};
-
-interface ArticleStructuredDataProps {
-  title: string;
-  description: string;
-  slug: string;
-  date: string;
-  image?: string;
 }
 
-export const ArticleStructuredData = ({ title, description, slug, date, image }: ArticleStructuredDataProps) => {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": title,
-    "description": description,
-    "image": image || "https://lilyslab.xyz/12.png",
-    "datePublished": date,
-    "dateModified": date,
-    "author": {
+/** Who the site belongs to: the person Google shows for a name search. */
+export const PersonStructuredData = () => (
+  <JsonLd
+    data={{
+      "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Lilian Ada",
-      "url": "https://lilyslab.xyz"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Lily's Garden",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://lilyslab.xyz/12.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://lilyslab.xyz/writing/${slug}`
-    }
-  };
-  
-  return (
-    <Script 
-      id={`article-schema-${slug}`}
-      type="application/ld+json"
-      strategy="afterInteractive"
-    >
-      {JSON.stringify(data)}
-    </Script>
-  );
-};
+      "@id": `${SITE_URL}/#person`,
+      name: AUTHOR.name,
+      alternateName: AUTHOR.alternateName,
+      url: SITE_URL,
+      image: `${SITE_URL}/images/logo.png`,
+      description: "Writer and software engineer. Essays and notes on writing, creativity and the personal web, plus small web apps.",
+      jobTitle: ["Writer", "Software Engineer", "Product Manager"],
+      sameAs: AUTHOR.sameAs,
+      knowsAbout: [
+        "Writing",
+        "Essays",
+        "Digital gardens",
+        "Personal websites",
+        "IndieWeb",
+        "Web development",
+        "User interface design",
+        "Product management",
+      ],
+    }}
+  />
+);
 
-interface BreadcrumbItem {
-  name: string;
-  url: string;
-}
+/** The site itself, and that it belongs to the person above. */
+export const WebsiteStructuredData = () => (
+  <JsonLd
+    data={{
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "Lily's Lab",
+      alternateName: ["Lilyslab", "Lily's Garden"],
+      url: SITE_URL,
+      description: "Lilian Ada's digital garden: essays, notes and small web apps.",
+      inLanguage: "en",
+      author: { "@id": `${SITE_URL}/#person` },
+      publisher: { "@id": `${SITE_URL}/#person` },
+    }}
+  />
+);
 
-interface BreadcrumbStructuredDataProps {
-  items: BreadcrumbItem[];
-}
-
-export const BreadcrumbStructuredData = ({ items }: BreadcrumbStructuredDataProps) => {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      "item": item.url
-    }))
-  };
-  
-  return (
-    <Script 
-      id="breadcrumb-schema"
-      type="application/ld+json"
-      strategy="afterInteractive"
-    >
-      {JSON.stringify(data)}
-    </Script>
-  );
-};
+/** A trail of pages, shown by Google in place of the address. */
+export const BreadcrumbStructuredData = ({ items }: { items: { name: string; url: string }[] }) => (
+  <JsonLd
+    data={{
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: item.url.startsWith("http") ? item.url : `${SITE_URL}${item.url}`,
+      })),
+    }}
+  />
+);

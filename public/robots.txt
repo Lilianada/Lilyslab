@@ -1,9 +1,7 @@
-# *
+# Everyone is welcome to read and index this garden.
 User-agent: *
 Allow: /
+Disallow: /ctrl-room
+Disallow: /api/
 
-# Host
-Host: https://lilyslab.xyz
-
-# Sitemaps
 Sitemap: https://lilyslab.xyz/sitemap.xml

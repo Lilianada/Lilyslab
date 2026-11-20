@@ -99,6 +99,15 @@
   .dark .backlink {
     text-decoration-color: hsl(var(--lightBlue));
   }
+  /* A gentle shift on hover: the underline fades a little and the text takes its colour. */
+  .backlink:hover {
+    color: hsl(var(--steelBlue));
+    text-decoration-color: hsl(var(--steelBlue) / 0.55);
+  }
+  .dark .backlink:hover {
+    color: hsl(var(--lightBlue));
+    text-decoration-color: hsl(var(--lightBlue) / 0.55);
+  }
   .backlink:focus-visible {
     @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background rounded-sm;
   }
@@ -245,6 +254,27 @@
   a,
   button {
     @apply transition-colors duration-200;
+  }
+
+  /*
+   * Every link gets the same quiet hover: a thin underline in a faded version of
+   * its own colour. :where() keeps this weaker than any class, so links with
+   * their own hover style (or a no-underline class) keep it.
+   */
+  :where(a) {
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition-property: color, background-color, border-color, opacity, text-decoration-color;
+  }
+  :where(a):hover,
+  :where(a):focus-visible {
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  }
+  /* Links that wrap a picture or a whole card don't need a line under them. */
+  :where(a:has(img, video, canvas, h2, h3, article)):hover {
+    text-decoration-line: none;
   }
 
   p {

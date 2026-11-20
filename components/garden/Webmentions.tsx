@@ -29,5 +29,5 @@ export function Webmentions({ path }: { path: string }) {
     return () => script.remove();
   }, [target]);
 
-  return <div className="mt-12" data-webmention-target={target} />;
+  return <div className="mt-8" data-webmention-target={target} />;
 }

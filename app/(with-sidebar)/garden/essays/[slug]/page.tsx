@@ -9,6 +9,9 @@ import path from "path";
 import matter from "gray-matter";
 import Image from "next/image";
 import { PostConnections } from "@/components/garden/PostConnections";
+import { JsonLd } from "@/components/structured-data";
+import { postSeo } from "@/lib/garden/seo";
+import { articleJsonLd, postMetadata } from "@/lib/seo";
 import { Replies } from "@/components/comments/Replies";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { EssayMarkdownWrapper } from "./markdown-wrapper";
@@ -37,10 +40,8 @@ export async function generateMetadata({
     };
   }
 
-  return {
-    title: essay.title,
-    description: essay.excerpt,
-  };
+  const seo = postSeo("essay", resolvedParams.slug);
+  return seo ? postMetadata(seo) : { title: essay.title };
 }
 
 export default async function EssaySlugPage({ params }: PageProps) {
@@ -119,6 +120,10 @@ export default async function EssaySlugPage({ params }: PageProps) {
         </div>
 
         <PostConnections href={`/garden/essays/${slug}`} />
+        {(() => {
+          const seo = postSeo("essay", slug);
+          return seo ? <JsonLd data={articleJsonLd(seo)} /> : null;
+        })()}
         <Webmentions path={`/garden/essays/${slug}`} />
         <Replies page={`essays/${slug}`} title={data.title || slug} />
       </div>

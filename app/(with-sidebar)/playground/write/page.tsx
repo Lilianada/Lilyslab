@@ -1,7 +1,7 @@
 import Write from "@/components/playground/Write";
 
 export const metadata = {
-  title: "Write Online | Lab | Lilyslab",
+  title: "Write Online | Lab",
   description: "A quiet place to write. Notes are kept in your browser and never leave it.",
 };
 

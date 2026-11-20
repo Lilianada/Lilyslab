@@ -11,7 +11,7 @@ import { MusicPlayerWidget } from "@/components/audio/music-player-widget";
 import { WanderButton } from "@/components/fun/WanderButton";
 
 export const metadata = {
-  title: "Digital Garden | Lilyslab",
+  title: "The Garden",
   description:
     "Essays and notes arranged by topic and connection, not by date.",
 };

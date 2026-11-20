@@ -2440,3 +2440,42 @@ tags:
 type: article
 id: article-197
 ---
+
+---
+publish: true
+title: "Copy this website"
+url: https://a11ce.com/website.html
+createdAt: 2026-11-20
+tags:
+- personal-website
+- web-development
+- tutorial
+type: article
+id: article-198
+---
+
+---
+publish: true
+title: "the internet as a creative practice"
+url: https://keningzhu.com/journal/the-internet-as-creative-practice
+createdAt: 2026-11-20
+tags:
+- creativity
+- personal-website
+- internet
+type: article
+id: article-199
+---
+
+---
+publish: true
+title: "your vision is born from desire & discontent"
+url: https://keningzhu.com/journal/vision-discontent-and-desire
+createdAt: 2026-11-20
+tags:
+- creativity
+- vision
+- journaling
+type: article
+id: article-200
+---

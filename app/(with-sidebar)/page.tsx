@@ -157,31 +157,33 @@ export default async function HomePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 font-mono">
         <div className="md:col-span-2">
-          <h2 className="font-medium">Lily's Garden</h2>
+          <h1 className="font-medium">Lily's Garden</h1>
           <div className="flex flex-col text-sm text-muted-foreground lg:max-w-xl">
             <div className="mt-3 space-y-2 ">
               <div className="flex items-center">
-                <p className="text-sm mr-2">Hi there, I'm Lily. </p>{" "}
+                <p className="text-sm mr-2 font-nitti">
+                  {" "}
+                  Hi there wanderer, I'm Lily.{" "}
+                </p>{" "}
                 <Smile size={14} className="inline-block" />
               </div>
-              <p className="text-sm">
-                Hi there wanderer, welcome to my{" "}
-                <Link href="/garden/digital-garden" className="text-codeRed">
+              <p className="text-s font-nitti">
+                Welcome to my{" "}
+                <Link href="/garden/essays/digital-garden" className="text-codeRed">
                   digital garden
                 </Link>{" "}
                 and{" "}
-                <Link href="/garden/minispace" className="text-codeRed">
+                <Link href="/minispace" className="text-codeRed">
                   minispace
                 </Link>{" "}
-                on the internet where I talk about all my little interests,
-                hobbies and life work. I'm super excited to have had you wander
-                into my garden. I created this space for be able to express
-                myself through code, images, sounds, and words. There's
-                literally no limit to what I can do here.
+                on the internet where I post about all my little interests,
+                ideas, resources, hobbies and life work. I'm super excited to
+                have had you wander into my website. There's literally no limit
+                to what I can do here.
               </p>
-              <p className="text-sm">
+              <p className="text-sm font-nitti">
                 I'm currently looking for funding, contract work, or employment.{" "}
-                <Link href="/contact" className="text-codeRed">
+                <Link href="/hello" className="text-codeRed">
                   Reach out
                 </Link>{" "}
                 if you'd like to work together or know of something I'd be a
@@ -191,7 +193,7 @@ export default async function HomePage() {
                 </Link>{" "}
                 just to give you an idea of what I'm aiming for.
               </p>
-              <p className="text-sm">
+              <p className="text-sm font-nitti">
                 Before you go, you should first learn a little{" "}
                 <Link href="/about" className="text-codeRed">
                   about me
@@ -223,7 +225,7 @@ export default async function HomePage() {
           {/* Four beds of four pages: sized to end about level with "Recently Tended" beside it. */}
           <div className="mt-8">
             <h2 className="font-medium mb-1">Collections & Pages</h2>
-            <p className="text-sm text-muted-foreground mb-6">
+            <p className="text-sm text-muted-foreground mb-6 font-nitti">
               The rest of the garden, planted in beds.
             </p>
             <div className="space-y-8 lg:space-y-10">

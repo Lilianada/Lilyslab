@@ -6,6 +6,8 @@ import { getAllEssays } from "@/lib/garden/essays";
 import { getAllNotesData } from "@/lib/notes";
 import { getAllLessons, getTracks } from "@/lib/learn";
 import { PLAYGROUND_TOYS } from "@/lib/playground-toys";
+import { getGardenPosts } from "@/lib/garden/posts";
+import { TOPICS } from "@/lib/garden/topics";
 
 const SITE_URL = (process.env.SITE_URL || "https://lilyslab.xyz").replace(/\/$/, "");
 
@@ -46,6 +48,10 @@ const PAGES = [
   "/changelog",
   "/colophon",
   "/sitemap",
+  "/minispace",
+  "/misc",
+  "/100pics",
+  "/365days",
 ];
 
 function getThenPaths() {
@@ -69,6 +75,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...PAGES.map((route) => entry(route)),
     ...PLAYGROUND_TOYS.map((toy) => entry(toy.href)),
+    // Each topic page, dated by its most recently tended post.
+    ...TOPICS.flatMap((topic) => {
+      const tended = getGardenPosts()
+        .filter((post) => post.topicId === topic.id)
+        .map((post) => post.lastUpdated)
+        .sort()
+        .pop();
+      return tended ? [entry(`/garden/topics/${topic.id}`, tended)] : [];
+    }),
     ...getThenPaths().map((route) => entry(route)),
     ...getTracks().map((track) => entry(track.href)),
     ...getAllLessons().map((lesson) => entry(lesson.href)),

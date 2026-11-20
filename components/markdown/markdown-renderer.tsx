@@ -145,8 +145,10 @@ const MarkdownRenderer = ({
     const backlinkRegex = /\[\[(.*?)\]\]/g;
 
     // Replace all instances of [[text]] with custom link components
-    return content.replace(backlinkRegex, (match, linkText) => {
-      return `[${linkText}](/__backlink/${encodeURIComponent(linkText)})`;
+    // [[target|label]] shows "label" and links to "target".
+    return content.replace(backlinkRegex, (match, linkText: string) => {
+      const [target, label] = linkText.split("|");
+      return `[${(label ?? target).trim()}](/__backlink/${encodeURIComponent(target.trim())})`;
     });
   };
 
@@ -169,23 +171,20 @@ const MarkdownRenderer = ({
               );
 
               return (
-                <span
+                <a
                   className="backlink"
                   data-backlink={linkText}
-                  onClick={() => handleBacklinkClick(linkText)}
-                  title={`Go to: ${linkText}`}
-                  role="link"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      handleBacklinkClick(linkText);
-                    }
+                  href={`/garden/go?to=${encodeURIComponent(linkText)}`}
+                  onClick={(e) => {
+                    // New-tab and similar clicks use the plain address.
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                    e.preventDefault();
+                    handleBacklinkClick(linkText);
                   }}
                   {...props}
                 >
                   {props.children}
-                </span>
+                </a>
               );
             }
 
